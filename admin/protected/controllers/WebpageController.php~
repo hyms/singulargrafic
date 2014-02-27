@@ -1,0 +1,11 @@
+<?php
+
+class WebpageController extends Controller
+{
+	
+	public function actionIndex()
+	{
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('index');
+	}
+}
