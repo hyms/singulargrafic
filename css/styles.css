@@ -1,9 +1,10 @@
  body {
 	margin: 0;
 	padding: 0;
+	
  }
  
- #background 
+.background 
 { 
 	 left: 0px; 
 	 top: 0px; 
@@ -14,7 +15,68 @@
 	 height: 800px; 
 	 overflow: hidden;
 	 z-index:0;
-	} 
+	 background: url("../images/Capa1.png") no-repeat;
+} 
+/* banner*/ 
+ .Impresionacontusidea 
+{ 
+	 left: 303px; 
+	 top: 283px; 
+	 position: absolute; 
+	 width: 294px;
+	 height: 23px;
+	 z-index:4;
+} 
+
+ .logo 
+{ 
+	 left: 272px; 
+	 top: 102px; 
+	 position: absolute; 
+	 width: 359px;
+	 height: 173px;
+	 z-index:5;
+}
+
+/* footer*/
+.footer 
+{ 
+	background:#04488d;
+	left: 0px; 
+	top: 767px; 
+	width: 900px;
+	position: absolute; 
+	height: 33px;
+	z-index:20;
+} 
+
+/* menu */
+ .menu 
+{ 
+	background: url("../images/Capa4copia.png") repeat;
+	left: 0px; 
+	top: 390px;
+	width: 900px; 
+	position: absolute; 
+	height: 38px;
+	z-index:3;
+} 
+.bottonmenu
+{
+	width: 112px;
+	height: 42px;
+	color:#eba31d;
+	font: bold;
+	background: url("../images/Objetointeligentevec_3.png");
+}
+.body
+{
+	top: 460px; 
+	position: absolute;
+	width: 900px;
+	height: 310px;
+	z-index:2;
+}
 
  #Capa1 
 { 
@@ -28,43 +90,12 @@
 
  #Capa3 
 { 
-	 left: -73px; 
-	 top: 430px; 
-	 position: absolute; 
-	 width: 733px;
-	 height: 441px;
-	 z-index:2;
+	 
 } 
 
- #Capa4copia 
-{ 
-	 left: 0px; 
-	 top: 425px; 
-	 position: absolute; 
-	 width: 900px;
-	 height: 38px;
-	 z-index:3;
-} 
 
- #Impresionacontusidea 
-{ 
-	 left: 303px; 
-	 top: 283px; 
-	 position: absolute; 
-	 width: 294px;
-	 height: 23px;
-	 z-index:4;
-} 
 
- #Objetointeligentevec 
-{ 
-	 left: 272px; 
-	 top: 102px; 
-	 position: absolute; 
-	 width: 359px;
-	 height: 173px;
-	 z-index:5;
-} 
+ 
 
  #Capa4copia3 
 { 
@@ -72,7 +103,7 @@
 	 top: 433px; 
 	 position: absolute; 
 	 width: 900px;
-	 height: 21px;
+	 height: 310px;
 	 z-index:6;
 } 
 
@@ -206,12 +237,4 @@
 	 z-index:19;
 } 
 
- #Capa10 
-{ 
-	 left: 0px; 
-	 top: 767px; 
-	 position: absolute; 
-	 width: 900px;
-	 height: 33px;
-	 z-index:20;
-} 
+ 
