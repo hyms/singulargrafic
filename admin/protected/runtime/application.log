@@ -447,3 +447,177 @@ REQUEST_URI=/singular/admin/index.php/webpage/pages
 in /var/www/singular/admin/protected/views/webpage/pages.php (23)
 in /var/www/singular/admin/protected/controllers/WebpageController.php (13)
 in /var/www/singular/admin/index.php (13)
+2014/02/28 14:56:45 [error] [php] Use of undefined constant contenido - assumed 'contenido' (/var/www/singular/admin/protected/views/webpage/pages.php:37)
+Stack trace:
+#0 /var/www/framework/web/CController.php(869): WebpageController->renderFile()
+#1 /var/www/framework/web/CController.php(782): WebpageController->renderPartial()
+#2 /var/www/singular/admin/protected/controllers/WebpageController.php(14): WebpageController->render()
+#3 /var/www/framework/web/actions/CInlineAction.php(49): WebpageController->actionPages()
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/framework/web/CController.php(286): WebpageController->runAction()
+#6 /var/www/framework/web/CController.php(265): WebpageController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): WebpageController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/admin/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/admin/index.php/webpage/pages
+in /var/www/singular/admin/protected/views/webpage/pages.php (37)
+in /var/www/singular/admin/protected/controllers/WebpageController.php (14)
+in /var/www/singular/admin/index.php (13)
+2014/02/28 15:01:07 [error] [exception.CException] exception 'CException' with message 'Alias "application.extensions.ckeditor.cKEditorWidget" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /var/www/framework/YiiBase.php:322
+Stack trace:
+#0 /var/www/framework/web/CWidgetFactory.php(146): YiiBase::import('application.ext...', true)
+#1 /var/www/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(WebpageController), 'application.ext...', Array)
+#2 /var/www/framework/web/CBaseController.php(172): CBaseController->createWidget('application.ext...', Array)
+#3 /var/www/singular/admin/protected/views/webpage/pages.php(19): CBaseController->widget('application.ext...', Array)
+#4 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#5 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#6 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#7 /var/www/framework/web/CController.php(782): CController->renderPartial('pages', Array, true)
+#8 /var/www/singular/admin/protected/controllers/WebpageController.php(14): CController->render('pages', Array)
+#9 /var/www/framework/web/actions/CInlineAction.php(49): WebpageController->actionPages()
+#10 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/framework/web/CWebApplication.php(282): CController->run('pages')
+#14 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('webpage/pages')
+#15 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/singular/admin/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singular/admin/index.php/webpage/pages
+HTTP_REFERER=http://localhost/singular/admin/index.php/webpage/pages
+---
+2014/02/28 15:14:25 [error] [exception.CException] exception 'CException' with message 'Alias "application.extensions.ckeditor.cKEditorWidget" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /var/www/framework/YiiBase.php:322
+Stack trace:
+#0 /var/www/framework/web/CWidgetFactory.php(146): YiiBase::import('application.ext...', true)
+#1 /var/www/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(WebpageController), 'application.ext...', Array)
+#2 /var/www/framework/web/CBaseController.php(172): CBaseController->createWidget('application.ext...', Array)
+#3 /var/www/singular/admin/protected/views/webpage/pages.php(49): CBaseController->widget('application.ext...', Array)
+#4 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#5 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#6 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#7 /var/www/framework/web/CController.php(782): CController->renderPartial('pages', Array, true)
+#8 /var/www/singular/admin/protected/controllers/WebpageController.php(14): CController->render('pages', Array)
+#9 /var/www/framework/web/actions/CInlineAction.php(49): WebpageController->actionPages()
+#10 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/framework/web/CWebApplication.php(282): CController->run('pages')
+#14 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('webpage/pages')
+#15 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/singular/admin/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singular/admin/index.php/webpage/pages
+HTTP_REFERER=http://localhost/singular/admin/index.php/webpage/pages
+---
+2014/02/28 15:27:14 [error] [exception.CException] exception 'CException' with message 'Property "CActiveForm.class" is not defined.' in /var/www/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/framework/web/CWidgetFactory.php(161): CComponent->__set('class', 'form-group')
+#1 /var/www/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(WebpageController), 'CActiveForm', Array)
+#2 /var/www/framework/web/CBaseController.php(189): CBaseController->createWidget('CActiveForm', Array)
+#3 /var/www/singular/admin/protected/views/webpage/pages.php(18): CBaseController->beginWidget('CActiveForm', Array)
+#4 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#5 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#6 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#7 /var/www/framework/web/CController.php(782): CController->renderPartial('pages', Array, true)
+#8 /var/www/singular/admin/protected/controllers/WebpageController.php(14): CController->render('pages', Array)
+#9 /var/www/framework/web/actions/CInlineAction.php(49): WebpageController->actionPages()
+#10 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/framework/web/CWebApplication.php(282): CController->run('pages')
+#14 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('webpage/pages')
+#15 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/singular/admin/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singular/admin/index.php/webpage/pages
+HTTP_REFERER=http://localhost/singular/admin/index.php/webpage/pages
+---
+2014/02/28 15:27:16 [error] [exception.CException] exception 'CException' with message 'Property "CActiveForm.class" is not defined.' in /var/www/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/framework/web/CWidgetFactory.php(161): CComponent->__set('class', 'form-group')
+#1 /var/www/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(WebpageController), 'CActiveForm', Array)
+#2 /var/www/framework/web/CBaseController.php(189): CBaseController->createWidget('CActiveForm', Array)
+#3 /var/www/singular/admin/protected/views/webpage/pages.php(18): CBaseController->beginWidget('CActiveForm', Array)
+#4 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#5 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#6 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#7 /var/www/framework/web/CController.php(782): CController->renderPartial('pages', Array, true)
+#8 /var/www/singular/admin/protected/controllers/WebpageController.php(14): CController->render('pages', Array)
+#9 /var/www/framework/web/actions/CInlineAction.php(49): WebpageController->actionPages()
+#10 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/framework/web/CWebApplication.php(282): CController->run('pages')
+#14 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('webpage/pages')
+#15 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/singular/admin/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singular/admin/index.php/webpage/pages
+HTTP_REFERER=http://localhost/singular/admin/index.php/webpage/pages
+---
+2014/02/28 15:52:09 [error] [exception.CException] exception 'CException' with message 'CActiveForm and its behaviors do not have a method or closure named "chekout".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/admin/protected/views/webpage/pages.php(47): CComponent->__call('chekout', Array)
+#1 /var/www/singular/admin/protected/views/webpage/pages.php(47): CActiveForm->chekout(Object(Pages), 'enable')
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/framework/web/CController.php(782): CController->renderPartial('pages', Array, true)
+#6 /var/www/singular/admin/protected/controllers/WebpageController.php(14): CController->render('pages', Array)
+#7 /var/www/framework/web/actions/CInlineAction.php(49): WebpageController->actionPages()
+#8 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/framework/web/CWebApplication.php(282): CController->run('pages')
+#12 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('webpage/pages')
+#13 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/singular/admin/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/singular/admin/index.php/webpage/pages
+HTTP_REFERER=http://localhost/singular/admin/index.php/webpage/pages
+---
+2014/02/28 15:52:21 [error] [exception.CException] exception 'CException' with message 'CActiveForm and its behaviors do not have a method or closure named "chekOut".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/admin/protected/views/webpage/pages.php(47): CComponent->__call('chekOut', Array)
+#1 /var/www/singular/admin/protected/views/webpage/pages.php(47): CActiveForm->chekOut(Object(Pages), 'enable')
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/framework/web/CController.php(782): CController->renderPartial('pages', Array, true)
+#6 /var/www/singular/admin/protected/controllers/WebpageController.php(14): CController->render('pages', Array)
+#7 /var/www/framework/web/actions/CInlineAction.php(49): WebpageController->actionPages()
+#8 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/framework/web/CWebApplication.php(282): CController->run('pages')
+#12 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('webpage/pages')
+#13 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/singular/admin/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/singular/admin/index.php/webpage/pages
+HTTP_REFERER=http://localhost/singular/admin/index.php/webpage/pages
+---
+2014/02/28 15:56:05 [error] [exception.CException] exception 'CException' with message 'Alias "application.extensions.jui.EDatePicker" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /var/www/framework/YiiBase.php:322
+Stack trace:
+#0 /var/www/framework/web/CWidgetFactory.php(146): YiiBase::import('application.ext...', true)
+#1 /var/www/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(WebpageController), 'application.ext...', Array)
+#2 /var/www/framework/web/CBaseController.php(172): CBaseController->createWidget('application.ext...', Array)
+#3 /var/www/singular/admin/protected/views/webpage/pages.php(73): CBaseController->widget('application.ext...', Array)
+#4 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#5 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#6 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#7 /var/www/framework/web/CController.php(782): CController->renderPartial('pages', Array, true)
+#8 /var/www/singular/admin/protected/controllers/WebpageController.php(14): CController->render('pages', Array)
+#9 /var/www/framework/web/actions/CInlineAction.php(49): WebpageController->actionPages()
+#10 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#12 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/framework/web/CWebApplication.php(282): CController->run('pages')
+#14 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('webpage/pages')
+#15 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/singular/admin/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singular/admin/index.php/webpage/pages
+HTTP_REFERER=http://localhost/singular/admin/index.php/webpage/pages
+---

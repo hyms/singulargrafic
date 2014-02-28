@@ -10,12 +10,12 @@
 	<link rel="shortcut icon" href="<?php echo Yii::app()->request->baseUrl; ?>/img/icons/favicon.ico">
 	<link rel="apple-touch-icon" href="<?php echo Yii::app()->request->baseUrl; ?>/img/icons/apple-touch-icon.png">
 	<!--style sheet-->
-	<link rel="stylesheet" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/css/facebook-framework.css" />
-	<link rel="stylesheet" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css" />
-	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/flexslider.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/fancybox.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/font-awesome.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/colors/light.css" type="text/css" media="screen" />
+	<!-- <link rel="stylesheet" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/css/facebook-framework.css" /> -->
+	<link rel="stylesheet" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/css/styles.css" />
+	<!--<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/flexslider.css" type="text/css" media="screen" /> -->
+	<!--<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/fancybox.css" type="text/css" media="screen" /> -->
+	<!--<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/font-awesome.css" type="text/css" media="screen" /> -->
+	<!--<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/colors/light.css" type="text/css" media="screen" /> -->
 	
 	<!--[if IE 7]>
 	  	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/font-awesome-ie7.css">

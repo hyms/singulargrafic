@@ -7,6 +7,7 @@
 		->registerCoreScript( 'jquery' )
 		->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.js', CClientScript::POS_END )
 		//->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END )
+		->registerScriptFile( Yii::app()->baseUrl.'/js/ckeditor/ckeditor.js')
 		//*/
 ?>
 <!DOCTYPE html>
@@ -16,13 +17,13 @@
 	
 	<meta name="language" content="en" />
 	
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css" />
+	
 	
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar navbar-inverse navbar-static-top">
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
@@ -62,7 +63,9 @@
 	</div>
 	
 	<div class="container">
-	<?php echo $content ?>
+		<div class="row">
+			<?php echo $content ?>
+		</div>
 	</div>
 	
 		
