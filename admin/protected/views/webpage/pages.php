@@ -4,14 +4,29 @@
 /* @var $form CActiveForm */
 
 ?>
+<div class="col-sm-2">
+	<h2>Lista de paginas</h2>
+	<ul class="nav nav-pills nav-stacked">
+	<?php
+		foreach ($paginas as $pag)
+		{
+	?>
+		<li><?php echo CHtml::link($pag->nombre, array('webpage/pages', 'id'=>$pag->id));?></li>
+	<?php 
+		} 
+	?>
+	</ul>
+</div>
+<div class="form col-sm-10">
 
-<div class="form">
-
+<h1>Paginas</h1>
+<?php if($model->id != null){?>
+	
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'pages-pages-form',
+	'id'=>'pagesForm',
 	'htmlOptions'=>array(
 			'class'=>'form-horizontal',
-			'role'=>'form"'
+			'role'=>'form'
 	),
 	
 	// Please note: When you enable ajax validation, make sure the corresponding
@@ -20,9 +35,8 @@
 	// you need to use the performAjaxValidation()-method described there.
 	'enableAjaxValidation'=>true,
 )); ?>
-	<h1>Paginas</h1>
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
+	<p class="note">Los campos con <span class="required">*</span> son obligatorios.</p>
+	<p class="note">Ultima modificacion <code><?php echo $model->fecha;?></code></p>
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="form-group">
@@ -56,31 +70,7 @@
 		</div>
 		<?php echo $form->error($model,'order'); ?>
 	</div>
-
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'fecha',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-2">
-			<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-    
-			    'name'=>'fecha',
-			    //'id'=>'user_Birthdate',
-			    'model'=>$model,
-			    
-			    // additional javascript options for the date picker plugin
-			    'options'=>array(
-			        'showAnim'=>'fold',
-			    ),
-			    'htmlOptions'=>array(
-			        'style'=>'height:20px;',
-					'class'=>'form-control',
-			    ),
-			));
-			?>
-		</div>
-		<?php echo $form->error($model,'fecha'); ?>
-	</div>
-
-
+	
 	<div class="form-group">
 		<?php echo CHtml::submitButton('Submit',array('class'=>'btn btn-default col-sm-offset-2')); ?>
 	</div>
@@ -89,4 +79,5 @@
 <script type="text/javascript">
     CKEDITOR.replace( 'contenido' );
 </script>
+<?php }?>
 </div><!-- form -->

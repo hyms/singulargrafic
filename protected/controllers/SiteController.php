@@ -32,6 +32,37 @@ class SiteController extends Controller
 		$this->render('index');
 	}
 
+	public function actionImprenta()
+	{
+		//$page = new Pages();
+		$imprenta = Pages::model()->find("nombre='imprenta'");
+		//print_r($imprenta);
+		$this->render('pages',array('model'=>$imprenta));
+	}
+	
+	public function actionCtp()
+	{
+		//$page = new Pages();
+		$imprenta = Pages::model()->find("nombre='ctp'");
+		//print_r($imprenta);
+		$this->render('pages',array('model'=>$imprenta));
+	}
+	
+	public function actionEditorial()
+	{
+		//$page = new Pages();
+		$imprenta = Pages::model()->find("nombre='editorial'");
+		//print_r($imprenta);
+		$this->render('pages',array('model'=>$imprenta));
+	}
+	
+	public function actionDistribuidora()
+	{
+		//$page = new Pages();
+		$imprenta = Pages::model()->find("nombre='distribuidora'");
+		//print_r($imprenta);
+		$this->render('pages',array('model'=>$imprenta));
+	}
 	/**
 	 * This is the action to handle external exceptions.
 	 */

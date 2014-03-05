@@ -49,10 +49,10 @@
 	        		'htmlOptions' => array('class' => 'nav navbar-nav'),
 		        	'items'=>array(
 					array('label'=>'Home', 'url'=>array('/site/index'),'linkOptions'=> array('class' => 'bottonmenu')),
-					array('label'=>'Imprenta/Cotizaciones', 'url'=>array('/site/page', 'view'=>'imprenta'),'linkOptions'=> array('class' => 'bottonmenu')),
-					array('label'=>'Servicio CTP', 'url'=>array('/site/page', 'view'=>'ctp'),'linkOptions'=> array('class' => 'bottonmenu')),
-					array('label'=>'Editorial', 'url'=>array('/site/page', 'view'=>'editorial'),'linkOptions'=> array('class' => 'bottonmenu')),
-					array('label'=>'Distribuidora de Papel', 'url'=>array('/site/page', 'view'=>'distribuidora'),'linkOptions'=> array('class' => 'bottonmenu')),
+					array('label'=>'Imprenta/Cotizaciones', 'url'=>array('/site/imprenta'),'linkOptions'=> array('class' => 'bottonmenu')),
+					array('label'=>'Servicio CTP', 'url'=>array('/site/ctp'),'linkOptions'=> array('class' => 'bottonmenu')),
+					array('label'=>'Editorial', 'url'=>array('/site/editorial'),'linkOptions'=> array('class' => 'bottonmenu')),
+					array('label'=>'Distribuidora de Papel', 'url'=>array('/site/distribuidora'),'linkOptions'=> array('class' => 'bottonmenu')),
 					array('label'=>'Contactos', 'url'=>array('/site/contact'),'linkOptions'=> array('class' => 'bottonmenu')),
 					),
 				)); ?>

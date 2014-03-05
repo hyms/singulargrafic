@@ -7,11 +7,40 @@ class WebpageController extends Controller
 		$this->render('index');
 	}
 	
-	public function actionPages()
+	public function actionPages($id = NULL)
 	{
-		$model = new Pages;
+		$pages = new Pages;
+		$paginas = $pages->nombres();
 		
-		$this->render('pages',array('model'=>$model));
+		if($id != null)
+			$pages=Pages::model()->findByPk($id);
+		
+		if(isset($_POST['Pages']))
+		{
+			
+			
+			$pages->nombre=$_POST['Pages']['nombre'];
+			$pages->contenido=$_POST['contenido'];
+			if($_POST['Pages']['enable'])
+				$pages->enable=1;
+			else
+				$pages->enable=0;
+			$pages->order=$_POST['Pages']['order'];
+			$pages->fecha=date("Y-m-d H:i:s");
+			
+			if($pages->save())
+			{
+				$this->redirect(array('webpage/pages'));
+			}
+			else 
+			{
+				$this->render('pages',array('model'=>$pages, 'paginas'=>$paginas));
+			}
+		}
+		else
+		{
+			$this->render('pages',array('model'=>$pages, 'paginas'=>$paginas));
+		}
 	} 
 	
 	// Uncomment the following methods and override them if needed

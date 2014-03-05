@@ -1164,3 +1164,132 @@ Stack trace:
 REQUEST_URI=/singular/index.php/site/view/imprenta/linkOptions%5Bclass%5D/page
 HTTP_REFERER=http://localhost/singular/index.php/site/contact
 ---
+2014/03/05 18:27:42 [error] [php] Undefined variable: imprenta (/var/www/singular/protected/controllers/SiteController.php:37)
+Stack trace:
+#0 /var/www/framework/web/CController.php(286): SiteController->runAction()
+#1 /var/www/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#2 /var/www/framework/web/CWebApplication.php(282): SiteController->run()
+#3 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#5 /var/www/singular/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/index.php/site/imprenta
+in /var/www/singular/protected/controllers/SiteController.php (37)
+in /var/www/singular/index.php (13)
+2014/03/05 18:31:15 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'imprenta' in 'where clause'. The SQL statement executed was: SELECT * FROM `pages` `t` WHERE nombre=imprenta LIMIT 1.
+in /var/www/singular/protected/controllers/SiteController.php (38)
+in /var/www/singular/index.php (13)
+2014/03/05 18:31:15 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'imprenta' in 'where clause'. The SQL statement executed was: SELECT * FROM `pages` `t` WHERE nombre=imprenta LIMIT 1' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/singular/protected/controllers/SiteController.php(38): CActiveRecord->find('nombre=imprenta')
+#4 /var/www/framework/web/actions/CInlineAction.php(49): SiteController->actionImprenta()
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('imprenta')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('site/imprenta')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/index.php/site/imprenta
+HTTP_REFERER=http://localhost/singular/
+---
+2014/03/05 18:32:18 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'imprenta' in 'where clause'. The SQL statement executed was: SELECT * FROM `pages` `t` WHERE nombre=imprenta LIMIT 1.
+in /var/www/singular/protected/controllers/SiteController.php (38)
+in /var/www/singular/index.php (13)
+2014/03/05 18:32:18 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'imprenta' in 'where clause'. The SQL statement executed was: SELECT * FROM `pages` `t` WHERE nombre=imprenta LIMIT 1' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/singular/protected/controllers/SiteController.php(38): CActiveRecord->find('nombre=imprenta')
+#4 /var/www/framework/web/actions/CInlineAction.php(49): SiteController->actionImprenta()
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('imprenta')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('site/imprenta')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/index.php/site/imprenta
+HTTP_REFERER=http://localhost/singular/
+---
+2014/03/05 18:32:19 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'imprenta' in 'where clause'. The SQL statement executed was: SELECT * FROM `pages` `t` WHERE nombre=imprenta LIMIT 1.
+in /var/www/singular/protected/controllers/SiteController.php (38)
+in /var/www/singular/index.php (13)
+2014/03/05 18:32:19 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'imprenta' in 'where clause'. The SQL statement executed was: SELECT * FROM `pages` `t` WHERE nombre=imprenta LIMIT 1' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/singular/protected/controllers/SiteController.php(38): CActiveRecord->find('nombre=imprenta')
+#4 /var/www/framework/web/actions/CInlineAction.php(49): SiteController->actionImprenta()
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('imprenta')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('site/imprenta')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/index.php/site/imprenta
+HTTP_REFERER=http://localhost/singular/
+---
+2014/03/05 19:00:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "imprenta".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('imprenta')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('imprenta')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('site/imprenta')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/index.php/site/imprenta
+HTTP_REFERER=http://localhost/singular/index.php/site/index
+---
+2014/03/05 19:05:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "ctp".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('ctp')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('ctp')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('site/ctp')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/index.php/site/ctp
+HTTP_REFERER=http://localhost/singular/index.php/site/imprenta
+---
+2014/03/05 19:05:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "ctp".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('ctp')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('ctp')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('site/ctp')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/index.php/site/ctp
+HTTP_REFERER=http://localhost/singular/index.php/site/ctp
+---
+2014/03/05 19:05:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "editorial".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('editorial')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('editorial')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('site/editorial')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/index.php/site/editorial
+HTTP_REFERER=http://localhost/singular/index.php/site/ctp
+---
+2014/03/05 19:05:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "distribuidora".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('distribuidora')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('distribuidora')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('site/distribuid...')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/index.php/site/distribuidora
+HTTP_REFERER=http://localhost/singular/index.php/site/editorial
+---

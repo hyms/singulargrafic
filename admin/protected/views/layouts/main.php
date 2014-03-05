@@ -68,15 +68,5 @@
 		</div>
 	</div>
 	
-		
-	<div class="footer">
-	  <div class="container">
-		<div class="row" id="label">
-			By Helier Cortez
-		</div> <!-- /row -->
-	  </div> <!-- /container -->
-	</div>
-	
-	
 </body>
 </html>

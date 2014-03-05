@@ -29,12 +29,12 @@ class Pages extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, nombre, contenido, enable, order, fecha', 'required'),
-			array('id, enable, order', 'numerical', 'integerOnly'=>true),
+			array('nombre, contenido, order', 'required'),
+			array('order', 'numerical', 'integerOnly'=>true),
 			array('nombre', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nombre, contenido, enable, order, fecha', 'safe', 'on'=>'search'),
+			array('nombre, contenido, enable, order, fecha', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,8 +58,8 @@ class Pages extends CActiveRecord
 			'id' => 'ID',
 			'nombre' => 'Nombre',
 			'contenido' => 'Contenido',
-			'enable' => 'Enable',
-			'order' => 'Order',
+			'enable' => 'Habilitado',
+			'order' => 'Orden',
 			'fecha' => 'Fecha',
 		);
 	}
@@ -82,7 +82,6 @@ class Pages extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
 		$criteria->compare('nombre',$this->nombre,true);
 		$criteria->compare('contenido',$this->contenido,true);
 		$criteria->compare('enable',$this->enable);
@@ -104,4 +103,16 @@ class Pages extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	public function nombres()
+	{
+		$pages = $this->findall();
+		$nombres = array();
+		foreach ($pages as $page)
+		{
+			$pag =  array('id'=>$page->id,'nombre'=>$page->nombre);
+			array_push($nombres, $page);
+		}
+		return $nombres;
+	} 
 }
