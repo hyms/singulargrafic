@@ -4,8 +4,8 @@
 $this->pageTitle=Yii::app()->name .' - '. $model->nombre;
 
 ?>
-<section class="content dark container clearfix body">
-	<p>
+<section class=" content dark clearfix conteiner ">
+	<div class="body">
 		<?php echo $model->contenido ?>
-	</p>
+	</div>
 </section>

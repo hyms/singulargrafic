@@ -7,6 +7,25 @@ class WebpageController extends Controller
 		$this->render('index');
 	}
 	
+	//controller
+	function init(){
+	  if(isset($_POST['SESSION_ID'])){
+	    $session=Yii::app()->getSession();
+	    $session->close();
+	    $session->sessionID = $_POST['SESSION_ID'];
+	    $session->open();
+	  }
+	}
+	function actionUpload(){
+	  if(isset($_POST['myPicture'])){
+	    $myPicture=CUploadedFile::getInstanceByName('myPicture');
+	    if(!$myPicture->saveAs('someFile.jpg'))
+	      throw new CHttpException(500);
+	    echo 1;
+	    Yii::app()->end();
+	  }
+	}
+	
 	public function actionPages($id = NULL)
 	{
 		$pages = new Pages;
@@ -43,6 +62,38 @@ class WebpageController extends Controller
 		}
 	} 
 	
+	public function actionBanner($id = NULL)
+	{
+		$dataProvider=new CActiveDataProvider('Banner');
+		$this->render('banner/index',array(
+			'dataProvider'=>$dataProvider,
+		));
+	}
+	
+	public function actionBannerCreate($id = NULL)
+	{
+		$model=new Banner;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Banner']))
+		{
+			$model->attributes=$_POST['Banner'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
+		}
+
+		$this->render('banner/create',array(
+			'model'=>$model,
+		));
+	}
+	
+	public function actions() {
+		return array(
+				'upload'=>'application.controllers.upload.UploadFileAction',
+		);
+	}
 	// Uncomment the following methods and override them if needed
 	/*
 	public function filters()

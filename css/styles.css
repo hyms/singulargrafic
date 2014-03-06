@@ -73,9 +73,9 @@
 {
 	top: 460px; 
 	position: absolute;
-	width: 900px;
+	width: 860px;
 	height: 310px;
-	z-index:2;
+	margin: 0px 20px;
 }
 
  #Capa1 

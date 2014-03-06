@@ -72,12 +72,14 @@
 	</div>
 	
 	<div class="form-group">
-		<?php echo CHtml::submitButton('Submit',array('class'=>'btn btn-default col-sm-offset-2')); ?>
+		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
 <script type="text/javascript">
-    CKEDITOR.replace( 'contenido' );
+    CKEDITOR.replace( 'contenido'
+    	    //,{ filebrowserBrowseUrl : '/images/' }
+		);
 </script>
 <?php }?>
 </div><!-- form -->
