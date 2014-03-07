@@ -30,8 +30,8 @@ class Banner extends CActiveRecord
 		return array(
 			array('imagen, texto, order', 'required'),
 			array('order', 'numerical', 'integerOnly'=>true),
-			array('imagen', 'length', 'max'=>500),
-			array('texto', 'length', 'max'=>1000),
+			array('imagen', 'file', 'types'=>'jpg, gif, png','allowEmpty'=>true, 'on'=>'update'),
+       		array('texto', 'length', 'max'=>1000),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, imagen, texto, fecha, order', 'safe', 'on'=>'search'),

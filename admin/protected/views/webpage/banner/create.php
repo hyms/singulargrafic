@@ -19,7 +19,8 @@
 	'id'=>'banner-form',
 	'htmlOptions'=>array(
 		'class'=>'form-horizontal',
-		'role'=>'form'),
+		'role'=>'form',
+		'enctype' => 'multipart/form-data'),
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
@@ -34,13 +35,13 @@
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'imagen',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-4">
-		<?php $this->widget('ext.uploadify.MUploadify',array(
+		<?php /*$this->widget('ext.uploadify.MUploadify',array(
 			  'model'=>$model,
 			  'attribute'=>'imagen',
 			  //'script'=>$this->createUrl('upload'),
 			  //'auto'=>true,
 			  //'someOption'=>'someValue',
-			));?>
+			));*/?>
 		<?php echo $form->fileField($model,'imagen',array('class'=>'form-control','size'=>60,'maxlength'=>500)); ?>
 		</div>
 		<?php echo $form->error($model,'imagen'); ?>

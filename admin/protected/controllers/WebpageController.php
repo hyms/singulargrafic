@@ -70,7 +70,7 @@ class WebpageController extends Controller
 		));
 	}
 	
-	public function actionBannerCreate($id = NULL)
+	public function actionBannerCreate()
 	{
 		$model=new Banner;
 
@@ -79,14 +79,33 @@ class WebpageController extends Controller
 
 		if(isset($_POST['Banner']))
 		{
-			$model->attributes=$_POST['Banner'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			$imagen = CUploadedFile::getInstance($model, 'imagen');
+			$model->imagen = $imagen->getName();
+			$model->fecha = date("Y-m-d H:i:s");
+			$model->order = $_POST['Banner']['order'];
+			$model->texto = $_POST['texto'];
+			
+			if($imagen->saveAs('images/banner/'.$imagen))
+			{
+				if($model->save())
+				{
+					$this->redirect(array('webpage/banner'));
+				}
+				else 
+				{
+					$this->render('banner/create',array('model'=>$model));
+				}
+			}
+			else
+			{
+				$this->render('banner/create',array('model'=>$model));
+			}	
+		}
+		else
+		{
+			$this->render('banner/create',array('model'=>$model));
 		}
 
-		$this->render('banner/create',array(
-			'model'=>$model,
-		));
 	}
 	
 	public function actions() {
