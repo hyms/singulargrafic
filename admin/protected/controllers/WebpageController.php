@@ -83,8 +83,8 @@ class WebpageController extends Controller
 			{
 				$imagen = CUploadedFile::getInstance($model, 'imagen');
 				$model->imagen = $imagen->getName();
-				$imagen->saveAs('images/banner/'.$imagen);
-				$imagen->saveAs('../images/'.$imagen);
+				if($imagen->saveAs('images/banner/'.$imagen,false))
+					$imagen->saveAs(Yii::app()->basePath.'/../../images/'.$imagen);
 			}
 			else 
 			{
@@ -122,8 +122,8 @@ class WebpageController extends Controller
 			{
 				$imagen = CUploadedFile::getInstance($model, 'imagen');
 				$model->imagen = $imagen->getName();
-				$imagen->saveAs('images/banner/'.$imagen);
-				$imagen->saveAs('images/'.$imagen);
+				if($imagen->saveAs('images/banner/'.$imagen,false))
+					$imagen->saveAs(Yii::app()->basePath.'/../../images/'.$imagen);
 			}
 			$model->fecha = date("Y-m-d H:i:s");
 			$model->order = $_POST['Banner']['order'];

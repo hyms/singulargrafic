@@ -23,7 +23,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	'itemsCssClass' => 'table table-hover table-condensed',
 	'htmlOptions' => array('class' => 'table-responsive'),
 	'columns'=>array(
-		'id',
+		
+		array(
+			'header'=>'#',
+			'value'=>'$row+1',       //  row is zero based
+		),
 		array(
     		'name'=>'imagen',
        		'type'=>'raw',

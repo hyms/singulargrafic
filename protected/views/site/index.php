@@ -25,17 +25,6 @@ $this->pageTitle=Yii::app()->name;
       	} 
       ?>
       
-      
-      <!--third slide starts-->
-      <li>
-        <div class="col-sm-8"> <img src="<?php echo Yii::app()->request->baseUrl; ?>/img/slider/slide3.jpg" alt="We build apps"> </div>
-        <div class="col-sm-4">
-          <h1>We Build Rock Solid Applications!</h1>
-          <p>Our work always adhere to the latest trends and standards. We create complex web apps and on time ALWAYS!</p>
-        </div>
-      </li>
-      <!--third slide ends-->
-      
     </ul>
   </div>
 </div>
