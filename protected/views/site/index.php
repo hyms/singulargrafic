@@ -6,30 +6,25 @@ $this->pageTitle=Yii::app()->name;
 
 <!-- slider starts
 ================================================== -->
-<section id="slider" class="body">
-	
+<section id="slider" >
+<div class="body">
   <div class="flexslider slider-text-image">
     <ul class="slides">
       
-      <!--first slide starts-->
-      <li>
-        <div class="col-sm-8"> <img src="<?php echo Yii::app()->request->baseUrl; ?>/img/slider/slide1.jpg" alt="We build apps"> </div>
-        <div class="col-sm-4">
-          <h1>We Build Mobile Apps For Masses!</h1>
-          <p>Our design team specializes in Information Architecture and User Interface design for Web and Mobile applications.</p>
-          <a href="#" class="button medium color">View Our Work</a> </div>
-      </li>
-      <!--first slide ends--> 
+      <?php
+      	foreach ($model as $banner)
+      	{
+      ?>
+	      <li>
+	        <div class="col-sm-8"><?php echo CHtml::image(Yii::app()->request->baseUrl.'/images/'.$banner->imagen)?> </div>
+	        <div class="col-sm-4">
+	        <?php echo $banner->texto ?>
+	  		</div>
+	      </li>
+      <?php 
+      	} 
+      ?>
       
-      <!--second slide starts-->
-      <li>
-        <div class="col-sm-8"> <img src="<?php echo Yii::app()->request->baseUrl; ?>/img/slider/slide2.jpg" alt="We build apps"> </div>
-        <div class="col-sm-4">
-          <h1>We Design Stunning Interfaces!</h1>
-          <p>Our design team specializes in Information Architecture and User Interface design for Web and Mobile applications.</p>
-          <a href="#" class="button medium color">Contact Us</a> </div>
-      </li>
-      <!--second slide ends--> 
       
       <!--third slide starts-->
       <li>
@@ -43,6 +38,7 @@ $this->pageTitle=Yii::app()->name;
       
     </ul>
   </div>
+</div>
 </section>
 <!-- slider ends
 ================================================== --> 

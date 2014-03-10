@@ -12,6 +12,8 @@
  */
 class Banner extends CActiveRecord
 {
+	var $file;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -30,7 +32,7 @@ class Banner extends CActiveRecord
 		return array(
 			array('imagen, texto, order', 'required'),
 			array('order', 'numerical', 'integerOnly'=>true),
-			array('imagen', 'file', 'types'=>'jpg, gif, png','allowEmpty'=>true, 'on'=>'update'),
+			array('imagen', 'file','types'=>'jpg, gif, png, jpeg','maxSize'=>1024 * 1024 * 50,'tooLarge'=>'The file was larger than 50MB. Please upload a smaller file.','allowEmpty'=>true),
        		array('texto', 'length', 'max'=>1000),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

@@ -79,33 +79,68 @@ class WebpageController extends Controller
 
 		if(isset($_POST['Banner']))
 		{
-			$imagen = CUploadedFile::getInstance($model, 'imagen');
-			$model->imagen = $imagen->getName();
+			if(!empty($_FILES['Banner']['name']['imagen']))
+			{
+				$imagen = CUploadedFile::getInstance($model, 'imagen');
+				$model->imagen = $imagen->getName();
+				$imagen->saveAs('images/banner/'.$imagen);
+				$imagen->saveAs('../images/'.$imagen);
+			}
+			else 
+			{
+				$model->imagen="";
+			}
 			$model->fecha = date("Y-m-d H:i:s");
 			$model->order = $_POST['Banner']['order'];
 			$model->texto = $_POST['texto'];
 			
-			if($imagen->saveAs('images/banner/'.$imagen))
+			if($model->save())
 			{
-				if($model->save())
-				{
-					$this->redirect(array('webpage/banner'));
-				}
-				else 
-				{
-					$this->render('banner/create',array('model'=>$model));
-				}
+				$this->redirect(array('webpage/banner'));
 			}
-			else
+			else 
 			{
 				$this->render('banner/create',array('model'=>$model));
-			}	
+			}
 		}
 		else
 		{
 			$this->render('banner/create',array('model'=>$model));
 		}
 
+	}
+	
+	public function actionBannerUpdate($id)
+	{
+		$model=Banner::model()->find($id);
+		
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+		if(isset($_POST['Banner']))
+		{	
+			if(!empty($_FILES['Banner']['name']['imagen']))
+			{
+				$imagen = CUploadedFile::getInstance($model, 'imagen');
+				$model->imagen = $imagen->getName();
+				$imagen->saveAs('images/banner/'.$imagen);
+				$imagen->saveAs('images/'.$imagen);
+			}
+			$model->fecha = date("Y-m-d H:i:s");
+			$model->order = $_POST['Banner']['order'];
+			$model->texto = $_POST['texto'];
+			if($model->save())
+			{
+				$this->redirect(array('webpage/banner'));
+			}
+			else 
+			{
+				$this->render('banner/update',array('model'=>$model));
+			}
+		}
+		else
+		{
+			$this->render('banner/update',array('model'=>$model));
+		}
 	}
 	
 	public function actions() {

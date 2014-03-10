@@ -22,6 +22,34 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
 	'itemsCssClass' => 'table table-hover table-condensed',
 	'htmlOptions' => array('class' => 'table-responsive'),
+	'columns'=>array(
+		'id',
+		array(
+    		'name'=>'imagen',
+       		'type'=>'raw',
+       		'value'=>'CHtml::image(Yii::app()->request->baseUrl."/images/banner/".$data->imagen,"imagen banner",array("width"=>"200px","class"=>"img-thumbnail"))'
+      	),
+		array(
+    		'name'=>'texto',
+        	'type'=>'raw',
+        	'value'=>'$data->texto'
+      	),
+		'fecha',
+		'order',
+		array(
+			'name'=>'',
+			'type'=>'raw',
+			'value'=>'CHtml::link("Editar",array("webpage/bannerUpdate","id"=>$data->id))'
+		),
+		array(
+			'name'=>'',
+			'type'=>'raw',
+			'value'=>'CHtml::link("Eliminar","webpage/bannerdel","id"=>$data->id)'
+		),
+		//'viewButtonImageUrl' => 'view',
+		//'updateButtonImageUrl' => Yii::app()->baseUrl . '/css/gridViewStyle/images/' . 'gr-update.png',
+		//'deleteButtonImageUrl' => Yii::app()->baseUrl . '/css/gridViewStyle/images/' . 'gr-delete.png',
 
+	)
 ));
 ?>
