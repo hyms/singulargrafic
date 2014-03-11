@@ -112,7 +112,7 @@ class WebpageController extends Controller
 	
 	public function actionBannerUpdate($id)
 	{
-		$model=Banner::model()->find($id);
+		$model=Banner::model()->findByPk($id);
 		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);

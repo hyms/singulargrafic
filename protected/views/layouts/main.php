@@ -3,20 +3,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="language" content="en" />
+	<meta name="language" content="es" />
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
 	<link rel="shortcut icon" href="<?php echo Yii::app()->request->baseUrl; ?>/img/icons/favicon.ico">
 	<link rel="apple-touch-icon" href="<?php echo Yii::app()->request->baseUrl; ?>/img/icons/apple-touch-icon.png">
 	<!--style sheet-->
-	<!-- <link rel="stylesheet" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/css/facebook-framework.css" /> -->
 	<link rel="stylesheet" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/css/styles.css" />
 	<link rel="stylesheet" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" />
 	<link rel="stylesheet" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/css/flexslider.css" />
-	<!--<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/fancybox.css" type="text/css" media="screen" /> -->
-	<!--<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/font-awesome.css" type="text/css" media="screen" /> -->
-	<!--<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/colors/light.css" type="text/css" media="screen" /> -->
 	
 	<!--[if IE 7]>
 	  	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/font-awesome-ie7.css">
@@ -31,37 +27,25 @@
 <div class="background">
 <!-- header starts
 ================================================== -->
-<section id="header" class="container clearfix">
-	<div class="logo">
-		<a class="page" href="#">
-			<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/Objetointeligentevec.png" alt="<?php echo CHtml::encode(Yii::app()->name); ?>">
-		</a>
-	</div>
-	<div class="Impresionacontusidea">
-		<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/Impresionacontusidea.png" alt="<?php echo CHtml::encode(Yii::app()->name); ?>">	
-	</div>
-	<div class="menu navbar navbar-static-top">
-	<div class="container">
-	<div class="collapse navbar-collapse">
-		<nav class="mainNav">
-	    	<ul>
-	        	<?php $this->widget('zii.widgets.CMenu',array(
-	        		'htmlOptions' => array('class' => 'nav navbar-nav'),
+<div class="banner row container clearfix">
+	<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/banner.png" alt="<?php echo CHtml::encode(Yii::app()->name); ?>">	
+</div>
+<div>
+	<nav class="menu navbar" role="navigation">
+	         	<?php $this->widget('zii.widgets.CMenu',array(
+	        		'htmlOptions' => array('class' => 'nav nav-pills'),
 		        	'items'=>array(
 					array('label'=>'Home', 'url'=>array('/site/index'),'linkOptions'=> array('class' => 'bottonmenu')),
-					array('label'=>'Imprenta/Cotizaciones', 'url'=>array('/site/imprenta'),'linkOptions'=> array('class' => 'bottonmenu')),
-					array('label'=>'Servicio CTP', 'url'=>array('/site/ctp'),'linkOptions'=> array('class' => 'bottonmenu')),
+					array('label'=>'Imprenta', 'url'=>array('/site/imprenta'),'linkOptions'=> array('class' => 'bottonmenu')),
+					array('label'=>'CTP', 'url'=>array('/site/ctp'),'linkOptions'=> array('class' => 'bottonmenu')),
 					array('label'=>'Editorial', 'url'=>array('/site/editorial'),'linkOptions'=> array('class' => 'bottonmenu')),
-					array('label'=>'Distribuidora de Papel', 'url'=>array('/site/distribuidora'),'linkOptions'=> array('class' => 'bottonmenu')),
+					array('label'=>'Distribuidora', 'url'=>array('/site/distribuidora'),'linkOptions'=> array('class' => 'bottonmenu')),
 					array('label'=>'Contactos', 'url'=>array('/site/contact'),'linkOptions'=> array('class' => 'bottonmenu')),
 					),
 				)); ?>
-	      	</ul>
-	  	</nav>
-	</div>
-	</div>
-	</div>
-</section>
+	   
+	</nav>
+</div>
 <!-- header ends
 ================================================== --> 
 	
@@ -71,17 +55,15 @@
 
 <!-- copyright starts
 ================================================== -->
-<section id="copyright" class="footer">
-  <div class="span12">
-    <p>©HFCT. All Rights Reserved. </p>
-    <ul class="social">
-      <li class="facebook"><a href="#">facebook</a></li>
-      <li class="twitter"><a href="#">twitter</a></li>
-      <li class="skype"><a href="#">Skype</a></li>
-      <li class="email"><a href="#">flickr</a></li>
-    </ul>
-  </div>
-</section>
+<div class="footer">
+	<p class="navbar-text">©HFCT. All Rights Reserved.</p>
+    <p class="navbar-text navbar-right"> 
+        <a href="#" class="navbar-link">facebook</a>
+	    <a href="#" class="navbar-link">twitter</a>
+		<a href="#" class="navbar-link">Skype</a>
+   		<a href="#" class="navbar-link">flickr</a>
+	</p>
+</div>
 <!-- copyright ends
 ================================================== --> 
 

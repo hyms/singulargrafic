@@ -6,8 +6,7 @@ $this->pageTitle=Yii::app()->name;
 
 <!-- slider starts
 ================================================== -->
-<section id="slider" >
-<div class="body">
+<div class="body row">
   <div class="flexslider slider-text-image">
     <ul class="slides">
       
@@ -28,6 +27,5 @@ $this->pageTitle=Yii::app()->name;
     </ul>
   </div>
 </div>
-</section>
 <!-- slider ends
 ================================================== --> 
