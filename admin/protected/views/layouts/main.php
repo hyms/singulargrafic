@@ -43,7 +43,8 @@
 					'encodeLabel' => false,
 					'items'=>array(
 						array('label'=>'Home', 'url'=>array('/site/index')),
-						array('label'=>'WebPage <b class="caret"></b>', 'url'=>array('#'),
+						//menu webpage
+						array('label'=>'Pagina Web <b class="caret"></b>', 'url'=>array('#'),
 						'linkOptions'=> array(
                        		'class' => 'dropdown-toggle',
                             'data-toggle' => 'dropdown',
@@ -51,8 +52,17 @@
 						'itemOptions' => array('class'=>'dropdown'),
 						'items'=>array(
 							array('label'=>'Banner', 'url'=>array('webpage/banner')),
-							array('label'=>'Paginas', 'url'=>array('/webpage/pages')),
-							array('label'=>'Footer', 'url'=>array('#')),
+							array('label'=>'Paginas', 'url'=>array('webpage/pages')),
+						)),
+						array('label'=>'Empresa <b class="caret"></b>', 'url'=>array('#'),
+							'linkOptions'=> array(
+									'class' => 'dropdown-toggle',
+									'data-toggle' => 'dropdown',
+							),
+							'itemOptions' => array('class'=>'dropdown'),
+							'items'=>array(
+								array('label'=>'Sucursales', 'url'=>array('empresa/sucursal')),
+								array('label'=>'Empleados', 'url'=>array('empresa/personal')),
 						)),
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)

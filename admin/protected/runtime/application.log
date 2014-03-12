@@ -2489,3 +2489,116 @@ Stack trace:
 REQUEST_URI=/singular/admin/index.php/webpage/bannerUpdate/1
 in /var/www/singular/admin/protected/controllers/WebpageController.php (132)
 in /var/www/singular/admin/index.php (13)
+2014/03/12 17:53:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "banner".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('banner')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('banner')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('empresa/banner')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/admin/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/admin/index.php/empresa/banner
+HTTP_REFERER=http://localhost/singular/admin/index.php/webpage/pages
+---
+2014/03/12 17:53:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "personal".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('personal')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('personal')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('empresa/persona...')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/admin/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/admin/index.php/empresa/personal
+HTTP_REFERER=http://localhost/singular/admin/index.php/empresa/banner
+---
+2014/03/12 17:54:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "personal".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('personal')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('personal')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('empresa/persona...')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/admin/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/admin/index.php/empresa/personal
+HTTP_REFERER=http://localhost/singular/admin/index.php/empresa/sucursal
+---
+2014/03/12 17:54:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "personal".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('personal')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('personal')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('empresa/persona...')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/admin/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/admin/index.php/empresa/personal
+HTTP_REFERER=http://localhost/singular/admin/index.php/empresa/personal
+---
+2014/03/12 17:57:42 [error] [php] Undefined variable: paginas (/var/www/singular/admin/protected/views/empresa/empresa.php:10)
+Stack trace:
+#0 /var/www/framework/web/CController.php(869): EmpresaController->renderFile()
+#1 /var/www/framework/web/CController.php(782): EmpresaController->renderPartial()
+#2 /var/www/singular/admin/protected/controllers/EmpresaController.php(32): EmpresaController->render()
+#3 /var/www/framework/web/actions/CInlineAction.php(49): EmpresaController->actionSucursal()
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/framework/web/CController.php(286): EmpresaController->runAction()
+#6 /var/www/framework/web/CController.php(265): EmpresaController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): EmpresaController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/admin/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/admin/index.php/empresa/sucursal
+in /var/www/singular/admin/protected/views/empresa/empresa.php (10)
+in /var/www/singular/admin/protected/controllers/EmpresaController.php (32)
+in /var/www/singular/admin/index.php (13)
+2014/03/12 18:26:15 [error] [php] Undefined variable: select (/var/www/singular/admin/protected/views/empresa/empresa.php:52)
+Stack trace:
+#0 /var/www/framework/web/CController.php(869): EmpresaController->renderFile()
+#1 /var/www/framework/web/CController.php(782): EmpresaController->renderPartial()
+#2 /var/www/singular/admin/protected/controllers/EmpresaController.php(32): EmpresaController->render()
+#3 /var/www/framework/web/actions/CInlineAction.php(49): EmpresaController->actionSucursal()
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/framework/web/CController.php(286): EmpresaController->runAction()
+#6 /var/www/framework/web/CController.php(265): EmpresaController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): EmpresaController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/admin/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/admin/index.php/empresa/sucursal
+in /var/www/singular/admin/protected/views/empresa/empresa.php (52)
+in /var/www/singular/admin/protected/controllers/EmpresaController.php (32)
+in /var/www/singular/admin/index.php (13)
+2014/03/12 18:53:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "empresa".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('empresa')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('empresa')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('empresa/empresa...')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/admin/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/admin/index.php/empresa/empresa/sucursal
+HTTP_REFERER=http://localhost/singular/admin/index.php/empresa/sucursal
+---
+2014/03/12 19:09:31 [error] [php] Undefined index: new (/var/www/singular/admin/protected/controllers/EmpresaController.php:32)
+Stack trace:
+#0 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/framework/web/CController.php(286): EmpresaController->runAction()
+#3 /var/www/framework/web/CController.php(265): EmpresaController->runActionWithFilters()
+#4 /var/www/framework/web/CWebApplication.php(282): EmpresaController->run()
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/admin/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/admin/index.php/empresa/sucursal/1
+in /var/www/singular/admin/protected/controllers/EmpresaController.php (32)
+in /var/www/singular/admin/index.php (13)
+2014/03/12 19:12:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "personal".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('personal')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('personal')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('empresa/persona...')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/admin/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/admin/index.php/empresa/personal
+HTTP_REFERER=http://localhost/singular/admin/index.php/empresa/sucursal
+---

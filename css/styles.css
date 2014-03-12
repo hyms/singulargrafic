@@ -47,8 +47,9 @@
 	color:#fff;
 	text-align:center;
 	font:bold 14px "Arial"; 
-	background: url("../images/boton.png");
-	background-size: 100% 100%;
+	/*background: url("../images/boton.png");
+	background-size: 100% 100%;*/
+	background:#eba31d;
 	width: 115px; 
 	/*height: 40px;*/
 }

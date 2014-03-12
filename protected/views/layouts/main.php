@@ -11,7 +11,7 @@
 	<link rel="apple-touch-icon" href="<?php echo Yii::app()->request->baseUrl; ?>/img/icons/apple-touch-icon.png">
 	<!--style sheet-->
 	<link rel="stylesheet" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/css/styles.css" />
-	<link rel="stylesheet" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" />
+	<link rel="stylesheet" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.Readable.css" />
 	<link rel="stylesheet" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/css/flexslider.css" />
 	
 	<!--[if IE 7]>
@@ -20,7 +20,6 @@
 	
 	<!--jquery libraries / others are at the bottom-->
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-1.7.1.min.js" type="text/javascript"></script>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/modernizr.js" type="text/javascript"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.js" type="text/javascript"></script>
 </head>
 <body >
@@ -61,7 +60,6 @@
         <a href="#" class="navbar-link">facebook</a>
 	    <a href="#" class="navbar-link">twitter</a>
 		<a href="#" class="navbar-link">Skype</a>
-   		<a href="#" class="navbar-link">flickr</a>
 	</p>
 </div>
 <!-- copyright ends
@@ -72,25 +70,34 @@
 <!--other jqueries required--> 
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.js" type="text/javascript"></script> 
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.flexslider-min.js" type="text/javascript"></script> 
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.fancybox-1.3.4.pack.js"></script> 
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.isotope.min.js"></script> 
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/custom.js" type="text/javascript"></script> 
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/contact.js" type="text/javascript"></script> 
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.als1.min.js" type="text/javascript"></script> 
-<script type="text/javascript">
-	$(document).ready(function() 
-	{
-		$("#lista1").als({
-			visible_items: 4,
-			scrolling_items: 2,
-			orientation: "horizontal",
-			circular: "yes",
-			autoscroll: "no",
-			interval: 5000,
-			direction: "right"
-		});
-	});
-</script>
+<script type="text/javascript" >
+$(window).load(function () {
+    //Text + Image Slider
+    $('.slider-text-image').flexslider({
+        animation: "fade",
+        slideshowSpeed: 4000,
+        animationDuration: 600,
+        controlNav: true,
+        keyboardNav: true,
+        directionNav: false,
+        pauseOnHover: true,
+        pauseOnAction: true
 
+    });
+
+    //testimonial slider
+    $('.slider-testimonial').flexslider({
+        animation: "fade",
+        slideshowSpeed: 7000,
+        animationDuration: 200,
+        controlNav: false,
+        keyboardNav: true,
+        directionNav: false,
+        pauseOnHover: true,
+        pauseOnAction: true
+    });
+});
+
+</script> 
 </body>
 </html>
