@@ -130,6 +130,16 @@ class Empresa extends CActiveRecord
 		);
 	}
 	
+	public function getSuperiores(){
+		if($this->id==null)
+			return CHtml::listData( $this::model()->findAll(array('select'=>'id, nombre','group'=>'nombre')),'id','nombre' );
+		return CHtml::listData( $this::model()->findAll('id!='.$this->id, array('select'=>'id, nombre','group'=>'nombre')),'id','nombre' );
+	}
+	
+	public function getServicios(){
+		return CHtml::listData( Servicios::model()->findAll(array('select'=>'id, nombre')),'id','nombre' );
+	}
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

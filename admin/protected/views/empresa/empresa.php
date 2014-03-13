@@ -10,11 +10,12 @@
 		foreach ($sucursal as $suc)
 		{
 	?>
-		<li><?php echo CHtml::link($suc->nombre, array('empresa/sucursal', 'id'=>$suc->id));?></li>
+		<li class="form-group"><?php echo CHtml::link($suc->nombre, array('empresa/sucursal', 'id'=>$suc->id));?></li>
 	<?php 
 		}
 		$form=$this->beginWidget('CActiveForm', array(
 				'id'=>'empresa-empresa-form',
+				'action'=>Yii::app()->createUrl('/empresa/sucursal'),
 				'htmlOptions'=>array(
 						'class'=>'form-horizontal',
 						'role'=>'form'
@@ -35,7 +36,7 @@
 	</ul>
 </div>
 <div class="form col-sm-10">
-	<h1>Sucursal</h1>
+	<h1><?php echo $model->nombre; ?></h1>
 <?php if($new==true || $model->id != null){?>
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -142,12 +143,25 @@
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'patern',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-3">
-		<?php echo $form->textField($model,'patern',array('class'=>'form-control')); ?>
+		<?php echo CHtml::dropDownList('Superior', $model->patern, 
+              $model->superiores,
+              array('empty' => 'Seleccione su Superior',
+					'class'=>'form-control'
+		));?>
 		</div>
 		<?php echo $form->error($model,'patern'); ?>
 	</div>
-
-
+	<div class="form-group">
+	<?php echo Chtml::label('Servicios','servicio',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-3">
+		<?php echo CHtml::dropDownList('Servicios', $servicios->nombre, 
+              $model->servicios,
+              array('empty' => 'Seleccione el Servicio',
+					'class'=>'form-control'
+		));?>
+		</div>
+	
+	</div>
 	<div class="form-group">
 		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
 	</div>
@@ -158,3 +172,27 @@
 
 <?php }?>
 </div>
+
+<script type="text/javascript">
+
+	var startingNo = 3;
+	var $node = "";
+	for(varCount=0;varCount<=startingNo;varCount++){
+	    var displayCount = varCount+1;
+	    $node += '<p><label for="var'+displayCount+'">Variable '+displayCount+': </label><input type="text" name="var'+displayCount+'" id="var'+displayCount+'"><span class="removeVar">Remove Variable</span></p>';
+	}
+	//add them to the DOM
+	$('form').prepend($node);
+	//remove a textfield    
+	$('form').on('click', '.removeVar', function(){
+	   $(this).parent().remove();
+	  
+	});
+	//add a new node
+	$('#addVar').on('click', function(){
+	varCount++;
+	$node = '<p><label for="var'+varCount+'">Variable '+varCount+': </label><input type="text" name="var'+varCount+'" id="var'+varCount+'"><span class="removeVar">Remove Variable</span></p>';
+	$(this).parent().before($node);
+	});
+		
+</script>

@@ -10,8 +10,13 @@ class EmpresaController extends Controller
 	public function actionSucursal($id=null)
 	{
 		$model=new Empresa;
+		$servicios = new Servicios;
 		if($id!=null)
+		{
 			$model=Empresa::model()->findByPk($id);
+			$servicios=Servicios::model()->with('empresaServicio')->find('idEmpresa='.$id);
+		}
+			
 		$sucursal=Empresa::model()->findall();
 		
 		$new=false;
@@ -24,16 +29,88 @@ class EmpresaController extends Controller
 			$model->ciudad=$_POST['ciudad']; 
 			if($model->save())
 			{
+				$ser= new EmpresaServicio;
+				$ser->idEmpresa=$model->id;
+				$ser->idServicio=$_POST['Servicios'];
+				$ser->save();
+				print_r($ser);
+				
 				$this->redirect('sucursal');
 			}
 			else 
 			{
-				$this->render('empresa',array('model'=>$model,'sucursal'=>$sucursal,"new"=>$new));
+				$this->render('empresa',array('model'=>$model,'sucursal'=>$sucursal,"new"=>$new,'servicios'=>$servicios));
 			}
 		}
 		else 
 		{
-			$this->render('empresa',array('model'=>$model,'sucursal'=>$sucursal,"new"=>$new));
+			$this->render('empresa',array('model'=>$model,'sucursal'=>$sucursal,"new"=>$new,'servicios'=>$servicios));
+		}
+	}
+
+	public function actionEmpleado($id=null)
+	{
+		$model=new Empleado;
+		
+		if($id!=null)
+			$model=Empleado::model()->findByPk($id);
+			
+		$empleados=Empleado::model()->findall();
+		
+		$new=false;
+		if(isset($_POST['new']))
+			$new=$_POST['new'];
+		
+		if(isset($_POST['Empleado']))
+		{
+			$model->attributes=$_POST['Empleado'];
+			$model->sucursal=$_POST['sucursal'];
+			$model->superior=$_POST['superior'];
+			$model->fechaIngreso=date("Y-m-d", strtotime($model->fechaIngreso));
+			
+			if($model->save())
+			{
+				$this->redirect('empleado');
+			}
+			else 
+			{
+				$this->render('empleado',array('model'=>$model,'empleados'=>$empleados,'new'=>$new));
+			}
+		}
+		else 
+		{
+			$this->render('empleado',array('model'=>$model,'empleados'=>$empleados,'new'=>$new));
+		}
+	}
+	
+	public function actionServicios($id=null)
+	{
+		$model=new Servicios;
+		if($id!=null)
+			$model=Servicios::model()->findByPk($id);
+		$servicios=Servicios::model()->findall();
+		
+		$new=false;
+		if(isset($_POST['new']))
+			$new=$_POST['new'];
+		
+		if(isset($_POST['Servicios']))
+		{
+			$model->attributes=$_POST['Servicios'];
+			$model->fechaCreacion=date("Y-m-d H:i:s", strtotime($model->fechaCreacion));
+			print_r($model);
+			if($model->save())
+			{
+				$this->redirect('servicios');
+			}
+			else
+			{
+				$this->render('servicios',array('model'=>$model,'servicios'=>$servicios,'new'=>$new));
+			}
+		}
+		else
+		{
+			$this->render('servicios',array('model'=>$model,'servicios'=>$servicios,'new'=>$new));
 		}
 	}
 	

@@ -62,8 +62,10 @@
 							'itemOptions' => array('class'=>'dropdown'),
 							'items'=>array(
 								array('label'=>'Sucursales', 'url'=>array('empresa/sucursal')),
-								array('label'=>'Empleados', 'url'=>array('empresa/personal')),
+								array('label'=>'Empleados', 'url'=>array('empresa/empleado')),
+								array('label'=>'Servicios', 'url'=>array('empresa/servicios')),
 						)),
+
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 					),
