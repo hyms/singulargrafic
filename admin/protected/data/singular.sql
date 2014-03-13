@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 12-03-2014 a las 17:32:06
+-- Tiempo de generación: 13-03-2014 a las 19:14:03
 -- Versión del servidor: 5.5.35
 -- Versión de PHP: 5.4.4-14+deb7u8
 
@@ -46,6 +46,31 @@ INSERT INTO `banner` (`id`, `imagen`, `texto`, `fecha`, `order`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `empleado`
+--
+
+CREATE TABLE IF NOT EXISTS `empleado` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombres` varchar(100) NOT NULL,
+  `apellidos` varchar(100) NOT NULL,
+  `ci` varchar(20) NOT NULL,
+  `telefono` varchar(15) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `cargo` varchar(50) NOT NULL,
+  `turno` varchar(50) NOT NULL,
+  `sueldo` int(11) NOT NULL,
+  `skype` varchar(100) NOT NULL,
+  `face` varchar(100) NOT NULL,
+  `sucursal` int(11) NOT NULL,
+  `superior` int(11) NOT NULL,
+  `fechaIngreso` datetime NOT NULL,
+  `obs` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `empresa`
 --
 
@@ -61,8 +86,36 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `horarios` varchar(50) NOT NULL,
   `skype` varchar(500) NOT NULL,
   `facebook` varchar(500) NOT NULL,
+  `patern` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `empresa`
+--
+
+INSERT INTO `empresa` (`id`, `nombre`, `ciudad`, `calle`, `maps`, `fax`, `correo`, `telefono`, `horarios`, `skype`, `facebook`, `patern`) VALUES
+(1, 'Singular Central', 'La Paz', 'Juan de la Riva', '', '', 'demo@demo.com', '123456', '9:00 a 13:00 / 14:30 a 19:30', '', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empresaServicio`
+--
+
+CREATE TABLE IF NOT EXISTS `empresaServicio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idEmpresa` int(11) NOT NULL,
+  `idServicio` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `empresaServicio`
+--
+
+INSERT INTO `empresaServicio` (`id`, `idEmpresa`, `idServicio`) VALUES
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -90,6 +143,26 @@ INSERT INTO `pages` (`id`, `nombre`, `contenido`, `enable`, `order`, `fecha`) VA
 (4, 'Editorial', '<p>\r\n	Texto de demostracion&nbsp;</p>\r\n', 1, 3, '2014-03-05 19:34:25'),
 (5, 'Distribuidora', '<p>\r\n	Texto de demostracion&nbsp;</p>\r\n<p>\r\n	&nbsp;</p>\r\n', 1, 4, '2014-03-05 19:34:29'),
 (6, 'Contacto', '<p>\r\n	Ubicacion juan de la riva ..</p>\r\n', 1, 5, '2014-03-12 16:32:47');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `servicios`
+--
+
+CREATE TABLE IF NOT EXISTS `servicios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `fechaCreacion` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `servicios`
+--
+
+INSERT INTO `servicios` (`id`, `nombre`, `fechaCreacion`) VALUES
+(1, 'Imprenta', '2014-03-13 00:00:00');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
