@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 13-03-2014 a las 19:14:03
+-- Tiempo de generación: 14-03-2014 a las 19:13:54
 -- Versión del servidor: 5.5.35
 -- Versión de PHP: 5.4.4-14+deb7u8
 
@@ -66,7 +66,14 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `fechaIngreso` datetime NOT NULL,
   `obs` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `empleado`
+--
+
+INSERT INTO `empleado` (`id`, `nombres`, `apellidos`, `ci`, `telefono`, `email`, `cargo`, `turno`, `sueldo`, `skype`, `face`, `sucursal`, `superior`, `fechaIngreso`, `obs`) VALUES
+(1, 'Helier', 'Cortez', '5999242', '73221183', '', 'sistemas', '', 1000, 'helier20', '', 1, 0, '2014-02-23 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -88,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `facebook` varchar(500) NOT NULL,
   `patern` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `empresa`
@@ -108,14 +115,15 @@ CREATE TABLE IF NOT EXISTS `empresaServicio` (
   `idEmpresa` int(11) NOT NULL,
   `idServicio` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Volcado de datos para la tabla `empresaServicio`
 --
 
 INSERT INTO `empresaServicio` (`id`, `idEmpresa`, `idServicio`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(12, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -153,16 +161,18 @@ INSERT INTO `pages` (`id`, `nombre`, `contenido`, `enable`, `order`, `fecha`) VA
 CREATE TABLE IF NOT EXISTS `servicios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
+  `detalle` varchar(500) NOT NULL,
   `fechaCreacion` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `servicios`
 --
 
-INSERT INTO `servicios` (`id`, `nombre`, `fechaCreacion`) VALUES
-(1, 'Imprenta', '2014-03-13 00:00:00');
+INSERT INTO `servicios` (`id`, `nombre`, `detalle`, `fechaCreacion`) VALUES
+(1, 'Imprenta', 'imprenta', '2014-03-13 00:00:00'),
+(2, 'CTP', 'ctp', '2014-03-14 00:00:00');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

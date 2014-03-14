@@ -27,14 +27,40 @@ class EmpresaController extends Controller
 		{
 			$model->attributes=$_POST['Empresa'];
 			$model->ciudad=$_POST['ciudad']; 
+			$model->patern=$_POST['Superior'];
+			
 			if($model->save())
 			{
-				$ser= new EmpresaServicio;
-				$ser->idEmpresa=$model->id;
-				$ser->idServicio=$_POST['Servicios'];
-				$ser->save();
-				print_r($ser);
-				
+				$count=0;
+				while(isset($_POST['Servicios'.$count]))
+				{
+					$ser= EmpresaServicio::model()->find('idEmpresa='.$model->id.' and idServicio='.$_POST['Servicios'.$count]);
+					if(empty($ser))
+						$ser = new EmpresaServicio;
+					
+					$ser->idEmpresa=$model->id;
+					$ser->idServicio=$_POST['Servicios'.$count];
+					
+					if(isset($_POST['Servicios'.$count-1]))
+					{
+						$sw=0;
+						for($id=0;$i<=$count;$i++)
+						{
+							if($_POST['Servicios'.$i]==$_POST['Servicios'.$count])
+							{
+								$sw=1; break;
+							}
+						}
+						if($sw==0)
+							$ser->save();
+					}
+					else 
+					{
+						$ser->save();
+					}
+					
+					$count++;
+				}
 				$this->redirect('sucursal');
 			}
 			else 
@@ -87,18 +113,21 @@ class EmpresaController extends Controller
 	{
 		$model=new Servicios;
 		if($id!=null)
+		{
 			$model=Servicios::model()->findByPk($id);
+		}
 		$servicios=Servicios::model()->findall();
 		
 		$new=false;
 		if(isset($_POST['new']))
+		{
 			$new=$_POST['new'];
-		
+		}
 		if(isset($_POST['Servicios']))
 		{
 			$model->attributes=$_POST['Servicios'];
 			$model->fechaCreacion=date("Y-m-d H:i:s", strtotime($model->fechaCreacion));
-			print_r($model);
+			print_r($_POST['Servicios']);
 			if($model->save())
 			{
 				$this->redirect('servicios');

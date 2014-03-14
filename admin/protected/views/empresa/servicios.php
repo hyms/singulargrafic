@@ -66,7 +66,15 @@
 		</div>
 		<?php echo $form->error($model,'nombre'); ?>
 	</div>
-
+	
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'detalle',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-4">
+		<?php echo $form->textArea($model,'detalle',array('class'=>'form-control')); ?>
+		</div>
+		<?php echo $form->error($model,'detalle'); ?>
+	</div>
+	
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'fechaCreacion',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-2">

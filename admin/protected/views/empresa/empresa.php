@@ -153,15 +153,34 @@
 	</div>
 	<div class="form-group">
 	<?php echo Chtml::label('Servicios','servicio',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-3">
-		<?php echo CHtml::dropDownList('Servicios', $servicios->nombre, 
-              $model->servicios,
-              array('empty' => 'Seleccione el Servicio',
-					'class'=>'form-control'
-		));?>
+		<div class="col-sm-3" id="Serv">
+		<?php
+		if(count($servicios)<=1){
+			echo CHtml::dropDownList('Servicios0', $servicios->id, 
+	              $model->servicios,
+	              array('empty' => 'Seleccione el Servicio',
+						'class'=>'form-control'
+			));
+		}else{
+			$id=0;
+			foreach ($servicios as $serv)
+			{
+				echo CHtml::dropDownList('Servicios'.$id, $serv->id,
+						$model->servicios,
+						array('empty' => 'Seleccione el Servicio',
+								'class'=>'form-control'
+						));
+				$id+=1;
+			}
+		}
+		echo count($servicios);
+		//print_r($servicios);
+		?>
+		
 		</div>
-	
+		<span id="addVar" class="btn btn-default">+</span>
 	</div>
+	
 	<div class="form-group">
 		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
 	</div>
@@ -175,24 +194,27 @@
 
 <script type="text/javascript">
 
-	var startingNo = 3;
+	var $frm = document.getElementById("Serv");
+	
+	var varCount = $frm.getElementsByTagName('select').length - 1 ;
 	var $node = "";
-	for(varCount=0;varCount<=startingNo;varCount++){
-	    var displayCount = varCount+1;
-	    $node += '<p><label for="var'+displayCount+'">Variable '+displayCount+': </label><input type="text" name="var'+displayCount+'" id="var'+displayCount+'"><span class="removeVar">Remove Variable</span></p>';
-	}
-	//add them to the DOM
-	$('form').prepend($node);
+	var $options = "";
+	
 	//remove a textfield    
 	$('form').on('click', '.removeVar', function(){
 	   $(this).parent().remove();
 	  
 	});
+	
 	//add a new node
 	$('#addVar').on('click', function(){
 	varCount++;
-	$node = '<p><label for="var'+varCount+'">Variable '+varCount+': </label><input type="text" name="var'+varCount+'" id="var'+varCount+'"><span class="removeVar">Remove Variable</span></p>';
-	$(this).parent().before($node);
+	$options = $("#Servicios0").find('option').clone();
+	$node = '<select class="form-control" name="Servicios'+varCount+'" id="Servicios'+varCount+'"></select>';
+	$('#Serv').append($node);//$(this).parent().before($node);
+	$('#Servicios'+varCount).append($options);
+	
 	});
+	
 		
 </script>

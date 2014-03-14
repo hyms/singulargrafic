@@ -38,7 +38,7 @@ class Empleado extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombres, apellidos, ci, telefono, cargo, sueldo, skype, sucursal, superior, fechaIngreso', 'required'),
+			array('nombres, apellidos, ci, telefono, cargo, sueldo, skype, sucursal, fechaIngreso', 'required'),
 			array('ci, sueldo, sucursal, superior', 'numerical', 'integerOnly'=>true),
 			array('nombres, apellidos, email, skype, face', 'length', 'max'=>100),
 			array('ci', 'length', 'max'=>20),
@@ -47,7 +47,7 @@ class Empleado extends CActiveRecord
 			array('obs', 'length', 'max'=>500),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('nombres, apellidos, ci, telefono, email, cargo, turno, sueldo, skype, face, superior, fechaIngreso, obs', 'safe', 'on'=>'search'),
+			array('nombres, apellidos, ci, telefono, email, cargo, turno, sueldo, skype, face, superior, obs', 'safe', 'on'=>'search'),
 		);
 	}
 

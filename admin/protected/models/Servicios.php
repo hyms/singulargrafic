@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'servicios':
  * @property integer $id
  * @property string $nombre
+ * @property string $detalle
  * @property string $fechaCreacion
  */
 class Servicios extends CActiveRecord
@@ -28,6 +29,7 @@ class Servicios extends CActiveRecord
 		return array(
 			array('nombre, fechaCreacion', 'required'),
 			array('nombre', 'length', 'max'=>100),
+			array('detalle', 'length', 'max'=>500),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('nombre, fechaCreacion', 'safe', 'on'=>'search'),
@@ -54,6 +56,7 @@ class Servicios extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'nombre' => 'Nombre',
+			'detalle' => 'Detalle',
 			'fechaCreacion' => 'Fecha Creacion',
 		);
 	}
