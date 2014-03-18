@@ -70,9 +70,16 @@
 		</div>
 		<?php echo $form->error($model,'order'); ?>
 	</div>
-
 	<div class="form-group">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Guardar' : 'Save',array('class'=>'btn btn-default col-sm-offset-2')); ?>
+	<?php 
+		echo CHtml::button('Atras', array(
+            'name' => 'btnBack',
+            'class' => 'btn btn-default col-sm-pull-2',
+            'onclick' => "history.go(-1)",
+                )
+        );
+		 echo CHtml::submitButton($model->isNewRecord ? 'Guardar' : 'Save',array('class'=>'btn btn-default col-sm-offset-1')); 
+	?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -10,9 +10,13 @@
 		foreach ($empleados as $emp)
 		{
 	?>
-		<li class="form-group"><?php echo CHtml::link($emp->nombres.' '.$emp->apellidos, array('empresa/empleado', 'id'=>$emp->id));?></li>
+		<li><?php echo CHtml::link($emp->nombres.' '.$emp->apellidos, array('empresa/empleado', 'id'=>$emp->id));?></li>
 	<?php 
 		}
+	?>
+	</ul>
+	
+	<?php
 		$form=$this->beginWidget('CActiveForm', array(
 				'id'=>'empresa-empresa-form',
 				'action'=>Yii::app()->createUrl('/empresa/empleado'),
@@ -26,14 +30,17 @@
 				// you need to use the performAjaxValidation()-method described there.
 				'enableAjaxValidation'=>false,
 		)); 
-		echo CHtml::hiddenField('new','true');
+		
 	?>
+	<div class="form-group">
+		<?php echo CHtml::hiddenField('new','true'); ?>
+	</div>
 	<div class="form-group">
 		<?php echo CHtml::submitButton('Añadir',array('class'=>'btn btn-default col-sm-offset-2')); ?>
 	</div>
 
 	<?php $this->endWidget(); ?>
-	</ul>
+	
 </div>
 <div class="form col-sm-10">
 	<h1><?php echo $model->nombres.' '.$model->apellidos; ?></h1>
@@ -52,7 +59,7 @@
 	// See class documentation of CActiveForm for details on this,
 	// you need to use the performAjaxValidation()-method described there.
 	'enableAjaxValidation'=>false,
-)); ?>
+	)); ?>
 
 	<p class="note">Los campos con <span class="required">*</span> son obligatorios.</p>
 

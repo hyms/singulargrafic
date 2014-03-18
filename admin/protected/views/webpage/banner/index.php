@@ -48,7 +48,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		array(
 			'name'=>'',
 			'type'=>'raw',
-			'value'=>'CHtml::link("Eliminar","webpage/bannerdel","id"=>$data->id)'
+			'value'=>'CHtml::link("Eliminar",array("webpage/bannerDelete","id"=>$data->id),array("confirm" => "Esta seguro de Eliminarlo?"))'
 		),
 		//'viewButtonImageUrl' => 'view',
 		//'updateButtonImageUrl' => Yii::app()->baseUrl . '/css/gridViewStyle/images/' . 'gr-update.png',

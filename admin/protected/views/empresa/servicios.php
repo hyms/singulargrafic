@@ -6,14 +6,18 @@
 
 <div class="col-sm-2">
 	<h2>Servicios</h2>
-	<ul class="nav nav-pills nav-stacked">
+	<ul class="nav nav-pills nav-stacked ">
 	<?php
 		foreach ($servicios as $serv)
 		{
 	?>
-		<li class="form-group"><?php echo CHtml::link($serv->nombre, array('empresa/servicios', 'id'=>$serv->id));?></li>
+		<li><?php echo CHtml::link($serv->nombre, array('empresa/servicios', 'id'=>$serv->id));?></li>
+	
 	<?php 
 		}
+	?>
+	</ul>
+	<?php
 		$form=$this->beginWidget('CActiveForm', array(
 				'id'=>'empresa-empresa-form',
 				'action'=>Yii::app()->createUrl('/empresa/servicios'),
@@ -27,14 +31,16 @@
 				// you need to use the performAjaxValidation()-method described there.
 				'enableAjaxValidation'=>false,
 		)); 
-		echo CHtml::hiddenField('new','true');
 	?>
+	<div class="form-group">
+		<?php echo CHtml::hiddenField('new','true'); ?>
+	</div>
 	<div class="form-group">
 		<?php echo CHtml::submitButton('Añadir',array('class'=>'btn btn-default col-sm-offset-2')); ?>
 	</div>
 
 	<?php $this->endWidget(); ?>
-	</ul>
+	
 </div>
 <div class="form col-sm-10">
 	<h1><?php echo $model->nombre; ?></h1>

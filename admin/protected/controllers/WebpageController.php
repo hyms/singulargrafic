@@ -4,26 +4,7 @@ class WebpageController extends Controller
 {
 	public function actionIndex()
 	{
-		$this->render('index');
-	}
-	
-	//controller
-	function init(){
-	  if(isset($_POST['SESSION_ID'])){
-	    $session=Yii::app()->getSession();
-	    $session->close();
-	    $session->sessionID = $_POST['SESSION_ID'];
-	    $session->open();
-	  }
-	}
-	function actionUpload(){
-	  if(isset($_POST['myPicture'])){
-	    $myPicture=CUploadedFile::getInstanceByName('myPicture');
-	    if(!$myPicture->saveAs('someFile.jpg'))
-	      throw new CHttpException(500);
-	    echo 1;
-	    Yii::app()->end();
-	  }
+		$this->redirect(array('site/index'));
 	}
 	
 	public function actionPages($id = NULL)
@@ -62,7 +43,7 @@ class WebpageController extends Controller
 		}
 	} 
 	
-	public function actionBanner($id = NULL)
+	public function actionBanner()
 	{
 		$dataProvider=new CActiveDataProvider('Banner');
 		$this->render('banner/index',array(
@@ -143,35 +124,13 @@ class WebpageController extends Controller
 		}
 	}
 	
-	public function actions() {
-		return array(
-				'upload'=>'application.controllers.upload.UploadFileAction',
-		);
-	}
-	// Uncomment the following methods and override them if needed
-	/*
-	public function filters()
+	public function actionBannerDelete($id)
 	{
-		// return the filter configuration for this controller, e.g.:
-		return array(
-			'inlineFilterName',
-			array(
-				'class'=>'path.to.FilterClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
+		$model=Banner::model()->findByPk($id);
+		$model->delete();
+		
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('webpage/banner'));
 	}
-
-	public function actions()
-	{
-		// return external action classes, e.g.:
-		return array(
-			'action1'=>'path.to.ActionClass',
-			'action2'=>array(
-				'class'=>'path.to.AnotherActionClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
-	*/
 }
