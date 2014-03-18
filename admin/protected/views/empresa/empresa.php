@@ -155,25 +155,27 @@
 	<?php echo Chtml::label('Servicios','servicio',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-3" id="Serv">
 		<?php
-		if(count($servicios)<=1){
+		if($new){
 			echo CHtml::dropDownList('Servicios0', $servicios->id, 
 	              $model->servicios,
 	              array('empty' => 'Seleccione el Servicio',
 						'class'=>'form-control'
 			));
 		}else{
-			$id=0;
-			foreach ($servicios as $serv)
+			$count=0;
+			$servs = CHtml::listData( $servicios, 'nombre' , 'id');
+			
+			foreach ($servs as $serv)
 			{
-				echo CHtml::dropDownList('Servicios'.$id, $serv->id,
+				echo CHtml::dropDownList('Servicios'.$count, $serv,
 						$model->servicios,
 						array('empty' => 'Seleccione el Servicio',
 								'class'=>'form-control'
 						));
-				$id+=1;
+				$count++;
 			}
 		}
-		echo count($servicios);
+		
 		//print_r($servicios);
 		?>
 		

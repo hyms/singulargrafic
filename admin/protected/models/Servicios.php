@@ -44,7 +44,8 @@ class Servicios extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-        'empresaServicio' => array(self::HAS_MANY, 'EmpresaServicio', array('idServicio'=>'id')),
+        	'empresaServicio' => array(self::HAS_MANY, 'EmpresaServicio', 'idServicio'),
+			//'empresaServicio'=>array(self::MANY_MANY, 'Empresa', 'empresaServicio(idServicio, idEmpresa)'),
     	);
 	}
 

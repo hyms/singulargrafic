@@ -14,9 +14,9 @@ class EmpresaController extends Controller
 		if($id!=null)
 		{
 			$model=Empresa::model()->findByPk($id);
-			$servicios=Servicios::model()->with('empresaServicio')->find('idEmpresa='.$id);
+			$servicios=Servicios::model()->with('empresaServicio')->findall('idEmpresa='.$id);
 		}
-			
+		
 		$sucursal=Empresa::model()->findall();
 		
 		$new=false;
