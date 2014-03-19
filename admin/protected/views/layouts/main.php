@@ -64,6 +64,8 @@
 								array('label'=>'Sucursales', 'url'=>array('empresa/sucursal')),
 								array('label'=>'Empleados', 'url'=>array('empresa/empleado')),
 								array('label'=>'Servicios', 'url'=>array('empresa/servicios')),
+								array('label'=>'Clientes', 'url'=>array('empresa/cliente')),
+								array('label'=>'Proveedores', 'url'=>array('empresa/proveedor')),
 						)),
 
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),

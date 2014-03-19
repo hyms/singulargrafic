@@ -1,26 +1,25 @@
 <?php
-/* @var $this ServiciosController */
-/* @var $model Servicios */
+/* @var $this ProveedorController */
+/* @var $model Proveedor */
 /* @var $form CActiveForm */
 ?>
-
 <div class="col-sm-2">
-	<h2>Servicios</h2>
-	<ul class="nav nav-pills nav-stacked ">
+	<h2>Proveedores</h2>
+	<ul class="nav nav-pills nav-stacked">
 	<?php
-		foreach ($servicios as $serv)
+		foreach ($proveedor as $prov)
 		{
 	?>
-		<li><?php echo CHtml::link($serv->nombre, array('empresa/servicios', 'id'=>$serv->id));?></li>
-	
+		<li><?php echo CHtml::link($prov->nombre, array('empresa/proveedor', 'id'=>$prov->id));?></li>
 	<?php 
 		}
 	?>
 	</ul>
+	
 	<?php
 		$form=$this->beginWidget('CActiveForm', array(
 				'id'=>'empresa-empresa-form',
-				'action'=>Yii::app()->createUrl('/empresa/servicios'),
+				'action'=>Yii::app()->createUrl('/empresa/proveedor'),
 				'htmlOptions'=>array(
 						'class'=>'form-horizontal',
 						'role'=>'form'
@@ -31,6 +30,7 @@
 				// you need to use the performAjaxValidation()-method described there.
 				'enableAjaxValidation'=>false,
 		)); 
+		
 	?>
 	<div class="form-group">
 		<?php echo CHtml::hiddenField('new','true'); ?>
@@ -49,7 +49,7 @@
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'servicios-servicios-form',
+	'id'=>'proveedor-Proveedor-form',
 	'htmlOptions'=>array(
 		'class'=>'form-horizontal',
 		'role'=>'form'
@@ -66,27 +66,51 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="form-group">
+		<?php echo $form->labelEx($model,'nit',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-2">
+		<?php echo $form->textField($model,'nit',array('class'=>'form-control')); ?>
+		</div>
+		<?php echo $form->error($model,'nit'); ?>
+	</div>
+
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'nombre',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-3">
+		<div class="col-sm-4">
 		<?php echo $form->textField($model,'nombre',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'nombre'); ?>
 	</div>
-	
+
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'detalle',array('class'=>'col-sm-2 control-label')); ?>
+		<?php echo $form->labelEx($model,'direccion',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-4">
-		<?php echo $form->textArea($model,'detalle',array('class'=>'form-control')); ?>
+		<?php echo $form->textField($model,'direccion',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'detalle'); ?>
+		<?php echo $form->error($model,'direccion'); ?>
 	</div>
-	
+
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'fechaCreacion',array('class'=>'col-sm-2 control-label')); ?>
+		<?php echo $form->labelEx($model,'telefono',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-2">
+		<?php echo $form->textField($model,'telefono',array('class'=>'form-control')); ?>
+		</div>
+		<?php echo $form->error($model,'telefono'); ?>
+	</div>
+
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'correo',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-4">
+		<?php echo $form->textField($model,'correo',array('class'=>'form-control')); ?>
+		</div>
+		<?php echo $form->error($model,'correo'); ?>
+	</div>
+
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'fechaRegistro',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-2">
 		<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-    	    'name'=>'fechaCreacion',
-			'attribute'=>'fechaCreacion',
+    	    'name'=>'fechaRegistro',
+			'attribute'=>'fechaRegistro',
 		    //'id'=>'user_Birthdate',
 		    'model'=>$model,
 		    // additional javascript options for the date picker plugin
@@ -100,18 +124,20 @@
 		));
 		?>
 		</div>
-		<?php echo $form->error($model,'fechaCreacion'); ?>
+		<?php echo $form->error($model,'fechaRegistro'); ?>
+	</div>
+
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'obs',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-4">
+		<?php echo $form->textArea($model,'obs',array('class'=>'form-control')); ?>
+		</div>
+		<?php echo $form->error($model,'obs'); ?>
 	</div>
 
 
 	<div class="form-group">
-		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-3')); ?>
-		
-		<?php
-			if($model->id != null)
-				echo CHtml::link('Eliminar', array('empresa/serviciosDelete', 'id'=>$model->id),array("confirm" => "Esta seguro de Eliminarlo?"));
-		?>
-		
+		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

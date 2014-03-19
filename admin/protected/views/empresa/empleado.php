@@ -201,7 +201,13 @@
 
 
 	<div class="form-group">
-		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
+		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-3')); ?>
+		
+		<?php
+			if($model->id != null)
+				echo CHtml::link('Eliminar', array('empresa/empleadoDelete', 'id'=>$model->id),array("confirm" => "Esta seguro de Eliminarlo?"));
+		?>
+		
 	</div>
 
 <?php $this->endWidget(); ?>

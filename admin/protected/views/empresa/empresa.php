@@ -178,6 +178,14 @@
 						));
 				$count++;
 			}
+			if($count==0)
+			{
+				echo CHtml::dropDownList('Servicios0', '',
+						$model->servicios,
+						array('empty' => 'Seleccione el Servicio',
+								'class'=>'form-control'
+						));
+			}
 		}
 		
 		//print_r($servicios);
@@ -185,12 +193,17 @@
 		
 		</div>
 		<span id="addVar" class="btn btn-default">+</span>
+		<span id="removeVar" class="btn btn-default">-</span>
 	</div>
 	
 	<div class="form-group">
-		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
+		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-3')); ?>
+	
+	<?php
+		if($model->id != null)
+			echo CHtml::link('Eliminar', array('empresa/sucursalDelete', 'id'=>$model->id),array("confirm" => "Esta seguro de Eliminarlo?"));
+	?>
 	</div>
-
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
@@ -207,9 +220,12 @@
 	var $options = "";
 	
 	//remove a textfield    
-	$('form').on('click', '.removeVar', function(){
-	   $(this).parent().remove();
-	  
+	$('#removeVar').on('click', function(){
+		if(varCount>0)
+		{
+			$('#Servicios'+varCount ).remove();
+			varCount--;
+		}
 	});
 	
 	//add a new node

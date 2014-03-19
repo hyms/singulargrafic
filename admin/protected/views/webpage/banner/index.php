@@ -36,7 +36,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		array(
     		'name'=>'texto',
         	'type'=>'raw',
-        	'value'=>'$data->texto'
+        	'value'=>'"<div style=\"height: 130px; overflow:overlay;\">".$data->texto."</div>"',
+			//'htmlOptions'=>array('style'=>'height: 100px; overflow:hidden;'),
       	),
 		'fecha',
 		'order',

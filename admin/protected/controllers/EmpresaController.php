@@ -32,6 +32,8 @@ class EmpresaController extends Controller
 			if($model->save())
 			{
 				$count=0;
+				EmpresaServicio::model()->deleteAll('idEmpresa='.$model->id);
+				
 				while(isset($_POST['Servicios'.$count]))
 				{
 					$ser= EmpresaServicio::model()->find('idEmpresa='.$model->id.' and idServicio='.$_POST['Servicios'.$count]);
@@ -58,7 +60,6 @@ class EmpresaController extends Controller
 					{
 						$ser->save();
 					}
-					
 					$count++;
 				}
 				$this->redirect('sucursal');
@@ -143,30 +144,99 @@ class EmpresaController extends Controller
 		}
 	}
 	
-	// Uncomment the following methods and override them if needed
-	/*
-	public function filters()
+	public function actionCliente($id=null)
 	{
-		// return the filter configuration for this controller, e.g.:
-		return array(
-			'inlineFilterName',
-			array(
-				'class'=>'path.to.FilterClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
+		$model=new Cliente;
+		
+		if($id!=null)
+			$model=Cliente::model()->findByPk($id);
+			
+		$clientes=Cliente::model()->findall();
+	
+		$new=false;
+		if(isset($_POST['new']))
+			$new=$_POST['new'];
+		
+		if(isset($_POST['Cliente']))
+		{
+			$model->attributes=$_POST['Cliente'];
+			$model->fechaRegistro=date("Y-m-d", strtotime($model->fechaRegistro));
+			
+			if($model->save())
+			{
+				$this->redirect('cliente');
+			}
+			else 
+			{
+				$this->render('cliente',array('model'=>$model,'clientes'=>$clientes,'new'=>$new));
+			}
+		}
+		else 
+		{
+			$this->render('cliente',array('model'=>$model,'clientes'=>$clientes,'new'=>$new));
+		}
 	}
-
-	public function actions()
+	
+	public function actionProveedor($id=null)
 	{
-		// return external action classes, e.g.:
-		return array(
-			'action1'=>'path.to.ActionClass',
-			'action2'=>array(
-				'class'=>'path.to.AnotherActionClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
+		$model=new Proveedor;
+	
+		if($id!=null)
+			$model=Proveedor::model()->findByPk($id);
+			
+		$proveedor=Proveedor::model()->findall();
+		
+		$new=false;
+		if(isset($_POST['new']))
+			$new=$_POST['new'];
+		
+		if(isset($_POST['Proveedor']))
+		{
+			$model->attributes=$_POST['Proveedor'];
+			$model->fechaRegistro=date("Y-m-d", strtotime($model->fechaRegistro));
+			
+			if($model->save())
+			{
+				$this->redirect('proveedor');
+			}
+			else 
+			{
+				$this->render('proveedor',array('model'=>$model,'proveedor'=>$proveedor,'new'=>$new));
+			}
+		}
+		else 
+		{
+			$this->render('proveedor',array('model'=>$model,'proveedor'=>$proveedor,'new'=>$new));
+		}
 	}
-	*/
+	
+	
+	//delete's
+	public function actionSucursalDelete($id)
+	{
+		$model=Empresa::model()->findByPk($id);
+		$model->delete();
+		
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('empresa/sucursal'));
+	}
+	public function actionEmpleadoDelete($id)
+	{
+		$model=Empleado::model()->findByPk($id);
+		$model->delete();
+		
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('empresa/empleado'));
+	}
+	public function actionServiciosDelete($id)
+	{	
+		$model=Servicios::model()->findByPk($id);
+		$model->delete();
+		
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('empresa/servicios'));
+	}
 }
