@@ -4,7 +4,6 @@
  * This is the model class for table "empresaServicio".
  *
  * The followings are the available columns in table 'empresaServicio':
- * @property integer $id
  * @property integer $idEmpresa
  * @property integer $idServicio
  */
@@ -30,7 +29,7 @@ class EmpresaServicio extends CActiveRecord
 			array('idEmpresa, idServicio', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, idEmpresa, idServicio', 'safe', 'on'=>'search'),
+			array('idEmpresa, idServicio', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,7 +52,6 @@ class EmpresaServicio extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
 			'idEmpresa' => 'Id Empresa',
 			'idServicio' => 'Id Servicio',
 		);
@@ -77,7 +75,6 @@ class EmpresaServicio extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
 		$criteria->compare('idEmpresa',$this->idEmpresa);
 		$criteria->compare('idServicio',$this->idServicio);
 

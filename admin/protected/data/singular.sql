@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 14-03-2014 a las 19:13:54
+-- Tiempo de generación: 20-03-2014 a las 19:21:43
 -- Versión del servidor: 5.5.35
 -- Versión de PHP: 5.4.4-14+deb7u8
 
@@ -33,15 +33,45 @@ CREATE TABLE IF NOT EXISTS `banner` (
   `fecha` datetime NOT NULL,
   `order` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `banner`
 --
 
 INSERT INTO `banner` (`id`, `imagen`, `texto`, `fecha`, `order`) VALUES
-(1, 'logo.png', '<h1>\r\n	Historia</h1>\r\n<p>\r\n	El 15 de mayo de 2006 se fundo <strong>GRAFICA SINGULAR en la calle</strong></p>\r\n', '2014-03-11 18:04:03', 1),
+(1, 'logo.png', '<h1>\r\n	Historia</h1>\r\n<p>\r\n	El 15 de mayo de 2006 se fundo <strong>GRAFICA SINGULAR </strong>en la calle<strong> Juan de la Riva</strong></p>\r\n<p>\r\n	Dise&ntilde;o grafico y publicidad</p>\r\n<p>\r\n	Sistemas de preprensa CTP</p>\r\n', '2014-03-19 16:56:17', 1),
 (2, 'Capa3.png', '<h1>\r\n	VALORES</h1>\r\n', '2014-03-11 18:06:57', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente`
+--
+
+CREATE TABLE IF NOT EXISTS `cliente` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nitCi` varchar(15) NOT NULL,
+  `apellido` varchar(30) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `telefono` varchar(15) NOT NULL,
+  `fechaRegistro` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `color`
+--
+
+CREATE TABLE IF NOT EXISTS `color` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `codigo` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -95,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `facebook` varchar(500) NOT NULL,
   `patern` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `empresa`
@@ -111,19 +141,42 @@ INSERT INTO `empresa` (`id`, `nombre`, `ciudad`, `calle`, `maps`, `fax`, `correo
 --
 
 CREATE TABLE IF NOT EXISTS `empresaServicio` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `idEmpresa` int(11) NOT NULL,
-  `idServicio` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+  `idServicio` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `empresaServicio`
 --
 
-INSERT INTO `empresaServicio` (`id`, `idEmpresa`, `idServicio`) VALUES
-(1, 1, 1),
-(12, 1, 2);
+INSERT INTO `empresaServicio` (`idEmpresa`, `idServicio`) VALUES
+(1, 2),
+(1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Industria`
+--
+
+CREATE TABLE IF NOT EXISTS `Industria` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `material`
+--
+
+CREATE TABLE IF NOT EXISTS `material` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(200) NOT NULL,
+  `detalle` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -155,6 +208,49 @@ INSERT INTO `pages` (`id`, `nombre`, `contenido`, `enable`, `order`, `fecha`) VA
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `producto`
+--
+
+CREATE TABLE IF NOT EXISTS `producto` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(50) NOT NULL,
+  `peso` varchar(10) NOT NULL,
+  `idColor` int(11) NOT NULL,
+  `alto` float NOT NULL,
+  `ancho` float NOT NULL,
+  `idProcedencia` int(11) NOT NULL,
+  `costoSF` double NOT NULL,
+  `costoSFUnidad` double NOT NULL,
+  `costoCF` double NOT NULL,
+  `costoCFUnidad` double NOT NULL,
+  `idIndustria` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `obs` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proveedor`
+--
+
+CREATE TABLE IF NOT EXISTS `proveedor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nit` varchar(15) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `direccion` varchar(200) NOT NULL,
+  `telefono` varchar(15) NOT NULL,
+  `correo` varchar(150) NOT NULL,
+  `fechaRegistro` datetime NOT NULL,
+  `obs` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nit` (`nit`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `servicios`
 --
 
@@ -163,16 +259,18 @@ CREATE TABLE IF NOT EXISTS `servicios` (
   `nombre` varchar(100) NOT NULL,
   `detalle` varchar(500) NOT NULL,
   `fechaCreacion` datetime NOT NULL,
+  `idParent` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `servicios`
 --
 
-INSERT INTO `servicios` (`id`, `nombre`, `detalle`, `fechaCreacion`) VALUES
-(1, 'Imprenta', 'imprenta', '2014-03-13 00:00:00'),
-(2, 'CTP', 'ctp', '2014-03-14 00:00:00');
+INSERT INTO `servicios` (`id`, `nombre`, `detalle`, `fechaCreacion`, `idParent`) VALUES
+(1, 'Imprenta', 'imprenta', '2014-03-13 00:00:00', 0),
+(2, 'CTP', 'ctp', '2014-03-14 00:00:00', 0),
+(3, 'Editorial', 'Editorial', '2014-03-19 00:00:00', 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
