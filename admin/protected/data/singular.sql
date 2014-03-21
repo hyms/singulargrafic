@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 20-03-2014 a las 19:21:43
+-- Tiempo de generación: 21-03-2014 a las 19:50:22
 -- Versión del servidor: 5.5.35
 -- Versión de PHP: 5.4.4-14+deb7u8
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `banner` (
   `fecha` datetime NOT NULL,
   `order` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `banner`
@@ -71,7 +71,16 @@ CREATE TABLE IF NOT EXISTS `color` (
   `nombre` varchar(100) NOT NULL,
   `codigo` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `color`
+--
+
+INSERT INTO `color` (`id`, `nombre`, `codigo`) VALUES
+(1, 'blanco', '#ffffff'),
+(2, 'blanco alcalino', '#fcffe9'),
+(3, 'celeste', '#8bddfb');
 
 -- --------------------------------------------------------
 
@@ -163,7 +172,15 @@ CREATE TABLE IF NOT EXISTS `Industria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `Industria`
+--
+
+INSERT INTO `Industria` (`id`, `nombre`) VALUES
+(1, 'España'),
+(2, 'China');
 
 -- --------------------------------------------------------
 
@@ -176,7 +193,15 @@ CREATE TABLE IF NOT EXISTS `material` (
   `nombre` varchar(200) NOT NULL,
   `detalle` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `material`
+--
+
+INSERT INTO `material` (`id`, `nombre`, `detalle`) VALUES
+(1, 'Couché Brillo', ''),
+(2, 'Couché Mate', '');
 
 -- --------------------------------------------------------
 
@@ -214,11 +239,11 @@ INSERT INTO `pages` (`id`, `nombre`, `contenido`, `enable`, `order`, `fecha`) VA
 CREATE TABLE IF NOT EXISTS `producto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) NOT NULL,
+  `idMaterial` int(11) NOT NULL,
   `peso` varchar(10) NOT NULL,
   `idColor` int(11) NOT NULL,
-  `alto` float NOT NULL,
-  `ancho` float NOT NULL,
-  `idProcedencia` int(11) NOT NULL,
+  `dimension` varchar(20) NOT NULL,
+  `procedencia` varchar(20) NOT NULL,
   `costoSF` double NOT NULL,
   `costoSFUnidad` double NOT NULL,
   `costoCF` double NOT NULL,
@@ -227,7 +252,14 @@ CREATE TABLE IF NOT EXISTS `producto` (
   `cantidad` int(11) NOT NULL,
   `obs` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id`, `codigo`, `idMaterial`, `peso`, `idColor`, `dimension`, `procedencia`, `costoSF`, `costoSFUnidad`, `costoCF`, `costoCFUnidad`, `idIndustria`, `cantidad`, `obs`) VALUES
+(1, 'CB90-6787SP', 1, '90', 1, '67x87', 'Sarrio Papel', 153, 0.65, 161, 0.68, 1, 250, 'ninguna');
 
 -- --------------------------------------------------------
 
