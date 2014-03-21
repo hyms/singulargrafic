@@ -1,14 +1,26 @@
 <?php
-	Yii::app()->clientscript
+	$cs =Yii::app()->clientscript;
+	
+	$cs->scriptMap = array(
+			'jquery.js' => Yii::app()->request->baseUrl.'/js/jquery-1.11.0.js',
+			'jquery.yii.js' => Yii::app()->request->baseUrl.'/js/jquery-1.11.0.min.js',
+	);
 		// use it when you need it!
-		
+		$cs->registerCssFile( Yii::app()->request->baseUrl . '/css/spectrum.css')
 		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.css' )
 		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap-responsive.css' )
 		//->registerCssFile( Yii::app()->request->baseUrl . '/css/uploadify.css' )
-		->registerCoreScript( 'jquery' )
-		->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.js', CClientScript::POS_END )
-		//->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END )
-		->registerScriptFile( Yii::app()->baseUrl.'/js/ckeditor/ckeditor.js')
+		
+		->registerCoreScript('jquery')
+		->registerCoreScript('jquery.ui')
+		//->registerScriptFile( Yii::app()->baseUrl.'/js/jquery.min.js')
+		//->registerScriptFile( Yii::app()->request->baseUrl.'/js/jquery-1.10.2')
+		->registerScriptFile( Yii::app()->request->baseUrl . '/js/spectrum.js')
+		//->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.js')
+		->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END )
+		->registerScriptFile( Yii::app()->baseUrl.'/js/ckeditor/ckeditor.js');
+		
+		
 		//->registerScriptFile( Yii::app()->baseUrl.'/js/uploadify/jquery.uploadify.js')
 		//*/
 ?>
@@ -16,9 +28,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	
 	<meta name="language" content="es" />
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 	
 	
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
@@ -67,7 +77,19 @@
 								array('label'=>'Clientes', 'url'=>array('empresa/cliente')),
 								array('label'=>'Proveedores', 'url'=>array('empresa/proveedor')),
 						)),
-
+						
+						array('label'=>'Productos <b class="caret"></b>', 'url'=>array('#'),
+							'linkOptions'=> array(
+								'class' => 'dropdown-toggle',
+								'data-toggle' => 'dropdown',
+							),
+							'itemOptions' => array('class'=>'dropdown'),
+							'items'=>array(
+								array('label'=>'Productos', 'url'=>array('producto/')),
+								array('label'=>'Materiales', 'url'=>array('producto/material')),
+								array('label'=>'Colores', 'url'=>array('producto/color')),
+								array('label'=>'Industrias', 'url'=>array('producto/industria')),								
+						)),
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 					),
