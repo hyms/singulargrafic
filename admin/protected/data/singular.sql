@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-03-2014 a las 19:50:22
+-- Tiempo de generación: 24-03-2014 a las 19:18:19
 -- Versión del servidor: 5.5.35
 -- Versión de PHP: 5.4.4-14+deb7u8
 
@@ -81,6 +81,21 @@ INSERT INTO `color` (`id`, `nombre`, `codigo`) VALUES
 (1, 'blanco', '#ffffff'),
 (2, 'blanco alcalino', '#fcffe9'),
 (3, 'celeste', '#8bddfb');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalleVenta`
+--
+
+CREATE TABLE IF NOT EXISTS `detalleVenta` (
+  `id` int(11) NOT NULL,
+  `idVenta` int(11) NOT NULL,
+  `idProducto` int(11) NOT NULL,
+  `cantUnidad` int(11) NOT NULL,
+  `cantPaquete` int(11) NOT NULL,
+  `costoTotal` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -259,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `producto` (
 --
 
 INSERT INTO `producto` (`id`, `codigo`, `idMaterial`, `peso`, `idColor`, `dimension`, `procedencia`, `costoSF`, `costoSFUnidad`, `costoCF`, `costoCFUnidad`, `idIndustria`, `cantidad`, `obs`) VALUES
-(1, 'CB90-6787SP', 1, '90', 1, '67x87', 'Sarrio Papel', 153, 0.65, 161, 0.68, 1, 250, 'ninguna');
+(1, 'CB90-6787SP', 1, '90', 1, '67x87', 'Sarrio Papel', 153, 0.65, 161, 0.68, 1, 250, 'ninguno');
 
 -- --------------------------------------------------------
 
@@ -303,6 +318,25 @@ INSERT INTO `servicios` (`id`, `nombre`, `detalle`, `fechaCreacion`, `idParent`)
 (1, 'Imprenta', 'imprenta', '2014-03-13 00:00:00', 0),
 (2, 'CTP', 'ctp', '2014-03-14 00:00:00', 0),
 (3, 'Editorial', 'Editorial', '2014-03-19 00:00:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventaTmp`
+--
+
+CREATE TABLE IF NOT EXISTS `ventaTmp` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(20) NOT NULL,
+  `Pago` varchar(20) NOT NULL,
+  `fechaVenta` datetime NOT NULL,
+  `fechaModifcacion` datetime NOT NULL,
+  `Estado` int(11) NOT NULL,
+  `idCliente` int(11) NOT NULL,
+  `idEmpleado` int(11) NOT NULL,
+  `obs` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -43,21 +43,9 @@
 					'encodeLabel' => false,
 					'items'=>array(
 						array('label'=>'Home', 'url'=>array('/site/index')),
-						
-						/*array('label'=>'Empresa <b class="caret"></b>', 'url'=>array('#'),
-							'linkOptions'=> array(
-									'class' => 'dropdown-toggle',
-									'data-toggle' => 'dropdown',
-							),
-							'itemOptions' => array('class'=>'dropdown'),
-							'items'=>array(
-								array('label'=>'Sucursales', 'url'=>array('empresa/sucursal')),
-								array('label'=>'Empleados', 'url'=>array('empresa/empleado')),
-								array('label'=>'Servicios', 'url'=>array('empresa/servicios')),
-								array('label'=>'Clientes', 'url'=>array('empresa/cliente')),
-								array('label'=>'Proveedores', 'url'=>array('empresa/proveedor')),
-						)),
-						//*/
+						array('label'=>'Distribuidora', 'url'=>array('distribuidora/index')),
+						array('label'=>'Imprenta', 'url'=>array('#')),
+						array('label'=>'Producto', 'url'=>array('producto/')),
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 					),
@@ -76,3 +64,4 @@
 	
 </body>
 </html>
+

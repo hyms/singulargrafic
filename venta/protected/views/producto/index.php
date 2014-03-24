@@ -10,8 +10,6 @@ $this->breadcrumbs=array(
 
 <h1>Productos</h1>
 
-<?php echo CHtml::link('Añadir',array('producto/create'), array('class' => 'btn btn-default') ); ?>
-
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
@@ -59,11 +57,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			'type'=>'raw',
 			'value'=>'CHtml::link("Editar",array("producto/update","id"=>$data->id))'
 		),
-		array(
-			'name'=>'',
-			'type'=>'raw',
-			'value'=>'CHtml::link("Eliminar",array("producto/delete","id"=>$data->id),array("confirm" => "Esta seguro de Eliminarlo?"))'
-		),
+		
 		//'viewButtonImageUrl' => 'view',
 		//'updateButtonImageUrl' => Yii::app()->baseUrl . '/css/gridViewStyle/images/' . 'gr-update.png',
 		//'deleteButtonImageUrl' => Yii::app()->baseUrl . '/css/gridViewStyle/images/' . 'gr-delete.png',
