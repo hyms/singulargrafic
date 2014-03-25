@@ -6,10 +6,10 @@
  * The followings are the available columns in table 'ventaTmp':
  * @property integer $id
  * @property string $codigo
- * @property integer $idPago
+ * @property integer $pago
  * @property string $fechaVenta
  * @property string $fechaModifcacion
- * @property integer $Estado
+ * @property integer $estado
  * @property integer $idCliente
  * @property integer $idEmpleado
  * @property string $obs
@@ -32,13 +32,13 @@ class Venta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codigo, idPago, fechaModifcacion, idCliente, idEmpleado, obs', 'required'),
-			array('idPago, Estado, idCliente, idEmpleado', 'numerical', 'integerOnly'=>true),
+			array('codigo, pago, fechaModifcacion, idCliente, idEmpleado, obs', 'required'),
+			array('estado, idCliente, idEmpleado', 'numerical', 'integerOnly'=>true),
 			array('codigo', 'length', 'max'=>20),
 			array('obs', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, codigo, idPago, fechaVenta, fechaModifcacion, Estado, idCliente, idEmpleado, obs', 'safe', 'on'=>'search'),
+			array('id, codigo, pago, fechaVenta, fechaModifcacion, Estado, idCliente, idEmpleado, obs', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,6 +50,10 @@ class Venta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'Cliente'=>array(self::BELONGS_TO, 'Cliente', 'idCliente'),
+			'Empleado'=>array(self::BELONGS_TO, 'Empleado', 'idEmpleado'),
+				
+			'DetalleVenta'=>array(self::HAS_ONE, 'DetalleVenta', 'idVenta'),
 		);
 	}
 
@@ -61,10 +65,10 @@ class Venta extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'codigo' => 'Codigo',
-			'idPago' => 'Pago',
+			'pago' => 'Pago',
 			'fechaVenta' => 'Fecha Venta',
 			'fechaModifcacion' => 'Fecha Modifcacion',
-			'Estado' => 'Estado',
+			'estado' => 'Estado',
 			'idCliente' => 'Cliente',
 			'idEmpleado' => 'Responsable',
 			'obs' => 'Obs',
@@ -91,10 +95,10 @@ class Venta extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('codigo',$this->codigo,true);
-		$criteria->compare('idPago',$this->idPago);
+		$criteria->compare('pago',$this->pago);
 		$criteria->compare('fechaVenta',$this->fechaVenta,true);
 		$criteria->compare('fechaModifcacion',$this->fechaModifcacion,true);
-		$criteria->compare('Estado',$this->Estado);
+		$criteria->compare('estado',$this->Estado);
 		$criteria->compare('idCliente',$this->idCliente);
 		$criteria->compare('idEmpleado',$this->idEmpleado);
 		$criteria->compare('obs',$this->obs,true);

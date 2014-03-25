@@ -1,24 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "detalleVenta".
+ * This is the model class for table "almacen".
  *
- * The followings are the available columns in table 'detalleVenta':
+ * The followings are the available columns in table 'almacen':
  * @property integer $id
- * @property integer $idVenta
  * @property integer $idProducto
- * @property integer $cantUnidad
- * @property integer $cantPaquete
- * @property integer $costoTotal
+ * @property integer $idTipoAlmacen
+ * @property integer $stockUnidad
+ * @property integer $stockPaquete
  */
-class DetalleVenta extends CActiveRecord
+class Almacen extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'detalleVenta';
+		return 'almacen';
 	}
 
 	/**
@@ -29,11 +28,11 @@ class DetalleVenta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idVenta, idProducto, costoTotal', 'required'),
-			array('idVenta, idProducto, cantUnidad, cantPaquete, costoTotal', 'numerical', 'integerOnly'=>true),
+			array('idProducto, idTipoAlmacen', 'required'),
+			array('idProducto, idTipoAlmacen, stockUnidad, stockPaquete', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, idVenta, idProducto, cantUnidad, cantPaquete, costoTotal', 'safe', 'on'=>'search'),
+			array('id, idProducto, idTipoAlmacen, stockUnidad, stockPaquete', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -45,8 +44,8 @@ class DetalleVenta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Venta'=>array(self::BELONGS_TO, 'Venta', 'idVenta'),
-			'Producto'=>array(self::BELONGS_TO, 'Producto', 'idProducto'),
+				'TipoAlmacen'=>array(self::BELONGS_TO, 'TipoAlmacen', 'idTipoAlmacen'),
+				'Producto'=>array(self::BELONGS_TO, 'Producto', 'idProducto'),
 		);
 	}
 
@@ -57,11 +56,10 @@ class DetalleVenta extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'idVenta' => 'Id Venta',
-			'idProducto' => 'Id Producto',
-			'cantUnidad' => 'Cant Unidad',
-			'cantPaquete' => 'Cant Paquete',
-			'costoTotal' => 'Costo Total',
+			'idProducto' => 'Producto',
+			'idTipoAlmacen' => 'Tipo Almacen',
+			'stockUnidad' => 'Stock Unidad',
+			'stockPaquete' => 'Stock Paquete',
 		);
 	}
 
@@ -84,11 +82,10 @@ class DetalleVenta extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('idVenta',$this->idVenta);
 		$criteria->compare('idProducto',$this->idProducto);
-		$criteria->compare('cantUnidad',$this->cantUnidad);
-		$criteria->compare('cantPaquete',$this->cantPaquete);
-		$criteria->compare('costoTotal',$this->costoTotal);
+		$criteria->compare('idTipoAlmacen',$this->idTipoAlmacen);
+		$criteria->compare('stockUnidad',$this->stockUnidad);
+		$criteria->compare('stockPaquete',$this->stockPaquete);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -99,7 +96,7 @@ class DetalleVenta extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return DetalleVenta the static model class
+	 * @return Almacen the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

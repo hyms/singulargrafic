@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-03-2014 a las 19:18:19
+-- Tiempo de generación: 25-03-2014 a las 19:32:36
 -- Versión del servidor: 5.5.35
 -- Versión de PHP: 5.4.4-14+deb7u8
 
@@ -19,6 +19,28 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `singular`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `almacen`
+--
+
+CREATE TABLE IF NOT EXISTS `almacen` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idProducto` int(11) NOT NULL,
+  `idTipoAlmacen` int(11) NOT NULL,
+  `stockUnidad` int(11) NOT NULL,
+  `stockPaquete` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `almacen`
+--
+
+INSERT INTO `almacen` (`id`, `idProducto`, `idTipoAlmacen`, `stockUnidad`, `stockPaquete`) VALUES
+(1, 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -89,13 +111,14 @@ INSERT INTO `color` (`id`, `nombre`, `codigo`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `detalleVenta` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `idVenta` int(11) NOT NULL,
   `idProducto` int(11) NOT NULL,
   `cantUnidad` int(11) NOT NULL,
   `cantPaquete` int(11) NOT NULL,
-  `costoTotal` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `costoTotal` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -221,6 +244,24 @@ INSERT INTO `material` (`id`, `nombre`, `detalle`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `movimientoAlmacen`
+--
+
+CREATE TABLE IF NOT EXISTS `movimientoAlmacen` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idEmpleado` int(11) NOT NULL,
+  `idAlmacen` int(11) NOT NULL,
+  `unidad` int(11) NOT NULL,
+  `paquete` int(11) NOT NULL,
+  `estado` int(11) NOT NULL,
+  `fechaInicio` datetime NOT NULL,
+  `fechaFinal` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pages`
 --
 
@@ -267,14 +308,15 @@ CREATE TABLE IF NOT EXISTS `producto` (
   `cantidad` int(11) NOT NULL,
   `obs` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `producto`
 --
 
 INSERT INTO `producto` (`id`, `codigo`, `idMaterial`, `peso`, `idColor`, `dimension`, `procedencia`, `costoSF`, `costoSFUnidad`, `costoCF`, `costoCFUnidad`, `idIndustria`, `cantidad`, `obs`) VALUES
-(1, 'CB90-6787SP', 1, '90', 1, '67x87', 'Sarrio Papel', 153, 0.65, 161, 0.68, 1, 250, 'ninguno');
+(1, 'CB90-6787SP', 1, '90', 1, '67x87', 'Sarrio Papel', 153, 0.65, 161, 0.68, 1, 250, 'ninguno'),
+(2, 'CB90-77110SP', 1, '90', 1, '77x110', 'Sarrio Papel', 235, 0.96, 245, 1, 1, 250, 'Ninguna');
 
 -- --------------------------------------------------------
 
@@ -322,16 +364,36 @@ INSERT INTO `servicios` (`id`, `nombre`, `detalle`, `fechaCreacion`, `idParent`)
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tipoAlmacen`
+--
+
+CREATE TABLE IF NOT EXISTS `tipoAlmacen` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `tipoAlmacen`
+--
+
+INSERT INTO `tipoAlmacen` (`id`, `nombre`) VALUES
+(1, 'Deposito Central'),
+(2, 'Tienda Distribuidora');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `ventaTmp`
 --
 
 CREATE TABLE IF NOT EXISTS `ventaTmp` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(20) NOT NULL,
-  `Pago` varchar(20) NOT NULL,
+  `pago` varchar(20) NOT NULL,
   `fechaVenta` datetime NOT NULL,
   `fechaModifcacion` datetime NOT NULL,
-  `Estado` int(11) NOT NULL,
+  `estado` int(11) NOT NULL,
   `idCliente` int(11) NOT NULL,
   `idEmpleado` int(11) NOT NULL,
   `obs` varchar(200) NOT NULL,

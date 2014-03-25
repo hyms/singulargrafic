@@ -1,16 +1,16 @@
 <?php
-/* @var $this IndustriaController */
-/* @var $model Industria */
+/* @var $this TipoAlmacenController */
+/* @var $model TipoAlmacen */
 /* @var $form CActiveForm */
 ?>
 <div class="col-sm-2">
-	<h2>Industrias</h2>
+	<h2>Tipos de Almacen</h2>
 	<ul class="nav nav-pills nav-stacked">
 	<?php
-		foreach ($industrias as $industria)
+		foreach ($tipos as $tipo)
 		{
 	?>
-		<li><?php echo CHtml::link($industria->nombre, array('producto/industria', 'id'=>$industria->id));?></li>
+		<li><?php echo CHtml::link($tipo->nombre, array('almacen/tipoAlmacen', 'id'=>$tipo->id));?></li>
 	<?php 
 		}
 	?>
@@ -19,7 +19,7 @@
 	<?php
 		$form=$this->beginWidget('CActiveForm', array(
 				'id'=>'empresa-empresa-form',
-				'action'=>Yii::app()->createUrl('/producto/industria'),
+				'action'=>Yii::app()->createUrl('/almacen/tipoAlmacen'),
 				'htmlOptions'=>array(
 						'class'=>'form-horizontal',
 						'role'=>'form'
@@ -50,7 +50,7 @@
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'industria-industria-form',
+	'id'=>'tipo-almacen-tipoAlmacen-form',
 	'htmlOptions'=>array(
 		'class'=>'form-horizontal',
 		'role'=>'form'

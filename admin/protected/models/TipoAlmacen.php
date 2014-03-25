@@ -1,24 +1,20 @@
 <?php
 
 /**
- * This is the model class for table "detalleVenta".
+ * This is the model class for table "tipoAlmacen".
  *
- * The followings are the available columns in table 'detalleVenta':
+ * The followings are the available columns in table 'tipoAlmacen':
  * @property integer $id
- * @property integer $idVenta
- * @property integer $idProducto
- * @property integer $cantUnidad
- * @property integer $cantPaquete
- * @property integer $costoTotal
+ * @property string $nombre
  */
-class DetalleVenta extends CActiveRecord
+class TipoAlmacen extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'detalleVenta';
+		return 'tipoAlmacen';
 	}
 
 	/**
@@ -29,11 +25,10 @@ class DetalleVenta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idVenta, idProducto, costoTotal', 'required'),
-			array('idVenta, idProducto, cantUnidad, cantPaquete, costoTotal', 'numerical', 'integerOnly'=>true),
+			array('nombre', 'required'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, idVenta, idProducto, cantUnidad, cantPaquete, costoTotal', 'safe', 'on'=>'search'),
+			array('id, nombre', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -45,8 +40,7 @@ class DetalleVenta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Venta'=>array(self::BELONGS_TO, 'Venta', 'idVenta'),
-			'Producto'=>array(self::BELONGS_TO, 'Producto', 'idProducto'),
+			'Almacen'=>array(self::HAS_ONE, 'Almacen', 'idTipoAlmacen'),
 		);
 	}
 
@@ -57,11 +51,7 @@ class DetalleVenta extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'idVenta' => 'Id Venta',
-			'idProducto' => 'Id Producto',
-			'cantUnidad' => 'Cant Unidad',
-			'cantPaquete' => 'Cant Paquete',
-			'costoTotal' => 'Costo Total',
+			'nombre' => 'Nombre',
 		);
 	}
 
@@ -84,11 +74,7 @@ class DetalleVenta extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('idVenta',$this->idVenta);
-		$criteria->compare('idProducto',$this->idProducto);
-		$criteria->compare('cantUnidad',$this->cantUnidad);
-		$criteria->compare('cantPaquete',$this->cantPaquete);
-		$criteria->compare('costoTotal',$this->costoTotal);
+		$criteria->compare('nombre',$this->nombre);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -99,7 +85,7 @@ class DetalleVenta extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return DetalleVenta the static model class
+	 * @return TipoAlmacen the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

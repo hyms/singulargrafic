@@ -61,6 +61,8 @@ class Producto extends CActiveRecord
 			'Color'=>array(self::BELONGS_TO, 'Color', 'idColor'),
 			'Material'=>array(self::BELONGS_TO, 'Material', 'idMaterial'),
 			'Industria'=>array(self::BELONGS_TO, 'Industria', 'idIndustria'),
+			
+			'DetalleVenta'=>array(self::HAS_MANY, 'DetalleVenta', 'idProducto'),
 		);
 	}
 

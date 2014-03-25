@@ -12,7 +12,7 @@ $this->breadcrumbs=array(
 <div class="col-md-10">
 <h2>Nueva Venta</h2>
 <?php 
-	$this->renderPartial('venta',array('model'=>$model)); ?>
+	$this->renderPartial('ventaProducto'); ?>
 	
 <?php 
 	$this->renderPartial('producto',array(

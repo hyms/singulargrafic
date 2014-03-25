@@ -7,7 +7,11 @@ $this->breadcrumbs=array(
 );
 
 ?>
+<div class="col-md-2">
+<?php $this->renderPartial('/distribuidora/menu'); ?>
+</div>
 
+<div class="col-md-10">
 <h1>Productos</h1>
 
 <?php 
@@ -65,3 +69,4 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	)
 ));
 ?>
+</div>

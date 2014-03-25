@@ -35,11 +35,11 @@ $model->fechaModifcacion = date("d/m/Y");
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'idPago',array('class'=>'col-sm-2 control-label')); ?>
+		<?php echo $form->labelEx($model,'pago',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-4">
-		<?php echo $form->textField($model,'idPago',array('class'=>'form-control')); ?>
+		<?php echo $form->textField($model,'pago',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'idPago'); ?>
+		<?php echo $form->error($model,'pago'); ?>
 	</div>
 <div class="form-group">
 	<div class="form-group col-md-3">

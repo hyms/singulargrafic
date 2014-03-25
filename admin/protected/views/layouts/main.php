@@ -9,12 +9,10 @@
 		$cs->registerCssFile( Yii::app()->request->baseUrl . '/css/spectrum.css')
 		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.css' )
 		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap-responsive.css' )
-		//->registerCssFile( Yii::app()->request->baseUrl . '/css/uploadify.css' )
 		
 		->registerCoreScript('jquery')
 		->registerCoreScript('jquery.ui')
-		//->registerScriptFile( Yii::app()->baseUrl.'/js/jquery.min.js')
-		//->registerScriptFile( Yii::app()->request->baseUrl.'/js/jquery-1.10.2')
+		
 		->registerScriptFile( Yii::app()->request->baseUrl . '/js/spectrum.js')
 		//->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.js')
 		->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END )
@@ -85,10 +83,21 @@
 							),
 							'itemOptions' => array('class'=>'dropdown'),
 							'items'=>array(
-								array('label'=>'Productos', 'url'=>array('producto/')),
+								array('label'=>'Productos', 'url'=>array('producto/index')),
 								array('label'=>'Materiales', 'url'=>array('producto/material')),
 								array('label'=>'Colores', 'url'=>array('producto/color')),
 								array('label'=>'Industrias', 'url'=>array('producto/industria')),								
+						)),
+						array('label'=>'Almacen <b class="caret"></b>', 'url'=>array('#'),
+							'linkOptions'=> array(
+									'class' => 'dropdown-toggle',
+									'data-toggle' => 'dropdown',
+							),
+							'itemOptions' => array('class'=>'dropdown'),
+							'items'=>array(
+									array('label'=>'Almacenes', 'url'=>array('almacen/index')),
+									array('label'=>'Tipo de Almacen', 'url'=>array('almacen/tipoAlmacen')),
+									array('label'=>'Añadir/Reducir Stock', 'url'=>array('almacen/add_reduce')),
 						)),
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
