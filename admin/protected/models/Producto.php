@@ -46,7 +46,7 @@ class Producto extends CActiveRecord
 			array('obs', 'length', 'max'=>500),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, codigo, idMaterial, peso, idColor, dimension, procedencia, costoSF, costoSFUnidad, costoCF, costoCFUnidad, idIndustria, cantidad, obs', 'safe', 'on'=>'search'),
+			array('id, codigo, idMaterial, peso, idColor, dimension, procedencia, costoSF, costoSFUnidad, costoCF, costoCFUnidad, idIndustria, cantidad, obs, color', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,6 +61,8 @@ class Producto extends CActiveRecord
 			'Color'=>array(self::BELONGS_TO, 'Color', 'idColor'),
 			'Material'=>array(self::BELONGS_TO, 'Material', 'idMaterial'),
 			'Industria'=>array(self::BELONGS_TO, 'Industria', 'idIndustria'),
+				
+			'Almacen'=>array(self::HAS_MANY, 'Almacen', 'idProducto'),
 		);
 	}
 
@@ -122,6 +124,32 @@ class Producto extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+		));
+	}
+	
+	public $color;
+	
+	public function searchAll()
+	{
+		$criteria=new CDbCriteria;
+		
+		$criteria->with = 'Color';
+		$criteria->with = 'Material';
+		$criteria->with = 'Industria';
+		//$criteria->with('Almacen');
+		
+		$criteria->compare('id',$this->id);
+		$criteria->compare('codigo',$this->codigo,true);
+		//$criteria->compare('Material.nombre',$this->Material->nombre);
+		$criteria->compare('peso',$this->peso,true);
+		$criteria->compare('Color.nombre', $this->color,true);
+		$criteria->compare('dimension',$this->dimension,true);
+		$criteria->compare('procedencia',$this->procedencia);
+		//$criteria->compare('industria',$this->Industria->nombre);
+		//$criteria->compare('industria',$this->Almacen->id);
+	
+		return new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
 		));
 	}
 

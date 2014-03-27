@@ -23,22 +23,7 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'idEmpleado',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
-		<?php echo $form->textField($model,'idEmpleado',array('class'=>'form-control')); ?>
-		</div>
-		<?php echo $form->error($model,'idEmpleado'); ?>
-	</div>
-
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'idAlmacen',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
-		<?php echo $form->textField($model,'idAlmacen',array('class'=>'form-control')); ?>
-		</div>
-		<?php echo $form->error($model,'idAlmacen'); ?>
-	</div>
-
+	
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'unidad',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-4">

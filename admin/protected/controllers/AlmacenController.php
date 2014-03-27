@@ -3,17 +3,7 @@
 class AlmacenController extends Controller
 {
 	
-	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
-	 */
-	public function actionView($id)
-	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
-	}
-
+	
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -29,7 +19,7 @@ class AlmacenController extends Controller
 		{
 			$model->attributes=$_POST['Almacen'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('index'));
 		}
 
 		$this->render('create',array(
@@ -131,19 +121,32 @@ class AlmacenController extends Controller
 		}
 	}
 	
-	public function actionAdd_reduce()
+	public function actionAdd_reduce($al=NULL, $id=NULL)
 	{
-		$model=new Almacen;
-		$model=new MovimientoAlmacen;
-		// uncomment the following code to enable ajax-based validation
-		/*
-		if(isset($_POST['ajax']) && $_POST['ajax']==='almacen-add_reduce-form')
-		{
-		echo CActiveForm::validate($model);
-		Yii::app()->end();
+		/*$productos=new Almacen('search');
+		$productos->unsetAttributes();
+		if (isset($_GET['Almacen'])) {
+			$productos->attributes = $_GET['Almacen'];
 		}
 		*/
-	
+		
+		$productos=new Producto('searchAll');
+		$productos->unsetAttributes();
+		if (isset($_GET['Producto'])) {
+			$productos->attributes = $_GET['Producto'];
+			//$productos->colores= $_GET['Color'];
+			print_r($_GET);
+		}
+		
+		
+		$almacenes = TipoAlmacen::model()->findAll();
+		$model=new MovimientoAlmacen;
+		//$productos = new Almacen;
+		/*if($al!=null)
+			$productos=Almacen::model()->with('Producto')->with('Producto.Color')->findAll('idTipoAlmacen='.$al);
+			//$productos=Producto::model()->with('Almacen')->findAll('Almacen.idTipoAlmacen='.$al);
+			*/
+		
 		if(isset($_POST['Almacen']))
 		{
 			$model->attributes=$_POST['Almacen'];
@@ -153,20 +156,23 @@ class AlmacenController extends Controller
 				return;
 			}
 		}
-		$dataProvider=new CActiveDataProvider('Almacen');
+		//$dataProvider=new CActiveDataProvider('Almacen');
 		$this->render('add_reduce',array(
-				'dataProvider'=>$dataProvider,
+				/*'dataProvider'=>$dataProvider,
 				'criteria'=>array(
 						'with'=>'TipoAlmacen',
 						'with'=>'Producto',
 						'with'=>'Producto.Color',
 						'with'=>'Producto.Material',
 				),
-		
+		*/
 				'pagination'=>array(
 						'pageSize'=>20,
 				),
-				'model'=>$model));
-		//$this->render('add_reduce',array('model'=>$model));
+				'model'=>$model,
+				'almacenes'=>$almacenes,
+				'productos'=>$productos,
+				));
+		//$this->render('add_reduce',array('model'=>$model,'almacenes'=>$almacenes,'productos'=>$productos));
 	}
 }

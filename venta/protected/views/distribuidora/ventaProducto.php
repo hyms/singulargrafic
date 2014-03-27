@@ -13,7 +13,36 @@
 		'enableAjaxValidation'=>false,
 ));
 ?>
-
+<div class="form-group">
+	<div class="form-group col-md-3">
+		<?php echo $form->labelEx($model,'codigo',array('class'=>'col-md-4 control-label')); ?>
+		<div class="col-md-8">
+			<?php echo $form->textField($model,'codigo',array('class'=>'form-control')); ?>
+		</div>
+		<?php echo $form->error($model,'codigo'); ?>
+	</div>
+	<div class="form-group col-md-3">
+		<?php echo $form->labelEx($model,'codigo',array('class'=>'col-md-4 control-label')); ?>
+		<div class="col-md-8">
+			<?php echo $form->textField($model,'codigo',array('class'=>'form-control')); ?>
+		</div>
+		<?php echo $form->error($model,'codigo'); ?>
+	</div>
+	<div class="form-group col-md-3">
+		<?php echo $form->labelEx($model,'codigo',array('class'=>'col-md-4 control-label')); ?>
+		<div class="col-md-8">
+			<?php echo $form->textField($model,'codigo',array('class'=>'form-control')); ?>
+		</div>
+		<?php echo $form->error($model,'codigo'); ?>
+	</div>
+	<div class="form-group col-md-3">
+		<?php echo $form->labelEx($model,'codigo',array('class'=>'col-md-4 control-label')); ?>
+		<div class="col-md-8">
+			<?php echo $form->textField($model,'codigo',array('class'=>'form-control')); ?>
+		</div>
+		<?php echo $form->error($model,'codigo'); ?>
+	</div>
+</div>
 <div class="form-group">
 	<?php echo CHtml::Button('Añadir',array('class'=>'btn btn-default')); ?>
 </div>

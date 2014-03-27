@@ -31,7 +31,6 @@ class Almacen extends CActiveRecord
 			array('idProducto, idTipoAlmacen', 'required'),
 			array('idProducto, idTipoAlmacen, stockUnidad, stockPaquete', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
 			array('id, idProducto, idTipoAlmacen, stockUnidad, stockPaquete', 'safe', 'on'=>'search'),
 		);
 	}
@@ -46,6 +45,8 @@ class Almacen extends CActiveRecord
 		return array(
 				'TipoAlmacen'=>array(self::BELONGS_TO, 'TipoAlmacen', 'idTipoAlmacen'),
 				'Producto'=>array(self::BELONGS_TO, 'Producto', 'idProducto'),
+				
+				'MovimientoAlmacen'=>array(self::HAS_ONE, 'MovimientoAlmacen', 'idAlmacen'),
 		);
 	}
 
@@ -77,10 +78,14 @@ class Almacen extends CActiveRecord
 	 */
 	public function search()
 	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
+		
 		$criteria=new CDbCriteria;
-
+		/*$criteria->with = array(
+				'Producto' => array(),
+				'Producto.Color' => array(),
+				'Producto.Industria' => array(),
+				'Producto.Material' => array(),
+		);*/
 		$criteria->compare('id',$this->id);
 		$criteria->compare('idProducto',$this->idProducto);
 		$criteria->compare('idTipoAlmacen',$this->idTipoAlmacen);
@@ -89,6 +94,7 @@ class Almacen extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination'=>array('pageSize'=>20),
 		));
 	}
 

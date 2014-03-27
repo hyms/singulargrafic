@@ -31,7 +31,7 @@ class MovimientoAlmacen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idEmpleado, idAlmacen, unidad, paquete, estado, fechaInicio, fechaFinal', 'required'),
+			array('idEmpleado, idAlmacen, estado, fechaInicio, fechaFinal', 'required'),
 			array('idEmpleado, idAlmacen, unidad, paquete, estado', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -47,6 +47,8 @@ class MovimientoAlmacen extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+				'Empleado'=>array(self::BELONGS_TO, 'Empleado', 'idEmpleado'),
+				'Almacen'=>array(self::BELONGS_TO, 'Almacen', 'idAlmacen'),
 		);
 	}
 
