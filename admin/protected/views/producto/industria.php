@@ -5,17 +5,19 @@
 ?>
 <div class="col-sm-2">
 	<h2>Industrias</h2>
-	<ul class="nav nav-pills nav-stacked">
-	<?php
-		foreach ($industrias as $industria)
-		{
-	?>
-		<li><?php echo CHtml::link($industria->nombre, array('producto/industria', 'id'=>$industria->id));?></li>
 	<?php 
-		}
+	$items = array();
+	foreach ($industrias as $industria)
+	{
+		array_push($items,array('label'=>$industria->nombre, 'url'=>array('/producto/industria', 'id'=>$industria->id)));
+	}
+	$this->widget('zii.widgets.CMenu',array(
+					'htmlOptions' => array('class' => 'nav nav-pills nav-stacked'),
+					'activeCssClass'	=> 'active',
+					'encodeLabel' => false,
+					'items'=>$items,
+					)); 
 	?>
-	</ul>
-	
 	<?php
 		$form=$this->beginWidget('CActiveForm', array(
 				'id'=>'empresa-empresa-form',

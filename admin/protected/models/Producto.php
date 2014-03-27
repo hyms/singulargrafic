@@ -46,7 +46,7 @@ class Producto extends CActiveRecord
 			array('obs', 'length', 'max'=>500),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, codigo, idMaterial, peso, idColor, dimension, procedencia, costoSF, costoSFUnidad, costoCF, costoCFUnidad, idIndustria, cantidad, obs, color', 'safe', 'on'=>'search'),
+			array('id, codigo, idMaterial, peso, idColor, dimension, procedencia, costoSF, costoSFUnidad, costoCF, costoCFUnidad, idIndustria, cantidad, obs, color, material', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,7 +62,7 @@ class Producto extends CActiveRecord
 			'Material'=>array(self::BELONGS_TO, 'Material', 'idMaterial'),
 			'Industria'=>array(self::BELONGS_TO, 'Industria', 'idIndustria'),
 				
-			'Almacen'=>array(self::HAS_MANY, 'Almacen', 'idProducto'),
+			'Almacen'=>array(self::HAS_ONE, 'Almacen', 'idProducto'),
 		);
 	}
 
@@ -128,26 +128,33 @@ class Producto extends CActiveRecord
 	}
 	
 	public $color;
+	public $material;
+	public $industria;
+	public $almacen;
 	
 	public function searchAll()
 	{
 		$criteria=new CDbCriteria;
 		
-		$criteria->with = 'Color';
-		$criteria->with = 'Material';
-		$criteria->with = 'Industria';
-		//$criteria->with('Almacen');
+		$criteria->with= array(
+							'Color',
+							'Material',
+							'Industria',
+							'Almacen',
+						);
 		
 		$criteria->compare('id',$this->id);
-		$criteria->compare('codigo',$this->codigo,true);
-		//$criteria->compare('Material.nombre',$this->Material->nombre);
+		$criteria->compare('t.codigo',$this->codigo,true);
+		//$criteria->compare('Material.nombre',$this->material,true);
+		$criteria->compare('idMaterial',$this->material,true);
 		$criteria->compare('peso',$this->peso,true);
-		$criteria->compare('Color.nombre', $this->color,true);
+		$criteria->compare('idColor', $this->color,true);
+		//$criteria->compare('Color.nombre', $this->color,true);
 		$criteria->compare('dimension',$this->dimension,true);
 		$criteria->compare('procedencia',$this->procedencia);
-		//$criteria->compare('industria',$this->Industria->nombre);
-		//$criteria->compare('industria',$this->Almacen->id);
-	
+		$criteria->compare('idIndustria',$this->industria);
+		$criteria->compare('Almacen.idTipoAlmacen',$this->almacen);
+		
 		return new CActiveDataProvider($this, array(
 				'criteria'=>$criteria,
 		));

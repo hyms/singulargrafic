@@ -6,16 +6,19 @@
 ?>
 <div class="col-sm-2">
 	<h2>Lista de paginas</h2>
-	<ul class="nav nav-pills nav-stacked">
-	<?php
-		foreach ($paginas as $pag)
-		{
-	?>
-		<li><?php echo CHtml::link($pag->nombre, array('webpage/pages', 'id'=>$pag->id));?></li>
 	<?php 
-		} 
+	$items = array();
+	foreach ($paginas as $pag)
+	{
+		array_push($items,array('label'=>$pag->nombre, 'url'=>array('/webpage/pages', 'id'=>$pag->id)));
+	}
+	$this->widget('zii.widgets.CMenu',array(
+					'htmlOptions' => array('class' => 'nav nav-pills nav-stacked'),
+					'activeCssClass'	=> 'active',
+					'encodeLabel' => false,
+					'items'=>$items,
+					)); 
 	?>
-	</ul>
 </div>
 <div class="form col-sm-10">
 

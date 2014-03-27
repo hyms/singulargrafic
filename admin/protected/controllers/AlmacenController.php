@@ -18,8 +18,34 @@ class AlmacenController extends Controller
 		if(isset($_POST['Almacen']))
 		{
 			$model->attributes=$_POST['Almacen'];
-			if($model->save())
-				$this->redirect(array('index'));
+			if($model->idTipoAlmacen==1)
+			{	
+				if($model->save())
+					$this->redirect(array('index'));
+			}
+			else 
+			{
+				$almacen=Almacen::model()->find('idTipoAlmacen=1 and idProducto='.$model->idProducto);
+				$almacen->stockPaquete=$almacen->stockPaquete-$model->stockPaquete;
+				$almacen->stockUnidad=$almacen->stockUnidad-$model->stockUnidad;
+				if($almacen->stockPaquete>=0 && $almacen->stockUnidad>=0)
+				{
+					if($model->save())
+					{
+						$almacen->save();
+						$this->redirect(array('index'));
+					}
+				}
+				else 
+				{
+					if($almacen->stockPaquete<0)
+						$model->addError('stockPaquete', 'La cantidad debe ser menor al de deposito');
+					if($almacen->stockUnidad<0)
+						$model->addError('stockUnidad', 'La cantidad debe ser menor al de deposito');
+					
+				}
+			}
+			
 		}
 
 		$this->render('create',array(
@@ -34,11 +60,27 @@ class AlmacenController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
-
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		$model=$this->loadModel($id);
+		//$model=Almacen::model()->findByPk($id);
+		if($model->idTipoAlmacen==1)
+		{
+			$count=Almacen::model()->findAll('idProducto='.$model->idProducto);
+			
+			if(count($count)==1)
+				$model->delete();
+		}
+		else 
+		{
+			$principal=Almacen::model()->find('idProducto='.$model->idProducto.' and idTipoAlmacen=1');
+			$principal->stockUnidad=$principal->stockUnidad + $model->stockUnidad;
+			$principal->stockPaquete=$principal->stockPaquete + $model->stockPaquete;
+			//print_r($principal);
+			//print_r($model);
+			if($principal->save())
+				$model->delete();
+		}
+		
+		$this->redirect(array('index'));
 	}
 
 	/**
@@ -50,10 +92,8 @@ class AlmacenController extends Controller
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 				'criteria'=>array(
-					'with'=>'TipoAlmacen',
-					'with'=>'Producto',
-					'with'=>'Producto.Color',
-					'with'=>'Producto.Material',
+					'with'=>array('TipoAlmacen','Producto','Producto.Color','Producto.Material'),
+					'order'=>'Producto.codigo',
 				),
 				
 			'pagination'=>array(
@@ -110,69 +150,74 @@ class AlmacenController extends Controller
 			{
 				$this->redirect('tipoAlmacen');
 			}
-			else
-			{
-				$this->render('tipoAlmacen',array('model'=>$model,'tipos'=>$tipos,'new'=>$new));
-			}
 		}
-		else
-		{
-			$this->render('tipoAlmacen',array('model'=>$model,'tipos'=>$tipos,'new'=>$new));
-		}
+		
+		$this->render('tipoAlmacen',array('model'=>$model,'tipos'=>$tipos,'new'=>$new));
+		
 	}
 	
 	public function actionAdd_reduce($al=NULL, $id=NULL)
 	{
-		/*$productos=new Almacen('search');
-		$productos->unsetAttributes();
-		if (isset($_GET['Almacen'])) {
-			$productos->attributes = $_GET['Almacen'];
-		}
-		*/
-		
 		$productos=new Producto('searchAll');
 		$productos->unsetAttributes();
-		if (isset($_GET['Producto'])) {
+		if($al!=null)
+		{
+			$productos->almacen=$al;
+		}
+		
+		if (isset($_GET['Producto'])) 
+		{
 			$productos->attributes = $_GET['Producto'];
-			//$productos->colores= $_GET['Color'];
-			print_r($_GET);
+			$productos->color = $_GET['Producto']['color'];
+			$productos->material = $_GET['Producto']['material'];
+			$productos->industria = $_GET['Producto']['industria'];
+			$productos->almacen = $_GET['Producto']['almacen'];
 		}
 		
 		
 		$almacenes = TipoAlmacen::model()->findAll();
 		$model=new MovimientoAlmacen;
+		if($id!=null)
+		{
+			$model->idAlmacen = $id;
+		}
 		//$productos = new Almacen;
 		/*if($al!=null)
 			$productos=Almacen::model()->with('Producto')->with('Producto.Color')->findAll('idTipoAlmacen='.$al);
 			//$productos=Producto::model()->with('Almacen')->findAll('Almacen.idTipoAlmacen='.$al);
 			*/
 		
-		if(isset($_POST['Almacen']))
+		if(isset($_POST['MovimientoAlmacen']))
 		{
-			$model->attributes=$_POST['Almacen'];
-			if($model->validate())
+			print_r($_POST);
+			$model->attributes=$_POST['MovimientoAlmacen'];
+			
+			$model->fechaInicio=date("Y-m-d H:i:s");
+			$model->estado="2";
+			if($model->save())
 			{
-				// form inputs are valid, do something here
-				return;
+				$almacen=Almacen::model()->findByPK($model->idAlmacen);
+				$almacen->stockUnidad = $almacen->stockUnidad + $model->unidad;
+				$almacen->stockPaquete = $almacen->stockPaquete + $model->paquete;
+				if($almacen->save())
+				{
+					$model->fechaFinal=date("Y-m-d H:i:s");
+					$model->estado="1";
+					if($model->save())
+					{
+						$this->redirect('add_reduce');
+					}
+				}
 			}
 		}
-		//$dataProvider=new CActiveDataProvider('Almacen');
+		
 		$this->render('add_reduce',array(
-				/*'dataProvider'=>$dataProvider,
-				'criteria'=>array(
-						'with'=>'TipoAlmacen',
-						'with'=>'Producto',
-						'with'=>'Producto.Color',
-						'with'=>'Producto.Material',
-				),
-		*/
 				'pagination'=>array(
 						'pageSize'=>20,
 				),
 				'model'=>$model,
 				'almacenes'=>$almacenes,
 				'productos'=>$productos,
-				));
-		//$this->render('add_reduce',array('model'=>$model,'almacenes'=>$almacenes,'productos'=>$productos));
+		));
 	}
 }

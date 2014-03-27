@@ -10,6 +10,7 @@
  * @property integer $unidad
  * @property integer $paquete
  * @property integer $estado
+ * @property integer $tipo
  * @property string $fechaInicio
  * @property string $fechaFinal
  */
@@ -31,11 +32,11 @@ class MovimientoAlmacen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idEmpleado, idAlmacen, estado, fechaInicio, fechaFinal', 'required'),
+			array('idAlmacen, estado, fechaInicio', 'required'),
 			array('idEmpleado, idAlmacen, unidad, paquete, estado', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, idEmpleado, idAlmacen, unidad, paquete, estado, fechaInicio, fechaFinal', 'safe', 'on'=>'search'),
+			array('id, idEmpleado, idAlmacen, unidad, paquete, estado, tipo, fechaInicio, fechaFinal', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,6 +65,7 @@ class MovimientoAlmacen extends CActiveRecord
 			'unidad' => 'Unidad',
 			'paquete' => 'Paquete',
 			'estado' => 'Estado',
+			'tipo' => 'Tipo',	
 			'fechaInicio' => 'Fecha Inicio',
 			'fechaFinal' => 'Fecha Final',
 		);
@@ -93,6 +95,7 @@ class MovimientoAlmacen extends CActiveRecord
 		$criteria->compare('unidad',$this->unidad);
 		$criteria->compare('paquete',$this->paquete);
 		$criteria->compare('estado',$this->estado);
+		$criteria->compare('tipo',$this->tipo);
 		$criteria->compare('fechaInicio',$this->fechaInicio,true);
 		$criteria->compare('fechaFinal',$this->fechaFinal,true);
 

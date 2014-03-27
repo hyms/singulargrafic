@@ -6,17 +6,19 @@
 
 <div class="col-sm-2">
 	<h2>Servicios</h2>
-	<ul class="nav nav-pills nav-stacked ">
-	<?php
-		foreach ($servicios as $serv)
-		{
-	?>
-		<li><?php echo CHtml::link($serv->nombre, array('empresa/servicios', 'id'=>$serv->id));?></li>
-	
 	<?php 
-		}
+	$items = array();
+	foreach ($servicios as $serv)
+	{
+		array_push($items,array('label'=>$serv->nombre, 'url'=>array('/empresa/servicios', 'id'=>$serv->id)));
+	}
+	$this->widget('zii.widgets.CMenu',array(
+					'htmlOptions' => array('class' => 'nav nav-pills nav-stacked'),
+					'activeCssClass'	=> 'active',
+					'encodeLabel' => false,
+					'items'=>$items,
+					)); 
 	?>
-	</ul>
 	<?php
 		$form=$this->beginWidget('CActiveForm', array(
 				'id'=>'empresa-empresa-form',

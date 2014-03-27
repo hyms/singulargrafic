@@ -5,17 +5,19 @@
 ?>
 <div class="col-sm-2">
 	<h2>Tipos de Almacen</h2>
-	<ul class="nav nav-pills nav-stacked">
-	<?php
-		foreach ($tipos as $tipo)
-		{
-	?>
-		<li><?php echo CHtml::link($tipo->nombre, array('almacen/tipoAlmacen', 'id'=>$tipo->id));?></li>
 	<?php 
-		}
+	$items = array();
+	foreach ($tipos as $tipo)
+	{
+		array_push($items,array('label'=>$tipo->nombre, 'url'=>array('/almacen/tipoAlmacen', 'id'=>$tipo->id)));
+	}
+	$this->widget('zii.widgets.CMenu',array(
+					'htmlOptions' => array('class' => 'nav nav-pills nav-stacked'),
+					'activeCssClass'	=> 'active',
+					'encodeLabel' => false,
+					'items'=>$items,
+					)); 
 	?>
-	</ul>
-	
 	<?php
 		$form=$this->beginWidget('CActiveForm', array(
 				'id'=>'empresa-empresa-form',

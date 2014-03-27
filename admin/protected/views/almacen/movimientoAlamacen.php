@@ -2,8 +2,18 @@
 /* @var $this MovimientoAlmacenController */
 /* @var $model MovimientoAlmacen */
 /* @var $form CActiveForm */
+$producto = Producto::model()->with('Almacen')->with('Color')->with('Material')->with('Industria')->find('Almacen.id='.$model->idAlmacen);
 ?>
-
+<h1>Añadir a
+<?php
+	echo CHtml::label($producto->codigo,'producto');
+?>
+</h1>
+<h3>
+<?php
+	echo CHtml::label($producto->Material->nombre.' '.$producto->peso.' '.$producto->Color->nombre.' '.$producto->dimension.' '.$producto->procedencia,'productoName');
+?>
+</h3>
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -39,31 +49,6 @@
 		</div>
 		<?php echo $form->error($model,'paquete'); ?>
 	</div>
-
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'estado',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
-		<?php echo $form->textField($model,'estado',array('class'=>'form-control')); ?>
-		</div>
-		<?php echo $form->error($model,'estado'); ?>
-	</div>
-
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'fechaInicio',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
-		<?php echo $form->textField($model,'fechaInicio',array('class'=>'form-control')); ?>
-		</div>
-		<?php echo $form->error($model,'fechaInicio'); ?>
-	</div>
-
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'fechaFinal',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
-		<?php echo $form->textField($model,'fechaFinal',array('class'=>'form-control')); ?>
-		</div>
-		<?php echo $form->error($model,'fechaFinal'); ?>
-	</div>
-
 
 	<div class="form-group">
 		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>

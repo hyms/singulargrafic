@@ -5,17 +5,19 @@
 ?>
 <div class="col-sm-2">
 	<h2>Clientes</h2>
-	<ul class="nav nav-pills nav-stacked">
-	<?php
-		foreach ($clientes as $cli)
-		{
-	?>
-		<li><?php echo CHtml::link($cli->nombre.' '.$cli->apellido, array('empresa/cliente', 'id'=>$cli->id));?></li>
 	<?php 
-		}
+	$items = array();
+	foreach ($clientes as $cli)
+	{
+		array_push($items,array('label'=>$cli->nombre.' '.$cli->apellido, 'url'=>array('/empresa/cliente', 'id'=>$cli->id)));
+	}
+	$this->widget('zii.widgets.CMenu',array(
+					'htmlOptions' => array('class' => 'nav nav-pills nav-stacked'),
+					'activeCssClass'	=> 'active',
+					'encodeLabel' => false,
+					'items'=>$items,
+					)); 
 	?>
-	</ul>
-	
 	<?php
 		$form=$this->beginWidget('CActiveForm', array(
 				'id'=>'empresa-empresa-form',

@@ -10,17 +10,19 @@ Yii::app()->clientscript
 ?>
 <div class="col-sm-2">
 	<h2>Colores</h2>
-	<ul class="nav nav-pills nav-stacked">
-	<?php
-		foreach ($colores as $color)
-		{
-	?>
-		<li><?php echo CHtml::link($color->nombre, array('producto/color', 'id'=>$color->id));?></li>
 	<?php 
-		}
+	$items = array();
+	foreach ($colores as $color)
+	{
+		array_push($items,array('label'=>$color->nombre, 'url'=>array('/producto/color', 'id'=>$color->id)));
+	}
+	$this->widget('zii.widgets.CMenu',array(
+					'htmlOptions' => array('class' => 'nav nav-pills nav-stacked'),
+					'activeCssClass'	=> 'active',
+					'encodeLabel' => false,
+					'items'=>$items,
+					)); 
 	?>
-	</ul>
-	
 	<?php
 		$form=$this->beginWidget('CActiveForm', array(
 				'id'=>'empresa-empresa-form',
