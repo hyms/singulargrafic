@@ -38,13 +38,14 @@ class Empleado extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombres, apellidos, ci, telefono, cargo, sueldo, skype, sucursal, fechaIngreso', 'required'),
-			array('ci, sueldo, sucursal, superior', 'numerical', 'integerOnly'=>true),
-			array('nombres, apellidos, email, skype, face', 'length', 'max'=>100),
-			array('ci', 'length', 'max'=>20),
-			array('telefono', 'length', 'max'=>15),
-			array('turno, cargo', 'length', 'max'=>50),
-			array('obs', 'length', 'max'=>500),
+			array('nombres, apellidos, ci, telefono, cargo, sueldo, skype, sucursal, fechaIngreso', 'required', 'message'=>'El campo <b>{attribute}</b> es obligatorio',),
+			array('ci, sueldo, sucursal, superior', 'numerical', 'integerOnly'=>true, 'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
+			array('nombres, apellidos, email, skype, face', 'length', 'max'=>100,'message'=>'<b>{attribute}</b> solo puede contener 100 caracteres'),
+			array('email','email','message'=>'La direccion de <b>{attribute}</b> no es valido'),
+			array('ci', 'length', 'max'=>20,'message'=>'<b>{attribute}</b> solo puede contener 20 caracteres'),
+			array('telefono', 'length', 'max'=>15,'message'=>'<b>{attribute}</b> solo puede contener 15 caracteres'),
+			array('turno, cargo', 'length', 'max'=>50,'message'=>'<b>{attribute}</b> solo puede contener 50 caracteres'),
+			array('obs', 'length', 'max'=>500,'message'=>'<b>{attribute}</b> solo puede contener 500 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('nombres, apellidos, ci, telefono, email, cargo, turno, sueldo, skype, face, superior, obs', 'safe', 'on'=>'search'),

@@ -2,8 +2,9 @@
 /* @var $this MovimientoAlmacenController */
 /* @var $model MovimientoAlmacen */
 /* @var $form CActiveForm */
-$producto = Producto::model()->with('Almacen')->with('Color')->with('Material')->with('Industria')->find('Almacen.id='.$model->idAlmacen);
+
 ?>
+<h1><?php echo CHtml::label($producto->Almacen->TipoAlmacen->nombre,'producto')?></h1>
 <h1>Añadir a
 <?php
 	echo CHtml::label($producto->codigo,'producto');
@@ -31,7 +32,7 @@ $producto = Producto::model()->with('Almacen')->with('Color')->with('Material')-
 
 	<p class="note">Los campos con <span class="required">*</span> son obligatorios.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model,'', '', array('class' => 'alert alert-danger')); ?>
 
 	
 	<div class="form-group">
@@ -39,7 +40,7 @@ $producto = Producto::model()->with('Almacen')->with('Color')->with('Material')-
 		<div class="col-sm-4">
 		<?php echo $form->textField($model,'unidad',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'unidad'); ?>
+		<?php echo $form->error($model,'unidad',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -47,7 +48,7 @@ $producto = Producto::model()->with('Almacen')->with('Color')->with('Material')-
 		<div class="col-sm-4">
 		<?php echo $form->textField($model,'paquete',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'paquete'); ?>
+		<?php echo $form->error($model,'paquete',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">

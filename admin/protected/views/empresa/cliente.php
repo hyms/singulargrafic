@@ -65,14 +65,14 @@
 
 	<p class="note">Los campos con <span class="required">*</span> son obligatorios.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model,'', '', array('class' => 'alert alert-danger')); ?>
 
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'nitCi',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-2">
 		<?php echo $form->textField($model,'nitCi',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'nitCi'); ?>
+		<?php echo $form->error($model,'nitCi',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -80,7 +80,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->textField($model,'apellido',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'apellido'); ?>
+		<?php echo $form->error($model,'apellido',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -88,7 +88,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->textField($model,'nombre',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'nombre'); ?>
+		<?php echo $form->error($model,'nombre',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -96,7 +96,7 @@
 		<div class="col-sm-4">
 		<?php echo $form->textField($model,'correo',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'correo'); ?>
+		<?php echo $form->error($model,'correo',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -104,7 +104,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->textField($model,'telefono',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'telefono'); ?>
+		<?php echo $form->error($model,'telefono',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -126,7 +126,7 @@
 		));
 		?>
 		</div>
-		<?php echo $form->error($model,'fechaRegistro'); ?>
+		<?php echo $form->error($model,'fechaRegistro',array('class'=>'label label-danger')); ?>
 	</div>
 
 

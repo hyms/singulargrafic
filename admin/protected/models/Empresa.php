@@ -35,13 +35,14 @@ class Empresa extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre, calle, correo, telefono, horarios', 'required'),
-			array('patern', 'numerical', 'integerOnly'=>true),
-			array('nombre, calle, correo, skype, facebook', 'length', 'max'=>500),
-			array('ciudad', 'length', 'max'=>100),
-			array('maps', 'length', 'max'=>1000),
-			array('fax, telefono', 'length', 'max'=>20),
-			array('horarios', 'length', 'max'=>50),
+			array('nombre, calle, correo, telefono, horarios, ciudad', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
+			array('patern, telefono, fax', 'numerical', 'integerOnly'=>true,'message'=>'<b>{attribute}</b> debe ser numerico'),
+			array('correo','email','message'=>'La direccion de <b>{attribute}</b> no es valido'),
+			array('nombre, calle, correo, skype, facebook', 'length', 'max'=>500,'message'=>'<b>{attribute}</b> solo puede contener 500 caracteres'),
+			array('ciudad', 'length', 'max'=>100,'message'=>'<b>{attribute}</b> solo puede contener 100 caracteres'),
+			array('maps', 'length', 'max'=>1000,'message'=>'<b>{attribute}</b> solo puede contener 1000 caracteres'),
+			array('fax, telefono', 'length', 'max'=>20,'message'=>'<b>{attribute}</b> solo puede contener 20 caracteres'),
+			array('horarios', 'length', 'max'=>50,'message'=>'<b>{attribute}</b> solo puede contener 50 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, nombre, ciudad, calle, maps, fax, correo, telefono, horarios, skype, facebook, patern', 'safe', 'on'=>'search'),

@@ -24,7 +24,7 @@
 <?php
 if($model->idAlmacen!=null)
 {
-	$this->renderPartial('movimientoAlamacen', array('model'=>$model));
+	$this->renderPartial('movimientoAlamacen', array('model'=>$model,'producto'=>$producto));
 }
 else
 {
@@ -91,7 +91,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		array(
 			'header'=>'',
 			'type'=>'raw',
-			'value'=>'CHtml::link("Seleccionar",array("almacen/add_reduce","id"=>$data->id))'
+			'value'=>'CHtml::link("Seleccionar",array("almacen/add_reduce","id"=>$data->Almacen->id))'
 		),
 		/*array(
 			'name'=>'',

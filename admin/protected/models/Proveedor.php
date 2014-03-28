@@ -31,12 +31,13 @@ class Proveedor extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nit, nombre, direccion, telefono, correo, fechaRegistro, obs', 'required'),
-			array('nit, telefono', 'length', 'max'=>15),
-			array('nombre', 'length', 'max'=>50),
-			array('direccion', 'length', 'max'=>200),
-			array('correo', 'length', 'max'=>150),
-			array('obs', 'length', 'max'=>500),
+			array('nit, nombre, direccion, telefono, correo, fechaRegistro', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
+			array('nit, telefono', 'numerical', 'integerOnly'=>true, 'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
+			array('nit, telefono', 'length', 'max'=>15,'message'=>'<b>{attribute}</b> solo puede contener 15 caracteres'),
+			array('nombre', 'length', 'max'=>50,'message'=>'<b>{attribute}</b> solo puede contener 50 caracteres'),
+			array('direccion', 'length', 'max'=>200,'message'=>'<b>{attribute}</b> solo puede contener 200 caracteres'),
+			array('correo', 'length', 'max'=>150,'message'=>'<b>{attribute}</b> solo puede contener 150 caracteres'),
+			array('obs', 'length', 'max'=>500,'message'=>'<b>{attribute}</b> solo puede contener 500 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, nit, nombre, direccion, telefono, correo, fechaRegistro, obs', 'safe', 'on'=>'search'),

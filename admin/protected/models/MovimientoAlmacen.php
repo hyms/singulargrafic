@@ -33,7 +33,7 @@ class MovimientoAlmacen extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('idAlmacen, estado, fechaInicio', 'required'),
-			array('idEmpleado, idAlmacen, unidad, paquete, estado', 'numerical', 'integerOnly'=>true),
+			array('idEmpleado, idAlmacen, unidad, paquete, estado', 'numerical', 'integerOnly'=>true,'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, idEmpleado, idAlmacen, unidad, paquete, estado, tipo, fechaInicio, fechaFinal', 'safe', 'on'=>'search'),

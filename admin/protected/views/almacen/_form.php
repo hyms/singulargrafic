@@ -21,7 +21,7 @@
 
 	<p class="note">Los campos con <span class="required">*</span> son obligatorios.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model,'', '', array('class' => 'alert alert-danger')); ?>
 
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'idProducto',array('class'=>'col-sm-2 control-label')); ?>
@@ -29,7 +29,7 @@
 		<?php echo $form->dropDownList($model,'idProducto', 
 				CHtml::listData(Producto::model()->with('Material')->findAll(), 'id', 'codigo'), array('empty'=>'Seleccione Producto','class'=>'form-control'));?>
 		</div>
-		<?php echo $form->error($model,'idProducto'); ?>
+		<?php echo $form->error($model,'idProducto',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -37,7 +37,7 @@
 		<div class="col-sm-3">
 		<?php echo $form->dropDownList($model,'idTipoAlmacen', CHtml::listData(TipoAlmacen::model()->findAll(), 'id', 'nombre'), array('empty'=>'Seleccione Tipo','class'=>'form-control'));?>
 		</div>
-		<?php echo $form->error($model,'idTipoAlmacen'); ?>
+		<?php echo $form->error($model,'idTipoAlmacen',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -45,7 +45,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->textField($model,'stockUnidad',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'stockUnidad'); ?>
+		<?php echo $form->error($model,'stockUnidad',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -53,7 +53,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->textField($model,'stockPaquete',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'stockPaquete'); ?>
+		<?php echo $form->error($model,'stockPaquete',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">

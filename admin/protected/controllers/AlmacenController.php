@@ -18,34 +18,36 @@ class AlmacenController extends Controller
 		if(isset($_POST['Almacen']))
 		{
 			$model->attributes=$_POST['Almacen'];
-			if($model->idTipoAlmacen==1)
-			{	
-				if($model->save())
-					$this->redirect(array('index'));
-			}
-			else 
+			if($model->validate())
 			{
-				$almacen=Almacen::model()->find('idTipoAlmacen=1 and idProducto='.$model->idProducto);
-				$almacen->stockPaquete=$almacen->stockPaquete-$model->stockPaquete;
-				$almacen->stockUnidad=$almacen->stockUnidad-$model->stockUnidad;
-				if($almacen->stockPaquete>=0 && $almacen->stockUnidad>=0)
-				{
+				if($model->idTipoAlmacen==1)
+				{	
 					if($model->save())
-					{
-						$almacen->save();
 						$this->redirect(array('index'));
-					}
 				}
 				else 
 				{
-					if($almacen->stockPaquete<0)
-						$model->addError('stockPaquete', 'La cantidad debe ser menor al de deposito');
-					if($almacen->stockUnidad<0)
-						$model->addError('stockUnidad', 'La cantidad debe ser menor al de deposito');
-					
+					$almacen=$this->verifyModel(Almacen::model()->find('idTipoAlmacen=1 and idProducto='.$model->idProducto));
+					$almacen->stockPaquete=$almacen->stockPaquete-$model->stockPaquete;
+					$almacen->stockUnidad=$almacen->stockUnidad-$model->stockUnidad;
+					if($almacen->stockPaquete>=0 && $almacen->stockUnidad>=0)
+					{
+						if($model->save())
+						{
+							$almacen->save();
+							$this->redirect(array('index'));
+						}
+					}
+					else 
+					{
+						if($almacen->stockPaquete<0)
+							$model->addError('stockPaquete', 'La cantidad de <b>stockPaquete</b> debe ser menor al de deposito');
+						if($almacen->stockUnidad<0)
+							$model->addError('stockUnidad', 'La cantidad de <b>stockUnidad</b> debe ser menor al de deposito');
+						
+					}
 				}
 			}
-			
 		}
 
 		$this->render('create',array(
@@ -60,8 +62,7 @@ class AlmacenController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$model=$this->loadModel($id);
-		//$model=Almacen::model()->findByPk($id);
+		$model=$this->verifyModel(Almacen::model()->findByPk($id));
 		if($model->idTipoAlmacen==1)
 		{
 			$count=Almacen::model()->findAll('idProducto='.$model->idProducto);
@@ -103,21 +104,6 @@ class AlmacenController extends Controller
 	}
 
 	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer $id the ID of the model to be loaded
-	 * @return Almacen the loaded model
-	 * @throws CHttpException
-	 */
-	public function loadModel($id)
-	{
-		$model=Almacen::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
-	}
-
-	/**
 	 * Performs the AJAX validation.
 	 * @param Almacen $model the model to be validated
 	 */
@@ -134,7 +120,7 @@ class AlmacenController extends Controller
 	{
 		$model=new TipoAlmacen;
 		if($id!=null)
-			$model=TipoAlmacen::model()->findByPk($id);
+			$model=$this->verifyModel(TipoAlmacen::model()->findByPk($id));
 			
 		$tipos=TipoAlmacen::model()->findall();
 		
@@ -145,10 +131,16 @@ class AlmacenController extends Controller
 		if(isset($_POST['TipoAlmacen']))
 		{
 			$model->attributes=$_POST['TipoAlmacen'];
-				
-			if($model->save())
+			if($model->validate())
 			{
-				$this->redirect('tipoAlmacen');
+				if($model->save())
+				{
+					$this->redirect(array('tipoAlmacen'));
+				}
+			}
+			else
+			{
+				$new=true;
 			}
 		}
 		
@@ -160,6 +152,7 @@ class AlmacenController extends Controller
 	{
 		$productos=new Producto('searchAll');
 		$productos->unsetAttributes();
+		$producto=null;
 		if($al!=null)
 		{
 			$productos->almacen=$al;
@@ -171,7 +164,7 @@ class AlmacenController extends Controller
 			$productos->color = $_GET['Producto']['color'];
 			$productos->material = $_GET['Producto']['material'];
 			$productos->industria = $_GET['Producto']['industria'];
-			$productos->almacen = $_GET['Producto']['almacen'];
+			//$productos->almacen = $_GET['Producto']['almacen'];
 		}
 		
 		
@@ -180,12 +173,8 @@ class AlmacenController extends Controller
 		if($id!=null)
 		{
 			$model->idAlmacen = $id;
+			$producto = $this->verifyModel(Producto::model()->with('Almacen')->with('Color')->with('Material')->with('Industria')->find('Almacen.id='.$model->idAlmacen));
 		}
-		//$productos = new Almacen;
-		/*if($al!=null)
-			$productos=Almacen::model()->with('Producto')->with('Producto.Color')->findAll('idTipoAlmacen='.$al);
-			//$productos=Producto::model()->with('Almacen')->findAll('Almacen.idTipoAlmacen='.$al);
-			*/
 		
 		if(isset($_POST['MovimientoAlmacen']))
 		{
@@ -205,12 +194,12 @@ class AlmacenController extends Controller
 					$model->estado="1";
 					if($model->save())
 					{
-						$this->redirect('add_reduce');
+						$this->redirect(array('add_reduce'));
 					}
 				}
 			}
 		}
-		
+		//$producto = $this->verifyModel(Producto::model()->with('Almacen')->with('Color')->with('Material')->with('Industria')->find('Almacen.id='.$model->idAlmacen));
 		$this->render('add_reduce',array(
 				'pagination'=>array(
 						'pageSize'=>20,
@@ -218,6 +207,14 @@ class AlmacenController extends Controller
 				'model'=>$model,
 				'almacenes'=>$almacenes,
 				'productos'=>$productos,
+				'producto'=>$producto
 		));
+	}
+	private function verifyModel($model)
+	{
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+	
+		return $model;
 	}
 }

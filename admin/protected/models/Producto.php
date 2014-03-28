@@ -37,13 +37,13 @@ class Producto extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codigo, idMaterial, peso, idColor, dimension, procedencia, costoSF, costoSFUnidad, costoCF, costoCFUnidad, idIndustria, cantidad', 'required'),
-			array('cantidad', 'numerical', 'integerOnly'=>true),
-			array('costoSF, costoSFUnidad, costoCF, costoCFUnidad', 'numerical'),
-			array('codigo', 'length', 'max'=>50),
-			array('peso', 'length', 'max'=>10),
-			array('dimension', 'length', 'max'=>20),
-			array('obs', 'length', 'max'=>500),
+			array('codigo, idMaterial, peso, idColor, dimension, procedencia, costoSF, costoSFUnidad, costoCF, costoCFUnidad, idIndustria, cantidad', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
+			array('cantidad, peso', 'numerical', 'integerOnly'=>true,'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
+			array('costoSF, costoSFUnidad, costoCF, costoCFUnidad', 'numerical', 'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
+			array('codigo', 'length', 'max'=>50,'message'=>'<b>{attribute}</b> solo puede contener 50 caracteres'),
+			array('peso', 'length', 'max'=>10,'message'=>'<b>{attribute}</b> solo puede contener 10 caracteres'),
+			array('dimension, procedencia', 'length', 'max'=>20,'message'=>'<b>{attribute}</b> solo puede contener 20 caracteres'),
+			array('obs', 'length', 'max'=>500,'message'=>'<b>{attribute}</b> solo puede contener 500 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, codigo, idMaterial, peso, idColor, dimension, procedencia, costoSF, costoSFUnidad, costoCF, costoCFUnidad, idIndustria, cantidad, obs, color, material', 'safe', 'on'=>'search'),

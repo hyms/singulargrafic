@@ -13,7 +13,7 @@ class EmpresaController extends Controller
 		$servicios = new Servicios;
 		if($id!=null)
 		{
-			$model=Empresa::model()->findByPk($id);
+			$model=$this->verifyModel(Empresa::model()->findByPk($id));
 			$servicios=Servicios::model()->with('empresaServicio')->findall('idEmpresa='.$id);
 		}
 		
@@ -28,51 +28,50 @@ class EmpresaController extends Controller
 			$model->attributes=$_POST['Empresa'];
 			$model->ciudad=$_POST['ciudad']; 
 			$model->patern=$_POST['Superior'];
-			
-			if($model->save())
+			if($model->validate())
 			{
-				$count=0;
-				EmpresaServicio::model()->deleteAll('idEmpresa='.$model->id);
-				
-				while(isset($_POST['Servicios'.$count]))
+				if($model->save())
 				{
-					$ser= EmpresaServicio::model()->find('idEmpresa='.$model->id.' and idServicio='.$_POST['Servicios'.$count]);
-					if(empty($ser))
-						$ser = new EmpresaServicio;
+					$count=0;
+					EmpresaServicio::model()->deleteAll('idEmpresa='.$model->id);
 					
-					$ser->idEmpresa=$model->id;
-					$ser->idServicio=$_POST['Servicios'.$count];
-					
-					if(isset($_POST['Servicios'.$count-1]))
+					while(isset($_POST['Servicios'.$count]))
 					{
-						$sw=0;
-						for($id=0;$i<=$count;$i++)
+						$ser= EmpresaServicio::model()->find('idEmpresa='.$model->id.' and idServicio='.$_POST['Servicios'.$count]);
+						if(empty($ser))
+							$ser = new EmpresaServicio;
+						
+						$ser->idEmpresa=$model->id;
+						$ser->idServicio=$_POST['Servicios'.$count];
+						
+						if(isset($_POST['Servicios'.$count-1]))
 						{
-							if($_POST['Servicios'.$i]==$_POST['Servicios'.$count])
+							$sw=0;
+							for($id=0;$i<=$count;$i++)
 							{
-								$sw=1; break;
+								if($_POST['Servicios'.$i]==$_POST['Servicios'.$count])
+								{
+									$sw=1; break;
+								}
 							}
+							if($sw==0)
+								$ser->save();
 						}
-						if($sw==0)
+						else 
+						{
 							$ser->save();
+						}
+						$count++;
 					}
-					else 
-					{
-						$ser->save();
-					}
-					$count++;
+					$this->redirect('sucursal');
 				}
-				$this->redirect('sucursal');
 			}
 			else 
 			{
-				$this->render('empresa',array('model'=>$model,'sucursal'=>$sucursal,"new"=>$new,'servicios'=>$servicios));
+				$new=true;
 			}
 		}
-		else 
-		{
-			$this->render('empresa',array('model'=>$model,'sucursal'=>$sucursal,"new"=>$new,'servicios'=>$servicios));
-		}
+		$this->render('empresa',array('model'=>$model,'sucursal'=>$sucursal,"new"=>$new,'servicios'=>$servicios));
 	}
 
 	public function actionEmpleado($id=null)
@@ -80,7 +79,7 @@ class EmpresaController extends Controller
 		$model=new Empleado;
 		
 		if($id!=null)
-			$model=Empleado::model()->findByPk($id);
+			$model=$this->verifyModel(Empleado::model()->findByPk($id));
 			
 		$empleados=Empleado::model()->findall();
 		
@@ -93,21 +92,21 @@ class EmpresaController extends Controller
 			$model->attributes=$_POST['Empleado'];
 			$model->sucursal=$_POST['sucursal'];
 			$model->superior=$_POST['superior'];
-			$model->fechaIngreso=date("Y-m-d", strtotime($model->fechaIngreso));
-			
-			if($model->save())
+			if($model->validate())
 			{
-				$this->redirect('empleado');
+				$model->fechaIngreso=date("Y-m-d", strtotime($model->fechaIngreso));
+				if($model->save())
+				{
+					$this->redirect('empleado');
+				}
 			}
 			else 
 			{
-				$this->render('empleado',array('model'=>$model,'empleados'=>$empleados,'new'=>$new));
+				$new=true;
 			}
-		}
-		else 
-		{
-			$this->render('empleado',array('model'=>$model,'empleados'=>$empleados,'new'=>$new));
-		}
+		}	
+		$this->render('empleado',array('model'=>$model,'empleados'=>$empleados,'new'=>$new));
+			
 	}
 	
 	public function actionServicios($id=null)
@@ -115,7 +114,7 @@ class EmpresaController extends Controller
 		$model=new Servicios;
 		if($id!=null)
 		{
-			$model=Servicios::model()->findByPk($id);
+			$model=$this->verifyModel(Servicios::model()->findByPk($id));
 		}
 		$servicios=Servicios::model()->findall();
 		
@@ -127,21 +126,20 @@ class EmpresaController extends Controller
 		if(isset($_POST['Servicios']))
 		{
 			$model->attributes=$_POST['Servicios'];
-			$model->fechaCreacion=date("Y-m-d H:i:s", strtotime($model->fechaCreacion));
-			print_r($_POST['Servicios']);
-			if($model->save())
+			if($model->validate())
 			{
-				$this->redirect('servicios');
+				$model->fechaCreacion=date("Y-m-d H:i:s", strtotime($model->fechaCreacion));
+				if($model->save())
+				{
+					$this->redirect('servicios');
+				}
 			}
 			else
 			{
-				$this->render('servicios',array('model'=>$model,'servicios'=>$servicios,'new'=>$new));
+				$new=true;
 			}
 		}
-		else
-		{
-			$this->render('servicios',array('model'=>$model,'servicios'=>$servicios,'new'=>$new));
-		}
+		$this->render('servicios',array('model'=>$model,'servicios'=>$servicios,'new'=>$new));
 	}
 	
 	public function actionCliente($id=null)
@@ -149,7 +147,7 @@ class EmpresaController extends Controller
 		$model=new Cliente;
 		
 		if($id!=null)
-			$model=Cliente::model()->findByPk($id);
+			$model=$this->verifyModel(Cliente::model()->findByPk($id));
 			
 		$clientes=Cliente::model()->findall();
 	
@@ -160,21 +158,21 @@ class EmpresaController extends Controller
 		if(isset($_POST['Cliente']))
 		{
 			$model->attributes=$_POST['Cliente'];
-			$model->fechaRegistro=date("Y-m-d", strtotime($model->fechaRegistro));
-			
-			if($model->save())
+			if($model->validate())
 			{
-				$this->redirect('cliente');
+				$model->fechaRegistro=date("Y-m-d", strtotime($model->fechaRegistro));
+				
+				if($model->save())
+				{
+					$this->redirect('cliente');
+				}
 			}
-			else 
+			else
 			{
-				$this->render('cliente',array('model'=>$model,'clientes'=>$clientes,'new'=>$new));
+				$new=true;
 			}
 		}
-		else 
-		{
-			$this->render('cliente',array('model'=>$model,'clientes'=>$clientes,'new'=>$new));
-		}
+		$this->render('cliente',array('model'=>$model,'clientes'=>$clientes,'new'=>$new));
 	}
 	
 	public function actionProveedor($id=null)
@@ -182,7 +180,7 @@ class EmpresaController extends Controller
 		$model=new Proveedor;
 	
 		if($id!=null)
-			$model=Proveedor::model()->findByPk($id);
+			$model=$this->verifyModel(Proveedor::model()->findByPk($id));
 			
 		$proveedor=Proveedor::model()->findall();
 		
@@ -193,50 +191,48 @@ class EmpresaController extends Controller
 		if(isset($_POST['Proveedor']))
 		{
 			$model->attributes=$_POST['Proveedor'];
-			$model->fechaRegistro=date("Y-m-d", strtotime($model->fechaRegistro));
-			
-			if($model->save())
+			if($model->validate())
 			{
-				$this->redirect('proveedor');
+				$model->fechaRegistro=date("Y-m-d", strtotime($model->fechaRegistro));
+				if($model->save())
+				{
+					$this->redirect('proveedor');
+				}
 			}
-			else 
+			else
 			{
-				$this->render('proveedor',array('model'=>$model,'proveedor'=>$proveedor,'new'=>$new));
+				$new=true;
 			}
 		}
-		else 
-		{
-			$this->render('proveedor',array('model'=>$model,'proveedor'=>$proveedor,'new'=>$new));
-		}
+		$this->render('proveedor',array('model'=>$model,'proveedor'=>$proveedor,'new'=>$new));
 	}
 	
 	
 	//delete's
 	public function actionSucursalDelete($id)
 	{
-		$model=Empresa::model()->findByPk($id);
+		$model=$this->verifyModel(Empresa::model()->findByPk($id));
 		$model->delete();
-		
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('empresa/sucursal'));
+		$this->redirect(array('empresa/sucursal'));
 	}
 	public function actionEmpleadoDelete($id)
 	{
-		$model=Empleado::model()->findByPk($id);
+		$model=$this->verifyModel(Empleado::model()->findByPk($id));
 		$model->delete();
-		
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('empresa/empleado'));
+		$this->redirect(array('empresa/empleado'));
 	}
 	public function actionServiciosDelete($id)
 	{	
-		$model=Servicios::model()->findByPk($id);
+		$model=$this->verifyModel(Servicios::model()->findByPk($id));
 		$model->delete();
+		$this->redirect(array('empresa/servicios'));
+	}
+	
+	private function verifyModel($model)
+	{
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
 		
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('empresa/servicios'));
+		return $model;
 	}
 }

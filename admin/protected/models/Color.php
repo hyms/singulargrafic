@@ -26,9 +26,9 @@ class Color extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre, codigo', 'required'),
-			array('nombre', 'length', 'max'=>100),
-			array('codigo', 'length', 'max'=>10),
+			array('nombre, codigo', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
+			array('nombre', 'length', 'max'=>100,'message'=>'<b>{attribute}</b> solo puede contener 100 caracteres'),
+			array('codigo', 'length', 'max'=>10,'message'=>'<b>{attribute}</b> solo puede contener 10 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, nombre, codigo', 'safe', 'on'=>'search'),
@@ -43,6 +43,7 @@ class Color extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+				'Producto'=>array(self::HAS_ONE, 'Producto', 'idColor'),
 		);
 	}
 

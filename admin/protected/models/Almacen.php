@@ -28,8 +28,8 @@ class Almacen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idProducto, idTipoAlmacen', 'required'),
-			array('idProducto, idTipoAlmacen, stockUnidad, stockPaquete', 'numerical', 'integerOnly'=>true),
+			array('idProducto, idTipoAlmacen', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
+			array('idProducto, idTipoAlmacen, stockUnidad, stockPaquete', 'numerical', 'integerOnly'=>true,'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
 			// The following rule is used by search().
 			array('id, idProducto, idTipoAlmacen, stockUnidad, stockPaquete', 'safe', 'on'=>'search'),
 		);

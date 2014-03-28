@@ -4,17 +4,6 @@ class ProductoController extends Controller
 {
 	
 	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
-	 */
-	public function actionView($id)
-	{
-		$this->render('view',array(
-			'model'=>Producto::model()->findByPk($id),
-		));
-	}
-
-	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
@@ -28,8 +17,11 @@ class ProductoController extends Controller
 		if(isset($_POST['Producto']))
 		{
 			$model->attributes=$_POST['Producto'];
-			if($model->save())
-				$this->redirect(array('index'));
+			if($model->validate())
+			{
+				if($model->save())
+					$this->redirect(array('index'));
+			}
 		}
 
 		$this->render('create',array(
@@ -44,7 +36,7 @@ class ProductoController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=Producto::model()->findByPk($id);
+		$model=$this->verifyModel(Producto::model()->findByPk($id));
 		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -68,11 +60,9 @@ class ProductoController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$model=Producto::model()->findByPk($id);
+		$model=$this->verifyModel(Producto::model()->findByPk($id));
 		$model->delete();
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		$this->redirect(array('admin'));
 	}
 
 	/**
@@ -94,27 +84,12 @@ class ProductoController extends Controller
 		));
 	}
 
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-		$model=new Producto('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Producto']))
-			$model->attributes=$_GET['Producto'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
-
 	public function actionMaterial($id=NULL)
 	{
 		$model=new Material;
 		
 		if($id!=null)
-			$model=Material::model()->findByPk($id);
+			$model=$this->verifyModel(Material::model()->findByPk($id));
 			
 		$materiales=Material::model()->findall();
 		
@@ -125,20 +100,20 @@ class ProductoController extends Controller
 		if(isset($_POST['Material']))
 		{
 			$model->attributes=$_POST['Material'];
-			
-			if($model->save())
+			if($model->validate())
 			{
-				$this->redirect('material');
+				if($model->save())
+				{
+					$this->redirect('material');
+				}
 			}
-			else 
+			else
 			{
-				$this->render('material',array('model'=>$model,'material'=>$materiales,'new'=>$new));
+				$new=true;
 			}
 		}
-		else 
-		{
-			$this->render('material',array('model'=>$model,'material'=>$materiales,'new'=>$new));
-		}
+		$this->render('material',array('model'=>$model,'material'=>$materiales,'new'=>$new));
+		
 	}
 	
 	public function actionColor($id=null)
@@ -146,7 +121,7 @@ class ProductoController extends Controller
 		$model=new Color;
 		
 		if($id!=null)
-			$model=Color::model()->findByPk($id);
+			$model=$this->verifyModel($model=Color::model()->findByPk($id));
 			
 		$colores=Color::model()->findall();
 		
@@ -158,26 +133,27 @@ class ProductoController extends Controller
 		{
 			$model->attributes=$_POST['Color'];
 			
-			if($model->save())
+			if($model->validate())
 			{
-				$this->redirect('color');
+				if($model->save())
+				{
+					$this->redirect('color');
+				}
 			}
-			else 
+			else
 			{
-				$this->render('color',array('model'=>$model,'colores'=>$colores,'new'=>$new));
+				$new=true;
 			}
 		}
-		else 
-		{
-			$this->render('color',array('model'=>$model,'colores'=>$colores,'new'=>$new));
-		}
+		$this->render('color',array('model'=>$model,'colores'=>$colores,'new'=>$new));
+		
 	}
 	
 	public function actionIndustria($id=null)
 	{
 		$model=new Industria;
 		if($id!=null)
-			$model=Industria::model()->findByPk($id);
+			$model=$model=$this->verifyModel(Industria::model()->findByPk($id));
 			
 		$industrias=Industria::model()->findall();
 		
@@ -189,18 +165,28 @@ class ProductoController extends Controller
 		{
 			$model->attributes=$_POST['Industria'];
 				
-			if($model->save())
-			{
-				$this->redirect('industria');
+			if($model->validate())
+			{	
+				if($model->save())
+				{
+					$this->redirect('industria');
+				}
 			}
 			else
 			{
-				$this->render('industria',array('model'=>$model,'industrias'=>$industrias,'new'=>$new));
+				$new=true;
 			}
+			
 		}
-		else
-		{
-			$this->render('industria',array('model'=>$model,'industrias'=>$industrias,'new'=>$new));
-		}
+		$this->render('industria',array('model'=>$model,'industrias'=>$industrias,'new'=>$new));
+		
+	}
+	
+	private function verifyModel($model)
+	{
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+	
+		return $model;
 	}
 }

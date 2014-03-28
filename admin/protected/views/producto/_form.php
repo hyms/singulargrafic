@@ -21,14 +21,14 @@
 
 	<p class="note">Los campos con <span class="required">*</span> son obligatorios.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model,'', '', array('class' => 'alert alert-danger')); ?>
 
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'codigo',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-2">
 			<?php echo $form->textField($model,'codigo',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'codigo'); ?>
+		<?php echo $form->error($model,'codigo',array('class'=>'label label-danger')); ?>
 	</div>
 	
 	<div class="form-group">
@@ -36,7 +36,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->dropDownList($model,'idMaterial', CHtml::listData(Material::model()->findAll(), 'id', 'nombre'), array('empty'=>'Seleccione Material','class'=>'form-control'));?>
 		</div>
-		<?php echo $form->error($model,'idMaterial'); ?>
+		<?php echo $form->error($model,'idMaterial',array('class'=>'label label-danger')); ?>
 	</div>
 	
 	<div class="form-group">
@@ -44,7 +44,7 @@
 		<div class="col-sm-1">
 		<?php echo $form->textField($model,'peso',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'peso'); ?>
+		<?php echo $form->error($model,'peso',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -52,7 +52,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->dropDownList($model,'idColor', CHtml::listData(Color::model()->findAll(), 'id', 'nombre'), array('empty'=>'Seleccione Material','class'=>'form-control'));?>
 		</div>
-		<?php echo $form->error($model,'idColor'); ?>
+		<?php echo $form->error($model,'idColor',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -60,7 +60,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->textField($model,'dimension',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'dimension'); ?>
+		<?php echo $form->error($model,'dimension',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -68,7 +68,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->textField($model,'procedencia',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'procedencia'); ?>
+		<?php echo $form->error($model,'procedencia',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -76,7 +76,7 @@
 		<div class="col-sm-1">
 		<?php echo $form->textField($model,'costoSF',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'costoSF'); ?>
+		<?php echo $form->error($model,'costoSF',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -84,7 +84,7 @@
 		<div class="col-sm-1">
 		<?php echo $form->textField($model,'costoSFUnidad',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'costoSFUnidad'); ?>
+		<?php echo $form->error($model,'costoSFUnidad',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -92,7 +92,7 @@
 		<div class="col-sm-1">
 		<?php echo $form->textField($model,'costoCF',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'costoCF'); ?>
+		<?php echo $form->error($model,'costoCF',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -100,7 +100,7 @@
 		<div class="col-sm-1">
 		<?php echo $form->textField($model,'costoCFUnidad',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'costoCFUnidad'); ?>
+		<?php echo $form->error($model,'costoCFUnidad',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -108,7 +108,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->dropDownList($model,'idIndustria', CHtml::listData(Industria::model()->findAll(), 'id', 'nombre'), array('empty'=>'Seleccione Material','class'=>'form-control'));?>
 		</div>
-		<?php echo $form->error($model,'idIndustria'); ?>
+		<?php echo $form->error($model,'idIndustria',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -116,7 +116,7 @@
 		<div class="col-sm-1">
 		<?php echo $form->textField($model,'cantidad',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'cantidad'); ?>
+		<?php echo $form->error($model,'cantidad',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -124,7 +124,7 @@
 		<div class="col-sm-4">
 		<?php echo $form->textArea($model,'obs',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'obs'); ?>
+		<?php echo $form->error($model,'obs',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">

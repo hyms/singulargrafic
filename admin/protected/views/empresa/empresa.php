@@ -62,14 +62,14 @@
 
 	<p class="note">Los campos con <span class="required">*</span> son obligatorios.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model,'', '', array('class' => 'alert alert-danger')); ?>
 
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'nombre',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-4">
 		<?php echo $form->textField($model,'nombre',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'nombre'); ?>
+		<?php echo $form->error($model,'nombre',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -81,7 +81,7 @@
 					'class'=>'form-control'
 		));?>
 		</div>
-		<?php echo $form->error($model,'ciudad'); ?>
+		<?php echo $form->error($model,'ciudad',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -89,7 +89,7 @@
 		<div class="col-sm-5">
 		<?php echo $form->textField($model,'calle',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'calle'); ?>
+		<?php echo $form->error($model,'calle',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -97,7 +97,7 @@
 		<div class="col-sm-5">
 		<?php echo $form->textField($model,'maps',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'maps'); ?>
+		<?php echo $form->error($model,'maps',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -105,7 +105,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->textField($model,'fax',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'fax'); ?>
+		<?php echo $form->error($model,'fax',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -113,7 +113,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->textField($model,'telefono',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'telefono'); ?>
+		<?php echo $form->error($model,'telefono',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -121,7 +121,7 @@
 		<div class="col-sm-4">
 		<?php echo $form->textField($model,'correo',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'correo'); ?>
+		<?php echo $form->error($model,'correo',array('class'=>'label label-danger')); ?>
 	</div>
 	
 	<div class="form-group">
@@ -129,7 +129,7 @@
 		<div class="col-sm-3">
 		<?php echo $form->textField($model,'horarios',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'horarios'); ?>
+		<?php echo $form->error($model,'horarios',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -137,7 +137,7 @@
 		<div class="col-sm-4">
 		<?php echo $form->textField($model,'skype',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'skype'); ?>
+		<?php echo $form->error($model,'skype',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -145,7 +145,7 @@
 		<div class="col-sm-4">
 		<?php echo $form->textField($model,'facebook',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'facebook'); ?>
+		<?php echo $form->error($model,'facebook',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -157,13 +157,13 @@
 					'class'=>'form-control'
 		));?>
 		</div>
-		<?php echo $form->error($model,'patern'); ?>
+		<?php echo $form->error($model,'patern',array('class'=>'label label-danger')); ?>
 	</div>
 	<div class="form-group">
 	<?php echo Chtml::label('Servicios','servicio',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-3" id="Serv">
 		<?php
-		if($new){
+		if($model->id==null){
 			echo CHtml::dropDownList('Servicios0', $servicios->id, 
 	              $model->servicios,
 	              array('empty' => 'Seleccione el Servicio',
@@ -194,7 +194,6 @@
 		
 		//print_r($servicios);
 		?>
-		
 		</div>
 		<span id="addVar" class="btn btn-default">+</span>
 		<span id="removeVar" class="btn btn-default">-</span>

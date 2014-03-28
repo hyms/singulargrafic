@@ -65,14 +65,14 @@
 
 	<p class="note">Los campos con <span class="required">*</span> son obligatorios.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model,'', '', array('class' => 'alert alert-danger')); ?>
 
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'nombre',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-3">
 		<?php echo $form->textField($model,'nombre',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'nombre'); ?>
+		<?php echo $form->error($model,'nombre',array('class'=>'label label-danger')); ?>
 	</div>
 	
 	<div class="form-group">
@@ -80,7 +80,7 @@
 		<div class="col-sm-4">
 		<?php echo $form->textArea($model,'detalle',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'detalle'); ?>
+		<?php echo $form->error($model,'detalle',array('class'=>'label label-danger')); ?>
 	</div>
 	
 	<div class="form-group">
@@ -102,7 +102,7 @@
 		));
 		?>
 		</div>
-		<?php echo $form->error($model,'fechaCreacion'); ?>
+		<?php echo $form->error($model,'fechaCreacion',array('class'=>'label label-danger')); ?>
 	</div>
 
 

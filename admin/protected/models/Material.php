@@ -26,9 +26,9 @@ class Material extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre', 'required'),
-			array('nombre', 'length', 'max'=>200),
-			array('detalle', 'length', 'max'=>500),
+			array('nombre', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
+			array('nombre', 'length', 'max'=>200,'message'=>'<b>{attribute}</b> solo puede contener 200 caracteres'),
+			array('detalle', 'length', 'max'=>500,'message'=>'<b>{attribute}</b> solo puede contener 500 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, nombre, detalle', 'safe', 'on'=>'search'),
@@ -43,6 +43,7 @@ class Material extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'Producto'=>array(self::HAS_ONE, 'Producto', 'idMaterial'),
 		);
 	}
 

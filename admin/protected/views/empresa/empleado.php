@@ -65,14 +65,14 @@
 
 	<p class="note">Los campos con <span class="required">*</span> son obligatorios.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model,'', '', array('class' => 'alert alert-danger')); ?>
 
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'nombres',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-3">
 		<?php echo $form->textField($model,'nombres',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'nombres'); ?>
+		<?php echo $form->error($model,'nombres',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -80,7 +80,7 @@
 		<div class="col-sm-3">
 		<?php echo $form->textField($model,'apellidos',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'apellidos'); ?>
+		<?php echo $form->error($model,'apellidos',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -88,7 +88,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->textField($model,'ci',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'ci'); ?>
+		<?php echo $form->error($model,'ci',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -96,7 +96,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->textField($model,'telefono',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'telefono'); ?>
+		<?php echo $form->error($model,'telefono',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -104,7 +104,7 @@
 		<div class="col-sm-4">
 		<?php echo $form->textField($model,'email',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'email'); ?>
+		<?php echo $form->error($model,'email',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -112,7 +112,7 @@
 		<div class="col-sm-3">
 		<?php echo $form->textField($model,'cargo',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'cargo'); ?>
+		<?php echo $form->error($model,'cargo',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -120,7 +120,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->textField($model,'turno',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'turno'); ?>
+		<?php echo $form->error($model,'turno',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -128,7 +128,7 @@
 		<div class="col-sm-2">
 		<?php echo $form->textField($model,'sueldo',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'sueldo'); ?>
+		<?php echo $form->error($model,'sueldo',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -136,7 +136,7 @@
 		<div class="col-sm-3">
 		<?php echo $form->textField($model,'skype',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'skype'); ?>
+		<?php echo $form->error($model,'skype',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -144,7 +144,7 @@
 		<div class="col-sm-3">
 		<?php echo $form->textField($model,'face',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'face'); ?>
+		<?php echo $form->error($model,'face',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -156,7 +156,7 @@
 					'class'=>'form-control'
 		));?>
 		</div>
-		<?php echo $form->error($model,'superior'); ?>
+		<?php echo $form->error($model,'sucursal',array('class'=>'label label-danger')); ?>
 	</div>
 	
 	<div class="form-group">
@@ -168,7 +168,7 @@
 					'class'=>'form-control'
 		));?>
 		</div>
-		<?php echo $form->error($model,'superior'); ?>
+		<?php echo $form->error($model,'superior',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -190,7 +190,7 @@
 		));
 		?>
 		</div>
-		<?php echo $form->error($model,'fechaIngreso'); ?>
+		<?php echo $form->error($model,'fechaIngreso',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
@@ -198,7 +198,7 @@
 		<div class="col-sm-5">
 		<?php echo $form->textArea($model,'obs',array('maxlength' => 500,'class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'obs'); ?>
+		<?php echo $form->error($model,'obs',array('class'=>'label label-danger')); ?>
 	</div>
 
 
