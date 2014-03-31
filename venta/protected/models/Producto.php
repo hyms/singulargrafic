@@ -37,16 +37,16 @@ class Producto extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codigo, idMaterial, peso, idColor, dimension, procedencia, costoSF, costoSFUnidad, costoCF, costoCFUnidad, idIndustria, cantidad', 'required'),
-			array('cantidad', 'numerical', 'integerOnly'=>true),
-			array('costoSF, costoSFUnidad, costoCF, costoCFUnidad', 'numerical'),
-			array('codigo', 'length', 'max'=>50),
-			array('peso', 'length', 'max'=>10),
-			array('dimension', 'length', 'max'=>20),
-			array('obs', 'length', 'max'=>500),
+			array('codigo, idMaterial, peso, idColor, dimension, procedencia, costoSF, costoSFUnidad, costoCF, costoCFUnidad, idIndustria, cantidad', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
+			array('cantidad, peso', 'numerical', 'integerOnly'=>true,'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
+			array('costoSF, costoSFUnidad, costoCF, costoCFUnidad', 'numerical', 'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
+			array('codigo', 'length', 'max'=>50,'message'=>'<b>{attribute}</b> solo puede contener 50 caracteres'),
+			array('peso', 'length', 'max'=>10,'message'=>'<b>{attribute}</b> solo puede contener 10 caracteres'),
+			array('dimension, procedencia', 'length', 'max'=>20,'message'=>'<b>{attribute}</b> solo puede contener 20 caracteres'),
+			array('obs', 'length', 'max'=>500,'message'=>'<b>{attribute}</b> solo puede contener 500 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, codigo, idMaterial, peso, idColor, dimension, procedencia, costoSF, costoSFUnidad, costoCF, costoCFUnidad, idIndustria, cantidad, obs', 'safe', 'on'=>'search'),
+			array('id, codigo, idMaterial, peso, idColor, dimension, procedencia, costoSF, costoSFUnidad, costoCF, costoCFUnidad, idIndustria, cantidad, obs, color, material', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,8 +61,8 @@ class Producto extends CActiveRecord
 			'Color'=>array(self::BELONGS_TO, 'Color', 'idColor'),
 			'Material'=>array(self::BELONGS_TO, 'Material', 'idMaterial'),
 			'Industria'=>array(self::BELONGS_TO, 'Industria', 'idIndustria'),
-			
-			'DetalleVenta'=>array(self::HAS_MANY, 'DetalleVenta', 'idProducto'),
+				
+			'Almacen'=>array(self::HAS_ONE, 'Almacen', 'idProducto'),
 		);
 	}
 
@@ -124,6 +124,39 @@ class Producto extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+		));
+	}
+	
+	public $color;
+	public $material;
+	public $industria;
+	public $almacen;
+	
+	public function searchAll()
+	{
+		$criteria=new CDbCriteria;
+		
+		$criteria->with= array(
+							'Color',
+							'Material',
+							'Industria',
+							'Almacen',
+						);
+		
+		$criteria->compare('id',$this->id);
+		$criteria->compare('t.codigo',$this->codigo,true);
+		//$criteria->compare('Material.nombre',$this->material,true);
+		$criteria->compare('idMaterial',$this->material,true);
+		$criteria->compare('peso',$this->peso,true);
+		$criteria->compare('idColor', $this->color,true);
+		//$criteria->compare('Color.nombre', $this->color,true);
+		$criteria->compare('dimension',$this->dimension,true);
+		$criteria->compare('procedencia',$this->procedencia);
+		$criteria->compare('idIndustria',$this->industria);
+		$criteria->compare('Almacen.idTipoAlmacen',$this->almacen);
+		
+		return new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
 		));
 	}
 

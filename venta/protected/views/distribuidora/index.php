@@ -12,10 +12,11 @@ $this->breadcrumbs=array(
 <div class="col-md-10">
 <h2>Nueva Venta</h2>
 <?php 
-	$this->renderPartial('ventaProducto',array('model'=>$model)); ?>
+	$this->renderPartial('ventaProducto',array('ventaTmp'=>$ventaTmp,'cliente'=>$cliente,'almacen'=>$almacen)); ?>
 	
 <?php 
-	$this->renderPartial('producto',array(
-			'dataProvider'=>$dataProvider,
-	)); ?>
+	$this->renderPartial('producto',array('productos'=>$productos));	
+?>
+<h2>Detalle de Venta</h2>
+<?php $this->renderPartial('detalleVenta',array('detalle'=>$detalle))?>
 </div>

@@ -1,0 +1,13 @@
+# Ecplipse generated files #
+######################
+.project
+.cache/
+.settings/
+
+# OS generated files #
+######################
+Thumbs.db
+
+# temporary files #
+######################
+upload/

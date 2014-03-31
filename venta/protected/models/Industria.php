@@ -25,8 +25,8 @@ class Industria extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre', 'required'),
-			array('nombre', 'length', 'max'=>20),
+			array('nombre', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
+			array('nombre', 'length', 'max'=>20,'message'=>'<b>{attribute}</b> solo puede contener 20 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, nombre', 'safe', 'on'=>'search'),
@@ -41,7 +41,7 @@ class Industria extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Producto'=>array(self::HAS_ONE, 'Producto', 'idIndustria'),
+				'Producto'=>array(self::HAS_ONE, 'Producto', 'idIndustria'),
 		);
 	}
 

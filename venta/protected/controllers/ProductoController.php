@@ -32,6 +32,21 @@ class ProductoController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$productos=new Producto('searchAll');
+		
+		//seccion on filter
+		$productos->unsetAttributes();
+		$dist = TipoAlmacen::model()->find('nombre like "%distribuidora%"');
+		$productos->almacen = $dist->id;
+		if (isset($_GET['Producto']))
+		{
+			$productos->attributes = $_GET['Producto'];
+			$productos->color = $_GET['Producto']['color'];
+			$productos->material = $_GET['Producto']['material'];
+			$productos->industria = $_GET['Producto']['industria'];
+			//$productos->almacen = $_GET['Producto']['almacen'];
+		}
+		
 		$dataProvider=new CActiveDataProvider('Producto',array(
             'criteria'=>array(
                 'with'=>'Color',

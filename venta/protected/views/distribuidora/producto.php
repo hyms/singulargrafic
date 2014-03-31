@@ -1,12 +1,8 @@
-<div>
-
-</div>
-
-
-
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
-	'dataProvider'=>$dataProvider,
+	'dataProvider'=>$productos->searchAll(),
+	'filter'=>$productos,
+	'ajaxUpdate'=>true,
 	'itemsCssClass' => 'table table-hover table-condensed',
 	'htmlOptions' => array('class' => 'table-responsive'),
 	'columns'=>array(
@@ -15,42 +11,63 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			'header'=>'#',
 			'value'=>'$row+1',       //  row is zero based
 		),
-		'codigo',
 		array(
-			'name'=>'Material',
-			'type'=>'raw',
-			'value'=>'$data->Material->nombre'
+			'name'=>'codigo',
+			'value'=>'$data->codigo',
+			'filter'=>CHtml::activeTextField($productos, 'codigo'),
 		),
 		array(
-			'name'=>'Detalle del Producto',
-			'type'=>'raw',
-			'value'=>'$data->Color->nombre." ".$data->peso." ".$data->dimension.", ".$data->procedencia'
-		),
-		array(
-			'name'=>'Precio S/F',
-			'type'=>'raw',
-			'value'=>'$data->costoSF."/".$data->costoSFUnidad'
-		),
-		array(
-			'name'=>'Precio C/F',
-			'type'=>'raw',
-			'value'=>'$data->costoCF."/".$data->costoCFUnidad'
-		),
-		array(
-			'name'=>'Industria',
-			'type'=>'raw',
-			'value'=>'$data->Industria->nombre'
-		),
-		array(
-			'name'=>'Cant X Paqt',
-			'type'=>'raw',
-			'value'=>'$data->cantidad'
+			'name'=>'material',
+			'value'=>'$data->Material->nombre',
+			'filter'=>CHtml::listData(Material::model()->findAll(array('order'=>'nombre')),'id','nombre'),
 		),
 		
-		//'viewButtonImageUrl' => 'view',
-		//'updateButtonImageUrl' => Yii::app()->baseUrl . '/css/gridViewStyle/images/' . 'gr-update.png',
-		//'deleteButtonImageUrl' => Yii::app()->baseUrl . '/css/gridViewStyle/images/' . 'gr-delete.png',
-
+		array(
+			'name'=>'color',
+			'value'=>'$data->Color->nombre',
+			'filter'=>CHtml::listData(Color::model()->findAll(array('order'=>'nombre')),'id','nombre'),
+			//'filter'=>CHtml::activeTextField($productos, 'color'),
+		),
+		array(
+			'name'=>'peso',
+			'value'=>'$data->peso',
+			'filter'=>CHtml::listData(Producto::model()->findAll(array('select'=>'peso','order'=>'peso','group'=>'peso')),'peso','peso'),
+		),
+		array(
+			'name'=>'dimension',
+			'value'=>'$data->dimension',
+			'filter'=>CHtml::listData(Producto::model()->findAll(array('select'=>'dimension','order'=>'dimension','group'=>'dimension')),'dimension','dimension'),
+		),
+		array(
+			'name'=>'procedencia',
+			'value'=>'$data->procedencia',
+			'filter'=>CHtml::listData(Producto::model()->findAll(array('select'=>'procedencia','order'=>'procedencia','group'=>'procedencia')),'procedencia','procedencia'),
+		),
+		array(
+			'name'=>'industria',
+			'value'=>'$data->Industria->nombre',
+			'filter'=>CHtml::listData(Industria::model()->findAll(array('order'=>'nombre')),'id','nombre'),
+		),
+		array(
+			'header'=>'stock Unidad',
+			'value'=>'$data->Almacen->stockUnidad',
+		),
+		array(
+			'header'=>'stock Paquete',
+			'value'=>'$data->Almacen->stockPaquete',
+		),
+		
+		array(
+			'header'=>'',
+			'type'=>'raw',
+			'value'=>'CHtml::link("Añadir",array("#"))'
+		),
+		/*array(
+			'name'=>'',
+			'type'=>'raw',
+			'value'=>'CHtml::link("Eliminar",array("almacen/delete","id"=>$data->id),array("confirm" => "Esta seguro de Eliminarlo?"))'
+		),*/
+		
 	)
-));
+)); 
 ?>

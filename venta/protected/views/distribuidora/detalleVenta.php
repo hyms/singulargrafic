@@ -5,8 +5,33 @@
 ?>
 
 <div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php
+$detalles=array();
+if(count($detalle)==1)
+	array_push($detalles,$detalle);
+$this->widget('ext.widgets.tabularinput.XTabularInput',array(
+		'models'=>$detalles,
+		'containerTagName'=>'table',
+		'headerTagName'=>'thead',
+		'header'=>'
+        <tr>
+            <td>'.CHtml::activeLabelEx($detalle,'idProducto').'</td>
+            <td></td>
+        </tr>
+    ',
+		'inputContainerTagName'=>'tbody',
+		'inputTagName'=>'tr',
+		'inputView'=>'_tabularInputAsTable',
+		'inputUrl'=>$this->createUrl('request/addTabularInputsAsTable'),
+		'addTemplate'=>'<tbody><tr><td colspan="3">{link}</td></tr></tbody>',
+		'addLabel'=>Yii::t('ui','Añadir Producto'),
+		'addHtmlOptions'=>array('class'=>'blue pill full-width'),
+		'removeTemplate'=>'<td>{link}</td>',
+		'removeLabel'=>Yii::t('ui','Quitar'),
+		'removeHtmlOptions'=>array('class'=>'red pill'),
+)); 
+?>
+<?php /*$form=$this->beginWidget('CActiveForm', array(
 	'id'=>'detalle-venta-detalleVenta-form',
 	'htmlOptions'=>array(
 		'class'=>'form-horizontal',
@@ -76,6 +101,6 @@
 		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
 	</div>
 
-<?php $this->endWidget(); ?>
+<?php $this->endWidget(); */?>
 
 </div><!-- form -->

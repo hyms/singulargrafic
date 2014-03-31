@@ -30,11 +30,12 @@ class Cliente extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nitCi, apellido, nombre, correo, telefono, fechaRegistro', 'required'),
-			array('nitCi, telefono', 'numerical', 'integerOnly'=>true),
-			array('nitCi, telefono', 'length', 'max'=>15),
-			array('apellido, nombre', 'length', 'max'=>30),
-			array('correo', 'length', 'max'=>100),
+			array('nitCi, apellido, nombre, correo, telefono, fechaRegistro', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio',),
+			array('nitCi, telefono', 'numerical', 'integerOnly'=>true, 'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
+			array('nitCi, telefono', 'length', 'max'=>15,'message'=>'<b>{attribute}</b> solo puede contener 15 caracteres'),
+			array('apellido, nombre', 'length', 'max'=>30,'message'=>'<b>{attribute}</b> solo puede contener 30 caracteres'),
+			array('correo', 'length', 'max'=>100,'message'=>'<b>{attribute}</b> solo puede contener 100 caracteres'),
+			array('correo','email','message'=>'La direccion de <b>{attribute}</b> no es valido'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, nitCi, apellido, nombre, correo, telefono, fechaRegistro', 'safe', 'on'=>'search'),
