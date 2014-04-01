@@ -47,6 +47,7 @@ class Almacen extends CActiveRecord
 				'Producto'=>array(self::BELONGS_TO, 'Producto', 'idProducto'),
 				
 				'MovimientoAlmacen'=>array(self::HAS_ONE, 'MovimientoAlmacen', 'idAlmacen'),
+				'DetalleVenta'=>array(self::HAS_ONE, 'DetalleVenta', 'idAlmacen'),
 		);
 	}
 
@@ -59,8 +60,8 @@ class Almacen extends CActiveRecord
 			'id' => 'ID',
 			'idProducto' => 'Producto',
 			'idTipoAlmacen' => 'Tipo Almacen',
-			'stockUnidad' => 'Stock Unidad',
-			'stockPaquete' => 'Stock Paquete',
+			'stockUnidad' => 'Unidad',
+			'stockPaquete' => 'Paquete',
 		);
 	}
 

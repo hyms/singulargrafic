@@ -7,6 +7,7 @@
  * @property integer $id
  * @property integer $idVenta
  * @property integer $idProducto
+ * @property integer $idAlmacen
  * @property integer $cantUnidad
  * @property integer $cantPaquete
  * @property integer $costoTotal
@@ -29,7 +30,7 @@ class DetalleVenta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idVenta, idProducto, costoTotal', 'required'),
+			array('idVenta, idProducto, idAlmacen, costoTotal', 'required'),
 			array('idVenta, idProducto, cantUnidad, cantPaquete, costoTotal', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -45,8 +46,9 @@ class DetalleVenta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Venta'=>array(self::BELONGS_TO, 'Venta', 'idVenta'),
+			'Venta'=>array(self::BELONGS_TO, 'VentaTmp', 'idVenta'),
 			'Producto'=>array(self::BELONGS_TO, 'Producto', 'idProducto'),
+			'Almacen'=>array(self::BELONGS_TO, 'Almacen', 'idAlmacen'),
 		);
 	}
 
@@ -59,6 +61,7 @@ class DetalleVenta extends CActiveRecord
 			'id' => 'ID',
 			'idVenta' => 'Id Venta',
 			'idProducto' => 'Id Producto',
+			'idAlmacen' => 'Id Almacen',
 			'cantUnidad' => 'Cant Unidad',
 			'cantPaquete' => 'Cant Paquete',
 			'costoTotal' => 'Costo Total',
@@ -86,6 +89,7 @@ class DetalleVenta extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('idVenta',$this->idVenta);
 		$criteria->compare('idProducto',$this->idProducto);
+		$criteria->compare('idAlmacen',$this->idAlmacen);
 		$criteria->compare('cantUnidad',$this->cantUnidad);
 		$criteria->compare('cantPaquete',$this->cantPaquete);
 		$criteria->compare('costoTotal',$this->costoTotal);

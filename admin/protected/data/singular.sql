@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-03-2014 a las 19:32:36
+-- Tiempo de generación: 01-04-2014 a las 19:18:01
 -- Versión del servidor: 5.5.35
 -- Versión de PHP: 5.4.4-14+deb7u8
 
@@ -33,14 +33,16 @@ CREATE TABLE IF NOT EXISTS `almacen` (
   `stockUnidad` int(11) NOT NULL,
   `stockPaquete` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Volcado de datos para la tabla `almacen`
 --
 
 INSERT INTO `almacen` (`id`, `idProducto`, `idTipoAlmacen`, `stockUnidad`, `stockPaquete`) VALUES
-(1, 1, 1, 1, 0);
+(2, 2, 1, 2, 1),
+(7, 1, 1, 8, 0),
+(9, 1, 2, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -114,6 +116,7 @@ CREATE TABLE IF NOT EXISTS `detalleVenta` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idVenta` int(11) NOT NULL,
   `idProducto` int(11) NOT NULL,
+  `idAlmacen` int(11) NOT NULL,
   `cantUnidad` int(11) NOT NULL,
   `cantPaquete` int(11) NOT NULL,
   `costoTotal` int(11) NOT NULL,
@@ -254,10 +257,26 @@ CREATE TABLE IF NOT EXISTS `movimientoAlmacen` (
   `unidad` int(11) NOT NULL,
   `paquete` int(11) NOT NULL,
   `estado` int(11) NOT NULL,
+  `tipo` int(11) NOT NULL,
   `fechaInicio` datetime NOT NULL,
   `fechaFinal` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Volcado de datos para la tabla `movimientoAlmacen`
+--
+
+INSERT INTO `movimientoAlmacen` (`id`, `idEmpleado`, `idAlmacen`, `unidad`, `paquete`, `estado`, `tipo`, `fechaInicio`, `fechaFinal`) VALUES
+(1, 0, 1, 1, 0, 1, 0, '2014-03-27 17:19:25', '2014-03-27 17:19:25'),
+(2, 0, 1, 0, 1, 1, 0, '2014-03-27 17:19:33', '2014-03-27 17:19:33'),
+(3, 0, 7, 0, 0, 1, 0, '2014-03-28 19:02:58', '2014-03-28 19:02:58'),
+(4, 0, 2, 0, 0, 1, 0, '2014-03-28 19:03:04', '2014-03-28 19:03:04'),
+(5, 0, 2, 0, 0, 1, 0, '2014-03-28 19:07:42', '2014-03-28 19:07:42'),
+(6, 0, 2, 0, 0, 1, 0, '2014-03-28 19:08:12', '2014-03-28 19:08:12'),
+(7, 0, 2, 0, 0, 1, 0, '2014-03-28 19:08:54', '2014-03-28 19:08:54'),
+(8, 0, 9, 0, 0, 1, 0, '2014-03-28 19:09:46', '2014-03-28 19:09:46'),
+(9, 0, 9, 0, 0, 1, 0, '2014-03-28 19:26:27', '2014-03-28 19:26:27');
 
 -- --------------------------------------------------------
 
@@ -384,6 +403,23 @@ INSERT INTO `tipoAlmacen` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `venta`
+--
+
+CREATE TABLE IF NOT EXISTS `venta` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idCliente` int(11) NOT NULL,
+  `fechaVenta` datetime NOT NULL,
+  `idEmpleado` int(11) NOT NULL,
+  `idAlmacen` int(11) NOT NULL,
+  `montoTotal` varchar(50) NOT NULL,
+  `codigo` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `ventaTmp`
 --
 
@@ -396,6 +432,7 @@ CREATE TABLE IF NOT EXISTS `ventaTmp` (
   `estado` int(11) NOT NULL,
   `idCliente` int(11) NOT NULL,
   `idEmpleado` int(11) NOT NULL,
+  `idAlmacen` int(11) NOT NULL,
   `obs` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

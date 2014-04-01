@@ -14,7 +14,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		array(
 			'name'=>'codigo',
 			'value'=>'$data->codigo',
-			'filter'=>CHtml::activeTextField($productos, 'codigo'),
+			'filter'=>CHtml::activeTextField($productos, 'codigo',array("class"=>"form-control input-sm")),
 		),
 		array(
 			'name'=>'material',
@@ -60,7 +60,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		array(
 			'header'=>'',
 			'type'=>'raw',
-			'value'=>'CHtml::link("Añadir",array("#"))'
+			'value'=>'CHtml::link("Añadir",array("#"),array("id"=>"add-sell"))'
 		),
 		/*array(
 			'name'=>'',

@@ -4,18 +4,38 @@ class DistribuidoraController extends Controller
 {
 	public function actions()
 	{
-		return array('addTabularInputs'=>array(
+		return array('newRow'=>array(
 				'class'=>'ext.actions.XTabularInputAction',
-				'modelName'=>'Person',
-				'viewName'=>'/distribuidora/_tabularInput',
+				'modelName'=>'DetalleVenta',
+				'viewName'=>'/distribuidora/_newRowDetalleVenta',
 		),);
 	}
 	
-	public function actionIndex()
+	public function actionIndex($id=null)
 	{
 		$cliente = new Cliente;
+		$empleado = Empleado::model()->findByPk('1');
 		$almacen = new Almacen;
-		$detalle = DetalleVenta::model()->findAll();
+		$detalle = DetalleVenta::model()->with('Producto')
+										->with('Producto.Color')
+										->with('Producto.Material')
+										->with('Producto.Industria')
+										->with('Venta')
+										->with('Venta.Cliente')
+										->with('Venta.Empleado')
+										->findAll();
+		
+		if($id!=null)
+		{
+			$detalle = DetalleVenta::model()->with('Producto')
+											->with('Producto.Color')
+											->with('Producto.Material')
+											->with('Producto.Industria')
+											->with('Venta')
+											->with('Venta.Cliente')
+											->with('Venta.Empleado')
+											->findAll();
+		}
 		$productos=new Producto('searchAll');
 		
 		//seccion on filter
@@ -31,54 +51,28 @@ class DistribuidoraController extends Controller
 			//$productos->almacen = $_GET['Producto']['almacen'];
 		}
 		
+		if(isset($_POST))
+		{
+			//print_r($_POST);
+		}
 		$venta = new VentaTmp;
 		$detalle = new DetalleVenta;
-		$dataProvider=new CActiveDataProvider('Producto',array(
-				'criteria'=>array(
-						'with'=>'Color',
-						'with'=>'Material',
-						'with'=>'Industria',
-				),
-				'pagination'=>array(
-						'pageSize'=>'5',
-				),));
+
 		$this->render('index',array(
-				'dataProvider'=>$dataProvider,
+				//'dataProvider'=>$dataProvider,
 				'cliente'=>$cliente,
+				'empleado'=>$empleado,
 				'ventaTmp'=>$venta,
 				'almacen'=>$almacen,
 				'productos'=>$productos,
 				'detalle'=>$detalle,
+				
+				'pagination'=>array(
+						'pageSize'=>20,
+				),
 		));
 		
 		
 	}
 
-	
-	// Uncomment the following methods and override them if needed
-	/*
-	public function filters()
-	{
-		// return the filter configuration for this controller, e.g.:
-		return array(
-			'inlineFilterName',
-			array(
-				'class'=>'path.to.FilterClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
-
-	public function actions()
-	{
-		// return external action classes, e.g.:
-		return array(
-			'action1'=>'path.to.ActionClass',
-			'action2'=>array(
-				'class'=>'path.to.AnotherActionClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
-	*/
 }

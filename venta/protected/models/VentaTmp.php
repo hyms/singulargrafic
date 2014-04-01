@@ -12,6 +12,7 @@
  * @property integer $estado
  * @property integer $idCliente
  * @property integer $idEmpleado
+ * @property integer $idAlmacen
  * @property string $obs
  */
 class VentaTmp extends CActiveRecord
@@ -38,7 +39,7 @@ class VentaTmp extends CActiveRecord
 			array('obs', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, codigo, pago, fechaVenta, fechaModifcacion, Estado, idCliente, idEmpleado, obs', 'safe', 'on'=>'search'),
+			array('id, codigo, pago, fechaVenta, fechaModifcacion, Estado, idCliente, idEmpleado, idAlmacen, obs', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,6 +72,7 @@ class VentaTmp extends CActiveRecord
 			'estado' => 'Estado',
 			'idCliente' => 'Cliente',
 			'idEmpleado' => 'Responsable',
+			'idAlmacen'=>'Almacen',
 			'obs' => 'Obs',
 		);
 	}
@@ -101,6 +103,7 @@ class VentaTmp extends CActiveRecord
 		$criteria->compare('estado',$this->Estado);
 		$criteria->compare('idCliente',$this->idCliente);
 		$criteria->compare('idEmpleado',$this->idEmpleado);
+		$criteria->compare('idAlmacen',$this->idAlmacen);
 		$criteria->compare('obs',$this->obs,true);
 
 		return new CActiveDataProvider($this, array(

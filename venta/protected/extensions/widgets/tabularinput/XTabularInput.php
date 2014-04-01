@@ -196,7 +196,7 @@ class XTabularInput extends CWidget
 	/**
 	 * Default CSS class for the widget container.
 	 */
-	public $containerCssClass='tabular-container';
+	public $containerCssClass='table';
 	/**
 	 * Default CSS class for container that holds all inputs.
 	 */
@@ -276,7 +276,7 @@ class XTabularInput extends CWidget
 		if($this->header)
 			echo CHtml::tag($this->headerTagName, $this->headerHtmlOptions, $this->header);
 		echo CHtml::openTag($this->inputContainerTagName, $this->inputContainerHtmlOptions);
-		$this->renderContent();
+		//$this->renderContent();
 		echo CHtml::closeTag($this->inputContainerTagName);
 		echo $this->getAddLink();
 		echo CHtml::closeTag($this->containerTagName);
@@ -305,7 +305,7 @@ class XTabularInput extends CWidget
 	$("#{$this->id} .{$this->addCssClass}").click(function(event){
 		event.preventDefault();
 		var input = $(this).parents(".{$this->containerCssClass}:first").children(".{$this->inputContainerCssClass}");
-		var index = input.find(".{$this->indexCssClass}").length>0 ? input.find(".{$this->indexCssClass}").max()+1 : 0;
+		var index = input.find(".{$this->indexCssClass}").length>=0 ? input.find(".{$this->indexCssClass}").max()+1 : 0;
 		$.ajax({
 			success: function(html){
 				input.append('{$openInputTag}'+html+'{$this->getRemoveLinkAndIndexInput("'+index+'")}{$closeInputTag}');

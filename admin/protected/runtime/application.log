@@ -4857,3 +4857,21 @@ REQUEST_URI=/singulargrafic/admin/index.php/empresa/sucursal/1
 in C:\wamp\www\singulargrafic\admin\protected\views\empresa\empresa.php (166)
 in C:\wamp\www\singulargrafic\admin\protected\controllers\EmpresaController.php (73)
 in C:\wamp\www\singulargrafic\admin\index.php (13)
+2014/04/01 14:50:41 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/admin/protected/controllers/AlmacenController.php (163)
+in /var/www/singular/admin/index.php (13)
+2014/04/01 14:50:41 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/admin/protected/controllers/AlmacenController.php (163)
+in /var/www/singular/admin/index.php (13)
+2014/04/01 14:50:41 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/admin/protected/controllers/AlmacenController.php (163)
+in /var/www/singular/admin/index.php (13)
+2014/04/01 14:50:43 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/admin/protected/controllers/AlmacenController.php (163)
+in /var/www/singular/admin/index.php (13)
+2014/04/01 14:50:43 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/admin/protected/controllers/AlmacenController.php (163)
+in /var/www/singular/admin/index.php (13)
+2014/04/01 14:50:43 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/admin/protected/controllers/AlmacenController.php (163)
+in /var/www/singular/admin/index.php (13)

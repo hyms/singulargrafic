@@ -29,11 +29,11 @@
 		<?php echo $form->error($cliente,'apellido'); ?>
 	</div>
 	<div class="form-group col-md-3">
-		<?php echo $form->labelEx($cliente,'nombre',array('class'=>'control-label')); ?>
+		<?php echo $form->labelEx($empleado,'nombres',array('class'=>'control-label')); ?>
 		<div >
-			<?php echo $form->textField($cliente,'nombre',array('class'=>'form-control')); ?>
+			<?php echo $form->textField($empleado,'nombres',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($cliente,'nombre'); ?>
+		<?php echo $form->error($empleado,'nombres'); ?>
 	</div>
 	<div class="form-group col-md-3">
 		<?php echo $form->labelEx($ventaTmp,'fechaModifcacion',array('class'=>'control-label')); ?>
