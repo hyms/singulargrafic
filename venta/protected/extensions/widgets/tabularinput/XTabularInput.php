@@ -301,6 +301,7 @@ class XTabularInput extends CWidget
 
 		// register inline javascript
 		$script =
+		
 <<<SCRIPT
 	$("#{$this->id} .{$this->addCssClass}").click(function(event){
 		event.preventDefault();

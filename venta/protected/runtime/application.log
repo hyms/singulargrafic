@@ -8765,3 +8765,2327 @@ Stack trace:
 REQUEST_URI=/singular/venta/index.php/distribuidora/index
 HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/index
 ---
+2014/04/01 19:24:48 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:24:48 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:24:48 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:24:51 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:24:51 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:24:51 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:24:55 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:24:55 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:24:55 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:24:57 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:24:57 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:24:57 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:24:59 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:24:59 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:24:59 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:01 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:01 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:01 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:02 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:02 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:02 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:03 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:03 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:03 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:05 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:05 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:05 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:15 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:15 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:15 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:17 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:17 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/01 19:25:17 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:11 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:11 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:11 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:13 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:13 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:13 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:15 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:15 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:15 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:18 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:18 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:18 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:22 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:22 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:22 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:24 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:24 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:24 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:25 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:25 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 15:44:25 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:11:29 [error] [exception.CException] exception 'CException' with message 'CActiveForm and its behaviors do not have a method or closure named "activeTextField".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/ventaProducto.php(20): CComponent->__call('activeTextField', Array)
+#1 /var/www/singular/venta/protected/views/distribuidora/ventaProducto.php(20): CActiveForm->activeTextField(Object(Cliente), 'nitCi', Array)
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/distribuidora/index.php(15): CController->renderPartial('ventaProducto', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#11 [internal function]: DistribuidoraController->actionIndex(NULL)
+#12 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#13 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#14 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/framework/web/CWebApplication.php(282): CController->run('')
+#18 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora')
+#19 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/singular/venta/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 16:11:31 [error] [exception.CException] exception 'CException' with message 'CActiveForm and its behaviors do not have a method or closure named "activeTextField".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/ventaProducto.php(20): CComponent->__call('activeTextField', Array)
+#1 /var/www/singular/venta/protected/views/distribuidora/ventaProducto.php(20): CActiveForm->activeTextField(Object(Cliente), 'nitCi', Array)
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/distribuidora/index.php(15): CController->renderPartial('ventaProducto', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#11 [internal function]: DistribuidoraController->actionIndex(NULL)
+#12 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#13 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#14 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/framework/web/CWebApplication.php(282): CController->run('')
+#18 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora')
+#19 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/singular/venta/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 16:41:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "distribucion/ajaxCliente".' in /var/www/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribucion/aj...')
+#1 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/singular/venta/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/singular/venta/index.php/distribucion/ajaxCliente?nitCi=123
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 16:41:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "distribucion/ajaxCliente".' in /var/www/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribucion/aj...')
+#1 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/singular/venta/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/singular/venta/index.php/distribucion/ajaxCliente?nitCi=123
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 16:42:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "distribucion/ajaxCliente".' in /var/www/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribucion/aj...')
+#1 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/singular/venta/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/singular/venta/index.php/distribucion/ajaxCliente?nitCi=112
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 16:43:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "distribucion/ajaxCliente".' in /var/www/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribucion/aj...')
+#1 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/singular/venta/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/singular/venta/index.php/distribucion/ajaxCliente?nitCi=
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 16:43:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "distribucion/ajaxCliente".' in /var/www/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribucion/aj...')
+#1 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/singular/venta/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/singular/venta/index.php/distribucion/ajaxCliente?nitCi=123
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 16:44:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "distribucion/ajaxCliente".' in /var/www/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribucion/aj...')
+#1 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/singular/venta/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/singular/venta/index.php/distribucion/ajaxCliente?nitCi=123
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 16:44:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "distribucion/ajaxCliente".' in /var/www/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribucion/aj...')
+#1 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/singular/venta/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/singular/venta/index.php/distribucion/ajaxCliente?nitCi=123
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 16:44:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "distribucion/ajaxCliente".' in /var/www/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribucion/aj...')
+#1 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/singular/venta/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/singular/venta/index.php/distribucion/ajaxCliente?nitCi=123
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 16:44:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/singular/venta/protected/controllers/DistribuidoraController.php:101
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(80): DistribuidoraController->verifyModel(NULL)
+#1 [internal function]: DistribuidoraController->actionAjaxCliente('123')
+#2 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#3 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/venta/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=123
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 16:46:08 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /var/www/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#2 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#3 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#4 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#5 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /var/www/singular/venta/index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente
+---
+2014/04/02 16:46:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/singular/venta/protected/controllers/DistribuidoraController.php:101
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(80): DistribuidoraController->verifyModel(NULL)
+#1 [internal function]: DistribuidoraController->actionAjaxCliente('123')
+#2 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#3 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/venta/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=123
+---
+2014/04/02 16:47:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/singular/venta/protected/controllers/DistribuidoraController.php:101
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(80): DistribuidoraController->verifyModel(NULL)
+#1 [internal function]: DistribuidoraController->actionAjaxCliente('123')
+#2 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#3 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/venta/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=123
+---
+2014/04/02 16:47:30 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /var/www/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#2 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#3 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#4 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#5 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /var/www/singular/venta/index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente
+---
+2014/04/02 16:51:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/singular/venta/protected/controllers/DistribuidoraController.php:101
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(80): DistribuidoraController->verifyModel(NULL)
+#1 [internal function]: DistribuidoraController->actionAjaxCliente('123')
+#2 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#3 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/venta/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=123
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 16:51:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/singular/venta/protected/controllers/DistribuidoraController.php:101
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(80): DistribuidoraController->verifyModel(NULL)
+#1 [internal function]: DistribuidoraController->actionAjaxCliente('123')
+#2 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#3 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/venta/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=123
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 16:51:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/singular/venta/protected/controllers/DistribuidoraController.php:101
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(80): DistribuidoraController->verifyModel(NULL)
+#1 [internal function]: DistribuidoraController->actionAjaxCliente('123')
+#2 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#3 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/venta/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=123
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 16:52:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/singular/venta/protected/controllers/DistribuidoraController.php:101
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(80): DistribuidoraController->verifyModel(NULL)
+#1 [internal function]: DistribuidoraController->actionAjaxCliente('123')
+#2 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#3 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/venta/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=123
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 16:52:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/singular/venta/protected/controllers/DistribuidoraController.php:101
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(80): DistribuidoraController->verifyModel(NULL)
+#1 [internal function]: DistribuidoraController->actionAjaxCliente('123')
+#2 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#3 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/venta/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=123
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 16:55:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/singular/venta/protected/controllers/DistribuidoraController.php:101
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(80): DistribuidoraController->verifyModel(NULL)
+#1 [internal function]: DistribuidoraController->actionAjaxCliente('123')
+#2 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#3 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/venta/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=123
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 16:55:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/singular/venta/protected/controllers/DistribuidoraController.php:101
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(80): DistribuidoraController->verifyModel(NULL)
+#1 [internal function]: DistribuidoraController->actionAjaxCliente('123')
+#2 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#3 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/venta/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=123
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 16:55:59 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:55:59 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:55:59 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:56:01 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:56:01 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:56:01 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:56:02 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:56:02 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:56:02 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:58:42 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:58:42 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:58:42 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:58:44 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:58:44 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:58:44 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:58:45 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:58:45 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 16:58:45 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 17:14:07 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 17:14:15 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 17:15:05 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora
+---
+2014/04/02 17:15:49 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora
+---
+2014/04/02 17:15:58 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 17:17:13 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 17:17:40 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 17:18:23 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 17:21:37 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 17:25:11 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora
+---
+2014/04/02 17:37:59 [error] [exception.CException] exception 'CException' with message 'Property "DistribuidoraController.containerCssClass" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/producto.php(79): CComponent->__get('containerCssCla...')
+#1 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#2 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#3 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#4 /var/www/singular/venta/protected/views/distribuidora/index.php(18): CController->renderPartial('producto', Array)
+#5 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#6 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#7 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#9 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#10 [internal function]: DistribuidoraController->actionIndex(NULL)
+#11 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#12 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#13 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#14 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#15 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/framework/web/CWebApplication.php(282): CController->run('index')
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/i...')
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singular/venta/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 17:38:00 [error] [exception.CException] exception 'CException' with message 'Property "DistribuidoraController.containerCssClass" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/producto.php(79): CComponent->__get('containerCssCla...')
+#1 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#2 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#3 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#4 /var/www/singular/venta/protected/views/distribuidora/index.php(18): CController->renderPartial('producto', Array)
+#5 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#6 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#7 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#9 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#10 [internal function]: DistribuidoraController->actionIndex(NULL)
+#11 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#12 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#13 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#14 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#15 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/framework/web/CWebApplication.php(282): CController->run('index')
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/i...')
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singular/venta/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 17:40:07 [error] [exception.CException] exception 'CException' with message 'Property "DistribuidoraController.containerCssClass" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/producto.php(79): CComponent->__get('containerCssCla...')
+#1 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#2 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#3 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#4 /var/www/singular/venta/protected/views/distribuidora/index.php(18): CController->renderPartial('producto', Array)
+#5 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#6 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#7 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#9 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#10 [internal function]: DistribuidoraController->actionIndex(NULL)
+#11 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#12 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#13 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#14 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#15 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/framework/web/CWebApplication.php(282): CController->run('index')
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/i...')
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singular/venta/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 17:43:58 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getRemoveLinkAndIndexInput".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): CComponent->__call('getRemoveLinkAn...', Array)
+#1 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): DistribuidoraController->getRemoveLinkAndIndexInput(''+index+'')
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/distribuidora/index.php(18): CController->renderPartial('producto', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#11 [internal function]: DistribuidoraController->actionIndex(NULL)
+#12 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#13 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#14 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/framework/web/CWebApplication.php(282): CController->run('index')
+#18 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/i...')
+#19 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/singular/venta/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 17:44:00 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getRemoveLinkAndIndexInput".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): CComponent->__call('getRemoveLinkAn...', Array)
+#1 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): DistribuidoraController->getRemoveLinkAndIndexInput(''+index+'')
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/distribuidora/index.php(18): CController->renderPartial('producto', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#11 [internal function]: DistribuidoraController->actionIndex(NULL)
+#12 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#13 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#14 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/framework/web/CWebApplication.php(282): CController->run('index')
+#18 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/i...')
+#19 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/singular/venta/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 17:44:01 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getRemoveLinkAndIndexInput".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): CComponent->__call('getRemoveLinkAn...', Array)
+#1 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): DistribuidoraController->getRemoveLinkAndIndexInput(''+index+'')
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/distribuidora/index.php(18): CController->renderPartial('producto', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#11 [internal function]: DistribuidoraController->actionIndex(NULL)
+#12 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#13 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#14 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/framework/web/CWebApplication.php(282): CController->run('index')
+#18 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/i...')
+#19 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/singular/venta/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 17:44:27 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getRemoveLinkAndIndexInput".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): CComponent->__call('getRemoveLinkAn...', Array)
+#1 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): DistribuidoraController->getRemoveLinkAndIndexInput(''+index+'')
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/distribuidora/index.php(18): CController->renderPartial('producto', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#11 [internal function]: DistribuidoraController->actionIndex(NULL)
+#12 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#13 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#14 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/framework/web/CWebApplication.php(282): CController->run('index')
+#18 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/i...')
+#19 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/singular/venta/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 17:45:35 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getRemoveLinkAndIndexInput".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): CComponent->__call('getRemoveLinkAn...', Array)
+#1 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): DistribuidoraController->getRemoveLinkAndIndexInput(''+index+'')
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/distribuidora/index.php(18): CController->renderPartial('producto', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#11 [internal function]: DistribuidoraController->actionIndex(NULL)
+#12 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#13 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#14 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/framework/web/CWebApplication.php(282): CController->run('index')
+#18 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/i...')
+#19 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/singular/venta/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 17:45:36 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getRemoveLinkAndIndexInput".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): CComponent->__call('getRemoveLinkAn...', Array)
+#1 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): DistribuidoraController->getRemoveLinkAndIndexInput(''+index+'')
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/distribuidora/index.php(18): CController->renderPartial('producto', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#11 [internal function]: DistribuidoraController->actionIndex(NULL)
+#12 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#13 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#14 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/framework/web/CWebApplication.php(282): CController->run('index')
+#18 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/i...')
+#19 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/singular/venta/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 17:46:27 [error] [exception.CException] exception 'CException' with message 'Property "DistribuidoraController.removeLabel" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(104): CComponent->__get('removeLabel')
+#1 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): DistribuidoraController->getRemoveLinkAndIndexInput(''+index+'')
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/distribuidora/index.php(18): CController->renderPartial('producto', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#11 [internal function]: DistribuidoraController->actionIndex(NULL)
+#12 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#13 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#14 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/framework/web/CWebApplication.php(282): CController->run('index')
+#18 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/i...')
+#19 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/singular/venta/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 17:48:05 [error] [exception.CException] exception 'CException' with message 'Property "DistribuidoraController.indexCssClass" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(104): CComponent->__get('indexCssClass')
+#1 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): DistribuidoraController->getRemoveLinkAndIndexInput(''+index+'')
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/distribuidora/index.php(18): CController->renderPartial('producto', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#11 [internal function]: DistribuidoraController->actionIndex(NULL)
+#12 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#13 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#14 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/framework/web/CWebApplication.php(282): CController->run('index')
+#18 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/i...')
+#19 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/singular/venta/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 18:08:28 [error] [php] Illegal string offset 'href' (/var/www/framework/web/helpers/CHtml.php:410)
+Stack trace:
+#0 /var/www/framework/web/CBaseController.php(126): require()
+#1 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#2 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#3 /var/www/singular/venta/protected/views/distribuidora/index.php(18): DistribuidoraController->renderPartial()
+#4 /var/www/framework/web/CBaseController.php(126): require()
+#5 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#6 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#7 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#8 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#9 unknown(0): DistribuidoraController->actionIndex()
+#10 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#11 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#12 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#13 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#14 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#15 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#16 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#17 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (104)
+in /var/www/singular/venta/protected/views/distribuidora/producto.php (83)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (18)
+2014/04/02 18:16:33 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 18:16:41 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 18:17:08 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora
+---
+2014/04/02 18:17:40 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora
+---
+2014/04/02 18:17:46 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora
+---
+2014/04/02 18:23:02 [error] [exception.CException] exception 'CException' with message 'Property "DistribuidoraController.inputCssClass" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/producto.php(97): CComponent->__get('inputCssClass')
+#1 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#2 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#3 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#4 /var/www/singular/venta/protected/views/distribuidora/index.php(18): CController->renderPartial('producto', Array)
+#5 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#6 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#7 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#9 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#10 [internal function]: DistribuidoraController->actionIndex(NULL)
+#11 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#12 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#13 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#14 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#15 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/framework/web/CWebApplication.php(282): CController->run('')
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora')
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singular/venta/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora
+---
+2014/04/02 18:23:52 [error] [exception.CException] exception 'CException' with message 'Property "DistribuidoraController.inputContainerCssClass" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/producto.php(98): CComponent->__get('inputContainerC...')
+#1 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#2 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#3 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#4 /var/www/singular/venta/protected/views/distribuidora/index.php(18): CController->renderPartial('producto', Array)
+#5 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#6 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#7 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#9 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#10 [internal function]: DistribuidoraController->actionIndex(NULL)
+#11 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#12 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#13 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#14 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#15 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/framework/web/CWebApplication.php(282): CController->run('')
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora')
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singular/venta/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora
+---
+2014/04/02 18:31:39 [error] [php] Undefined variable: XTabularInput (/var/www/singular/venta/protected/views/distribuidora/producto.php:83)
+Stack trace:
+#0 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#1 /var/www/singular/venta/protected/views/distribuidora/index.php(18): DistribuidoraController->renderPartial()
+#2 /var/www/framework/web/CBaseController.php(126): require()
+#3 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#4 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#5 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#6 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#7 unknown(0): DistribuidoraController->actionIndex()
+#8 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#9 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#11 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#12 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#13 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#14 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#15 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora
+in /var/www/singular/venta/protected/views/distribuidora/producto.php (83)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (18)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 18:50:08 [error] [php] include(form.php): failed to open stream: No such file or directory (/var/www/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php(49): spl_autoload_call()
+#1 /var/www/framework/web/CBaseController.php(126): require()
+#2 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#3 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#4 /var/www/singular/venta/protected/views/distribuidora/index.php(22): DistribuidoraController->renderPartial()
+#5 /var/www/framework/web/CBaseController.php(126): require()
+#6 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#7 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#8 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#9 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#10 unknown(0): DistribuidoraController->actionIndex()
+#11 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#12 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#13 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#14 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#15 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#16 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora
+in /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php (49)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (22)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 18:50:38 [error] [exception.CException] exception 'CException' with message 'CActiveForm and its behaviors do not have a method or closure named "hidden".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php(49): CComponent->__call('hidden', Array)
+#1 /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php(49): CActiveForm->hidden('', Array)
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/distribuidora/index.php(22): CController->renderPartial('detalleVenta', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#11 [internal function]: DistribuidoraController->actionIndex(NULL)
+#12 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#13 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#14 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/framework/web/CWebApplication.php(282): CController->run('')
+#18 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora')
+#19 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/singular/venta/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora
+---
+2014/04/02 18:50:50 [error] [exception.CException] exception 'CException' with message 'CActiveForm and its behaviors do not have a method or closure named "Hidden".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php(49): CComponent->__call('Hidden', Array)
+#1 /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php(49): CActiveForm->Hidden('', Array)
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/distribuidora/index.php(22): CController->renderPartial('detalleVenta', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#11 [internal function]: DistribuidoraController->actionIndex(NULL)
+#12 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#13 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#14 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/framework/web/CWebApplication.php(282): CController->run('')
+#18 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora')
+#19 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/singular/venta/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora
+---
+2014/04/02 18:51:16 [error] [php] strpos() expects parameter 1 to be string, array given (/var/www/framework/web/helpers/CHtml.php:2477)
+Stack trace:
+#0 /var/www/framework/web/helpers/CHtml.php(1608): resolveNameID()
+#1 /var/www/framework/web/widgets/CActiveForm.php(756): activeHiddenField()
+#2 /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php(49): CActiveForm->hiddenField()
+#3 /var/www/framework/web/CBaseController.php(126): require()
+#4 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#5 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#6 /var/www/singular/venta/protected/views/distribuidora/index.php(22): DistribuidoraController->renderPartial()
+#7 /var/www/framework/web/CBaseController.php(126): require()
+#8 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#9 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#10 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#11 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#12 unknown(0): DistribuidoraController->actionIndex()
+#13 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#14 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#15 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#16 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#17 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#18 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#19 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#20 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#21 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora
+in /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php (49)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (22)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 18:51:56 [error] [php] htmlspecialchars() expects parameter 1 to be string, array given (/var/www/framework/web/helpers/CHtml.php:103)
+Stack trace:
+#0 /var/www/framework/web/helpers/CHtml.php(158): renderAttributes()
+#1 /var/www/framework/web/helpers/CHtml.php(1351): tag()
+#2 /var/www/framework/web/helpers/CHtml.php(728): inputField()
+#3 /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php(49): hiddenField()
+#4 /var/www/framework/web/CBaseController.php(126): require()
+#5 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#6 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#7 /var/www/singular/venta/protected/views/distribuidora/index.php(22): DistribuidoraController->renderPartial()
+#8 /var/www/framework/web/CBaseController.php(126): require()
+#9 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#10 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#11 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#12 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#13 unknown(0): DistribuidoraController->actionIndex()
+#14 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#15 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#16 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#17 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#18 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#19 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#20 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#21 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora
+in /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php (49)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (22)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 18:52:11 [error] [php] htmlspecialchars() expects parameter 1 to be string, array given (/var/www/framework/web/helpers/CHtml.php:103)
+Stack trace:
+#0 /var/www/framework/web/helpers/CHtml.php(158): renderAttributes()
+#1 /var/www/framework/web/helpers/CHtml.php(1351): tag()
+#2 /var/www/framework/web/helpers/CHtml.php(728): inputField()
+#3 /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php(49): hiddenField()
+#4 /var/www/framework/web/CBaseController.php(126): require()
+#5 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#6 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#7 /var/www/singular/venta/protected/views/distribuidora/index.php(22): DistribuidoraController->renderPartial()
+#8 /var/www/framework/web/CBaseController.php(126): require()
+#9 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#10 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#11 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#12 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#13 unknown(0): DistribuidoraController->actionIndex()
+#14 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#15 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#16 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#17 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#18 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#19 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#20 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#21 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora
+in /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php (49)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (22)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 18:52:21 [error] [exception.CException] exception 'CException' with message 'CActiveForm and its behaviors do not have a method or closure named "submitButton".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php(52): CComponent->__call('submitButton', Array)
+#1 /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php(52): CActiveForm->submitButton('Finalizar', Array)
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/distribuidora/index.php(22): CController->renderPartial('detalleVenta', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#11 [internal function]: DistribuidoraController->actionIndex(NULL)
+#12 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#13 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#14 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/framework/web/CWebApplication.php(282): CController->run('')
+#18 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora')
+#19 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/singular/venta/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora
+---
+2014/04/02 18:53:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/singular/venta/protected/controllers/DistribuidoraController.php:98
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(80): DistribuidoraController->verifyModel(NULL)
+#1 [internal function]: DistribuidoraController->actionAjaxCliente('123')
+#2 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#3 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/venta/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=123
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora
+---
+2014/04/02 18:57:13 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getRemoveLinkAndIndexInput".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): CComponent->__call('getRemoveLinkAn...', Array)
+#1 /var/www/singular/venta/protected/views/distribuidora/producto.php(83): DistribuidoraController->getRemoveLinkAndIndexInput(''+index+'')
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/distribuidora/index.php(18): CController->renderPartial('producto', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#11 [internal function]: DistribuidoraController->actionIndex(NULL)
+#12 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#13 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#14 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#16 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/framework/web/CWebApplication.php(282): CController->run('')
+#18 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora')
+#19 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/singular/venta/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora
+---
+2014/04/02 19:01:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/singular/venta/protected/controllers/DistribuidoraController.php:98
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(80): DistribuidoraController->verifyModel(NULL)
+#1 [internal function]: DistribuidoraController->actionAjaxCliente('12')
+#2 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#3 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/venta/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=12
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 19:02:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in /var/www/singular/venta/protected/controllers/DistribuidoraController.php:98
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(80): DistribuidoraController->verifyModel(NULL)
+#1 [internal function]: DistribuidoraController->actionAjaxCliente('122')
+#2 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#3 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singular/venta/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=122
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 19:03:33 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:33 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:33 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:35 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:35 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:35 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:36 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:36 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:36 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:38 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:38 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:38 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:39 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:39 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:39 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:41 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:41 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:41 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:42 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:42 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:42 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:44 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:44 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:44 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:45 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:45 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:45 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:47 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:47 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:47 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:51 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:51 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:51 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:53 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:53 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:53 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:56 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:56 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:56 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:57 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:57 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:57 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:58 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:58 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:58 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:59 [warning] [application] Failed to set unsafe attribute "material" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:59 [warning] [application] Failed to set unsafe attribute "color" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:03:59 [warning] [application] Failed to set unsafe attribute "industria" of "Producto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/04/02 19:07:01 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in /var/www/singular/venta/protected/extensions/actions/XTabularInputAction.php:64
+Stack trace:
+#0 /var/www/framework/web/actions/CAction.php(76): XTabularInputAction->run()
+#1 /var/www/framework/web/CController.php(308): CAction->runWithParams(Array)
+#2 /var/www/framework/web/CController.php(286): CController->runAction(Object(XTabularInputAction))
+#3 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(XTabularInputAction), Array)
+#4 /var/www/framework/web/CWebApplication.php(282): CController->run('newRow')
+#5 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/n...')
+#6 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /var/www/singular/venta/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/newRow
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/index
+---
+2014/04/02 19:10:26 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 [internal function]: DistribuidoraController->actionAddDetalle(NULL)
+#3 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/venta/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480226402
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:10:27 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 [internal function]: DistribuidoraController->actionAddDetalle(NULL)
+#3 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/venta/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480227507
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:10:27 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 [internal function]: DistribuidoraController->actionAddDetalle(NULL)
+#3 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/venta/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480227699
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:10:27 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 [internal function]: DistribuidoraController->actionAddDetalle(NULL)
+#3 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/venta/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480227906
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:10:28 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 [internal function]: DistribuidoraController->actionAddDetalle(NULL)
+#3 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/venta/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480228106
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:10:28 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 [internal function]: DistribuidoraController->actionAddDetalle(NULL)
+#3 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/venta/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480228314
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:10:28 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 [internal function]: DistribuidoraController->actionAddDetalle(NULL)
+#3 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/venta/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480228507
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:10:28 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 [internal function]: DistribuidoraController->actionAddDetalle(NULL)
+#3 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/venta/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480228730
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:10:29 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 [internal function]: DistribuidoraController->actionAddDetalle(NULL)
+#3 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/venta/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480228970
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:10:30 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 [internal function]: DistribuidoraController->actionAddDetalle(NULL)
+#3 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/venta/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480230682
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:10:30 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 [internal function]: DistribuidoraController->actionAddDetalle(NULL)
+#3 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/venta/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480230898
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:10:54 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 [internal function]: DistribuidoraController->actionAddDetalle(NULL)
+#3 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/venta/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480254600
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:10:55 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 [internal function]: DistribuidoraController->actionAddDetalle(NULL)
+#3 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/venta/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480255132
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:10:55 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 [internal function]: DistribuidoraController->actionAddDetalle(NULL)
+#3 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/venta/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480255330
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:10:55 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 [internal function]: DistribuidoraController->actionAddDetalle(NULL)
+#3 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singular/venta/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480255522
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:11:33 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#3 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#7 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#8 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/singular/venta/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480293901
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:13:17 [error] [exception.CException] exception 'CException' with message 'DistribuidoraController and its behaviors do not have a method or closure named "getController".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): CComponent->__call('getController', Array)
+#1 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(89): DistribuidoraController->getController()
+#2 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#3 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/framework/web/CWebApplication.php(282): CController->run('addDetalle')
+#7 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#8 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/singular/venta/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/addDetalle?index=-Infinity&_=1396480397043
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/
+---
+2014/04/02 19:20:29 [error] [php] Use of undefined constant id - assumed 'id' (/var/www/framework/base/CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 /var/www/framework/zii/widgets/grid/CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 /var/www/framework/zii/widgets/grid/CGridView.php(616): CDataColumn->renderDataCell()
+#2 /var/www/framework/zii/widgets/grid/CGridView.php(572): CGridView->renderTableRow()
+#3 /var/www/framework/zii/widgets/grid/CGridView.php(482): CGridView->renderTableBody()
+#4 /var/www/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#7 /var/www/framework/zii/widgets/CBaseListView.php(135): CGridView->renderContent()
+#8 /var/www/framework/web/CBaseController.php(173): CGridView->run()
+#9 /var/www/singular/venta/protected/views/distribuidora/producto.php(72): DistribuidoraController->widget()
+#10 /var/www/framework/web/CBaseController.php(126): require()
+#11 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#12 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#13 /var/www/singular/venta/protected/views/distribuidora/index.php(18): DistribuidoraController->renderPartial()
+#14 /var/www/framework/web/CBaseController.php(126): require()
+#15 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#16 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#17 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#18 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#19 unknown(0): DistribuidoraController->actionIndex()
+#20 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#21 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#22 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#23 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#24 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#25 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#26 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#27 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#28 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+in /var/www/singular/venta/protected/views/distribuidora/producto.php (72)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (18)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 19:20:30 [error] [php] Use of undefined constant id - assumed 'id' (/var/www/framework/base/CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 /var/www/framework/zii/widgets/grid/CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 /var/www/framework/zii/widgets/grid/CGridView.php(616): CDataColumn->renderDataCell()
+#2 /var/www/framework/zii/widgets/grid/CGridView.php(572): CGridView->renderTableRow()
+#3 /var/www/framework/zii/widgets/grid/CGridView.php(482): CGridView->renderTableBody()
+#4 /var/www/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#7 /var/www/framework/zii/widgets/CBaseListView.php(135): CGridView->renderContent()
+#8 /var/www/framework/web/CBaseController.php(173): CGridView->run()
+#9 /var/www/singular/venta/protected/views/distribuidora/producto.php(72): DistribuidoraController->widget()
+#10 /var/www/framework/web/CBaseController.php(126): require()
+#11 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#12 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#13 /var/www/singular/venta/protected/views/distribuidora/index.php(18): DistribuidoraController->renderPartial()
+#14 /var/www/framework/web/CBaseController.php(126): require()
+#15 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#16 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#17 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#18 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#19 unknown(0): DistribuidoraController->actionIndex()
+#20 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#21 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#22 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#23 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#24 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#25 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#26 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#27 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#28 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+in /var/www/singular/venta/protected/views/distribuidora/producto.php (72)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (18)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 19:20:31 [error] [php] Use of undefined constant id - assumed 'id' (/var/www/framework/base/CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 /var/www/framework/zii/widgets/grid/CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 /var/www/framework/zii/widgets/grid/CGridView.php(616): CDataColumn->renderDataCell()
+#2 /var/www/framework/zii/widgets/grid/CGridView.php(572): CGridView->renderTableRow()
+#3 /var/www/framework/zii/widgets/grid/CGridView.php(482): CGridView->renderTableBody()
+#4 /var/www/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#7 /var/www/framework/zii/widgets/CBaseListView.php(135): CGridView->renderContent()
+#8 /var/www/framework/web/CBaseController.php(173): CGridView->run()
+#9 /var/www/singular/venta/protected/views/distribuidora/producto.php(72): DistribuidoraController->widget()
+#10 /var/www/framework/web/CBaseController.php(126): require()
+#11 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#12 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#13 /var/www/singular/venta/protected/views/distribuidora/index.php(18): DistribuidoraController->renderPartial()
+#14 /var/www/framework/web/CBaseController.php(126): require()
+#15 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#16 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#17 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#18 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#19 unknown(0): DistribuidoraController->actionIndex()
+#20 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#21 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#22 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#23 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#24 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#25 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#26 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#27 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#28 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+in /var/www/singular/venta/protected/views/distribuidora/producto.php (72)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (18)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 19:20:31 [error] [php] Use of undefined constant id - assumed 'id' (/var/www/framework/base/CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 /var/www/framework/zii/widgets/grid/CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 /var/www/framework/zii/widgets/grid/CGridView.php(616): CDataColumn->renderDataCell()
+#2 /var/www/framework/zii/widgets/grid/CGridView.php(572): CGridView->renderTableRow()
+#3 /var/www/framework/zii/widgets/grid/CGridView.php(482): CGridView->renderTableBody()
+#4 /var/www/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#7 /var/www/framework/zii/widgets/CBaseListView.php(135): CGridView->renderContent()
+#8 /var/www/framework/web/CBaseController.php(173): CGridView->run()
+#9 /var/www/singular/venta/protected/views/distribuidora/producto.php(72): DistribuidoraController->widget()
+#10 /var/www/framework/web/CBaseController.php(126): require()
+#11 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#12 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#13 /var/www/singular/venta/protected/views/distribuidora/index.php(18): DistribuidoraController->renderPartial()
+#14 /var/www/framework/web/CBaseController.php(126): require()
+#15 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#16 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#17 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#18 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#19 unknown(0): DistribuidoraController->actionIndex()
+#20 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#21 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#22 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#23 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#24 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#25 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#26 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#27 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#28 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+in /var/www/singular/venta/protected/views/distribuidora/producto.php (72)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (18)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 19:20:31 [error] [php] Use of undefined constant id - assumed 'id' (/var/www/framework/base/CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 /var/www/framework/zii/widgets/grid/CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 /var/www/framework/zii/widgets/grid/CGridView.php(616): CDataColumn->renderDataCell()
+#2 /var/www/framework/zii/widgets/grid/CGridView.php(572): CGridView->renderTableRow()
+#3 /var/www/framework/zii/widgets/grid/CGridView.php(482): CGridView->renderTableBody()
+#4 /var/www/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#7 /var/www/framework/zii/widgets/CBaseListView.php(135): CGridView->renderContent()
+#8 /var/www/framework/web/CBaseController.php(173): CGridView->run()
+#9 /var/www/singular/venta/protected/views/distribuidora/producto.php(72): DistribuidoraController->widget()
+#10 /var/www/framework/web/CBaseController.php(126): require()
+#11 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#12 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#13 /var/www/singular/venta/protected/views/distribuidora/index.php(18): DistribuidoraController->renderPartial()
+#14 /var/www/framework/web/CBaseController.php(126): require()
+#15 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#16 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#17 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#18 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#19 unknown(0): DistribuidoraController->actionIndex()
+#20 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#21 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#22 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#23 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#24 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#25 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#26 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#27 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#28 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+in /var/www/singular/venta/protected/views/distribuidora/producto.php (72)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (18)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 19:21:02 [error] [php] Use of undefined constant id - assumed 'id' (/var/www/framework/base/CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 /var/www/framework/zii/widgets/grid/CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 /var/www/framework/zii/widgets/grid/CGridView.php(616): CDataColumn->renderDataCell()
+#2 /var/www/framework/zii/widgets/grid/CGridView.php(572): CGridView->renderTableRow()
+#3 /var/www/framework/zii/widgets/grid/CGridView.php(482): CGridView->renderTableBody()
+#4 /var/www/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#7 /var/www/framework/zii/widgets/CBaseListView.php(135): CGridView->renderContent()
+#8 /var/www/framework/web/CBaseController.php(173): CGridView->run()
+#9 /var/www/singular/venta/protected/views/distribuidora/producto.php(72): DistribuidoraController->widget()
+#10 /var/www/framework/web/CBaseController.php(126): require()
+#11 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#12 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#13 /var/www/singular/venta/protected/views/distribuidora/index.php(18): DistribuidoraController->renderPartial()
+#14 /var/www/framework/web/CBaseController.php(126): require()
+#15 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#16 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#17 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#18 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#19 unknown(0): DistribuidoraController->actionIndex()
+#20 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#21 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#22 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#23 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#24 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#25 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#26 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#27 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#28 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+in /var/www/singular/venta/protected/views/distribuidora/producto.php (72)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (18)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 19:22:10 [error] [php] Use of undefined constant id - assumed 'id' (/var/www/framework/base/CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 /var/www/framework/zii/widgets/grid/CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 /var/www/framework/zii/widgets/grid/CGridView.php(616): CDataColumn->renderDataCell()
+#2 /var/www/framework/zii/widgets/grid/CGridView.php(572): CGridView->renderTableRow()
+#3 /var/www/framework/zii/widgets/grid/CGridView.php(482): CGridView->renderTableBody()
+#4 /var/www/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#7 /var/www/framework/zii/widgets/CBaseListView.php(135): CGridView->renderContent()
+#8 /var/www/framework/web/CBaseController.php(173): CGridView->run()
+#9 /var/www/singular/venta/protected/views/distribuidora/producto.php(72): DistribuidoraController->widget()
+#10 /var/www/framework/web/CBaseController.php(126): require()
+#11 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#12 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#13 /var/www/singular/venta/protected/views/distribuidora/index.php(18): DistribuidoraController->renderPartial()
+#14 /var/www/framework/web/CBaseController.php(126): require()
+#15 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#16 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#17 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#18 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#19 unknown(0): DistribuidoraController->actionIndex()
+#20 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#21 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#22 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#23 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#24 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#25 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#26 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#27 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#28 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+in /var/www/singular/venta/protected/views/distribuidora/producto.php (72)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (18)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 19:22:13 [error] [php] Use of undefined constant id - assumed 'id' (/var/www/framework/base/CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 /var/www/framework/zii/widgets/grid/CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 /var/www/framework/zii/widgets/grid/CGridView.php(616): CDataColumn->renderDataCell()
+#2 /var/www/framework/zii/widgets/grid/CGridView.php(572): CGridView->renderTableRow()
+#3 /var/www/framework/zii/widgets/grid/CGridView.php(482): CGridView->renderTableBody()
+#4 /var/www/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#7 /var/www/framework/zii/widgets/CBaseListView.php(135): CGridView->renderContent()
+#8 /var/www/framework/web/CBaseController.php(173): CGridView->run()
+#9 /var/www/singular/venta/protected/views/distribuidora/producto.php(72): DistribuidoraController->widget()
+#10 /var/www/framework/web/CBaseController.php(126): require()
+#11 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#12 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#13 /var/www/singular/venta/protected/views/distribuidora/index.php(18): DistribuidoraController->renderPartial()
+#14 /var/www/framework/web/CBaseController.php(126): require()
+#15 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#16 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#17 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#18 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#19 unknown(0): DistribuidoraController->actionIndex()
+#20 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#21 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#22 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#23 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#24 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#25 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#26 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#27 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#28 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+in /var/www/singular/venta/protected/views/distribuidora/producto.php (72)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (18)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 19:24:22 [error] [php] Undefined variable: almacen (/var/www/singular/venta/protected/views/distribuidora/detalleVenta.php:50)
+Stack trace:
+#0 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#1 /var/www/singular/venta/protected/views/distribuidora/index.php(22): DistribuidoraController->renderPartial()
+#2 /var/www/framework/web/CBaseController.php(126): require()
+#3 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#4 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#5 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#6 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#7 unknown(0): DistribuidoraController->actionIndex()
+#8 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#9 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#11 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#12 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#13 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#14 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#15 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+in /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php (50)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (22)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 19:24:23 [error] [php] Undefined variable: almacen (/var/www/singular/venta/protected/views/distribuidora/detalleVenta.php:50)
+Stack trace:
+#0 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#1 /var/www/singular/venta/protected/views/distribuidora/index.php(22): DistribuidoraController->renderPartial()
+#2 /var/www/framework/web/CBaseController.php(126): require()
+#3 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#4 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#5 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#6 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#7 unknown(0): DistribuidoraController->actionIndex()
+#8 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#9 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#11 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#12 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#13 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#14 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#15 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+in /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php (50)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (22)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 19:25:57 [error] [php] htmlspecialchars() expects parameter 1 to be string, object given (/var/www/framework/web/helpers/CHtml.php:103)
+Stack trace:
+#0 /var/www/framework/web/helpers/CHtml.php(158): renderAttributes()
+#1 /var/www/framework/web/helpers/CHtml.php(1351): tag()
+#2 /var/www/framework/web/helpers/CHtml.php(728): inputField()
+#3 /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php(50): hiddenField()
+#4 /var/www/framework/web/CBaseController.php(126): require()
+#5 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#6 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#7 /var/www/singular/venta/protected/views/distribuidora/index.php(22): DistribuidoraController->renderPartial()
+#8 /var/www/framework/web/CBaseController.php(126): require()
+#9 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#10 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#11 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#12 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#13 unknown(0): DistribuidoraController->actionIndex()
+#14 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#15 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#16 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#17 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#18 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#19 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#20 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#21 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+in /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php (50)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (22)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 19:25:59 [error] [php] htmlspecialchars() expects parameter 1 to be string, object given (/var/www/framework/web/helpers/CHtml.php:103)
+Stack trace:
+#0 /var/www/framework/web/helpers/CHtml.php(158): renderAttributes()
+#1 /var/www/framework/web/helpers/CHtml.php(1351): tag()
+#2 /var/www/framework/web/helpers/CHtml.php(728): inputField()
+#3 /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php(50): hiddenField()
+#4 /var/www/framework/web/CBaseController.php(126): require()
+#5 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#6 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#7 /var/www/singular/venta/protected/views/distribuidora/index.php(22): DistribuidoraController->renderPartial()
+#8 /var/www/framework/web/CBaseController.php(126): require()
+#9 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#10 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#11 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#12 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#13 unknown(0): DistribuidoraController->actionIndex()
+#14 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#15 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#16 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#17 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#18 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#19 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#20 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#21 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+in /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php (50)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (22)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 19:29:51 [error] [php] htmlspecialchars() expects parameter 1 to be string, object given (/var/www/framework/web/helpers/CHtml.php:103)
+Stack trace:
+#0 /var/www/framework/web/helpers/CHtml.php(158): renderAttributes()
+#1 /var/www/framework/web/helpers/CHtml.php(1351): tag()
+#2 /var/www/framework/web/helpers/CHtml.php(728): inputField()
+#3 /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php(50): hiddenField()
+#4 /var/www/framework/web/CBaseController.php(126): require()
+#5 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#6 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#7 /var/www/singular/venta/protected/views/distribuidora/index.php(22): DistribuidoraController->renderPartial()
+#8 /var/www/framework/web/CBaseController.php(126): require()
+#9 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#10 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#11 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#12 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#13 unknown(0): DistribuidoraController->actionIndex()
+#14 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#15 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#16 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#17 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#18 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#19 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#20 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#21 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+in /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php (50)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (22)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 19:29:52 [error] [php] htmlspecialchars() expects parameter 1 to be string, object given (/var/www/framework/web/helpers/CHtml.php:103)
+Stack trace:
+#0 /var/www/framework/web/helpers/CHtml.php(158): renderAttributes()
+#1 /var/www/framework/web/helpers/CHtml.php(1351): tag()
+#2 /var/www/framework/web/helpers/CHtml.php(728): inputField()
+#3 /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php(50): hiddenField()
+#4 /var/www/framework/web/CBaseController.php(126): require()
+#5 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#6 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#7 /var/www/singular/venta/protected/views/distribuidora/index.php(22): DistribuidoraController->renderPartial()
+#8 /var/www/framework/web/CBaseController.php(126): require()
+#9 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#10 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#11 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#12 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): DistribuidoraController->render()
+#13 unknown(0): DistribuidoraController->actionIndex()
+#14 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#15 /var/www/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#16 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#17 /var/www/framework/web/CController.php(286): DistribuidoraController->runAction()
+#18 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#19 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#20 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#21 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+in /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php (50)
+in /var/www/singular/venta/protected/views/distribuidora/index.php (22)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (73)
+2014/04/02 19:31:10 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.Almacen.id" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(145): CComponent->__get('Almacen.id')
+#1 /var/www/framework/web/helpers/CHtml.php(2529): CActiveRecord->__get('Almacen.id')
+#2 /var/www/framework/web/helpers/CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'Almacen.id')
+#3 /var/www/framework/web/helpers/CHtml.php(1609): CHtml::activeInputField('hidden', Object(DetalleVenta), 'Almacen.id', Array)
+#4 /var/www/framework/web/widgets/CActiveForm.php(756): CHtml::activeHiddenField(Object(DetalleVenta), 'Almacen.id', Array)
+#5 /var/www/singular/venta/protected/views/distribuidora/detalleVenta.php(50): CActiveForm->hiddenField(Object(DetalleVenta), 'Almacen.id')
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/singular/venta/protected/views/distribuidora/index.php(22): CController->renderPartial('detalleVenta', Array)
+#10 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#11 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#12 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#13 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#14 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(73): CController->render('index', Array)
+#15 [internal function]: DistribuidoraController->actionIndex(NULL)
+#16 /var/www/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(DistribuidoraController), Array)
+#17 /var/www/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(DistribuidoraController), Object(ReflectionMethod), Array)
+#18 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#19 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#20 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#21 /var/www/framework/web/CWebApplication.php(282): CController->run('')
+#22 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora')
+#23 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#24 /var/www/singular/venta/index.php(13): CApplication->run()
+#25 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/
+---

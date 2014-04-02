@@ -37,13 +37,16 @@ $this->widget('ext.widgets.tabularinput.XTabularInput',array(
 		'inputView'=>'_newRowDetalleVenta',
 		'inputUrl'=>$this->createUrl('distribuidora/newRow'),
 		'addTemplate'=>'<tbody><tr><td colspan="3">{link}</td></tr></tbody>',
-		'addLabel'=>Yii::t('ui','+'),
-		'addHtmlOptions'=>array('class'=>'btn btn-default'),
+		'addLabel'=>Yii::t('ui',''),
+		//'addHtmlOptions'=>array('class'=>'btn btn-default'),
 		'removeTemplate'=>'<td>{link}</td>',
 		'removeLabel'=>Yii::t('ui','Quitar'),
 		'removeHtmlOptions'=>array('class'=>'btn btn-danger'),
 )); 
 ?>
+</div>
+<div>
+	<?php echo CHtml::hiddenField('clienteId','',array("id"=>"clienteId")); ?>
 </div>
 	<div class="form-group">
 		<?php echo CHtml::submitButton('Finalizar',array('class'=>'btn btn-default')); ?>

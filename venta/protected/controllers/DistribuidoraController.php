@@ -40,7 +40,7 @@ class DistribuidoraController extends Controller
 		
 		//seccion on filter
 		$productos->unsetAttributes();
-		$dist = TipoAlmacen::model()->find('nombre like "%distribuidora%"');
+		$dist = $this->verifyModel(TipoAlmacen::model()->find('nombre like "%distribuidora%"'));
 		$productos->almacen = $dist->id;
 		if (isset($_GET['Producto']))
 		{
@@ -53,7 +53,7 @@ class DistribuidoraController extends Controller
 		
 		if(isset($_POST))
 		{
-			//print_r($_POST);
+			print_r($_POST);
 		}
 		$venta = new VentaTmp;
 		$detalle = new DetalleVenta;
@@ -74,5 +74,48 @@ class DistribuidoraController extends Controller
 		
 		
 	}
-
+	
+	public function actionAjaxCliente($nitCi)
+	{
+		$cliente = $this->verifyModel(Cliente::model()->find('nitCi='.$nitCi));
+		echo CJSON::encode($cliente);
+	}
+	
+	public function actionAddDetalle()
+	{
+		if(Yii::app()->request->isAjaxRequest && isset($_GET['index']))
+		{
+			$detalle = new DetalleVenta;
+			if(isset($_GET['al']))
+				$detalle = DetalleVenta::model()->with('Almacen')->find('Almacen.id='.$_GET['al']);
+			
+			$this->renderPartial('_newRowDetalleVenta', array(
+					'model'=>$detalle,
+					'index'=>$_GET['index'],
+			));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+	
+	public function actionEditDetalle($id)
+	{
+		
+	}
+	
+	
+	private function verifyModel($model)
+	{
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+	
+		return $model;
+	}
+	
+	protected function getRemoveLinkAndIndexInput($index)
+	{
+		$removeLink=CHtml::link('Quitar', '#', array('class'=>'btn btn-danger tabular-input-remove')).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />';
+		$removeLink=strtr("<td>{link}</td>", array('{link}'=>$removeLink));
+		return $removeLink;
+	}
 }

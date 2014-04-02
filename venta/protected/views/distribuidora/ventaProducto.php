@@ -17,14 +17,14 @@
 	<div class="form-group col-md-3">
 		<?php echo $form->labelEx($cliente,'nitCi',array('class'=>'control-label')); ?>
 		<div >
-			<?php echo $form->textField($cliente,'nitCi',array('class'=>'form-control')); ?>
+			<?php echo $form->textField($cliente,'nitCi',array('class'=>'form-control',"id"=>"NitCi")); ?>
 		</div>
 		<?php echo $form->error($cliente,'nitCi'); ?>
 	</div>
 	<div class="form-group col-md-3">
 		<?php echo $form->labelEx($cliente,'apellido',array('class'=>'control-label')); ?>
 		<div >
-			<?php echo $form->textField($cliente,'apellido',array('class'=>'form-control')); ?>
+			<?php echo $form->textField($cliente,'apellido',array('class'=>'form-control',"id"=>"apellido")); ?>
 		</div>
 		<?php echo $form->error($cliente,'apellido'); ?>
 	</div>
@@ -49,5 +49,31 @@
 </div>
 	 -->
 <?php $this->endWidget(); ?>
-
+<?php $url_action = CHtml::normalizeUrl(array('/distribuidora/ajaxCliente')); ?>
+<?php Yii::app()->getClientScript()->registerScript("ajax_cliente",
+"
+   
+	function cliente (nitCi)
+	{
+		nitCi = jQuery.trim(nitCi);
+        $.ajax({
+            url: '$url_action', type: 'get', 
+            data: { nitCi: nitCi},
+            success: function (data){ 
+            			$('#apellido').val(data['apellido']); 
+            			$('#clienteId').val(data['id']);
+					 },
+        });
+	}
+		
+    $('#NitCi').keydown(function(e){ 
+        if(e.keyCode==13 || e.keyCode==9) 
+	    { 
+	    	if($('#NitCi').val()!=\"\")
+	     	cliente($('#NitCi').val())
+	      	return true; 
+	    } 
+           
+    });
+",CClientScript::POS_LOAD); ?>
 </div><!-- form -->

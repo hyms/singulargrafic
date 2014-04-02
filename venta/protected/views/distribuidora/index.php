@@ -19,6 +19,6 @@ $this->breadcrumbs=array(
 ?>
 <h2>Detalle de Venta</h2>
 
-<?php $this->renderPartial('detalleVenta',array('detalle'=>$detalle))?>
+<?php $this->renderPartial('detalleVenta',array('detalle'=>$detalle,'almacen'=>$almacen))?>
 
 </div>
