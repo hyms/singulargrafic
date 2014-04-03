@@ -57,12 +57,14 @@
 	{
 		nitCi = jQuery.trim(nitCi);
         $.ajax({
-            url: '$url_action', type: 'get', 
+            url: '$url_action', 
+            type: 'GET', 
             data: { nitCi: nitCi},
             success: function (data){ 
             			$('#apellido').val(data['apellido']); 
-            			$('#clienteId').val(data['id']);
+            			$('#clienteNit').val(data['nitCi']);
 					 },
+			error:	$('#clienteNit').val(nitCi),
         });
 	}
 		
@@ -70,10 +72,30 @@
         if(e.keyCode==13 || e.keyCode==9) 
 	    { 
 	    	if($('#NitCi').val()!=\"\")
-	     	cliente($('#NitCi').val())
+	     		cliente($('#NitCi').val())
 	      	return true; 
 	    } 
            
     });
-",CClientScript::POS_LOAD); ?>
+    
+    $('#NitCi').blur(function(e){ 
+        if($('#NitCi').val()!=\"\")
+	     	cliente($('#NitCi').val())
+    });
+    
+    $('#apellido').keydown(function(e){ 
+        if(e.keyCode==13 || e.keyCode==9) 
+	    { 
+	    	$('#clienteApellido').val($('#apellido').val());
+	      	return true; 
+	    } 
+           
+    });
+    
+    $('#apellido').blur(function(e){ 
+        $('#clienteApellido').val($('#apellido').val());
+	      	return true;
+    });
+    
+",CClientScript::POS_READY); ?>
 </div><!-- form -->

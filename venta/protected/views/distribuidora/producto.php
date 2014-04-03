@@ -60,7 +60,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		array(
 			'header'=>'',
 			'type'=>'raw',
-			'value'=>'CHtml::link("Añadir",array("distribuidora/newRow","al"=>$data->Almacen->id),array("id"=>"add-sell"))'
+			//'value'=>'CHtml::link("Añadir",array("distribuidora/newRow","al"=>$data->Almacen->id),array("id"=>"add-sell"))'
+			'value'=>'CHtml::link("Añadir","#",array("onclick"=>\'newRow("\'.$data->Almacen->id.\'");\'))',
 		),
 		/*array(
 			'name'=>'',
@@ -72,12 +73,14 @@ $this->widget('zii.widgets.grid.CGridView', array(
 )); 
 ?>
 <?php $url_action = CHtml::normalizeUrl(array('/distribuidora/addDetalle')); ?>
-<?php Yii::app()->clientScript->registerScript(__CLASS__.'#'.$this->id,
+<?php /*Yii::app()->clientScript->registerScript(__CLASS__.'#'.$this->id,
 "
-	$(\"#add-sell\").click(function(event){
+	var input ;
+	var index = input.find(\".tabular-input-index\").length>=0 ? input.find(\".tabular-input-index\").max()+1 : 0;
+	/*$(\"#add-sell\").click(function(event){
 		event.preventDefault();
-		var input = $(\"#yw3 tbody:first\");
-		var index = input.find(\".tabular-input-index\").length>=0 ? input.find(\".tabular-input-index\").max()+1 : 0;
+		input = $(\"#yw3 tbody:first\");
+		index = input.find(\".tabular-input-index\").length>=0 ? input.find(\".tabular-input-index\").max()+1 : 0;
 		$.ajax({
 			success: function(html){
 				input.append('<tr class=\"tabular-input\">'+html+'{$this->getRemoveLinkAndIndexInput("'+index+'")}</tr>');
@@ -86,11 +89,35 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			type: 'get',
 			url: '{$url_action}',
 			data: {
-				index: index
+				index:index,
+				al:almacen
 			},
 			cache: false,
 			dataType: 'html'
-		});
+		});	
 	});
 	
-",CClientScript::POS_READY);//*/ ?>
+	",CClientScript::POS_READY); */ ?>
+<?php Yii::app()->clientScript->registerScript('jQuery',"
+
+function newRow(almacen)
+{
+	event.preventDefault();
+	input = $(\"#yw3 tbody:first\");
+	index = input.find(\".tabular-input-index\").length>=0 ? input.find(\".tabular-input-index\").max()+1 : 0;
+	$.ajax({
+		success: function(html){
+			input.append('<tr class=\"tabular-input\">'+html+'{$this->getRemoveLinkAndIndexInput("'+index+'")}</tr>');
+			input.siblings('.tabular-header').show();
+		},
+		type: 'get',
+		url: '{$url_action}',
+		data: {
+			index:index,
+			al:almacen
+		},
+		cache: false,
+		dataType: 'html'
+	});
+}
+",CClientScript::POS_HEAD); ?>

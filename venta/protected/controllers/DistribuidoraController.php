@@ -68,7 +68,7 @@ class DistribuidoraController extends Controller
 				'detalle'=>$detalle,
 				
 				'pagination'=>array(
-						'pageSize'=>20,
+						'pageSize'=>5,
 				),
 		));
 		
@@ -86,12 +86,21 @@ class DistribuidoraController extends Controller
 		if(Yii::app()->request->isAjaxRequest && isset($_GET['index']))
 		{
 			$detalle = new DetalleVenta;
+			$almacen = new Almacen;
 			if(isset($_GET['al']))
-				$detalle = DetalleVenta::model()->with('Almacen')->find('Almacen.id='.$_GET['al']);
-			
+			{	
+				$almacen = Almacen::model()	->with("Producto")
+											->with("Producto.Color")
+											->with("Producto.Material")
+											//->with("Producto.Industria")
+											->findByPk($_GET['al']);
+				
+			}
 			$this->renderPartial('_newRowDetalleVenta', array(
-					'model'=>$detalle,
+					'detalle'=>$detalle,
 					'index'=>$_GET['index'],
+					'almacen'=>$almacen,
+					'costos'=>array(),
 			));
 		}
 		else

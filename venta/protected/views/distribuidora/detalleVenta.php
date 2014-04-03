@@ -44,9 +44,11 @@ $this->widget('ext.widgets.tabularinput.XTabularInput',array(
 		'removeHtmlOptions'=>array('class'=>'btn btn-danger'),
 )); 
 ?>
+	<p class="col-md-offset-9 col-sm-2"><?php echo CHtml::textField('total',"00",array('class'=>'form-control input-sm','disabled'=>true)); ?></p>
 </div>
 <div>
-	<?php echo CHtml::hiddenField('clienteId','',array("id"=>"clienteId")); ?>
+	<?php echo CHtml::hiddenField('clienteNit','',array("id"=>"clienteNit")); ?>
+	<?php echo CHtml::hiddenField('clienteApellido','',array("id"=>"clienteApellido")); ?>
 </div>
 	<div class="form-group">
 		<?php echo CHtml::submitButton('Finalizar',array('class'=>'btn btn-default')); ?>
