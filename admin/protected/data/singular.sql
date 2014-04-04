@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 01-04-2014 a las 19:18:01
+-- Tiempo de generación: 04-04-2014 a las 19:27:31
 -- Versión del servidor: 5.5.35
 -- Versión de PHP: 5.4.4-14+deb7u8
 
@@ -33,16 +33,17 @@ CREATE TABLE IF NOT EXISTS `almacen` (
   `stockUnidad` int(11) NOT NULL,
   `stockPaquete` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `almacen`
 --
 
 INSERT INTO `almacen` (`id`, `idProducto`, `idTipoAlmacen`, `stockUnidad`, `stockPaquete`) VALUES
-(2, 2, 1, 2, 1),
+(2, 2, 1, 1, 0),
 (7, 1, 1, 8, 0),
-(9, 1, 2, 2, 2);
+(9, 1, 2, 2, 2),
+(10, 2, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -119,7 +120,8 @@ CREATE TABLE IF NOT EXISTS `detalleVenta` (
   `idAlmacen` int(11) NOT NULL,
   `cantUnidad` int(11) NOT NULL,
   `cantPaquete` int(11) NOT NULL,
-  `costoTotal` int(11) NOT NULL,
+  `adicional` varchar(20) NOT NULL,
+  `costoTotal` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -414,6 +416,7 @@ CREATE TABLE IF NOT EXISTS `venta` (
   `idAlmacen` int(11) NOT NULL,
   `montoTotal` varchar(50) NOT NULL,
   `codigo` varchar(20) NOT NULL,
+  `obs` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
