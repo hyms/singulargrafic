@@ -1,15 +1,4 @@
-<?php
-/* @var $this DetalleVentaController */
-/* @var $model DetalleVenta */
-/* @var $form CActiveForm */
-$form=$this->beginWidget('CActiveForm', array(
-		'id'=>'detalle-venta-detalleVenta-form',
-		'htmlOptions'=>array(
-				'class'=>'form-horizontal',
-				'role'=>'form'
-		),
-));
-?>
+
 
 <div class="table-responsive form-group">
 <?php
@@ -28,6 +17,7 @@ $this->widget('ext.widgets.tabularinput.XTabularInput',array(
 			<td>'.CHtml::label('Detalle de producto','detalle').'</td>
 			<td>'.CHtml::activeLabelEx($detalle,'Almacen.stockUnidad').'</td>
 			<td>'.CHtml::activeLabelEx($detalle,'Almacen.stockPaquete').'</td>
+			<td>'.CHtml::activeLabelEx($detalle,'adicional').'</td>
 			<td>'.CHtml::label('Total','total').'</td>
             <td></td>
         </tr>
@@ -39,19 +29,68 @@ $this->widget('ext.widgets.tabularinput.XTabularInput',array(
 		'addTemplate'=>'<tbody><tr><td colspan="3">{link}</td></tr></tbody>',
 		'addLabel'=>Yii::t('ui',''),
 		//'addHtmlOptions'=>array('class'=>'btn btn-default'),
-		'removeTemplate'=>'<td>{link}</td>',
+		'removeTemplate'=>'<td class="col-sm-1">{link}</td>',
 		'removeLabel'=>Yii::t('ui','Quitar'),
 		'removeHtmlOptions'=>array('class'=>'btn btn-danger'),
 )); 
 ?>
-	<p class="col-md-offset-9 col-sm-2"><?php echo CHtml::textField('total',"00",array('class'=>'form-control input-sm','disabled'=>true)); ?></p>
-</div>
-<div>
-	<?php echo CHtml::hiddenField('clienteNit','',array("id"=>"clienteNit")); ?>
-	<?php echo CHtml::hiddenField('clienteApellido','',array("id"=>"clienteApellido")); ?>
-</div>
-	<div class="form-group">
-		<?php echo CHtml::submitButton('Finalizar',array('class'=>'btn btn-default')); ?>
+	<div class="form-group col-sm-6">
+	    <?php echo CHtml::label("Observaciones","obs",array('class'=>'control-label col-sm-4'))?>
+	    <div class="col-sm-8">
+		<?php echo CHtml::textArea("Observaciones","",array('class'=>'form-control'))?>
+	   	</div>
 	</div>
-<?php $this->endWidget(); ?>
-
+	<div class="form-horizontal col-sm-offset-2 col-sm-4" >
+		
+		<div class="form-group ">
+	    	<?php echo CHtml::label("Total","total",array('class'=>'control-label col-sm-4'))?>
+	    	<div class="col-sm-8">
+	      	<?php echo CHtml::textField('total',"00",array('class'=>'form-control input-sm','disabled'=>true,"id"=>"total")); ?>
+	    	</div>
+	  	</div>
+	  	<div class="form-group ">
+	    	<?php echo CHtml::label("Pagado","pagado",array('class'=>'control-label col-sm-4'))?>
+	    	<div class="col-sm-8">
+	      	<?php echo CHtml::textField('pagado',"",array('class'=>'form-control input-sm',"id"=>"pagado")); ?>
+	    	</div>
+	  	</div>
+	  	<div class="form-group ">
+	    	<?php echo CHtml::label("Cambio","cambio",array('class'=>'control-label col-sm-4'))?>
+	    	<div class="col-sm-8">
+	      	<?php echo CHtml::textField('cambio',"00",array('class'=>'form-control input-sm','disabled'=>true,"id"=>"cambio")); ?>
+	    	</div>
+	  	</div>
+	  	
+	</div>
+	
+	
+	
+</div>
+	
+<?php Yii::app()->getClientScript()->registerScript("ajax_total",
+"
+   	function calcular_total() {
+		importe_total = 0
+		$('.costo*').each(
+			function(index, value) {
+				importe_total = importe_total + parseFloat($(this).val()*1);
+			}
+		);
+		$('#total').val(parseFloat(importe_total).toFixed(2));
+		$('#cambio').val(resta($('#pagado').val(),$('#total').val()).toFixed(2));
+	}
+		
+	function suma(a,b)
+	{
+		return ((a*1) + (b*1));
+	}
+	
+	function resta(a,b)
+	{
+		
+		return ((a*1) - (b*1));
+	}
+		 
+	
+    
+",CClientScript::POS_HEAD); ?>

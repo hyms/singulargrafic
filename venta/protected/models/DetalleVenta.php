@@ -10,6 +10,7 @@
  * @property integer $idAlmacen
  * @property integer $cantUnidad
  * @property integer $cantPaquete
+ * @property integer $adicional
  * @property integer $costoTotal
  */
 class DetalleVenta extends CActiveRecord
@@ -31,10 +32,11 @@ class DetalleVenta extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('idVenta, idProducto, idAlmacen, costoTotal', 'required'),
-			array('idVenta, idProducto, cantUnidad, cantPaquete, costoTotal', 'numerical', 'integerOnly'=>true),
+			array('idVenta, idProducto, cantUnidad, cantPaquete', 'numerical', 'integerOnly'=>true),
+			array('adicional, costoTotal', 'numerical'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, idVenta, idProducto, cantUnidad, cantPaquete, costoTotal', 'safe', 'on'=>'search'),
+			array('id, idVenta, idProducto, cantUnidad, cantPaquete, adicional, costoTotal', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,6 +66,7 @@ class DetalleVenta extends CActiveRecord
 			'idAlmacen' => 'Id Almacen',
 			'cantUnidad' => 'Cant Unidad',
 			'cantPaquete' => 'Cant Paquete',
+			'adicional' => 'Adicional',
 			'costoTotal' => 'Costo Total',
 		);
 	}
@@ -92,6 +95,7 @@ class DetalleVenta extends CActiveRecord
 		$criteria->compare('idAlmacen',$this->idAlmacen);
 		$criteria->compare('cantUnidad',$this->cantUnidad);
 		$criteria->compare('cantPaquete',$this->cantPaquete);
+		$criteria->compare('adicional',$this->adicional);
 		$criteria->compare('costoTotal',$this->costoTotal);
 
 		return new CActiveDataProvider($this, array(
