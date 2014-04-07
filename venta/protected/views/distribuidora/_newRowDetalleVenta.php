@@ -1,6 +1,7 @@
+<tr class="tabular-input">
 <td class="col-sm-1">
 	<p class="form-control-static"><?php echo CHtml::encode($index + 1)?></p>
-	<?php echo CHtml::activeHiddenField($almacen,"[$index]id")?>
+	<?php echo CHtml::activeHiddenField($model,"[$index]idAlmacen")?>
 </td>
 
 <td class="col-sm-2">
@@ -12,26 +13,30 @@
 </td>
 
 <td class="col-sm-1">
-	<?php echo CHtml::activeTextField(Almacen::model(),"[$index]stockUnidad",array('class'=>'form-control input-sm','id'=>'stockUnidad_'.$index)); ?>
-	<?php echo CHtml::error(Almacen::model(),"[$index]stockUnidad"); ?>
+	<?php echo CHtml::activeTextField($model,"[$index]cantUnidad",array('class'=>'form-control input-sm','id'=>'stockUnidad_'.$index)); ?>
+	<?php echo CHtml::error($model,"[$index]cantUnidad"); ?>
 	<?php echo CHtml::hiddenField("unidad".$index,$almacen->Producto->costoCFUnidad)?>
 </td>
 
 <td class="col-sm-1">
-	<?php echo CHtml::activeTextField(Almacen::model(),"[$index]stockPaquete",array('class'=>'form-control input-sm','id'=>'stockPaquete_'.$index)); ?>
-	<?php echo CHtml::error(Almacen::model(),"[$index]stockPaquete"); ?>
+	<?php echo CHtml::activeTextField($model,"[$index]cantPaquete",array('class'=>'form-control input-sm','id'=>'stockPaquete_'.$index)); ?>
+	<?php echo CHtml::error($model,"[$index]cantPaquete"); ?>
 	<?php echo CHtml::hiddenField("paquete".$index,$almacen->Producto->costoCF)?>
 </td>
 
 <td class="col-sm-1">
-	<?php echo CHtml::activeTextField($detalle,"[$index]adicional",array('class'=>'form-control input-sm','id'=>'adicional_'.$index)); ?>
-	<?php echo CHtml::error($detalle,"[$index]adicional"); ?>
+	<?php echo CHtml::activeTextField($model,"[$index]adicional",array('class'=>'form-control input-sm','id'=>'adicional_'.$index)); ?>
+	<?php echo CHtml::error($model,"[$index]adicional"); ?>
 </td>
 
 <td class="col-sm-1">
-	<?php echo CHtml::activeTextField($detalle,"[$index]costoTotal",array('class'=>'costo form-control input-sm','disabled'=>true,'id'=>'costoTotal_'.$index)); ?>
+	<?php echo CHtml::activeTextField($model,"[$index]costoTotal",array('class'=>'costo form-control input-sm','readonly'=>true,'id'=>'costoTotal_'.$index)); ?>
 </td>
 
+<td class="col-sm-1">
+	<?php echo CHtml::link('Quitar', '#', array("class"=>"btn btn-danger tabular-input-remove")).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />'; ?>
+</td>
+</tr>
 <?php  echo 
 "
 <script>

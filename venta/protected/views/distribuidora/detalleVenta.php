@@ -5,59 +5,69 @@
 $detalles=array();
 if(count($detalle)==1)
 	array_push($detalles,$detalle);
+else 
+	$detalles = $detalle;
 //print_r($detalle);
-$this->widget('ext.widgets.tabularinput.XTabularInput',array(
-		'models'=>$detalles,
-		'containerTagName'=>'table',
-		'headerTagName'=>'thead',
-		'header'=>'
-        <tr>
+
+echo '<table id="yw3" class="table"><thead class="tabular-header"><tr>
 			<td>'.CHtml::label('Nº','number').'</td>
-			<td>'.CHtml::activeLabelEx($detalle,'Producto.codigo').'</td>
+			<td>'.CHtml::activeLabelEx($almacen,'Producto.codigo').'</td>
 			<td>'.CHtml::label('Detalle de producto','detalle').'</td>
-			<td>'.CHtml::activeLabelEx($detalle,'Almacen.stockUnidad').'</td>
-			<td>'.CHtml::activeLabelEx($detalle,'Almacen.stockPaquete').'</td>
-			<td>'.CHtml::activeLabelEx($detalle,'adicional').'</td>
+			<td>'.CHtml::activeLabelEx(new DetalleVenta,'cantUnidad').'</td>
+			<td>'.CHtml::activeLabelEx(new DetalleVenta,'cantPaquete').'</td>
+			<td>'.CHtml::activeLabelEx(new DetalleVenta,'adicional').'</td>
 			<td>'.CHtml::label('Total','total').'</td>
             <td></td>
-        </tr>
-    ',
-		'inputContainerTagName'=>'tbody',
-		'inputTagName'=>'tr',
-		'inputView'=>'_newRowDetalleVenta',
-		'inputUrl'=>$this->createUrl('distribuidora/newRow'),
-		'addTemplate'=>'<tbody><tr><td colspan="3">{link}</td></tr></tbody>',
-		'addLabel'=>Yii::t('ui',''),
-		//'addHtmlOptions'=>array('class'=>'btn btn-default'),
-		'removeTemplate'=>'<td class="col-sm-1">{link}</td>',
-		'removeLabel'=>Yii::t('ui','Quitar'),
-		'removeHtmlOptions'=>array('class'=>'btn btn-danger'),
-)); 
+        </tr>';
+
+echo '</thead><tbody class="tabular-input-container">';
+
+if($detalles[0]->idAlmacen!=null)
+{	
+	$i=0;
+	foreach ($detalles as $item)
+	{
+		$this->renderPartial('_newRowDetalleVenta', array(
+				'model'=>$item,
+				'index'=>$i,
+				'almacen'=>$almacen = Almacen::model()	->with("Producto")
+														->with("Producto.Color")
+														->with("Producto.Material")
+														//->with("Producto.Industria")
+														->findByPk($item->idAlmacen),
+				'costos'=>array(),
+		));
+		$i++;
+	}
+}
+echo '</tbody></table>';
+
+
 ?>
 	<div class="form-group col-sm-6">
-	    <?php echo CHtml::label("Observaciones","obs",array('class'=>'control-label col-sm-4'))?>
+	    <?php echo CHtml::activeLabelEx($venta,"obs",array('class'=>'control-label col-sm-4'))?>
 	    <div class="col-sm-8">
-		<?php echo CHtml::textArea("Observaciones","",array('class'=>'form-control'))?>
+		<?php echo CHtml::activeTextArea($venta,"obs",array('class'=>'form-control'))?>
 	   	</div>
 	</div>
 	<div class=" col-sm-offset-2 col-sm-4" >
 		
 		<div class="form-group ">
-	    	<?php echo CHtml::label("Total","total",array('class'=>'control-label col-sm-4'))?>
+	    	<?php echo CHtml::activeLabelEx($venta,"montoTotal",array('class'=>'control-label col-sm-4'))?>
 	    	<div class="col-sm-8">
-	      	<?php echo CHtml::textField('total',"00",array('class'=>'form-control input-sm','disabled'=>true,"id"=>"total")); ?>
+	      	<?php echo CHtml::activeTextField($venta,"montoTotal",array('class'=>'form-control input-sm','readonly'=>true,"id"=>"total")); ?>
 	    	</div>
 	  	</div>
 	  	<div class="form-group ">
-	    	<?php echo CHtml::label("Pagado","pagado",array('class'=>'control-label col-sm-4'))?>
+	    	<?php echo CHtml::activeLabelEx($venta,"montoPagado",array('class'=>'control-label col-sm-4'))?>
 	    	<div class="col-sm-8">
-	      	<?php echo CHtml::textField('pagado',"",array('class'=>'form-control input-sm',"id"=>"pagado")); ?>
+	      	<?php echo CHtml::activeTextField($venta,"montoPagado",array('class'=>'form-control input-sm',"id"=>"pagado")); ?>
 	    	</div>
 	  	</div>
 	  	<div class="form-group ">
-	    	<?php echo CHtml::label("Cambio","cambio",array('class'=>'control-label col-sm-4'))?>
+	    	<?php echo CHtml::activeLabelEx($venta,"montoCambio",array('class'=>'control-label col-sm-4'))?>
 	    	<div class="col-sm-8">
-	      	<?php echo CHtml::textField('cambio',"00",array('class'=>'form-control input-sm','disabled'=>true,"id"=>"cambio")); ?>
+	      	<?php echo CHtml::activeTextField($venta,"montoCambio",array('class'=>'form-control input-sm','readonly'=>true,"id"=>"cambio")); ?>
 	    	</div>
 	  	</div>
 	  	
@@ -94,3 +104,4 @@ $this->widget('ext.widgets.tabularinput.XTabularInput',array(
 	
     
 ",CClientScript::POS_HEAD); ?>
+

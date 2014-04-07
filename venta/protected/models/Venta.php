@@ -1,28 +1,31 @@
 <?php
 
 /**
- * This is the model class for table "ventaTmp".
+ * This is the model class for table "venta".
  *
- * The followings are the available columns in table 'ventaTmp':
+ * The followings are the available columns in table 'venta':
  * @property integer $id
- * @property string $codigo
- * @property integer $pago
- * @property string $fechaVenta
- * @property string $fechaModifcacion
- * @property integer $estado
+ * @property integer $idTipoPago
  * @property integer $idCliente
+ * @property string $fechaVenta
+ * @property string $fechaPlazo
  * @property integer $idEmpleado
  * @property integer $idAlmacen
+ * @property double $montoTotal
+ * @property double $montoPagado
+ * @property double $montoCambio
+ * @property string $codigo
+ * @property integer $estado
  * @property string $obs
  */
-class VentaTmp extends CActiveRecord
+class Venta extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'ventaTmp';
+		return 'venta';
 	}
 
 	/**
@@ -33,13 +36,14 @@ class VentaTmp extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codigo, pago, fechaModifcacion, idCliente, idEmpleado, obs', 'required'),
-			array('estado, idCliente, idEmpleado', 'numerical', 'integerOnly'=>true),
+			array('idTipoPago, idCliente, fechaVenta, fechaPlazo, idEmpleado, idAlmacen, montoTotal, montoPagado, montoCambio, codigo, estado, obs', 'required'),
+			array('idTipoPago, idCliente, idEmpleado, idAlmacen, estado', 'numerical', 'integerOnly'=>true),
+			array('montoTotal, montoPagado, montoCambio', 'numerical'),
 			array('codigo', 'length', 'max'=>20),
 			array('obs', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, codigo, pago, fechaVenta, fechaModifcacion, Estado, idCliente, idEmpleado, idAlmacen, obs', 'safe', 'on'=>'search'),
+			array('id, idTipoPago, idCliente, fechaVenta, fechaPlazo, idEmpleado, idAlmacen, montoTotal, montoPagado, montoCambio, codigo, estado, obs', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,10 +55,6 @@ class VentaTmp extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Cliente'=>array(self::BELONGS_TO, 'Cliente', 'idCliente'),
-			'Empleado'=>array(self::BELONGS_TO, 'Empleado', 'idEmpleado'),
-				
-			'DetalleVenta'=>array(self::HAS_ONE, 'DetalleVenta', 'idVenta'),
 		);
 	}
 
@@ -65,15 +65,18 @@ class VentaTmp extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'codigo' => 'Codigo',
-			'pago' => 'Pago',
+			'idTipoPago' => 'Id Tipo Pago',
+			'idCliente' => 'Id Cliente',
 			'fechaVenta' => 'Fecha Venta',
-			'fechaModifcacion' => 'Fecha',
+			'fechaPlazo' => 'Fecha Plazo',
+			'idEmpleado' => 'Id Empleado',
+			'idAlmacen' => 'Id Almacen',
+			'montoTotal' => 'Total',
+			'montoPagado' => 'Pagado',
+			'montoCambio' => 'Cambio',
+			'codigo' => 'Codigo',
 			'estado' => 'Estado',
-			'idCliente' => 'Cliente',
-			'idEmpleado' => 'Responsable',
-			'idAlmacen'=>'Almacen',
-			'obs' => 'Obs',
+			'obs' => 'Observaciones',
 		);
 	}
 
@@ -96,14 +99,17 @@ class VentaTmp extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('codigo',$this->codigo,true);
-		$criteria->compare('pago',$this->pago);
-		$criteria->compare('fechaVenta',$this->fechaVenta,true);
-		$criteria->compare('fechaModifcacion',$this->fechaModifcacion,true);
-		$criteria->compare('estado',$this->Estado);
+		$criteria->compare('idTipoPago',$this->idTipoPago);
 		$criteria->compare('idCliente',$this->idCliente);
+		$criteria->compare('fechaVenta',$this->fechaVenta,true);
+		$criteria->compare('fechaPlazo',$this->fechaPlazo,true);
 		$criteria->compare('idEmpleado',$this->idEmpleado);
 		$criteria->compare('idAlmacen',$this->idAlmacen);
+		$criteria->compare('montoTotal',$this->montoTotal);
+		$criteria->compare('montoPagado',$this->montoPagado);
+		$criteria->compare('montoCambio',$this->montoCambio);
+		$criteria->compare('codigo',$this->codigo,true);
+		$criteria->compare('estado',$this->estado);
 		$criteria->compare('obs',$this->obs,true);
 
 		return new CActiveDataProvider($this, array(
@@ -115,7 +121,7 @@ class VentaTmp extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return VentaTmp the static model class
+	 * @return Venta the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

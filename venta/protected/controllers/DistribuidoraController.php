@@ -16,27 +16,9 @@ class DistribuidoraController extends Controller
 		$cliente = new Cliente;
 		$empleado = Empleado::model()->findByPk('1');
 		$almacen = new Almacen;
-		$detalle = DetalleVenta::model()->with('Producto')
-										->with('Producto.Color')
-										->with('Producto.Material')
-										->with('Producto.Industria')
-										->with('Venta')
-										->with('Venta.Cliente')
-										->with('Venta.Empleado')
-										->findAll();
-		
-		if($id!=null)
-		{
-			$detalle = DetalleVenta::model()->with('Producto')
-											->with('Producto.Color')
-											->with('Producto.Material')
-											->with('Producto.Industria')
-											->with('Venta')
-											->with('Venta.Cliente')
-											->with('Venta.Empleado')
-											->findAll();
-		}
 		$productos=new Producto('searchAll');
+		$venta = new Venta;
+		$detalle = new DetalleVenta;
 		
 		//seccion on filter
 		$productos->unsetAttributes();
@@ -51,18 +33,30 @@ class DistribuidoraController extends Controller
 			//$productos->almacen = $_GET['Producto']['almacen'];
 		}
 		
-		if(isset($_POST))
+		if(isset($_POST['Cliente']))
 		{
-			print_r($_POST);
+			//print_r($_POST);
+			$cliente->attributes = $_POST['Cliente'];
+			$detalle = array();
+			
+			$i=0;
+			
+			foreach ($_POST['DetalleVenta'] as $item)
+			{
+				array_push($detalle,new DetalleVenta);
+				$detalle[$i]->attributes = $item;
+				$i++;
+			}
+			
+			$venta->attributes = $_POST['Venta'];
+			
 		}
-		$venta = new VentaTmp;
-		$detalle = new DetalleVenta;
-
+		
 		$this->render('index',array(
 				//'dataProvider'=>$dataProvider,
 				'cliente'=>$cliente,
 				'empleado'=>$empleado,
-				'ventaTmp'=>$venta,
+				'venta'=>$venta,
 				'almacen'=>$almacen,
 				'productos'=>$productos,
 				'detalle'=>$detalle,
@@ -96,8 +90,9 @@ class DistribuidoraController extends Controller
 											->findByPk($_GET['al']);
 				
 			}
+			$detalle->idAlmacen = $almacen->id;
 			$this->renderPartial('_newRowDetalleVenta', array(
-					'detalle'=>$detalle,
+					'model'=>$detalle,
 					'index'=>$_GET['index'],
 					'almacen'=>$almacen,
 					'costos'=>array(),

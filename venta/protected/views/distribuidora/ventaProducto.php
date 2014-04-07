@@ -21,10 +21,10 @@
 		<?php echo $form->error($empleado,'nombres'); ?>
 	</div>
 	<div class="form-group col-md-6">
-		<?php echo $form->labelEx($ventaTmp,'fechaModifcacion',array('class'=>'control-label col-sm-4')); ?>
+		<?php echo $form->labelEx($venta,'fechaVenta',array('class'=>'control-label col-sm-4')); ?>
 		<div class="col-sm-8">
-			<?php echo $form->hiddenField($ventaTmp,'fechaModifcacion'); ?>
+			<?php echo $form->hiddenField($venta,'fechaVenta'); ?>
 			<p class=" form-control "><?php echo date("d/m/Y");?></p>
 		</div>
-		<?php echo $form->error($ventaTmp,'fechaModifcacion'); ?>
+		<?php echo $form->error($venta,'fechaVenta'); ?>
 	</div>

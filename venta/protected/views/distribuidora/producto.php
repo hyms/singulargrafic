@@ -63,11 +63,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			//'value'=>'CHtml::link("Añadir",array("distribuidora/newRow","al"=>$data->Almacen->id),array("id"=>"add-sell"))'
 			'value'=>'CHtml::link("Añadir","#",array("onclick"=>\'newRow("\'.$data->Almacen->id.\'");\'))',
 		),
-		/*array(
-			'name'=>'',
-			'type'=>'raw',
-			'value'=>'CHtml::link("Eliminar",array("almacen/delete","id"=>$data->id),array("confirm" => "Esta seguro de Eliminarlo?"))'
-		),*/
 		
 	)
 )); 
@@ -78,22 +73,28 @@ $this->widget('zii.widgets.grid.CGridView', array(
 function newRow(almacen)
 {
 	
-	input = $(\"#yw3 tbody:first\");
-	index = input.find(\".tabular-input-index\").length>=0 ? input.find(\".tabular-input-index\").max()+1 : 0;
+	var input = $(\"#yw3 tbody\");
+	var index = 0;
+	if(input.find(\".tabular-input-index\").length>0)
+	{
+		$(\".tabular-input-index\").each(function() {
+		    index = Math.max(index, parseInt(this.value)) + 1;
+		});
+	}		
 	$.ajax({
+		type: 'GET',
+		url: '".CHtml::normalizeUrl(array('/distribuidora/addDetalle'))."',
+		data: 'index='+index+'&al='+almacen,
+		dataType: 'html',
 		success: function(html){
-			input.append('<tr class=\"tabular-input\">'+html+'{$this->getRemoveLinkAndIndexInput("'+index+'")}</tr>');
+			input.append(html);
 			input.siblings('.tabular-header').show();
 		},
-		type: 'get',
-		url: '".CHtml::normalizeUrl(array('/distribuidora/addDetalle'))."',
-		data: {
-			index:index,
-			al:almacen
-		},
-		cache: false,
-		dataType: 'html'
+		
 	});
 	event.preventDefault();
 }
+
+	
+
 ",CClientScript::POS_HEAD); ?>

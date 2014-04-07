@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 04-04-2014 a las 19:27:31
+-- Tiempo de generación: 07-04-2014 a las 19:27:52
 -- Versión del servidor: 5.5.35
 -- Versión de PHP: 5.4.4-14+deb7u8
 
@@ -410,32 +410,17 @@ INSERT INTO `tipoAlmacen` (`id`, `nombre`) VALUES
 
 CREATE TABLE IF NOT EXISTS `venta` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idTipoPago` int(11) NOT NULL,
   `idCliente` int(11) NOT NULL,
   `fechaVenta` datetime NOT NULL,
+  `fechaPlazo` datetime NOT NULL,
   `idEmpleado` int(11) NOT NULL,
   `idAlmacen` int(11) NOT NULL,
-  `montoTotal` varchar(50) NOT NULL,
+  `montoTotal` float NOT NULL,
+  `montoPagado` float NOT NULL,
+  `montoCambio` float NOT NULL,
   `codigo` varchar(20) NOT NULL,
-  `obs` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ventaTmp`
---
-
-CREATE TABLE IF NOT EXISTS `ventaTmp` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(20) NOT NULL,
-  `pago` varchar(20) NOT NULL,
-  `fechaVenta` datetime NOT NULL,
-  `fechaModifcacion` datetime NOT NULL,
   `estado` int(11) NOT NULL,
-  `idCliente` int(11) NOT NULL,
-  `idEmpleado` int(11) NOT NULL,
-  `idAlmacen` int(11) NOT NULL,
   `obs` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

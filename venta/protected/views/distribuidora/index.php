@@ -28,9 +28,9 @@ $this->breadcrumbs=array(
 	));
 	?>
 	<h2 >Detalle de Venta</h2>
-	<?php $this->renderPartial('detalleVenta',array('detalle'=>$detalle,'almacen'=>$almacen))?>
+	<?php $this->renderPartial('detalleVenta',array('venta'=>$venta,'detalle'=>$detalle,'almacen'=>$almacen))?>
 	
-	<?php $this->renderPartial('ventaProducto',array('ventaTmp'=>$ventaTmp,'cliente'=>$cliente,'almacen'=>$almacen,'empleado'=>$empleado,'form'=>$form)); ?>
+	<?php $this->renderPartial('ventaProducto',array('venta'=>$venta,'cliente'=>$cliente,'empleado'=>$empleado,'form'=>$form)); ?>
 	<div class="form-group">
 		<?php echo CHtml::submitButton('Finalizar',array('class'=>'btn btn-default')); ?>
 	</div>
@@ -98,4 +98,9 @@ $this->breadcrumbs=array(
 		}
 	});
 	
+	$(\"#yw3 .tabular-input-remove\").live(\"click\", function(event) {
+		event.preventDefault();
+		$(this).parents(\".tabular-input:first\").remove();
+		$('.tabular-input-container').filter(function(){return $.trim($(this).text())==='' && $(this).children().length == 0}).siblings('.tabular-header').hide();
+	});
 ",CClientScript::POS_READY); ?>
