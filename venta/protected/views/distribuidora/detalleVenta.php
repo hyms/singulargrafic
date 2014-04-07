@@ -40,7 +40,7 @@ $this->widget('ext.widgets.tabularinput.XTabularInput',array(
 		<?php echo CHtml::textArea("Observaciones","",array('class'=>'form-control'))?>
 	   	</div>
 	</div>
-	<div class="form-horizontal col-sm-offset-2 col-sm-4" >
+	<div class=" col-sm-offset-2 col-sm-4" >
 		
 		<div class="form-group ">
 	    	<?php echo CHtml::label("Total","total",array('class'=>'control-label col-sm-4'))?>

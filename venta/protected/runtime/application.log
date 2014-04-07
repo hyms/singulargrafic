@@ -425,3 +425,1442 @@ Stack trace:
 #11 {main}
 REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=12
 ---
+2014/04/07 00:33:19 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830798905
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:33:21 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830800802
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:33:23 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396830802582
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:33:23 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396830802874
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:33:24 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830803869
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:33:24 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830804072
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:33:24 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830804261
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:33:25 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396830805046
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:00 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396830959351
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:01 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830960883
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:01 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830961103
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:01 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830961306
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:01 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830961539
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:02 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830962081
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:02 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830962275
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:02 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830962618
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:03 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830962814
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:03 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830962998
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:03 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830963209
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:03 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830963378
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:04 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830963590
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:04 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830963789
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:04 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830963979
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:04 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830964155
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:04 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830964356
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:04 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830964574
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:05 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830964901
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:05 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830965099
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:05 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830965292
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:05 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830964725
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:05 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830965534
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:06 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830965809
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:07 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396830966798
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:07 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396830966985
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:07 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396830967180
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:07 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396830967463
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:07 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396830967694
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:09 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830968695
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:09 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830968519
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:09 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396830968886
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:43 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396831003197
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:51 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396831011202
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:54 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396831013650
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:55 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396831014891
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:56 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831016213
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:57 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831016947
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:58 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831017164
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:58 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831017372
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:58 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831017581
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:58 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831017764
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:58 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831017962
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:59 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831018310
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:59 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831018501
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:59 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831018698
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:59 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831018895
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:59 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831019336
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:36:59 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831019106
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:37:00 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831020122
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:37:00 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831020328
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:37:00 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831020548
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:37:01 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396831020757
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---
+2014/04/07 00:39:24 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php:107
+Stack trace:
+#0 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#1 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#5 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#6 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#7 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=9&_=1396830959351
+---
+2014/04/07 00:39:50 [error] [exception.CException] exception 'CException' with message 'Property "DetalleVenta.adicional" is not defined.' in C:\wamp\www\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\framework\db\ar\CActiveRecord.php(145): CComponent->__get('adicional')
+#1 C:\wamp\www\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('adicional')
+#2 C:\wamp\www\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(DetalleVenta), 'adicional')
+#3 C:\wamp\www\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(DetalleVenta), 'adicional', Array)
+#4 C:\wamp\www\singulargrafic\venta\protected\views\distribuidora\_newRowDetalleVenta.php(27): CHtml::activeTextField(Object(DetalleVenta), '[-Infinity]adic...', Array)
+#5 C:\wamp\www\framework\web\CBaseController.php(126): require('C:\wamp\www\sin...')
+#6 C:\wamp\www\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sin...', Array, true)
+#7 C:\wamp\www\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sin...', Array, true)
+#8 C:\wamp\www\singulargrafic\venta\protected\controllers\DistribuidoraController.php(104): CController->renderPartial('_newRowDetalleV...', Array)
+#9 C:\wamp\www\framework\web\actions\CInlineAction.php(49): DistribuidoraController->actionAddDetalle()
+#10 C:\wamp\www\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\framework\web\CWebApplication.php(282): CController->run('addDetalle')
+#14 C:\wamp\www\framework\web\CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 C:\wamp\www\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\singulargrafic\venta\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulargrafic/venta/index.php/distribuidora/addDetalle?index=-Infinity&al=10&_=1396831190523
+HTTP_REFERER=http://localhost:8080/singulargrafic/venta/index.php/distribuidora/index
+---

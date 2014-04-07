@@ -3,6 +3,7 @@
 /* @var $model Pages */
 /* @var $form CActiveForm */
 
+Yii::app()->clientscript->registerScriptFile( Yii::app()->baseUrl.'/js/ckeditor/ckeditor.js');
 ?>
 <div class="col-sm-2">
 	<h2>Lista de paginas</h2>
@@ -79,10 +80,11 @@
 	</div>
 
 <?php $this->endWidget(); ?>
-<script type="text/javascript">
+<?php Yii::app()->getClientScript()->registerScript("CKEDITOR",
+"
     CKEDITOR.replace( 'contenido'
     	    //,{ filebrowserBrowseUrl : '/images/' }
 		);
-</script>
+",CClientScript::POS_READY); ?>
 <?php }?>
 </div><!-- form -->

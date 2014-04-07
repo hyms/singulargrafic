@@ -2,8 +2,8 @@
 /* @var $this ColorController */
 /* @var $model Color */
 /* @var $form CActiveForm */
-
-Yii::app()->clientscript
+Yii::app()->clientscript->registerCssFile( Yii::app()->request->baseUrl . '/css/spectrum.css');
+Yii::app()->clientscript->registerScriptFile( Yii::app()->request->baseUrl . '/js/spectrum.js');
 // use it when you need it!
 
 
@@ -98,11 +98,10 @@ Yii::app()->clientscript
 
 </div><!-- form -->
 
-
-<script>
-//$("#codigo").spectrum();
-$("#codigo").spectrum({
-	preferredFormat: "hex",
+<?php Yii::app()->getClientScript()->registerScript("spectrum",
+"
+$(\"#codigo\").spectrum({
+	preferredFormat: \"hex\",
 	showInitial: true,
     showInput: true,
     show: function(color) {
@@ -110,10 +109,11 @@ $("#codigo").spectrum({
     }
     
 });
-$("#color").show();
+$(\"#color\").show();
 
 t.toHex();
-</script>
+		
+",CClientScript::POS_READY); ?>
 
 <?php }?>
 </div>

@@ -210,17 +210,13 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
-
-<?php }?>
-</div>
-
-<script type="text/javascript">
-
-	var $frm = document.getElementById("Serv");
+<?php Yii::app()->getClientScript()->registerScript("CKEDITOR",
+"
+    var frm = document.getElementById(\"Serv\");
 	
-	var varCount = $frm.getElementsByTagName('select').length - 1 ;
-	var $node = "";
-	var $options = "";
+	var varCount = frm.getElementsByTagName('select').length - 1 ;
+	var node = \"\";
+	var options = \"\";
 	
 	//remove a textfield    
 	$('#removeVar').on('click', function(){
@@ -234,12 +230,14 @@
 	//add a new node
 	$('#addVar').on('click', function(){
 	varCount++;
-	$options = $("#Servicios0").find('option').clone();
-	$node = '<select class="form-control" name="Servicios'+varCount+'" id="Servicios'+varCount+'"></select>';
-	$('#Serv').append($node);//$(this).parent().before($node);
-	$('#Servicios'+varCount).append($options);
+	options = $(\"#Servicios0\").find('option').clone();
+	node = '<select class=\"form-control\" name=\"Servicios'+varCount+'\" id=\"Servicios'+varCount+'\"></select>';
+	$('#Serv').append(node);//$(this).parent().before(node);
+	$('#Servicios'+varCount).append(options);
 	
 	});
-	
 		
-</script>
+",CClientScript::POS_READY); ?>
+<?php }?>
+</div>
+

@@ -6,21 +6,20 @@
 			'jquery.yii.js' => Yii::app()->request->baseUrl.'/js/jquery-1.11.0.min.js',
 	);
 		// use it when you need it!
-		$cs->registerCssFile( Yii::app()->request->baseUrl . '/css/spectrum.css')
+		$cs
 		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.css' )
 		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap-responsive.css' )
 		
 		->registerCoreScript('jquery')
 		->registerCoreScript('jquery.ui')
 		
-		->registerScriptFile( Yii::app()->request->baseUrl . '/js/spectrum.js')
 		//->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.js')
 		->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END )
-		->registerScriptFile( Yii::app()->baseUrl.'/js/ckeditor/ckeditor.js');
+		
 		
 		
 		//->registerScriptFile( Yii::app()->baseUrl.'/js/uploadify/jquery.uploadify.js')
-		//*/
+		;
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
