@@ -2,7 +2,9 @@
 	Yii::app()->clientscript
 		// use it when you need it!
 		
-		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.min.flatly.css' )
+		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.min.slate.css' )
+		//->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.min.darckly.css' )
+		//->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.min.super.css' )
 		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap-responsive.css' )
 		//->registerCssFile( Yii::app()->request->baseUrl . '/css/uploadify.css' )
 		->registerCoreScript( 'jquery' )

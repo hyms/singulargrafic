@@ -33,10 +33,11 @@ class DistribuidoraController extends Controller
 			//$productos->almacen = $_GET['Producto']['almacen'];
 		}
 		
+		//print_r($_POST);
 		if(isset($_POST['Cliente']))
 		{
+			$cliente = new Cliente;
 			$cliente->attributes = $_POST['Cliente'];
-			$cliente->validate();
 		}
 		
 		if(isset($_POST['DetalleVenta']))
@@ -58,8 +59,12 @@ class DistribuidoraController extends Controller
 			$venta->attributes = $_POST['Venta'];
 			$venta->validate();
 		}
-			
 		
+		$factura=0;
+		if(isset($_POST['factura']))
+		{
+			$factura=$_POST['factura'];
+		}
 		
 		$this->render('index',array(
 				//'dataProvider'=>$dataProvider,
@@ -69,6 +74,7 @@ class DistribuidoraController extends Controller
 				'almacen'=>$almacen,
 				'productos'=>$productos,
 				'detalle'=>$detalle,
+				'factura'=>$factura,
 				
 				'pagination'=>array(
 						'pageSize'=>5,
@@ -103,6 +109,7 @@ class DistribuidoraController extends Controller
 			$this->renderPartial('_newRowDetalleVenta', array(
 					'model'=>$detalle,
 					'index'=>$_GET['index'],
+					'factura'=>$_GET['factura'],
 					'almacen'=>$almacen,
 					'costos'=>array(),
 			));
@@ -116,6 +123,73 @@ class DistribuidoraController extends Controller
 		
 	}
 	
+	public function actionFactura()
+	{
+		$empleado = Empleado::model()->findByPk('1');
+		
+		$productos=new Producto('searchAll');
+		$cliente = new Cliente;
+		$detalle = array();
+		$venta = new Venta;
+		
+		$factura=0;
+		if(isset($_POST['factura']))
+		{
+			$factura=$_POST['factura'];
+		}
+		
+		if(isset($_POST['Cliente']))
+		{
+			$cliente->attributes = $_POST['Cliente'];
+		}
+		$total=0;
+		if(isset($_POST['DetalleVenta']))
+		{
+			$i=0;
+				
+			foreach ($_POST['DetalleVenta'] as $item)
+			{
+				array_push($detalle,new DetalleVenta);
+				$detalle[$i]->attributes = $item;
+				
+				$almacen = Almacen::model()->with('Producto')->findByPk($detalle[$i]->idAlmacen);
+				if($factura==0)
+				{
+					$detalle[$i]->costoTotal=($almacen->Producto->costoCFUnidad*$detalle[$i]->cantUnidad)+($almacen->Producto->costoCF*$detalle[$i]->cantPaquete);
+				}
+				else
+				{
+					$detalle[$i]->costoTotal=($almacen->Producto->costoSFUnidad*$detalle[$i]->cantUnidad)+($almacen->Producto->costoSF*$detalle[$i]->cantPaquete);
+				}
+				$total=$total+$detalle[$i]->costoTotal;
+				$i++;
+			}
+		}
+			
+		if(isset($_POST['Venta']))
+		{
+			$venta->attributes = $_POST['Venta'];
+			$venta->montoTotal=$total;
+			$venta->montoCambio=$venta->montoPagado - $venta->montoTotal;
+		}
+		
+		$almacen = new Almacen;
+		
+		$this->render('index',array(
+				//'dataProvider'=>$dataProvider,
+				'cliente'=>$cliente,
+				'empleado'=>$empleado,
+				'venta'=>$venta,
+				'almacen'=>$almacen,
+				'productos'=>$productos,
+				'detalle'=>$detalle,
+				'factura'=>$factura,
+		
+				'pagination'=>array(
+						'pageSize'=>5,
+				),
+		));
+	}
 	
 	private function verifyModel($model)
 	{

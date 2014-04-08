@@ -24,9 +24,9 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		
 		array(
 			'name'=>'color',
-			'value'=>'$data->Color->nombre',
+			'type'=>'raw',
+			'value'=>'$data->Color->nombre." <div style=\"background-color:".$data->Color->codigo."\" with=\"5px\">&nbsp</div>"',
 			'filter'=>CHtml::listData(Color::model()->findAll(array('order'=>'nombre')),'id','nombre'),
-			//'filter'=>CHtml::activeTextField($productos, 'color'),
 		),
 		array(
 			'name'=>'peso',
@@ -47,6 +47,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			'name'=>'industria',
 			'value'=>'$data->Industria->nombre',
 			'filter'=>CHtml::listData(Industria::model()->findAll(array('order'=>'nombre')),'id','nombre'),
+		),
+		array(
+			'name'=>'cantidad',
+			'value'=>'$data->cantidad',
+			'filter'=>CHtml::activeTextField($productos, 'cantidad',array("class"=>"form-control input-sm")),
 		),
 		array(
 			'header'=>'stock Unidad',
@@ -75,6 +80,7 @@ function newRow(almacen)
 	
 	var input = $(\"#yw3 tbody\");
 	var index = 0;
+	var factura = $('#factura_0').attr('checked')?0:1;
 	if(input.find(\".tabular-input-index\").length>0)
 	{
 		$(\".tabular-input-index\").each(function() {
@@ -84,7 +90,7 @@ function newRow(almacen)
 	$.ajax({
 		type: 'GET',
 		url: '".CHtml::normalizeUrl(array('/distribuidora/addDetalle'))."',
-		data: 'index='+index+'&al='+almacen,
+		data: 'index='+index+'&al='+almacen+'&factura='+factura,
 		dataType: 'html',
 		success: function(html){
 			input.append(html);
@@ -94,7 +100,5 @@ function newRow(almacen)
 	});
 	event.preventDefault();
 }
-
-	
 
 ",CClientScript::POS_HEAD); ?>

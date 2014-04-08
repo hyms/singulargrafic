@@ -15,13 +15,13 @@
 <td class="col-sm-1">
 	<?php echo CHtml::activeTextField($model,"[$index]cantUnidad",array('class'=>'form-control input-sm','id'=>'stockUnidad_'.$index)); ?>
 	<?php echo CHtml::error($model,"[$index]cantUnidad"); ?>
-	<?php echo CHtml::hiddenField("unidad".$index,$almacen->Producto->costoCFUnidad)?>
+	<?php echo CHtml::hiddenField("unidad".$index,$factura?$almacen->Producto->costoSFUnidad:$almacen->Producto->costoCFUnidad)?>
 </td>
 
 <td class="col-sm-1">
 	<?php echo CHtml::activeTextField($model,"[$index]cantPaquete",array('class'=>'form-control input-sm','id'=>'stockPaquete_'.$index)); ?>
 	<?php echo CHtml::error($model,"[$index]cantPaquete"); ?>
-	<?php echo CHtml::hiddenField("paquete".$index,$almacen->Producto->costoCF)?>
+	<?php echo CHtml::hiddenField("paquete".$index,$factura?$almacen->Producto->costoSF:$almacen->Producto->costoCF)?>
 </td>
 
 <td class="col-sm-1">

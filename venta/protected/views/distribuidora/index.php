@@ -21,6 +21,7 @@ $this->breadcrumbs=array(
 	/* @var $form CActiveForm */
 	$form=$this->beginWidget('CActiveForm', array(
 			'id'=>'detalle-venta-detalleVenta-form',
+			'action'=>CHtml::normalizeUrl(array('/distribuidora/index')),
 			'htmlOptions'=>array(
 					'class'=>'form-horizontal',
 					'role'=>'form'
@@ -28,7 +29,7 @@ $this->breadcrumbs=array(
 	));
 	?>
 	<h2 >Detalle de Venta</h2>
-	<?php $this->renderPartial('detalleVenta',array('venta'=>$venta,'detalle'=>$detalle,'almacen'=>$almacen))?>
+	<?php $this->renderPartial('detalleVenta',array('venta'=>$venta,'detalle'=>$detalle,'almacen'=>$almacen,'factura'=>$factura))?>
 	
 	<?php $this->renderPartial('ventaProducto',array('venta'=>$venta,'cliente'=>$cliente,'empleado'=>$empleado,'form'=>$form)); ?>
 	<div class="form-group">

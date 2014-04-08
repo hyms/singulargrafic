@@ -15,29 +15,34 @@ echo '<table id="yw3" class="table"><thead class="tabular-header"><tr>
         </tr>';
 
 echo '</thead><tbody class="tabular-input-container">';
+
 if(count($detalle)>=1)
 {
-	$i=0;
-	foreach ($detalle as $item)
+	if(!isset($detalle->isNewRecord))
 	{
-		if($item->idAlmacen!=null)
+		$i=0;
+		
+		foreach ($detalle as $item)
 		{
-			$this->renderPartial('_newRowDetalleVenta', array(
-					'model'=>$item,
-					'index'=>$i,
-					'almacen'=>$almacen = Almacen::model()	->with("Producto")
-															->with("Producto.Color")
-															->with("Producto.Material")
-															//->with("Producto.Industria")
-															->findByPk($item->idAlmacen),
-					'costos'=>array(),
-			));
-			$i++;
+			if($item->idAlmacen!=null)
+			{
+				$this->renderPartial('_newRowDetalleVenta', array(
+						'model'=>$item,
+						'index'=>$i,
+						'factura'=>$factura,
+						'almacen'=>$almacen = Almacen::model()	->with("Producto")
+																->with("Producto.Color")
+																->with("Producto.Material")
+																//->with("Producto.Industria")
+																->findByPk($item->idAlmacen),
+						'costos'=>array(),
+				));
+				$i++;
+			}
 		}
 	}
 }
 
-//print_r($detalle);
 echo '</tbody></table>';
 
 ?>
@@ -47,30 +52,63 @@ echo '</tbody></table>';
 		<?php echo CHtml::activeTextArea($venta,"obs",array('class'=>'form-control'))?>
 	   	</div>
 	</div>
-	<div class=" col-sm-offset-2 col-sm-4" >
+		
+	<div class="col-sm-2">
+		<?php echo CHtml::radioButtonList('factura',$factura,array('Con Factura','Sin Factura'))?>
+	</div>
+	
+	<div class="col-sm-4" >
 		
 		<div class="form-group ">
 	    	<?php echo CHtml::activeLabelEx($venta,"montoTotal",array('class'=>'control-label col-sm-4'))?>
 	    	<div class="col-sm-8">
 	      	<?php echo CHtml::activeTextField($venta,"montoTotal",array('class'=>'form-control input-sm','readonly'=>true,"id"=>"total")); ?>
 	    	</div>
+	    	<?php echo CHtml::error($venta,"montoTotal",array('class'=>'label label-danger')); ?>
 	  	</div>
 	  	<div class="form-group ">
 	    	<?php echo CHtml::activeLabelEx($venta,"montoPagado",array('class'=>'control-label col-sm-4'))?>
 	    	<div class="col-sm-8">
 	      	<?php echo CHtml::activeTextField($venta,"montoPagado",array('class'=>'form-control input-sm',"id"=>"pagado")); ?>
 	    	</div>
+	    	<?php echo CHtml::error($venta,"montoPagado",array('class'=>'label label-danger')); ?>
 	  	</div>
 	  	<div class="form-group ">
 	    	<?php echo CHtml::activeLabelEx($venta,"montoCambio",array('class'=>'control-label col-sm-4'))?>
 	    	<div class="col-sm-8">
 	      	<?php echo CHtml::activeTextField($venta,"montoCambio",array('class'=>'form-control input-sm','readonly'=>true,"id"=>"cambio")); ?>
 	    	</div>
+	    	<?php echo CHtml::error($venta,"montoCambio",array('class'=>'label label-danger')); ?>
 	  	</div>
 	  	
 	</div>
 	
-	
+	<div class="col-sm-offset-2 ">
+		<div class="col-sm-6">
+	    	<?php echo CHtml::radioButtonList('fomaPago',$factura,array('Contado','Credito'))?>
+	    <div class="form-group">
+		<?php echo CHtml::activeLabelEx($venta,'fechaPlazo',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-5">
+		<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+    	    'name'=>'fechaPlazo',
+			'attribute'=>'fechaPlazo',
+		    //'id'=>'user_Birthdate',
+		    'model'=>$venta,
+		    // additional javascript options for the date picker plugin
+		    'options'=>array(
+		        'showAnim'=>'fold',
+				'dateFormat'=>'dd-mm-yy',
+		    ),
+		    'htmlOptions'=>array(
+		        'class'=>'form-control'
+		    ),
+		));
+		?>
+		</div>
+		</div>
+	    	<?php //echo CHtml::activeTextField('autorizado',$factura,array('Contado','Credito'))?>
+	    </div>
+	</div>
 	
 </div>
 	
@@ -102,3 +140,18 @@ echo '</tbody></table>';
     
 ",CClientScript::POS_HEAD); ?>
 
+<?php 
+Yii::app()->getClientScript()->registerScript("check","
+function factura()
+{
+	$('form').attr('action', '".CHtml::normalizeUrl(array('/distribuidora/factura'))."');
+   	$('form').submit();
+}
+					
+$('#factura_0').change(function(){
+	factura();
+});
+$('#factura_1').change(function(){
+	factura();
+});
+",CClientScript::POS_READY);?>

@@ -36,11 +36,11 @@ class Venta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idTipoPago, idCliente, fechaVenta, idEmpleado, idAlmacen, montoTotal, montoPagado, montoCambio, codigo, estado', 'required'),
-			array('idTipoPago, idCliente, idEmpleado, idAlmacen, estado', 'numerical', 'integerOnly'=>true),
-			array('montoTotal, montoPagado, montoCambio', 'numerical'),
-			array('codigo', 'length', 'max'=>20),
-			array('obs', 'length', 'max'=>200),
+			array('idTipoPago, idCliente, fechaVenta, idEmpleado, idAlmacen, montoTotal, montoPagado, montoCambio, codigo, estado', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
+			array('idTipoPago, idCliente, idEmpleado, idAlmacen, estado', 'numerical', 'integerOnly'=>true,'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
+			array('montoTotal, montoPagado, montoCambio', 'numerical','message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
+			array('codigo', 'length', 'max'=>20 ,'message'=>'El campo <b>{attribute}</b> solo puede tener 20 caracteres'),
+			array('obs', 'length', 'max'=>200 ,'message'=>'El campo <b>{attribute}</b> solo puede tener 200 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, idTipoPago, idCliente, fechaVenta, fechaPlazo, idEmpleado, idAlmacen, montoTotal, montoPagado, montoCambio, codigo, estado, obs', 'safe', 'on'=>'search'),
