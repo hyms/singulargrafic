@@ -2,12 +2,6 @@
 
 <div class="table-responsive form-group">
 <?php
-$detalles=array();
-if(count($detalle)==1)
-	array_push($detalles,$detalle);
-else 
-	$detalles = $detalle;
-//print_r($detalle);
 
 echo '<table id="yw3" class="table"><thead class="tabular-header"><tr>
 			<td>'.CHtml::label('Nº','number').'</td>
@@ -21,27 +15,30 @@ echo '<table id="yw3" class="table"><thead class="tabular-header"><tr>
         </tr>';
 
 echo '</thead><tbody class="tabular-input-container">';
-
-if($detalles[0]->idAlmacen!=null)
-{	
+if(count($detalle)>=1)
+{
 	$i=0;
-	foreach ($detalles as $item)
+	foreach ($detalle as $item)
 	{
-		$this->renderPartial('_newRowDetalleVenta', array(
-				'model'=>$item,
-				'index'=>$i,
-				'almacen'=>$almacen = Almacen::model()	->with("Producto")
-														->with("Producto.Color")
-														->with("Producto.Material")
-														//->with("Producto.Industria")
-														->findByPk($item->idAlmacen),
-				'costos'=>array(),
-		));
-		$i++;
+		if($item->idAlmacen!=null)
+		{
+			$this->renderPartial('_newRowDetalleVenta', array(
+					'model'=>$item,
+					'index'=>$i,
+					'almacen'=>$almacen = Almacen::model()	->with("Producto")
+															->with("Producto.Color")
+															->with("Producto.Material")
+															//->with("Producto.Industria")
+															->findByPk($item->idAlmacen),
+					'costos'=>array(),
+			));
+			$i++;
+		}
 	}
 }
-echo '</tbody></table>';
 
+//print_r($detalle);
+echo '</tbody></table>';
 
 ?>
 	<div class="form-group col-sm-6">

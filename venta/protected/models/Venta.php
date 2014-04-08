@@ -36,7 +36,7 @@ class Venta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idTipoPago, idCliente, fechaVenta, fechaPlazo, idEmpleado, idAlmacen, montoTotal, montoPagado, montoCambio, codigo, estado, obs', 'required'),
+			array('idTipoPago, idCliente, fechaVenta, idEmpleado, idAlmacen, montoTotal, montoPagado, montoCambio, codigo, estado', 'required'),
 			array('idTipoPago, idCliente, idEmpleado, idAlmacen, estado', 'numerical', 'integerOnly'=>true),
 			array('montoTotal, montoPagado, montoCambio', 'numerical'),
 			array('codigo', 'length', 'max'=>20),

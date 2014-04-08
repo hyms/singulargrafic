@@ -35,22 +35,31 @@ class DistribuidoraController extends Controller
 		
 		if(isset($_POST['Cliente']))
 		{
-			//print_r($_POST);
 			$cliente->attributes = $_POST['Cliente'];
+			$cliente->validate();
+		}
+		
+		if(isset($_POST['DetalleVenta']))
+		{
 			$detalle = array();
-			
 			$i=0;
 			
 			foreach ($_POST['DetalleVenta'] as $item)
 			{
 				array_push($detalle,new DetalleVenta);
 				$detalle[$i]->attributes = $item;
+				$detalle[$i]->validate();
 				$i++;
 			}
-			
-			$venta->attributes = $_POST['Venta'];
-			
 		}
+			
+		if(isset($_POST['Venta']))
+		{
+			$venta->attributes = $_POST['Venta'];
+			$venta->validate();
+		}
+			
+		
 		
 		$this->render('index',array(
 				//'dataProvider'=>$dataProvider,

@@ -30,7 +30,7 @@ class Cliente extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nitCi, apellido, nombre, correo, telefono, fechaRegistro', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio',),
+			array('nitCi, apellido, fechaRegistro', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio',),
 			array('nitCi, telefono', 'numerical', 'integerOnly'=>true, 'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
 			array('nitCi, telefono', 'length', 'max'=>15,'message'=>'<b>{attribute}</b> solo puede contener 15 caracteres'),
 			array('apellido, nombre', 'length', 'max'=>30,'message'=>'<b>{attribute}</b> solo puede contener 30 caracteres'),
