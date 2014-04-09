@@ -6,16 +6,15 @@
 		//->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.min.darckly.css' )
 		//->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.min.super.css' )
 		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap-responsive.css' )
-		//->registerCssFile( Yii::app()->request->baseUrl . '/css/uploadify.css' )
+		
 		->registerCoreScript( 'jquery' )
 		->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.js', CClientScript::POS_END )
 		//->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END )
-		->registerScriptFile( Yii::app()->baseUrl.'/js/ckeditor/ckeditor.js')
-		//->registerScriptFile( Yii::app()->baseUrl.'/js/uploadify/jquery.uploadify.js')
+		
 		//*/
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	

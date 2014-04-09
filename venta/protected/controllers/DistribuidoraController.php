@@ -2,25 +2,22 @@
 
 class DistribuidoraController extends Controller
 {
-	public function actions()
-	{
-		return array('newRow'=>array(
-				'class'=>'ext.actions.XTabularInputAction',
-				'modelName'=>'DetalleVenta',
-				'viewName'=>'/distribuidora/_newRowDetalleVenta',
-		),);
-	}
 	
 	public function actionIndex($id=null)
 	{
 		$cliente = new Cliente;
 		$empleado = Empleado::model()->findByPk('1');
 		$almacen = new Almacen;
-		$productos=new Producto('searchAll');
+		$productos = new Producto('searchAll');
 		$venta = new Venta;
 		$detalle = new DetalleVenta;
+
+		//new venta
+		$row = Venta::model()->find(array("select"=>"count(*) as `max`"));
+		$venta->codigo= ($row['max']+1)."-".date("m")."-".date("y");
+		$venta->fechaVenta = date("d/m/Y");
 		
-		//seccion on filter
+		//init seccion on filter
 		$productos->unsetAttributes();
 		$dist = $this->verifyModel(TipoAlmacen::model()->find('nombre like "%distribuidora%"'));
 		$productos->almacen = $dist->id;
@@ -32,12 +29,59 @@ class DistribuidoraController extends Controller
 			$productos->industria = $_GET['Producto']['industria'];
 			//$productos->almacen = $_GET['Producto']['almacen'];
 		}
+		//finish filter seccion
 		
-		//print_r($_POST);
+		
+		$factura=0;
+		$formaPago=0;
+		if(isset($_POST['factura']))
+		{
+			$factura=$_POST['factura'];
+		}
+		if(isset($_POST['formaPago']))
+		{
+			$formaPago=$_POST['formaPago'];
+		}
+		
+		//init seccion for save datas
+		$save=0;
 		if(isset($_POST['Cliente']))
 		{
-			$cliente = new Cliente;
+			$cliente = Cliente::model()->find('nitCi='.$_POST['Cliente']['nitCi']);
+			if($cliente==null)
+				$cliente = new Cliente;
+			
 			$cliente->attributes = $_POST['Cliente'];
+			if($cliente->validate())
+			{
+				if($cliente->save())
+					$save++;
+			}
+		}
+		
+		if(isset($_POST['Venta']))
+		{
+			$venta->attributes = $_POST['Venta'];
+			$venta->idCliente = $cliente->id;
+			$venta->idTipoPago = $formaPago;
+			$venta->estado = '1';
+			
+			if(isset($_POST['Venta']['fechaPlazo']))
+				$venta->fechaPlazo = $_POST['Venta']['fechaPlazo'];
+			if($venta->validate())
+			{
+				if($venta->save())
+					$save++;
+			}
+			if($formaPago==1)
+			{
+				$credito = new Credito;
+				$credito->idVenta=$venta->id;
+				$credito->idcliente=$venta->idCliente;
+				$credito->fechaPago=$venta->fechaVenta;
+				$credito->monto=$venta->pagado;
+				$credito->save();
+			}
 		}
 		
 		if(isset($_POST['DetalleVenta']))
@@ -49,21 +93,20 @@ class DistribuidoraController extends Controller
 			{
 				array_push($detalle,new DetalleVenta);
 				$detalle[$i]->attributes = $item;
-				$detalle[$i]->validate();
+				$detalle[$i]->idVenta = $venta->id;
+				if($detalle[$i]->validate())
+				{	
+					if($detalle[$i]->save())
+						$save++;
+				}
 				$i++;
 			}
 		}
-			
-		if(isset($_POST['Venta']))
-		{
-			$venta->attributes = $_POST['Venta'];
-			$venta->validate();
-		}
+		//finish section for save datas
 		
-		$factura=0;
-		if(isset($_POST['factura']))
+		if($save>=3)
 		{
-			$factura=$_POST['factura'];
+			$this->redirect(array('distribuidora/venta'));
 		}
 		
 		$this->render('index',array(
@@ -75,51 +118,13 @@ class DistribuidoraController extends Controller
 				'productos'=>$productos,
 				'detalle'=>$detalle,
 				'factura'=>$factura,
+				'formaPago'=>$formaPago,
 				
 				'pagination'=>array(
 						'pageSize'=>5,
 				),
 		));
 		
-		
-	}
-	
-	public function actionAjaxCliente($nitCi)
-	{
-		$cliente = $this->verifyModel(Cliente::model()->find('nitCi='.$nitCi));
-		echo CJSON::encode($cliente);
-	}
-	
-	public function actionAddDetalle()
-	{
-		if(Yii::app()->request->isAjaxRequest && isset($_GET['index']))
-		{
-			$detalle = new DetalleVenta;
-			$almacen = new Almacen;
-			if(isset($_GET['al']))
-			{	
-				$almacen = Almacen::model()	->with("Producto")
-											->with("Producto.Color")
-											->with("Producto.Material")
-											//->with("Producto.Industria")
-											->findByPk($_GET['al']);
-				
-			}
-			$detalle->idAlmacen = $almacen->id;
-			$this->renderPartial('_newRowDetalleVenta', array(
-					'model'=>$detalle,
-					'index'=>$_GET['index'],
-					'factura'=>$_GET['factura'],
-					'almacen'=>$almacen,
-					'costos'=>array(),
-			));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
-	
-	public function actionEditDetalle($id)
-	{
 		
 	}
 	
@@ -133,15 +138,21 @@ class DistribuidoraController extends Controller
 		$venta = new Venta;
 		
 		$factura=0;
+		$formaPago=0;
 		if(isset($_POST['factura']))
 		{
 			$factura=$_POST['factura'];
+		}
+		if(isset($_POST['formaPago']))
+		{
+			$formaPago=$_POST['formaPago'];
 		}
 		
 		if(isset($_POST['Cliente']))
 		{
 			$cliente->attributes = $_POST['Cliente'];
 		}
+		
 		$total=0;
 		if(isset($_POST['DetalleVenta']))
 		{
@@ -169,6 +180,8 @@ class DistribuidoraController extends Controller
 		if(isset($_POST['Venta']))
 		{
 			$venta->attributes = $_POST['Venta'];
+			if(isset($_POST['Venta']['fechaPlazo']))
+				$venta->fechaPlazo = $_POST['Venta']['fechaPlazo'];
 			$venta->montoTotal=$total;
 			$venta->montoCambio=$venta->montoPagado - $venta->montoTotal;
 		}
@@ -184,11 +197,58 @@ class DistribuidoraController extends Controller
 				'productos'=>$productos,
 				'detalle'=>$detalle,
 				'factura'=>$factura,
-		
+				'formaPago'=>$formaPago,
+				
 				'pagination'=>array(
 						'pageSize'=>5,
 				),
 		));
+	}
+	
+	public function actionVenta()
+	{
+		$ventas = new CActiveDataProvider('Venta');
+		$this->render('venta',array('ventas'=>$ventas,
+									'pagination'=>array(
+										'pageSize'=>5,
+									)));
+	}
+	
+	public function actionAjaxCliente($nitCi)
+	{
+		if(Yii::app()->request->isAjaxRequest)
+		{
+			$cliente = $this->verifyModel(Cliente::model()->find('nitCi='.$nitCi));
+			echo CJSON::encode($cliente);
+		}
+	}
+	
+	public function actionAddDetalle()
+	{
+		if(Yii::app()->request->isAjaxRequest && isset($_GET['index']))
+		{
+			$detalle = new DetalleVenta;
+			$almacen = new Almacen;
+			if(isset($_GET['al']))
+			{
+				$almacen = Almacen::model()	->with("Producto")
+				->with("Producto.Color")
+				->with("Producto.Material")
+				//->with("Producto.Industria")
+				->findByPk($_GET['al']);
+	
+			}
+			$detalle->idAlmacen = $almacen->id;
+			$this->renderPartial('_newRowDetalleVenta', array(
+					'model'=>$detalle,
+					'index'=>$_GET['index'],
+					'factura'=>$_GET['factura'],
+					'almacen'=>$almacen,
+					'costos'=>array(),
+			));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 	
 	private function verifyModel($model)

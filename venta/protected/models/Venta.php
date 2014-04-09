@@ -10,16 +10,17 @@
  * @property string $fechaVenta
  * @property string $fechaPlazo
  * @property integer $idEmpleado
- * @property integer $idAlmacen
  * @property double $montoTotal
  * @property double $montoPagado
  * @property double $montoCambio
  * @property string $codigo
  * @property integer $estado
+ * @property string $autorizado
  * @property string $obs
  */
 class Venta extends CActiveRecord
 {
+	public $max;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -36,14 +37,14 @@ class Venta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idTipoPago, idCliente, fechaVenta, idEmpleado, idAlmacen, montoTotal, montoPagado, montoCambio, codigo, estado', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
+			array('idTipoPago, idCliente, fechaVenta, idEmpleado, montoTotal, montoPagado, montoCambio, codigo, estado', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
 			array('idTipoPago, idCliente, idEmpleado, idAlmacen, estado', 'numerical', 'integerOnly'=>true,'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
 			array('montoTotal, montoPagado, montoCambio', 'numerical','message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
-			array('codigo', 'length', 'max'=>20 ,'message'=>'El campo <b>{attribute}</b> solo puede tener 20 caracteres'),
+			array('codigo, autorizado', 'length', 'max'=>20 ,'message'=>'El campo <b>{attribute}</b> solo puede tener 20 caracteres'),
 			array('obs', 'length', 'max'=>200 ,'message'=>'El campo <b>{attribute}</b> solo puede tener 200 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, idTipoPago, idCliente, fechaVenta, fechaPlazo, idEmpleado, idAlmacen, montoTotal, montoPagado, montoCambio, codigo, estado, obs', 'safe', 'on'=>'search'),
+			array('id, idTipoPago, idCliente, fechaVenta, fechaPlazo, idEmpleado, montoTotal, montoPagado, montoCambio, codigo, estado, autorizado, obs', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -76,6 +77,7 @@ class Venta extends CActiveRecord
 			'montoCambio' => 'Cambio',
 			'codigo' => 'Codigo',
 			'estado' => 'Estado',
+			'autorizado' => 'Autorizado',
 			'obs' => 'Observaciones',
 		);
 	}
@@ -110,6 +112,7 @@ class Venta extends CActiveRecord
 		$criteria->compare('montoCambio',$this->montoCambio);
 		$criteria->compare('codigo',$this->codigo,true);
 		$criteria->compare('estado',$this->estado);
+		$criteria->compare('autorizado',$this->autorizado);
 		$criteria->compare('obs',$this->obs,true);
 
 		return new CActiveDataProvider($this, array(

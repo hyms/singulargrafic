@@ -83,32 +83,41 @@ echo '</tbody></table>';
 	  	
 	</div>
 	
-	<div class="col-sm-offset-2 ">
-		<div class="col-sm-6">
-	    	<?php echo CHtml::radioButtonList('fomaPago',$factura,array('Contado','Credito'))?>
-	    <div class="form-group">
-		<?php echo CHtml::activeLabelEx($venta,'fechaPlazo',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-5">
-		<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-    	    'name'=>'fechaPlazo',
-			'attribute'=>'fechaPlazo',
-		    //'id'=>'user_Birthdate',
-		    'model'=>$venta,
-		    // additional javascript options for the date picker plugin
-		    'options'=>array(
-		        'showAnim'=>'fold',
-				'dateFormat'=>'dd-mm-yy',
-		    ),
-		    'htmlOptions'=>array(
-		        'class'=>'form-control'
-		    ),
-		));
-		?>
-		</div>
-		</div>
-	    	<?php //echo CHtml::activeTextField('autorizado',$factura,array('Contado','Credito'))?>
+	
+		<div class="form-group col-sm-10">
+		<div class="form-group col-sm-2">
+	    	<?php echo CHtml::radioButtonList('formaPago',$formaPago,array('Contado','Credito'))?>
 	    </div>
-	</div>
+	    <div class="form-group col-sm-5">
+			<?php echo CHtml::activeLabelEx($venta,'fechaPlazo',array('class'=>'col-sm-6 control-label')); ?>
+			<div class="col-sm-6">
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+	    	    'name'=>'fechaPlazo',
+				'attribute'=>'fechaPlazo',
+			    //'id'=>'fechaPlazo',
+			    'model'=>$venta,
+			    // additional javascript options for the date picker plugin
+			    'options'=>array(
+			        'showAnim'=>'fold',
+					'dateFormat'=>'dd-mm-yy',
+			    ),
+			    'htmlOptions'=>array(
+			        'class'=>'form-control input-sm',
+					'disabled'=>(($formaPago==0)?true:false),
+					//'id'=>"fechaPlazo",
+			    ),
+			));
+			?>
+			</div>
+		</div>
+		<div class="form-group col-sm-5">
+			<?php echo CHtml::activeLabelEx($venta,'autorizado',array('class'=>'col-sm-5 control-label')); ?>
+			<div class="form-group col-sm-7">
+			<?php echo CHtml::activeDropDownList($venta, 'autorizado',array('Erick Paredes','Miriam Martinez'),array('class'=>'form-control input-sm','disabled'=>(($formaPago==0)?true:false),'id'=>"autorizado",'empty' => 'Selecciona Responsable')); ?>
+	    	</div>
+	    </div>
+	    
+		</div>
 	
 </div>
 	
@@ -147,11 +156,25 @@ function factura()
 	$('form').attr('action', '".CHtml::normalizeUrl(array('/distribuidora/factura'))."');
    	$('form').submit();
 }
+
+function formaPago(value)
+{
+	$('#fechaPlazo').prop('disabled', value);
+	$('#autorizado').prop('disabled', value);
+}
 					
 $('#factura_0').change(function(){
 	factura();
 });
 $('#factura_1').change(function(){
 	factura();
+});
+					
+$('#formaPago_0').change(function(){
+	formaPago(true);
+});
+
+$('#formaPago_1').change(function(){
+	formaPago(false);
 });
 ",CClientScript::POS_READY);?>

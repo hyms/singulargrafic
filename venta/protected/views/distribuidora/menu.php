@@ -6,8 +6,8 @@ $this->widget('zii.widgets.CMenu',array(
 				'encodeLabel' => false,
 				'items'=>array(
 							array('label'=>'Nueva Venta', 'url'=>array('/distribuidora/index')),
-							array('label'=>'Confirmar Venta', 'url'=>array('#')),
-							array('label'=>'Lista de Ventas', 'url'=>array('#')),
+							array('label'=>'Ventas por Confirmar', 'url'=>array('/distribuidora/venta')),
+							array('label'=>'Ventas realizadas', 'url'=>array('#')),
 							array('label'=>'Producto', 'url'=>array('producto/index')),
 						),
 				)); 

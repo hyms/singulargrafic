@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 </div>
 
 <div class="col-md-10">
-	<h2>Nueva Venta</h2>
+	<h2>Productos</h2>
 	<div class="row">
 	<?php $this->renderPartial('producto',array('productos'=>$productos)); ?>
 	</div>
@@ -28,8 +28,9 @@ $this->breadcrumbs=array(
 			),
 	));
 	?>
-	<h2 >Detalle de Venta</h2>
-	<?php $this->renderPartial('detalleVenta',array('venta'=>$venta,'detalle'=>$detalle,'almacen'=>$almacen,'factura'=>$factura))?>
+	<h2 >Nueva Venta  <?php echo $venta->codigo?></h2>
+	<?php echo CHtml::activeHiddenField($venta,'codigo');?>
+	<?php $this->renderPartial('detalleVenta',array('venta'=>$venta,'detalle'=>$detalle,'almacen'=>$almacen,'factura'=>$factura,'formaPago'=>$formaPago))?>
 	
 	<?php $this->renderPartial('ventaProducto',array('venta'=>$venta,'cliente'=>$cliente,'empleado'=>$empleado,'form'=>$form)); ?>
 	<div class="form-group">

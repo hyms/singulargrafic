@@ -24,6 +24,6 @@
 		<?php echo $form->labelEx($venta,'fechaVenta',array('class'=>'control-label col-sm-4')); ?>
 		<div class="col-sm-8">
 			<?php echo $form->hiddenField($venta,'fechaVenta'); ?>
-			<p class=" form-control "><?php echo date("d/m/Y");?></p>
+			<p class=" form-control "><?php echo $venta->fechaVenta;?></p>
 		</div>
 	</div>
