@@ -38,7 +38,7 @@ class Venta extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('idTipoPago, idCliente, fechaVenta, idEmpleado, montoTotal, montoPagado, montoCambio, codigo, estado', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
-			array('idTipoPago, idCliente, idEmpleado, idAlmacen, estado', 'numerical', 'integerOnly'=>true,'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
+			array('idTipoPago, idCliente, idEmpleado, estado', 'numerical', 'integerOnly'=>true,'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
 			array('montoTotal, montoPagado, montoCambio', 'numerical','message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
 			array('codigo, autorizado', 'length', 'max'=>20 ,'message'=>'El campo <b>{attribute}</b> solo puede tener 20 caracteres'),
 			array('obs', 'length', 'max'=>200 ,'message'=>'El campo <b>{attribute}</b> solo puede tener 200 caracteres'),
@@ -56,6 +56,7 @@ class Venta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'Cliente'=>array(self::BELONGS_TO, 'Cliente', 'idCliente'),
 		);
 	}
 
@@ -71,7 +72,6 @@ class Venta extends CActiveRecord
 			'fechaVenta' => 'Fecha Venta',
 			'fechaPlazo' => 'Fecha Plazo',
 			'idEmpleado' => 'Id Empleado',
-			'idAlmacen' => 'Id Almacen',
 			'montoTotal' => 'Total',
 			'montoPagado' => 'Pagado',
 			'montoCambio' => 'Cambio',
@@ -106,7 +106,6 @@ class Venta extends CActiveRecord
 		$criteria->compare('fechaVenta',$this->fechaVenta,true);
 		$criteria->compare('fechaPlazo',$this->fechaPlazo,true);
 		$criteria->compare('idEmpleado',$this->idEmpleado);
-		$criteria->compare('idAlmacen',$this->idAlmacen);
 		$criteria->compare('montoTotal',$this->montoTotal);
 		$criteria->compare('montoPagado',$this->montoPagado);
 		$criteria->compare('montoCambio',$this->montoCambio);

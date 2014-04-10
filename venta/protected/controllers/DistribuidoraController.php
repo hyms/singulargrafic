@@ -3,8 +3,9 @@
 class DistribuidoraController extends Controller
 {
 	
-	public function actionIndex($id=null)
+	public function actionIndex()
 	{
+		//print_r($_POST);
 		$cliente = new Cliente;
 		$empleado = Empleado::model()->findByPk('1');
 		$almacen = new Almacen;
@@ -15,8 +16,8 @@ class DistribuidoraController extends Controller
 		//new venta
 		$row = Venta::model()->find(array("select"=>"count(*) as `max`"));
 		$venta->codigo= ($row['max']+1)."-".date("m")."-".date("y");
-		$venta->fechaVenta = date("d/m/Y");
-		
+		$venta->fechaVenta = date("Y-m-d H:i:s");
+		//date("Y-m-d", strtotime($model->fechaIngreso))
 		//init seccion on filter
 		$productos->unsetAttributes();
 		$dist = $this->verifyModel(TipoAlmacen::model()->find('nombre like "%distribuidora%"'));
@@ -52,6 +53,7 @@ class DistribuidoraController extends Controller
 				$cliente = new Cliente;
 			
 			$cliente->attributes = $_POST['Cliente'];
+			$cliente->fechaRegistro = date("Y-m-d");
 			if($cliente->validate())
 			{
 				if($cliente->save())
@@ -64,7 +66,8 @@ class DistribuidoraController extends Controller
 			$venta->attributes = $_POST['Venta'];
 			$venta->idCliente = $cliente->id;
 			$venta->idTipoPago = $formaPago;
-			$venta->estado = '1';
+			$venta->estado = 1;
+			$venta->idEmpleado = 1;
 			
 			if(isset($_POST['Venta']['fechaPlazo']))
 				$venta->fechaPlazo = $_POST['Venta']['fechaPlazo'];
@@ -94,19 +97,28 @@ class DistribuidoraController extends Controller
 				array_push($detalle,new DetalleVenta);
 				$detalle[$i]->attributes = $item;
 				$detalle[$i]->idVenta = $venta->id;
+				
+				$almacenes = Almacen::model()->findByPk($detalle[$i]->idAlmacen);
+				$almacenes->stockUnidad = $almacenes->stockUnidad - $detalle[$i]->cantUnidad;
+				$almacenes->stockPaquete = $almacenes->stockPaquete - $detalle[$i]->cantPaquete;
+				
 				if($detalle[$i]->validate())
 				{	
 					if($detalle[$i]->save())
+					{
 						$save++;
+						$almacenes->save();
+					}
 				}
 				$i++;
 			}
 		}
 		//finish section for save datas
 		
+		//print_r($venta);
 		if($save>=3)
 		{
-			$this->redirect(array('distribuidora/venta'));
+			$this->redirect(array('venta'));
 		}
 		
 		$this->render('index',array(
@@ -207,12 +219,20 @@ class DistribuidoraController extends Controller
 	
 	public function actionVenta()
 	{
-		$ventas = new CActiveDataProvider('Venta');
-		$this->render('venta',array('ventas'=>$ventas,
-									'pagination'=>array(
-										'pageSize'=>5,
-									)));
+		$ventas = new CActiveDataProvider('Venta',array('criteria'=>array(
+										        'condition'=>'estado=1',
+										        'with'=>array('Cliente'),
+										    ),
+										    'pagination'=>array(
+										        'pageSize'=>20,
+										    ),));
+		$this->render('venta',array('ventas'=>$ventas));
 	}
+	
+	public function actionPreview()
+	{
+		
+	} 
 	
 	public function actionAjaxCliente($nitCi)
 	{

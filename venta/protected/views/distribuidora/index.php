@@ -52,8 +52,9 @@ $this->breadcrumbs=array(
             type: 'GET', 
             data: { nitCi: nitCi},
             success: function (data){ 
-            			$('#apellido').val(data['apellido']); 
-            			$('#clienteNit').val(data['nitCi']);
+			 			data = JSON.parse(data);
+            			$('#apellido').val(data[\"apellido\"]); 
+            			$('#clienteNit').val(data[\"nitCi\"]);
 					 },
 			error:	$('#clienteNit').val(nitCi),
         });
