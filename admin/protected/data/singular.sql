@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-04-2014 a las 19:27:52
+-- Tiempo de generación: 11-04-2014 a las 19:53:33
 -- Versión del servidor: 5.5.35
 -- Versión de PHP: 5.4.4-14+deb7u8
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `almacen` (
 INSERT INTO `almacen` (`id`, `idProducto`, `idTipoAlmacen`, `stockUnidad`, `stockPaquete`) VALUES
 (2, 2, 1, 1, 0),
 (7, 1, 1, 8, 0),
-(9, 1, 2, 2, 2),
+(9, 1, 2, 1, 1),
 (10, 2, 2, 1, 1);
 
 -- --------------------------------------------------------
@@ -83,7 +83,14 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `telefono` varchar(15) NOT NULL,
   `fechaRegistro` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`id`, `nitCi`, `apellido`, `nombre`, `correo`, `telefono`, `fechaRegistro`) VALUES
+(1, '5999242', 'cortez', '', '', '', '2014-04-10 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -110,6 +117,21 @@ INSERT INTO `color` (`id`, `nombre`, `codigo`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `credito`
+--
+
+CREATE TABLE IF NOT EXISTS `credito` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idVenta` int(11) NOT NULL,
+  `monto` float NOT NULL,
+  `fechaPago` datetime NOT NULL,
+  `idcliente` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `detalleVenta`
 --
 
@@ -123,7 +145,14 @@ CREATE TABLE IF NOT EXISTS `detalleVenta` (
   `adicional` varchar(20) NOT NULL,
   `costoTotal` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `detalleVenta`
+--
+
+INSERT INTO `detalleVenta` (`id`, `idVenta`, `idProducto`, `idAlmacen`, `cantUnidad`, `cantPaquete`, `adicional`, `costoTotal`) VALUES
+(1, 1, 0, 9, 1, 1, '5', '166.68');
 
 -- --------------------------------------------------------
 
@@ -337,7 +366,7 @@ CREATE TABLE IF NOT EXISTS `producto` (
 
 INSERT INTO `producto` (`id`, `codigo`, `idMaterial`, `peso`, `idColor`, `dimension`, `procedencia`, `costoSF`, `costoSFUnidad`, `costoCF`, `costoCFUnidad`, `idIndustria`, `cantidad`, `obs`) VALUES
 (1, 'CB90-6787SP', 1, '90', 1, '67x87', 'Sarrio Papel', 153, 0.65, 161, 0.68, 1, 250, 'ninguno'),
-(2, 'CB90-77110SP', 1, '90', 1, '77x110', 'Sarrio Papel', 235, 0.96, 245, 1, 1, 250, 'Ninguna');
+(2, 'CB90-77110SP', 1, '90', 3, '77x110', 'Sarrio Papel', 235, 0.96, 245, 1, 1, 250, 'Ninguna');
 
 -- --------------------------------------------------------
 
@@ -415,15 +444,22 @@ CREATE TABLE IF NOT EXISTS `venta` (
   `fechaVenta` datetime NOT NULL,
   `fechaPlazo` datetime NOT NULL,
   `idEmpleado` int(11) NOT NULL,
-  `idAlmacen` int(11) NOT NULL,
   `montoTotal` float NOT NULL,
   `montoPagado` float NOT NULL,
   `montoCambio` float NOT NULL,
   `codigo` varchar(20) NOT NULL,
   `estado` int(11) NOT NULL,
+  `autorizado` varchar(50) NOT NULL,
   `obs` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `venta`
+--
+
+INSERT INTO `venta` (`id`, `idTipoPago`, `idCliente`, `fechaVenta`, `fechaPlazo`, `idEmpleado`, `montoTotal`, `montoPagado`, `montoCambio`, `codigo`, `estado`, `autorizado`, `obs`) VALUES
+(1, 0, 1, '2014-04-10 00:00:00', '0000-00-00 00:00:00', 1, 166.68, 200, 33.32, '1-04-14', 1, '', 'test');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

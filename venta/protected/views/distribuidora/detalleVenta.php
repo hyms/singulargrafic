@@ -1,5 +1,3 @@
-
-
 <div class="table-responsive form-group">
 <?php
 

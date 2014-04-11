@@ -231,7 +231,13 @@ class DistribuidoraController extends Controller
 	
 	public function actionPreview()
 	{
-		
+		if(Yii::app()->request->isAjaxRequest && isset($_GET['id']))
+		{
+			$ventas = Venta::model()->findByPk($_GET['id']);
+			$this->renderPartial('preview',array('venta'=>$ventas));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	} 
 	
 	public function actionAjaxCliente($nitCi)
