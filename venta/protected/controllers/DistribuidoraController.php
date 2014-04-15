@@ -3,6 +3,27 @@
 class DistribuidoraController extends Controller
 {
 	
+	public function filters()
+	{
+		return array( 'accessControl' ); // perform access control for CRUD operations
+	}
+	
+	public function accessRules() {
+		return array(
+				array('allow', // allow authenticated user to perform 'create' and 'update' actions
+						'actions'=>array('index','factura','confirm','credito','ventas','ajaxCliente','addDetalle'),
+						'users'=>array('@'),
+				),
+				array('allow', // allow authenticated user to perform 'create' and 'update' actions
+						'actions'=>array('index','factura','venta','preview','confirm','credito','ventas','ajaxCliente','addDetalle'),
+						'users'=>array('admin'),
+				),
+				array('deny',
+						'users'=>array('*'),
+				),
+		);
+	}
+	
 	public function actionIndex()
 	{
 		//print_r($_POST);

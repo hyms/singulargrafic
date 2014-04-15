@@ -18,6 +18,7 @@
  * @property integer $sucursal
  * @property integer $superior
  * @property string $fechaIngreso
+ * @property string $idUsers
  * @property string $obs
  */
 class Empleado extends CActiveRecord
@@ -48,7 +49,7 @@ class Empleado extends CActiveRecord
 			array('obs', 'length', 'max'=>500,'message'=>'<b>{attribute}</b> solo puede contener 500 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('nombres, apellidos, ci, telefono, email, cargo, turno, sueldo, skype, face, superior, obs', 'safe', 'on'=>'search'),
+			array('nombres, apellidos, ci, telefono, email, cargo, turno, sueldo, skype, face, superior, obs, idUsers', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,6 +62,7 @@ class Empleado extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 				'MovimientoAlmacen'=>array(self::HAS_ONE, 'MovimientoAlmacen', 'idEmpleado'),
+				'Users'=>array(self::BELONGS_TO,'Users','idUsers'),
 		);
 	}
 
@@ -84,6 +86,7 @@ class Empleado extends CActiveRecord
 			'sucursal' => 'Sucursal',
 			'superior' => 'Superior',
 			'fechaIngreso' => 'Fecha de Ingreso',
+			'idUsers' => 'Users',
 			'obs' => 'Observaciones',
 		);
 	}
@@ -120,6 +123,7 @@ class Empleado extends CActiveRecord
 		$criteria->compare('sucursal',$this->sucursal);
 		$criteria->compare('superior',$this->superior);
 		$criteria->compare('fechaIngreso',$this->fechaIngreso,true);
+		$criteria->compare('idUsers',$this->idUsers);
 		$criteria->compare('obs',$this->obs,true);
 
 		return new CActiveDataProvider($this, array(

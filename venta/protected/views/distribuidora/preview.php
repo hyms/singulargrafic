@@ -99,20 +99,25 @@
 </div>
 </div>
 <?php 
+$ajax = "
+			$.ajax({
+				url: '".CHtml::normalizeUrl(array('/distribuidora/confirm'))."',
+				type: 'GET',
+				data: { id: id},
+				success: function (data){
+					$(location).attr('href','".CHtml::normalizeUrl(array('/distribuidora/venta'))."');
+				},
+			});
+		";
 $script = "
 		function printView(id)
 		{
-			window.print()
-			$.ajax({
-            url: '".CHtml::normalizeUrl(array('/distribuidora/confirm'))."', 
-            type: 'GET', 
-            data: { id: id},
-            success: function (data){ 
-			 			$(location).attr('href','".CHtml::normalizeUrl(array('/distribuidora/venta'))."'); 
-					 },
-        	});
-		}
-		
-		";
+			window.print();";
+if($venta->estado==1)
+{
+	$script = $script.$ajax;
+}
+
+$script=$script."}";
 Yii::app()->clientScript->registerScript("print",$script,CClientScript::POS_HEAD); 
 //*/?>

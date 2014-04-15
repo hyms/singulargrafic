@@ -192,7 +192,43 @@
 		</div>
 		<?php echo $form->error($model,'fechaIngreso',array('class'=>'label label-danger')); ?>
 	</div>
+	
+	<div class="form-group">
+		<?php echo $form->labelEx($user,'username',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-3">
+		<?php echo $form->textField($user,'username',array('class'=>'form-control')); ?>
+		</div>
+		<?php echo $form->error($user,'username',array('class'=>'label label-danger')); ?>
+	</div>
 
+	<div class="form-group">
+		<?php echo $form->labelEx($user,'password',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-3">
+		<?php echo $form->passwordField($user,'password',array('class'=>'form-control')); ?>
+		</div>
+		<?php echo $form->error($user,'password',array('class'=>'label label-danger')); ?>
+	</div>
+
+	<div class="form-group">
+		<?php echo $form->labelEx($user,'estado',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-3">
+		<?php echo CHtml::activeRadioButtonList($user,'estado',array('Activado','Desactivado'))?>
+		</div>
+		<?php echo $form->error($user,'estado',array('class'=>'label label-danger')); ?>
+	</div>
+
+	<div class="form-group">
+		<?php echo $form->labelEx($user,'tipo',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-3">
+		<?php echo CHtml::activeDropDownList($user,'tipo', 
+              $user->tipos,
+              array('empty' => 'Seleccione Tipo',
+					'class'=>'form-control'
+		));?>
+		</div>
+		<?php echo $form->error($user,'tipo',array('class'=>'label label-danger')); ?>
+	</div>
+	
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'obs',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-5">

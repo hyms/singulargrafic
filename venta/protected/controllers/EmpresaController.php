@@ -2,10 +2,6 @@
 
 class EmpresaController extends Controller
 {
-	public function actionIndex()
-	{
-		$this->render('index');
-	}
 	
 	public function actionSucursal($id=null)
 	{

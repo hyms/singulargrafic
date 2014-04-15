@@ -77,9 +77,15 @@ class EmpresaController extends Controller
 	public function actionEmpleado($id=null)
 	{
 		$model=new Empleado;
+		$user=new Users;
 		
 		if($id!=null)
+		{
 			$model=$this->verifyModel(Empleado::model()->findByPk($id));
+			$user=Users::model()->findByPk($model->idUsers);
+			if($user==null)
+				$user=new Users;
+		}
 			
 		$empleados=Empleado::model()->findall();
 		
@@ -89,12 +95,31 @@ class EmpresaController extends Controller
 		
 		if(isset($_POST['Empleado']))
 		{
-			$model->attributes=$_POST['Empleado'];
-			$model->sucursal=$_POST['sucursal'];
-			$model->superior=$_POST['superior'];
+			$model->attributes = $_POST['Empleado'];
+			$model->sucursal = $_POST['sucursal'];
+			$model->superior = $_POST['superior'];
+			
+			$user->attributes = $_POST['Users'];
+			if($user->id!=null)
+			{
+				$userBpk = Users::model()->findByPk($user->id);
+				if($userBpk->password!=$user->password)
+					$user->password = md5($user->password);
+			}
+			else 
+			{
+				$user->password = md5($user->password);
+			}
+			
 			if($model->validate())
 			{
 				$model->fechaIngreso=date("Y-m-d", strtotime($model->fechaIngreso));
+				$user->validate();
+				if($user->save())
+				{
+					$model->idUsers=$user->id;
+					
+				}
 				if($model->save())
 				{
 					$this->redirect('empleado');
@@ -105,7 +130,7 @@ class EmpresaController extends Controller
 				$new=true;
 			}
 		}	
-		$this->render('empleado',array('model'=>$model,'empleados'=>$empleados,'new'=>$new));
+		$this->render('empleado',array('model'=>$model, 'user'=>$user,'empleados'=>$empleados, 'new'=>$new));
 			
 	}
 	
