@@ -57,6 +57,7 @@ class Venta extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'Cliente'=>array(self::BELONGS_TO, 'Cliente', 'idCliente'),
+			'Detalle'=>array(self::HAS_MANY, 'DetalleVenta', 'idVenta'),
 		);
 	}
 

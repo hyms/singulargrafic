@@ -48,7 +48,7 @@ class DistribuidoraController extends Controller
 		$save=0;
 		if(isset($_POST['Cliente']))
 		{
-			$cliente = Cliente::model()->find('nitCi='.$_POST['Cliente']['nitCi']);
+			$cliente = Cliente::model()->find('nitCi="'.$_POST['Cliente']['nitCi'].'"');
 			if($cliente==null)
 				$cliente = new Cliente;
 			
@@ -82,7 +82,7 @@ class DistribuidoraController extends Controller
 				$credito->idVenta=$venta->id;
 				$credito->idcliente=$venta->idCliente;
 				$credito->fechaPago=$venta->fechaVenta;
-				$credito->monto=$venta->pagado;
+				$credito->monto=$venta->montoPagado;
 				$credito->save();
 			}
 		}
@@ -231,10 +231,21 @@ class DistribuidoraController extends Controller
 	
 	public function actionPreview()
 	{
-		if(Yii::app()->request->isAjaxRequest && isset($_GET['id']))
+		if(isset($_GET['id']))
 		{
-			$ventas = Venta::model()->findByPk($_GET['id']);
-			$this->renderPartial('preview',array('venta'=>$ventas));
+			$ventas = Venta::model()
+						->with("Cliente")
+						->with("Detalle")
+						->with("Detalle.Almacen")
+						->with("Detalle.Almacen.Producto")
+						->with("Detalle.Almacen.Producto.Color")
+						->with("Detalle.Almacen.Producto.Material")
+						->findByPk($_GET['id']);
+			
+			if($ventas!=null)
+				$this->render('preview',array('venta'=>$ventas));
+			else
+				$this->redirect(array('venta'));
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
