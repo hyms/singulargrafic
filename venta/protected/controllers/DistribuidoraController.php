@@ -98,10 +98,6 @@ class DistribuidoraController extends Controller
 				$detalle[$i]->attributes = $item;
 				$detalle[$i]->idVenta = $venta->id;
 				
-				$almacenes = Almacen::model()->findByPk($detalle[$i]->idAlmacen);
-				$almacenes->stockUnidad = $almacenes->stockUnidad - $detalle[$i]->cantUnidad;
-				$almacenes->stockPaquete = $almacenes->stockPaquete - $detalle[$i]->cantPaquete;
-				
 				if($detalle[$i]->validate())
 				{	
 					if($detalle[$i]->save())
@@ -250,6 +246,56 @@ class DistribuidoraController extends Controller
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	} 
+	
+	public function actionConfirm()
+	{
+		if(isset($_GET['id']))
+		{
+			$venta = Venta::model()
+						->with("Detalle")
+						->with("Detalle.Almacen")
+						->findByPk($_GET['id']);
+			
+			foreach ($venta->Detalle as $detalle)
+			{
+				$almacenes = Almacen::model()->findByPk($detalle->idAlmacen);
+				$almacenes->stockUnidad = $almacenes->stockUnidad - $detalle->cantUnidad;
+				$almacenes->stockPaquete = $almacenes->stockPaquete - $detalle->cantPaquete;
+				$almacenes->save();
+			}
+			
+			$venta->estado = 0;
+			$venta->fechaVenta = date("Y-m-d H:i:s");
+			$venta->save();
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		
+	}
+	
+	public function actionCredito()
+	{
+		$ventas = new CActiveDataProvider('Venta',array('criteria'=>array(
+				'condition'=>'estado=2',
+				'with'=>array('Cliente'),
+		),
+				'pagination'=>array(
+						'pageSize'=>20,
+				),));
+		$this->render('venta',array('ventas'=>$ventas));
+	} 
+	
+	public function actionVentas()
+	{
+		$ventas = new CActiveDataProvider('Venta',array('criteria'=>array(
+				'condition'=>'estado=0',
+				'with'=>array('Cliente'),
+		),
+				'pagination'=>array(
+						'pageSize'=>20,
+				),));
+		$this->render('venta',array('ventas'=>$ventas));
+	}
 	
 	public function actionAjaxCliente($nitCi)
 	{

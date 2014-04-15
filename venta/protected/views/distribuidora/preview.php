@@ -4,7 +4,7 @@
 
 <div class="col-md-10" id="print" style="width:793px; height:529px; ">
 
-<a href="#" id="hrefPrint" class="btn btn-default hidden-print"  onClick='window.print()'>imprimir</a>
+<a href="#" id="hrefPrint" class="btn btn-default hidden-print"  onClick='printView(<?php echo $venta->id; ?>)'>imprimir</a>
 <div id="print-recived" class="container-fluid">
 <div>
 
@@ -100,12 +100,18 @@
 </div>
 <?php 
 $script = "
-		
-		$(\"#hrefPrint\").click(function() {
-		// Print the DIV.
-		$(\"#print\").print();
-		return (false);
-		});
+		function printView(id)
+		{
+			window.print()
+			$.ajax({
+            url: '".CHtml::normalizeUrl(array('/distribuidora/confirm'))."', 
+            type: 'GET', 
+            data: { id: id},
+            success: function (data){ 
+			 			$(location).attr('href','".CHtml::normalizeUrl(array('/distribuidora/venta'))."'); 
+					 },
+        	});
+		}
 		
 		";
 Yii::app()->clientScript->registerScript("print",$script,CClientScript::POS_HEAD); 

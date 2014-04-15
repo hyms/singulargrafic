@@ -58,8 +58,8 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=singular',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			//'password' => '',
-			'password' => 's1ngul4r',
+			'password' => '',
+			//'password' => 's1ngul4r',
 			'charset' => 'utf8',
 		),
 		//*/
