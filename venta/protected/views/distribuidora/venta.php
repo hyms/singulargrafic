@@ -2,6 +2,11 @@
 <?php $this->renderPartial('menu'); ?>
 </div>
 <div class="col-md-10">
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<strong><?php echo $titulo;?></strong>
+	</div>
+	<div class="panel-body">
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$ventas,
 	//'ajaxUpdate'=>true,
@@ -33,4 +38,6 @@
 	)
 )); 
 ?>
+</div>
+</div>
 </div>

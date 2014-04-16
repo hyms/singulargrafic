@@ -2,11 +2,15 @@
 <?php $this->renderPartial('menu'); ?>
 </div>
 
-<div class="col-md-10" id="print" style="width:793px; height:529px; ">
+<div class="col-md-10" id="print">
 
-<a href="#" id="hrefPrint" class="btn btn-default hidden-print"  onClick='printView(<?php echo $venta->id; ?>)'>imprimir</a>
-<div id="print-recived" class="container-fluid">
-<div>
+
+<?php echo CHtml::link('Imprimir', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"printView(".$venta->id.")")); ?>
+<?php
+	if($venta->estado==1)
+		echo CHtml::link('Cancelar', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"cancelar(".$venta->id.")")); 
+?>
+<div id="print-recived" class="form-group" style="width:793px; height:529px;">
 
 	<h4 class="col-xs-offset-10" style="text-align:right"><?php echo $venta->codigo; ?></h4>
 	<h3 class="col-xs-offset-8" style="text-align:right"><?php echo "NOTA DE VENTA";?></h3>
@@ -92,10 +96,9 @@
 	<span class="col-xs-6 "><strong>NOTA:</strong> Una vez redirada la mercancia, no se aceptan <strong>RECLAMOS, CAMBIOS NI DEVOLUCIONES</strong>.</span>
 	<span class="col-xs-offset-1 col-xs-4"><strong>Firma:..................................</strong></span>
 	<span class="col-xs-offset-1 col-xs-4"><strong>Apellido y Nomb ................</strong></span>
-	<span class="col-xs-offset-7 col-xs-4"><strong style="text-align:center"">Recibi Conforme</strong></span>
+	<span class="col-xs-offset-7 col-xs-4"><strong style="text-align:center">Recibi Conforme</strong></span>
 	</p>
 	
-</div>
 </div>
 </div>
 <?php 
@@ -117,7 +120,29 @@ if($venta->estado==1)
 {
 	$script = $script.$ajax;
 }
-
 $script=$script."}";
+if($venta->estado==1)
+{
+	$script=$script."
+		function cancelar(id)
+		{
+			var x;
+
+			var obs=prompt(\"Porque la cancelacion\",'');
+			
+			if (person!=null)
+			{
+				$.ajax({
+					url: '".CHtml::normalizeUrl(array('/distribuidora/cancalar'))."',
+					type: 'GET',
+					data: { id:id,obs:obs},
+					success: function (data){
+						$(location).attr('href','".CHtml::normalizeUrl(array('/distribuidora/venta'))."');
+					},
+				});
+			}
+		}
+		";
+}
 Yii::app()->clientScript->registerScript("print",$script,CClientScript::POS_HEAD); 
 //*/?>

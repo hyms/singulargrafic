@@ -5,16 +5,28 @@ $this->breadcrumbs=array(
 	'Distribuidora',
 );
 ?>
-<div class="col-md-2">
+<div class="col-sm-2">
 <?php $this->renderPartial('menu'); ?>
 </div>
 
-<div class="col-md-10">
-	<h2>Productos</h2>
-	<div class="row">
-	<?php $this->renderPartial('producto',array('productos'=>$productos)); ?>
+<div class="col-sm-10">
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<strong class="panel-title">Productos</strong>
 	</div>
-<div >
+  	<div class="panel-body">
+		<?php $this->renderPartial('producto',array('productos'=>$productos)); ?>
+	</div>
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<span class="panel-title"><strong>Nueva Venta</strong> <?php echo $venta->codigo;?></span>
+		<span style="float:right;"><strong>Fecha:</strong> <?php echo date("d-m-Y", strtotime($venta->fechaVenta));?></span>
+	</div>
+	
+	<div class="panel-body">
 	<?php
 	/* @var $this DetalleVentaController */
 	/* @var $model DetalleVenta */
@@ -28,18 +40,21 @@ $this->breadcrumbs=array(
 			),
 	));
 	?>
-	<h2 >Nueva Venta  <?php echo $venta->codigo?></h2>
-	<?php echo CHtml::activeHiddenField($venta,'codigo');?>
-	<?php $this->renderPartial('detalleVenta',array('venta'=>$venta,'detalle'=>$detalle,'almacen'=>$almacen,'factura'=>$factura,'formaPago'=>$formaPago))?>
+	<?php echo $form->hiddenField($venta,'codigo');?>
+	<?php echo $form->hiddenField($venta,'fechaVenta'); ?>
 	
-	<?php $this->renderPartial('ventaProducto',array('venta'=>$venta,'cliente'=>$cliente,'empleado'=>$empleado,'form'=>$form)); ?>
+	<?php $this->renderPartial('detalleVenta',array('venta'=>$venta,'detalle'=>$detalle,'almacen'=>$almacen,'factura'=>$factura,'formaPago'=>$formaPago))?>
 	<div class="form-group">
-		<?php echo CHtml::submitButton('Finalizar',array('class'=>'btn btn-default')); ?>
+	<?php $this->renderPartial('datosVenta',array('venta'=>$venta,'cliente'=>$cliente,'empleado'=>$empleado,'form'=>$form)); ?>
+	</div>
+	<div class="form-group">
+		<?php echo CHtml::submitButton('Continuar',array('class'=>'btn btn-default col-sm-offset-5')); ?>
 	</div>
 	<?php $this->endWidget(); ?>	
-</div>
+	</div>
 </div>
 
+</div>
 
 <?php Yii::app()->getClientScript()->registerScript("ajax_cliente",
 "

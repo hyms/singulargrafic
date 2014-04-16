@@ -33,6 +33,7 @@ class Users extends CActiveRecord
 			array('estado', 'numerical', 'integerOnly'=>true),
 			array('username, password', 'length', 'max'=>10),
 			array('tipo', 'length', 'max'=>20),
+			array('username', 'unique','message'=>'{value} ya existe.'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, username, password, fechaLogin, estado, tipo', 'safe', 'on'=>'search'),

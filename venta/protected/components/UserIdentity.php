@@ -33,8 +33,9 @@ class UserIdentity extends CUserIdentity
 			
 			/*Consultamos los datos del usuario por el username ($user->username) */
 			$info_usuario = Users::model()->findByPk($user->id);
-			Yii::app()->user->setState('user_type',$user->tipo);
+			//Yii::app()->user->setState('user_type',$user->tipo);
 			$this->setState('name', $user->username);
+			$this->setState('role',$user->tipo);
 			
 			//$info_usuario->fechaLogin=date("Y-m-d H:i:s");
 			$sql = "update users set fechaLogin = now() where id='$user->id'";

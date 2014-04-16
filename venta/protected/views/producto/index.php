@@ -12,8 +12,13 @@ $this->breadcrumbs=array(
 </div>
 
 <div class="col-md-10">
-<h1>Productos</h1>
 
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<strong>Productos</strong>
+	</div>
+	<div class="panel-body">
+	
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
@@ -69,4 +74,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	)
 ));
 ?>
+</div>
+</div>
 </div>

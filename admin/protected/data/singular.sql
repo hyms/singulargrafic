@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 11-04-2014 a las 19:53:33
+-- Tiempo de generación: 16-04-2014 a las 19:24:53
 -- Versión del servidor: 5.5.35
 -- Versión de PHP: 5.4.4-14+deb7u8
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `almacen` (
 INSERT INTO `almacen` (`id`, `idProducto`, `idTipoAlmacen`, `stockUnidad`, `stockPaquete`) VALUES
 (2, 2, 1, 1, 0),
 (7, 1, 1, 8, 0),
-(9, 1, 2, 1, 1),
+(9, 1, 2, 0, 0),
 (10, 2, 2, 1, 1);
 
 -- --------------------------------------------------------
@@ -175,6 +175,7 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `sucursal` int(11) NOT NULL,
   `superior` int(11) NOT NULL,
   `fechaIngreso` datetime NOT NULL,
+  `idUsers` int(11) NOT NULL,
   `obs` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
@@ -183,8 +184,8 @@ CREATE TABLE IF NOT EXISTS `empleado` (
 -- Volcado de datos para la tabla `empleado`
 --
 
-INSERT INTO `empleado` (`id`, `nombres`, `apellidos`, `ci`, `telefono`, `email`, `cargo`, `turno`, `sueldo`, `skype`, `face`, `sucursal`, `superior`, `fechaIngreso`, `obs`) VALUES
-(1, 'Helier', 'Cortez', '5999242', '73221183', '', 'sistemas', '', 1000, 'helier20', '', 1, 0, '2014-02-23 00:00:00', '');
+INSERT INTO `empleado` (`id`, `nombres`, `apellidos`, `ci`, `telefono`, `email`, `cargo`, `turno`, `sueldo`, `skype`, `face`, `sucursal`, `superior`, `fechaIngreso`, `idUsers`, `obs`) VALUES
+(1, 'Helier', 'Cortez', '5999242', '73221183', '', 'sistemas', '', 1000, 'helier20', '', 1, 0, '2014-02-23 00:00:00', 1, '');
 
 -- --------------------------------------------------------
 
@@ -434,6 +435,29 @@ INSERT INTO `tipoAlmacen` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(10) NOT NULL,
+  `password` varchar(150) NOT NULL,
+  `fechaLogin` datetime NOT NULL,
+  `estado` int(11) NOT NULL,
+  `tipo` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `fechaLogin`, `estado`, `tipo`) VALUES
+(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-04-16 19:22:52', 0, 'ventas');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `venta`
 --
 
@@ -459,7 +483,7 @@ CREATE TABLE IF NOT EXISTS `venta` (
 --
 
 INSERT INTO `venta` (`id`, `idTipoPago`, `idCliente`, `fechaVenta`, `fechaPlazo`, `idEmpleado`, `montoTotal`, `montoPagado`, `montoCambio`, `codigo`, `estado`, `autorizado`, `obs`) VALUES
-(1, 0, 1, '2014-04-10 00:00:00', '0000-00-00 00:00:00', 1, 166.68, 200, 33.32, '1-04-14', 1, '', 'test');
+(1, 0, 1, '2014-04-16 16:41:21', '0000-00-00 00:00:00', 1, 166.68, 200, 33.32, '1-04-14', 0, '', 'test');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -11,12 +11,11 @@ class DistribuidoraController extends Controller
 	public function accessRules() {
 		return array(
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'actions'=>array('index','factura','confirm','credito','ventas','ajaxCliente','addDetalle'),
-						'users'=>array('@'),
+						//'actions'=>array('index'),
+						'expression'=>'isset($user->role) && ($user->role==="ventas")',
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'actions'=>array('index','factura','venta','preview','confirm','credito','ventas','ajaxCliente','addDetalle'),
-						'users'=>array('admin'),
+						'expression'=>'isset($user->role) && ($user->role==="admin")',
 				),
 				array('deny',
 						'users'=>array('*'),
@@ -26,9 +25,9 @@ class DistribuidoraController extends Controller
 	
 	public function actionIndex()
 	{
-		//print_r($_POST);
+		//print_r(Yii::app()->user->id);
 		$cliente = new Cliente;
-		$empleado = Empleado::model()->findByPk('1');
+		$empleado = Empleado::model()->findByPk(Yii::app()->user->id);
 		$almacen = new Almacen;
 		$productos = new Producto('searchAll');
 		$venta = new Venta;
@@ -243,7 +242,7 @@ class DistribuidoraController extends Controller
 										    'pagination'=>array(
 										        'pageSize'=>20,
 										    ),));
-		$this->render('venta',array('ventas'=>$ventas));
+		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas por Confirmar"));
 	}
 	
 	public function actionPreview()
@@ -270,7 +269,7 @@ class DistribuidoraController extends Controller
 	
 	public function actionConfirm()
 	{
-		if(isset($_GET['id']))
+		if(Yii::app()->request->isAjaxRequest && isset($_GET['id']))
 		{
 			$venta = Venta::model()
 						->with("Detalle")
@@ -279,9 +278,15 @@ class DistribuidoraController extends Controller
 			
 			foreach ($venta->Detalle as $detalle)
 			{
-				$almacenes = Almacen::model()->findByPk($detalle->idAlmacen);
+				$almacenes = Almacen::model()->with('Producto')->findByPk($detalle->idAlmacen);
 				$almacenes->stockUnidad = $almacenes->stockUnidad - $detalle->cantUnidad;
+				if($almacenes->stockUnidad<0)
+				{
+					$almacenes->stockPaquete = $almacenes->stockPaquete - 1;
+					$almacenes->stockUnidad = $almacenes->stockUnidad + $almacenes->Producto->cantidad;
+				}
 				$almacenes->stockPaquete = $almacenes->stockPaquete - $detalle->cantPaquete;
+				
 				$almacenes->save();
 			}
 			
@@ -303,7 +308,7 @@ class DistribuidoraController extends Controller
 				'pagination'=>array(
 						'pageSize'=>20,
 				),));
-		$this->render('venta',array('ventas'=>$ventas));
+		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas a Credito"));
 	} 
 	
 	public function actionVentas()
@@ -315,7 +320,23 @@ class DistribuidoraController extends Controller
 				'pagination'=>array(
 						'pageSize'=>20,
 				),));
-		$this->render('venta',array('ventas'=>$ventas));
+		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas Realizadas"));
+	}
+	
+	public function actionCancelar()
+	{
+		if(Yii::app()->request->isAjaxRequest && isset($_GET['id']))
+		{
+			$venta = Venta::model()
+						->findByPk($_GET['id']);
+			$venta->estado = -1;
+			$venta->obs = $_GET['obs'];
+			$venta->fechaVenta = date("Y-m-d H:i:s");
+			$venta->save();
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		
 	}
 	
 	public function actionAjaxCliente($nitCi)
