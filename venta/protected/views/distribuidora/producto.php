@@ -49,6 +49,14 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			'filter'=>CHtml::listData(Industria::model()->findAll(array('order'=>'nombre')),'id','nombre'),
 		),
 		array(
+			'header'=>'Precio con Fac.',
+			'value'=>'$data->costoCFUnidad."/".$data->costoCF',
+		),
+		array(
+			'header'=>'Precio sin Fac.',
+			'value'=>'$data->costoSFUnidad."/".$data->costoSF',
+		),
+		array(
 			'name'=>'cantidad',
 			'value'=>'$data->cantidad',
 			'filter'=>CHtml::activeTextField($productos, 'cantidad',array("class"=>"form-control input-sm")),

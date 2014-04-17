@@ -15,7 +15,7 @@ $this->breadcrumbs=array(
 	<div class="panel-heading">
 		<strong class="panel-title">Productos</strong>
 	</div>
-  	<div class="panel-body">
+  	<div class="panel-body" style="overflow: auto;">
 		<?php $this->renderPartial('producto',array('productos'=>$productos)); ?>
 	</div>
 </div>

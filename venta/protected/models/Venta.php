@@ -14,6 +14,7 @@
  * @property double $montoPagado
  * @property double $montoCambio
  * @property string $codigo
+ * @property string $factura
  * @property integer $estado
  * @property string $autorizado
  * @property string $obs
@@ -44,7 +45,7 @@ class Venta extends CActiveRecord
 			array('obs', 'length', 'max'=>200 ,'message'=>'El campo <b>{attribute}</b> solo puede tener 200 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, idTipoPago, idCliente, fechaVenta, fechaPlazo, idEmpleado, montoTotal, montoPagado, montoCambio, codigo, estado, autorizado, obs', 'safe', 'on'=>'search'),
+			array('id, idTipoPago, idCliente, fechaVenta, fechaPlazo, idEmpleado, montoTotal, montoPagado, montoCambio, codigo, factura, estado, autorizado, obs', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,6 +59,7 @@ class Venta extends CActiveRecord
 		return array(
 			'Cliente'=>array(self::BELONGS_TO, 'Cliente', 'idCliente'),
 			'Detalle'=>array(self::HAS_MANY, 'DetalleVenta', 'idVenta'),
+			'Empleado'=>array(self::BELONGS_TO, 'Empleado', 'idEmpleado'),
 		);
 	}
 
@@ -77,6 +79,7 @@ class Venta extends CActiveRecord
 			'montoPagado' => 'Pagado',
 			'montoCambio' => 'Cambio',
 			'codigo' => 'Codigo',
+			'factura' => 'Factura',
 			'estado' => 'Estado',
 			'autorizado' => 'Autorizado',
 			'obs' => 'Observaciones',
@@ -111,6 +114,7 @@ class Venta extends CActiveRecord
 		$criteria->compare('montoPagado',$this->montoPagado);
 		$criteria->compare('montoCambio',$this->montoCambio);
 		$criteria->compare('codigo',$this->codigo,true);
+		$criteria->compare('factura',$this->factura,true);
 		$criteria->compare('estado',$this->estado);
 		$criteria->compare('autorizado',$this->autorizado);
 		$criteria->compare('obs',$this->obs,true);

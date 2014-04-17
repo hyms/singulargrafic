@@ -256,6 +256,7 @@ class DistribuidoraController extends Controller
 						->with("Detalle.Almacen.Producto")
 						->with("Detalle.Almacen.Producto.Color")
 						->with("Detalle.Almacen.Producto.Material")
+						->with("Empleado")
 						->findByPk($_GET['id']);
 			
 			if($ventas!=null)
@@ -276,6 +277,9 @@ class DistribuidoraController extends Controller
 						->with("Detalle.Almacen")
 						->findByPk($_GET['id']);
 			
+			if(isset($_GET['factura']))
+				$venta->factura=$_GET['factura'];
+			
 			foreach ($venta->Detalle as $detalle)
 			{
 				$almacenes = Almacen::model()->with('Producto')->findByPk($detalle->idAlmacen);
@@ -291,7 +295,6 @@ class DistribuidoraController extends Controller
 			}
 			
 			$venta->estado = 0;
-			$venta->fechaVenta = date("Y-m-d H:i:s");
 			$venta->save();
 		}
 		else

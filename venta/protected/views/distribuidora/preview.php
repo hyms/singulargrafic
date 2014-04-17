@@ -4,12 +4,16 @@
 
 <div class="col-md-10" id="print">
 
-
+<div class="col-sm-offset-3 col-sm-7">
 <?php echo CHtml::link('Imprimir', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"printView(".$venta->id.")")); ?>
 <?php
 	if($venta->estado==1)
-		echo CHtml::link('Cancelar', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"cancelar(".$venta->id.")")); 
+	{
+		echo CHtml::link('Confirmar', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"confirmar(".$venta->id.")"));
+		echo CHtml::link('Cancelar', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"cancelar(".$venta->id.")"));
+	} 
 ?>
+</div>
 <div id="print-recived" class="form-group" style="width:793px; height:529px;">
 
 	<h4 class="col-xs-offset-10" style="text-align:right"><?php echo $venta->codigo; ?></h4>
@@ -17,7 +21,7 @@
 	<p class="row">
 	<span class="col-xs-3" > <strong><?php echo "CLIENTE:";?></strong> <?php echo $venta->Cliente->apellido;?></span>
 	<span class="col-xs-2"> <strong><?php echo "NIT:";?></strong> <?php echo $venta->Cliente->nitCi;?></span>
-	<span class="col-xs-4"> <strong><?php echo "RESPONSABLE";?></strong> </span>
+	<span class="col-xs-4"> <strong><?php echo "RESPONSABLE";?></strong> <?php echo $venta->Empleado->apellidos." ".$venta->Empleado->nombres;?></span>
 	<span class="col-xs-3"> <strong><?php echo "FECHA:";?></strong> <?php echo date("d-m-Y",strtotime($venta->fechaVenta));?></span>
 	</p>
 	
@@ -102,28 +106,35 @@
 </div>
 </div>
 <?php 
-$ajax = "
-			$.ajax({
-				url: '".CHtml::normalizeUrl(array('/distribuidora/confirm'))."',
-				type: 'GET',
-				data: { id: id},
-				success: function (data){
-					$(location).attr('href','".CHtml::normalizeUrl(array('/distribuidora/venta'))."');
-				},
-			});
-		";
+
 $script = "
 		function printView(id)
 		{
-			window.print();";
+			window.print();
+		}";
 if($venta->estado==1)
 {
-	$script = $script.$ajax;
-}
-$script=$script."}";
-if($venta->estado==1)
-{
+	$ventana=($venta->idTipoPago==0)?"var fact=prompt(\"Introdusca el numero de factura\",'');":"";
+	$dato=($venta->idTipoPago==0)?",factura:fact":"";
+	$venta->idTipoPago;
 	$script=$script."
+		function confirmar(id)
+		{
+			var x;
+			".$ventana."
+			if (person!=null)
+			{
+				$.ajax({
+					url: '".CHtml::normalizeUrl(array('/distribuidora/confirm'))."',
+					type: 'GET',
+					data: { id: id ".$dato."},
+					success: function (data){
+						$(location).attr('href','".CHtml::normalizeUrl(array('/distribuidora/venta'))."');
+					},
+				});
+			}
+		}
+		
 		function cancelar(id)
 		{
 			var x;
