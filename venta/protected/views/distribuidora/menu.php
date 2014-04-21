@@ -9,7 +9,7 @@ $this->widget('zii.widgets.CMenu',array(
 							array('label'=>'Ventas por Confirmar', 'url'=>array('/distribuidora/venta')),
 							array('label'=>'Ventas Realizadas', 'url'=>array('/distribuidora/ventas')),
 							array('label'=>'Ventas a Credito', 'url'=>array('/distribuidora/credito')),
-							array('label'=>'Producto', 'url'=>array('producto/index')),
+							//array('label'=>'Producto', 'url'=>array('producto/index')),
 						),
 				)); 
 ?>

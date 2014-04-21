@@ -61,7 +61,8 @@ class Empleado extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-				'MovimientoAlmacen'=>array(self::HAS_ONE, 'MovimientoAlmacen', 'idEmpleado'),
+			'MovimientoAlmacen'=>array(self::HAS_ONE, 'MovimientoAlmacen', 'idEmpleado'),
+			'Users'=>array(self::BELONGS_TO, 'Users', 'idUsers'),
 		);
 	}
 

@@ -5,7 +5,8 @@
  *
  * The followings are the available columns in table 'venta':
  * @property integer $id
- * @property integer $idTipoPago
+ * @property integer $tipoPago
+ * @property integer $formaPago
  * @property integer $idCliente
  * @property string $fechaVenta
  * @property string $fechaPlazo
@@ -13,6 +14,7 @@
  * @property double $montoTotal
  * @property double $montoPagado
  * @property double $montoCambio
+ * @property double $montoDescuento
  * @property string $codigo
  * @property string $factura
  * @property integer $estado
@@ -38,14 +40,14 @@ class Venta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idTipoPago, idCliente, fechaVenta, idEmpleado, montoTotal, montoPagado, montoCambio, codigo, estado', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
-			array('idTipoPago, idCliente, idEmpleado, estado', 'numerical', 'integerOnly'=>true,'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
-			array('montoTotal, montoPagado, montoCambio', 'numerical','message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
+			array('tipoPago, formaPago, idCliente, fechaVenta, idEmpleado, montoTotal, montoPagado, montoCambio, codigo, estado', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
+			array('tipoPago, idCliente, idEmpleado, estado', 'numerical', 'integerOnly'=>true,'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
+			array('montoTotal, montoPagado, montoCambio, montoDescuento', 'numerical','message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
 			array('codigo, autorizado', 'length', 'max'=>20 ,'message'=>'El campo <b>{attribute}</b> solo puede tener 20 caracteres'),
 			array('obs', 'length', 'max'=>200 ,'message'=>'El campo <b>{attribute}</b> solo puede tener 200 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, idTipoPago, idCliente, fechaVenta, fechaPlazo, idEmpleado, montoTotal, montoPagado, montoCambio, codigo, factura, estado, autorizado, obs', 'safe', 'on'=>'search'),
+			array('id, tipoPago, formaPago, idCliente, fechaVenta, fechaPlazo, idEmpleado, montoTotal, montoPagado, montoCambio, montoDescuento, codigo, factura, estado, autorizado, obs', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,7 +72,8 @@ class Venta extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'idTipoPago' => 'Id Tipo Pago',
+			'tipoPago' => 'Tipo de Pago',
+			'formaPago' => 'Forma de Pago',
 			'idCliente' => 'Id Cliente',
 			'fechaVenta' => 'Fecha Venta',
 			'fechaPlazo' => 'Fecha Plazo',
@@ -78,6 +81,7 @@ class Venta extends CActiveRecord
 			'montoTotal' => 'Total',
 			'montoPagado' => 'Pagado',
 			'montoCambio' => 'Cambio',
+			'montoDescuento' => 'Descuento',
 			'codigo' => 'Codigo',
 			'factura' => 'Factura',
 			'estado' => 'Estado',
@@ -105,7 +109,8 @@ class Venta extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('idTipoPago',$this->idTipoPago);
+		$criteria->compare('tipoPago',$this->tipoPago);
+		$criteria->compare('formaPago',$this->formaPago);
 		$criteria->compare('idCliente',$this->idCliente);
 		$criteria->compare('fechaVenta',$this->fechaVenta,true);
 		$criteria->compare('fechaPlazo',$this->fechaPlazo,true);
@@ -113,6 +118,7 @@ class Venta extends CActiveRecord
 		$criteria->compare('montoTotal',$this->montoTotal);
 		$criteria->compare('montoPagado',$this->montoPagado);
 		$criteria->compare('montoCambio',$this->montoCambio);
+		$criteria->compare('montoDescuento',$this->montoDescuento);
 		$criteria->compare('codigo',$this->codigo,true);
 		$criteria->compare('factura',$this->factura,true);
 		$criteria->compare('estado',$this->estado);
@@ -135,3 +141,4 @@ class Venta extends CActiveRecord
 		return parent::model($className);
 	}
 }
+

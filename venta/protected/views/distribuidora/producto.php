@@ -57,9 +57,9 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			'value'=>'$data->costoSFUnidad."/".$data->costoSF',
 		),
 		array(
-			'name'=>'cantidad',
+			'header'=>'cantidad',
 			'value'=>'$data->cantidad',
-			'filter'=>CHtml::activeTextField($productos, 'cantidad',array("class"=>"form-control input-sm")),
+			//'filter'=>CHtml::activeTextField($productos, 'cantidad',array("class"=>"form-control input-sm")),
 		),
 		array(
 			'header'=>'stock Unidad',
@@ -88,7 +88,7 @@ function newRow(almacen)
 	
 	var input = $(\"#yw3 tbody\");
 	var index = 0;
-	var factura = $('#factura_0').attr('checked')?0:1;
+	var factura = $('#Venta_tipoPago_0').attr('checked')?0:1;
 	if(input.find(\".tabular-input-index\").length>0)
 	{
 		$(\".tabular-input-index\").each(function() {

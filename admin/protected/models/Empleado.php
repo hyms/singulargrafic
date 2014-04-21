@@ -39,7 +39,8 @@ class Empleado extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombres, apellidos, ci, telefono, cargo, sueldo, skype, sucursal, fechaIngreso', 'required', 'message'=>'El campo <b>{attribute}</b> es obligatorio',),
+			//array('nombres, apellidos, ci, telefono, cargo, sueldo, skype, sucursal, fechaIngreso', 'required', 'message'=>'El campo <b>{attribute}</b> es obligatorio',),
+				array('nombres, apellidos, sucursal', 'required', 'message'=>'El campo <b>{attribute}</b> es obligatorio',),
 			array('ci, sueldo, sucursal, superior', 'numerical', 'integerOnly'=>true, 'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
 			array('nombres, apellidos, email, skype, face', 'length', 'max'=>100,'message'=>'<b>{attribute}</b> solo puede contener 100 caracteres'),
 			array('email','email','message'=>'La direccion de <b>{attribute}</b> no es valido'),

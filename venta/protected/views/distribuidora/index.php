@@ -43,7 +43,7 @@ $this->breadcrumbs=array(
 	<?php echo $form->hiddenField($venta,'codigo');?>
 	<?php echo $form->hiddenField($venta,'fechaVenta'); ?>
 	
-	<?php $this->renderPartial('detalleVenta',array('venta'=>$venta,'detalle'=>$detalle,'almacen'=>$almacen,'factura'=>$factura,'formaPago'=>$formaPago))?>
+	<?php $this->renderPartial('detalleVenta',array('venta'=>$venta,'detalle'=>$detalle,'almacen'=>$almacen))?>
 	<div class="form-group">
 	<?php $this->renderPartial('datosVenta',array('venta'=>$venta,'cliente'=>$cliente,'empleado'=>$empleado,'form'=>$form)); ?>
 	</div>

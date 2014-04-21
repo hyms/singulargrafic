@@ -20,8 +20,12 @@
 		),
 		'codigo',
 		array(
-			'header'=>'Tipo Pago',
-			'value'=>'($data->idTipoPago==0)?CHtml::encode("Contado"):CHtml::encode("Credito")',
+			'name'=>'formaPago',
+			'value'=>'($data->formaPago==0)?CHtml::encode("Contado"):CHtml::encode("Credito")',
+		),
+		array(
+			'name'=>'tipoPago',
+			'value'=>'($data->tipoPago==0)?CHtml::encode("Con Factura"):CHtml::encode("Con Factura")',
 		),
 		array(
 			'header'=>'Cliente',

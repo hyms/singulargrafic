@@ -86,15 +86,15 @@
 	<span class="col-xs-offset-1 col-xs-3"><strong>Total:</strong> <?php echo $venta->montoTotal." Bs.";?></span>
 	</p>
 	<p class="row">
-	<span class="col-xs-4"><strong>Forma de pago:</strong> <?php echo ($venta->idTipoPago==0)?CHtml::encode("Contado"):CHtml::encode("Credito")?></span>
-	<span class="col-xs-4"><strong><?php echo ($venta->idTipoPago==1)?CHtml::encode("Fecha/Cobro:"):""?></strong> <?php echo ($venta->idTipoPago==1)?CHtml::encode(date("d/m/Y",strtotime($venta->fechaPlazo))):"" ?></span>
-	<span class="col-xs-4"><strong><?php echo ($venta->idTipoPago==1)?CHtml::encode("Autorizado:"):""?></strong> <?php echo ($venta->idTipoPago==1)?CHtml::encode($venta->autorizado):""?></span>
+	<span class="col-xs-4"><strong>Forma de pago:</strong> <?php echo ($venta->formaPago==0)?CHtml::encode("Contado"):CHtml::encode("Credito")?></span>
+	<span class="col-xs-4"><strong><?php echo ($venta->formaPago==1)?CHtml::encode("Fecha/Cobro:"):""?></strong> <?php echo ($venta->formaPago==1)?CHtml::encode(date("d/m/Y",strtotime($venta->fechaPlazo))):"" ?></span>
+	<span class="col-xs-4"><strong><?php echo ($venta->formaPago==1)?CHtml::encode("Autorizado:"):""?></strong> <?php echo ($venta->formaPago==1)?CHtml::encode($venta->autorizado):""?></span>
 	
 	</p>
 	<p class="row">
 	<span class="col-xs-6"><strong>Observaciones: </strong ><?php echo $venta->obs; ?></span>
-	<span class="col-xs-3"><strong><?php echo ($venta->idTipoPago==1)?CHtml::encode("a/c:"):""?></strong> <?php echo ($venta->idTipoPago==1)?CHtml::encode($venta->montoPagado):""?></span>
-	<span class="col-xs-3"><strong><?php echo ($venta->idTipoPago==1)?CHtml::encode("Saldo:"):""?></strong> <?php echo ($venta->idTipoPago==1)?CHtml::encode($venta->montoCambio*-1):""?></span>
+	<span class="col-xs-3"><strong><?php echo ($venta->formaPago==1)?CHtml::encode("a/c:"):""?></strong> <?php echo ($venta->formaPago==1)?CHtml::encode($venta->montoPagado):""?></span>
+	<span class="col-xs-3"><strong><?php echo ($venta->formaPago==1)?CHtml::encode("Saldo:"):""?></strong> <?php echo ($venta->formaPago==1)?CHtml::encode($venta->montoCambio*-1):""?></span>
 	</p>
 	<p class="row">
 	<span class="col-xs-6 "><strong>NOTA:</strong> Una vez redirada la mercancia, no se aceptan <strong>RECLAMOS, CAMBIOS NI DEVOLUCIONES</strong>.</span>
@@ -114,15 +114,15 @@ $script = "
 		}";
 if($venta->estado==1)
 {
-	$ventana=($venta->idTipoPago==0)?"var fact=prompt(\"Introdusca el numero de factura\",'');":"";
-	$dato=($venta->idTipoPago==0)?",factura:fact":"";
-	$venta->idTipoPago;
+	$ventana=($venta->tipoPago==0)?"var fact=prompt(\"Introdusca el numero de factura\",'');":"";
+	$dato=($venta->tipoPago==0)?",factura:fact":"";
+	$if=($venta->tipoPago==0)?" && fact!=\"\"":"";
 	$script=$script."
 		function confirmar(id)
 		{
 			var x;
 			".$ventana."
-			if (person!=null)
+			if (person!=null".$if.")
 			{
 				$.ajax({
 					url: '".CHtml::normalizeUrl(array('/distribuidora/confirm'))."',
@@ -141,7 +141,7 @@ if($venta->estado==1)
 
 			var obs=prompt(\"Porque la cancelacion\",'');
 			
-			if (person!=null)
+			if (person!=null && obs!=\"\")
 			{
 				$.ajax({
 					url: '".CHtml::normalizeUrl(array('/distribuidora/cancalar'))."',

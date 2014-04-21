@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-04-2014 a las 19:24:53
+-- Tiempo de generación: 21-04-2014 a las 18:56:17
 -- Versión del servidor: 5.5.35
 -- Versión de PHP: 5.4.4-14+deb7u8
 
@@ -178,14 +178,15 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `idUsers` int(11) NOT NULL,
   `obs` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `empleado`
 --
 
 INSERT INTO `empleado` (`id`, `nombres`, `apellidos`, `ci`, `telefono`, `email`, `cargo`, `turno`, `sueldo`, `skype`, `face`, `sucursal`, `superior`, `fechaIngreso`, `idUsers`, `obs`) VALUES
-(1, 'Helier', 'Cortez', '5999242', '73221183', '', 'sistemas', '', 1000, 'helier20', '', 1, 0, '2014-02-23 00:00:00', 1, '');
+(1, 'Helier', 'Cortez', '5999242', '73221183', '', 'sistemas', '', 1000, 'helier20', '', 1, 0, '2014-02-23 00:00:00', 1, ''),
+(2, 'Erika', 'Lecoña Castro', '4846615', '', '', 'Papeles', '', 0, '', '', 1, 0, '1969-12-31 00:00:00', 2, '');
 
 -- --------------------------------------------------------
 
@@ -446,14 +447,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `estado` int(11) NOT NULL,
   `tipo` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `fechaLogin`, `estado`, `tipo`) VALUES
-(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-04-16 19:22:52', 0, 'ventas');
+(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-04-21 15:27:49', 0, 'ventas'),
+(2, 'erika', 'e10adc3949ba59abbe56e057f20f883e', '2014-04-21 15:25:35', 0, 'ventas');
 
 -- --------------------------------------------------------
 
@@ -463,7 +465,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `fechaLogin`, `estado`, `tipo
 
 CREATE TABLE IF NOT EXISTS `venta` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idTipoPago` int(11) NOT NULL,
+  `tipoPago` int(11) NOT NULL,
+  `formaPago` int(11) NOT NULL,
   `idCliente` int(11) NOT NULL,
   `fechaVenta` datetime NOT NULL,
   `fechaPlazo` datetime NOT NULL,
@@ -471,7 +474,9 @@ CREATE TABLE IF NOT EXISTS `venta` (
   `montoTotal` float NOT NULL,
   `montoPagado` float NOT NULL,
   `montoCambio` float NOT NULL,
+  `montoDescuento` float NOT NULL,
   `codigo` varchar(20) NOT NULL,
+  `factura` varchar(20) NOT NULL,
   `estado` int(11) NOT NULL,
   `autorizado` varchar(50) NOT NULL,
   `obs` varchar(200) NOT NULL,
@@ -482,8 +487,8 @@ CREATE TABLE IF NOT EXISTS `venta` (
 -- Volcado de datos para la tabla `venta`
 --
 
-INSERT INTO `venta` (`id`, `idTipoPago`, `idCliente`, `fechaVenta`, `fechaPlazo`, `idEmpleado`, `montoTotal`, `montoPagado`, `montoCambio`, `codigo`, `estado`, `autorizado`, `obs`) VALUES
-(1, 0, 1, '2014-04-16 16:41:21', '0000-00-00 00:00:00', 1, 166.68, 200, 33.32, '1-04-14', 0, '', 'test');
+INSERT INTO `venta` (`id`, `tipoPago`, `formaPago`, `idCliente`, `fechaVenta`, `fechaPlazo`, `idEmpleado`, `montoTotal`, `montoPagado`, `montoCambio`, `montoDescuento`, `codigo`, `factura`, `estado`, `autorizado`, `obs`) VALUES
+(1, 0, 0, 1, '2014-04-16 16:41:21', '0000-00-00 00:00:00', 1, 166.68, 200, 33.32, 0, '1-04-14', '', 1, '', 'test');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

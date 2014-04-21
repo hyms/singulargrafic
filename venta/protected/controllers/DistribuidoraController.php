@@ -25,9 +25,9 @@ class DistribuidoraController extends Controller
 	
 	public function actionIndex()
 	{
-		//print_r(Yii::app()->user->id);
+		
 		$cliente = new Cliente;
-		$empleado = Empleado::model()->findByPk(Yii::app()->user->id);
+		$empleado = Empleado::model()->with('Users')->find('idUsers='.Yii::app()->user->id);
 		$almacen = new Almacen;
 		$productos = new Producto('searchAll');
 		$venta = new Venta;
@@ -37,6 +37,8 @@ class DistribuidoraController extends Controller
 		$row = Venta::model()->find(array("select"=>"count(*) as `max`"));
 		$venta->codigo= ($row['max']+1)."-".date("m")."-".date("y");
 		$venta->fechaVenta = date("Y-m-d H:i:s");
+		$venta->formaPago = 0;
+		$venta->tipoPago = 0;
 		//date("Y-m-d", strtotime($model->fechaIngreso))
 		//init seccion on filter
 		$productos->unsetAttributes();
@@ -51,18 +53,6 @@ class DistribuidoraController extends Controller
 			//$productos->almacen = $_GET['Producto']['almacen'];
 		}
 		//finish filter seccion
-		
-		
-		$factura=0;
-		$formaPago=0;
-		if(isset($_POST['factura']))
-		{
-			$factura=$_POST['factura'];
-		}
-		if(isset($_POST['formaPago']))
-		{
-			$formaPago=$_POST['formaPago'];
-		}
 		
 		//init seccion for save datas
 		$save=0;
@@ -85,18 +75,23 @@ class DistribuidoraController extends Controller
 		{
 			$venta->attributes = $_POST['Venta'];
 			$venta->idCliente = $cliente->id;
-			$venta->idTipoPago = $formaPago;
 			$venta->estado = 1;
-			$venta->idEmpleado = 1;
+			$venta->idEmpleado = $empleado->id;
 			
-			if(isset($_POST['Venta']['fechaPlazo']))
-				$venta->fechaPlazo = $_POST['Venta']['fechaPlazo'];
+			if($venta->formaPago==1)
+			{
+				if(($_POST['Venta']['fechaPlazo'])!="")
+					$venta->fechaPlazo = date("Y-m-d",strtotime($_POST['Venta']['fechaPlazo']));
+				if(empty($venta->fechaPlazo)||$venta->fechaPlazo=="") 
+					$venta->addError('fechaPlazo', 'La <b>fechaPlazo</b> no puede estar vacia');
+			}
+			//print_r($venta);
 			if($venta->validate())
 			{
 				if($venta->save())
 					$save++;
 			}
-			if($formaPago==1)
+			if($venta->formaPago==1)
 			{
 				$credito = new Credito;
 				$credito->idVenta=$venta->id;
@@ -145,8 +140,6 @@ class DistribuidoraController extends Controller
 				'almacen'=>$almacen,
 				'productos'=>$productos,
 				'detalle'=>$detalle,
-				'factura'=>$factura,
-				'formaPago'=>$formaPago,
 				
 				'pagination'=>array(
 						'pageSize'=>5,
@@ -165,52 +158,47 @@ class DistribuidoraController extends Controller
 		$detalle = array();
 		$venta = new Venta;
 		
-		$factura=0;
-		$formaPago=0;
-		if(isset($_POST['factura']))
-		{
-			$factura=$_POST['factura'];
-		}
-		if(isset($_POST['formaPago']))
-		{
-			$formaPago=$_POST['formaPago'];
-		}
-		
 		if(isset($_POST['Cliente']))
 		{
 			$cliente->attributes = $_POST['Cliente'];
 		}
-		
-		$total=0;
-		if(isset($_POST['DetalleVenta']))
-		{
-			$i=0;
-				
-			foreach ($_POST['DetalleVenta'] as $item)
-			{
-				array_push($detalle,new DetalleVenta);
-				$detalle[$i]->attributes = $item;
-				
-				$almacen = Almacen::model()->with('Producto')->findByPk($detalle[$i]->idAlmacen);
-				if($factura==0)
-				{
-					$detalle[$i]->costoTotal=($almacen->Producto->costoCFUnidad*$detalle[$i]->cantUnidad)+($almacen->Producto->costoCF*$detalle[$i]->cantPaquete);
-				}
-				else
-				{
-					$detalle[$i]->costoTotal=($almacen->Producto->costoSFUnidad*$detalle[$i]->cantUnidad)+($almacen->Producto->costoSF*$detalle[$i]->cantPaquete);
-				}
-				$total=$total+$detalle[$i]->costoTotal;
-				$i++;
-			}
-		}
-			
 		if(isset($_POST['Venta']))
 		{
 			$venta->attributes = $_POST['Venta'];
 			if(isset($_POST['Venta']['fechaPlazo']))
 				$venta->fechaPlazo = $_POST['Venta']['fechaPlazo'];
+			
+			$total=0;
+			if(isset($_POST['DetalleVenta']))
+			{
+				$i=0;
+					
+				foreach ($_POST['DetalleVenta'] as $item)
+				{
+					array_push($detalle,new DetalleVenta);
+					$detalle[$i]->attributes = $item;
+					
+					$almacen = Almacen::model()->with('Producto')->findByPk($detalle[$i]->idAlmacen);
+					if($venta->tipoPago==0)
+					{
+						$detalle[$i]->costoTotal=($almacen->Producto->costoCFUnidad*$detalle[$i]->cantUnidad)+($almacen->Producto->costoCF*$detalle[$i]->cantPaquete);
+					}
+					else
+					{
+						$detalle[$i]->costoTotal=($almacen->Producto->costoSFUnidad*$detalle[$i]->cantUnidad)+($almacen->Producto->costoSF*$detalle[$i]->cantPaquete);
+					}
+					$total=$total+$detalle[$i]->costoTotal;
+					$i++;
+				}
+			}	
+			
+		
+			
 			$venta->montoTotal=$total;
+			if($venta->montoDescuento!=null)
+			{
+				$venta->montoTotal=$venta->montoTotal-$venta->montoDescuento;
+			}
 			$venta->montoCambio=$venta->montoPagado - $venta->montoTotal;
 		}
 		
@@ -224,8 +212,6 @@ class DistribuidoraController extends Controller
 				'almacen'=>$almacen,
 				'productos'=>$productos,
 				'detalle'=>$detalle,
-				'factura'=>$factura,
-				'formaPago'=>$formaPago,
 				
 				'pagination'=>array(
 						'pageSize'=>5,
