@@ -118,7 +118,7 @@ class DistribuidoraController extends Controller
 					if($detalle[$i]->save())
 					{
 						$save++;
-						$almacenes->save();
+						//$almacenes->save();
 					}
 				}
 				$i++;
@@ -145,13 +145,11 @@ class DistribuidoraController extends Controller
 						'pageSize'=>5,
 				),
 		));
-		
-		
 	}
 	
 	public function actionFactura()
 	{
-		$empleado = Empleado::model()->findByPk('1');
+		$empleado = Empleado::model()->with('Users')->find('idUsers='.Yii::app()->user->id);
 		
 		$productos=new Producto('searchAll');
 		$cliente = new Cliente;
@@ -192,8 +190,6 @@ class DistribuidoraController extends Controller
 				}
 			}	
 			
-		
-			
 			$venta->montoTotal=$total;
 			if($venta->montoDescuento!=null)
 			{
@@ -224,68 +220,12 @@ class DistribuidoraController extends Controller
 		$ventas = new CActiveDataProvider('Venta',array('criteria'=>array(
 										        'condition'=>'estado=1',
 										        'with'=>array('Cliente'),
+												'order'=>'fechaVenta DESC',
 										    ),
 										    'pagination'=>array(
 										        'pageSize'=>20,
 										    ),));
-		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas por Confirmar"));
-	}
-	
-	public function actionPreview()
-	{
-		if(isset($_GET['id']))
-		{
-			$ventas = Venta::model()
-						->with("Cliente")
-						->with("Detalle")
-						->with("Detalle.Almacen")
-						->with("Detalle.Almacen.Producto")
-						->with("Detalle.Almacen.Producto.Color")
-						->with("Detalle.Almacen.Producto.Material")
-						->with("Empleado")
-						->findByPk($_GET['id']);
-			
-			if($ventas!=null)
-				$this->render('preview',array('venta'=>$ventas));
-			else
-				$this->redirect(array('venta'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	} 
-	
-	public function actionConfirm()
-	{
-		if(Yii::app()->request->isAjaxRequest && isset($_GET['id']))
-		{
-			$venta = Venta::model()
-						->with("Detalle")
-						->with("Detalle.Almacen")
-						->findByPk($_GET['id']);
-			
-			if(isset($_GET['factura']))
-				$venta->factura=$_GET['factura'];
-			
-			foreach ($venta->Detalle as $detalle)
-			{
-				$almacenes = Almacen::model()->with('Producto')->findByPk($detalle->idAlmacen);
-				$almacenes->stockUnidad = $almacenes->stockUnidad - $detalle->cantUnidad;
-				if($almacenes->stockUnidad<0)
-				{
-					$almacenes->stockPaquete = $almacenes->stockPaquete - 1;
-					$almacenes->stockUnidad = $almacenes->stockUnidad + $almacenes->Producto->cantidad;
-				}
-				$almacenes->stockPaquete = $almacenes->stockPaquete - $detalle->cantPaquete;
-				
-				$almacenes->save();
-			}
-			
-			$venta->estado = 0;
-			$venta->save();
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-		
+		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas por Confirmar",'estado'=>"1"));
 	}
 	
 	public function actionCredito()
@@ -297,19 +237,91 @@ class DistribuidoraController extends Controller
 				'pagination'=>array(
 						'pageSize'=>20,
 				),));
-		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas a Credito"));
+		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas a Credito",'estado'=>"2"));
 	} 
 	
 	public function actionVentas()
 	{
+		$tiempo="";
+		if (isset($_GET['d']))
+		{
+			$tiempo=$tiempo." and ";
+			$date = date("Y-m")."-".$_GET['d'];
+			$tiempo=$tiempo."fechaVenta=".$date;
+		}
+		if (isset($_GET['m']))
+		{
+			$tiempo=$tiempo." and ";
+			$date1 = date("Y")."-".$_GET['m']."-1";
+			$date2 = date("Y")."-".($_GET['m']+1)."-1";
+			$tiempo=$tiempo."fechaVenta BETWEEN ".$date1;
+			$tiempo=$tiempo." and ".$date2;
+		}
 		$ventas = new CActiveDataProvider('Venta',array('criteria'=>array(
-				'condition'=>'estado=0',
+				'condition'=>'estado=0'.$tiempo,
 				'with'=>array('Cliente'),
 		),
 				'pagination'=>array(
 						'pageSize'=>20,
 				),));
-		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas Realizadas"));
+		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas Realizadas",'estado'=>"0"));
+	}
+	
+	public function actionPreview()
+	{
+		if(isset($_GET['id']))
+		{
+			$ventas = Venta::model()
+			->with("Cliente")
+			->with("Detalle")
+			->with("Detalle.Almacen")
+			->with("Detalle.Almacen.Producto")
+			->with("Detalle.Almacen.Producto.Color")
+			->with("Detalle.Almacen.Producto.Material")
+			->with("Empleado")
+			->findByPk($_GET['id']);
+				
+			if($ventas!=null)
+				$this->render('preview',array('venta'=>$ventas));
+			else
+				$this->redirect(array('venta'));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+	
+	public function actionConfirm()
+	{
+		if(Yii::app()->request->isAjaxRequest && isset($_GET['id']))
+		{
+			$venta = Venta::model()
+			->with("Detalle")
+			->with("Detalle.Almacen")
+			->findByPk($_GET['id']);
+				
+			if(isset($_GET['factura']))
+				$venta->factura=$_GET['factura'];
+				
+			foreach ($venta->Detalle as $detalle)
+			{
+				$almacenes = Almacen::model()->with('Producto')->findByPk($detalle->idAlmacen);
+				$almacenes->stockUnidad = $almacenes->stockUnidad - $detalle->cantUnidad;
+				if($almacenes->stockUnidad<0)
+				{
+					$almacenes->stockPaquete = $almacenes->stockPaquete - 1;
+					$almacenes->stockUnidad = $almacenes->stockUnidad + $almacenes->Producto->cantidad;
+				}
+				$almacenes->stockPaquete = $almacenes->stockPaquete - $detalle->cantPaquete;
+	
+				$almacenes->save();
+			}
+				
+			$venta->estado = 0;
+			$venta->save();
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	
 	}
 	
 	public function actionCancelar()
