@@ -114,15 +114,15 @@ $script = "
 		}";
 if($venta->estado==1)
 {
-	$ventana=($venta->tipoPago==0)?"var fact=prompt(\"Introdusca el numero de factura\",'');":"";
+	$ventana=($venta->tipoPago==0)?"prompt(\"Introdusca el numero de factura\",'');":"confirm(\"Confirmar Venta??\");";
 	$dato=($venta->tipoPago==0)?",factura:fact":"";
-	$if=($venta->tipoPago==0)?" && fact!=\"\"":"";
+	$if=($venta->tipoPago==0)?" fact!=\"\" && fact.length>0":"fact";
 	$script=$script."
 		function confirmar(id)
 		{
 			var x;
-			".$ventana."
-			if (person!=null".$if.")
+			var fact=".$ventana."
+			if (".$if.")
 			{
 				$.ajax({
 					url: '".CHtml::normalizeUrl(array('/distribuidora/confirm'))."',
@@ -141,7 +141,7 @@ if($venta->estado==1)
 
 			var obs=prompt(\"Porque la cancelacion\",'');
 			
-			if (person!=null && obs!=\"\")
+			if (obs!=\"\" && obs.length>0)
 			{
 				$.ajax({
 					url: '".CHtml::normalizeUrl(array('/distribuidora/cancalar'))."',

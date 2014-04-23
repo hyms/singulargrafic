@@ -7,41 +7,42 @@
 		<strong><?php echo $titulo;?></strong>
 	</div>
 	<div class="panel-body">
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'dataProvider'=>$ventas,
-	//'ajaxUpdate'=>true,
-	'itemsCssClass' => 'table table-hover table-condensed',
-	'htmlOptions' => array('class' => 'table-responsive'),
-	'columns'=>array(
-		
-		array(
-			'header'=>'#',
-			'value'=>'$row+1',       //  row is zero based
-		),
-		'codigo',
-		array(
-			'name'=>'formaPago',
-			'value'=>'($data->formaPago==0)?CHtml::encode("Contado"):CHtml::encode("Credito")',
-		),
-		array(
-			'name'=>'tipoPago',
-			'value'=>'($data->tipoPago==0)?CHtml::encode("Con Factura"):CHtml::encode("Sin Factura")',
-		),
-		array(
-			'header'=>'Cliente',
-			'value'=>'$data->Cliente->nitCi." - ".$data->Cliente->apellido',
-		),
-		'fechaVenta',
-		'montoTotal',
-		array(
-			'header'=>'',
-			'type'=>'raw',
-			'value'=>'CHtml::link("Ver", array("preview","id"=>$data->id))',
-		),
-		
-	)
-)); 
-?>
-</div>
+	<?php $this->widget('zii.widgets.grid.CGridView', array(
+		'dataProvider'=>$ventas,
+		//'ajaxUpdate'=>true,
+		'itemsCssClass' => 'table table-hover table-condensed',
+		'htmlOptions' => array('class' => 'table-responsive'),
+		'columns'=>array(
+			
+			array(
+				'header'=>'#',
+				'value'=>'$row+1',       //  row is zero based
+			),
+			'codigo',
+			array(
+				'name'=>'tipoPago',
+				'value'=>'($data->tipoPago==0)?CHtml::encode("Con Factura"):CHtml::encode("Sin Factura")',
+			),
+			array(
+				'header'=>'Cliente',
+				'value'=>'$data->Cliente->nitCi." - ".$data->Cliente->apellido',
+			),
+			'fechaVenta',
+			'fechaPlazo',
+			array(
+				'header'=>'Deuda',
+				'value'=>'$data->montoTotal - $data->montoPagado',
+			),
+			'montoTotal',
+			array(
+				'header'=>'',
+				'type'=>'raw',
+				'value'=>'CHtml::link("Ver", array("preview","id"=>$data->id))',
+			),
+			
+		)
+	)); 
+	?>
+	</div>
 </div>
 </div>

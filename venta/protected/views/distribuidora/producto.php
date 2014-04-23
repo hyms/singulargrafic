@@ -59,7 +59,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		array(
 			'header'=>'cantidad',
 			'value'=>'$data->cantidad',
-			//'filter'=>CHtml::activeTextField($productos, 'cantidad',array("class"=>"form-control input-sm")),
 		),
 		array(
 			'header'=>'stock Unidad',

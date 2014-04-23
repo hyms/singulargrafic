@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-04-2014 a las 18:56:17
+-- Tiempo de generación: 23-04-2014 a las 19:16:35
 -- Versión del servidor: 5.5.35
 -- Versión de PHP: 5.4.4-14+deb7u8
 
@@ -71,6 +71,25 @@ INSERT INTO `banner` (`id`, `imagen`, `texto`, `fecha`, `order`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `caja`
+--
+
+CREATE TABLE IF NOT EXISTS `caja` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `saldo` float NOT NULL,
+  `ingreso` float NOT NULL,
+  `egreso` float NOT NULL,
+  `fechaArqueo` datetime NOT NULL,
+  `nombre` varchar(20) NOT NULL,
+  `obs` varchar(200) NOT NULL,
+  `arqueo` int(11) NOT NULL,
+  `entregado` float NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `cliente`
 --
 
@@ -124,6 +143,7 @@ CREATE TABLE IF NOT EXISTS `credito` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idVenta` int(11) NOT NULL,
   `monto` float NOT NULL,
+  `saldo` float NOT NULL,
   `fechaPago` datetime NOT NULL,
   `idcliente` int(11) NOT NULL,
   PRIMARY KEY (`id`)
@@ -314,6 +334,24 @@ INSERT INTO `movimientoAlmacen` (`id`, `idEmpleado`, `idAlmacen`, `unidad`, `paq
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `movimientoCaja`
+--
+
+CREATE TABLE IF NOT EXISTS `movimientoCaja` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idCaja` int(11) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `monto` int(11) NOT NULL,
+  `obs` varchar(200) NOT NULL,
+  `tipo` int(11) NOT NULL,
+  `idVenta` int(11) NOT NULL,
+  `idComprovante` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pages`
 --
 
@@ -454,8 +492,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `fechaLogin`, `estado`, `tipo`) VALUES
-(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-04-21 15:27:49', 0, 'ventas'),
-(2, 'erika', 'e10adc3949ba59abbe56e057f20f883e', '2014-04-21 15:25:35', 0, 'ventas');
+(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-04-23 18:45:20', 0, 'ventas'),
+(2, 'erika', 'e10adc3949ba59abbe56e057f20f883e', '2014-04-23 18:01:14', 0, 'ventas');
 
 -- --------------------------------------------------------
 
@@ -481,14 +519,15 @@ CREATE TABLE IF NOT EXISTS `venta` (
   `autorizado` varchar(50) NOT NULL,
   `obs` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `venta`
 --
 
 INSERT INTO `venta` (`id`, `tipoPago`, `formaPago`, `idCliente`, `fechaVenta`, `fechaPlazo`, `idEmpleado`, `montoTotal`, `montoPagado`, `montoCambio`, `montoDescuento`, `codigo`, `factura`, `estado`, `autorizado`, `obs`) VALUES
-(1, 0, 0, 1, '2014-04-16 16:41:21', '0000-00-00 00:00:00', 1, 166.68, 200, 33.32, 0, '1-04-14', '', 1, '', 'test');
+(1, 0, 0, 1, '2014-04-16 16:41:21', '0000-00-00 00:00:00', 1, 166.68, 200, 33.32, 0, '1-04-14', '', 0, '', 'test'),
+(2, 0, 0, 1, '2014-04-23 18:45:21', '0000-00-00 00:00:00', 1, 161.68, 500, 338.32, 0, '2-04-14', '', 1, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

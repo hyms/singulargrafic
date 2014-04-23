@@ -32,14 +32,14 @@ class DistribuidoraController extends Controller
 		$productos = new Producto('searchAll');
 		$venta = new Venta;
 		$detalle = new DetalleVenta;
-
+		$credito = "";
 		//new venta
 		$row = Venta::model()->find(array("select"=>"count(*) as `max`"));
 		$venta->codigo= ($row['max']+1)."-".date("m")."-".date("y");
 		$venta->fechaVenta = date("Y-m-d H:i:s");
 		$venta->formaPago = 0;
 		$venta->tipoPago = 0;
-		//date("Y-m-d", strtotime($model->fechaIngreso))
+		
 		//init seccion on filter
 		$productos->unsetAttributes();
 		$dist = $this->verifyModel(TipoAlmacen::model()->find('nombre like "%distribuidora%"'));
@@ -63,7 +63,9 @@ class DistribuidoraController extends Controller
 				$cliente = new Cliente;
 			
 			$cliente->attributes = $_POST['Cliente'];
-			$cliente->fechaRegistro = date("Y-m-d");
+			if(empty($cliente->fechaRegistro))
+				$cliente->fechaRegistro = date("Y-m-d");
+			
 			if($cliente->validate())
 			{
 				if($cliente->save())
@@ -85,12 +87,13 @@ class DistribuidoraController extends Controller
 				if(empty($venta->fechaPlazo)||$venta->fechaPlazo=="") 
 					$venta->addError('fechaPlazo', 'La <b>fechaPlazo</b> no puede estar vacia');
 			}
-			//print_r($venta);
+			
 			if($venta->validate())
 			{
 				if($venta->save())
 					$save++;
 			}
+			
 			if($venta->formaPago==1)
 			{
 				$credito = new Credito;
@@ -105,35 +108,65 @@ class DistribuidoraController extends Controller
 		if(isset($_POST['DetalleVenta']))
 		{
 			$detalle = array();
-			$i=0;
+			$i=0; 
+			$det=count($_POST['DetalleVenta']);
 			
 			foreach ($_POST['DetalleVenta'] as $item)
 			{
 				array_push($detalle,new DetalleVenta);
 				$detalle[$i]->attributes = $item;
-				$detalle[$i]->idVenta = $venta->id;
-				
-				if($detalle[$i]->validate())
-				{	
-					if($detalle[$i]->save())
-					{
-						$save++;
-						//$almacenes->save();
+				if(isset($venta->id) && empty($venta->id))
+				{
+					$detalle[$i]->idVenta = $venta->id;
+					
+					if($detalle[$i]->validate())
+					{	
+						$almacenes = Almacen::model()->with('Producto')->findByPk($detalle[$i]->idAlmacen);
+						$almacenes->stockUnidad = $almacenes->stockUnidad - $detalle[$i]->cantUnidad;
+						if($almacenes->stockUnidad<0)
+						{
+							$almacenes->stockPaquete = $almacenes->stockPaquete - 1;
+							$almacenes->stockUnidad = $almacenes->stockUnidad + $almacenes->Producto->cantidad;
+						}
+						$almacenes->stockPaquete = $almacenes->stockPaquete - $detalle[$i]->cantPaquete;
+						if($almacenes->stockUnidad>0 && $almacenes->stockPaquete>0)
+						{
+							if($detalle[$i]->validate())
+							{
+								$det--;
+							}
+						}
+						else
+						{
+							$venta->addError('montoTotal', 'No existen suficientes Insumos');
+							$venta->delete();
+							if($venta->formaPago==1)
+							{
+								$credito->delete();
+							}
+						}
 					}
 				}
 				$i++;
 			}
+			if($det==0)
+			{
+				foreach ($detalle as $item)
+				{
+					$item->save();
+				}
+				$save++;
+			}
 		}
+		
 		//finish section for save datas
 		
-		//print_r($venta);
 		if($save>=3)
 		{
 			$this->redirect(array('venta'));
 		}
 		
 		$this->render('index',array(
-				//'dataProvider'=>$dataProvider,
 				'cliente'=>$cliente,
 				'empleado'=>$empleado,
 				'venta'=>$venta,
@@ -237,7 +270,7 @@ class DistribuidoraController extends Controller
 				'pagination'=>array(
 						'pageSize'=>20,
 				),));
-		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas a Credito",'estado'=>"2"));
+		$this->render('credito',array('ventas'=>$ventas,'titulo'=>"Ventas a Credito",'estado'=>"2"));
 	} 
 	
 	public function actionVentas()
@@ -245,17 +278,14 @@ class DistribuidoraController extends Controller
 		$tiempo="";
 		if (isset($_GET['d']))
 		{
-			$tiempo=$tiempo." and ";
 			$date = date("Y-m")."-".$_GET['d'];
-			$tiempo=$tiempo."fechaVenta=".$date;
+			$tiempo=" and fechaVenta='".$date."'";
 		}
 		if (isset($_GET['m']))
 		{
-			$tiempo=$tiempo." and ";
 			$date1 = date("Y")."-".$_GET['m']."-1";
 			$date2 = date("Y")."-".($_GET['m']+1)."-1";
-			$tiempo=$tiempo."fechaVenta BETWEEN ".$date1;
-			$tiempo=$tiempo." and ".$date2;
+			$tiempo=" and fechaVenta between '".$date1."' and '".$date2."'";
 		}
 		$ventas = new CActiveDataProvider('Venta',array('criteria'=>array(
 				'condition'=>'estado=0'.$tiempo,
@@ -302,7 +332,7 @@ class DistribuidoraController extends Controller
 			if(isset($_GET['factura']))
 				$venta->factura=$_GET['factura'];
 				
-			foreach ($venta->Detalle as $detalle)
+			/*foreach ($venta->Detalle as $detalle)
 			{
 				$almacenes = Almacen::model()->with('Producto')->findByPk($detalle->idAlmacen);
 				$almacenes->stockUnidad = $almacenes->stockUnidad - $detalle->cantUnidad;
@@ -315,7 +345,7 @@ class DistribuidoraController extends Controller
 	
 				$almacenes->save();
 			}
-				
+			*/	
 			$venta->estado = 0;
 			$venta->save();
 		}
@@ -333,18 +363,40 @@ class DistribuidoraController extends Controller
 			$venta->estado = -1;
 			$venta->obs = $_GET['obs'];
 			$venta->fechaVenta = date("Y-m-d H:i:s");
-			$venta->save();
+			if($venta->save())
+			{
+				$venta = Venta::model()
+				->with("Detalle")
+				->findByPk($venta->id);
+				foreach ($venta->Detalle as $detalle)
+				{
+					$almacenes = Almacen::model()->with('Producto')->findByPk($detalle->idAlmacen);
+					$almacenes->stockUnidad = $almacenes->stockUnidad + $detalle->cantUnidad;
+					if($almacenes->stockUnidad>$almacenes->Producto->cantidad)
+					{
+						$almacenes->stockPaquete = $almacenes->stockPaquete + 1;
+						$almacenes->stockUnidad = $almacenes->stockUnidad - $almacenes->Producto->cantidad;
+					}
+					$almacenes->stockPaquete = $almacenes->stockPaquete + $detalle->cantPaquete;
+					$almacenes->save();
+				}
+			}
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 		
 	}
 	
-	public function actionAjaxCliente($nitCi)
+	public function actionReporte()
 	{
-		if(Yii::app()->request->isAjaxRequest)
+		$this->render('reporte');		
+	}
+	
+	public function actionAjaxCliente()
+	{
+		if(Yii::app()->request->isAjaxRequest && isset($_GET['nitCi']))
 		{
-			$cliente = $this->verifyModel(Cliente::model()->find('nitCi='.$nitCi));
+			$cliente = $this->verifyModel(Cliente::model()->find('nitCi='.$_GET['nitCi']));
 			echo CJSON::encode($cliente);
 		}
 	}
