@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 23-04-2014 a las 19:16:35
+-- Tiempo de generación: 24-04-2014 a las 19:23:15
 -- Versión del servidor: 5.5.35
 -- Versión de PHP: 5.4.4-14+deb7u8
 
@@ -145,9 +145,17 @@ CREATE TABLE IF NOT EXISTS `credito` (
   `monto` float NOT NULL,
   `saldo` float NOT NULL,
   `fechaPago` datetime NOT NULL,
-  `idcliente` int(11) NOT NULL,
+  `idRecibo` int(11) NOT NULL,
+  `idCliente` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `credito`
+--
+
+INSERT INTO `credito` (`id`, `idVenta`, `monto`, `saldo`, `fechaPago`, `idRecibo`, `idCliente`) VALUES
+(1, 20, 2, 3.96, '2014-04-24 19:00:35', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -165,14 +173,22 @@ CREATE TABLE IF NOT EXISTS `detalleVenta` (
   `adicional` varchar(20) NOT NULL,
   `costoTotal` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Volcado de datos para la tabla `detalleVenta`
 --
 
 INSERT INTO `detalleVenta` (`id`, `idVenta`, `idProducto`, `idAlmacen`, `cantUnidad`, `cantPaquete`, `adicional`, `costoTotal`) VALUES
-(1, 1, 0, 9, 1, 1, '5', '166.68');
+(1, 1, 0, 9, 1, 1, '5', '166.68'),
+(2, 13, 0, 10, 1, 0, '4', '4.96'),
+(3, 14, 0, 10, 1, 0, '4', '4.96'),
+(4, 15, 0, 10, 1, 0, '4', '4.96'),
+(5, 16, 0, 10, 1, 0, '4', '4.96'),
+(6, 17, 0, 10, 1, 0, '5', '5.96'),
+(7, 18, 0, 10, 1, 0, '5', '5.96'),
+(8, 19, 0, 10, 1, 0, '5', '5.96'),
+(9, 20, 0, 10, 1, 0, '5', '5.96');
 
 -- --------------------------------------------------------
 
@@ -346,6 +362,7 @@ CREATE TABLE IF NOT EXISTS `movimientoCaja` (
   `tipo` int(11) NOT NULL,
   `idVenta` int(11) NOT NULL,
   `idComprovante` int(11) NOT NULL,
+  `idEmpleado` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -430,6 +447,33 @@ CREATE TABLE IF NOT EXISTS `proveedor` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `recibo`
+--
+
+CREATE TABLE IF NOT EXISTS `recibo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(20) NOT NULL,
+  `idCliente` int(11) NOT NULL,
+  `responsable` varchar(50) NOT NULL,
+  `celular` varchar(15) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `concepto` varchar(200) NOT NULL,
+  `idVenta` int(11) NOT NULL,
+  `idTrabajo` int(11) NOT NULL,
+  `monto` float NOT NULL,
+  `acuenta` float NOT NULL,
+  `saldo` float NOT NULL,
+  `obs` varchar(500) NOT NULL,
+  `tipo` int(11) NOT NULL,
+  `idEmpleado` int(11) NOT NULL,
+  `descuento` varchar(50) NOT NULL,
+  `nro` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `servicios`
 --
 
@@ -492,7 +536,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `fechaLogin`, `estado`, `tipo`) VALUES
-(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-04-23 18:45:20', 0, 'ventas'),
+(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-04-24 18:39:29', 0, 'admin'),
 (2, 'erika', 'e10adc3949ba59abbe56e057f20f883e', '2014-04-23 18:01:14', 0, 'ventas');
 
 -- --------------------------------------------------------
@@ -519,7 +563,7 @@ CREATE TABLE IF NOT EXISTS `venta` (
   `autorizado` varchar(50) NOT NULL,
   `obs` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Volcado de datos para la tabla `venta`
@@ -527,7 +571,11 @@ CREATE TABLE IF NOT EXISTS `venta` (
 
 INSERT INTO `venta` (`id`, `tipoPago`, `formaPago`, `idCliente`, `fechaVenta`, `fechaPlazo`, `idEmpleado`, `montoTotal`, `montoPagado`, `montoCambio`, `montoDescuento`, `codigo`, `factura`, `estado`, `autorizado`, `obs`) VALUES
 (1, 0, 0, 1, '2014-04-16 16:41:21', '0000-00-00 00:00:00', 1, 166.68, 200, 33.32, 0, '1-04-14', '', 0, '', 'test'),
-(2, 0, 0, 1, '2014-04-23 18:45:21', '0000-00-00 00:00:00', 1, 161.68, 500, 338.32, 0, '2-04-14', '', 1, '', '');
+(2, 0, 0, 1, '2014-04-23 18:45:21', '0000-00-00 00:00:00', 1, 161.68, 500, 338.32, 0, '2-04-14', '', 1, '', ''),
+(17, 1, 1, 1, '2014-04-24 19:00:35', '2014-04-24 00:00:00', 1, 5.96, 2, -3.96, 0, '3-04-14', '', 1, '', ''),
+(18, 1, 1, 1, '2014-04-24 19:00:35', '2014-04-24 00:00:00', 1, 5.96, 2, -3.96, 0, '3-04-14', '', 1, '', ''),
+(19, 1, 1, 1, '2014-04-24 19:00:35', '2014-04-24 00:00:00', 1, 5.96, 2, -3.96, 0, '3-04-14', '', 1, '', ''),
+(20, 1, 1, 1, '2014-04-24 19:00:35', '2014-04-24 00:00:00', 1, 5.96, 2, -3.96, 0, '3-04-14', '', 1, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
