@@ -5,9 +5,10 @@ $this->widget('zii.widgets.CMenu',array(
 				'submenuHtmlOptions' => array('class' => 'dropdown-menu'),
 				'encodeLabel' => false,
 				'items'=>array(
-							array('label'=>'Nuevo Recivo Ingreso', 'url'=>array('recibos/index')),
-							array('label'=>'Nuevo Recivo Egreso', 'url'=>array('recibos/index')),
-							array('label'=>'Recibos Realizados', 'url'=>array('#')),
+							array('label'=>'Recibos Realizados', 'url'=>array('recibos/index')),
+							array('label'=>'Nuevo Ingreso', 'url'=>array('recibos/ingreso')),
+							array('label'=>'Nuevo Egreso', 'url'=>array('recibos/egreso')),
+							
 						),
 				)); 
 ?>

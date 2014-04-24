@@ -28,7 +28,26 @@ class CajaController extends Controller
 
 		$this->render("index");
 	}
-
+	
+	public function actionEgreso()
+	{
+		$egreso = new MovimientoCaja;
+		$egreso->fecha=date("Y-m-d H:m:s");
+		$this->render("egreso",array('model'=>$egreso));
+	}
+	
+	public function actionIngreso()
+	{
+		$ingreso = new MovimientoCaja;
+		$ingreso->fecha=date("Y-m-d H:m:s");
+		$this->render("ingreso",array('model'=>$ingreso));
+	}
+	
+	public function actionArqueo()
+	{
+		$this->render("arqueo");
+	}
+	
 	private function verifyModel($model)
 	{
 		if($model===null)
