@@ -27,10 +27,10 @@ $this->breadcrumbs=array(
 		));
 	?>
 		<div class="form-group" >
-			<div class="col-md-4">
+			<div class="col-sm-4">
 			<?php echo CHtml::label('GRAFICA SINGULAR','name',array('class'=>'control-label col-sm-offset-5')); ?>
 			</div>
-			<div class="col-md-6">
+			<div class="col-sm-6">
 				<?php echo CHtml::activeLabelEx($recibo,'responsable',array('class'=>'control-label col-sm-4')); ?>
 				<div class="col-sm-8">
 					<?php echo CHtml::activeTextField($recibo,'responsable',array('class'=>'form-control',"readonly"=>true)); ?>

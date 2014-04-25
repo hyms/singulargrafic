@@ -25,16 +25,16 @@ $this->breadcrumbs=array(
 )); ?>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'username',array('class'=>'col-md-4 control-label')); ?>
-		<div class="col-md-8">
+		<?php echo $form->labelEx($model,'username',array('class'=>'col-sm-4 control-label')); ?>
+		<div class="col-sm-8">
 		<?php echo $form->textField($model,'username',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'username'); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'password',array('class'=>'col-md-4 control-label')); ?>
-		<div class="col-md-8">
+		<?php echo $form->labelEx($model,'password',array('class'=>'col-sm-4 control-label')); ?>
+		<div class="col-sm-8">
 		<?php echo $form->passwordField($model,'password',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'password'); ?>

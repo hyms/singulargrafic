@@ -56,7 +56,7 @@ class DistribuidoraController extends Controller
 		
 		//init seccion for save datas
 		$save=0;
-		if(isset($_POST['Cliente']))
+		if(isset($_POST['Cliente']) && isset($_POST['Venta']) && isset($_POST['DetalleVenta']))
 		{
 			$cliente = Cliente::model()->find('nitCi="'.$_POST['Cliente']['nitCi'].'"');
 			if($cliente==null)
@@ -66,33 +66,34 @@ class DistribuidoraController extends Controller
 			if(empty($cliente->fechaRegistro))
 				$cliente->fechaRegistro = date("Y-m-d");
 			
-			if($cliente->validate())
+			$venta->attributes = $_POST['Venta'];
+			$venta->estado = 1;
+			$venta->idEmpleado = $empleado->id;
+			if($venta->formaPago==1)
 			{
-				if($cliente->save())
-					$save++;
+				if(($_POST['Venta']['fechaPlazo'])!="")
+					$venta->fechaPlazo = date("Y-m-d",strtotime($_POST['Venta']['fechaPlazo']));
+				if(empty($venta->fechaPlazo)||$venta->fechaPlazo=="")
+					$venta->addError('fechaPlazo', 'La <b>fechaPlazo</b> no puede estar vacia');
 			}
-		
-		
-			if(isset($_POST['Venta']))
+			
+			$detalle = array();
+			$i=0;
+			$det=count($_POST['DetalleVenta']);
+			foreach ($_POST['DetalleVenta'] as $item)
 			{
-				$venta->attributes = $_POST['Venta'];
+				array_push($detalle,new DetalleVenta);
+				$detalle[$i]->attributes = $item;
+				if($detalle[$i]->validate())
+				{
+					$det--;
+				}
+				$i++;
+			}
+			
+			if($cliente->save() && $venta->validate() && $det==0)
+			{
 				$venta->idCliente = $cliente->id;
-				$venta->estado = 1;
-				$venta->idEmpleado = $empleado->id;
-				
-				if($venta->formaPago==1)
-				{
-					if(($_POST['Venta']['fechaPlazo'])!="")
-						$venta->fechaPlazo = date("Y-m-d",strtotime($_POST['Venta']['fechaPlazo']));
-					if(empty($venta->fechaPlazo)||$venta->fechaPlazo=="") 
-						$venta->addError('fechaPlazo', 'La <b>fechaPlazo</b> no puede estar vacia');
-				}
-				
-				if($venta->validate())
-				{
-					if($venta->save())
-						$save++;
-				}
 				
 				if($venta->formaPago==1)
 				{
@@ -104,79 +105,64 @@ class DistribuidoraController extends Controller
 					$credito->saldo=$venta->montoCambio*(-1);
 					$credito->save();
 				}
-			
-			
-			if(isset($_POST['DetalleVenta']))
-			{
-				$detalle = array();
-				$i=0; 
-				$det=count($_POST['DetalleVenta']);
 				
-				foreach ($_POST['DetalleVenta'] as $item)
-				{
-					array_push($detalle,new DetalleVenta);
-					$detalle[$i]->attributes = $item;
-					if(isset($venta->id) && $venta->id!="")
+				if($venta->save())
+				{			
+					$det=count($detalle);
+					$almacenes=array();	$i=0;
+					foreach($detalle as $item)
 					{
-						$detalle[$i]->idVenta = $venta->id;
-						
-						if($detalle[$i]->validate())
+						$item->idVenta = $venta->id;
+						if($item->validate())
 						{	
-							$almacenes = Almacen::model()->with('Producto')->findByPk($detalle[$i]->idAlmacen);
-							$almacenes->stockUnidad = $almacenes->stockUnidad - $detalle[$i]->cantUnidad;
-							if($almacenes->stockUnidad<0)
+							$almacenes = array_push($almacenes,Almacen::model()->with('Producto')->findByPk($item->idAlmacen));
+							$almacenes[$i]->stockUnidad = $almacenes[$i]->stockUnidad - $item->cantUnidad;
+							if($almacenes[$i]->stockUnidad<0)
 							{
-								$almacenes->stockPaquete = $almacenes->stockPaquete - 1;
-								$almacenes->stockUnidad = $almacenes->stockUnidad + $almacenes->Producto->cantidad;
+								$almacenes[$i]->stockPaquete = $almacenes[$i]->stockPaquete - 1;
+								$almacenes[$i]->stockUnidad = $almacenes[$i]->stockUnidad + $almacenes[$i]->Producto->cantidad;
 							}
-							$almacenes->stockPaquete = $almacenes->stockPaquete - $detalle[$i]->cantPaquete;
-							if($almacenes->stockUnidad>=0 && $almacenes->stockPaquete>=0)
-							{
-								if($detalle[$i]->validate())
-								{
-									$det--;
-								}
-								else 
-								{
-									$venta->delete();
-								}
-							}
-							else
+							$almacenes[$i]->stockPaquete = $almacenes[$i]->stockPaquete - $item->cantPaquete;
+							if($almacenes[$i]->stockUnidad<0 && $almacenes[$i]->stockPaquete<0)
 							{
 								$venta->addError('montoTotal', 'No existen suficientes Insumos');
-								$venta->delete();
 								if($venta->formaPago==1)
 								{
 									$credito->delete();
 								}
+								$venta->delete();
+								break;
+							}
+							else 
+							{
+								$det--; $i++;
 							}
 						}
 						else
 						{
 							$venta->delete();
+							break;
 						}
 					}
-					$i++;
-				}
-				//print_r($detalle);
-				if($det==0)
-				{
-					foreach ($detalle as $item)
+					
+					if($det==0)
 					{
-						$item->save();
+						$i=0;
+						foreach ($detalle as $item)
+						{
+							if($item->save())
+							{
+								$almacenes[$i]->save();
+							}
+							$i++;
+						}
+						$this->redirect('venta');
 					}
-					$save++;
+					//finish section for save datas
 				}
-			}
-			
-			//finish section for save datas
-			
-			if($save>=3)
-			{
-				$this->redirect('venta');
-			}
 			}
 		}
+	
 		$this->render('index',array(
 				'cliente'=>$cliente,
 				'empleado'=>$empleado,
@@ -287,13 +273,14 @@ class DistribuidoraController extends Controller
 	
 	public function actionCredito()
 	{
-		$ventas = new CActiveDataProvider('Venta',array('criteria'=>array(
-				'condition'=>'estado=2',
-				'with'=>array('Cliente'),
-		),
-				'pagination'=>array(
-						'pageSize'=>20,
-				),));
+		$ventas = new CActiveDataProvider('Venta',
+									array('criteria'=>array(
+											'condition'=>'estado=2',
+											'with'=>array('Cliente'),
+									),
+									'pagination'=>array(
+									'pageSize'=>20,
+									),));
 		$this->render('credito',array('ventas'=>$ventas,'titulo'=>"Ventas a Credito",'estado'=>"2"));
 	} 
 	
@@ -311,11 +298,11 @@ class DistribuidoraController extends Controller
 			$date2 = date("Y")."-".($_GET['m']+1)."-1";
 			$tiempo=" and fechaVenta between '".$date1."' and '".$date2."'";
 		}
-		$ventas = new CActiveDataProvider('Venta',array('criteria'=>array(
-				'condition'=>'estado=0'.$tiempo,
-				'with'=>array('Cliente'),
-		),
-				'pagination'=>array(
+		$ventas = new CActiveDataProvider('Venta',
+				array('criteria'=>array(
+						'condition'=>'estado=0'.$tiempo,
+						'with'=>array('Cliente'),),
+						'pagination'=>array(
 						'pageSize'=>20,
 				),));
 		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas Realizadas",'estado'=>"0"));
@@ -326,14 +313,14 @@ class DistribuidoraController extends Controller
 		if(isset($_GET['id']))
 		{
 			$ventas = Venta::model()
-			->with("Cliente")
-			->with("Detalle")
-			->with("Detalle.Almacen")
-			->with("Detalle.Almacen.Producto")
-			->with("Detalle.Almacen.Producto.Color")
-			->with("Detalle.Almacen.Producto.Material")
-			->with("Empleado")
-			->findByPk($_GET['id']);
+							->with("Cliente")
+							->with("Detalle")
+							->with("Detalle.Almacen")
+							->with("Detalle.Almacen.Producto")
+							->with("Detalle.Almacen.Producto.Color")
+							->with("Detalle.Almacen.Producto.Material")
+							->with("Empleado")
+							->findByPk($_GET['id']);
 				
 			if($ventas!=null)
 				$this->render('preview',array('venta'=>$ventas));
@@ -349,9 +336,9 @@ class DistribuidoraController extends Controller
 		if(Yii::app()->request->isAjaxRequest && isset($_GET['id']))
 		{
 			$venta = Venta::model()
-			->with("Detalle")
-			->with("Detalle.Almacen")
-			->findByPk($_GET['id']);
+							->with("Detalle")
+							->with("Detalle.Almacen")
+							->findByPk($_GET['id']);
 				
 			if(isset($_GET['factura']))
 				$venta->factura=$_GET['factura'];
@@ -390,8 +377,8 @@ class DistribuidoraController extends Controller
 			if($venta->save())
 			{
 				$venta = Venta::model()
-				->with("Detalle")
-				->findByPk($venta->id);
+								->with("Detalle")
+								->findByPk($venta->id);
 				foreach ($venta->Detalle as $detalle)
 				{
 					$almacenes = Almacen::model()->with('Producto')->findByPk($detalle->idAlmacen);
@@ -409,11 +396,6 @@ class DistribuidoraController extends Controller
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 		
-	}
-	
-	public function actionReporte()
-	{
-		$this->render('reporte');		
 	}
 	
 	public function actionAjaxCliente()

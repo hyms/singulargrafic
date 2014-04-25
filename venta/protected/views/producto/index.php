@@ -7,11 +7,11 @@ $this->breadcrumbs=array(
 );
 
 ?>
-<div class="col-md-2">
+<div class="col-sm-2">
 <?php $this->renderPartial('/distribuidora/menu'); ?>
 </div>
 
-<div class="col-md-10">
+<div class="col-sm-10">
 
 <div class="panel panel-default">
 	<div class="panel-heading">
