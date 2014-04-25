@@ -5,7 +5,7 @@
 <div class="col-sm-10" id="print">
 
 <div class="col-sm-offset-3 col-sm-7">
-<?php echo CHtml::link('Imprimir', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"printView(".$venta->id.")")); ?>
+<?php echo CHtml::link('Imprimir', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"printView()")); ?>
 <?php
 	if($venta->estado==1)
 	{
@@ -16,8 +16,8 @@
 </div>
 <div id="print-recived" class="form-group" style="width:793px; height:529px;">
 
-	<h4 class="col-xs-offset-10" style="text-align:right"><?php echo $venta->codigo; ?></h4>
-	<h3 class="col-xs-offset-8" style="text-align:right"><?php echo "NOTA DE VENTA";?></h3>
+	<h4 class="col-xs-offset-10 text-right"><?php echo $venta->codigo; ?></h4>
+	<h3 class="col-xs-offset-8 text-right"><?php echo "NOTA DE VENTA";?></h3>
 	<p class="row">
 	<span class="col-xs-3" > <strong><?php echo "CLIENTE:";?></strong> <?php echo $venta->Cliente->apellido;?></span>
 	<span class="col-xs-2"> <strong><?php echo "NIT:";?></strong> <?php echo $venta->Cliente->nitCi;?></span>
@@ -108,7 +108,7 @@
 <?php 
 
 $script = "
-		function printView(id)
+		function printView()
 		{
 			window.print();
 		}";

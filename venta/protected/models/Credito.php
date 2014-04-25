@@ -30,7 +30,7 @@ class Credito extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idVenta, monto, saldo, fechaPago, idCliente', 'required'),
+			array('idVenta, monto, saldo, fechaPago, idRecibo, idCliente', 'required'),
 			array('idVenta, idRecibo, idCliente', 'numerical', 'integerOnly'=>true),
 			array('monto, saldo', 'numerical'),
 			// The following rule is used by search().

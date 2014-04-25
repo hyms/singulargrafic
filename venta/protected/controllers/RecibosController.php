@@ -27,22 +27,37 @@ class RecibosController extends Controller
 	{
 		$cliente = new Cliente;
 		$recibo = new Recibo;
+		$venta = new Venta;
+		$empleado = Empleado::model()->with('Users')->find('idUsers='.Yii::app()->user->id);
 		
-		$row = Recibo::model()->find('tipo=1',array("select"=>"count(*) as `max`"));
+		$row = Recibo::model()->find(array("select"=>"count(*) as `max`",'condition'=>'tipo=1'));
 		
-		$recibo->fecha=date("Y-m-d h:m:s");
+		$recibo->fecha = date("Y-m-d h:m:s");
 		$recibo->codigo = "I-".date("m")."-".($row['max']+1);
-		$recibo->tipo=1;
+		$recibo->tipo = 1;
+		$recibo->idEmpleado = $empleado->id;
 		
 		if(isset($_POST['Recibo']))
 		{
-			$recibo->attributes=$_POST['Recibo'];
-			$recibo->validate();	
+			$recibo->attributes = $_POST['Recibo'];
+			$cliente->attributes = $_POST['Cliente'];
+			$cliente = Cliente::model()->find("nitCi='".$cliente->nitCi."'");
+			$recibo->idCliente = $cliente->id;
+			$venta = Venta::model()->find("codigo='".$recibo->nro."'");
+			if($venta!=null)
+				$recibo->idVenta = $venta->id;
+			
+			if($recibo->validate())
+			{
+				$recibo->save();
+				$this->redirect('index');
+			}	
+			
 		}	 
 		$this->render("ingreso",array(
 									'cliente'=>$cliente,
 									'recibo'=>$recibo,
-					
+									'venta'=>$venta,
 									));
 	}
 	
@@ -50,18 +65,24 @@ class RecibosController extends Controller
 	{
 		$cliente = new Cliente;
 		$recibo = new Recibo;
+		$empleado = Empleado::model()->with('Users')->find('idUsers='.Yii::app()->user->id);
 		
-		$row = Recibo::model()->find('tipo=0',array("select"=>"count(*) as `max`"));
+		$row = Recibo::model()->find(array("select"=>"count(*) as `max`",'condition'=>'tipo=0'));
 		
 		$recibo->fecha=date("Y-m-d h:m:s");
 		$recibo->codigo = "E-".date("m")."-".($row['max']+1);
 		$recibo->tipo=0;
+		$recibo->idEmpleado = $empleado->id;
 		$recibo->responsable="Miriam Martinez";
 		
 		if(isset($_POST['Recibo']))
 		{
 			$recibo->attributes=$_POST['Recibo'];
-			$recibo->validate();
+			if($recibo->validate())
+			{
+				$recibo->save();
+				$this->redirect('index');
+			}
 		}
 		$this->render("egreso",array(
 				'cliente'=>$cliente,
@@ -72,22 +93,79 @@ class RecibosController extends Controller
 	
 	public function actionIndex()
 	{
-	
-		$this->render("index");
+		$recibo = new CActiveDataProvider('Recibo',array('criteria'=>array(
+				'with'=>array('Cliente'),
+				'order'=>'fecha DESC',
+		),
+				'pagination'=>array(
+						'pageSize'=>20,
+				),));
+		$this->render('index',array('recibo'=>$recibo,'titulo'=>"Recibos Realizados"));
+		
 	}
 	
 	public function actionPreview()
 	{
-		
+		if(isset($_GET['id']))
+		{
+			$recibo = Recibo::model()
+							->with("Cliente")
+							->with("Venta")
+							->with("Venta.Detalle")
+							->with("Venta.Detalle.Almacen")
+							->with("Venta.Detalle.Almacen.Producto")
+							->with("Venta.Detalle.Almacen.Producto.Color")
+							->with("Venta.Detalle.Almacen.Producto.Material")
+							->with("Empleado")
+							->findByPk($_GET['id']);
+				
+			if($recibo!=null)
+				$this->render('preview',array('recibo'=>$recibo));
+			else
+				$this->redirect('index');
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 	
 	public function actionLlenado()
 	{
 		if(Yii::app()->request->isAjaxRequest && isset($_GET['nitCi']))
+		//if(isset($_GET['nitCi']))
 		{
-			$cliente = $this->verifyModel(Cliente::model()->find('nitCi='.$_GET['nitCi']));
-			echo CJSON::encode($cliente);
+			//$cliente = $this->verifyModel(Cliente::model()->find('nitCi='.$_GET['nitCi']));
+		
+			$credito = Credito::model()
+						->with('Cliente')
+						->with('Venta')
+						->with('Venta.Detalle')
+						->with('Venta.Detalle.Almacen')
+						->with('Venta.Detalle.Almacen.Producto')
+						->with('Venta.Detalle.Almacen.Producto.Color')
+						->with('Venta.Detalle.Almacen.Producto.Material')
+						->find("nitCi='".$_GET['nitCi']."' and saldo>0",array('order'=>'fechaPlazo Desc'));
+			
+			$concepto="Pago por ";
+			$i=0;
+			foreach ($credito->Venta->Detalle as $item)
+			{
+				$i++;
+				$concepto=$concepto.$item->Almacen->Producto->Material->nombre." ".$item->Almacen->Producto->Color->nombre." ".$item->Almacen->Producto->peso." ".$item->Almacen->Producto->dimension." U:".$item->cantUnidad." P:".$item->cantPaquete;
+				if($i>1)
+					$concepto=$concepto."; ";
+			}
+			
+			$data = array(
+					"Credito"=>$credito->attributes,
+					"Cliente"=>$credito->Cliente->attributes,
+					"Venta"=>$credito->Venta->attributes,
+					"categoria"=>($credito->Venta->codigo!="")?"Nota de Venta":"",
+					"concepto"=>($credito->Venta->codigo!="")?$concepto:"",
+					);
+			echo CJSON::encode($data);
 		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 	
 	private function verifyModel($model)

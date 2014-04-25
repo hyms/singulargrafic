@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'recibo':
  * @property integer $id
+ * @property string $categoria
  * @property string $codigo
  * @property integer $idCliente
  * @property string $responsable
@@ -24,6 +25,7 @@
  */
 class Recibo extends CActiveRecord
 {
+	public $max;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -40,17 +42,17 @@ class Recibo extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codigo, responsable, fecha, concepto, monto, acuenta, saldo, obs, tipo, idEmpleado', 'required'),
+			array('categoria, codigo, idCliente, responsable, fecha, concepto, monto, acuenta, saldo, tipo, idEmpleado, nro', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
 			array('idCliente, idVenta, idTrabajo, tipo, idEmpleado', 'numerical', 'integerOnly'=>true),
-			array('monto, acuenta, saldo', 'numerical'),
+			array('monto, acuenta, saldo', 'numerical','message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
+			array('categoria, responsable, descuento, nro', 'length', 'max'=>50),
 			array('codigo', 'length', 'max'=>20),
-			array('responsable, descuento, nro', 'length', 'max'=>50),
 			array('celular', 'length', 'max'=>15),
-			array('concepto', 'length', 'max'=>200),
-			array('obs', 'length', 'max'=>500),
+			array('concepto', 'length', 'max'=>200,'message'=>'El campo <b>{attribute}</b> solo puede tener 200 caracteres'),
+			array('obs', 'length', 'max'=>500,'message'=>'El campo <b>{attribute}</b> solo puede tener 200 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, codigo, idCliente, responsable, celular, fecha, concepto, idVenta, idTrabajo, monto, acuenta, saldo, obs, tipo, idEmpleado, descuento, nro', 'safe', 'on'=>'search'),
+			array('id, categoria, codigo, idCliente, responsable, celular, fecha, concepto, idVenta, idTrabajo, monto, acuenta, saldo, obs, tipo, idEmpleado, descuento, nro', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,7 +66,7 @@ class Recibo extends CActiveRecord
 		return array(
 				'Cliente'=>array(self::BELONGS_TO, 'Cliente', 'idCliente'),
 				'Venta'=>array(self::BELONGS_TO, 'Venta', 'idVenta'),
-				'Empleado'=>array(self::BELONGS_TO, 'Cliente', 'idEmpleado'),
+				'Empleado'=>array(self::BELONGS_TO, 'Empleado', 'idEmpleado'),
 		);
 	}
 
@@ -75,6 +77,7 @@ class Recibo extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+			'categoria' => 'Categoria',
 			'codigo' => 'Codigo',
 			'idCliente' => 'Id Cliente',
 			'responsable' => 'Responsable',
@@ -113,6 +116,7 @@ class Recibo extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
+		$criteria->compare('categoria',$this->categoria,true);
 		$criteria->compare('codigo',$this->codigo,true);
 		$criteria->compare('idCliente',$this->idCliente);
 		$criteria->compare('responsable',$this->responsable,true);

@@ -55,17 +55,21 @@ class DistribuidoraController extends Controller
 		//finish filter seccion
 		
 		//init seccion for save datas
-		$save=0;
-		if(isset($_POST['Cliente']) && isset($_POST['Venta']) && isset($_POST['DetalleVenta']))
+		$swc=0; $swv=0;
+		if(isset($_POST['Cliente']))
 		{
 			$cliente = Cliente::model()->find('nitCi="'.$_POST['Cliente']['nitCi'].'"');
 			if($cliente==null)
 				$cliente = new Cliente;
-			
+				
 			$cliente->attributes = $_POST['Cliente'];
 			if(empty($cliente->fechaRegistro))
 				$cliente->fechaRegistro = date("Y-m-d");
-			
+			if($cliente->validate())
+				$swc=1;
+		}
+		if(isset($_POST['Venta']))
+		{
 			$venta->attributes = $_POST['Venta'];
 			$venta->estado = 1;
 			$venta->idEmpleado = $empleado->id;
@@ -76,7 +80,11 @@ class DistribuidoraController extends Controller
 				if(empty($venta->fechaPlazo)||$venta->fechaPlazo=="")
 					$venta->addError('fechaPlazo', 'La <b>fechaPlazo</b> no puede estar vacia');
 			}
-			
+			if($venta->validate())
+				$swv=1;
+		}
+		if(isset($_POST['DetalleVenta']))
+		{
 			$detalle = array();
 			$i=0;
 			$det=count($_POST['DetalleVenta']);
@@ -90,76 +98,76 @@ class DistribuidoraController extends Controller
 				}
 				$i++;
 			}
+		}
+		if($swc==1 && $swv==1 && $det==0)
+		{
+			$venta->idCliente = $cliente->id;
 			
-			if($cliente->save() && $venta->validate() && $det==0)
+			if($venta->formaPago==1)
 			{
-				$venta->idCliente = $cliente->id;
-				
-				if($venta->formaPago==1)
+				$credito = new Credito;
+				$credito->idVenta=$venta->id;
+				$credito->idCliente=$venta->idCliente;
+				$credito->fechaPago=$venta->fechaVenta;
+				$credito->monto=$venta->montoPagado;
+				$credito->saldo=$venta->montoCambio*(-1);
+				$credito->save();
+				$venta->estado = 2;
+			}
+			
+			if($venta->save())
+			{			
+				$det=count($detalle);
+				$almacenes=array();	$i=0;
+				foreach($detalle as $item)
 				{
-					$credito = new Credito;
-					$credito->idVenta=$venta->id;
-					$credito->idCliente=$venta->idCliente;
-					$credito->fechaPago=$venta->fechaVenta;
-					$credito->monto=$venta->montoPagado;
-					$credito->saldo=$venta->montoCambio*(-1);
-					$credito->save();
-				}
-				
-				if($venta->save())
-				{			
-					$det=count($detalle);
-					$almacenes=array();	$i=0;
-					foreach($detalle as $item)
-					{
-						$item->idVenta = $venta->id;
-						if($item->validate())
-						{	
-							$almacenes = array_push($almacenes,Almacen::model()->with('Producto')->findByPk($item->idAlmacen));
-							$almacenes[$i]->stockUnidad = $almacenes[$i]->stockUnidad - $item->cantUnidad;
-							if($almacenes[$i]->stockUnidad<0)
-							{
-								$almacenes[$i]->stockPaquete = $almacenes[$i]->stockPaquete - 1;
-								$almacenes[$i]->stockUnidad = $almacenes[$i]->stockUnidad + $almacenes[$i]->Producto->cantidad;
-							}
-							$almacenes[$i]->stockPaquete = $almacenes[$i]->stockPaquete - $item->cantPaquete;
-							if($almacenes[$i]->stockUnidad<0 && $almacenes[$i]->stockPaquete<0)
-							{
-								$venta->addError('montoTotal', 'No existen suficientes Insumos');
-								if($venta->formaPago==1)
-								{
-									$credito->delete();
-								}
-								$venta->delete();
-								break;
-							}
-							else 
-							{
-								$det--; $i++;
-							}
-						}
-						else
+					$item->idVenta = $venta->id;
+					if($item->validate())
+					{	
+						$almacenes = array_push($almacenes,Almacen::model()->with('Producto')->findByPk($item->idAlmacen));
+						$almacenes[$i]->stockUnidad = $almacenes[$i]->stockUnidad - $item->cantUnidad;
+						if($almacenes[$i]->stockUnidad<0)
 						{
+							$almacenes[$i]->stockPaquete = $almacenes[$i]->stockPaquete - 1;
+							$almacenes[$i]->stockUnidad = $almacenes[$i]->stockUnidad + $almacenes[$i]->Producto->cantidad;
+						}
+						$almacenes[$i]->stockPaquete = $almacenes[$i]->stockPaquete - $item->cantPaquete;
+						if($almacenes[$i]->stockUnidad<0 && $almacenes[$i]->stockPaquete<0)
+						{
+							$venta->addError('montoTotal', 'No existen suficientes Insumos');
+							if($venta->formaPago==1)
+							{
+								$credito->delete();
+							}
 							$venta->delete();
 							break;
 						}
-					}
-					
-					if($det==0)
-					{
-						$i=0;
-						foreach ($detalle as $item)
+						else 
 						{
-							if($item->save())
-							{
-								$almacenes[$i]->save();
-							}
-							$i++;
+							$det--; $i++;
 						}
-						$this->redirect('venta');
 					}
-					//finish section for save datas
+					else
+					{
+						$venta->delete();
+						break;
+					}
 				}
+				
+				if($det==0)
+				{
+					$i=0;
+					foreach ($detalle as $item)
+					{
+						if($item->save())
+						{
+							$almacenes[$i]->save();
+						}
+						$i++;
+					}
+					$this->redirect('venta');
+				}
+				//finish section for save datas
 			}
 		}
 	
@@ -290,7 +298,7 @@ class DistribuidoraController extends Controller
 		if (isset($_GET['d']))
 		{
 			$date = date("Y-m")."-".$_GET['d'];
-			$tiempo=" and fechaVenta='".$date."'";
+			$tiempo=" and fechaVenta between '".$date." 00:00:00' and '".$date." 23:59:59'";
 		}
 		if (isset($_GET['m']))
 		{
@@ -356,8 +364,11 @@ class DistribuidoraController extends Controller
 	
 				$almacenes->save();
 			}
-			*/	
+			*/
 			$venta->estado = 0;
+			if($venta->formaPago==1)
+				$venta->estado = 2;
+			
 			$venta->save();
 		}
 		else

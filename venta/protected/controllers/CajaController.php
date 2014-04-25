@@ -25,8 +25,39 @@ class CajaController extends Controller
 
 	public function actionIndex()
 	{
-
-		$this->render("index");
+		$vd = false;
+		$ld = false;
+		$tabla="";
+		
+		if(isset($_GET['vd']))
+		{
+			$date = date("Y-m")."-".$_GET['vd'];
+			$tabla = Venta::model()
+							->with('Cliente')
+							->with('Detalle')
+							->with('Detalle.Almacen')
+							->with('Detalle.Almacen.Producto')
+							->with('Detalle.Almacen.Producto.Color')
+							->with('Detalle.Almacen.Producto.Material')
+							->findAll("(fechaVenta between '".$date." 00:00:00' and '".$date." 23:59:59') and (estado=0 or estado=2)");
+			
+			$vd=true;
+			//print_r($tabla);
+		}
+		
+		if(isset($_GET['ld']))
+		{
+			$tabla = new CActiveDataProvider('Venta',array('criteria'=>array(
+					'with'=>array('Detalle'),
+					'with'=>array('Detalle.Almacen'),
+					'with'=>array('Detalle.Almacen.Producto'),
+					'with'=>array('Detalle.Almacen.Producto.Color'),
+					'with'=>array('Detalle.Almacen.Producto.Material'),
+			),
+			));
+		}
+		
+		$this->render("index",array('vd'=>$vd,'ld'=>$ld,'tabla'=>$tabla));
 	}
 	
 	public function actionEgreso()
