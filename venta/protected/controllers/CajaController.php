@@ -47,17 +47,36 @@ class CajaController extends Controller
 		
 		if(isset($_GET['ld']))
 		{
-			$tabla = new CActiveDataProvider('Venta',array('criteria'=>array(
-					'with'=>array('Detalle'),
-					'with'=>array('Detalle.Almacen'),
-					'with'=>array('Detalle.Almacen.Producto'),
-					'with'=>array('Detalle.Almacen.Producto.Color'),
-					'with'=>array('Detalle.Almacen.Producto.Material'),
-			),
-			));
+			$date = date("Y-m")."-".$_GET['ld'];
+			$tabla = Venta::model()
+							->with('Cliente')
+							->with('Detalle')
+							->with('Detalle.Almacen')
+							->with('Detalle.Almacen.Producto')
+							->with('Detalle.Almacen.Producto.Color')
+							->with('Detalle.Almacen.Producto.Material')
+							->findAll("(fechaVenta between '".$date." 00:00:00' and '".$date." 23:59:59') and (estado=0 or estado=2)");
+			
+			$vd=true;
 		}
 		
-		$this->render("index",array('vd'=>$vd,'ld'=>$ld,'tabla'=>$tabla));
+		if(isset($_GET['rd']))
+		{
+			$date = date("Y-m")."-".$_GET['rd'];
+			$tabla = Recibo::model()
+						->with('Cliente')
+						->with('Venta')
+						->with('Venta.Detalle')
+						->with('Venta.Detalle.Almacen')
+						->with('Venta.Detalle.Almacen.Producto')
+						->with('Venta.Detalle.Almacen.Producto.Color')
+						->with('Venta.Detalle.Almacen.Producto.Material')
+						->findAll("(fecha between '".$date." 00:00:00' and '".$date." 23:59:59')");
+				
+			$rd=true;
+		}
+		
+		$this->render("index",array('vd'=>$vd,'ld'=>$ld,'rd'=>$rd,'tabla'=>$tabla));
 	}
 	
 	public function actionEgreso()

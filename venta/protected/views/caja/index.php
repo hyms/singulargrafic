@@ -18,7 +18,7 @@ $this->breadcrumbs=array(
 		'items'=>array(
 			array('label'=>'Ventas Dia','url'=>array('caja/index','vd'=>date('d'))),
 			array('label'=>'Libro Diario', 'url'=>array('caja/index','ld'=>date('d'))),
-			//array('label'=>'Dia', 'url'=>array('distribuidora/index','d'=>date('d'))),
+			array('label'=>'Recibos Dia', 'url'=>array('caja/index','rd'=>date('d'))),
 		),
 	));
 ?>
@@ -37,6 +37,7 @@ $this->breadcrumbs=array(
 	{
 		$this->renderPartial('libroDiario');
 	}
+	
 ?>
 
 </div>

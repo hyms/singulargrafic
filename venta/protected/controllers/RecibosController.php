@@ -93,11 +93,22 @@ class RecibosController extends Controller
 	
 	public function actionIndex()
 	{
-		$recibo = new CActiveDataProvider('Recibo',array('criteria'=>array(
-				'with'=>array('Cliente'),
-				'order'=>'fecha DESC',
-		),
-				'pagination'=>array(
+		$condition = "t=0 or t=1";
+		if(isset($_GET['t']))
+		{
+			if($_GET['t']=="e")
+				$condition = "t=0";
+				
+			if($_GET['t']=="i")
+				$condition = "t=1";
+		}
+		$recibo = new CActiveDataProvider('Recibo',
+				array('criteria'=>array(
+					'with'=>array('Cliente'),
+					'order'=>'fecha DESC',
+					'condition'=>$condition,
+					),
+					'pagination'=>array(
 						'pageSize'=>20,
 				),));
 		$this->render('index',array('recibo'=>$recibo,'titulo'=>"Recibos Realizados"));

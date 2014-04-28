@@ -15,6 +15,18 @@ $this->breadcrumbs=array(
 		<strong><?php echo $titulo;?></strong>
 	</div>
 	<div class="panel-body">
+		<?php
+			$this->widget('zii.widgets.CMenu',array(
+							'htmlOptions' => array('class' => 'nav nav-tabs'),
+							'activeCssClass'	=> 'active',
+							'encodeLabel' => false,
+							'items'=>array(
+										array('label'=>'Todos','url'=>array('recibos/index','t'=>'all')),
+										array('label'=>'Egresos', 'url'=>array('recibos/index','t'=>'e')),
+										array('label'=>'Ingresos', 'url'=>array('recibos/index','t'=>'i')),
+									),
+							)); 
+		?>
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
 				'dataProvider'=>$recibo,
 				//'ajaxUpdate'=>true,
