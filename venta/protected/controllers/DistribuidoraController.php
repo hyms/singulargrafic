@@ -34,8 +34,18 @@ class DistribuidoraController extends Controller
 		$detalle = new DetalleVenta;
 		$credito = "";
 		//new venta
-		$row = Venta::model()->find(array("select"=>"count(*) as `max`"));
-		$venta->codigo= ($row['max']+1)."-".date("m")."-".date("y");
+		$row = Venta::model()->find(array("condition"=>"tipoPago=1",'order'=>'fechaVenta Desc'));
+		if(empty($row->serie))
+			$row->serie = 65;
+		$venta->codigo = $row->codigo +1;
+		if($row->codigo==1001)
+		{
+			$row->codigo;
+			$row->serie++;
+			if($row->serie==91)
+				$row->serie = 65;
+		}
+		$venta->serie = $row->serie;
 		$venta->fechaVenta = date("Y-m-d H:i:s");
 		$venta->formaPago = 0;
 		$venta->tipoPago = 1;
@@ -71,6 +81,18 @@ class DistribuidoraController extends Controller
 		if(isset($_POST['Venta']))
 		{
 			$venta->attributes = $_POST['Venta'];
+			$row = Venta::model()->find(array("condition"=>"tipoPago=".$venta->tipoPago,'order'=>'fechaVenta Desc'));
+			if(empty($row->serie) && $venta->tipoPago==1)
+				$row->serie = 65;
+			$venta->codigo = $row->codigo +1;
+			if($row->codigo==1001 && $venta->tipoPago==1)
+			{
+				$row->codigo;
+				$row->serie++;
+				if($row->serie==91)
+					$row->serie = 65;
+			}
+			$venta->serie = $row->serie;
 			$venta->estado = 1;
 			$venta->idEmpleado = $empleado->id;
 			if($venta->formaPago==1)
@@ -216,7 +238,19 @@ class DistribuidoraController extends Controller
 			$venta->attributes = $_POST['Venta'];
 			if(isset($_POST['Venta']['fechaPlazo']))
 				$venta->fechaPlazo = $_POST['Venta']['fechaPlazo'];
-			
+			$row = Venta::model()->find(array("condition"=>"tipoPago=".$venta->tipoPago,'order'=>'fechaVenta Desc'));
+			if(empty($row->serie) && $venta->tipoPago==1)
+				$row->serie = 65;
+			$venta->codigo = $row->codigo +1;
+			if($row->codigo==1001 && $venta->tipoPago==1)
+			{
+				$row->codigo;
+				$row->serie++;
+				if($row->serie==91)
+					$row->serie = 65;
+			}
+			$venta->serie = $row->serie;
+			$venta->fechaVenta = date("Y-m-d H:i:s");
 			$total=0;
 			if(isset($_POST['DetalleVenta']))
 			{

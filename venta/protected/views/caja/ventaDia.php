@@ -7,7 +7,7 @@ if(!empty($tabla))
 	$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 	
 ?>
-<p class="text-center"><strong><?php echo "REPORTE DE VENTAS DEL </strong>".$tabla[0]->codigo." <strong>AL</strong> ".$tabla[count($tabla)-1]->codigo; ?></p>
+<p class="text-center"><strong><?php echo "REPORTE DE VENTAS DEL DIA"?></strong></p>
 <p class="text-right"><?php echo "La Paz, ".$dias[date('w',strtotime($tabla[0]->fechaVenta))]." ".date('d',strtotime($tabla[0]->fechaVenta))." de ".$meses[date('n',strtotime($tabla[0]->fechaVenta))-1]. " del ".date('Y',strtotime($tabla[0]->fechaVenta));?></p>
 <table class="table table-bordered table-condensed">
 	<thead>
@@ -38,7 +38,7 @@ if(!empty($tabla))
 	?>	
 		<tr>
 			<td><?php echo $i;?></td>
-			<td><?php echo $item->codigo;?></td>
+			<td><?php echo ($item->tipoPago==0)?$item->codigo:(chr($item->serie)."-".$item->codigo);?></td>
 			<td><?php echo $item->Cliente->apellido." ".$item->Cliente->nombre;?></td>
 			<td><?php echo $producto->Almacen->Producto->codigo;?></td>
 			<td>
@@ -55,8 +55,8 @@ if(!empty($tabla))
 						"/".($producto->cantPaquete*(($item->tipoPago==0)?$producto->Almacen->Producto->costoCF:$producto->Almacen->Producto->costoSF)); ?></td>
 			<td><?php echo $producto->adicional; $adicional=$adicional+$producto->adicional; ?></td>
 			<td><?php echo $producto->costoTotal; $total=$total+$producto->costoTotal; ?></td>
-			<td><?php echo ($item->estado==0)?(($temp==0)?$item->montoPagado:0):0;
-				($item->estado==0)?(($temp==0)?($importe=$importe+$item->montoPagado):0):0; ?></td>
+			<td><?php echo ($item->estado==0)?(($temp==0)?($item->montoPagado-$item->montoCambio):0):(($item->estado==2)?(($temp==0)?$item->montoPagado:0):0);
+				($item->estado==0)?(($temp==0)?($importe=$importe+($item->montoPagado-$item->montoCambio)):0):(($item->estado==2)?(($temp==0)?($importe=$importe+$item->montoPagado):0):0); ?></td>
 			<td><?php echo ($item->estado==2)?(($temp==0)?($item->montoCambio*(-1)):0):0;
 				($item->estado==2)?(($temp==0)?($creditos=$creditos+($item->montoCambio*(-1))):0):0; ?></td>
 			<td><?php echo $item->factura;?></td>

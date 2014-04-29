@@ -12,17 +12,17 @@ $this->breadcrumbs=array(
 <div class="col-sm-10">
 <?php
 	$this->widget('zii.widgets.CMenu',array(
-		'htmlOptions' => array('class' => 'nav nav-tabs hidden-print'),
+		'htmlOptions' => array('class' => 'nav nav-tabs hidden-print col-sm-6'),
 		'activeCssClass'	=> 'active',
 		'encodeLabel' => false,
 		'items'=>array(
 			array('label'=>'Ventas Dia','url'=>array('caja/index','vd'=>date('d'))),
-			array('label'=>'Libro Diario', 'url'=>array('caja/index','ld'=>date('d'))),
-			array('label'=>'Recibos Dia', 'url'=>array('caja/index','rd'=>date('d'))),
+			array('label'=>'Registro Diario', 'url'=>array('caja/index','ld'=>date('d'))),
+			//array('label'=>'Recibos Dia', 'url'=>array('caja/index','rd'=>date('d'))),
 		),
 	));
 ?>
-	<div class="col-sm-offset-3 col-sm-7">
+	<div class="col-sm-6">
 	<div class="form-group">
 	<?php echo CHtml::link('Imprimir', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"printView()")); ?>
 	</div>
@@ -35,7 +35,7 @@ $this->breadcrumbs=array(
 	
 	if($ld)
 	{
-		$this->renderPartial('libroDiario');
+		$this->renderPartial('libroDiario',array('tabla'=>$tabla,'caja'=>$caja));
 	}
 	
 ?>

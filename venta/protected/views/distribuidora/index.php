@@ -20,7 +20,7 @@ $this->breadcrumbs=array(
 
 <div class="panel panel-primary">
 	<div class="panel-heading">
-		<span class="panel-title"><strong>Nueva Venta</strong> <?php echo $venta->codigo;?></span>
+		<span class="panel-title"><strong>Nueva Venta</strong> <?php echo ((!empty($venta->serie))?(chr($venta->serie)."-"):"").$venta->codigo;?></span>
 		<span style="float:right;"><strong>Fecha:</strong> <?php echo date("d-m-Y", strtotime($venta->fechaVenta));?></span>
 	</div>
 	
@@ -38,8 +38,6 @@ $this->breadcrumbs=array(
 			),
 	));
 	?>
-	<?php echo $form->hiddenField($venta,'codigo');?>
-	<?php echo $form->hiddenField($venta,'fechaVenta'); ?>
 	
 	<?php $this->renderPartial('detalleVenta',array('venta'=>$venta,'detalle'=>$detalle,'almacen'=>$almacen))?>
 	<div class="form-group">

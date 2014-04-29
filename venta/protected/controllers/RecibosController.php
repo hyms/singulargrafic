@@ -37,6 +37,9 @@ class RecibosController extends Controller
 		$recibo->tipo = 1;
 		$recibo->idEmpleado = $empleado->id;
 		
+		$caja = Caja::model()->find(array('condition'=>'arqueo=0 and entregado=0 and nombre like "papeles"','order'=>'id Desc'));
+		$recibo->idCaja = $caja->id;
+		
 		if(isset($_POST['Recibo']))
 		{
 			$recibo->attributes = $_POST['Recibo'];
@@ -49,8 +52,10 @@ class RecibosController extends Controller
 			
 			if($recibo->validate())
 			{
-				$recibo->save();
-				$this->redirect('index');
+				$caja->saldo = $caja->saldo+$recibo->monto;
+				if($recibo->save())
+					if($caja->save())
+						$this->redirect('index');
 			}	
 			
 		}	 
@@ -75,13 +80,25 @@ class RecibosController extends Controller
 		$recibo->idEmpleado = $empleado->id;
 		$recibo->responsable="Miriam Martinez";
 		
+		$caja = Caja::model()->find(array('condition'=>'arqueo=0 and entregado=0 and nombre like "papeles"','order'=>'id Desc'));
+		$recibo->idCaja = $caja->id;
+		
 		if(isset($_POST['Recibo']))
 		{
 			$recibo->attributes=$_POST['Recibo'];
 			if($recibo->validate())
 			{
-				$recibo->save();
-				$this->redirect('index');
+				$caja->saldo = $caja->saldo-$recibo->acuenta;
+				if($caja->saldo>=0)
+				{
+					if($recibo->save())
+						if($caja->save())
+							$this->redirect('index');
+				}
+				else
+				{
+					$recibo->addError('acuenta','No existen suficientes fondos');
+				}
 			}
 		}
 		$this->render("egreso",array(

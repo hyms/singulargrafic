@@ -29,6 +29,7 @@ class CajaController extends Controller
 		$ld = false;
 		$rd = false;
 		$tabla="";
+		$caja="";
 		
 		if(isset($_GET['vd']))
 		{
@@ -49,16 +50,11 @@ class CajaController extends Controller
 		if(isset($_GET['ld']))
 		{
 			$date = date("Y-m")."-".$_GET['ld'];
-			$tabla = Venta::model()
-							->with('Cliente')
-							->with('Detalle')
-							->with('Detalle.Almacen')
-							->with('Detalle.Almacen.Producto')
-							->with('Detalle.Almacen.Producto.Color')
-							->with('Detalle.Almacen.Producto.Material')
-							->findAll("(fechaVenta between '".$date." 00:00:00' and '".$date." 23:59:59') and (estado=0 or estado=2)");
+			$caja = Caja::model()->with('Movimiento')->with('Recibo')->find(array('condition'=>'arqueo=0 and entregado=0 and nombre like "papeles"','order'=>'`t`.id Desc'));
+			$tabla = Venta::model()->findAll("(fechaVenta between '".$date." 00:00:00' and '".$date." 23:59:59') and (estado=0 or estado=2)");
 			
-			$vd=true;
+						
+			$ld=true;
 		}
 		
 		if(isset($_GET['rd']))
@@ -77,7 +73,7 @@ class CajaController extends Controller
 			$rd=true;
 		}
 		
-		$this->render("index",array('vd'=>$vd,'ld'=>$ld,'rd'=>$rd,'tabla'=>$tabla));
+		$this->render("index",array('vd'=>$vd,'ld'=>$ld,'rd'=>$rd,'tabla'=>$tabla,'caja'=>$caja));
 	}
 	
 	public function actionEgreso()
@@ -87,7 +83,7 @@ class CajaController extends Controller
 		$egreso->tipo=0;
 		$empleado = Empleado::model()->with('Users')->find('idUsers='.Yii::app()->user->id);
 		$egreso->idEmpleado=$empleado->id;
-		$caja = Caja::model()->find(array('condition'=>'arqueo=0 and entregado=0','order'=>'id Desc'));
+		$caja = Caja::model()->find(array('condition'=>'arqueo=0 and entregado=0 and nombre like "papeles"','order'=>'id Desc'));
 		$egreso->idCaja = $caja->id;
 		if(isset($_POST['MovimientoCaja']))
 		{
@@ -98,7 +94,8 @@ class CajaController extends Controller
 				if($caja->saldo>=0)
 				{
 					if($egreso->save())
-						$caja->save();
+						if($caja->save())
+							$this->redirect('index');
 				}
 				else
 				{
@@ -116,18 +113,17 @@ class CajaController extends Controller
 		$ingreso->tipo = 1;
 		$empleado = Empleado::model()->with('Users')->find('idUsers='.Yii::app()->user->id);
 		$ingreso->idEmpleado = $empleado->id;
-		$caja = Caja::model()->find(array('condition'=>'arqueo=0 and entregado=0','order'=>'id Desc'));
+		$caja = Caja::model()->find(array('condition'=>'arqueo=0 and entregado=0 and nombre like "papeles"','order'=>'id Desc'));
 		$ingreso->idCaja = $caja->id;
 		if(isset($_POST['MovimientoCaja']))
 		{
 			$ingreso->attributes=$_POST['MovimientoCaja'];
 			if($ingreso->validate())
 			{
+				$caja->saldo = $caja->saldo+$ingreso->monto;
 				if($ingreso->save())
-				{
-					$caja->saldo = $caja->saldo+$ingreso->monto;
-					$caja->save();
-				}
+					if($caja->save())
+						$this->redirect('index');
 			}
 		}
 		$this->render("ingreso",array('model'=>$ingreso));

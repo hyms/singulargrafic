@@ -20,6 +20,7 @@
  * @property integer $estado
  * @property string $autorizado
  * @property string $obs
+ * @property interger $serie
  */
 class Venta extends CActiveRecord
 {
@@ -47,7 +48,7 @@ class Venta extends CActiveRecord
 			array('obs', 'length', 'max'=>200 ,'message'=>'El campo <b>{attribute}</b> solo puede tener 200 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, tipoPago, formaPago, idCliente, fechaVenta, fechaPlazo, idEmpleado, montoTotal, montoPagado, montoCambio, montoDescuento, codigo, factura, estado, autorizado, obs', 'safe', 'on'=>'search'),
+			array('id, tipoPago, formaPago, idCliente, fechaVenta, fechaPlazo, idEmpleado, montoTotal, montoPagado, montoCambio, montoDescuento, codigo, factura, estado, autorizado, obs, serie', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -87,6 +88,7 @@ class Venta extends CActiveRecord
 			'estado' => 'Estado',
 			'autorizado' => 'Autorizado',
 			'obs' => 'Observaciones',
+			'serie' => 'Serie'
 		);
 	}
 
@@ -124,6 +126,7 @@ class Venta extends CActiveRecord
 		$criteria->compare('estado',$this->estado);
 		$criteria->compare('autorizado',$this->autorizado);
 		$criteria->compare('obs',$this->obs,true);
+		$criteria->compare('serie',$this->serie,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

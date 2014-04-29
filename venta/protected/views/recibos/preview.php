@@ -8,8 +8,8 @@
 	</div>
 	
 	<div id="print-recived" class="form-group" style="width:793px; height:529px;">
-		<h4 class="col-xs-offset-10 text-right"><?php echo $recibo->codigo; ?></h4>
-		<h3 class="col-xs-offset-8 text-right"><?php echo date("d-m-Y",strtotime($recibo->fecha));?></h3>
+		<h4 class="text-center"><?php echo "<strong>RECIBO DE ".(($recibo->tipo==0)?"EGRESO":"INGRESO")."</strong> Nro. ".$recibo->codigo; ?></h4>
+		<h4 class="col-xs-offset-8 text-right"><strong>Fecha: </strong><?php echo date("d-m-Y",strtotime($recibo->fecha));?></h4>
 	
 		<p class="row">
 			<?php if(!empty($recibo->Cliente)){?>

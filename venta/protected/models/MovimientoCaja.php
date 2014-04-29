@@ -48,6 +48,8 @@ class MovimientoCaja extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'Caja'=>array(self::BELONGS_TO, 'Caja', 'idCaja'),
+			'Empleado'=>array(self::BELONGS_TO, 'Empleado', 'idEmpleado'),
 		);
 	}
 

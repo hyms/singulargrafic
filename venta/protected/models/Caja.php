@@ -11,6 +11,7 @@
  * @property string $obs
  * @property integer $arqueo
  * @property double $entregado
+ * @property string $comprovante
  */
 class Caja extends CActiveRecord
 {
@@ -30,14 +31,15 @@ class Caja extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('saldo', 'required'),
+			array('saldo, nombre', 'required'),
 			array('arqueo', 'numerical', 'integerOnly'=>true),
 			array('saldo, entregado', 'numerical'),
 			array('nombre', 'length', 'max'=>20),
 			array('obs', 'length', 'max'=>200),
+			array('comprovante', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, saldo, fechaArqueo, nombre, obs, arqueo, entregado', 'safe', 'on'=>'search'),
+			array('id, saldo, fechaArqueo, nombre, obs, arqueo, entregado, comprovante', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,6 +51,8 @@ class Caja extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'Movimiento'=>array(self::HAS_MANY, 'MovimientoCaja', 'idCaja'),
+			'Recibo'=>array(self::HAS_MANY, 'Recibo', 'idCaja'),
 		);
 	}
 
@@ -65,6 +69,7 @@ class Caja extends CActiveRecord
 			'obs' => 'Obs',
 			'arqueo' => 'Arqueo',
 			'entregado' => 'Entregado',
+			'comprovante' => 'Comprovante',
 		);
 	}
 
@@ -93,6 +98,7 @@ class Caja extends CActiveRecord
 		$criteria->compare('obs',$this->obs,true);
 		$criteria->compare('arqueo',$this->arqueo);
 		$criteria->compare('entregado',$this->entregado);
+		$criteria->compare('comprovante',$this->comprovante,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
