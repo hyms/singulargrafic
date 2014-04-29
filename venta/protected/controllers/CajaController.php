@@ -27,6 +27,7 @@ class CajaController extends Controller
 	{
 		$vd = false;
 		$ld = false;
+		$rd = false;
 		$tabla="";
 		
 		if(isset($_GET['vd']))
@@ -83,13 +84,52 @@ class CajaController extends Controller
 	{
 		$egreso = new MovimientoCaja;
 		$egreso->fecha=date("Y-m-d H:m:s");
+		$egreso->tipo=0;
+		$empleado = Empleado::model()->with('Users')->find('idUsers='.Yii::app()->user->id);
+		$egreso->idEmpleado=$empleado->id;
+		$caja = Caja::model()->find(array('condition'=>'arqueo=0 and entregado=0','order'=>'id Desc'));
+		$egreso->idCaja = $caja->id;
+		if(isset($_POST['MovimientoCaja']))
+		{
+			$egreso->attributes=$_POST['MovimientoCaja'];
+			if($egreso->validate())
+			{
+				$caja->saldo = $caja->saldo-$egreso->monto;
+				if($caja->saldo>=0)
+				{
+					if($egreso->save())
+						$caja->save();
+				}
+				else
+				{
+					$egreso->addError('monto','No existen suficientes fondos');
+				}
+			}
+		}
 		$this->render("egreso",array('model'=>$egreso));
 	}
 	
 	public function actionIngreso()
 	{
 		$ingreso = new MovimientoCaja;
-		$ingreso->fecha=date("Y-m-d H:m:s");
+		$ingreso->fecha = date("Y-m-d H:m:s");
+		$ingreso->tipo = 1;
+		$empleado = Empleado::model()->with('Users')->find('idUsers='.Yii::app()->user->id);
+		$ingreso->idEmpleado = $empleado->id;
+		$caja = Caja::model()->find(array('condition'=>'arqueo=0 and entregado=0','order'=>'id Desc'));
+		$ingreso->idCaja = $caja->id;
+		if(isset($_POST['MovimientoCaja']))
+		{
+			$ingreso->attributes=$_POST['MovimientoCaja'];
+			if($ingreso->validate())
+			{
+				if($ingreso->save())
+				{
+					$caja->saldo = $caja->saldo+$ingreso->monto;
+					$caja->save();
+				}
+			}
+		}
 		$this->render("ingreso",array('model'=>$ingreso));
 	}
 	

@@ -93,14 +93,14 @@ class RecibosController extends Controller
 	
 	public function actionIndex()
 	{
-		$condition = "t=0 or t=1";
+		$condition = "tipo=0 or tipo=1";
 		if(isset($_GET['t']))
 		{
 			if($_GET['t']=="e")
-				$condition = "t=0";
+				$condition = "tipo=0";
 				
 			if($_GET['t']=="i")
-				$condition = "t=1";
+				$condition = "tipo=1";
 		}
 		$recibo = new CActiveDataProvider('Recibo',
 				array('criteria'=>array(

@@ -1,26 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "movimientoCaja".
+ * This is the model class for table "caja".
  *
- * The followings are the available columns in table 'movimientoCaja':
+ * The followings are the available columns in table 'caja':
  * @property integer $id
- * @property integer $idCaja
- * @property string $fecha
- * @property integer $monto
+ * @property double $saldo
+ * @property string $fechaArqueo
+ * @property string $nombre
  * @property string $obs
- * @property integer $tipo
- * @property integer $idComprovante
- * @property integer $idEmpleado
+ * @property integer $arqueo
+ * @property double $entregado
  */
-class MovimientoCaja extends CActiveRecord
+class Caja extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'movimientoCaja';
+		return 'caja';
 	}
 
 	/**
@@ -31,12 +30,14 @@ class MovimientoCaja extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('fecha, monto, obs, tipo, idEmpleado', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
-			array('idCaja, monto, tipo, idComprovante, idEmpleado', 'numerical', 'integerOnly'=>true),
+			array('saldo', 'required'),
+			array('arqueo', 'numerical', 'integerOnly'=>true),
+			array('saldo, entregado', 'numerical'),
+			array('nombre', 'length', 'max'=>20),
 			array('obs', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, idCaja, fecha, monto, obs, tipo, idComprovante, idEmpleado', 'safe', 'on'=>'search'),
+			array('id, saldo, fechaArqueo, nombre, obs, arqueo, entregado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,13 +59,12 @@ class MovimientoCaja extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'idCaja' => 'Id Caja',
-			'fecha' => 'Fecha',
-			'monto' => 'Monto',
+			'saldo' => 'Saldo',
+			'fechaArqueo' => 'Fecha Arqueo',
+			'nombre' => 'Nombre',
 			'obs' => 'Obs',
-			'tipo' => 'Tipo',
-			'idComprovante' => 'Id Comprovante',
-			'idEmpleado' => 'Id Empleado',
+			'arqueo' => 'Arqueo',
+			'entregado' => 'Entregado',
 		);
 	}
 
@@ -87,13 +87,12 @@ class MovimientoCaja extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('idCaja',$this->idCaja);
-		$criteria->compare('fecha',$this->fecha,true);
-		$criteria->compare('monto',$this->monto);
+		$criteria->compare('saldo',$this->saldo);
+		$criteria->compare('fechaArqueo',$this->fechaArqueo,true);
+		$criteria->compare('nombre',$this->nombre,true);
 		$criteria->compare('obs',$this->obs,true);
-		$criteria->compare('tipo',$this->tipo);
-		$criteria->compare('idComprovante',$this->idComprovante);
-		$criteria->compare('idEmpleado',$this->idEmpleado);
+		$criteria->compare('arqueo',$this->arqueo);
+		$criteria->compare('entregado',$this->entregado);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -104,7 +103,7 @@ class MovimientoCaja extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return MovimientoCaja the static model class
+	 * @return Caja the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

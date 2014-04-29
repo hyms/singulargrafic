@@ -18,7 +18,7 @@ $this->breadcrumbs=array(
   	<div class="panel-body" style="overflow: auto;">
   	<?php
 		$form=$this->beginWidget('CActiveForm', array(
-				'id'=>'detalle-venta-detalleVenta-form',
+				'id'=>'form',
 				//'action'=>CHtml::normalizeUrl(array('/distribuidora/index')),
 				'htmlOptions'=>array(
 						'class'=>'form-horizontal',

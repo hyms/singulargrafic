@@ -1,5 +1,14 @@
 
 <div class="form-group" style="width:793px; height:529px;">
+<?php 
+if(!empty($tabla))
+{
+	$dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+	$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+	
+?>
+<p class="text-center"><strong><?php echo "REPORTE DE VENTAS DEL </strong>".$tabla[0]->codigo." <strong>AL</strong> ".$tabla[count($tabla)-1]->codigo; ?></p>
+<p class="text-right"><?php echo "La Paz, ".$dias[date('w',strtotime($tabla[0]->fechaVenta))]." ".date('d',strtotime($tabla[0]->fechaVenta))." de ".$meses[date('n',strtotime($tabla[0]->fechaVenta))-1]. " del ".date('Y',strtotime($tabla[0]->fechaVenta));?></p>
 <table class="table table-bordered table-condensed">
 	<thead>
 		<th>Nº</th>
@@ -17,14 +26,15 @@
 	</thead>
 	<tbody>
 	<?php 
-	if(!empty($tabla))
-	{
+	
 		$i=0;
+		$total=0;$importe=0;$creditos=0;$adicional=0;
 		foreach($tabla as $item)
 		{
+			$temp=count($item->Detalle);
 			foreach ($item->Detalle as $producto)
 			{
-				$i++;
+				$i++;$temp--;
 	?>	
 		<tr>
 			<td><?php echo $i;?></td>
@@ -40,16 +50,39 @@
 					." ".$producto->Almacen->Producto->procedencia;
 				?>
 			</td>
-			<td><?php echo $producto->cantUnidad."/".$producto->cantPaquete;?></td>
+			<td><?php echo $producto->cantUnidad."/".$producto->cantPaquete; ?></td>
 			<td><?php echo ($producto->cantUnidad*(($item->tipoPago==0)?$producto->Almacen->Producto->costoCFUnidad:$producto->Almacen->Producto->costoSFUnidad)).
-						"/".($producto->cantPaquete*(($item->tipoPago==0)?$producto->Almacen->Producto->costoCF:$producto->Almacen->Producto->costoSF));?></td>
-			<td><?php echo $producto->adicional;?></td>
-			<td><?php echo $producto->costoTotal;?></td>
-			<td><?php echo ($item->estado==0)?$producto->costoTotal:0;?></td>
-			<td><?php echo ($item->estado==2)?$item->montoPagado:0;?></td>
+						"/".($producto->cantPaquete*(($item->tipoPago==0)?$producto->Almacen->Producto->costoCF:$producto->Almacen->Producto->costoSF)); ?></td>
+			<td><?php echo $producto->adicional; $adicional=$adicional+$producto->adicional; ?></td>
+			<td><?php echo $producto->costoTotal; $total=$total+$producto->costoTotal; ?></td>
+			<td><?php echo ($item->estado==0)?(($temp==0)?$item->montoPagado:0):0;
+				($item->estado==0)?(($temp==0)?($importe=$importe+$item->montoPagado):0):0; ?></td>
+			<td><?php echo ($item->estado==2)?(($temp==0)?($item->montoCambio*(-1)):0):0;
+				($item->estado==2)?(($temp==0)?($creditos=$creditos+($item->montoCambio*(-1))):0):0; ?></td>
 			<td><?php echo $item->factura;?></td>
 		</tr>
-	<?php } } }?>
+	<?php }
+			
+		}
+		 
+	?>
+	<tr>
+		<td colspan="5" class="text-right"><strong>Totales</strong></td>
+		<td></td>
+		<td></td>
+		<td><strong><?php echo $adicional; ?></strong></td>
+		<td><strong><?php echo $total; ?></strong></td>
+		<td><strong><?php echo $importe; ?></strong></td>
+		<td><strong><?php echo $creditos; ?></strong></td>
+		<td></td>
+	</tr>
 	</tbody>
 </table>
+<?php 
+}
+else{
+	echo "No existen registros";
+} 
+?>
+
 </div>
