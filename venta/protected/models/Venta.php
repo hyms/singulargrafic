@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'venta':
  * @property integer $id
+ * @property integer $idCaja
  * @property integer $tipoPago
  * @property integer $formaPago
  * @property integer $idCliente
@@ -48,7 +49,7 @@ class Venta extends CActiveRecord
 			array('obs', 'length', 'max'=>200 ,'message'=>'El campo <b>{attribute}</b> solo puede tener 200 caracteres'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, tipoPago, formaPago, idCliente, fechaVenta, fechaPlazo, idEmpleado, montoTotal, montoPagado, montoCambio, montoDescuento, codigo, factura, estado, autorizado, obs, serie', 'safe', 'on'=>'search'),
+			array('id, idCaja, tipoPago, formaPago, idCliente, fechaVenta, fechaPlazo, idEmpleado, montoTotal, montoPagado, montoCambio, montoDescuento, codigo, factura, estado, autorizado, obs, serie', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,6 +64,8 @@ class Venta extends CActiveRecord
 			'Cliente'=>array(self::BELONGS_TO, 'Cliente', 'idCliente'),
 			'Detalle'=>array(self::HAS_MANY, 'DetalleVenta', 'idVenta'),
 			'Empleado'=>array(self::BELONGS_TO, 'Empleado', 'idEmpleado'),
+			'Caja'=>array(self::BELONGS_TO, 'Caja', 'idCaja'),
+			'Credito'=>array(self::HAS_MANY, 'Credito', 'idVenta'),
 		);
 	}
 
@@ -73,6 +76,7 @@ class Venta extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+			'idCaja'=>'Caja',
 			'tipoPago' => 'Tipo de Pago',
 			'formaPago' => 'Forma de Pago',
 			'idCliente' => 'Id Cliente',
@@ -111,6 +115,7 @@ class Venta extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
+		$criteria->compare('idCaja',$this->idCaja);
 		$criteria->compare('tipoPago',$this->tipoPago);
 		$criteria->compare('formaPago',$this->formaPago);
 		$criteria->compare('idCliente',$this->idCliente);

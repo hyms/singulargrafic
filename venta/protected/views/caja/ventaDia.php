@@ -11,6 +11,7 @@ if(!empty($tabla))
 <p class="text-right"><?php echo "La Paz, ".$dias[date('w',strtotime($tabla[0]->fechaVenta))]." ".date('d',strtotime($tabla[0]->fechaVenta))." de ".$meses[date('n',strtotime($tabla[0]->fechaVenta))-1]. " del ".date('Y',strtotime($tabla[0]->fechaVenta));?></p>
 <table class="table table-bordered table-condensed">
 	<thead>
+	<tr>
 		<th>Nº</th>
 		<th>Codigo Venta</th>
 		<th>Cliente</th>
@@ -23,6 +24,7 @@ if(!empty($tabla))
 		<th>Importe</th>
 		<th>Creditos</th>
 		<th>Fact.</th>
+	</tr>
 	</thead>
 	<tbody>
 	<?php 

@@ -31,6 +31,8 @@ class DistribuidoraController extends Controller
 		$almacen = new Almacen;
 		$productos = new Producto('searchAll');
 		$venta = new Venta;
+		$caja = Caja::model()->find(array('condition'=>'arqueo=0 and entregado=0 and nombre like "papeles"','order'=>'id Desc'));
+		$venta->idCaja = $caja->id;
 		$detalle = new DetalleVenta;
 		$credito = "";
 		//new venta
@@ -381,10 +383,14 @@ class DistribuidoraController extends Controller
 							->with("Detalle")
 							->with("Detalle.Almacen")
 							->findByPk($_GET['id']);
-				
+			$caja = Caja::model()->findByPk($venta->idCaja);	
 			if(isset($_GET['factura']))
 				$venta->factura=$_GET['factura'];
-				
+			if($venta->formaPago==0)
+				$caja->saldo = $caja->saldo+($venta->montoPagado-$venta->montoCambio);
+			
+			if($venta->formaPago==1)
+				$caja->saldo = $caja->saldo+$venta->montoPagado;
 			/*foreach ($venta->Detalle as $detalle)
 			{
 				$almacenes = Almacen::model()->with('Producto')->findByPk($detalle->idAlmacen);

@@ -30,9 +30,9 @@ $this->breadcrumbs=array(
 	<div class="form-group" >
 		<?php echo CHtml::label('Monto a Entregar','monto',array('class'=>'control-label col-sm-2')); ?>
 		<div class="col-sm-2">
-			<?php echo CHtml::textField('monto','',array('class'=>'form-control ',"id"=>"concepto")); ?>
+			<?php echo CHtml::activeTextField($movimiento,'monto',array('class'=>'form-control ',"id"=>"concepto")); ?>
 		</div>
-		
+		<?php echo CHtml::error($movimiento,'monto',array('class'=>'label label-danger')); ?>
 		<?php echo CHtml::submitButton('Continuar',array('class'=>'btn btn-default col-sm-offset-1')); ?>
 
 	</div>

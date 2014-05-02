@@ -1,23 +1,25 @@
 <div class="form-group" style="width:793px; height:529px;">
+<?php if(!empty($caja)){?>
+<?php echo CHtml::link('Comprobante', array('index','ce'=>$caja->id), array("class"=>"btn btn-default hidden-print")); ?>
 <?php 
 
 	$dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
 	$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-$importe=0;
-foreach($tabla as $item)
-{
-	if($item->estado==0)
+	$importe=0;
+	foreach($tabla as $item)
 	{
-		$importe=$importe+($item->montoPagado-$item->montoCambio);
-	}
-	else
-	{
-		if($item->estado==2)
+		if($item->estado==0)
 		{
-			$importe=$importe+$item->montoPagado;
-		}	
+			$importe=$importe+($item->montoPagado-$item->montoCambio);
+		}
+		else
+		{	
+			if($item->estado==2)
+			{
+				$importe=$importe+$item->montoPagado;
+			}	
+		}
 	}
-}
 
 ?>
 <p class="text-center"><strong><?php echo "REGISTRO DIARIO" ?></strong></p>
@@ -28,12 +30,14 @@ foreach($tabla as $item)
 
 <table class="table table-bordered table-condensed">
 	<thead>
+	<tr>
 		<th>Nº</th>
 		<th>Comprobante</th>
 		<th>Detalle</th>
 		<th>Ingreso</th>
 		<th>Egreso</th>
 		<th>Saldo</th>
+	</tr>
 	</thead>
 	<tbody>
 	<?php $index=0; $saldo=0;?>
@@ -112,4 +116,5 @@ foreach($tabla as $item)
 	
 	</tbody>
 </table>
+<?php }?>
 </div>

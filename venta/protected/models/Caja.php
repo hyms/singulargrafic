@@ -53,6 +53,7 @@ class Caja extends CActiveRecord
 		return array(
 			'Movimiento'=>array(self::HAS_MANY, 'MovimientoCaja', 'idCaja'),
 			'Recibo'=>array(self::HAS_MANY, 'Recibo', 'idCaja'),
+			'Venta'=>array(self::HAS_MANY, 'Venta', 'idCaja'),
 		);
 	}
 

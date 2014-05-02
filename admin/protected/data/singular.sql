@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-04-2014 a las 19:23:15
+-- Tiempo de generación: 02-05-2014 a las 19:36:35
 -- Versión del servidor: 5.5.35
--- Versión de PHP: 5.4.4-14+deb7u8
+-- Versión de PHP: 5.4.4-14+deb7u9
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -77,15 +77,21 @@ INSERT INTO `banner` (`id`, `imagen`, `texto`, `fecha`, `order`) VALUES
 CREATE TABLE IF NOT EXISTS `caja` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `saldo` float NOT NULL,
-  `ingreso` float NOT NULL,
-  `egreso` float NOT NULL,
   `fechaArqueo` datetime NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `obs` varchar(200) NOT NULL,
   `arqueo` int(11) NOT NULL,
   `entregado` float NOT NULL,
+  `comprovante` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `caja`
+--
+
+INSERT INTO `caja` (`id`, `saldo`, `fechaArqueo`, `nombre`, `obs`, `arqueo`, `entregado`, `comprovante`) VALUES
+(1, 0, '0000-00-00 00:00:00', 'papeles', '', 0, 0, '0');
 
 -- --------------------------------------------------------
 
@@ -155,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `credito` (
 --
 
 INSERT INTO `credito` (`id`, `idVenta`, `monto`, `saldo`, `fechaPago`, `idRecibo`, `idCliente`) VALUES
-(1, 20, 2, 3.96, '2014-04-24 19:00:35', 0, 1);
+(1, 17, 2, 3.96, '2014-04-24 19:00:35', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -173,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `detalleVenta` (
   `adicional` varchar(20) NOT NULL,
   `costoTotal` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `detalleVenta`
@@ -181,14 +187,8 @@ CREATE TABLE IF NOT EXISTS `detalleVenta` (
 
 INSERT INTO `detalleVenta` (`id`, `idVenta`, `idProducto`, `idAlmacen`, `cantUnidad`, `cantPaquete`, `adicional`, `costoTotal`) VALUES
 (1, 1, 0, 9, 1, 1, '5', '166.68'),
-(2, 13, 0, 10, 1, 0, '4', '4.96'),
-(3, 14, 0, 10, 1, 0, '4', '4.96'),
-(4, 15, 0, 10, 1, 0, '4', '4.96'),
-(5, 16, 0, 10, 1, 0, '4', '4.96'),
-(6, 17, 0, 10, 1, 0, '5', '5.96'),
-(7, 18, 0, 10, 1, 0, '5', '5.96'),
-(8, 19, 0, 10, 1, 0, '5', '5.96'),
-(9, 20, 0, 10, 1, 0, '5', '5.96');
+(2, 2, 0, 10, 1, 0, '4', '4.96'),
+(6, 17, 0, 10, 1, 0, '5', '5.96');
 
 -- --------------------------------------------------------
 
@@ -360,7 +360,6 @@ CREATE TABLE IF NOT EXISTS `movimientoCaja` (
   `monto` int(11) NOT NULL,
   `obs` varchar(200) NOT NULL,
   `tipo` int(11) NOT NULL,
-  `idVenta` int(11) NOT NULL,
   `idComprovante` int(11) NOT NULL,
   `idEmpleado` int(11) NOT NULL,
   PRIMARY KEY (`id`)
@@ -452,6 +451,7 @@ CREATE TABLE IF NOT EXISTS `proveedor` (
 
 CREATE TABLE IF NOT EXISTS `recibo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `categoria` varchar(50) NOT NULL,
   `codigo` varchar(20) NOT NULL,
   `idCliente` int(11) NOT NULL,
   `responsable` varchar(50) NOT NULL,
@@ -466,10 +466,18 @@ CREATE TABLE IF NOT EXISTS `recibo` (
   `obs` varchar(500) NOT NULL,
   `tipo` int(11) NOT NULL,
   `idEmpleado` int(11) NOT NULL,
+  `idCaja` int(11) NOT NULL,
   `descuento` varchar(50) NOT NULL,
   `nro` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `recibo`
+--
+
+INSERT INTO `recibo` (`id`, `categoria`, `codigo`, `idCliente`, `responsable`, `celular`, `fecha`, `concepto`, `idVenta`, `idTrabajo`, `monto`, `acuenta`, `saldo`, `obs`, `tipo`, `idEmpleado`, `idCaja`, `descuento`, `nro`) VALUES
+(1, 'Nota de Venta', 'I-04-1', 1, 'Helier cortez', '73221183', '2014-04-25 03:04:54', 'Pago por Couché Brillo celeste 90 77x110 U:1 P:0', 17, 0, 3.96, 4, -0.04, '', 1, 1, 0, '', '3-04-14');
 
 -- --------------------------------------------------------
 
@@ -536,8 +544,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `fechaLogin`, `estado`, `tipo`) VALUES
-(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-04-24 18:39:29', 0, 'admin'),
-(2, 'erika', 'e10adc3949ba59abbe56e057f20f883e', '2014-04-23 18:01:14', 0, 'ventas');
+(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-05-02 17:12:54', 0, 'admin'),
+(2, 'erika', 'e10adc3949ba59abbe56e057f20f883e', '2014-04-30 16:19:21', 0, 'ventas');
 
 -- --------------------------------------------------------
 
@@ -547,6 +555,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `fechaLogin`, `estado`, `tipo
 
 CREATE TABLE IF NOT EXISTS `venta` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idCaja` int(11) NOT NULL,
   `tipoPago` int(11) NOT NULL,
   `formaPago` int(11) NOT NULL,
   `idCliente` int(11) NOT NULL,
@@ -558,24 +567,22 @@ CREATE TABLE IF NOT EXISTS `venta` (
   `montoCambio` float NOT NULL,
   `montoDescuento` float NOT NULL,
   `codigo` varchar(20) NOT NULL,
-  `factura` varchar(20) NOT NULL,
+  `factura` varchar(50) NOT NULL,
   `estado` int(11) NOT NULL,
   `autorizado` varchar(50) NOT NULL,
   `obs` varchar(200) NOT NULL,
+  `serie` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Volcado de datos para la tabla `venta`
 --
 
-INSERT INTO `venta` (`id`, `tipoPago`, `formaPago`, `idCliente`, `fechaVenta`, `fechaPlazo`, `idEmpleado`, `montoTotal`, `montoPagado`, `montoCambio`, `montoDescuento`, `codigo`, `factura`, `estado`, `autorizado`, `obs`) VALUES
-(1, 0, 0, 1, '2014-04-16 16:41:21', '0000-00-00 00:00:00', 1, 166.68, 200, 33.32, 0, '1-04-14', '', 0, '', 'test'),
-(2, 0, 0, 1, '2014-04-23 18:45:21', '0000-00-00 00:00:00', 1, 161.68, 500, 338.32, 0, '2-04-14', '', 1, '', ''),
-(17, 1, 1, 1, '2014-04-24 19:00:35', '2014-04-24 00:00:00', 1, 5.96, 2, -3.96, 0, '3-04-14', '', 1, '', ''),
-(18, 1, 1, 1, '2014-04-24 19:00:35', '2014-04-24 00:00:00', 1, 5.96, 2, -3.96, 0, '3-04-14', '', 1, '', ''),
-(19, 1, 1, 1, '2014-04-24 19:00:35', '2014-04-24 00:00:00', 1, 5.96, 2, -3.96, 0, '3-04-14', '', 1, '', ''),
-(20, 1, 1, 1, '2014-04-24 19:00:35', '2014-04-24 00:00:00', 1, 5.96, 2, -3.96, 0, '3-04-14', '', 1, '', '');
+INSERT INTO `venta` (`id`, `idCaja`, `tipoPago`, `formaPago`, `idCliente`, `fechaVenta`, `fechaPlazo`, `idEmpleado`, `montoTotal`, `montoPagado`, `montoCambio`, `montoDescuento`, `codigo`, `factura`, `estado`, `autorizado`, `obs`, `serie`) VALUES
+(1, 1, 0, 0, 1, '2014-04-16 16:41:21', '0000-00-00 00:00:00', 1, 166.68, 200, 33.32, 0, '1', '', 0, '', 'test', 0),
+(2, 1, 0, 0, 1, '2014-04-23 18:45:21', '0000-00-00 00:00:00', 1, 161.68, 500, 338.32, 0, '2', '', 1, '', '', 0),
+(17, 1, 1, 1, 1, '2014-04-24 19:00:35', '2014-04-24 00:00:00', 1, 5.96, 2, -3.96, 0, '1', '', 2, '', '', 65);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

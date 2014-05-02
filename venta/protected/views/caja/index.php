@@ -22,7 +22,7 @@ $this->breadcrumbs=array(
 		),
 	));
 ?>
-	<div class="col-sm-6">
+	<div class="col-sm-6 hidden-print">
 	<div class="form-group">
 	<?php echo CHtml::link('Imprimir', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"printView()")); ?>
 	</div>
@@ -38,6 +38,10 @@ $this->breadcrumbs=array(
 		$this->renderPartial('libroDiario',array('tabla'=>$tabla,'caja'=>$caja));
 	}
 	
+	if($ce)
+	{
+		$this->renderPartial('comprobante',array('caja'=>$caja));
+	}
 ?>
 
 </div>
