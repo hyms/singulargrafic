@@ -63,7 +63,9 @@
 	?>
 		<tr>
 			<td><?php $index++; echo $index;?></td>
-			<td><?php ?></td>
+			
+			<td><?php echo ($item->idComprovante>=0)?$item->idComprovante:""?></td>
+			
 			<td><?php echo "Saldo del dia Anterior"; ?></td>
 			<?php if($item->tipo==1) {?>
 			<td><?php echo $item->monto; ?></td>

@@ -55,11 +55,111 @@ class ClienteController extends Controller
 	{
 		if(isset($_GET['id']))
 		{
+			$datos00=array();$datos01=array();$datos10=array();$datos11=array();
+			
 			$cliente = Cliente::model()
 									->with("Venta")
+									->with("Venta.Detalle")
+									->with("Venta.Detalle.Almacen")
+									->with("Venta.Detalle.Almacen.Producto")
+									->with("Venta.Detalle.Almacen.Producto.Color")
+									->with("Venta.Detalle.Almacen.Producto.Material")
 									->with("Venta.Credito")
-									->find('`t`.id='.$_GET['id']);
-			$this->render("detail",array('cliente'=>$cliente));
+									->find(array('condition'=>'`t`.id='.$_GET['id'].' and Venta.formaPago=0 and Venta.tipoPago=0','group'=>'Detalle.idAlmacen','select'=>'* , count(Detalle.idAlmacen) as max'));
+			$temp="";
+			if(!empty($cliente))
+			foreach ($cliente->Venta as $ventas)
+			{
+				foreach ($ventas->Detalle as $detalle)
+				{
+					$temp=array("nombre"=>$detalle->Almacen->Producto->Material->nombre." ".$detalle->Almacen->Producto->Color->nombre." ".$detalle->Almacen->Producto->peso." ".$detalle->Almacen->Producto->dimension.", ".$detalle->Almacen->Producto->procedencia,"cant"=>$cliente->max);
+					array_push($datos00, $temp);
+				}
+			}
+			$cliente = Cliente::model()
+			->with("Venta")
+			->with("Venta.Detalle")
+			->with("Venta.Detalle.Almacen")
+			->with("Venta.Detalle.Almacen.Producto")
+			->with("Venta.Detalle.Almacen.Producto.Color")
+			->with("Venta.Detalle.Almacen.Producto.Material")
+			->with("Venta.Credito")
+			->find(array('condition'=>'`t`.id='.$_GET['id'].' and Venta.formaPago=1 and Venta.tipoPago=0','group'=>'Detalle.idAlmacen','select'=>'* , count(Detalle.idAlmacen) as max'));
+			$temp="";
+			if(!empty($cliente))
+			foreach ($cliente->Venta as $ventas)
+			{
+				foreach ($ventas->Detalle as $detalle)
+				{
+					$temp=array("nombre"=>$detalle->Almacen->Producto->Material->nombre." ".$detalle->Almacen->Producto->Color->nombre." ".$detalle->Almacen->Producto->peso." ".$detalle->Almacen->Producto->dimension.", ".$detalle->Almacen->Producto->procedencia,"cant"=>$cliente->max);
+					array_push($datos01, $temp);
+				}
+			}
+			$cliente = Cliente::model()
+			->with("Venta")
+			->with("Venta.Detalle")
+			->with("Venta.Detalle.Almacen")
+			->with("Venta.Detalle.Almacen.Producto")
+			->with("Venta.Detalle.Almacen.Producto.Color")
+			->with("Venta.Detalle.Almacen.Producto.Material")
+			->with("Venta.Credito")
+			->find(array('condition'=>'`t`.id='.$_GET['id'].' and Venta.formaPago=0 and Venta.tipoPago=1','group'=>'Detalle.idAlmacen','select'=>'* , count(Detalle.idAlmacen) as max'));
+			$temp="";
+			if(!empty($cliente))
+			foreach ($cliente->Venta as $ventas)
+			{
+				foreach ($ventas->Detalle as $detalle)
+				{
+					$temp=array("nombre"=>$detalle->Almacen->Producto->Material->nombre." ".$detalle->Almacen->Producto->Color->nombre." ".$detalle->Almacen->Producto->peso." ".$detalle->Almacen->Producto->dimension.", ".$detalle->Almacen->Producto->procedencia,"cant"=>$cliente->max);
+					array_push($datos10, $temp);
+				}
+			}
+			$cliente = Cliente::model()
+			->with("Venta")
+			->with("Venta.Detalle")
+			->with("Venta.Detalle.Almacen")
+			->with("Venta.Detalle.Almacen.Producto")
+			->with("Venta.Detalle.Almacen.Producto.Color")
+			->with("Venta.Detalle.Almacen.Producto.Material")
+			->with("Venta.Credito")
+			->find(array('condition'=>'`t`.id='.$_GET['id'].' and Venta.formaPago=1	and Venta.tipoPago=1','group'=>'Detalle.idAlmacen','select'=>'* , count(Detalle.idAlmacen) as max'));
+			$temp="";
+			if(!empty($cliente))
+			foreach ($cliente->Venta as $ventas)
+			{
+				foreach ($ventas->Detalle as $detalle)
+				{
+					$temp=array("nombre"=>$detalle->Almacen->Producto->Material->nombre." ".$detalle->Almacen->Producto->Color->nombre." ".$detalle->Almacen->Producto->peso." ".$detalle->Almacen->Producto->dimension.", ".$detalle->Almacen->Producto->procedencia,"cant"=>$cliente->max);
+					array_push($datos11, $temp);
+				}
+			}
+			
+			$venta = Venta::model()
+							->with('Credito')
+							->with("Detalle")
+							->with("Detalle.Almacen")
+							->with("Detalle.Almacen.Producto")
+							->with("Detalle.Almacen.Producto.Color")
+							->with("Detalle.Almacen.Producto.Material")
+							->findAll(array('select'=>'MIN(Credito.saldo) as max, *','group'=>'`t`.idCliente','condition'=>'estado=2 and `t`.idCliente='.$_GET['id']));
+			$datosD = array();
+			if(!empty($venta))
+			foreach ($venta as $ventas)
+			{
+				foreach ($ventas->Detalle as $detalle)
+				{
+					$temp=array(
+							"nombre"=>$detalle->Almacen->Producto->Material->nombre." ".$detalle->Almacen->Producto->Color->nombre." ".$detalle->Almacen->Producto->peso." ".$detalle->Almacen->Producto->dimension.", ".$detalle->Almacen->Producto->procedencia,
+							"fechaVenta"=>date("d-m-Y",strtotime($ventas->fechaVenta)),
+							"fechaPlazo"=>date("d-m-Y",strtotime($ventas->fechaPlazo)),
+							"monto"=>number_format($ventas->max, 2));
+					array_push($datosD, $temp);
+				}
+			}
+			
+			$cliente = Cliente::model()->findByPk($_GET['id']);
+			$datos = array("00"=>$datos00,"01"=>$datos01,"10"=>$datos10,"11"=>$datos11,"deuda"=>$datosD);
+			$this->render("detail",array('cliente'=>$cliente,'datos'=>$datos));
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');

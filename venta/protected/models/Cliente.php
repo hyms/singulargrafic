@@ -14,6 +14,7 @@
  */
 class Cliente extends CActiveRecord
 {
+	public $max;
 	/**
 	 * @return string the associated database table name
 	 */

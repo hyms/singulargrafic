@@ -28,12 +28,17 @@ class CajaController extends Controller
 		$vd = false;
 		$ld = false;
 		$ce = false;
+		$sf = 0;
 		$tabla="";
 		$caja="";
 		
 		if(isset($_GET['vd']))
 		{
 			$date = date("Y-m")."-".$_GET['vd'];
+			if(isset($_GET['vm']))
+				$date = date("Y-")."-".$_GET['vm']."-".$_GET['vd'];
+			if(isset($_GET['sf']))
+				$sf=$_GET['sf'];
 			$tabla = Venta::model()->find("(fechaVenta between '".$date." 00:00:00' and '".$date." 23:59:59')");
 			if(!empty($tabla))
 			{
@@ -47,7 +52,7 @@ class CajaController extends Controller
 								->with('Venta.Detalle.Almacen.Producto')
 								->with('Venta.Detalle.Almacen.Producto.Color')
 								->with('Venta.Detalle.Almacen.Producto.Material')
-								->find(array('condition'=>'arqueo=0 and entregado=0 and `t`.nombre like "papeles" and `t`.id='.$tabla->idCaja.' and (`Venta`.estado=0 or `Venta`.estado=2)','order'=>'`t`.id Desc'));
+								->find(array('condition'=>'arqueo=0 and entregado=0 and `t`.nombre like "papeles" and `t`.id='.$tabla->idCaja.' and (`Venta`.estado=0 or `Venta`.estado=2) and `Venta`.tipoPago='.$sf,'order'=>'`t`.id Desc'));
 				$tabla = $caja->Venta;
 			}
 			$vd=true;
@@ -72,11 +77,11 @@ class CajaController extends Controller
 		}
 		if(isset($_GET['ce']) && !empty($_GET['ce']))
 		{
-			$caja = MovimientoCaja::model()->with('Empleado')->find('idCaja='.$_GET['ce'].' and idComprovante=1');
+			$caja = MovimientoCaja::model()->with('Empleado')->find('idCaja='.$_GET['ce'].' and idComprovante>=1');
 			$ce=true;
 		}
 				
-		$this->render("index",array('vd'=>$vd,'ld'=>$ld,'ce'=>$ce,'tabla'=>$tabla,'caja'=>$caja));
+		$this->render("index",array('vd'=>$vd,'ld'=>$ld,'ce'=>$ce,'tabla'=>$tabla,'caja'=>$caja,'sf'=>$sf));
 	}
 	
 	public function actionEgreso()
@@ -140,8 +145,12 @@ class CajaController extends Controller
 		{
 			$movimiento->attributes = $_POST['MovimientoCaja'];
 			$movimiento->obs = "Traspaso de efectivo a Administracion";
-			$movimiento->idComprovante = 1;
+			$comprovante = MovimientoCaja::model()->find(array('select'=>'max(idComprovante) as max'));
+			$movimiento->idComprovante = $comprovante->max +1;
 			$movimiento->fecha = date("Y-m-d H:i:s");
+			$comprovante = MovimientoCaja::model()->find(array('order'=>'fecha Desc'));
+			if(date("d",strtotime($movimiento->fecha)) > date("d",strtotime($comprovante->fecha)))
+				$movimiento->fecha = date("Y-m-d",strtotime($comprovante->fecha))." 23:00:00";
 			$movimiento->tipo = 0;
 			$empleado = Empleado::model()->with('Users')->find('idUsers='.Yii::app()->user->id);
 			$movimiento->idEmpleado = $empleado->id;
@@ -163,8 +172,11 @@ class CajaController extends Controller
 					if($movimiento->monto > 0)
 					{
 						if($movimiento->save())
+						{
+							$caja->comprovante = $movimiento->idComprovante;
 							if($caja->save())
 								$this->redirect('index',array('ar'=>$caja->id));
+						}
 					}
 					else
 					{

@@ -5,8 +5,13 @@ if(!empty($tabla))
 {
 	$dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
 	$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-	
 ?>
+<p class="text-center">
+<?php 
+	echo CHtml::link('Factura', array('index','sf'=>0,'vd'=>date('d')), array("class"=>"btn btn-default hidden-print"));
+	echo CHtml::link('Sin Factura', array('index','sf'=>1,'vd'=>date('d')), array("class"=>"btn btn-default hidden-print"));
+?>
+</p>
 <p class="text-center"><strong><?php echo "REPORTE DE VENTAS DEL DIA"?></strong></p>
 <p class="text-right"><?php echo "La Paz, ".$dias[date('w',strtotime($tabla[0]->fechaVenta))]." ".date('d',strtotime($tabla[0]->fechaVenta))." de ".$meses[date('n',strtotime($tabla[0]->fechaVenta))-1]. " del ".date('Y',strtotime($tabla[0]->fechaVenta));?></p>
 <table class="table table-bordered table-condensed">

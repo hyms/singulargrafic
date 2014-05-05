@@ -15,6 +15,7 @@
  */
 class MovimientoCaja extends CActiveRecord
 {
+	public $max;
 	/**
 	 * @return string the associated database table name
 	 */

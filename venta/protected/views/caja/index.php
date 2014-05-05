@@ -35,7 +35,7 @@ $this->breadcrumbs=array(
 	
 	if($ld)
 	{
-		$this->renderPartial('libroDiario',array('tabla'=>$tabla,'caja'=>$caja));
+		$this->renderPartial('libroDiario',array('tabla'=>$tabla,'caja'=>$caja,'sf'=>$sf));
 	}
 	
 	if($ce)
