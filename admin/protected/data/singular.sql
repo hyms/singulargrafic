@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 02-05-2014 a las 19:36:35
+-- Tiempo de generación: 06-05-2014 a las 14:05:26
 -- Versión del servidor: 5.5.35
 -- Versión de PHP: 5.4.4-14+deb7u9
 
@@ -544,7 +544,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `fechaLogin`, `estado`, `tipo`) VALUES
-(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-05-02 17:12:54', 0, 'admin'),
+(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-05-05 18:38:31', 0, 'admin'),
 (2, 'erika', 'e10adc3949ba59abbe56e057f20f883e', '2014-04-30 16:19:21', 0, 'ventas');
 
 -- --------------------------------------------------------
