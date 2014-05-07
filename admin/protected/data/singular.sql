@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-05-2014 a las 14:05:26
--- Versión del servidor: 5.5.35
+-- Tiempo de generación: 07-05-2014 a las 19:06:39
+-- Versión del servidor: 5.5.37
 -- Versión de PHP: 5.4.4-14+deb7u9
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -78,11 +78,11 @@ CREATE TABLE IF NOT EXISTS `caja` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `saldo` float NOT NULL,
   `fechaArqueo` datetime NOT NULL,
-  `nombre` varchar(20) NOT NULL,
   `obs` varchar(200) NOT NULL,
   `arqueo` int(11) NOT NULL,
   `entregado` float NOT NULL,
   `comprovante` varchar(50) NOT NULL,
+  `idTipoCaja` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
@@ -90,8 +90,28 @@ CREATE TABLE IF NOT EXISTS `caja` (
 -- Volcado de datos para la tabla `caja`
 --
 
-INSERT INTO `caja` (`id`, `saldo`, `fechaArqueo`, `nombre`, `obs`, `arqueo`, `entregado`, `comprovante`) VALUES
-(1, 0, '0000-00-00 00:00:00', 'papeles', '', 0, 0, '0');
+INSERT INTO `caja` (`id`, `saldo`, `fechaArqueo`, `obs`, `arqueo`, `entregado`, `comprovante`, `idTipoCaja`) VALUES
+(1, 0, '0000-00-00 00:00:00', '', 0, 0, '0', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cajaTipo`
+--
+
+CREATE TABLE IF NOT EXISTS `cajaTipo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(20) NOT NULL,
+  `idParent` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `cajaTipo`
+--
+
+INSERT INTO `cajaTipo` (`id`, `nombre`, `idParent`) VALUES
+(1, 'papeles', 0);
 
 -- --------------------------------------------------------
 
@@ -512,6 +532,7 @@ INSERT INTO `servicios` (`id`, `nombre`, `detalle`, `fechaCreacion`, `idParent`)
 CREATE TABLE IF NOT EXISTS `tipoAlmacen` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
+  `idParent` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
@@ -519,9 +540,9 @@ CREATE TABLE IF NOT EXISTS `tipoAlmacen` (
 -- Volcado de datos para la tabla `tipoAlmacen`
 --
 
-INSERT INTO `tipoAlmacen` (`id`, `nombre`) VALUES
-(1, 'Deposito Central'),
-(2, 'Tienda Distribuidora');
+INSERT INTO `tipoAlmacen` (`id`, `nombre`, `idParent`) VALUES
+(1, 'Deposito Central', 0),
+(2, 'Tienda Distribuidora', 1);
 
 -- --------------------------------------------------------
 
@@ -536,6 +557,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `fechaLogin` datetime NOT NULL,
   `estado` int(11) NOT NULL,
   `tipo` varchar(20) NOT NULL,
+  `idEmpleado` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
@@ -543,9 +565,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `fechaLogin`, `estado`, `tipo`) VALUES
-(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-05-05 18:38:31', 0, 'admin'),
-(2, 'erika', 'e10adc3949ba59abbe56e057f20f883e', '2014-04-30 16:19:21', 0, 'ventas');
+INSERT INTO `users` (`id`, `username`, `password`, `fechaLogin`, `estado`, `tipo`, `idEmpleado`) VALUES
+(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-05-07 14:10:48', 0, 'admin', 0),
+(2, 'erika', 'e10adc3949ba59abbe56e057f20f883e', '2014-05-07 16:59:50', 0, 'ventas', 0);
 
 -- --------------------------------------------------------
 

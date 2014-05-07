@@ -232,6 +232,38 @@ class EmpresaController extends Controller
 		$this->render('proveedor',array('model'=>$model,'proveedor'=>$proveedor,'new'=>$new));
 	}
 	
+	public function actionCajas($id=null)
+	{
+		$model=new CajaTipo;
+		if($id!=null)
+		{
+			$model=$this->verifyModel(CajaTipo::model()->findByPk($id));
+		}
+		$CajaTipo=CajaTipo::model()->findall();
+	
+		$new=false;
+		if(isset($_POST['new']))
+		{
+			$new=$_POST['new'];
+		}
+		if(isset($_POST['CajaTipo']))
+		{
+			$model->attributes=$_POST['CajaTipo'];
+			if($model->validate())
+			{
+				$model->fechaCreacion=date("Y-m-d H:i:s", strtotime($model->fechaCreacion));
+				if($model->save())
+				{
+					$this->redirect('CajaTipo');
+				}
+			}
+			else
+			{
+				$new=true;
+			}
+		}
+		$this->render('caja',array('model'=>$model,'CajaTipo'=>$CajaTipo,'new'=>$new));
+	}
 	
 	//delete's
 	public function actionSucursalDelete($id)

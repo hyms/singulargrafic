@@ -2,8 +2,16 @@ assets/
 protected/runtime/
 protected/config/main.php
 themes/classic/views/
+
+admin/assets/
+admin/protected/runtime/
 admin/protected/config/main.php
+admin/themes/classic/views/
+
+venta/assets/
+venta/protected/runtime/
 venta/protected/config/main.php
+venta/themes/classic/views/
 .buildpath
 .project
 .settings/

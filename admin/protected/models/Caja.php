@@ -7,7 +7,7 @@
  * @property integer $id
  * @property double $saldo
  * @property string $fechaArqueo
- * @property string $idTipoCaja
+ * @property int $idTipoCaja
  * @property string $obs
  * @property integer $arqueo
  * @property double $entregado
@@ -53,6 +53,8 @@ class Caja extends CActiveRecord
 			'Movimiento'=>array(self::HAS_MANY, 'MovimientoCaja', 'idCaja'),
 			'Recibo'=>array(self::HAS_MANY, 'Recibo', 'idCaja'),
 			'Venta'=>array(self::HAS_MANY, 'Venta', 'idCaja'),
+				
+			'CajaTipo'=>array(self::BELONGS_TO, 'CajaTipo', 'idTipoCaja'),
 		);
 	}
 
