@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'tipoAlmacen':
  * @property integer $id
  * @property string $nombre
+ * @property string $idParent
  */
 class TipoAlmacen extends CActiveRecord
 {
@@ -28,7 +29,7 @@ class TipoAlmacen extends CActiveRecord
 			array('nombre', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nombre', 'safe', 'on'=>'search'),
+			array('id, nombre, idParent', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,6 +53,7 @@ class TipoAlmacen extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'nombre' => 'Nombre',
+			'idParent' => 'Parent',
 		);
 	}
 
@@ -72,15 +74,23 @@ class TipoAlmacen extends CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
+		
 		$criteria->compare('id',$this->id);
 		$criteria->compare('nombre',$this->nombre);
+		$criteria->compare('idParent',$this->idParent);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
-
+	
+	
+	public function getSuperiores(){
+		if($this->id==null)
+			return CHtml::listData( $this::model()->findAll(array('select'=>'id, nombre')),'id','nombre' );
+		return CHtml::listData( $this::model()->findAll('id!='.$this->id, array('select'=>'id, nombre')),'id','nombre' );
+	}
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

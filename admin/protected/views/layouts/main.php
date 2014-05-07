@@ -70,6 +70,7 @@
 							'items'=>array(
 								array('label'=>'Sucursales', 'url'=>array('empresa/sucursal')),
 								array('label'=>'Empleados', 'url'=>array('empresa/empleado')),
+								array('label'=>'Caja', 'url'=>array('empresa/cajas')),
 								array('label'=>'Servicios', 'url'=>array('empresa/servicios')),
 								array('label'=>'Clientes', 'url'=>array('empresa/cliente')),
 								array('label'=>'Proveedores', 'url'=>array('empresa/proveedor')),

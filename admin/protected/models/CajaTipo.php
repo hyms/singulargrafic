@@ -1,26 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "caja".
+ * This is the model class for table "cajaTipo".
  *
- * The followings are the available columns in table 'caja':
+ * The followings are the available columns in table 'cajaTipo':
  * @property integer $id
- * @property double $saldo
- * @property string $fechaArqueo
- * @property string $idTipoCaja
- * @property string $obs
- * @property integer $arqueo
- * @property double $entregado
- * @property string $comprovante
+ * @property string $nombre
+ * @property integer $idParent
  */
-class Caja extends CActiveRecord
+class CajaTipo extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'caja';
+		return 'cajaTipo';
 	}
 
 	/**
@@ -31,14 +26,12 @@ class Caja extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('saldo, nombre', 'required'),
-			array('arqueo', 'numerical', 'integerOnly'=>true),
-			array('saldo, entregado', 'numerical'),
-			array('obs', 'length', 'max'=>200),
-			array('comprovante', 'length', 'max'=>50),
+			array('nombre, idParent', 'required'),
+			array('idParent', 'numerical', 'integerOnly'=>true),
+			array('nombre', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, saldo, fechaArqueo, idTipoCaja, obs, arqueo, entregado, comprovante', 'safe', 'on'=>'search'),
+			array('id, nombre, idParent', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,9 +43,7 @@ class Caja extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Movimiento'=>array(self::HAS_MANY, 'MovimientoCaja', 'idCaja'),
-			'Recibo'=>array(self::HAS_MANY, 'Recibo', 'idCaja'),
-			'Venta'=>array(self::HAS_MANY, 'Venta', 'idCaja'),
+			'Caja'=>array(self::HAS_ONE, 'Caja', 'idTipoCaja'),
 		);
 	}
 
@@ -63,13 +54,8 @@ class Caja extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'saldo' => 'Saldo',
-			'fechaArqueo' => 'Fecha Arqueo',
-			'idTipoCaja' => 'idTipoCaja',
-			'obs' => 'Obs',
-			'arqueo' => 'Arqueo',
-			'entregado' => 'Entregado',
-			'comprovante' => 'Comprovante',
+			'nombre' => 'Nombre',
+			'idParent' => 'Id Parent',
 		);
 	}
 
@@ -92,24 +78,25 @@ class Caja extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('saldo',$this->saldo);
-		$criteria->compare('fechaArqueo',$this->fechaArqueo,true);
-		$criteria->compare('idTipoCaja',$this->idTipoCaja);
-		$criteria->compare('obs',$this->obs,true);
-		$criteria->compare('arqueo',$this->arqueo);
-		$criteria->compare('entregado',$this->entregado);
-		$criteria->compare('comprovante',$this->comprovante,true);
+		$criteria->compare('nombre',$this->nombre,true);
+		$criteria->compare('idParent',$this->idParent);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
-
+	
+	
+	public function getSuperiores(){
+		if($this->id==null)
+			return CHtml::listData( $this::model()->findAll(array('select'=>'id, nombre')),'id','nombre' );
+		return CHtml::listData( $this::model()->findAll('id!='.$this->id, array('select'=>'id, nombre')),'id','nombre' );
+	}
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Caja the static model class
+	 * @return CajaTipo the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
