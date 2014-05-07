@@ -37,6 +37,8 @@ class DistribuidoraController extends Controller
 		$credito = "";
 		//new venta
 		$row = Venta::model()->find(array("condition"=>"tipoPago=1",'order'=>'fechaVenta Desc'));
+		if(empty($row))
+			$row=new Venta;
 		if(empty($row->serie))
 			$row->serie = 65;
 		$venta->codigo = $row->codigo +1;

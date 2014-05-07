@@ -1,6 +1,9 @@
-#assets/
-#protected/runtime/
-#themes/classic/views/
+assets/
+protected/runtime/
+protected/config/main.php
+themes/classic/views/
+admin/protected/config/main.php
+venta/protected/config/main.php
 .buildpath
 .project
 .settings/

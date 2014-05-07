@@ -63,7 +63,8 @@ class CajaController extends Controller
 		{
 			$date = date("Y-m")."-".$_GET['ld'];
 			$caja = Caja::model()->with('Movimiento')->with('Recibo')->with('Venta')->find(array('condition'=>'arqueo=0 and entregado=0 and nombre like "papeles" and (`Venta`.estado=0 or `Venta`.estado=2)','order'=>'`t`.id Desc'));
-			$tabla = $caja->Venta;
+			if(!empty($caja))
+				$tabla = $caja->Venta;
 						
 			$ld=true;
 		}
