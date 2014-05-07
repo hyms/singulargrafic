@@ -243,6 +243,8 @@ class DistribuidoraController extends Controller
 			if(isset($_POST['Venta']['fechaPlazo']))
 				$venta->fechaPlazo = $_POST['Venta']['fechaPlazo'];
 			$row = Venta::model()->find(array("condition"=>"tipoPago=".$venta->tipoPago,'order'=>'fechaVenta Desc'));
+			if(empty($row))
+				$row=new Venta;
 			if(empty($row->serie) && $venta->tipoPago==1)
 				$row->serie = 65;
 			$venta->codigo = $row->codigo +1;
