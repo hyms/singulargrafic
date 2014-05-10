@@ -4,13 +4,18 @@
  * This is the model class for table "cliente".
  *
  * The followings are the available columns in table 'cliente':
- * @property integer $id
+ * @property integer $idCliente
  * @property string $nitCi
  * @property string $apellido
  * @property string $nombre
  * @property string $correo
- * @property string $telefono
  * @property string $fechaRegistro
+ * @property string $telefono
+ * @property string $direccion
+ *
+ * The followings are the available model relations:
+ * @property Recibos[] $reciboses
+ * @property Venta[] $ventas
  */
 class Cliente extends CActiveRecord
 {
@@ -30,15 +35,14 @@ class Cliente extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nitCi, apellido, nombre, correo, telefono, fechaRegistro', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio',),
-			array('nitCi, telefono', 'numerical', 'integerOnly'=>true, 'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
-			array('nitCi, telefono', 'length', 'max'=>15,'message'=>'<b>{attribute}</b> solo puede contener 15 caracteres'),
-			array('apellido, nombre', 'length', 'max'=>30,'message'=>'<b>{attribute}</b> solo puede contener 30 caracteres'),
-			array('correo', 'length', 'max'=>100,'message'=>'<b>{attribute}</b> solo puede contener 100 caracteres'),
-			array('correo','email','message'=>'La direccion de <b>{attribute}</b> no es valido'),
+			array('nitCi, telefono', 'length', 'max'=>20),
+			array('apellido, nombre', 'length', 'max'=>40),
+			array('correo', 'length', 'max'=>50),
+			array('direccion', 'length', 'max'=>100),
+			array('fechaRegistro', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nitCi, apellido, nombre, correo, telefono, fechaRegistro', 'safe', 'on'=>'search'),
+			array('idCliente, nitCi, apellido, nombre, correo, fechaRegistro, telefono, direccion', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,6 +54,8 @@ class Cliente extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'reciboses' => array(self::HAS_MANY, 'Recibos', 'idCliente'),
+			'ventas' => array(self::HAS_MANY, 'Venta', 'idCliente'),
 		);
 	}
 
@@ -59,13 +65,14 @@ class Cliente extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
+			'idCliente' => 'Id Cliente',
 			'nitCi' => 'Nit Ci',
 			'apellido' => 'Apellido',
 			'nombre' => 'Nombre',
 			'correo' => 'Correo',
-			'telefono' => 'Telefono',
 			'fechaRegistro' => 'Fecha Registro',
+			'telefono' => 'Telefono',
+			'direccion' => 'Direccion',
 		);
 	}
 
@@ -87,13 +94,14 @@ class Cliente extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('idCliente',$this->idCliente);
 		$criteria->compare('nitCi',$this->nitCi,true);
 		$criteria->compare('apellido',$this->apellido,true);
 		$criteria->compare('nombre',$this->nombre,true);
 		$criteria->compare('correo',$this->correo,true);
-		$criteria->compare('telefono',$this->telefono,true);
 		$criteria->compare('fechaRegistro',$this->fechaRegistro,true);
+		$criteria->compare('telefono',$this->telefono,true);
+		$criteria->compare('direccion',$this->direccion,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

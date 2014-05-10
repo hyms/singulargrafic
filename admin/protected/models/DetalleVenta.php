@@ -1,24 +1,29 @@
 <?php
 
 /**
- * This is the model class for table "servicios".
+ * This is the model class for table "detalleVenta".
  *
- * The followings are the available columns in table 'servicios':
- * @property integer $id
- * @property string $nombre
- * @property string $detalle
- * @property string $fechaCreacion
- * @property integer $idParent
- * 
+ * The followings are the available columns in table 'detalleVenta':
+ * @property integer $idDetalleVenta
+ * @property integer $idVenta
+ * @property integer $cantidadU
+ * @property integer $cantidadP
+ * @property double $costoAdicional
+ * @property double $costoTotal
+ * @property integer $idAlmacenProducto
+ *
+ * The followings are the available model relations:
+ * @property Venta $idVenta0
+ * @property AlmacenProducto $idAlmacenProducto0
  */
-class Servicios extends CActiveRecord
+class DetalleVenta extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'servicios';
+		return 'detalleVenta';
 	}
 
 	/**
@@ -29,12 +34,11 @@ class Servicios extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre, fechaCreacion', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio',),
-			array('nombre', 'length', 'max'=>100,'message'=>'<b>{attribute}</b> solo puede contener 100 caracteres',),
-			array('detalle', 'length', 'max'=>500,'message'=>'<b>{attribute}</b> solo puede contener 500 caracteres',),
+			array('idVenta, cantidadU, cantidadP, idAlmacenProducto', 'numerical', 'integerOnly'=>true),
+			array('costoAdicional, costoTotal', 'numerical'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('nombre, fechaCreacion', 'safe', 'on'=>'search'),
+			array('idDetalleVenta, idVenta, cantidadU, cantidadP, costoAdicional, costoTotal, idAlmacenProducto', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -46,9 +50,9 @@ class Servicios extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-        	//'empresaServicio' => array(self::HAS_MANY, 'EmpresaServicio', 'idServicio'),
-			'empresaServicio'=>array(self::MANY_MANY, 'Empresa', 'empresaServicio(idServicio, idEmpresa)'),
-    	);
+			'idVenta0' => array(self::BELONGS_TO, 'Venta', 'idVenta'),
+			'idAlmacenProducto0' => array(self::BELONGS_TO, 'AlmacenProducto', 'idAlmacenProducto'),
+		);
 	}
 
 	/**
@@ -57,11 +61,13 @@ class Servicios extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'nombre' => 'Nombre',
-			'detalle' => 'Detalle',
-			'fechaCreacion' => 'Fecha Creacion',
-			'idParent' => 'Servicio',
+			'idDetalleVenta' => 'Id Detalle Venta',
+			'idVenta' => 'Id Venta',
+			'cantidadU' => 'Cantidad U',
+			'cantidadP' => 'Cantidad P',
+			'costoAdicional' => 'Costo Adicional',
+			'costoTotal' => 'Costo Total',
+			'idAlmacenProducto' => 'Id Almacen Producto',
 		);
 	}
 
@@ -83,9 +89,13 @@ class Servicios extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('nombre',$this->nombre,true);
-		$criteria->compare('fechaCreacion',$this->fechaCreacion,true);
+		$criteria->compare('idDetalleVenta',$this->idDetalleVenta);
+		$criteria->compare('idVenta',$this->idVenta);
+		$criteria->compare('cantidadU',$this->cantidadU);
+		$criteria->compare('cantidadP',$this->cantidadP);
+		$criteria->compare('costoAdicional',$this->costoAdicional);
+		$criteria->compare('costoTotal',$this->costoTotal);
+		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -96,7 +106,7 @@ class Servicios extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Servicios the static model class
+	 * @return DetalleVenta the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

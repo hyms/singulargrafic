@@ -1,21 +1,28 @@
 <?php
 
 /**
- * This is the model class for table "color".
+ * This is the model class for table "movimientoCaja".
  *
- * The followings are the available columns in table 'color':
- * @property integer $id
- * @property string $nombre
- * @property string $codigo
+ * The followings are the available columns in table 'movimientoCaja':
+ * @property integer $idMovimientoCaja
+ * @property double $monto
+ * @property string $motivo
+ * @property string $fechaMovimiento
+ * @property integer $idCaja
+ * @property integer $idUser
+ *
+ * The followings are the available model relations:
+ * @property Caja $idCaja0
+ * @property User $idUser0
  */
-class Color extends CActiveRecord
+class MovimientoCaja extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'color';
+		return 'movimientoCaja';
 	}
 
 	/**
@@ -26,12 +33,13 @@ class Color extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre, codigo', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
-			array('nombre', 'length', 'max'=>100,'message'=>'<b>{attribute}</b> solo puede contener 100 caracteres'),
-			array('codigo', 'length', 'max'=>10,'message'=>'<b>{attribute}</b> solo puede contener 10 caracteres'),
+			array('idCaja, idUser', 'numerical', 'integerOnly'=>true),
+			array('monto', 'numerical'),
+			array('motivo', 'length', 'max'=>100),
+			array('fechaMovimiento', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nombre, codigo', 'safe', 'on'=>'search'),
+			array('idMovimientoCaja, monto, motivo, fechaMovimiento, idCaja, idUser', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -43,7 +51,8 @@ class Color extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-				'Producto'=>array(self::HAS_ONE, 'Producto', 'idColor'),
+			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
+			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
 		);
 	}
 
@@ -53,9 +62,12 @@ class Color extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'nombre' => 'Nombre',
-			'codigo' => 'Codigo',
+			'idMovimientoCaja' => 'Id Movimiento Caja',
+			'monto' => 'Monto',
+			'motivo' => 'Motivo',
+			'fechaMovimiento' => 'Fecha Movimiento',
+			'idCaja' => 'Id Caja',
+			'idUser' => 'Id User',
 		);
 	}
 
@@ -77,9 +89,12 @@ class Color extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('nombre',$this->nombre,true);
-		$criteria->compare('codigo',$this->codigo,true);
+		$criteria->compare('idMovimientoCaja',$this->idMovimientoCaja);
+		$criteria->compare('monto',$this->monto);
+		$criteria->compare('motivo',$this->motivo,true);
+		$criteria->compare('fechaMovimiento',$this->fechaMovimiento,true);
+		$criteria->compare('idCaja',$this->idCaja);
+		$criteria->compare('idUser',$this->idUser);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -90,7 +105,7 @@ class Color extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Color the static model class
+	 * @return MovimientoCaja the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

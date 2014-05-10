@@ -1,20 +1,30 @@
 <?php
 
 /**
- * This is the model class for table "empresaServicio".
+ * This is the model class for table "cajaVenta".
  *
- * The followings are the available columns in table 'empresaServicio':
- * @property integer $idEmpresa
- * @property integer $idServicio
+ * The followings are the available columns in table 'cajaVenta':
+ * @property integer $idCajaVenta
+ * @property integer $idCaja
+ * @property integer $idUser
+ * @property double $saldo
+ * @property string $fechaArqueo
+ * @property integer $entregado
+ *
+ * The followings are the available model relations:
+ * @property Caja $idCaja0
+ * @property User $idUser0
+ * @property Recibos[] $reciboses
+ * @property Venta[] $ventas
  */
-class EmpresaServicio extends CActiveRecord
+class CajaVenta extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'empresaServicio';
+		return 'cajaVenta';
 	}
 
 	/**
@@ -25,11 +35,12 @@ class EmpresaServicio extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idEmpresa, idServicio', 'required'),
-			array('idEmpresa, idServicio', 'numerical', 'integerOnly'=>true),
+			array('idCaja, idUser, entregado', 'numerical', 'integerOnly'=>true),
+			array('saldo', 'numerical'),
+			array('fechaArqueo', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idEmpresa, idServicio', 'safe', 'on'=>'search'),
+			array('idCajaVenta, idCaja, idUser, saldo, fechaArqueo, entregado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -41,8 +52,10 @@ class EmpresaServicio extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-				'Servicios' => array(self::HAS_ONE, 'Servicios', 'id'),
-				'Empresa' => array(self::HAS_ONE, 'Empresa', 'id'),
+			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
+			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
+			'reciboses' => array(self::HAS_MANY, 'Recibos', 'idCaja'),
+			'ventas' => array(self::HAS_MANY, 'Venta', 'idCaja'),
 		);
 	}
 
@@ -52,8 +65,12 @@ class EmpresaServicio extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idEmpresa' => 'Id Empresa',
-			'idServicio' => 'Id Servicio',
+			'idCajaVenta' => 'Id Caja Venta',
+			'idCaja' => 'Id Caja',
+			'idUser' => 'Id User',
+			'saldo' => 'Saldo',
+			'fechaArqueo' => 'Fecha Arqueo',
+			'entregado' => 'Entregado',
 		);
 	}
 
@@ -75,8 +92,12 @@ class EmpresaServicio extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idEmpresa',$this->idEmpresa);
-		$criteria->compare('idServicio',$this->idServicio);
+		$criteria->compare('idCajaVenta',$this->idCajaVenta);
+		$criteria->compare('idCaja',$this->idCaja);
+		$criteria->compare('idUser',$this->idUser);
+		$criteria->compare('saldo',$this->saldo);
+		$criteria->compare('fechaArqueo',$this->fechaArqueo,true);
+		$criteria->compare('entregado',$this->entregado);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -87,7 +108,7 @@ class EmpresaServicio extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return EmpresaServicio the static model class
+	 * @return CajaVenta the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -1,15 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "users".
+ * This is the model class for table "user".
  *
- * The followings are the available columns in table 'users':
- * @property integer $id
+ * The followings are the available columns in table 'user':
+ * @property integer $idUser
  * @property string $username
  * @property string $password
  * @property string $fechaLogin
  * @property integer $estado
  * @property string $tipo
+ * @property integer $idEmpleado
+ *
+ * The followings are the available model relations:
+ * @property CajaVenta[] $cajaVentas
+ * @property MovimientoCaja[] $movimientoCajas
+ * @property Empleado $idEmpleado0
  */
 class Users extends CActiveRecord
 {
@@ -18,7 +24,7 @@ class Users extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'users';
+		return 'user';
 	}
 
 	/**
@@ -29,27 +35,17 @@ class Users extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, estado, tipo', 'required'),
-			array('estado', 'numerical', 'integerOnly'=>true),
-			array('username', 'length', 'max'=>10),
-			array('tipo', 'length', 'max'=>20),
+			array('idEmpleado', 'required'),
+			array('estado, idEmpleado', 'numerical', 'integerOnly'=>true),
+			array('username, password', 'length', 'max'=>20),
+			array('tipo', 'length', 'max'=>10),
+			array('fechaLogin', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, username, password, fechaLogin, estado, tipo', 'safe', 'on'=>'search'),
+			array('idUser, username, password, fechaLogin, estado, tipo, idEmpleado', 'safe', 'on'=>'search'),
 		);
 	}
-
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-		);
-	}
-
+	
 	public function getTipos()
 	{
 		return array('admin'=>'admin','ventas'=>'ventas');
@@ -64,17 +60,32 @@ class Users extends CActiveRecord
 	}
 	
 	/**
+	 * @return array relational rules.
+	 */
+	public function relations()
+	{
+		// NOTE: you may need to adjust the relation name and the related
+		// class name for the relations automatically generated below.
+		return array(
+			'cajaVentas' => array(self::HAS_MANY, 'CajaVenta', 'idUser'),
+			'movimientoCajas' => array(self::HAS_MANY, 'MovimientoCaja', 'idUser'),
+			'idEmpleado0' => array(self::BELONGS_TO, 'Empleado', 'idEmpleado'),
+		);
+	}
+
+	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
+			'idUser' => 'Id User',
 			'username' => 'Username',
 			'password' => 'Password',
 			'fechaLogin' => 'Fecha Login',
 			'estado' => 'Estado',
 			'tipo' => 'Tipo',
+			'idEmpleado' => 'Id Empleado',
 		);
 	}
 
@@ -96,12 +107,13 @@ class Users extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('idUser',$this->idUser);
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('fechaLogin',$this->fechaLogin,true);
 		$criteria->compare('estado',$this->estado);
 		$criteria->compare('tipo',$this->tipo,true);
+		$criteria->compare('idEmpleado',$this->idEmpleado);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -118,6 +130,4 @@ class Users extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-	
-	
 }

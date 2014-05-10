@@ -4,14 +4,15 @@
  * This is the model class for table "caja".
  *
  * The followings are the available columns in table 'caja':
- * @property integer $id
- * @property double $saldo
- * @property string $fechaArqueo
- * @property int $idTipoCaja
- * @property string $obs
- * @property integer $arqueo
- * @property double $entregado
- * @property string $comprovante
+ * @property integer $idCaja
+ * @property string $nombre
+ * @property integer $idParent
+ *
+ * The followings are the available model relations:
+ * @property Caja $idParent0
+ * @property Caja[] $cajas
+ * @property CajaVenta[] $cajaVentas
+ * @property MovimientoCaja[] $movimientoCajas
  */
 class Caja extends CActiveRecord
 {
@@ -31,14 +32,11 @@ class Caja extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('saldo, nombre', 'required'),
-			array('arqueo', 'numerical', 'integerOnly'=>true),
-			array('saldo, entregado', 'numerical'),
-			array('obs', 'length', 'max'=>200),
-			array('comprovante', 'length', 'max'=>50),
+			array('idParent', 'numerical', 'integerOnly'=>true),
+			array('nombre', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, saldo, fechaArqueo, idTipoCaja, obs, arqueo, entregado, comprovante', 'safe', 'on'=>'search'),
+			array('idCaja, nombre, idParent', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,11 +48,10 @@ class Caja extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Movimiento'=>array(self::HAS_MANY, 'MovimientoCaja', 'idCaja'),
-			'Recibo'=>array(self::HAS_MANY, 'Recibo', 'idCaja'),
-			'Venta'=>array(self::HAS_MANY, 'Venta', 'idCaja'),
-				
-			'CajaTipo'=>array(self::BELONGS_TO, 'CajaTipo', 'idTipoCaja'),
+			'idParent0' => array(self::BELONGS_TO, 'Caja', 'idParent'),
+			'cajas' => array(self::HAS_MANY, 'Caja', 'idParent'),
+			'cajaVentas' => array(self::HAS_MANY, 'CajaVenta', 'idCaja'),
+			'movimientoCajas' => array(self::HAS_MANY, 'MovimientoCaja', 'idCaja'),
 		);
 	}
 
@@ -64,14 +61,9 @@ class Caja extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'saldo' => 'Saldo',
-			'fechaArqueo' => 'Fecha Arqueo',
-			'idTipoCaja' => 'idTipoCaja',
-			'obs' => 'Obs',
-			'arqueo' => 'Arqueo',
-			'entregado' => 'Entregado',
-			'comprovante' => 'Comprovante',
+			'idCaja' => 'Id Caja',
+			'nombre' => 'Nombre',
+			'idParent' => 'Id Parent',
 		);
 	}
 
@@ -93,14 +85,9 @@ class Caja extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('saldo',$this->saldo);
-		$criteria->compare('fechaArqueo',$this->fechaArqueo,true);
-		$criteria->compare('idTipoCaja',$this->idTipoCaja);
-		$criteria->compare('obs',$this->obs,true);
-		$criteria->compare('arqueo',$this->arqueo);
-		$criteria->compare('entregado',$this->entregado);
-		$criteria->compare('comprovante',$this->comprovante,true);
+		$criteria->compare('idCaja',$this->idCaja);
+		$criteria->compare('nombre',$this->nombre,true);
+		$criteria->compare('idParent',$this->idParent);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

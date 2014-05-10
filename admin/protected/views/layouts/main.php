@@ -6,19 +6,14 @@
 			'jquery.yii.js' => Yii::app()->request->baseUrl.'/js/jquery-1.11.0.min.js',
 	);
 		// use it when you need it!
-		$cs
+	$cs
 		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.css' )
 		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap-responsive.css' )
 		
 		->registerCoreScript('jquery')
 		->registerCoreScript('jquery.ui')
 		
-		//->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.js')
 		->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END )
-		
-		
-		
-		//->registerScriptFile( Yii::app()->baseUrl.'/js/uploadify/jquery.uploadify.js')
 		;
 ?>
 <!DOCTYPE html>
@@ -50,60 +45,49 @@
 					'encodeLabel' => false,
 					'items'=>array(
 						array('label'=>'Home', 'url'=>array('/site/index')),
-						//menu webpage
-						array('label'=>'Pagina Web <b class="caret"></b>', 'url'=>array('#'),
-						'linkOptions'=> array(
-                       		'class' => 'dropdown-toggle',
-                            'data-toggle' => 'dropdown',
-                      	),
-						'itemOptions' => array('class'=>'dropdown'),
-						'items'=>array(
-							array('label'=>'Banner', 'url'=>array('webpage/banner')),
-							array('label'=>'Paginas', 'url'=>array('webpage/pages')),
-						)),
-						array('label'=>'Empresa <b class="caret"></b>', 'url'=>array('#'),
-							'linkOptions'=> array(
-									'class' => 'dropdown-toggle',
-									'data-toggle' => 'dropdown',
-							),
-							'itemOptions' => array('class'=>'dropdown'),
-							'items'=>array(
-								array('label'=>'Sucursales', 'url'=>array('empresa/sucursal')),
-								array('label'=>'Empleados', 'url'=>array('empresa/empleado')),
-								array('label'=>'Caja', 'url'=>array('empresa/cajas')),
-								array('label'=>'Servicios', 'url'=>array('empresa/servicios')),
-								array('label'=>'Clientes', 'url'=>array('empresa/cliente')),
-								array('label'=>'Proveedores', 'url'=>array('empresa/proveedor')),
-						)),
 						
-						array('label'=>'Productos <b class="caret"></b>', 'url'=>array('#'),
+						array('label'=>'Pagina Web <b class="caret"></b>', 'url'=>array('#'),
 							'linkOptions'=> array(
 								'class' => 'dropdown-toggle',
 								'data-toggle' => 'dropdown',
 							),
 							'itemOptions' => array('class'=>'dropdown'),
 							'items'=>array(
-								array('label'=>'Productos', 'url'=>array('producto/index')),
-								array('label'=>'Materiales', 'url'=>array('producto/material')),
-								array('label'=>'Colores', 'url'=>array('producto/color')),
-								array('label'=>'Industrias', 'url'=>array('producto/industria')),								
+								array('label'=>'Banner', 'url'=>array('webpage/banner')),
+								array('label'=>'Paginas', 'url'=>array('webpage/pages')),
 						)),
-						array('label'=>'Almacen <b class="caret"></b>', 'url'=>array('#'),
+						
+						array('label'=>'Empleados', 'url'=>array('empleado/index')),
+						array('label'=>'Clientes', 'url'=>array('cliente/index')),
+						array('label'=>'Administracion <b class="caret"></b>', 'url'=>array('#'),
 							'linkOptions'=> array(
-									'class' => 'dropdown-toggle',
-									'data-toggle' => 'dropdown',
+								'class' => 'dropdown-toggle',
+								'data-toggle' => 'dropdown',
 							),
 							'itemOptions' => array('class'=>'dropdown'),
 							'items'=>array(
-									array('label'=>'Almacenes', 'url'=>array('almacen/index')),
-									array('label'=>'Tipo de Almacen', 'url'=>array('almacen/tipoAlmacen')),
-									array('label'=>'Añadir/Reducir Stock', 'url'=>array('almacen/add_reduce')),
+								array('label'=>'Inventario Gral', 'url'=>array('inventario/index')),
+								array('label'=>'Cajas y Libro Mayor', 'url'=>array('#')),
+								array('label'=>'Recibos', 'url'=>array('#')),
 						)),
+						array('label'=>'Servicios <b class="caret"></b>', 'url'=>array('#'),
+							'linkOptions'=> array(
+								'class' => 'dropdown-toggle',
+								'data-toggle' => 'dropdown',
+							),
+							'itemOptions' => array('class'=>'dropdown'),
+							'items'=>array(
+								array('label'=>'Pre-Prensa CTP', 'url'=>array('#')),
+								array('label'=>'Distribuidora', 'url'=>array('#')),
+								array('label'=>'Imprenta', 'url'=>array('#')),
+								array('label'=>'Editorial', 'url'=>array('#')),
+						)),
+						array('label'=>'Reportes', 'url'=>array('#')),
+						
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 					),
 				)); ?>
-					
 			</div><!--/.nav-collapse -->
 			
 		</div>

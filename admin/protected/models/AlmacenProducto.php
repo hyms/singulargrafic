@@ -1,20 +1,28 @@
 <?php
 
 /**
- * This is the model class for table "Industria".
+ * This is the model class for table "almacenProducto".
  *
- * The followings are the available columns in table 'Industria':
- * @property integer $id
- * @property string $nombre
+ * The followings are the available columns in table 'almacenProducto':
+ * @property integer $idAlmacenProducto
+ * @property integer $idProducto
+ * @property integer $stockU
+ * @property integer $stockP
+ * @property integer $idAlmacen
+ *
+ * The followings are the available model relations:
+ * @property Producto $idProducto0
+ * @property Almacen $idAlmacen0
+ * @property DetalleVenta[] $detalleVentas
  */
-class Industria extends CActiveRecord
+class AlmacenProducto extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'Industria';
+		return 'almacenProducto';
 	}
 
 	/**
@@ -25,11 +33,10 @@ class Industria extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
-			array('nombre', 'length', 'max'=>20,'message'=>'<b>{attribute}</b> solo puede contener 20 caracteres'),
+			array('idProducto, stockU, stockP, idAlmacen', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nombre', 'safe', 'on'=>'search'),
+			array('idAlmacenProducto, idProducto, stockU, stockP, idAlmacen', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -41,7 +48,9 @@ class Industria extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-				'Producto'=>array(self::HAS_ONE, 'Producto', 'idIndustria'),
+			'idProducto0' => array(self::BELONGS_TO, 'Producto', 'idProducto'),
+			'idAlmacen0' => array(self::BELONGS_TO, 'Almacen', 'idAlmacen'),
+			'detalleVentas' => array(self::HAS_MANY, 'DetalleVenta', 'idAlmacenProducto'),
 		);
 	}
 
@@ -51,8 +60,11 @@ class Industria extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'nombre' => 'Nombre',
+			'idAlmacenProducto' => 'Id Almacen Producto',
+			'idProducto' => 'Id Producto',
+			'stockU' => 'Stock U',
+			'stockP' => 'Stock P',
+			'idAlmacen' => 'Id Almacen',
 		);
 	}
 
@@ -74,8 +86,11 @@ class Industria extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('nombre',$this->nombre,true);
+		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
+		$criteria->compare('idProducto',$this->idProducto);
+		$criteria->compare('stockU',$this->stockU);
+		$criteria->compare('stockP',$this->stockP);
+		$criteria->compare('idAlmacen',$this->idAlmacen);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -86,7 +101,7 @@ class Industria extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Industria the static model class
+	 * @return AlmacenProducto the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -4,11 +4,16 @@
  * This is the model class for table "almacen".
  *
  * The followings are the available columns in table 'almacen':
- * @property integer $id
- * @property integer $idProducto
- * @property integer $idTipoAlmacen
- * @property integer $stockUnidad
- * @property integer $stockPaquete
+ * @property integer $idAlmacen
+ * @property string $nombre
+ * @property integer $idParent
+ *
+ * The followings are the available model relations:
+ * @property Almacen $idParent0
+ * @property Almacen[] $almacens
+ * @property AlmacenProducto[] $almacenProductos
+ * @property MovimientoAlmacen[] $movimientoAlmacens
+ * @property MovimientoAlmacen[] $movimientoAlmacens1
  */
 class Almacen extends CActiveRecord
 {
@@ -28,10 +33,11 @@ class Almacen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idProducto, idTipoAlmacen', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
-			array('idProducto, idTipoAlmacen, stockUnidad, stockPaquete', 'numerical', 'integerOnly'=>true,'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
+			array('idParent', 'numerical', 'integerOnly'=>true),
+			array('nombre', 'length', 'max'=>20),
 			// The following rule is used by search().
-			array('id, idProducto, idTipoAlmacen, stockUnidad, stockPaquete', 'safe', 'on'=>'search'),
+			// @todo Please remove those attributes that should not be searched.
+			array('idAlmacen, nombre, idParent', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -43,10 +49,11 @@ class Almacen extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-				'TipoAlmacen'=>array(self::BELONGS_TO, 'TipoAlmacen', 'idTipoAlmacen'),
-				'Producto'=>array(self::BELONGS_TO, 'Producto', 'idProducto'),
-				
-				'MovimientoAlmacen'=>array(self::HAS_ONE, 'MovimientoAlmacen', 'idAlmacen'),
+			'idParent0' => array(self::BELONGS_TO, 'Almacen', 'idParent'),
+			'almacens' => array(self::HAS_MANY, 'Almacen', 'idParent'),
+			'almacenProductos' => array(self::HAS_MANY, 'AlmacenProducto', 'idAlmacen'),
+			'movimientoAlmacens' => array(self::HAS_MANY, 'MovimientoAlmacen', 'idAlmacenOrigen'),
+			'movimientoAlmacens1' => array(self::HAS_MANY, 'MovimientoAlmacen', 'idAlmacenDestino'),
 		);
 	}
 
@@ -56,11 +63,9 @@ class Almacen extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'idProducto' => 'Producto',
-			'idTipoAlmacen' => 'Tipo Almacen',
-			'stockUnidad' => 'Stock Unidad',
-			'stockPaquete' => 'Stock Paquete',
+			'idAlmacen' => 'Id Almacen',
+			'nombre' => 'Nombre',
+			'idParent' => 'Id Parent',
 		);
 	}
 
@@ -78,23 +83,16 @@ class Almacen extends CActiveRecord
 	 */
 	public function search()
 	{
-		
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
 		$criteria=new CDbCriteria;
-		/*$criteria->with = array(
-				'Producto' => array(),
-				'Producto.Color' => array(),
-				'Producto.Industria' => array(),
-				'Producto.Material' => array(),
-		);*/
-		$criteria->compare('id',$this->id);
-		$criteria->compare('idProducto',$this->idProducto);
-		$criteria->compare('idTipoAlmacen',$this->idTipoAlmacen);
-		$criteria->compare('stockUnidad',$this->stockUnidad);
-		$criteria->compare('stockPaquete',$this->stockPaquete);
+
+		$criteria->compare('idAlmacen',$this->idAlmacen);
+		$criteria->compare('nombre',$this->nombre,true);
+		$criteria->compare('idParent',$this->idParent);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-			'pagination'=>array('pageSize'=>20),
 		));
 	}
 

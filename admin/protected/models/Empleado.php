@@ -4,22 +4,16 @@
  * This is the model class for table "empleado".
  *
  * The followings are the available columns in table 'empleado':
- * @property integer $id
- * @property string $nombres
- * @property string $apellidos
- * @property string $ci
- * @property string $telefono
+ * @property integer $idEmpleado
+ * @property string $nombre
+ * @property string $apellido
+ * @property string $fechaRegistro
  * @property string $email
- * @property string $cargo
- * @property string $turno
- * @property integer $sueldo
- * @property string $skype
- * @property string $face
- * @property integer $sucursal
- * @property integer $superior
- * @property string $fechaIngreso
- * @property string $idUsers
- * @property string $obs
+ * @property string $telefono
+ * @property string $ci
+ *
+ * The followings are the available model relations:
+ * @property User[] $users
  */
 class Empleado extends CActiveRecord
 {
@@ -39,18 +33,13 @@ class Empleado extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			//array('nombres, apellidos, ci, telefono, cargo, sueldo, skype, sucursal, fechaIngreso', 'required', 'message'=>'El campo <b>{attribute}</b> es obligatorio',),
-				array('nombres, apellidos, sucursal', 'required', 'message'=>'El campo <b>{attribute}</b> es obligatorio',),
-			array('ci, sueldo, sucursal, superior', 'numerical', 'integerOnly'=>true, 'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
-			array('nombres, apellidos, email, skype, face', 'length', 'max'=>100,'message'=>'<b>{attribute}</b> solo puede contener 100 caracteres'),
-			array('email','email','message'=>'La direccion de <b>{attribute}</b> no es valido'),
-			array('ci', 'length', 'max'=>20,'message'=>'<b>{attribute}</b> solo puede contener 20 caracteres'),
-			array('telefono', 'length', 'max'=>15,'message'=>'<b>{attribute}</b> solo puede contener 15 caracteres'),
-			array('turno, cargo', 'length', 'max'=>50,'message'=>'<b>{attribute}</b> solo puede contener 50 caracteres'),
-			array('obs', 'length', 'max'=>500,'message'=>'<b>{attribute}</b> solo puede contener 500 caracteres'),
+			array('nombre, apellido', 'length', 'max'=>40),
+			array('email', 'length', 'max'=>50),
+			array('telefono, ci', 'length', 'max'=>20),
+			array('fechaRegistro', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('nombres, apellidos, ci, telefono, email, cargo, turno, sueldo, skype, face, superior, obs, idUsers', 'safe', 'on'=>'search'),
+			array('idEmpleado, nombre, apellido, fechaRegistro, email, telefono, ci', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,8 +51,7 @@ class Empleado extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-				'MovimientoAlmacen'=>array(self::HAS_ONE, 'MovimientoAlmacen', 'idEmpleado'),
-				'Users'=>array(self::BELONGS_TO,'Users','idUsers'),
+			'users' => array(self::HAS_MANY, 'User', 'idEmpleado'),
 		);
 	}
 
@@ -73,22 +61,13 @@ class Empleado extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'nombres' => 'Nombres',
-			'apellidos' => 'Apellidos',
-			'ci' => 'CI',
-			'telefono' => 'Telefono',
+			'idEmpleado' => 'Id Empleado',
+			'nombre' => 'Nombre',
+			'apellido' => 'Apellido',
+			'fechaRegistro' => 'Fecha Registro',
 			'email' => 'Email',
-			'cargo' => 'Cargo',
-			'turno' => 'Turno',
-			'sueldo' => 'Sueldo',
-			'skype' => 'Skype',
-			'face' => 'Facebook',
-			'sucursal' => 'Sucursal',
-			'superior' => 'Superior',
-			'fechaIngreso' => 'Fecha de Ingreso',
-			'idUsers' => 'Users',
-			'obs' => 'Observaciones',
+			'telefono' => 'Telefono',
+			'ci' => 'Ci',
 		);
 	}
 
@@ -110,38 +89,19 @@ class Empleado extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('nombres',$this->nombres,true);
-		$criteria->compare('apellidos',$this->apellidos,true);
-		$criteria->compare('ci',$this->ci,true);
-		$criteria->compare('telefono',$this->telefono,true);
+		$criteria->compare('idEmpleado',$this->idEmpleado);
+		$criteria->compare('nombre',$this->nombre,true);
+		$criteria->compare('apellido',$this->apellido,true);
+		$criteria->compare('fechaRegistro',$this->fechaRegistro,true);
 		$criteria->compare('email',$this->email,true);
-		$criteria->compare('cargo',$this->cargo);
-		$criteria->compare('turno',$this->turno,true);
-		$criteria->compare('sueldo',$this->sueldo);
-		$criteria->compare('skype',$this->skype,true);
-		$criteria->compare('face',$this->face,true);
-		$criteria->compare('sucursal',$this->sucursal);
-		$criteria->compare('superior',$this->superior);
-		$criteria->compare('fechaIngreso',$this->fechaIngreso,true);
-		$criteria->compare('idUsers',$this->idUsers);
-		$criteria->compare('obs',$this->obs,true);
+		$criteria->compare('telefono',$this->telefono,true);
+		$criteria->compare('ci',$this->ci,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
 
-	public function getSucursales(){
-		return CHtml::listData( Empresa::model()->findAll(),'id','nombre' );
-	}
-	
-	public function getSuperiores(){
-		if($this->id==null)
-			return CHtml::listData( $this::model()->findAll(array('select'=>'id, cargo','group'=>'cargo')),'id','cargo' );
-		return CHtml::listData( $this::model()->findAll('id!='.$this->id, array('select'=>'id, cargo','group'=>'cargo')),'id','cargo' );
-	}
-	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
