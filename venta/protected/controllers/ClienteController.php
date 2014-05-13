@@ -12,10 +12,10 @@ class ClienteController extends Controller
 		return array(
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
 						//'actions'=>array('index'),
-						'expression'=>'isset($user->role) && ($user->role==="ventas")',
+						'expression'=>'isset($user->role) && ($user->role==="3")',
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'expression'=>'isset($user->role) && ($user->role==="admin")',
+						'expression'=>'isset($user->role) && ($user->role==="1")',
 				),
 				array('deny',
 						'users'=>array('*'),
@@ -27,10 +27,13 @@ class ClienteController extends Controller
 	{
 		$venta = Venta::model()->findAll(array('select'=>'count(*) as max, idCliente','group'=>'`t`.idCliente'));
 		$datos1 = CHtml::listData($venta,'idCliente','max');
+		
 		$venta = Venta::model()->findAll(array('select'=>'count(*) as max, idCliente','group'=>'`t`.idCliente','condition'=>'formaPago=1'));
 		$datos2 = CHtml::listData($venta,'idCliente','max');
-		$venta = Venta::model()->with('Credito')->findAll(array('select'=>'MIN(Credito.saldo) as max, idCliente','group'=>'`t`.idCliente','condition'=>'formaPago=1'));
+		
+		$venta = Venta::model()->findAll(array('select'=>'montoCambio as max, idCliente','group'=>'`t`.idCliente','condition'=>'formaPago=1'));
 		$datos3 = CHtml::listData($venta,'idCliente','max');
+		
 		//print_r($datos);
 		$datos= array('compra'=>$datos1,'credito'=>$datos2,'deuda'=>$datos3);
 		$criteria=new CDbCriteria();
@@ -46,102 +49,124 @@ class ClienteController extends Controller
 	
 	public function actionRegister()
 	{
-		$cliente = new Cliente;
-		$cliente->fechaRegistro = date("Y-m-d"); 
-		$this->render("form",array('model'=>$cliente));
+		$model=new Cliente;
+		
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+		
+		if(isset($_POST['Cliente']))
+		{
+			$model->attributes=$_POST['Cliente'];
+			$model->fechaRegistro=date("Y-m-d H:i:s");
+			if($model->save())
+				$this->redirect(array('index'));
+		}
+		
+		$this->render("form",array('model'=>$model));
+	}
+	
+	public function actionUpdate()
+	{
+		if($_GET['id'])
+		{
+			$model=$this->verifyModel(Cliente::model()->findByPk($_GET['id']));
+	
+			// Uncomment the following line if AJAX validation is needed
+			// $this->performAjaxValidation($model);
+	
+			if(isset($_POST['Cliente']))
+			{
+				$model->attributes=$_POST['Cliente'];
+				if($model->save())
+					$this->redirect(array('index'));
+			}
+	
+			$this->render('form',array(
+					'model'=>$model,
+			));
+		}
+		else
+			throw new CHttpException(400,'Petición no válida.');
 	}
 	
 	public function actionDetail()
 	{
 		if(isset($_GET['id']))
 		{
-			$datos00=array();$datos01=array();$datos10=array();$datos11=array();
-			
+			$datos00=array();
 			$cliente = Cliente::model()
 									->with("Venta")
-									->with("Venta.Detalle")
-									->with("Venta.Detalle.Almacen")
-									->with("Venta.Detalle.Almacen.Producto")
-									->with("Venta.Detalle.Almacen.Producto.Color")
-									->with("Venta.Detalle.Almacen.Producto.Material")
-									->with("Venta.Credito")
-									->find(array('condition'=>'`t`.id='.$_GET['id'].' and Venta.formaPago=0 and Venta.tipoPago=0','group'=>'Detalle.idAlmacen','select'=>'* , count(Detalle.idAlmacen) as max'));
+									->with("Venta.detalleVentas")
+									->with("Venta.detalleVentas.idAlmacenProducto0")
+									->with("Venta.detalleVentas.idAlmacenProducto0.idProducto0")
+									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and Venta.formaPago=0 and Venta.tipoPago=0','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
 			$temp="";
 			if(!empty($cliente))
 			foreach ($cliente->Venta as $ventas)
 			{
-				foreach ($ventas->Detalle as $detalle)
+				foreach ($ventas->detalleVentas as $detalle)
 				{
-					$temp=array("nombre"=>$detalle->Almacen->Producto->Material->nombre." ".$detalle->Almacen->Producto->Color->nombre." ".$detalle->Almacen->Producto->peso." ".$detalle->Almacen->Producto->dimension.", ".$detalle->Almacen->Producto->procedencia,"cant"=>$cliente->max);
+					$temp=array("nombre"=>$detalle->idAlmacenProducto0->idProducto0->material." ".$detalle->idAlmacenProducto0->idProducto0->color." ".$detalle->idAlmacenProducto0->idProducto0->detalle,"cant"=>$cliente->max);
 					array_push($datos00, $temp);
 				}
 			}
+			$datos01=array();
 			$cliente = Cliente::model()
-			->with("Venta")
-			->with("Venta.Detalle")
-			->with("Venta.Detalle.Almacen")
-			->with("Venta.Detalle.Almacen.Producto")
-			->with("Venta.Detalle.Almacen.Producto.Color")
-			->with("Venta.Detalle.Almacen.Producto.Material")
-			->with("Venta.Credito")
-			->find(array('condition'=>'`t`.id='.$_GET['id'].' and Venta.formaPago=1 and Venta.tipoPago=0','group'=>'Detalle.idAlmacen','select'=>'* , count(Detalle.idAlmacen) as max'));
+									->with("Venta")
+									->with("Venta.detalleVentas")
+									->with("Venta.detalleVentas.idAlmacenProducto0")
+									->with("Venta.detalleVentas.idAlmacenProducto0.idProducto0")
+									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and Venta.formaPago=1 and Venta.tipoPago=0','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
 			$temp="";
 			if(!empty($cliente))
 			foreach ($cliente->Venta as $ventas)
 			{
 				foreach ($ventas->Detalle as $detalle)
 				{
-					$temp=array("nombre"=>$detalle->Almacen->Producto->Material->nombre." ".$detalle->Almacen->Producto->Color->nombre." ".$detalle->Almacen->Producto->peso." ".$detalle->Almacen->Producto->dimension.", ".$detalle->Almacen->Producto->procedencia,"cant"=>$cliente->max);
+					$temp=array("nombre"=>$detalle->idAlmacenProducto0->idProducto0->material." ".$detalle->idAlmacenProducto0->idProducto0->color." ".$detalle->idAlmacenProducto0->idProducto0->detalle,"cant"=>$cliente->max);
 					array_push($datos01, $temp);
 				}
 			}
+			$datos10=array();
 			$cliente = Cliente::model()
-			->with("Venta")
-			->with("Venta.Detalle")
-			->with("Venta.Detalle.Almacen")
-			->with("Venta.Detalle.Almacen.Producto")
-			->with("Venta.Detalle.Almacen.Producto.Color")
-			->with("Venta.Detalle.Almacen.Producto.Material")
-			->with("Venta.Credito")
-			->find(array('condition'=>'`t`.id='.$_GET['id'].' and Venta.formaPago=0 and Venta.tipoPago=1','group'=>'Detalle.idAlmacen','select'=>'* , count(Detalle.idAlmacen) as max'));
+									->with("Venta")
+									->with("Venta.detalleVentas")
+									->with("Venta.detalleVentas.idAlmacenProducto0")
+									->with("Venta.detalleVentas.idAlmacenProducto0.idProducto0")
+									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and Venta.formaPago=0 and Venta.tipoPago=1','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
 			$temp="";
 			if(!empty($cliente))
 			foreach ($cliente->Venta as $ventas)
 			{
 				foreach ($ventas->Detalle as $detalle)
 				{
-					$temp=array("nombre"=>$detalle->Almacen->Producto->Material->nombre." ".$detalle->Almacen->Producto->Color->nombre." ".$detalle->Almacen->Producto->peso." ".$detalle->Almacen->Producto->dimension.", ".$detalle->Almacen->Producto->procedencia,"cant"=>$cliente->max);
+					$temp=array("nombre"=>$detalle->idAlmacenProducto0->idProducto0->material." ".$detalle->idAlmacenProducto0->idProducto0->color." ".$detalle->idAlmacenProducto0->idProducto0->detalle,"cant"=>$cliente->max);
 					array_push($datos10, $temp);
 				}
 			}
+			$datos11=array();
 			$cliente = Cliente::model()
-			->with("Venta")
-			->with("Venta.Detalle")
-			->with("Venta.Detalle.Almacen")
-			->with("Venta.Detalle.Almacen.Producto")
-			->with("Venta.Detalle.Almacen.Producto.Color")
-			->with("Venta.Detalle.Almacen.Producto.Material")
-			->with("Venta.Credito")
-			->find(array('condition'=>'`t`.id='.$_GET['id'].' and Venta.formaPago=1	and Venta.tipoPago=1','group'=>'Detalle.idAlmacen','select'=>'* , count(Detalle.idAlmacen) as max'));
+									->with("Venta")
+									->with("Venta.detalleVentas")
+									->with("Venta.detalleVentas.idAlmacenProducto0")
+									->with("Venta.detalleVentas.idAlmacenProducto0.idProducto0")
+									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and Venta.formaPago=1	and Venta.tipoPago=1','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
 			$temp="";
 			if(!empty($cliente))
 			foreach ($cliente->Venta as $ventas)
 			{
 				foreach ($ventas->Detalle as $detalle)
 				{
-					$temp=array("nombre"=>$detalle->Almacen->Producto->Material->nombre." ".$detalle->Almacen->Producto->Color->nombre." ".$detalle->Almacen->Producto->peso." ".$detalle->Almacen->Producto->dimension.", ".$detalle->Almacen->Producto->procedencia,"cant"=>$cliente->max);
+					$temp=array("nombre"=>$detalle->idAlmacenProducto0->idProducto0->material." ".$detalle->idAlmacenProducto0->idProducto0->color." ".$detalle->idAlmacenProducto0->idProducto0->detalle,"cant"=>$cliente->max);
 					array_push($datos11, $temp);
 				}
 			}
 			
 			$venta = Venta::model()
-							->with('Credito')
-							->with("Detalle")
-							->with("Detalle.Almacen")
-							->with("Detalle.Almacen.Producto")
-							->with("Detalle.Almacen.Producto.Color")
-							->with("Detalle.Almacen.Producto.Material")
-							->findAll(array('select'=>'MIN(Credito.saldo) as max, *','group'=>'`t`.idCliente','condition'=>'estado=2 and `t`.idCliente='.$_GET['id']));
+							->with("detalleVentas")
+							->with("detalleVentas.idAlmacenProducto0")
+							->with("detalleVentas.idAlmacenProducto0.idProducto0")
+							->findAll(array('select'=>'montoCambio as max, *','group'=>'`t`.idCliente','condition'=>'estado=2 and `t`.idCliente='.$_GET['id']));
 			$datosD = array();
 			if(!empty($venta))
 			foreach ($venta as $ventas)
@@ -149,7 +174,7 @@ class ClienteController extends Controller
 				foreach ($ventas->Detalle as $detalle)
 				{
 					$temp=array(
-							"nombre"=>$detalle->Almacen->Producto->Material->nombre." ".$detalle->Almacen->Producto->Color->nombre." ".$detalle->Almacen->Producto->peso." ".$detalle->Almacen->Producto->dimension.", ".$detalle->Almacen->Producto->procedencia,
+							"nombre"=>$detalle->idAlmacenProducto0->idProducto0->material." ".$detalle->idAlmacenProducto0->idProducto0->color." ".$detalle->idAlmacenProducto0->idProducto0->detalle,
 							"fechaVenta"=>date("d-m-Y",strtotime($ventas->fechaVenta)),
 							"fechaPlazo"=>date("d-m-Y",strtotime($ventas->fechaPlazo)),
 							"monto"=>number_format($ventas->max, 2));
@@ -162,13 +187,13 @@ class ClienteController extends Controller
 			$this->render("detail",array('cliente'=>$cliente,'datos'=>$datos));
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			throw new CHttpException(400,'Petición no válida.');
 	}
 	
 	private function verifyModel($model)
 	{
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404,'La Respuesta de la pagina no Existe.');
 
 		return $model;
 	}

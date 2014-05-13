@@ -118,9 +118,8 @@ class ClienteController extends Controller
 	{
 		$dataProvider=new CActiveDataProvider('Cliente',
 						array(
-								'with'=>'almacenProductos',
 								'pagination'=>array(
-		                'pageSize'=>'1',
+		                'pageSize'=>'20',
 		            	),));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider

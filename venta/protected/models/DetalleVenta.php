@@ -4,18 +4,20 @@
  * This is the model class for table "detalleVenta".
  *
  * The followings are the available columns in table 'detalleVenta':
- * @property integer $id
+ * @property integer $idDetalleVenta
  * @property integer $idVenta
- * @property integer $idProducto
- * @property integer $idAlmacen
- * @property integer $cantUnidad
- * @property integer $cantPaquete
- * @property integer $adicional
- * @property integer $costoTotal
+ * @property integer $cantidadU
+ * @property integer $cantidadP
+ * @property double $costoAdicional
+ * @property double $costoTotal
+ * @property integer $idAlmacenProducto
+ *
+ * The followings are the available model relations:
+ * @property Venta $idVenta0
+ * @property AlmacenProducto $idAlmacenProducto0
  */
 class DetalleVenta extends CActiveRecord
 {
-	public $max;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -32,11 +34,11 @@ class DetalleVenta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idVenta, idAlmacen', 'required'),
-			array('idVenta, idProducto, cantUnidad, cantPaquete, adicional, costoTotal', 'numerical'),
+			array('idVenta, cantidadU, cantidadP, idAlmacenProducto', 'numerical', 'integerOnly'=>true),
+			array('costoAdicional, costoTotal', 'numerical'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, idVenta, idProducto, cantUnidad, cantPaquete, adicional, costoTotal', 'safe', 'on'=>'search'),
+			array('idDetalleVenta, idVenta, cantidadU, cantidadP, costoAdicional, costoTotal, idAlmacenProducto', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -48,9 +50,8 @@ class DetalleVenta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Venta'=>array(self::BELONGS_TO, 'VentaTmp', 'idVenta'),
-			'Producto'=>array(self::BELONGS_TO, 'Producto', 'idProducto'),
-			'Almacen'=>array(self::BELONGS_TO, 'Almacen', 'idAlmacen'),
+			'idVenta0' => array(self::BELONGS_TO, 'Venta', 'idVenta'),
+			'idAlmacenProducto0' => array(self::BELONGS_TO, 'AlmacenProducto', 'idAlmacenProducto'),
 		);
 	}
 
@@ -60,14 +61,13 @@ class DetalleVenta extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
+			'idDetalleVenta' => 'Id Detalle Venta',
 			'idVenta' => 'Id Venta',
-			'idProducto' => 'Id Producto',
-			'idAlmacen' => 'Id Almacen',
-			'cantUnidad' => 'Cant Unidad',
-			'cantPaquete' => 'Cant Paquete',
-			'adicional' => 'Adicional',
+			'cantidadU' => 'Cantidad U',
+			'cantidadP' => 'Cantidad P',
+			'costoAdicional' => 'Costo Adicional',
 			'costoTotal' => 'Costo Total',
+			'idAlmacenProducto' => 'Id Almacen Producto',
 		);
 	}
 
@@ -89,14 +89,13 @@ class DetalleVenta extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('idDetalleVenta',$this->idDetalleVenta);
 		$criteria->compare('idVenta',$this->idVenta);
-		$criteria->compare('idProducto',$this->idProducto);
-		$criteria->compare('idAlmacen',$this->idAlmacen);
-		$criteria->compare('cantUnidad',$this->cantUnidad);
-		$criteria->compare('cantPaquete',$this->cantPaquete);
-		$criteria->compare('adicional',$this->adicional);
+		$criteria->compare('cantidadU',$this->cantidadU);
+		$criteria->compare('cantidadP',$this->cantidadP);
+		$criteria->compare('costoAdicional',$this->costoAdicional);
 		$criteria->compare('costoTotal',$this->costoTotal);
+		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -1,28 +1,30 @@
 <?php
 
 /**
- * This is the model class for table "almacen".
+ * This is the model class for table "cajaVenta".
  *
- * The followings are the available columns in table 'almacen':
- * @property integer $idAlmacen
- * @property string $nombre
- * @property integer $idParent
+ * The followings are the available columns in table 'cajaVenta':
+ * @property integer $idCajaVenta
+ * @property integer $idCaja
+ * @property integer $idUser
+ * @property double $saldo
+ * @property string $fechaArqueo
+ * @property integer $entregado
  *
  * The followings are the available model relations:
- * @property Almacen $idParent0
- * @property Almacen[] $almacens
- * @property AlmacenProducto[] $almacenProductos
- * @property MovimientoAlmacen[] $movimientoAlmacens
- * @property MovimientoAlmacen[] $movimientoAlmacens1
+ * @property Caja $idCaja0
+ * @property User $idUser0
+ * @property Recibos[] $reciboses
+ * @property Venta[] $ventas
  */
-class Almacen extends CActiveRecord
+class CajaVenta extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'almacen';
+		return 'cajaVenta';
 	}
 
 	/**
@@ -33,11 +35,12 @@ class Almacen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idParent', 'numerical', 'integerOnly'=>true),
-			array('nombre', 'length', 'max'=>20),
+			array('idCaja, idUser, entregado', 'numerical', 'integerOnly'=>true),
+			array('saldo', 'numerical'),
+			array('fechaArqueo', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idAlmacen, nombre, idParent', 'safe', 'on'=>'search'),
+			array('idCajaVenta, idCaja, idUser, saldo, fechaArqueo, entregado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,11 +52,10 @@ class Almacen extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idParent0' => array(self::BELONGS_TO, 'Almacen', 'idParent'),
-			'almacens' => array(self::HAS_MANY, 'Almacen', 'idParent'),
-			'almacenProductos' => array(self::HAS_MANY, 'AlmacenProducto', 'idAlmacen'),
-			'movimientoAlmacens' => array(self::HAS_MANY, 'MovimientoAlmacen', 'idAlmacenOrigen'),
-			'movimientoAlmacens1' => array(self::HAS_MANY, 'MovimientoAlmacen', 'idAlmacenDestino'),
+			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
+			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
+			'reciboses' => array(self::HAS_MANY, 'Recibos', 'idCaja'),
+			'ventas' => array(self::HAS_MANY, 'Venta', 'idCaja'),
 		);
 	}
 
@@ -63,9 +65,12 @@ class Almacen extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idAlmacen' => 'Id Almacen',
-			'nombre' => 'Nombre',
-			'idParent' => 'Id Parent',
+			'idCajaVenta' => 'Id Caja Venta',
+			'idCaja' => 'Id Caja',
+			'idUser' => 'Id User',
+			'saldo' => 'Saldo',
+			'fechaArqueo' => 'Fecha Arqueo',
+			'entregado' => 'Entregado',
 		);
 	}
 
@@ -87,9 +92,12 @@ class Almacen extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idAlmacen',$this->idAlmacen);
-		$criteria->compare('nombre',$this->nombre,true);
-		$criteria->compare('idParent',$this->idParent);
+		$criteria->compare('idCajaVenta',$this->idCajaVenta);
+		$criteria->compare('idCaja',$this->idCaja);
+		$criteria->compare('idUser',$this->idUser);
+		$criteria->compare('saldo',$this->saldo);
+		$criteria->compare('fechaArqueo',$this->fechaArqueo,true);
+		$criteria->compare('entregado',$this->entregado);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -100,7 +108,7 @@ class Almacen extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Almacen the static model class
+	 * @return CajaVenta the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

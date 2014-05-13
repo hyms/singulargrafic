@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-05-2014 a las 19:06:39
+-- Tiempo de generación: 12-05-2014 a las 19:47:51
 -- Versión del servidor: 5.5.37
 -- Versión de PHP: 5.4.4-14+deb7u9
 
@@ -27,23 +27,37 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `almacen` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idProducto` int(11) NOT NULL,
-  `idTipoAlmacen` int(11) NOT NULL,
-  `stockUnidad` int(11) NOT NULL,
-  `stockPaquete` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+  `idAlmacen` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(20) DEFAULT NULL,
+  `idParent` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idAlmacen`),
+  KEY `fk_almacen_almacen1` (`idParent`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `almacen`
 --
 
-INSERT INTO `almacen` (`id`, `idProducto`, `idTipoAlmacen`, `stockUnidad`, `stockPaquete`) VALUES
-(2, 2, 1, 1, 0),
-(7, 1, 1, 8, 0),
-(9, 1, 2, 0, 0),
-(10, 2, 2, 1, 1);
+INSERT INTO `almacen` (`idAlmacen`, `nombre`, `idParent`) VALUES
+(1, 'Deposito Central', NULL),
+(2, 'Tienda', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `almacenProducto`
+--
+
+CREATE TABLE IF NOT EXISTS `almacenProducto` (
+  `idAlmacenProducto` int(11) NOT NULL AUTO_INCREMENT,
+  `idProducto` int(11) DEFAULT NULL,
+  `stockU` int(11) DEFAULT NULL,
+  `stockP` int(11) DEFAULT NULL,
+  `idAlmacen` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idAlmacenProducto`),
+  KEY `fk_almacenProducto_producto1` (`idProducto`),
+  KEY `fk_almacenProducto_almacen1` (`idAlmacen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -75,43 +89,38 @@ INSERT INTO `banner` (`id`, `imagen`, `texto`, `fecha`, `order`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `caja` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `saldo` float NOT NULL,
-  `fechaArqueo` datetime NOT NULL,
-  `obs` varchar(200) NOT NULL,
-  `arqueo` int(11) NOT NULL,
-  `entregado` float NOT NULL,
-  `comprovante` varchar(50) NOT NULL,
-  `idTipoCaja` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `idCaja` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) DEFAULT NULL,
+  `idParent` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idCaja`),
+  KEY `fk_caja_caja1` (`idParent`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `caja`
 --
 
-INSERT INTO `caja` (`id`, `saldo`, `fechaArqueo`, `obs`, `arqueo`, `entregado`, `comprovante`, `idTipoCaja`) VALUES
-(1, 0, '0000-00-00 00:00:00', '', 0, 0, '0', 1);
+INSERT INTO `caja` (`idCaja`, `nombre`, `idParent`) VALUES
+(1, 'administracion', NULL),
+(2, 'papeles', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cajaTipo`
+-- Estructura de tabla para la tabla `cajaVenta`
 --
 
-CREATE TABLE IF NOT EXISTS `cajaTipo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(20) NOT NULL,
-  `idParent` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `cajaTipo`
---
-
-INSERT INTO `cajaTipo` (`id`, `nombre`, `idParent`) VALUES
-(1, 'papeles', 0);
+CREATE TABLE IF NOT EXISTS `cajaVenta` (
+  `idCajaVenta` int(11) NOT NULL AUTO_INCREMENT,
+  `idCaja` int(11) DEFAULT NULL,
+  `idUser` int(11) DEFAULT NULL,
+  `saldo` double DEFAULT NULL,
+  `fechaArqueo` datetime DEFAULT NULL,
+  `entregado` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idCajaVenta`),
+  KEY `fk_cajaVenta_caja1` (`idCaja`),
+  KEY `fk_cajaVenta_user1` (`idUser`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -120,68 +129,16 @@ INSERT INTO `cajaTipo` (`id`, `nombre`, `idParent`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cliente` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nitCi` varchar(15) NOT NULL,
-  `apellido` varchar(30) NOT NULL,
-  `nombre` varchar(30) NOT NULL,
-  `correo` varchar(100) NOT NULL,
-  `telefono` varchar(15) NOT NULL,
-  `fechaRegistro` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `cliente`
---
-
-INSERT INTO `cliente` (`id`, `nitCi`, `apellido`, `nombre`, `correo`, `telefono`, `fechaRegistro`) VALUES
-(1, '5999242', 'cortez', '', '', '', '2014-04-10 00:00:00');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `color`
---
-
-CREATE TABLE IF NOT EXISTS `color` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) NOT NULL,
-  `codigo` varchar(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `color`
---
-
-INSERT INTO `color` (`id`, `nombre`, `codigo`) VALUES
-(1, 'blanco', '#ffffff'),
-(2, 'blanco alcalino', '#fcffe9'),
-(3, 'celeste', '#8bddfb');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `credito`
---
-
-CREATE TABLE IF NOT EXISTS `credito` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idVenta` int(11) NOT NULL,
-  `monto` float NOT NULL,
-  `saldo` float NOT NULL,
-  `fechaPago` datetime NOT NULL,
-  `idRecibo` int(11) NOT NULL,
-  `idCliente` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `credito`
---
-
-INSERT INTO `credito` (`id`, `idVenta`, `monto`, `saldo`, `fechaPago`, `idRecibo`, `idCliente`) VALUES
-(1, 17, 2, 3.96, '2014-04-24 19:00:35', 0, 1);
+  `idCliente` int(11) NOT NULL AUTO_INCREMENT,
+  `nitCi` varchar(20) DEFAULT NULL,
+  `apellido` varchar(40) DEFAULT NULL,
+  `nombre` varchar(40) DEFAULT NULL,
+  `correo` varchar(50) DEFAULT NULL,
+  `fechaRegistro` datetime DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `direccion` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idCliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -190,25 +147,17 @@ INSERT INTO `credito` (`id`, `idVenta`, `monto`, `saldo`, `fechaPago`, `idRecibo
 --
 
 CREATE TABLE IF NOT EXISTS `detalleVenta` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idVenta` int(11) NOT NULL,
-  `idProducto` int(11) NOT NULL,
-  `idAlmacen` int(11) NOT NULL,
-  `cantUnidad` int(11) NOT NULL,
-  `cantPaquete` int(11) NOT NULL,
-  `adicional` varchar(20) NOT NULL,
-  `costoTotal` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
-
---
--- Volcado de datos para la tabla `detalleVenta`
---
-
-INSERT INTO `detalleVenta` (`id`, `idVenta`, `idProducto`, `idAlmacen`, `cantUnidad`, `cantPaquete`, `adicional`, `costoTotal`) VALUES
-(1, 1, 0, 9, 1, 1, '5', '166.68'),
-(2, 2, 0, 10, 1, 0, '4', '4.96'),
-(6, 17, 0, 10, 1, 0, '5', '5.96');
+  `idDetalleVenta` int(11) NOT NULL AUTO_INCREMENT,
+  `idVenta` int(11) DEFAULT NULL,
+  `cantidadU` int(11) DEFAULT NULL,
+  `cantidadP` int(11) DEFAULT NULL,
+  `costoAdicional` double DEFAULT NULL,
+  `costoTotal` double DEFAULT NULL,
+  `idAlmacenProducto` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idDetalleVenta`),
+  KEY `fk_detalleVenta_venta1` (`idVenta`),
+  KEY `fk_detalleVenta_almacenProducto1` (`idAlmacenProducto`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -217,121 +166,23 @@ INSERT INTO `detalleVenta` (`id`, `idVenta`, `idProducto`, `idAlmacen`, `cantUni
 --
 
 CREATE TABLE IF NOT EXISTS `empleado` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombres` varchar(100) NOT NULL,
-  `apellidos` varchar(100) NOT NULL,
-  `ci` varchar(20) NOT NULL,
-  `telefono` varchar(15) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `cargo` varchar(50) NOT NULL,
-  `turno` varchar(50) NOT NULL,
-  `sueldo` int(11) NOT NULL,
-  `skype` varchar(100) NOT NULL,
-  `face` varchar(100) NOT NULL,
-  `sucursal` int(11) NOT NULL,
-  `superior` int(11) NOT NULL,
-  `fechaIngreso` datetime NOT NULL,
-  `idUsers` int(11) NOT NULL,
-  `obs` varchar(500) NOT NULL,
-  PRIMARY KEY (`id`)
+  `idEmpleado` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(40) DEFAULT NULL,
+  `apellido` varchar(40) DEFAULT NULL,
+  `fechaRegistro` datetime DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `ci` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`idEmpleado`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `empleado`
 --
 
-INSERT INTO `empleado` (`id`, `nombres`, `apellidos`, `ci`, `telefono`, `email`, `cargo`, `turno`, `sueldo`, `skype`, `face`, `sucursal`, `superior`, `fechaIngreso`, `idUsers`, `obs`) VALUES
-(1, 'Helier', 'Cortez', '5999242', '73221183', '', 'sistemas', '', 1000, 'helier20', '', 1, 0, '2014-02-23 00:00:00', 1, ''),
-(2, 'Erika', 'Lecoña Castro', '4846615', '', '', 'Papeles', '', 0, '', '', 1, 0, '1969-12-31 00:00:00', 2, '');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `empresa`
---
-
-CREATE TABLE IF NOT EXISTS `empresa` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(500) NOT NULL,
-  `ciudad` varchar(100) NOT NULL,
-  `calle` varchar(500) NOT NULL,
-  `maps` varchar(1000) NOT NULL,
-  `fax` varchar(20) NOT NULL,
-  `correo` varchar(500) NOT NULL,
-  `telefono` varchar(20) NOT NULL,
-  `horarios` varchar(50) NOT NULL,
-  `skype` varchar(500) NOT NULL,
-  `facebook` varchar(500) NOT NULL,
-  `patern` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `empresa`
---
-
-INSERT INTO `empresa` (`id`, `nombre`, `ciudad`, `calle`, `maps`, `fax`, `correo`, `telefono`, `horarios`, `skype`, `facebook`, `patern`) VALUES
-(1, 'Singular Central', 'La Paz', 'Juan de la Riva', '', '', 'demo@demo.com', '123456', '9:00 a 13:00 / 14:30 a 19:30', '', '', 0);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `empresaServicio`
---
-
-CREATE TABLE IF NOT EXISTS `empresaServicio` (
-  `idEmpresa` int(11) NOT NULL,
-  `idServicio` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `empresaServicio`
---
-
-INSERT INTO `empresaServicio` (`idEmpresa`, `idServicio`) VALUES
-(1, 2),
-(1, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `Industria`
---
-
-CREATE TABLE IF NOT EXISTS `Industria` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `Industria`
---
-
-INSERT INTO `Industria` (`id`, `nombre`) VALUES
-(1, 'España'),
-(2, 'China');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `material`
---
-
-CREATE TABLE IF NOT EXISTS `material` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(200) NOT NULL,
-  `detalle` varchar(500) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `material`
---
-
-INSERT INTO `material` (`id`, `nombre`, `detalle`) VALUES
-(1, 'Couché Brillo', ''),
-(2, 'Couché Mate', '');
+INSERT INTO `empleado` (`idEmpleado`, `nombre`, `apellido`, `fechaRegistro`, `email`, `telefono`, `ci`) VALUES
+(1, '', '', NULL, '', '', ''),
+(2, 'Helier', 'Cortez', NULL, 'hdnymib@gmail.com', '73221183', '5999242');
 
 -- --------------------------------------------------------
 
@@ -340,32 +191,20 @@ INSERT INTO `material` (`id`, `nombre`, `detalle`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `movimientoAlmacen` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idEmpleado` int(11) NOT NULL,
-  `idAlmacen` int(11) NOT NULL,
-  `unidad` int(11) NOT NULL,
-  `paquete` int(11) NOT NULL,
-  `estado` int(11) NOT NULL,
-  `tipo` int(11) NOT NULL,
-  `fechaInicio` datetime NOT NULL,
-  `fechaFinal` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
-
---
--- Volcado de datos para la tabla `movimientoAlmacen`
---
-
-INSERT INTO `movimientoAlmacen` (`id`, `idEmpleado`, `idAlmacen`, `unidad`, `paquete`, `estado`, `tipo`, `fechaInicio`, `fechaFinal`) VALUES
-(1, 0, 1, 1, 0, 1, 0, '2014-03-27 17:19:25', '2014-03-27 17:19:25'),
-(2, 0, 1, 0, 1, 1, 0, '2014-03-27 17:19:33', '2014-03-27 17:19:33'),
-(3, 0, 7, 0, 0, 1, 0, '2014-03-28 19:02:58', '2014-03-28 19:02:58'),
-(4, 0, 2, 0, 0, 1, 0, '2014-03-28 19:03:04', '2014-03-28 19:03:04'),
-(5, 0, 2, 0, 0, 1, 0, '2014-03-28 19:07:42', '2014-03-28 19:07:42'),
-(6, 0, 2, 0, 0, 1, 0, '2014-03-28 19:08:12', '2014-03-28 19:08:12'),
-(7, 0, 2, 0, 0, 1, 0, '2014-03-28 19:08:54', '2014-03-28 19:08:54'),
-(8, 0, 9, 0, 0, 1, 0, '2014-03-28 19:09:46', '2014-03-28 19:09:46'),
-(9, 0, 9, 0, 0, 1, 0, '2014-03-28 19:26:27', '2014-03-28 19:26:27');
+  `idMovimientoAlmacen` int(11) NOT NULL AUTO_INCREMENT,
+  `idProducto` int(11) DEFAULT NULL,
+  `idAlmacenOrigen` int(11) DEFAULT NULL,
+  `idAlmacenDestino` int(11) DEFAULT NULL,
+  `cantidadU` int(11) DEFAULT NULL,
+  `cantidadP` int(11) DEFAULT NULL,
+  `idUser` int(11) DEFAULT NULL,
+  `fechaMovimiento` datetime DEFAULT NULL,
+  PRIMARY KEY (`idMovimientoAlmacen`),
+  KEY `fk_movimientoAlmacen_producto1` (`idProducto`),
+  KEY `fk_movimientoAlmacen_almacen1` (`idAlmacenOrigen`),
+  KEY `fk_movimientoAlmacen_almacen2` (`idAlmacenDestino`),
+  KEY `fk_movimientoAlmacen_user1` (`idUser`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -374,15 +213,15 @@ INSERT INTO `movimientoAlmacen` (`id`, `idEmpleado`, `idAlmacen`, `unidad`, `paq
 --
 
 CREATE TABLE IF NOT EXISTS `movimientoCaja` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idCaja` int(11) NOT NULL,
-  `fecha` datetime NOT NULL,
-  `monto` int(11) NOT NULL,
-  `obs` varchar(200) NOT NULL,
-  `tipo` int(11) NOT NULL,
-  `idComprovante` int(11) NOT NULL,
-  `idEmpleado` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `idMovimientoCaja` int(11) NOT NULL AUTO_INCREMENT,
+  `monto` double DEFAULT NULL,
+  `motivo` varchar(100) DEFAULT NULL,
+  `fechaMovimiento` datetime DEFAULT NULL,
+  `idCaja` int(11) DEFAULT NULL,
+  `idUser` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idMovimientoCaja`),
+  KEY `fk_movimientoCaja_caja1` (`idCaja`),
+  KEY `fk_movimientoCaja_user1` (`idUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -419,155 +258,82 @@ INSERT INTO `pages` (`id`, `nombre`, `contenido`, `enable`, `order`, `fecha`) VA
 --
 
 CREATE TABLE IF NOT EXISTS `producto` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(50) NOT NULL,
-  `idMaterial` int(11) NOT NULL,
-  `peso` varchar(10) NOT NULL,
-  `idColor` int(11) NOT NULL,
-  `dimension` varchar(20) NOT NULL,
-  `procedencia` varchar(20) NOT NULL,
-  `costoSF` double NOT NULL,
-  `costoSFUnidad` double NOT NULL,
-  `costoCF` double NOT NULL,
-  `costoCFUnidad` double NOT NULL,
-  `idIndustria` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL,
-  `obs` varchar(500) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `idProducto` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(40) DEFAULT NULL,
+  `material` varchar(40) DEFAULT NULL,
+  `color` varchar(40) DEFAULT NULL,
+  `marca` varchar(40) DEFAULT NULL,
+  `industria` varchar(40) DEFAULT NULL,
+  `cantXPaquete` int(11) DEFAULT NULL,
+  `precioSFU` double DEFAULT NULL,
+  `precioSFP` double DEFAULT NULL,
+  `precioCFU` double DEFAULT NULL,
+  `precioCFP` double DEFAULT NULL,
+  `familia` varchar(40) DEFAULT NULL,
+  `detalle` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idProducto`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`id`, `codigo`, `idMaterial`, `peso`, `idColor`, `dimension`, `procedencia`, `costoSF`, `costoSFUnidad`, `costoCF`, `costoCFUnidad`, `idIndustria`, `cantidad`, `obs`) VALUES
-(1, 'CB90-6787SP', 1, '90', 1, '67x87', 'Sarrio Papel', 153, 0.65, 161, 0.68, 1, 250, 'ninguno'),
-(2, 'CB90-77110SP', 1, '90', 3, '77x110', 'Sarrio Papel', 235, 0.96, 245, 1, 1, 250, 'Ninguna');
+INSERT INTO `producto` (`idProducto`, `codigo`, `material`, `color`, `marca`, `industria`, `cantXPaquete`, `precioSFU`, `precioSFP`, `precioCFU`, `precioCFP`, `familia`, `detalle`) VALUES
+(1, '1', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `proveedor`
+-- Estructura de tabla para la tabla `recibos`
 --
 
-CREATE TABLE IF NOT EXISTS `proveedor` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nit` varchar(15) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `direccion` varchar(200) NOT NULL,
-  `telefono` varchar(15) NOT NULL,
-  `correo` varchar(150) NOT NULL,
-  `fechaRegistro` datetime NOT NULL,
-  `obs` varchar(500) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `nit` (`nit`)
+CREATE TABLE IF NOT EXISTS `recibos` (
+  `idRecibos` int(11) NOT NULL AUTO_INCREMENT,
+  `categoria` varchar(40) DEFAULT NULL,
+  `codigo` varchar(20) DEFAULT NULL,
+  `idCliente` int(11) DEFAULT NULL,
+  `responsable` varchar(40) DEFAULT NULL,
+  `celular` varchar(20) DEFAULT NULL,
+  `fechaRegistro` datetime DEFAULT NULL,
+  `concepto` varchar(100) DEFAULT NULL,
+  `codigoNumero` varchar(20) DEFAULT NULL,
+  `servicio` varchar(20) DEFAULT NULL,
+  `monto` double DEFAULT NULL,
+  `acuenta` double DEFAULT NULL,
+  `saldo` double DEFAULT NULL,
+  `obs` varchar(200) DEFAULT NULL,
+  `tipoRecivo` int(11) DEFAULT NULL,
+  `idCaja` int(11) DEFAULT NULL,
+  `descuento` double DEFAULT NULL,
+  PRIMARY KEY (`idRecibos`),
+  KEY `fk_recibos_cliente1` (`idCliente`),
+  KEY `fk_recibos_cajaVenta1` (`idCaja`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `recibo`
+-- Estructura de tabla para la tabla `user`
 --
 
-CREATE TABLE IF NOT EXISTS `recibo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `categoria` varchar(50) NOT NULL,
-  `codigo` varchar(20) NOT NULL,
-  `idCliente` int(11) NOT NULL,
-  `responsable` varchar(50) NOT NULL,
-  `celular` varchar(15) NOT NULL,
-  `fecha` datetime NOT NULL,
-  `concepto` varchar(200) NOT NULL,
-  `idVenta` int(11) NOT NULL,
-  `idTrabajo` int(11) NOT NULL,
-  `monto` float NOT NULL,
-  `acuenta` float NOT NULL,
-  `saldo` float NOT NULL,
-  `obs` varchar(500) NOT NULL,
-  `tipo` int(11) NOT NULL,
-  `idEmpleado` int(11) NOT NULL,
-  `idCaja` int(11) NOT NULL,
-  `descuento` varchar(50) NOT NULL,
-  `nro` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE IF NOT EXISTS `user` (
+  `idUser` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) DEFAULT NULL,
+  `password` varchar(150) DEFAULT NULL,
+  `fechaLogin` datetime DEFAULT NULL,
+  `estado` int(11) DEFAULT NULL,
+  `tipo` varchar(10) DEFAULT NULL,
+  `idEmpleado` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idUser`),
+  KEY `fk_user_empleado1` (`idEmpleado`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- Volcado de datos para la tabla `recibo`
+-- Volcado de datos para la tabla `user`
 --
 
-INSERT INTO `recibo` (`id`, `categoria`, `codigo`, `idCliente`, `responsable`, `celular`, `fecha`, `concepto`, `idVenta`, `idTrabajo`, `monto`, `acuenta`, `saldo`, `obs`, `tipo`, `idEmpleado`, `idCaja`, `descuento`, `nro`) VALUES
-(1, 'Nota de Venta', 'I-04-1', 1, 'Helier cortez', '73221183', '2014-04-25 03:04:54', 'Pago por Couché Brillo celeste 90 77x110 U:1 P:0', 17, 0, 3.96, 4, -0.04, '', 1, 1, 0, '', '3-04-14');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `servicios`
---
-
-CREATE TABLE IF NOT EXISTS `servicios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) NOT NULL,
-  `detalle` varchar(500) NOT NULL,
-  `fechaCreacion` datetime NOT NULL,
-  `idParent` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `servicios`
---
-
-INSERT INTO `servicios` (`id`, `nombre`, `detalle`, `fechaCreacion`, `idParent`) VALUES
-(1, 'Imprenta', 'imprenta', '2014-03-13 00:00:00', 0),
-(2, 'CTP', 'ctp', '2014-03-14 00:00:00', 0),
-(3, 'Editorial', 'Editorial', '2014-03-19 00:00:00', 0);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tipoAlmacen`
---
-
-CREATE TABLE IF NOT EXISTS `tipoAlmacen` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  `idParent` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `tipoAlmacen`
---
-
-INSERT INTO `tipoAlmacen` (`id`, `nombre`, `idParent`) VALUES
-(1, 'Deposito Central', 0),
-(2, 'Tienda Distribuidora', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `users`
---
-
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(10) NOT NULL,
-  `password` varchar(150) NOT NULL,
-  `fechaLogin` datetime NOT NULL,
-  `estado` int(11) NOT NULL,
-  `tipo` varchar(20) NOT NULL,
-  `idEmpleado` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`, `fechaLogin`, `estado`, `tipo`, `idEmpleado`) VALUES
-(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-05-07 14:10:48', 0, 'admin', 0),
-(2, 'erika', 'e10adc3949ba59abbe56e057f20f883e', '2014-05-07 16:59:50', 0, 'ventas', 0);
+INSERT INTO `user` (`idUser`, `username`, `password`, `fechaLogin`, `estado`, `tipo`, `idEmpleado`) VALUES
+(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-05-12 16:57:00', 0, '1', 2);
 
 -- --------------------------------------------------------
 
@@ -576,35 +342,100 @@ INSERT INTO `users` (`id`, `username`, `password`, `fechaLogin`, `estado`, `tipo
 --
 
 CREATE TABLE IF NOT EXISTS `venta` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idCaja` int(11) NOT NULL,
-  `tipoPago` int(11) NOT NULL,
-  `formaPago` int(11) NOT NULL,
-  `idCliente` int(11) NOT NULL,
-  `fechaVenta` datetime NOT NULL,
-  `fechaPlazo` datetime NOT NULL,
-  `idEmpleado` int(11) NOT NULL,
-  `montoTotal` float NOT NULL,
-  `montoPagado` float NOT NULL,
-  `montoCambio` float NOT NULL,
-  `montoDescuento` float NOT NULL,
-  `codigo` varchar(20) NOT NULL,
-  `factura` varchar(50) NOT NULL,
-  `estado` int(11) NOT NULL,
-  `autorizado` varchar(50) NOT NULL,
-  `obs` varchar(200) NOT NULL,
-  `serie` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+  `idVenta` int(11) NOT NULL AUTO_INCREMENT,
+  `idCaja` int(11) DEFAULT NULL,
+  `fechaVenta` datetime DEFAULT NULL,
+  `tipoVenta` int(11) DEFAULT NULL,
+  `formaPago` datetime DEFAULT NULL,
+  `idCliente` int(11) DEFAULT NULL,
+  `fechaPlazo` datetime DEFAULT NULL,
+  `codigo` varchar(45) DEFAULT NULL,
+  `serie` int(11) DEFAULT NULL,
+  `montoVenta` double DEFAULT NULL,
+  `montoPagado` double DEFAULT NULL,
+  `montoCambio` double DEFAULT NULL,
+  `montoDescuento` double DEFAULT NULL,
+  `estado` int(11) DEFAULT NULL,
+  `factura` varchar(50) DEFAULT NULL,
+  `autorizado` varchar(50) DEFAULT NULL,
+  `responsable` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`idVenta`),
+  KEY `fk_venta_cliente1` (`idCliente`),
+  KEY `fk_venta_cajaVenta1` (`idCaja`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Volcado de datos para la tabla `venta`
+-- Restricciones para tablas volcadas
 --
 
-INSERT INTO `venta` (`id`, `idCaja`, `tipoPago`, `formaPago`, `idCliente`, `fechaVenta`, `fechaPlazo`, `idEmpleado`, `montoTotal`, `montoPagado`, `montoCambio`, `montoDescuento`, `codigo`, `factura`, `estado`, `autorizado`, `obs`, `serie`) VALUES
-(1, 1, 0, 0, 1, '2014-04-16 16:41:21', '0000-00-00 00:00:00', 1, 166.68, 200, 33.32, 0, '1', '', 0, '', 'test', 0),
-(2, 1, 0, 0, 1, '2014-04-23 18:45:21', '0000-00-00 00:00:00', 1, 161.68, 500, 338.32, 0, '2', '', 1, '', '', 0),
-(17, 1, 1, 1, 1, '2014-04-24 19:00:35', '2014-04-24 00:00:00', 1, 5.96, 2, -3.96, 0, '1', '', 2, '', '', 65);
+--
+-- Filtros para la tabla `almacen`
+--
+ALTER TABLE `almacen`
+  ADD CONSTRAINT `fk_almacen_almacen1` FOREIGN KEY (`idParent`) REFERENCES `almacen` (`idAlmacen`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `almacenProducto`
+--
+ALTER TABLE `almacenProducto`
+  ADD CONSTRAINT `fk_almacenProducto_almacen1` FOREIGN KEY (`idAlmacen`) REFERENCES `almacen` (`idAlmacen`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_almacenProducto_producto1` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `caja`
+--
+ALTER TABLE `caja`
+  ADD CONSTRAINT `fk_caja_caja1` FOREIGN KEY (`idParent`) REFERENCES `caja` (`idCaja`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `cajaVenta`
+--
+ALTER TABLE `cajaVenta`
+  ADD CONSTRAINT `fk_cajaVenta_caja1` FOREIGN KEY (`idCaja`) REFERENCES `caja` (`idCaja`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_cajaVenta_user1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `detalleVenta`
+--
+ALTER TABLE `detalleVenta`
+  ADD CONSTRAINT `fk_detalleVenta_almacenProducto1` FOREIGN KEY (`idAlmacenProducto`) REFERENCES `almacenProducto` (`idAlmacenProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_detalleVenta_venta1` FOREIGN KEY (`idVenta`) REFERENCES `venta` (`idVenta`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `movimientoAlmacen`
+--
+ALTER TABLE `movimientoAlmacen`
+  ADD CONSTRAINT `fk_movimientoAlmacen_almacen1` FOREIGN KEY (`idAlmacenOrigen`) REFERENCES `almacen` (`idAlmacen`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_movimientoAlmacen_almacen2` FOREIGN KEY (`idAlmacenDestino`) REFERENCES `almacen` (`idAlmacen`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_movimientoAlmacen_producto1` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_movimientoAlmacen_user1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `movimientoCaja`
+--
+ALTER TABLE `movimientoCaja`
+  ADD CONSTRAINT `fk_movimientoCaja_caja1` FOREIGN KEY (`idCaja`) REFERENCES `caja` (`idCaja`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_movimientoCaja_user1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `recibos`
+--
+ALTER TABLE `recibos`
+  ADD CONSTRAINT `fk_recibos_cajaVenta1` FOREIGN KEY (`idCaja`) REFERENCES `cajaVenta` (`idCajaVenta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_recibos_cliente1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `fk_user_empleado1` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `venta`
+--
+ALTER TABLE `venta`
+  ADD CONSTRAINT `fk_venta_cajaVenta1` FOREIGN KEY (`idCaja`) REFERENCES `cajaVenta` (`idCajaVenta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_venta_cliente1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

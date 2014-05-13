@@ -15,7 +15,7 @@ class SiteController extends Controller
 				'users'=>array('*')
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('index','logout'),
+				'actions'=>array('index','logout','dates'),
 				'users'=>array('@'),
 			),
 			array('deny',
@@ -102,5 +102,46 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 		//$this->redirect(array("index"));
+	}
+	
+	public function actionDates()
+	{
+		if(isset($_GET['id']))
+		{
+			$model = Users::model()->findByPk($_GET['id']);
+			
+			// uncomment the following code to enable ajax-based validation
+			/*
+			if(isset($_POST['ajax']) && $_POST['ajax']==='users-formDate-form')
+			{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+			}
+			*/
+				
+			$empleado = Empleado::model()->findByPk($model->idEmpleado);
+				
+			if(isset($_POST['Users']))
+			{
+				$model->attributes = $_POST['Users'];
+	
+				if($model->idUser!=null)
+				{
+				$userBpk = Users::model()->findByPk($model->idUser);
+				if($userBpk->password != $model->password)
+					$model->password = md5($model->password);
+				}
+				else
+				{
+					$model->password = md5($model->password);
+				}
+		
+				if($model->save())
+					$this->redirect(array('index'));
+			}
+			$this->render('formDate',array('model'=>$model,'empleado'=>$empleado));
+		}
+		else
+			throw new CHttpException(400,'La Respuesta de la pagina no Existe.');
 	}
 }

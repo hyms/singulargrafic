@@ -118,13 +118,63 @@ class EmpleadoController extends Controller
 	{
 		$dataProvider=new CActiveDataProvider('Empleado',
 						array('pagination'=>array(
-		                'pageSize'=>'1',
+		                'pageSize'=>'20',
 		            	),));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider
 		));
 	}
-
+	
+	
+	public function actionDates()
+	{
+		if(isset($_GET['id']))
+		{
+			$model = Users::model()->find('idEmpleado='.$_GET['id']);
+			$empleado = new Empleado;
+			if(empty($model))
+			{
+				$model = new Users;
+				$model->idEmpleado = $_GET['id'];
+			}
+			
+			// uncomment the following code to enable ajax-based validation
+			/*
+			if(isset($_POST['ajax']) && $_POST['ajax']==='users-formDate-form')
+			{
+				echo CActiveForm::validate($model);
+			    Yii::app()->end();
+			}
+			*/
+			
+			$empleado = Empleado::model()->findByPk($model->idEmpleado);
+			
+			if(isset($_POST['Users']))
+			{
+				$model->attributes = $_POST['Users'];
+				
+				if($model->idUser!=null)
+				{
+					$userBpk = Users::model()->findByPk($model->idUser);
+					if($userBpk->password != $model->password)
+						$model->password = md5($model->password);
+				}
+				else 
+				{
+					$model->password = md5($model->password);
+				}
+				
+				//print_r($model);
+				//$model->validate();
+				if($model->save())
+					$this->redirect(array('index'));
+			}
+			$this->render('formDate',array('model'=>$model,'empleado'=>$empleado));
+		}
+		else
+			throw new CHttpException(400,'La Respuesta de la pagina no Existe.');
+	}
+		
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

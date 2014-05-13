@@ -37,7 +37,7 @@ class Users extends CActiveRecord
 		return array(
 			array('idEmpleado', 'required'),
 			array('estado, idEmpleado', 'numerical', 'integerOnly'=>true),
-			array('username, password', 'length', 'max'=>20),
+			array('username', 'length', 'max'=>20),
 			array('tipo', 'length', 'max'=>10),
 			array('fechaLogin', 'safe'),
 			// The following rule is used by search().
@@ -88,7 +88,17 @@ class Users extends CActiveRecord
 			'idEmpleado' => 'Id Empleado',
 		);
 	}
-
+	
+	public function tipos()
+	{
+		return array(
+			'1' => 'Admin',
+			'2' => 'Administracion',
+			'3' => 'Ventas',
+			'4' => 'Diseño',
+		);
+	} //*/
+	
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *

@@ -153,7 +153,7 @@ class RecibosController extends Controller
 				$this->redirect('index');
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			throw new CHttpException(400,'Petición no válida.');
 	}
 	
 	public function actionLlenado()
@@ -193,13 +193,13 @@ class RecibosController extends Controller
 			echo CJSON::encode($data);
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			throw new CHttpException(400,'Petición no válida.');
 	}
 	
 	private function verifyModel($model)
 	{
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404,'La Respuesta de la pagina no Existe.');
 
 		return $model;
 	}

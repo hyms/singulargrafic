@@ -4,28 +4,31 @@
  * This is the model class for table "venta".
  *
  * The followings are the available columns in table 'venta':
- * @property integer $id
+ * @property integer $idVenta
  * @property integer $idCaja
- * @property integer $tipoPago
- * @property integer $formaPago
- * @property integer $idCliente
  * @property string $fechaVenta
+ * @property integer $tipoVenta
+ * @property string $formaPago
+ * @property integer $idCliente
  * @property string $fechaPlazo
- * @property integer $idEmpleado
- * @property double $montoTotal
+ * @property string $codigo
+ * @property integer $serie
+ * @property double $montoVenta
  * @property double $montoPagado
  * @property double $montoCambio
  * @property double $montoDescuento
- * @property string $codigo
- * @property string $factura
  * @property integer $estado
+ * @property string $factura
  * @property string $autorizado
- * @property string $obs
- * @property interger $serie
+ * @property string $responsable
+ *
+ * The followings are the available model relations:
+ * @property DetalleVenta[] $detalleVentas
+ * @property Cliente $idCliente0
+ * @property CajaVenta $idCaja0
  */
 class Venta extends CActiveRecord
 {
-	public $max;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -42,14 +45,14 @@ class Venta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('tipoPago, formaPago, idCliente, fechaVenta, idEmpleado, montoTotal, montoPagado, montoCambio, codigo, estado', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
-			array('tipoPago, idCliente, idEmpleado, estado', 'numerical', 'integerOnly'=>true,'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
-			array('montoTotal, montoPagado, montoCambio, montoDescuento', 'numerical','message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
-			array('codigo, autorizado', 'length', 'max'=>20 ,'message'=>'El campo <b>{attribute}</b> solo puede tener 20 caracteres'),
-			array('obs', 'length', 'max'=>200 ,'message'=>'El campo <b>{attribute}</b> solo puede tener 200 caracteres'),
+			array('idCaja, tipoVenta, idCliente, serie, estado', 'numerical', 'integerOnly'=>true),
+			array('montoVenta, montoPagado, montoCambio, montoDescuento', 'numerical'),
+			array('codigo', 'length', 'max'=>45),
+			array('factura, autorizado, responsable', 'length', 'max'=>50),
+			array('fechaVenta, formaPago, fechaPlazo', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, idCaja, tipoPago, formaPago, idCliente, fechaVenta, fechaPlazo, idEmpleado, montoTotal, montoPagado, montoCambio, montoDescuento, codigo, factura, estado, autorizado, obs, serie', 'safe', 'on'=>'search'),
+			array('idVenta, idCaja, fechaVenta, tipoVenta, formaPago, idCliente, fechaPlazo, codigo, serie, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,11 +64,9 @@ class Venta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Cliente'=>array(self::BELONGS_TO, 'Cliente', 'idCliente'),
-			'Detalle'=>array(self::HAS_MANY, 'DetalleVenta', 'idVenta'),
-			'Empleado'=>array(self::BELONGS_TO, 'Empleado', 'idEmpleado'),
-			'Caja'=>array(self::BELONGS_TO, 'Caja', 'idCaja'),
-			'Credito'=>array(self::HAS_MANY, 'Credito', 'idVenta'),
+			'detalleVentas' => array(self::HAS_MANY, 'DetalleVenta', 'idVenta'),
+			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
+			'idCaja0' => array(self::BELONGS_TO, 'CajaVenta', 'idCaja'),
 		);
 	}
 
@@ -75,24 +76,23 @@ class Venta extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'idCaja'=>'Caja',
-			'tipoPago' => 'Tipo de Pago',
-			'formaPago' => 'Forma de Pago',
-			'idCliente' => 'Id Cliente',
+			'idVenta' => 'Id Venta',
+			'idCaja' => 'Id Caja',
 			'fechaVenta' => 'Fecha Venta',
+			'tipoVenta' => 'Tipo Venta',
+			'formaPago' => 'Forma Pago',
+			'idCliente' => 'Id Cliente',
 			'fechaPlazo' => 'Fecha Plazo',
-			'idEmpleado' => 'Id Empleado',
-			'montoTotal' => 'Total',
-			'montoPagado' => 'Pagado',
-			'montoCambio' => 'Cambio',
-			'montoDescuento' => 'Descuento',
 			'codigo' => 'Codigo',
-			'factura' => 'Factura',
+			'serie' => 'Serie',
+			'montoVenta' => 'Monto Venta',
+			'montoPagado' => 'Monto Pagado',
+			'montoCambio' => 'Monto Cambio',
+			'montoDescuento' => 'Monto Descuento',
 			'estado' => 'Estado',
+			'factura' => 'Factura',
 			'autorizado' => 'Autorizado',
-			'obs' => 'Observaciones',
-			'serie' => 'Serie'
+			'responsable' => 'Responsable',
 		);
 	}
 
@@ -114,28 +114,26 @@ class Venta extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('idVenta',$this->idVenta);
 		$criteria->compare('idCaja',$this->idCaja);
-		$criteria->compare('tipoPago',$this->tipoPago);
-		$criteria->compare('formaPago',$this->formaPago);
-		$criteria->compare('idCliente',$this->idCliente);
 		$criteria->compare('fechaVenta',$this->fechaVenta,true);
+		$criteria->compare('tipoVenta',$this->tipoVenta);
+		$criteria->compare('formaPago',$this->formaPago,true);
+		$criteria->compare('idCliente',$this->idCliente);
 		$criteria->compare('fechaPlazo',$this->fechaPlazo,true);
-		$criteria->compare('idEmpleado',$this->idEmpleado);
-		$criteria->compare('montoTotal',$this->montoTotal);
+		$criteria->compare('codigo',$this->codigo,true);
+		$criteria->compare('serie',$this->serie);
+		$criteria->compare('montoVenta',$this->montoVenta);
 		$criteria->compare('montoPagado',$this->montoPagado);
 		$criteria->compare('montoCambio',$this->montoCambio);
 		$criteria->compare('montoDescuento',$this->montoDescuento);
-		$criteria->compare('codigo',$this->codigo,true);
-		$criteria->compare('factura',$this->factura,true);
 		$criteria->compare('estado',$this->estado);
-		$criteria->compare('autorizado',$this->autorizado);
-		$criteria->compare('obs',$this->obs,true);
-		$criteria->compare('serie',$this->serie,true);
+		$criteria->compare('factura',$this->factura,true);
+		$criteria->compare('autorizado',$this->autorizado,true);
+		$criteria->compare('responsable',$this->responsable,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-			
 		));
 	}
 
@@ -150,4 +148,3 @@ class Venta extends CActiveRecord
 		return parent::model($className);
 	}
 }
-

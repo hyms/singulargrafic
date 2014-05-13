@@ -9,6 +9,7 @@
 		<th>Cant. Creditos</th>
 		<th>Monto Deuda</th>
 		<th></th>
+		<th></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -20,33 +21,13 @@
 	<td><?php echo $datos['compra'][$item->id]?></td>
 	<td><?php echo $datos['credito'][$item->id]?></td>
 	<td><?php echo $datos['deuda'][$item->id]?></td>
-	<td><?php echo CHtml::link('ver',array('cliente/detail','id'=>$item->id));?></td>
+	<td><?php echo CHtml::link('Ver',array('cliente/detail','id'=>$item->id));?></td>
+	<td><?php echo CHtml::link('Cambiar Datos',array('cliente/update','id'=>$item->id));?></td>
 	</tr>
 	<?php }?>
 	</tbody>
 </table>
 <?php $this->widget('CLinkPager', array(
 		'pages' => $pages,
-)) 
-/*$this->widget('zii.widgets.grid.CGridView', array(
-	'dataProvider'=>$cliente,
-	//'ajaxUpdate'=>true,
-	'itemsCssClass' => 'table table-hover table-condensed',
-	'htmlOptions' => array('class' => 'table-responsive'),
-	'columns'=>array(
-		
-		array(
-			'header'=>'#',
-			'value'=>'$row+1',       //  row is zero based
-		),
-			
-			
-			array(
-			'header'=>'',
-			'type'=>'raw',
-			'value'=>'',
-			
-		),
-		
-	)
-));*/ ?>
+)); 
+?>

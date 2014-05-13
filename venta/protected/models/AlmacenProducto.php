@@ -1,28 +1,28 @@
 <?php
 
 /**
- * This is the model class for table "almacen".
+ * This is the model class for table "almacenProducto".
  *
- * The followings are the available columns in table 'almacen':
+ * The followings are the available columns in table 'almacenProducto':
+ * @property integer $idAlmacenProducto
+ * @property integer $idProducto
+ * @property integer $stockU
+ * @property integer $stockP
  * @property integer $idAlmacen
- * @property string $nombre
- * @property integer $idParent
  *
  * The followings are the available model relations:
- * @property Almacen $idParent0
- * @property Almacen[] $almacens
- * @property AlmacenProducto[] $almacenProductos
- * @property MovimientoAlmacen[] $movimientoAlmacens
- * @property MovimientoAlmacen[] $movimientoAlmacens1
+ * @property Producto $idProducto0
+ * @property Almacen $idAlmacen0
+ * @property DetalleVenta[] $detalleVentas
  */
-class Almacen extends CActiveRecord
+class AlmacenProducto extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'almacen';
+		return 'almacenProducto';
 	}
 
 	/**
@@ -33,11 +33,10 @@ class Almacen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idParent', 'numerical', 'integerOnly'=>true),
-			array('nombre', 'length', 'max'=>20),
+			array('idProducto, stockU, stockP, idAlmacen', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idAlmacen, nombre, idParent', 'safe', 'on'=>'search'),
+			array('idAlmacenProducto, idProducto, stockU, stockP, idAlmacen', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,11 +48,9 @@ class Almacen extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idParent0' => array(self::BELONGS_TO, 'Almacen', 'idParent'),
-			'almacens' => array(self::HAS_MANY, 'Almacen', 'idParent'),
-			'almacenProductos' => array(self::HAS_MANY, 'AlmacenProducto', 'idAlmacen'),
-			'movimientoAlmacens' => array(self::HAS_MANY, 'MovimientoAlmacen', 'idAlmacenOrigen'),
-			'movimientoAlmacens1' => array(self::HAS_MANY, 'MovimientoAlmacen', 'idAlmacenDestino'),
+			'idProducto0' => array(self::BELONGS_TO, 'Producto', 'idProducto'),
+			'idAlmacen0' => array(self::BELONGS_TO, 'Almacen', 'idAlmacen'),
+			'detalleVentas' => array(self::HAS_MANY, 'DetalleVenta', 'idAlmacenProducto'),
 		);
 	}
 
@@ -63,9 +60,11 @@ class Almacen extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+			'idAlmacenProducto' => 'Id Almacen Producto',
+			'idProducto' => 'Id Producto',
+			'stockU' => 'Stock U',
+			'stockP' => 'Stock P',
 			'idAlmacen' => 'Id Almacen',
-			'nombre' => 'Nombre',
-			'idParent' => 'Id Parent',
 		);
 	}
 
@@ -87,9 +86,11 @@ class Almacen extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
+		$criteria->compare('idProducto',$this->idProducto);
+		$criteria->compare('stockU',$this->stockU);
+		$criteria->compare('stockP',$this->stockP);
 		$criteria->compare('idAlmacen',$this->idAlmacen);
-		$criteria->compare('nombre',$this->nombre,true);
-		$criteria->compare('idParent',$this->idParent);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -100,7 +101,7 @@ class Almacen extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Almacen the static model class
+	 * @return AlmacenProducto the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

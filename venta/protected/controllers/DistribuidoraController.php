@@ -12,10 +12,10 @@ class DistribuidoraController extends Controller
 		return array(
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
 						//'actions'=>array('index'),
-						'expression'=>'isset($user->role) && ($user->role==="ventas")',
+						'expression'=>'isset($user->role) && ($user->role==="3")',
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'expression'=>'isset($user->role) && ($user->role==="admin")',
+						'expression'=>'isset($user->role) && ($user->role==="1")',
 				),
 				array('deny',
 						'users'=>array('*'),
@@ -25,9 +25,8 @@ class DistribuidoraController extends Controller
 	
 	public function actionIndex()
 	{
-		
-		$cliente = new Cliente;
-		$empleado = Empleado::model()->with('Users')->find('idUsers='.Yii::app()->user->id);
+		$user= Users::model()->findByPk(Yii::app()->user->id);
+		$empleado = Empleado::model()->findByPk($user->idEmpleado);
 		$almacen = new Almacen;
 		$productos = new Producto('searchAll');
 		$venta = new Venta;
@@ -376,7 +375,7 @@ class DistribuidoraController extends Controller
 				$this->redirect('venta');
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			throw new CHttpException(400,'Petición no válida.');
 	}
 	
 	public function actionConfirm()
@@ -416,7 +415,7 @@ class DistribuidoraController extends Controller
 			$venta->save();
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			throw new CHttpException(400,'Petición no válida.');
 	
 	}
 	
@@ -449,7 +448,7 @@ class DistribuidoraController extends Controller
 			}
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			throw new CHttpException(400,'Petición no válida.');
 		
 	}
 	
@@ -487,13 +486,13 @@ class DistribuidoraController extends Controller
 			));
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			throw new CHttpException(400,'Petición no válida.');
 	}
 	
 	private function verifyModel($model)
 	{
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404,'La Respuesta de la pagina no Existe.');
 	
 		return $model;
 	}

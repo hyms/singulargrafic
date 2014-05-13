@@ -47,7 +47,17 @@
 						array('label'=>'Caja', 'url'=>array('caja/index')),
 						array('label'=>'Clientes', 'url'=>array('cliente/index')),
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+						//array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
+						array('label'=>'Logout ('.Yii::app()->user->name.') <b class="caret"></b>', 'url'=>array('#'), 'visible'=>!Yii::app()->user->isGuest,
+								'linkOptions'=> array(
+										'class' => 'dropdown-toggle',
+										'data-toggle' => 'dropdown',
+								),
+								'itemOptions' => array('class'=>'dropdown'),
+								'items'=>array(
+										array('label'=>'Cambiar Password', 'url'=>array('/site/dates','id'=>Yii::app()->user->id)),
+										array('label'=>'Salir', 'url'=>array('/site/logout')),
+								)),
 					),
 				)); ?>
 					

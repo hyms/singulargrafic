@@ -45,7 +45,7 @@ $this->breadcrumbs=array(
 		array(
 				'header'=>'',
 				'type'=>'raw',
-				'value'=>'CHtml::link("Datos de Acceso",array("empleado/update","id"=>$data->idEmpleado))'
+				'value'=>'CHtml::link("Datos de Acceso",array("empleado/dates","id"=>$data->idEmpleado))'
 		),
 	)
 	));

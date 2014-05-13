@@ -242,7 +242,7 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 			$this->_model=<?php echo $this->modelClass; ?>::model()->findbyPk($id);
 				
 			if($this->_model===null)
-				throw new CHttpException(404,'The requested page does not exist.');
+				throw new CHttpException(404,'La Respuesta de la pagina no Existe.');
 		}
 		return $this->_model;
 	}	

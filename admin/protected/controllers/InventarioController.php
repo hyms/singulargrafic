@@ -65,7 +65,8 @@ class InventarioController extends Controller
 		{
 			$model->attributes=$_POST['Producto'];
 			if($model->save())
-				$this->redirect(array('index'));
+				if($this->initStock($model->idProducto))
+					$this->redirect(array('index'));
 		}
 		
 		$this->render('create',array(
@@ -96,6 +97,40 @@ class InventarioController extends Controller
 		else
 			throw new CHttpException(400,'La Respuesta de la pagina no Existe.');
 	}
+	
+	public function actionStock()
+	{
+		if($_GET['id'])
+		{
+			$model=$this->verifyModel(AlmacenProducto::model()->find('idProducto='.$_GET['id']));
+			
+			// Uncomment the following line if AJAX validation is needed
+			// $this->performAjaxValidation($model);
+			
+			if(isset($_POST['AlmacenProducto']))
+			{
+				$model->attributes=$_POST['AlmacenProducto'];
+				if($model->save())
+					$this->redirect(array('index'));
+			}
+			
+			$this->render('update',array(
+					'model'=>$model,
+			));
+		}
+		else
+			throw new CHttpException(400,'La Respuesta de la pagina no Existe.');
+	}
+	
+	private function initStock($id)
+	{
+		$almacen = new AlmacenProducto;
+		$almacen->idAlmacen=1;
+		$almacen->idProducto=$id;
+		$almacen->stockU=0;
+		$almacen->stockP=0;
+		return $almacen->save();
+	} 
 	
 	public function verifyModel($model)
 	{

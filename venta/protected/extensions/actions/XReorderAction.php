@@ -62,7 +62,7 @@ class XReorderAction extends CAction
 			$model=$this->getModel()->findbyPk($_GET['id']);
 
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404,'La Respuesta de la pagina no Existe.');
 		else
 			return $model;
 	}

@@ -4,15 +4,20 @@
  * This is the model class for table "movimientoAlmacen".
  *
  * The followings are the available columns in table 'movimientoAlmacen':
- * @property integer $id
- * @property integer $idEmpleado
- * @property integer $idAlmacen
- * @property integer $unidad
- * @property integer $paquete
- * @property integer $estado
- * @property integer $tipo
- * @property string $fechaInicio
- * @property string $fechaFinal
+ * @property integer $idMovimientoAlmacen
+ * @property integer $idProducto
+ * @property integer $idAlmacenOrigen
+ * @property integer $idAlmacenDestino
+ * @property integer $cantidadU
+ * @property integer $cantidadP
+ * @property integer $idUser
+ * @property string $fechaMovimiento
+ *
+ * The followings are the available model relations:
+ * @property Producto $idProducto0
+ * @property Almacen $idAlmacenOrigen0
+ * @property Almacen $idAlmacenDestino0
+ * @property User $idUser0
  */
 class MovimientoAlmacen extends CActiveRecord
 {
@@ -32,11 +37,11 @@ class MovimientoAlmacen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idAlmacen, estado, fechaInicio', 'required'),
-			array('idEmpleado, idAlmacen, unidad, paquete, estado', 'numerical', 'integerOnly'=>true,'message'=>'El campo <b>{attribute}</b> solo puede ser numerico'),
+			array('idProducto, idAlmacenOrigen, idAlmacenDestino, cantidadU, cantidadP, idUser', 'numerical', 'integerOnly'=>true),
+			array('fechaMovimiento', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, idEmpleado, idAlmacen, unidad, paquete, estado, tipo, fechaInicio, fechaFinal', 'safe', 'on'=>'search'),
+			array('idMovimientoAlmacen, idProducto, idAlmacenOrigen, idAlmacenDestino, cantidadU, cantidadP, idUser, fechaMovimiento', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -48,8 +53,10 @@ class MovimientoAlmacen extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-				'Empleado'=>array(self::BELONGS_TO, 'Empleado', 'idEmpleado'),
-				'Almacen'=>array(self::BELONGS_TO, 'Almacen', 'idAlmacen'),
+			'idProducto0' => array(self::BELONGS_TO, 'Producto', 'idProducto'),
+			'idAlmacenOrigen0' => array(self::BELONGS_TO, 'Almacen', 'idAlmacenOrigen'),
+			'idAlmacenDestino0' => array(self::BELONGS_TO, 'Almacen', 'idAlmacenDestino'),
+			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
 		);
 	}
 
@@ -59,15 +66,14 @@ class MovimientoAlmacen extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'idEmpleado' => 'Id Empleado',
-			'idAlmacen' => 'Id Almacen',
-			'unidad' => 'Unidad',
-			'paquete' => 'Paquete',
-			'estado' => 'Estado',
-			'tipo' => 'Tipo',	
-			'fechaInicio' => 'Fecha Inicio',
-			'fechaFinal' => 'Fecha Final',
+			'idMovimientoAlmacen' => 'Id Movimiento Almacen',
+			'idProducto' => 'Id Producto',
+			'idAlmacenOrigen' => 'Id Almacen Origen',
+			'idAlmacenDestino' => 'Id Almacen Destino',
+			'cantidadU' => 'Cantidad U',
+			'cantidadP' => 'Cantidad P',
+			'idUser' => 'Id User',
+			'fechaMovimiento' => 'Fecha Movimiento',
 		);
 	}
 
@@ -89,15 +95,14 @@ class MovimientoAlmacen extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('idEmpleado',$this->idEmpleado);
-		$criteria->compare('idAlmacen',$this->idAlmacen);
-		$criteria->compare('unidad',$this->unidad);
-		$criteria->compare('paquete',$this->paquete);
-		$criteria->compare('estado',$this->estado);
-		$criteria->compare('tipo',$this->tipo);
-		$criteria->compare('fechaInicio',$this->fechaInicio,true);
-		$criteria->compare('fechaFinal',$this->fechaFinal,true);
+		$criteria->compare('idMovimientoAlmacen',$this->idMovimientoAlmacen);
+		$criteria->compare('idProducto',$this->idProducto);
+		$criteria->compare('idAlmacenOrigen',$this->idAlmacenOrigen);
+		$criteria->compare('idAlmacenDestino',$this->idAlmacenDestino);
+		$criteria->compare('cantidadU',$this->cantidadU);
+		$criteria->compare('cantidadP',$this->cantidadP);
+		$criteria->compare('idUser',$this->idUser);
+		$criteria->compare('fechaMovimiento',$this->fechaMovimiento,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

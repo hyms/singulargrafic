@@ -26,22 +26,22 @@ class UserIdentity extends CUserIdentity
 		else if(!$user->validatePassword($this->password))
 		{$this->errorCode=self::ERROR_PASSWORD_INVALID;}
 		else{
-			$this->_id=$user->id;
+			$this->_id=$user->idUser;
 			$this->username=$user->username;
 			
 			$this->errorCode=self::ERROR_NONE;
 			
 			/*Consultamos los datos del usuario por el username ($user->username) */
-			$info_usuario = Users::model()->findByPk($user->id);
+			$info_usuario = Users::model()->findByPk($user->idUser);
 			//Yii::app()->user->setState('user_type',$user->tipo);
 			$this->setState('name', $user->username);
 			$this->setState('role',$user->tipo);
 			
 			//$info_usuario->fechaLogin=date("Y-m-d H:i:s");
-			$sql = "update users set fechaLogin = now() where id='$user->id'";
-			$connection = Yii::app() -> db;
-			$command = $connection -> createCommand($sql);
-			$command -> execute();
+			$sql = "update user set fechaLogin=now() where idUser='$user->idUser'";
+			$connection = Yii::app()->db;
+			$command = $connection->createCommand($sql);
+			$command->execute();
 			
 	
 		}

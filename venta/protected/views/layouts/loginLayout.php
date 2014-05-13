@@ -23,9 +23,9 @@ Yii::app()->clientscript
 </head>
 
 <body>
-	<div class="container center">
-		<div class="row">
-			<?php echo $content ?>
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+		<?php echo $content ?>
 		</div>
 	</div>
 </body>

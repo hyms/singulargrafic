@@ -4,18 +4,19 @@
  * This is the model class for table "movimientoCaja".
  *
  * The followings are the available columns in table 'movimientoCaja':
- * @property integer $id
+ * @property integer $idMovimientoCaja
+ * @property double $monto
+ * @property string $motivo
+ * @property string $fechaMovimiento
  * @property integer $idCaja
- * @property string $fecha
- * @property integer $monto
- * @property string $obs
- * @property integer $tipo
- * @property integer $idComprovante
- * @property integer $idEmpleado
+ * @property integer $idUser
+ *
+ * The followings are the available model relations:
+ * @property Caja $idCaja0
+ * @property User $idUser0
  */
 class MovimientoCaja extends CActiveRecord
 {
-	public $max;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -32,12 +33,13 @@ class MovimientoCaja extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('fecha, monto, obs, tipo, idEmpleado', 'required','message'=>'El campo <b>{attribute}</b> es obligatorio'),
-			array('idCaja, monto, tipo, idComprovante, idEmpleado', 'numerical', 'integerOnly'=>true),
-			array('obs', 'length', 'max'=>200),
+			array('idCaja, idUser', 'numerical', 'integerOnly'=>true),
+			array('monto', 'numerical'),
+			array('motivo', 'length', 'max'=>100),
+			array('fechaMovimiento', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, idCaja, fecha, monto, obs, tipo, idComprovante, idEmpleado', 'safe', 'on'=>'search'),
+			array('idMovimientoCaja, monto, motivo, fechaMovimiento, idCaja, idUser', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,8 +51,8 @@ class MovimientoCaja extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Caja'=>array(self::BELONGS_TO, 'Caja', 'idCaja'),
-			'Empleado'=>array(self::BELONGS_TO, 'Empleado', 'idEmpleado'),
+			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
+			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
 		);
 	}
 
@@ -60,14 +62,12 @@ class MovimientoCaja extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'idCaja' => 'Id Caja',
-			'fecha' => 'Fecha',
+			'idMovimientoCaja' => 'Id Movimiento Caja',
 			'monto' => 'Monto',
-			'obs' => 'Obs',
-			'tipo' => 'Tipo',
-			'idComprovante' => 'Id Comprovante',
-			'idEmpleado' => 'Id Empleado',
+			'motivo' => 'Motivo',
+			'fechaMovimiento' => 'Fecha Movimiento',
+			'idCaja' => 'Id Caja',
+			'idUser' => 'Id User',
 		);
 	}
 
@@ -89,14 +89,12 @@ class MovimientoCaja extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('idCaja',$this->idCaja);
-		$criteria->compare('fecha',$this->fecha,true);
+		$criteria->compare('idMovimientoCaja',$this->idMovimientoCaja);
 		$criteria->compare('monto',$this->monto);
-		$criteria->compare('obs',$this->obs,true);
-		$criteria->compare('tipo',$this->tipo);
-		$criteria->compare('idComprovante',$this->idComprovante);
-		$criteria->compare('idEmpleado',$this->idEmpleado);
+		$criteria->compare('motivo',$this->motivo,true);
+		$criteria->compare('fechaMovimiento',$this->fechaMovimiento,true);
+		$criteria->compare('idCaja',$this->idCaja);
+		$criteria->compare('idUser',$this->idUser);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

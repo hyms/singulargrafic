@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Login</h1>
+<h1 class="text-center">Sistema de Ventas</h1>
 
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -26,7 +26,7 @@ $this->breadcrumbs=array(
 
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'username',array('class'=>'col-sm-4 control-label')); ?>
-		<div class="col-sm-8">
+		<div class="col-sm-5">
 		<?php echo $form->textField($model,'username',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'username'); ?>
@@ -34,7 +34,7 @@ $this->breadcrumbs=array(
 
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'password',array('class'=>'col-sm-4 control-label')); ?>
-		<div class="col-sm-8">
+		<div class="col-sm-5">
 		<?php echo $form->passwordField($model,'password',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'password'); ?>
@@ -51,8 +51,8 @@ $this->breadcrumbs=array(
 	</div>
 	
 	<div class="form-group">
-	<div class="col-sm-offset-4 col-sm-8">
-    	<?php echo CHtml::submitButton('Login',array('class'=>'btn btn-default ')); ?>
+	<div class="text-center">
+    	<?php echo CHtml::submitButton('Ingresar',array('class'=>'btn btn-default')); ?>
     </div>
 	</div>
 

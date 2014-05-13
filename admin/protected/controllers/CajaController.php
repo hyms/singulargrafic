@@ -138,7 +138,7 @@ class CajaController extends Controller
 	private function verifyModel($model)
 	{
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404,'La Respuesta de la pagina no Existe.');
 	
 		return $model;
 	}
