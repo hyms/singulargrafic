@@ -21,6 +21,7 @@
  * The followings are the available model relations:
  * @property AlmacenProducto[] $almacenProductos
  * @property MovimientoAlmacen[] $movimientoAlmacens
+ * @property AlmacenProducto $almacenProducto
  */
 class Producto extends CActiveRecord
 {
@@ -59,6 +60,7 @@ class Producto extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'almacenProductos' => array(self::HAS_MANY, 'AlmacenProducto', 'idProducto'),
+			'almacenProducto' => array(self::HAS_ONE, 'AlmacenProducto', 'idProducto'),
 			'movimientoAlmacens' => array(self::HAS_MANY, 'MovimientoAlmacen', 'idProducto'),
 		);
 	}

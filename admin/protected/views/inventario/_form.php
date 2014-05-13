@@ -127,7 +127,7 @@
 	            'onclick' => "history.go(-1)",
 	                )
 	        ); ?>
-			<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
+			<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default')); ?>
 		</p>
 	</div>
 

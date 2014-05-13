@@ -70,8 +70,8 @@ class MovimientoAlmacen extends CActiveRecord
 			'idProducto' => 'Id Producto',
 			'idAlmacenOrigen' => 'Id Almacen Origen',
 			'idAlmacenDestino' => 'Id Almacen Destino',
-			'cantidadU' => 'Cantidad U',
-			'cantidadP' => 'Cantidad P',
+			'cantidadU' => 'Cantidad Unidad',
+			'cantidadP' => 'Cantidad Paquete',
 			'idUser' => 'Id User',
 			'fechaMovimiento' => 'Fecha Movimiento',
 		);

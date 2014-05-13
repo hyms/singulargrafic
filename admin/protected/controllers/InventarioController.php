@@ -45,8 +45,13 @@ class InventarioController extends Controller
 	
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Producto',
-				array('pagination'=>array(
+		$dataProvider=new CActiveDataProvider('AlmacenProducto',
+				array(	
+						'criteria'=>array(
+							'condition'=>'idAlmacen=1',
+							'with'=>array('idProducto0'),
+						),
+						'pagination'=>array(
 						'pageSize'=>'1',
 				),));
 		$this->render('index',array(
@@ -102,21 +107,34 @@ class InventarioController extends Controller
 	{
 		if($_GET['id'])
 		{
-			$model=$this->verifyModel(AlmacenProducto::model()->find('idProducto='.$_GET['id']));
+			$almacen=$this->verifyModel(AlmacenProducto::model()->with('idProducto0')->findByPk($_GET['id']));
 			
-			// Uncomment the following line if AJAX validation is needed
-			// $this->performAjaxValidation($model);
+			$model=new MovimientoAlmacen;
 			
-			if(isset($_POST['AlmacenProducto']))
-			{
-				$model->attributes=$_POST['AlmacenProducto'];
-				if($model->save())
-					$this->redirect(array('index'));
+			// uncomment the following code to enable ajax-based validation
+			/*
+			 if(isset($_POST['ajax']) && $_POST['ajax']==='movimiento-almacen-add_reduce-form')
+			 {
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
 			}
+			*/
+			$model->idProducto = $almacen->idProducto;
+			$model->idAlmacenDestino = $almacen->idAlmacen;
+			//$idUser->idUser = Yii::app()->user->id;
+			$model->fechaMovimiento = date("Y-m-d H:i:s");
 			
-			$this->render('update',array(
-					'model'=>$model,
-			));
+			if(isset($_POST['MovimientoAlmacen']))
+			{
+				$model->attributes=$_POST['MovimientoAlmacen'];
+				if($model->validate())
+				{
+	            // form inputs are valid, do something here
+					return;
+				}
+			}
+			$this->render('add_reduce',array('model'=>$model,'almacen'=>$almacen));
+			
 		}
 		else
 			throw new CHttpException(400,'La Respuesta de la pagina no Existe.');

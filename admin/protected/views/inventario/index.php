@@ -24,42 +24,42 @@ $this->breadcrumbs=array(
 		
 		array(
 				'header'=>'Codigo',
-				'value'=>'$data->codigo'
+				'value'=>'$data->idProducto0->codigo'
 		),
 		array(
 				'header'=>'Material',
-				'value'=>'$data->material'
+				'value'=>'$data->idProducto0->material'
 		),
 		array(
 				'header'=>'Detalle Producto',
-				'value'=>'$data->color." ".$data->detalle'
+				'value'=>'$data->idProducto0->color." ".$data->idProducto0->detalle'
 		),
 		array(
 				'header'=>'Precio S/F',
-				'value'=>'$data->precioSFU."/".$data->precioSFP'
+				'value'=>'$data->idProducto0->precioSFU."/".$data->idProducto0->precioSFP'
 		),
 		array(
 				'header'=>'Precio C/F',
-				'value'=>'$data->precioCFU."/".$data->precioCFP'
+				'value'=>'$data->idProducto0->precioCFU."/".$data->idProducto0->precioCFP'
 		),
 		array(
 				'header'=>'Industria',
-				'value'=>'$data->industria'
+				'value'=>'$data->idProducto0->industria'
 		),
 
 		array(
 				'header'=>'Cant.xPaqt.',
-				'value'=>'$data->cantXPaquete'
+				'value'=>'$data->idProducto0->cantXPaquete'
 		),
 		array(
 				'header'=>'',
 				'type'=>'raw',
-				'value'=>'CHtml::link("Editar",array("inventario/update","id"=>$data->idProducto))'
+				'value'=>'CHtml::link("Editar",array("inventario/update","id"=>$data->idProducto0->idProducto))'
 		),
 		array(
 				'header'=>'',
 				'type'=>'raw',
-				'value'=>'CHtml::link("Añadir a Stock",array("inventario/update","id"=>$data->idProducto))'
+				'value'=>'CHtml::link("Añadir a Stock",array("inventario/stock","id"=>$data->idAlmacenProducto))'
 		),
 	)
 	));
