@@ -5,10 +5,14 @@ $this->widget('zii.widgets.CMenu',array(
 				'submenuHtmlOptions' => array('class' => 'dropdown-menu'),
 				'encodeLabel' => false,
 				'items'=>array(
-							array('label'=>'Reportes', 'url'=>array('caja/index')),
+							/*array('label'=>'Reportes', 'url'=>array('caja/index')),
 							array('label'=>'Registrar Egresos', 'url'=>array('caja/egreso')),
 							array('label'=>'Registrar Ingresos', 'url'=>array('caja/ingreso')),
-							array('label'=>'Arqueo', 'url'=>array('caja/arqueo')),
+							array('label'=>'Arqueo', 'url'=>array('caja/arqueo')),*/
+						
+							array('label'=>'Diario Caja', 'url'=>array('#')),
+							array('label'=>'Recibos Ingreso', 'url'=>array('#')),
+							array('label'=>'Recibos Egreso', 'url'=>array('#')),
 						),
 				)); 
 ?>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 12-05-2014 a las 19:47:51
+-- Tiempo de generación: 13-05-2014 a las 19:56:39
 -- Versión del servidor: 5.5.37
 -- Versión de PHP: 5.4.4-14+deb7u9
 
@@ -57,7 +57,14 @@ CREATE TABLE IF NOT EXISTS `almacenProducto` (
   PRIMARY KEY (`idAlmacenProducto`),
   KEY `fk_almacenProducto_producto1` (`idProducto`),
   KEY `fk_almacenProducto_almacen1` (`idAlmacen`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `almacenProducto`
+--
+
+INSERT INTO `almacenProducto` (`idAlmacenProducto`, `idProducto`, `stockU`, `stockP`, `idAlmacen`) VALUES
+(1, 1, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -150,7 +157,9 @@ CREATE TABLE IF NOT EXISTS `detalleVenta` (
   `idDetalleVenta` int(11) NOT NULL AUTO_INCREMENT,
   `idVenta` int(11) DEFAULT NULL,
   `cantidadU` int(11) DEFAULT NULL,
+  `costoU` double NOT NULL,
   `cantidadP` int(11) DEFAULT NULL,
+  `costoP` double NOT NULL,
   `costoAdicional` double DEFAULT NULL,
   `costoTotal` double DEFAULT NULL,
   `idAlmacenProducto` int(11) DEFAULT NULL,
@@ -333,7 +342,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`idUser`, `username`, `password`, `fechaLogin`, `estado`, `tipo`, `idEmpleado`) VALUES
-(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-05-12 16:57:00', 0, '1', 2);
+(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-05-13 18:33:05', 0, '1', 2);
 
 -- --------------------------------------------------------
 

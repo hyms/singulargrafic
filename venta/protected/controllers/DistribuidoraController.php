@@ -25,7 +25,7 @@ class DistribuidoraController extends Controller
 	
 	public function actionIndex()
 	{
-		$user= Users::model()->findByPk(Yii::app()->user->id);
+		/*$user= Users::model()->findByPk(Yii::app()->user->id);
 		$empleado = Empleado::model()->findByPk($user->idEmpleado);
 		$almacen = new Almacen;
 		$productos = new Producto('searchAll');
@@ -207,7 +207,8 @@ class DistribuidoraController extends Controller
 				'pagination'=>array(
 						'pageSize'=>5,
 				),
-		));
+		));*/
+		$this->render('menu');
 	}
 	
 	public function actionFactura()

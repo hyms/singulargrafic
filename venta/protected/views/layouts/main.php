@@ -42,7 +42,7 @@
 					'items'=>array(
 						array('label'=>'Home', 'url'=>array('/site/index')),
 						array('label'=>'Distribuidora', 'url'=>array('distribuidora/index')),
-						array('label'=>'Pre-Prensa CTP', 'url'=>array('#')),
+						array('label'=>'Pre-Prensa CTP', 'url'=>array('ctp/index')),
 						//array('label'=>'Recibos', 'url'=>array('recibos/index')),
 						array('label'=>'Caja', 'url'=>array('caja/index')),
 						array('label'=>'Clientes', 'url'=>array('cliente/index')),

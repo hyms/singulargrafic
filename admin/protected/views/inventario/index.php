@@ -46,11 +46,19 @@ $this->breadcrumbs=array(
 				'header'=>'Industria',
 				'value'=>'$data->idProducto0->industria'
 		),
-
 		array(
 				'header'=>'Cant.xPaqt.',
 				'value'=>'$data->idProducto0->cantXPaquete'
 		),
+		array(
+				'header'=>'Stock Unidad',
+				'value'=>'$data->stockU'
+		),
+		array(
+				'header'=>'Stock Paquete',
+				'value'=>'$data->stockP'
+		),
+		
 		array(
 				'header'=>'',
 				'type'=>'raw',

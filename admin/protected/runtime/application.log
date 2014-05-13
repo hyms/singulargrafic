@@ -8171,3 +8171,19 @@ Stack trace:
 REQUEST_URI=/singulardev/admin/index.php/inventario/stock/1
 HTTP_REFERER=http://localhost/singulardev/admin/index.php/inventario/index
 ---
+2014/05/13 18:07:57 [error] [exception.CException] exception 'CException' with message 'Property "MovimientoAlmacen.catidadU" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(145): CComponent->__get('catidadU')
+#1 /var/www/singulardev/admin/protected/controllers/InventarioController.php(134): CActiveRecord->__get('catidadU')
+#2 /var/www/framework/web/actions/CInlineAction.php(49): InventarioController->actionStock()
+#3 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), NULL)
+#6 /var/www/framework/web/CWebApplication.php(282): CController->run('stock')
+#7 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('inventario/stoc...')
+#8 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#9 /var/www/singulardev/admin/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/singulardev/admin/index.php/inventario/stock/1
+HTTP_REFERER=http://localhost/singulardev/admin/index.php/inventario/stock/1
+---

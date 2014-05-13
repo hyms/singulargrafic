@@ -52,7 +52,7 @@ class InventarioController extends Controller
 							'with'=>array('idProducto0'),
 						),
 						'pagination'=>array(
-						'pageSize'=>'1',
+						'pageSize'=>'20',
 				),));
 		$this->render('index',array(
 				'dataProvider'=>$dataProvider
@@ -127,10 +127,14 @@ class InventarioController extends Controller
 			if(isset($_POST['MovimientoAlmacen']))
 			{
 				$model->attributes=$_POST['MovimientoAlmacen'];
-				if($model->validate())
+				
+				if($model->save())
 				{
 	            // form inputs are valid, do something here
-					return;
+					$almacen->stockU = $almacen->stockU + $model->cantidadU;
+					$almacen->stockP = $almacen->stockP + $model->cantidadP;
+					if($almacen->save())
+						$this->redirect(array('index'));
 				}
 			}
 			$this->render('add_reduce',array('model'=>$model,'almacen'=>$almacen));
