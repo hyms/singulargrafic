@@ -208,7 +208,31 @@ class DistribuidoraController extends Controller
 						'pageSize'=>5,
 				),
 		));*/
-		$this->render('menu');
+		$this->render('index');
+	}
+	
+	public function actionNotas()
+	{
+		$productos = new AlmacenProducto('searchAll');
+		$cliente = new Cliente;
+		$detalle = new DetalleVenta;
+		
+		if (isset($_GET['AlmacenProducto']))
+		{
+			$productos->attributes = $_GET['AlmacenProducto'];
+			$productos->color = $_GET['AlmacenProducto']['color'];
+			$productos->material = $_GET['AlmacenProducto']['material'];
+			$productos->industria = $_GET['AlmacenProducto']['industria'];
+			$productos->paquete = $_GET['AlmacenProducto']['paquete'];
+			$productos->detalle = $_GET['AlmacenProducto']['detalle'];
+			$productos->codigo = $_GET['AlmacenProducto']['codigo'];
+		}
+		
+		$this->render('notas',array(
+									'productos'=>$productos,
+									'cliente'=>$cliente,
+									'detalle'=>$detalle,
+		));
 	}
 	
 	public function actionFactura()
@@ -318,6 +342,7 @@ class DistribuidoraController extends Controller
 										    ),));
 		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas por Confirmar",'estado'=>"1"));
 	}
+	
 	
 	public function actionCredito()
 	{

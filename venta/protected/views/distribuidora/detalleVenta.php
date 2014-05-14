@@ -1,16 +1,19 @@
 <table id="yw3" class="table">
 	<thead class="tabular-header"><tr>
 		<td><?php echo CHtml::label('Nº','number')?></td>
-		<td><?php echo CHtml::activeLabelEx($almacen,'Producto.codigo')?></td>
+		<td><?php echo CHtml::label('Codigo','codigo')?></td>
 		<td><?php echo CHtml::label('Detalle de producto','detalle')?></td>
-		<td><?php echo CHtml::activeLabelEx(new DetalleVenta,'cantUnidad')?></td>
-		<td><?php echo CHtml::activeLabelEx(new DetalleVenta,'cantPaquete')?></td>
-		<td><?php echo CHtml::activeLabelEx(new DetalleVenta,'adicional')?></td>
+		<td><?php echo CHtml::label('Cant. Unidad','cantUnidad')?></td>
+		<td><?php echo CHtml::label('Precio Unidad','precioUnidad')?></td>
+		<td><?php echo CHtml::label('Cant. Paquete','cantPaquete')?></td>
+		<td><?php echo CHtml::label('Precio Paquete','precioPaquete')?></td>
+		<td><?php echo CHtml::label('Adicional','adicional')?></td>
 		<td><?php echo CHtml::label('Total','total')?></td>
        	<td></td>
  	</tr></thead>
 <tbody class="tabular-input-container">
 <?php
+
 if(count($detalle)>=1)
 {
 	if(!isset($detalle->isNewRecord))
@@ -39,7 +42,7 @@ if(count($detalle)>=1)
 }
 ?>
 </tbody></table>
-
+<?php /*?>
 <div class="form-group">
 <div class="col-sm-6">
     <?php echo CHtml::activeLabelEx($venta,"obs",array('class'=>'control-label col-sm-4'))?>
@@ -204,4 +207,4 @@ $('#descuento').blur(function(e){
 	$('#total').val(resta($('#total').val(),$('#descuento').val()).toFixed(2));
 	cambio();
 });
-",CClientScript::POS_READY);?>
+",CClientScript::POS_READY);*/?>

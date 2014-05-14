@@ -8,7 +8,8 @@ $this->breadcrumbs=array(
 </div>
 
 <div class="col-sm-10">
-
+</div>
+<?php /*?>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<strong class="panel-title">Productos</strong>
@@ -29,7 +30,7 @@ $this->breadcrumbs=array(
 	/* @var $this DetalleVentaController */
 	/* @var $model DetalleVenta */
 	/* @var $form CActiveForm */
-	$form=$this->beginWidget('CActiveForm', array(
+	/*$form=$this->beginWidget('CActiveForm', array(
 			'id'=>'detalle-venta-detalleVenta-form',
 			'action'=>CHtml::normalizeUrl(array('/distribuidora/index')),
 			'htmlOptions'=>array(
@@ -119,4 +120,4 @@ $this->breadcrumbs=array(
 		$(this).parents(\".tabular-input:first\").remove();
 		$('.tabular-input-container').filter(function(){return $.trim($(this).text())==='' && $(this).children().length == 0}).siblings('.tabular-header').hide();
 	});
-",CClientScript::POS_READY); ?>
+",CClientScript::POS_READY); */?>

@@ -11,7 +11,7 @@ $this->widget('zii.widgets.CMenu',array(
 							array('label'=>'Ventas a Credito', 'url'=>array('/distribuidora/credito')),*/
 							//array('label'=>'Reportes de Ventas', 'url'=>array('/distribuidora/reporte')),
 							//array('label'=>'Producto', 'url'=>array('producto/index')),
-							array('label'=>'Notas de Venta', 'url'=>array('#')),
+							array('label'=>'Notas de Venta', 'url'=>array('distribuidora/notas')),
 							array('label'=>'Deudores', 'url'=>array('#')),
 							array('label'=>'Movimientos', 'url'=>array('#')),
 							
