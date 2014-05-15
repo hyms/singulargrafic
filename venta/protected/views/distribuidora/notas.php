@@ -17,9 +17,11 @@
 		<h3 class="col-sm-2"><?php echo $venta->codigo;?></h3> 
 		<h3 class="col-sm-3"><?php echo date("d/m/Y",strtotime($venta->fechaVenta));?></h3>
 		<div class="col-sm-4">
+		<div class="text-right">
 			<?php echo CHtml::link("Nuevo",array("/distribuidora/notas"),array("class"=>"btn btn-default "))?>
 			<?php echo CHtml::link("Buscar","#",array("class"=>"btn btn-default"))?>
 			<?php echo CHtml::link("Modificar","#",array("class"=>"btn btn-default"))?>
+		</div>
 		</div>
 	</div>
 	<?php
