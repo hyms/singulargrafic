@@ -21,6 +21,7 @@
  * @property string $factura
  * @property string $autorizado
  * @property string $responsable
+ * @property string $obs
  *
  * The followings are the available model relations:
  * @property DetalleVenta[] $detalleVentas
@@ -52,7 +53,7 @@ class Venta extends CActiveRecord
 			array('fechaVenta, formaPago, fechaPlazo', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idVenta, idCaja, fechaVenta, tipoVenta, formaPago, idCliente, fechaPlazo, codigo, serie, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable', 'safe', 'on'=>'search'),
+			array('idVenta, idCaja, fechaVenta, tipoVenta, formaPago, idCliente, fechaPlazo, codigo, serie, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -93,6 +94,7 @@ class Venta extends CActiveRecord
 			'factura' => 'Factura',
 			'autorizado' => 'Autorizado',
 			'responsable' => 'Responsable',
+			'obs'=>'Observaciones',
 		);
 	}
 
@@ -131,6 +133,7 @@ class Venta extends CActiveRecord
 		$criteria->compare('factura',$this->factura,true);
 		$criteria->compare('autorizado',$this->autorizado,true);
 		$criteria->compare('responsable',$this->responsable,true);
+		$criteria->compare('obs',$this->obs,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

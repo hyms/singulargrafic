@@ -1,29 +1,33 @@
 <tr class="tabular-input">
-<td class="col-sm-1">
+<td >
 	<p class="form-control-static"><?php echo CHtml::encode($index + 1)?></p>
-	<?php echo CHtml::activeHiddenField($model,"[$index]idAlmacen")?>
+	<?php echo CHtml::activeHiddenField($model,"[$index]idAlmacenProducto")?>
 </td>
 
-<td class="col-sm-2">
-	<p class="form-control-static"><?php echo CHtml::encode($almacen->Producto->codigo) ?></p>
+<td>
+	<p class="form-control-static"><?php echo CHtml::encode($almacen->idProducto0->codigo) ?></p>
 </td>
 
-<td class="col-sm-4">
-	<p class="form-control-static"><?php echo CHtml::encode($almacen->Producto->Material->nombre ." ".$almacen->Producto->Color->nombre." ".$almacen->Producto->peso." ".$almacen->Producto->dimension." ".$almacen->Producto->procedencia) ?></p>
-</td>
-
-<td class="col-sm-1">
-	<?php echo CHtml::activeTextField($model,"[$index]cantUnidad",array('class'=>'form-control input-sm','id'=>'stockUnidad_'.$index)); ?>
-	<?php echo CHtml::hiddenField("unidad".$index,$factura?$almacen->Producto->costoSFUnidad:$almacen->Producto->costoCFUnidad)?>
+<td>
+	<p class="form-control-static"><?php echo CHtml::encode($almacen->idProducto0->material." ".$almacen->idProducto0->color." ".$almacen->idProducto0->detalle.", ".$almacen->idProducto0->marca) ?></p>
 </td>
 
 <td class="col-sm-1">
-	<?php echo CHtml::activeTextField($model,"[$index]cantPaquete",array('class'=>'form-control input-sm','id'=>'stockPaquete_'.$index)); ?>
-	<?php echo CHtml::hiddenField("paquete".$index,$factura?$almacen->Producto->costoSF:$almacen->Producto->costoCF)?>
+	<?php echo CHtml::activeTextField($model,"[$index]cantidadU",array('class'=>'form-control input-sm','id'=>'stockUnidad_'.$index)); ?>
+</td>
+<td class="col-sm-1">
+	<?php echo CHtml::activeTextField($model,"[$index]costoU",array('class'=>'form-control input-sm','id'=>'costoUnidad_'.$index)); ?>
 </td>
 
 <td class="col-sm-1">
-	<?php echo CHtml::activeTextField($model,"[$index]adicional",array('class'=>'form-control input-sm','id'=>'adicional_'.$index)); ?>
+	<?php echo CHtml::activeTextField($model,"[$index]cantidadP",array('class'=>'form-control input-sm','id'=>'stockPaquete_'.$index)); ?>
+</td>
+<td class="col-sm-1">
+	<?php echo CHtml::activeTextField($model,"[$index]costoP",array('class'=>'form-control input-sm','id'=>'costoPaquete_'.$index)); ?>
+</td>
+
+<td class="col-sm-1">
+	<?php echo CHtml::activeTextField($model,"[$index]costoAdicional",array('class'=>'form-control input-sm','id'=>'adicional_'.$index)); ?>
 </td>
 
 <td class="col-sm-1">
@@ -31,26 +35,26 @@
 </td>
 
 <td class="col-sm-1">
-	<?php echo CHtml::link('Quitar', '#', array("class"=>"btn btn-danger tabular-input-remove")).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />'; ?>
+	<?php echo CHtml::link('Quitar', '#', array("class"=>"btn btn-danger btn-sm tabular-input-remove")).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />'; ?>
 </td>
 </tr>
 <?php  echo 
 "
 <script>
 	$('#stockUnidad_". $index ."').blur(function(e){ 
-	    $('#costoTotal_". $index ."').val(suma(suma($('#stockUnidad_".  $index ."').val()*$('#unidad". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#paquete". $index ."').val()),$('#adicional_". $index ."').val()));
+	    $('#costoTotal_". $index ."').val(suma(suma($('#stockUnidad_".  $index ."').val()*$('#costoUnidad_". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#costoPaquete_". $index ."').val()),$('#adicional_". $index ."').val()));
 		calcular_total();
 		return true;
 	});
 	
 	$('#stockPaquete_". $index ."').blur(function(e){ 
-	    $('#costoTotal_". $index ."').val(suma(suma($('#stockUnidad_". $index ."').val()*$('#unidad". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#paquete". $index ."').val()),$('#adicional_". $index ."').val()));
+	    $('#costoTotal_". $index ."').val(suma(suma($('#stockUnidad_". $index ."').val()*$('#costoUnidad_". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#costoPaquete_". $index ."').val()),$('#adicional_". $index ."').val()));
 		calcular_total();
 	  	return true;
 	});
 	
 	$('#adicional_". $index ."').blur(function(e){ 
-	    $('#costoTotal_". $index ."').val(suma(suma($('#stockUnidad_". $index ."').val()*$('#unidad". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#paquete". $index ."').val()),$('#adicional_". $index ."').val()));
+	    $('#costoTotal_". $index ."').val(suma(suma($('#stockUnidad_". $index ."').val()*$('#costoUnidad_". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#costoPaquete_". $index ."').val()),$('#adicional_". $index ."').val()));
 		calcular_total();
 	  	return true;
 	});

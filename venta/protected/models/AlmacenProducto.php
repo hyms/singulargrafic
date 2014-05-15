@@ -101,9 +101,9 @@ class AlmacenProducto extends CActiveRecord
 	public $detalle;
 	public $material;
 	public $color;
-	public $industria;
+	public $marca;
 	public $paquete;
-	public function searchAll()
+	public function searchDistribuidora()
 	{
 		$criteria=new CDbCriteria;
 	
@@ -122,7 +122,7 @@ class AlmacenProducto extends CActiveRecord
 		$criteria->compare('idProducto0.detalle',$this->detalle,true);
 		$criteria->compare('idProducto0.material',$this->material,true);
 		$criteria->compare('idProducto0.color',$this->color,true);
-		$criteria->compare('idProducto0.industria',$this->industria,true);
+		$criteria->compare('idProducto0.marca',$this->marca,true);
 		$criteria->compare('idProducto0.cantXPaquete',$this->paquete,true);
 		//$criteria->compare('idProducto',$this->idProducto);
 		//$criteria->compare('stockU',$this->stockU);

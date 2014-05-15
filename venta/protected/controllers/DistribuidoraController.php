@@ -213,16 +213,37 @@ class DistribuidoraController extends Controller
 	
 	public function actionNotas()
 	{
-		$productos = new AlmacenProducto('searchAll');
+		$productos = new AlmacenProducto('searchDistribuidora');
 		$cliente = new Cliente;
 		$detalle = new DetalleVenta;
+		$venta = new Venta;
+		Yii::app()->user->id;
 		
+		$row = Venta::model()->find(array("condition"=>"tipoVenta=1",'order'=>'fechaVenta Desc'));
+		if(empty($row))
+			$row=new Venta;
+		if(empty($row->serie))
+			$row->serie = 65;
+		$venta->codigo = $row->codigo +1;
+		if($row->codigo==1001)
+		{
+			$row->codigo;
+			$row->serie++;
+			if($row->serie==91)
+				$row->serie = 65;
+		}
+		$venta->serie = $row->serie;
+		$venta->fechaVenta = date("Y-m-d H:i:s");
+		$venta->formaPago = 0;
+		$venta->tipoVenta = 1;
+		
+		$productos->unsetAttributes();
 		if (isset($_GET['AlmacenProducto']))
 		{
 			$productos->attributes = $_GET['AlmacenProducto'];
 			$productos->color = $_GET['AlmacenProducto']['color'];
 			$productos->material = $_GET['AlmacenProducto']['material'];
-			$productos->industria = $_GET['AlmacenProducto']['industria'];
+			$productos->marca = $_GET['AlmacenProducto']['marca'];
 			$productos->paquete = $_GET['AlmacenProducto']['paquete'];
 			$productos->detalle = $_GET['AlmacenProducto']['detalle'];
 			$productos->codigo = $_GET['AlmacenProducto']['codigo'];
@@ -232,29 +253,31 @@ class DistribuidoraController extends Controller
 									'productos'=>$productos,
 									'cliente'=>$cliente,
 									'detalle'=>$detalle,
+									'venta'=>$venta,
 		));
 	}
 	
 	public function actionFactura()
 	{
-		$empleado = Empleado::model()->with('Users')->find('idUsers='.Yii::app()->user->id);
+		Yii::app()->user->id;
 		
-		$productos=new Producto('searchAll');
+		$productos = new AlmacenProducto('searchDistribuidora');
 		$cliente = new Cliente;
 		$detalle = array();
 		$venta = new Venta;
 		
 		//init seccion on filter
+	
 		$productos->unsetAttributes();
-		$dist = $this->verifyModel(TipoAlmacen::model()->find('nombre like "%distribuidora%"'));
-		$productos->almacen = $dist->id;
-		if (isset($_GET['Producto']))
+		if (isset($_GET['AlmacenProducto']))
 		{
-			$productos->attributes = $_GET['Producto'];
-			$productos->color = $_GET['Producto']['color'];
-			$productos->material = $_GET['Producto']['material'];
-			$productos->industria = $_GET['Producto']['industria'];
-			//$productos->almacen = $_GET['Producto']['almacen'];
+			$productos->attributes = $_GET['AlmacenProducto'];
+			$productos->color = $_GET['AlmacenProducto']['color'];
+			$productos->material = $_GET['AlmacenProducto']['material'];
+			$productos->marca = $_GET['AlmacenProducto']['marca'];
+			$productos->paquete = $_GET['AlmacenProducto']['paquete'];
+			$productos->detalle = $_GET['AlmacenProducto']['detalle'];
+			$productos->codigo = $_GET['AlmacenProducto']['codigo'];
 		}
 		
 		if(isset($_POST['Cliente']))
@@ -266,13 +289,13 @@ class DistribuidoraController extends Controller
 			$venta->attributes = $_POST['Venta'];
 			if(isset($_POST['Venta']['fechaPlazo']))
 				$venta->fechaPlazo = $_POST['Venta']['fechaPlazo'];
-			$row = Venta::model()->find(array("condition"=>"tipoPago=".$venta->tipoPago,'order'=>'fechaVenta Desc'));
+			$row = Venta::model()->find(array("condition"=>"tipoVenta=".$venta->tipoVenta,'order'=>'fechaVenta Desc'));
 			if(empty($row))
 				$row=new Venta;
-			if(empty($row->serie) && $venta->tipoPago==1)
+			if(empty($row->serie) && $venta->tipoVenta==1)
 				$row->serie = 65;
 			$venta->codigo = $row->codigo +1;
-			if($row->codigo==1001 && $venta->tipoPago==1)
+			if($row->codigo==1001 && $venta->tipoVenta==1)
 			{
 				$row->codigo;
 				$row->serie++;
@@ -291,36 +314,33 @@ class DistribuidoraController extends Controller
 					array_push($detalle,new DetalleVenta);
 					$detalle[$i]->attributes = $item;
 					
-					$almacen = Almacen::model()->with('Producto')->findByPk($detalle[$i]->idAlmacen);
-					if($venta->tipoPago==0)
+					$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($detalle[$i]->idAlmacenProducto);
+					if($venta->tipoVenta==0)
 					{
-						$detalle[$i]->costoTotal=($almacen->Producto->costoCFUnidad*$detalle[$i]->cantUnidad)+($almacen->Producto->costoCF*$detalle[$i]->cantPaquete)+$detalle[$i]->adicional;
+						$detalle[$i]->costoTotal=($almacen->idProducto0->precioSFP*$detalle[$i]->cantidadU)+($almacen->idProducto0->precioCFP*$detalle[$i]->cantidadP)+$detalle[$i]->costoAdicional;
 					}
 					else
 					{
-						$detalle[$i]->costoTotal=($almacen->Producto->costoSFUnidad*$detalle[$i]->cantUnidad)+($almacen->Producto->costoSF*$detalle[$i]->cantPaquete)+$detalle[$i]->adicional;
+						$detalle[$i]->costoTotal=($almacen->idProducto0->precioSFU*$detalle[$i]->cantidadU)+($almacen->idProducto0->precioSFP*$detalle[$i]->cantidadP)+$detalle[$i]->costoAdicional;
 					}
 					$total=$total+$detalle[$i]->costoTotal;
 					$i++;
 				}
 			}	
 			
-			$venta->montoTotal=$total;
+			$venta->montoVenta=$total;
 			if($venta->montoDescuento!=null)
 			{
-				$venta->montoTotal=$venta->montoTotal-$venta->montoDescuento;
+				$venta->montoVenta=$venta->montoVenta-$venta->montoDescuento;
 			}
-			$venta->montoCambio=$venta->montoPagado - $venta->montoTotal;
+			$venta->montoCambio=$venta->montoPagado - $venta->montoVenta;
 		}
 		
 		$almacen = new Almacen;
 		
-		$this->render('index',array(
-				//'dataProvider'=>$dataProvider,
+		$this->render('notas',array(
 				'cliente'=>$cliente,
-				'empleado'=>$empleado,
 				'venta'=>$venta,
-				'almacen'=>$almacen,
 				'productos'=>$productos,
 				'detalle'=>$detalle,
 				
@@ -489,26 +509,38 @@ class DistribuidoraController extends Controller
 	
 	public function actionAddDetalle()
 	{
-		if(Yii::app()->request->isAjaxRequest && isset($_GET['index']))
+		//if(Yii::app()->request->isAjaxRequest && isset($_GET['index']))
+		if(isset($_GET['index']))
 		{
 			$detalle = new DetalleVenta;
-			$almacen = new Almacen;
+			$almacen = new AlmacenProducto;
 			if(isset($_GET['al']))
 			{
-				$almacen = Almacen::model()	->with("Producto")
-				->with("Producto.Color")
-				->with("Producto.Material")
-				//->with("Producto.Industria")
-				->findByPk($_GET['al']);
+				$almacen = AlmacenProducto::model()
+							->with("idProducto0")
+							->findByPk($_GET['al']);	
 	
 			}
-			$detalle->idAlmacen = $almacen->id;
+			
+			$detalle->idAlmacenProducto = $almacen->idAlmacenProducto;
+			if(isset($_GET['factura']))
+			{
+				if($_GET['factura']==0)
+				{
+					$detalle->costoP = $almacen->idProducto0->precioCFP;
+					$detalle->costoU = $almacen->idProducto0->precioCFU;
+				}
+				else
+				{
+					$detalle->costoP = $almacen->idProducto0->precioSFP;
+					$detalle->costoU = $almacen->idProducto0->precioSFU;
+				}
+			}
+				
 			$this->renderPartial('_newRowDetalleVenta', array(
 					'model'=>$detalle,
 					'index'=>$_GET['index'],
-					'factura'=>$_GET['factura'],
 					'almacen'=>$almacen,
-					'costos'=>array(),
 			));
 		}
 		else

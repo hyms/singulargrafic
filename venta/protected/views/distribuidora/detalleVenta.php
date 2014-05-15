@@ -1,4 +1,5 @@
-<table id="yw3" class="table">
+<div class="table-responsive">
+<table id="yw3" class="table table-condensed">
 	<thead class="tabular-header"><tr>
 		<td><?php echo CHtml::label('Nº','number')?></td>
 		<td><?php echo CHtml::label('Codigo','codigo')?></td>
@@ -22,18 +23,14 @@ if(count($detalle)>=1)
 		
 		foreach ($detalle as $item)
 		{
-			if($item->idAlmacen!=null)
+			if($item->idAlmacenProducto!=null)
 			{
 				$this->renderPartial('_newRowDetalleVenta', array(
 						'model'=>$item,
 						'index'=>$i,
-						'factura'=>$venta->formaPago,
-						'almacen'=>$almacen = Almacen::model()	->with("Producto")
-																->with("Producto.Color")
-																->with("Producto.Material")
-																//->with("Producto.Industria")
-																->findByPk($item->idAlmacen),
-						'costos'=>array(),
+						'almacen'=>AlmacenProducto::model()
+									->with("idProducto0")
+									->findByPk($item->idAlmacenProducto),
 				));
 				$i++;
 			}
@@ -42,26 +39,22 @@ if(count($detalle)>=1)
 }
 ?>
 </tbody></table>
-<?php /*?>
+</div>
 <div class="form-group">
-<div class="col-sm-6">
+<div class="col-sm-7">
     <?php echo CHtml::activeLabelEx($venta,"obs",array('class'=>'control-label col-sm-4'))?>
     <div class="col-sm-8">
 	<?php echo CHtml::activeTextArea($venta,"obs",array('class'=>'form-control'))?>
 	</div>
 </div>
 
-<div class="col-sm-2">
-	<?php echo CHtml::activeRadioButtonList($venta,'tipoPago',array('Con Factura','Sin Factura'))?>
-</div>
-	
-<div class="col-sm-4" >
+<div class="col-sm-5" >
 	<div class="form-group">
-		<?php echo CHtml::activeLabelEx($venta,"montoTotal",array('class'=>'control-label col-sm-4'))?>
+		<?php echo CHtml::activeLabelEx($venta,"montoVenta",array('class'=>'control-label col-sm-4'))?>
 	    <div class="col-sm-8">
-	    	<?php echo CHtml::activeTextField($venta,"montoTotal",array('class'=>'form-control input-sm','readonly'=>true,"id"=>"total")); ?>
+	    	<?php echo CHtml::activeTextField($venta,"montoVenta",array('class'=>'form-control input-sm','readonly'=>true,"id"=>"total")); ?>
 	    </div>
-	    <?php echo CHtml::error($venta,"montoTotal",array('class'=>'label label-danger')); ?>
+	    <?php echo CHtml::error($venta,"montoVenta",array('class'=>'label label-danger')); ?>
 	</div>
 	<div class="form-group">
 	   	<?php echo CHtml::activeLabelEx($venta,"montoPagado",array('class'=>'control-label col-sm-4'))?>
@@ -78,53 +71,6 @@ if(count($detalle)>=1)
 	    <?php echo CHtml::error($venta,"montoCambio",array('class'=>'label label-danger')); ?>
 	</div>
 </div>
-</div>
-
-<div class="form-group">
-	<div class="col-sm-2">
-		<?php echo CHtml::activeRadioButtonList($venta,'formaPago',array('Contado','Credito'))?>
-	</div>
-	<div class="col-sm-6">
-		<div class="form-group">
-			<?php echo CHtml::activeLabelEx($venta,'fechaPlazo',array('class'=>'col-sm-5 control-label')); ?>
-			<div class="col-sm-7">
-			<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-		    		'name'=>'fechaPlazo',
-					'attribute'=>'fechaPlazo',
-				    //'id'=>'fechaPlazo',
-				    'model'=>$venta,
-				    // additional javascript options for the date picker plugin
-				    'options'=>array(
-				        'showAnim'=>'fold',
-						'dateFormat'=>'dd-mm-yy',
-				    ),
-				    'htmlOptions'=>array(
-				        'class'=>'form-control input-sm',
-						'disabled'=>(($venta->formaPago==0)?true:false),
-						//'id'=>"fechaPlazo",
-				    ),
-				));
-			?>
-			</div>
-			<?php echo CHtml::error($venta,"fechaPlazo",array('class'=>'label label-danger')); ?>
-		</div>
-		<div class="form-group">
-			<?php echo CHtml::activeLabelEx($venta,'autorizado',array('class'=>'col-sm-5 control-label')); ?>
-			<div class="col-sm-7">
-			<?php echo CHtml::activeDropDownList($venta, 'autorizado',array('Erick Paredes','Miriam Martinez'),array('class'=>'form-control input-sm','disabled'=>(($venta->formaPago==0)?true:false),'id'=>"autorizado",'empty' => 'Selecciona Responsable')); ?>
-		   	</div>
-		</div>
-	</div>
-	<div class="col-sm-4">
-		<div class="form-group ">
-		<div class="col-sm-5">
-		<?php echo CHtml::checkBoxList('Descuento',false,array('Descuento')); ?>
-		</div>
-		<div class="col-sm-7">
-		<?php echo CHtml::activeTextField($venta,'montoDescuento',array('class'=>'form-control input-sm','disabled'=>(empty($venta->montoDescuento)?true:false),'id'=>'descuento')); ?>
-		</div>
-		</div>
-	</div>
 </div>
 
 <?php Yii::app()->getClientScript()->registerScript("ajax_total",
@@ -158,53 +104,22 @@ if(count($detalle)>=1)
    
 ",CClientScript::POS_HEAD); ?>
 
-<?php 
-Yii::app()->getClientScript()->registerScript("check","
-function factura()
-{
-	$('form').attr('action', '".CHtml::normalizeUrl(array('/distribuidora/factura'))."');
-   	$('form').submit();
-}
-
-function formaPago(value)
-{
-	$('#fechaPlazo').prop('disabled', value);
-	$('#autorizado').prop('disabled', value);
-}
-					
-$('#Venta_tipoPago_0').change(function(){
-	factura();
-});
-$('#Venta_tipoPago_1').change(function(){
-	factura();
-});
-					
-$('#Venta_formaPago_0').change(function(){
-	formaPago(true);
-});
-
-$('#Venta_formaPago_1').change(function(){
-	formaPago(false);
-});
-				
-$('#Descuento_0').change(function(){
-	var value;
-	if($('#Descuento_0').is(':checked'))
-	{
-		value = false;
-		$('#total').val(resta($('#total').val(),$('#descuento').val()).toFixed(2));
-		cambio();
-	}
-	else
-	{
-		value = true;
-		calcular_total()
-	}			
-	$('#descuento').prop('disabled', value);
-});
-
-$('#descuento').blur(function(e){
-	$('#total').val(resta($('#total').val(),$('#descuento').val()).toFixed(2));
-	cambio();
-});
-",CClientScript::POS_READY);*/?>
+<?php Yii::app()->getClientScript()->registerScript("ajax_detalleventa","
+$('#pagado').blur(function(e){
+		$('#cambio').val(resta($('#pagado').val(),$('#total').val()).toFixed(2));
+		return true;
+	});
+	$('#pagado').keydown(function(e){
+		if(e.keyCode==13 || e.keyCode==9) 
+	    { 
+			$('#cambio').val(resta($('#pagado').val(),$('#total').val()).toFixed(2));
+			return true;
+		}
+	});
+	
+	$(\"#yw3 .tabular-input-remove\").live(\"click\", function(event) {
+		event.preventDefault();
+		$(this).parents(\".tabular-input:first\").remove();
+		$('.tabular-input-container').filter(function(){return $.trim($(this).text())==='' && $(this).children().length == 0}).siblings('.tabular-header').hide();
+	});
+",CClientScript::POS_READY); ?>
