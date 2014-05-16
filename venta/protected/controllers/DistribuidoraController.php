@@ -25,189 +25,6 @@ class DistribuidoraController extends Controller
 	
 	public function actionIndex()
 	{
-		/*$user= Users::model()->findByPk(Yii::app()->user->id);
-		$empleado = Empleado::model()->findByPk($user->idEmpleado);
-		$almacen = new Almacen;
-		$productos = new Producto('searchAll');
-		$venta = new Venta;
-		$caja = Caja::model()->find(array('condition'=>'arqueo=0 and entregado=0 and nombre like "papeles"','order'=>'id Desc'));
-		$venta->idCaja = $caja->id;
-		$detalle = new DetalleVenta;
-		$credito = "";
-		//new venta
-		$row = Venta::model()->find(array("condition"=>"tipoPago=1",'order'=>'fechaVenta Desc'));
-		if(empty($row))
-			$row=new Venta;
-		if(empty($row->serie))
-			$row->serie = 65;
-		$venta->codigo = $row->codigo +1;
-		if($row->codigo==1001)
-		{
-			$row->codigo;
-			$row->serie++;
-			if($row->serie==91)
-				$row->serie = 65;
-		}
-		$venta->serie = $row->serie;
-		$venta->fechaVenta = date("Y-m-d H:i:s");
-		$venta->formaPago = 0;
-		$venta->tipoPago = 1;
-		
-		//init seccion on filter
-		$productos->unsetAttributes();
-		$dist = $this->verifyModel(TipoAlmacen::model()->find('nombre like "%distribuidora%"'));
-		$productos->almacen = $dist->id;
-		if (isset($_GET['Producto']))
-		{
-			$productos->attributes = $_GET['Producto'];
-			$productos->color = $_GET['Producto']['color'];
-			$productos->material = $_GET['Producto']['material'];
-			$productos->industria = $_GET['Producto']['industria'];
-			//$productos->almacen = $_GET['Producto']['almacen'];
-		}
-		//finish filter seccion
-		
-		//init seccion for save datas
-		$swc=0; $swv=0;
-		if(isset($_POST['Cliente']))
-		{
-			$cliente = Cliente::model()->find('nitCi="'.$_POST['Cliente']['nitCi'].'"');
-			if($cliente==null)
-				$cliente = new Cliente;
-				
-			$cliente->attributes = $_POST['Cliente'];
-			if(empty($cliente->fechaRegistro))
-				$cliente->fechaRegistro = date("Y-m-d");
-			if($cliente->validate())
-				$swc=1;
-		}
-		if(isset($_POST['Venta']))
-		{
-			$venta->attributes = $_POST['Venta'];
-			$row = Venta::model()->find(array("condition"=>"tipoPago=".$venta->tipoPago,'order'=>'fechaVenta Desc'));
-			if(empty($row->serie) && $venta->tipoPago==1)
-				$row->serie = 65;
-			$venta->codigo = $row->codigo +1;
-			if($row->codigo==1001 && $venta->tipoPago==1)
-			{
-				$row->codigo;
-				$row->serie++;
-				if($row->serie==91)
-					$row->serie = 65;
-			}
-			$venta->serie = $row->serie;
-			$venta->estado = 1;
-			$venta->idEmpleado = $empleado->id;
-			if($venta->formaPago==1)
-			{
-				if(($_POST['Venta']['fechaPlazo'])!="")
-					$venta->fechaPlazo = date("Y-m-d",strtotime($_POST['Venta']['fechaPlazo']));
-				if(empty($venta->fechaPlazo)||$venta->fechaPlazo=="")
-					$venta->addError('fechaPlazo', 'La <b>fechaPlazo</b> no puede estar vacia');
-			}
-			if($venta->validate())
-				$swv=1;
-		}
-		if(isset($_POST['DetalleVenta']))
-		{
-			$detalle = array();
-			$i=0;
-			$det=count($_POST['DetalleVenta']);
-			foreach ($_POST['DetalleVenta'] as $item)
-			{
-				array_push($detalle,new DetalleVenta);
-				$detalle[$i]->attributes = $item;
-				if($detalle[$i]->validate())
-				{
-					$det--;
-				}
-				$i++;
-			}
-		}
-		if($swc==1 && $swv==1 && $det==0)
-		{
-			$venta->idCliente = $cliente->id;
-			
-			if($venta->formaPago==1)
-			{
-				$credito = new Credito;
-				$credito->idVenta=$venta->id;
-				$credito->idCliente=$venta->idCliente;
-				$credito->fechaPago=$venta->fechaVenta;
-				$credito->monto=$venta->montoPagado;
-				$credito->saldo=$venta->montoCambio*(-1);
-				$credito->save();
-				$venta->estado = 2;
-			}
-			
-			if($venta->save())
-			{			
-				$det=count($detalle);
-				$almacenes=array();	$i=0;
-				foreach($detalle as $item)
-				{
-					$item->idVenta = $venta->id;
-					if($item->validate())
-					{	
-						$almacenes = array_push($almacenes,Almacen::model()->with('Producto')->findByPk($item->idAlmacen));
-						$almacenes[$i]->stockUnidad = $almacenes[$i]->stockUnidad - $item->cantUnidad;
-						if($almacenes[$i]->stockUnidad<0)
-						{
-							$almacenes[$i]->stockPaquete = $almacenes[$i]->stockPaquete - 1;
-							$almacenes[$i]->stockUnidad = $almacenes[$i]->stockUnidad + $almacenes[$i]->Producto->cantidad;
-						}
-						$almacenes[$i]->stockPaquete = $almacenes[$i]->stockPaquete - $item->cantPaquete;
-						if($almacenes[$i]->stockUnidad<0 && $almacenes[$i]->stockPaquete<0)
-						{
-							$venta->addError('montoTotal', 'No existen suficientes Insumos');
-							if($venta->formaPago==1)
-							{
-								$credito->delete();
-							}
-							$venta->delete();
-							break;
-						}
-						else 
-						{
-							$det--; $i++;
-						}
-					}
-					else
-					{
-						$venta->delete();
-						break;
-					}
-				}
-				
-				if($det==0)
-				{
-					$i=0;
-					foreach ($detalle as $item)
-					{
-						if($item->save())
-						{
-							$almacenes[$i]->save();
-						}
-						$i++;
-					}
-					$this->redirect('venta');
-				}
-				//finish section for save datas
-			}
-		}
-	
-		$this->render('index',array(
-				'cliente'=>$cliente,
-				'empleado'=>$empleado,
-				'venta'=>$venta,
-				'almacen'=>$almacen,
-				'productos'=>$productos,
-				'detalle'=>$detalle,
-				
-				'pagination'=>array(
-						'pageSize'=>5,
-				),
-		));*/
 		$this->render('index');
 	}
 	
@@ -368,7 +185,13 @@ class DistribuidoraController extends Controller
 						}
 						$i++;
 					}
-					$this->redirect(array('index'));
+					if($venta->formaPago==0)
+						$caja->saldo = $caja->saldo+($venta->montoPagado-$venta->montoCambio);
+						
+					if($venta->formaPago==1)
+						$caja->saldo = $caja->saldo+$venta->montoPagado;
+					if($caja->save())
+						$this->redirect(array('index'));
 				}
 				//finish section for save datas
 			}
@@ -473,14 +296,58 @@ class DistribuidoraController extends Controller
 				'venta'=>$venta,
 				'productos'=>$productos,
 				'detalle'=>$detalle,
-				
-				'pagination'=>array(
-						'pageSize'=>5,
-				),
 		));
 	}
 	
-	public function actionVenta()
+	public function actionBuscar()
+	{
+		$ventas = new Venta('searchVenta');
+		$ventas->unsetAttributes();
+		if (isset($_GET['Venta']))
+		{
+			$ventas->attributes = $_GET['Venta'];
+			$ventas->codigos = $_GET['Venta']['codigos'];
+			$ventas->nit = $_GET['Venta']['nit'];
+			$ventas->apellido = $_GET['Venta']['apellido'];
+		}
+		$this->render('buscar',array('ventas'=>$ventas));
+	}
+	
+	public function actionModificar()
+	{
+		if(isset($_GET['id']))
+		{
+			$venta = $this->verifyModel(Venta::model()->with('idCliente0')->findByPk($_GET['id']));
+			$cliente = $venta->idCliente0;
+			$detalle = DetalleVenta::model()->findAll($venta->idVenta);
+			$productos = new AlmacenProducto('searchDistribuidora');
+			
+			//init seccion on filter
+			
+			$productos->unsetAttributes();
+			if (isset($_GET['AlmacenProducto']))
+			{
+				$productos->attributes = $_GET['AlmacenProducto'];
+				$productos->color = $_GET['AlmacenProducto']['color'];
+				$productos->material = $_GET['AlmacenProducto']['material'];
+				$productos->marca = $_GET['AlmacenProducto']['marca'];
+				$productos->paquete = $_GET['AlmacenProducto']['paquete'];
+				$productos->detalle = $_GET['AlmacenProducto']['detalle'];
+				$productos->codigo = $_GET['AlmacenProducto']['codigo'];
+			}
+			
+			$this->render('notas',array(
+				'productos'=>$productos,
+				'cliente'=>$cliente,
+				'detalle'=>$detalle,
+				'venta'=>$venta,
+			));
+		}
+		else
+			throw new CHttpException(400,'Petición no válida.');
+	}
+	
+	/*public function actionVenta()
 	{
 		$ventas = new CActiveDataProvider('Venta',array('criteria'=>array(
 												        'condition'=>'estado=1',
@@ -491,10 +358,10 @@ class DistribuidoraController extends Controller
 												        'pageSize'=>20,
 										    ),));
 		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas por Confirmar",'estado'=>"1"));
-	}
+	}*/
 	
 	
-	public function actionCredito()
+	/*public function actionCredito()
 	{
 		$ventas = new CActiveDataProvider('Venta',
 									array('criteria'=>array(
@@ -505,7 +372,7 @@ class DistribuidoraController extends Controller
 									'pageSize'=>20,
 									),));
 		$this->render('credito',array('ventas'=>$ventas,'titulo'=>"Ventas a Credito",'estado'=>"2"));
-	} 
+	} */
 	
 	public function actionVentas()
 	{
@@ -554,7 +421,7 @@ class DistribuidoraController extends Controller
 			throw new CHttpException(400,'Petición no válida.');
 	}
 	
-	public function actionConfirm()
+	/*public function actionConfirm()
 	{
 		if(Yii::app()->request->isAjaxRequest && isset($_GET['id']))
 		{
@@ -583,7 +450,7 @@ class DistribuidoraController extends Controller
 	
 				$almacenes->save();
 			}
-			*/
+			
 			$venta->estado = 0;
 			if($venta->formaPago==1)
 				$venta->estado = 2;
@@ -593,9 +460,9 @@ class DistribuidoraController extends Controller
 		else
 			throw new CHttpException(400,'Petición no válida.');
 	
-	}
+	}*/
 	
-	public function actionCancelar()
+	/*public function actionCancelar()
 	{
 		if(Yii::app()->request->isAjaxRequest && isset($_GET['id']))
 		{
@@ -626,7 +493,7 @@ class DistribuidoraController extends Controller
 		else
 			throw new CHttpException(400,'Petición no válida.');
 		
-	}
+	}*/
 	
 	public function actionAjaxCliente()
 	{

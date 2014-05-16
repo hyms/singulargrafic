@@ -139,7 +139,39 @@ class Venta extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-
+	
+	public $nit;
+	public $apellido;
+	public $codigos;
+	public function searchVenta()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+	
+		$criteria=new CDbCriteria;
+		$criteria->with=array('idCliente0');
+		
+		$criteria->compare('idVenta',$this->idVenta);
+		$criteria->compare('fechaVenta',$this->fechaVenta,true);
+		$criteria->compare('tipoVenta',$this->tipoVenta);
+		$criteria->compare('formaPago',$this->formaPago,true);
+		$criteria->compare('idCliente',$this->idCliente);
+		$criteria->compare('fechaPlazo',$this->fechaPlazo,true);
+		$criteria->compare('codigo',$this->codigo,true);
+		$criteria->compare('serie',$this->serie);
+		$criteria->compare('montoVenta',$this->montoVenta);
+		$criteria->compare('montoPagado',$this->montoPagado);
+		$criteria->compare('montoCambio',$this->montoCambio);
+		$criteria->compare('montoDescuento',$this->montoDescuento);
+		$criteria->compare('idCliente0.nitCi',$this->nit);
+		$criteria->compare('idCliente0.apellido',$this->apellido);
+		$criteria->compare('codigo',$this->codigos);
+		$criteria->compare('serie',$this->codigos);
+		
+		return new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
+		));
+	}
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

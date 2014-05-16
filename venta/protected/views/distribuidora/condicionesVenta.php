@@ -44,6 +44,14 @@
 		<?php echo CHtml::activeTextField($venta,'montoDescuento',array('class'=>'form-control input-sm','disabled'=>(empty($venta->montoDescuento)?true:false),'id'=>'descuento')); ?>
 		</div>
 	</div>
+	<div class="form-group ">
+		<div class="col-sm-5">
+		<?php echo CHtml::activeLabelEx($venta,'factura',array('class'=>'col-sm-5 control-label')); ?>
+		</div>
+		<div class="col-sm-7">
+		<?php echo CHtml::activeTextField($venta,'factura',array('class'=>'form-control input-sm','disabled'=>(($venta->tipoVenta==0)?false:(empty($venta->factura)?true:false)),'id'=>'factura')); ?>
+		</div>
+	</div>
 </div>
 
 <?php 

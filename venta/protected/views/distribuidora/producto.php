@@ -2,7 +2,7 @@
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$productos->searchDistribuidora(),
 		'filter'=>$productos,
-		'ajaxUpdate'=>false,
+		'ajaxUpdate'=>true,
 		'itemsCssClass' => 'table table-hover table-condensed',
 		'htmlOptions' => array('class' => 'table-responsive'),
 		'columns'=>array(
