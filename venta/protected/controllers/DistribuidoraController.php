@@ -217,7 +217,8 @@ class DistribuidoraController extends Controller
 		$cliente = new Cliente;
 		$detalle = new DetalleVenta;
 		$venta = new Venta;
-		Yii::app()->user->id;
+		$caja = CajaVenta::model()->find(array('condition'=>'idCaja=2 and idUser='.Yii::app()->user->id));
+		//Yii::app()->user->id;
 		
 		//init default values
 		$row = Venta::model()->find(array("condition"=>"tipoVenta=1",'order'=>'fechaVenta Desc'));
@@ -237,6 +238,7 @@ class DistribuidoraController extends Controller
 		$venta->fechaVenta = date("Y-m-d H:i:s");
 		$venta->formaPago = 0;
 		$venta->tipoVenta = 1;
+		$venta->idCaja = $caja->idCajaVenta;
 		//end default values
 		
 		//init filter
@@ -481,12 +483,12 @@ class DistribuidoraController extends Controller
 	public function actionVenta()
 	{
 		$ventas = new CActiveDataProvider('Venta',array('criteria'=>array(
-										        'condition'=>'estado=1',
-										        'with'=>array('Cliente'),
-												'order'=>'fechaVenta DESC',
-										    ),
-										    'pagination'=>array(
-										        'pageSize'=>20,
+												        'condition'=>'estado=1',
+												        'with'=>array('Cliente'),
+														'order'=>'fechaVenta DESC',
+												    ),
+												    'pagination'=>array(
+												        'pageSize'=>20,
 										    ),));
 		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas por Confirmar",'estado'=>"1"));
 	}
