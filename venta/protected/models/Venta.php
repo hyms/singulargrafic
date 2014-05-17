@@ -149,6 +149,7 @@ class Venta extends CActiveRecord
 	
 		$criteria=new CDbCriteria;
 		$criteria->with=array('idCliente0');
+		$criteria->condition('estado=1 or estado=2');
 		
 		$criteria->compare('idVenta',$this->idVenta);
 		$criteria->compare('fechaVenta',$this->fechaVenta,true);

@@ -104,6 +104,7 @@ class DistribuidoraController extends Controller
 			$venta->estado = 1;
 			if($venta->formaPago==1)
 			{
+				$venta->estado = 2;
 				if(!empty($_POST['Venta']['fechaPlazo']))
 					$venta->fechaPlazo = date("Y-m-d",strtotime($_POST['Venta']['fechaPlazo']));
 				if(empty($venta->fechaPlazo)||$venta->fechaPlazo=="")
@@ -133,11 +134,6 @@ class DistribuidoraController extends Controller
 		if($swc==1 && $swv==1 && $det==0)
 		{
 			$venta->idCliente = $cliente->idCliente;
-				
-			if($venta->formaPago==1)
-			{
-				$venta->estado = 2;
-			}
 				
 			if($venta->save())
 			{
@@ -321,7 +317,7 @@ class DistribuidoraController extends Controller
 			$cliente = $venta->idCliente0;
 			$detalle = DetalleVenta::model()->findAll($venta->idVenta);
 			$productos = new AlmacenProducto('searchDistribuidora');
-			
+			$caja = CajaVenta::model()->findByPk($venta->idCaja);
 			//init seccion on filter
 			
 			$productos->unsetAttributes();
@@ -334,6 +330,113 @@ class DistribuidoraController extends Controller
 				$productos->paquete = $_GET['AlmacenProducto']['paquete'];
 				$productos->detalle = $_GET['AlmacenProducto']['detalle'];
 				$productos->codigo = $_GET['AlmacenProducto']['codigo'];
+			}
+			$swc=0;
+			if(isset($_POST['Cliente']))
+			{
+				$cliente->attributes = $_POST['Cliente'];
+				if($cliente->save())
+					$swc=1;
+			}
+			$swv=0;
+			if(isset($_POST['Venta']))
+			{
+				$venta->attributes = $_POST['Venta'];
+				$row = Venta::model()->find(array("condition"=>"tipoVenta=".$venta->tipoVenta,'order'=>'fechaVenta Desc'));
+				if(empty($row->serie) && $venta->tipoVenta==1)
+					$row->serie = 65;
+				$venta->codigo = $row->codigo +1;
+				if($row->codigo==1001 && $venta->tipoVenta==1)
+				{
+					$row->codigo;
+					$row->serie++;
+					if($row->serie==91)
+						$row->serie = 65;
+				}
+				$venta->serie = $row->serie;
+				$venta->estado = 1;
+				if($venta->formaPago==1)
+				{
+					$venta->estado = 2;
+					if(!empty($_POST['Venta']['fechaPlazo']))
+						$venta->fechaPlazo = date("Y-m-d",strtotime($_POST['Venta']['fechaPlazo']));
+					if(empty($venta->fechaPlazo)||$venta->fechaPlazo=="")
+						$venta->addError('fechaPlazo', 'La <b>fechaPlazo</b> no puede estar vacia');
+				}
+				$ventabkp = Venta::model()->findByPk($_GET['id']);
+				if($venta->validate())
+				{
+					$saldo1=0;$saldo2=0;
+					if($venta->formaPago==0)
+					{
+						$saldo1=$venta->montoPagado-$venta->montoCambio;
+						$saldo2=$ventabkp->montoPagado-$ventabkp->montoCambio;
+					}
+					else
+					{
+						$saldo1=$venta->montoPagado;
+						$saldo2=$ventabkp->montoPagado;
+					}
+					
+					if($saldo1!=$saldo2)
+					{
+						$caja->saldo = $caja->saldo - $saldo2 + $saldo1;
+						
+					}
+					if($venta->save())
+						$caja->save();
+					$swv=1;
+				}	
+			}
+			$det=1;
+			if(isset($_POST['DetalleVenta']))
+			{
+				$detalle2 = array();
+				$i=0;
+				$det=count($_POST['DetalleVenta']);
+				foreach ($_POST['DetalleVenta'] as $item)
+				{
+					array_push($detalle2,new DetalleVenta);
+					$detalle2[$i]->attributes = $item;
+					if($detalle2[$i]->validate())
+					{
+						$det--;
+					}
+					$i++;
+				}
+			}
+			
+			if($swv==1 && $det==0)
+			{
+				foreach ($detalle as $item)
+				{
+					$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto);
+					$almacenes->stockU = $almacenes->stockUnidad + $item->cantidadU;
+					if($almacenes->stockU>$almacenes->idProducto0->cantXPaquete)
+					{
+						$almacenes->stockP = $almacenes->stockP + 1;
+						$almacenes->stockU = $almacenes->stockU - $almacenes->idProducto0->cantXPaquete;
+					}
+					$almacenes->stockP = $almacenes->stockP + $item->cantidadP;
+					$almacenes->save();
+				}
+				foreach ($detalle2 as $item)
+				{
+					$item->idVenta = $venta->idVenta;
+					$almacenes = AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto);
+					$almacenes->stockU = $almacenes->stockU - $item->cantidadU;
+					if($almacenes->stockU<0)
+					{
+						$almacenes->stockP = $almacenes->stockP - 1;
+						$almacenes->stockU = $almacenes->stockU + $almacenes->idProducto0->cantXPaquete;
+					}
+					$almacenes->stockP = $almacenes->stockP - $item->cantidadP;
+					if($item->save())
+					{
+						$almacenes->save();
+					}
+				}
+				$this->redirect(array('buscar'));		
 			}
 			
 			$this->render('notas',array(
