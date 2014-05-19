@@ -54,7 +54,12 @@
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("Modificar","#")',
+					'value'=>'CHtml::link("Modificar",array("caja/modificar","id"=>data->idVenta),array("class"=>"hidden-print"))',
+			),
+			array(
+					'header'=>'',
+					'type'=>'raw',
+					'value'=>'CHtml::link("Imprimir",array("caja/preview","id"=>data->idVenta),array("class"=>"hidden-print"))',
 			),
 		)
 	));

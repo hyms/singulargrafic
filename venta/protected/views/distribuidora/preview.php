@@ -6,22 +6,15 @@
 
 <div class="col-sm-offset-3 col-sm-7">
 <?php echo CHtml::link('Imprimir', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"printView()")); ?>
-<?php
-	if($venta->estado==1)
-	{
-		echo CHtml::link('Confirmar', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"confirmar(".$venta->id.")"));
-		echo CHtml::link('Cancelar', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"cancelar(".$venta->id.")"));
-	} 
-?>
 </div>
 <div id="print-recived" class="form-group" style="width:793px; height:529px;">
 
-	<h4 class="col-xs-offset-10 text-right"><?php echo $venta->codigo; ?></h4>
+	<h4 class="col-xs-offset-10 text-right"><?php echo $venta->serie." ".$venta->codigo; ?></h4>
 	<h3 class="col-xs-offset-8 text-right"><?php echo "NOTA DE VENTA";?></h3>
 	<p class="row">
-	<span class="col-xs-3" > <strong><?php echo "CLIENTE:";?></strong> <?php echo $venta->Cliente->apellido;?></span>
-	<span class="col-xs-2"> <strong><?php echo "NIT:";?></strong> <?php echo $venta->Cliente->nitCi;?></span>
-	<span class="col-xs-4"> <strong><?php echo "RESPONSABLE";?></strong> <?php echo $venta->Empleado->apellidos." ".$venta->Empleado->nombres;?></span>
+	<span class="col-xs-3" > <strong><?php echo "CLIENTE:";?></strong> <?php echo $venta->idCliente0->apellido;?></span>
+	<span class="col-xs-2"> <strong><?php echo "NIT:";?></strong> <?php echo $venta->idCliente0->nitCi;?></span>
+	<span class="col-xs-4"> <strong><?php echo "RESPONSABLE";?></strong> <?php echo $venta->idCaja0->idUser0->idEmpleado0->apellido." ".$venta->idCaja0->idUser0->idEmpleado0->nombre;?></span>
 	<span class="col-xs-3"> <strong><?php echo "FECHA:";?></strong> <?php echo date("d-m-Y",strtotime($venta->fechaVenta));?></span>
 	</p>
 	
@@ -38,10 +31,10 @@
 				<?php echo "Detalle de producto"; ?>
 			</th>
 			<th>
-				<?php echo "Cant. Unidad"; ?>
+				<?php echo "Cant*Costo Unidad"; ?>
 			</th>
 			<th>
-				<?php echo "Cant. Paquete"; ?>
+				<?php echo "Cant*Costo Paquete"; ?>
 			</th>
 			<th>
 				<?php echo "Adicional"; ?>
@@ -53,25 +46,25 @@
 		</thead>
 		
 		<tbody>
-			<?php $i=0; foreach ($venta->Detalle as $producto){ $i++;?>
+			<?php $i=0; foreach ($venta->detalleVentas as $producto){ $i++;?>
 			<tr>
 				<td>
 					<?php echo $i;?>
 				</td>
 				<td>
-					<?php echo $producto->Almacen->Producto->codigo; ?>
+					<?php echo $producto->idAlmacenProducto0->idProducto0->codigo; ?>
 				</td>
 				<td>
-					<?php echo $producto->Almacen->Producto->Material->nombre." ".$producto->Almacen->Producto->Color->nombre." ".$producto->Almacen->Producto->peso." ".$producto->Almacen->Producto->dimension." ".$producto->Almacen->Producto->procedencia;?>
+					<?php echo $producto->idAlmacenProducto0->idProducto0->material." ".$producto->idAlmacenProducto0->idProducto0->color." ".$producto->idAlmacenProducto0->idProducto0->detalle." ".$producto->idAlmacenProducto0->idProducto0->marca;?>
 				</td>
 				<td>
-					<?php echo $producto->cantUnidad;?>
+					<?php echo $producto->cantidadU."*".$producto->costoU;?>
 				</td>
 				<td>
-					<?php echo $producto->cantPaquete;?>
+					<?php echo $producto->cantidadP."*".$producto->costoP;?>
 				</td>
 				<td>
-					<?php echo $producto->adicional;?>
+					<?php echo $producto->costoAdicional;?>
 				</td>
 				<td>
 					<?php echo $producto->costoTotal;?>
@@ -82,8 +75,8 @@
 	
 	</table>
 	<p class="row">
-	<span class="col-xs-8"><strong>Son:</strong> <?php $this->widget('ext.numerosALetras', array('valor'=>$venta->montoTotal,'despues'=>''))?></span>
-	<span class="col-xs-offset-1 col-xs-3"><strong>Total:</strong> <?php echo $venta->montoTotal." Bs.";?></span>
+	<span class="col-xs-8"><strong>Son:</strong> <?php $this->widget('ext.numerosALetras', array('valor'=>$venta->montoVenta,'despues'=>''))?></span>
+	<span class="col-xs-offset-1 col-xs-3"><strong>Total:</strong> <?php echo $venta->montoVenta." Bs.";?></span>
 	</p>
 	<p class="row">
 	<span class="col-xs-4"><strong>Forma de pago:</strong> <?php echo ($venta->formaPago==0)?CHtml::encode("Contado"):CHtml::encode("Credito")?></span>
@@ -112,48 +105,6 @@ $script = "
 		{
 			window.print();
 		}";
-if($venta->estado==1)
-{
-	$ventana=($venta->tipoPago==0)?"prompt(\"Introdusca el numero de factura\",'');":"confirm(\"Confirmar Venta??\");";
-	$dato=($venta->tipoPago==0)?",factura:fact":"";
-	$if=($venta->tipoPago==0)?" fact!=\"\" && fact.length>0":"fact";
-	$script=$script."
-		function confirmar(id)
-		{
-			var x;
-			var fact=".$ventana."
-			if (".$if.")
-			{
-				$.ajax({
-					url: '".CHtml::normalizeUrl(array('/distribuidora/confirm'))."',
-					type: 'GET',
-					data: { id: id ".$dato."},
-					success: function (data){
-						$(location).attr('href','".CHtml::normalizeUrl(array('/distribuidora/venta'))."');
-					},
-				});
-			}
-		}
-		
-		function cancelar(id)
-		{
-			var x;
 
-			var obs=prompt(\"Porque la cancelacion\",'');
-			
-			if (obs!=\"\" && obs.length>0)
-			{
-				$.ajax({
-					url: '".CHtml::normalizeUrl(array('/distribuidora/cancalar'))."',
-					type: 'GET',
-					data: { id:id,obs:obs},
-					success: function (data){
-						$(location).attr('href','".CHtml::normalizeUrl(array('/distribuidora/venta'))."');
-					},
-				});
-			}
-		}
-		";
-}
 Yii::app()->clientScript->registerScript("print",$script,CClientScript::POS_HEAD); 
 //*/?>

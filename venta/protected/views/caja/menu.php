@@ -11,8 +11,9 @@ $this->widget('zii.widgets.CMenu',array(
 							array('label'=>'Arqueo', 'url'=>array('caja/arqueo')),*/
 						
 							array('label'=>'Diario Caja', 'url'=>array('#')),
-							array('label'=>'Recibos Ingreso', 'url'=>array('#')),
-							array('label'=>'Recibos Egreso', 'url'=>array('#')),
+							array('label'=>'Recibos Ingreso', 'url'=>array('caja/reciboIngreso')),
+							array('label'=>'Recibos Egreso', 'url'=>array('caja/reciboEgreso')),
+							array('label'=>'Buscar', 'url'=>array('caja/buscar')),
 						),
 				)); 
 ?>

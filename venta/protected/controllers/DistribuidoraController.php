@@ -187,7 +187,7 @@ class DistribuidoraController extends Controller
 					if($venta->formaPago==1)
 						$caja->saldo = $caja->saldo+$venta->montoPagado;
 					if($caja->save())
-						$this->redirect(array('index'));
+						$this->redirect(array('preview'));
 				}
 				//finish section for save datas
 			}
@@ -436,7 +436,7 @@ class DistribuidoraController extends Controller
 						$almacenes->save();
 					}
 				}
-				$this->redirect(array('buscar'));		
+				$this->redirect(array('preview'));		
 			}
 			
 			$this->render('notas',array(
@@ -450,6 +450,42 @@ class DistribuidoraController extends Controller
 			throw new CHttpException(400,'Petición no válida.');
 	}
 	
+	public function actionPreview()
+	{
+		if(isset($_GET['id']))
+		{
+			$ventas = Venta::model()
+			->with("idCliente0")
+			->with("detalleVentas")
+			->with("detalleVentas.idAlmacenProducto0")
+			->with("detalleVentas.idAlmacenProducto0.idProducto0")
+			->with("idCaja0")
+			->with("idCaja0.idUser0")
+			->with("idCaja0.idUser0.idEmpleado0")
+			->findByPk($_GET['id']);
+	
+			if($ventas!=null)
+				$this->render('preview',array('venta'=>$ventas));
+			else
+				$this->redirect('index');
+		}
+		else
+			throw new CHttpException(400,'Petición no válida.');
+	}
+	
+	public function actionDeudores()
+	{
+		$deudores = new CActiveDataProvider('Venta',
+										array('criteria'=>array(
+											'condition'=>'montoVenta>montoPagado and formaPago=1',
+											'with'=>array('idCliente0'),
+											'order'=>'fechaPlazo ASC',
+										),
+											'pagination'=>array(
+													'pageSize'=>20,
+										),));
+		$this->render('deudores',array('deudores'=>$deudores));
+	}
 	/*public function actionVenta()
 	{
 		$ventas = new CActiveDataProvider('Venta',array('criteria'=>array(
@@ -501,28 +537,7 @@ class DistribuidoraController extends Controller
 		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas Realizadas",'estado'=>"0"));
 	}
 	
-	public function actionPreview()
-	{
-		if(isset($_GET['id']))
-		{
-			$ventas = Venta::model()
-							->with("Cliente")
-							->with("Detalle")
-							->with("Detalle.Almacen")
-							->with("Detalle.Almacen.Producto")
-							->with("Detalle.Almacen.Producto.Color")
-							->with("Detalle.Almacen.Producto.Material")
-							->with("Empleado")
-							->findByPk($_GET['id']);
-				
-			if($ventas!=null)
-				$this->render('preview',array('venta'=>$ventas));
-			else
-				$this->redirect('venta');
-		}
-		else
-			throw new CHttpException(400,'Petición no válida.');
-	}
+	
 	
 	/*public function actionConfirm()
 	{

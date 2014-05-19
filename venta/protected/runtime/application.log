@@ -8709,3 +8709,648 @@ Stack trace:
 #14 {main}
 REQUEST_URI=/singulardev/venta/index.php/distribuidora/modificar/1
 ---
+2014/05/19 15:18:49 [error] [exception.CException] exception 'CException' with message 'CDbCriteria and its behaviors do not have a method or closure named "condition".' in /var/www/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/singulardev/venta/protected/models/Venta.php(152): CComponent->__call('condition', Array)
+#1 /var/www/singulardev/venta/protected/models/Venta.php(152): CDbCriteria->condition('estado=1 or est...')
+#2 /var/www/singulardev/venta/protected/views/distribuidora/buscar.php(7): Venta->searchVenta()
+#3 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#4 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#5 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#6 /var/www/framework/web/CController.php(782): CController->renderPartial('buscar', Array, true)
+#7 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(309): CController->render('buscar', Array)
+#8 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionBuscar()
+#9 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#11 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#12 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#16 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/framework/web/CWebApplication.php(282): CController->run('buscar')
+#18 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/b...')
+#19 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/buscar
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/index
+---
+2014/05/19 15:19:26 [error] [php] Array to string conversion (/var/www/framework/db/ar/CActiveFinder.php:1325)
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveFinder.php(151): CJoinElement->count()
+#1 /var/www/framework/db/ar/CActiveRecord.php(1605): CActiveFinder->count()
+#2 /var/www/framework/web/CActiveDataProvider.php(228): Venta->count()
+#3 /var/www/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 /var/www/framework/web/CActiveDataProvider.php(178): CActiveDataProvider->getTotalItemCount()
+#5 /var/www/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(111): CActiveDataProvider->getData()
+#7 /var/www/framework/zii/widgets/grid/CGridView.php(339): CGridView->init()
+#8 /var/www/framework/web/CBaseController.php(147): CGridView->init()
+#9 /var/www/framework/web/CBaseController.php(172): DistribuidoraController->createWidget()
+#10 /var/www/singulardev/venta/protected/views/distribuidora/buscar.php(60): DistribuidoraController->widget()
+#11 /var/www/framework/web/CBaseController.php(126): require()
+#12 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#13 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#14 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#15 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(309): DistribuidoraController->render()
+#16 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionBuscar()
+#17 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#18 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#19 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#20 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#21 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#22 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#23 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#24 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#25 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#26 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#27 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#28 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/buscar
+in /var/www/singulardev/venta/protected/views/distribuidora/buscar.php (60)
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (309)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/19 15:54:31 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dsadsad' in 'where clause'. The SQL statement executed was: SELECT * FROM `cliente` `t` WHERE nitCi=dsadsad LIMIT 1.
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (605)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/19 15:54:31 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dsadsad' in 'where clause'. The SQL statement executed was: SELECT * FROM `cliente` `t` WHERE nitCi=dsadsad LIMIT 1' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(605): CActiveRecord->find('nitCi=dsadsad')
+#4 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionAjaxCliente()
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#8 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#12 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#14 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#15 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/ajaxCliente?nitCi=dsadsad
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/notas
+---
+2014/05/19 16:19:39 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '==1)' at line 1. The SQL statement executed was: SELECT COUNT(DISTINCT `t`.`idVenta`) FROM `venta` `t`  LEFT OUTER JOIN `cliente` `idCliente0` ON (`t`.`idCliente`=`idCliente0`.`idCliente`)  WHERE (montoVenta>montoPagado and formaPago==1).
+in /var/www/singulardev/venta/protected/views/distribuidora/deudores.php (30)
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (487)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/19 16:19:39 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '==1)' at line 1. The SQL statement executed was: SELECT COUNT(DISTINCT `t`.`idVenta`) FROM `venta` `t`  LEFT OUTER JOIN `cliente` `idCliente0` ON (`t`.`idCliente`=`idCliente0`.`idCliente`)  WHERE (montoVenta>montoPagado and formaPago==1)' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/framework/db/ar/CActiveFinder.php(759): CDbCommand->queryScalar()
+#2 /var/www/framework/db/ar/CActiveFinder.php(151): CJoinElement->count(Object(CDbCriteria))
+#3 /var/www/framework/db/ar/CActiveRecord.php(1605): CActiveFinder->count(Object(CDbCriteria))
+#4 /var/www/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#5 /var/www/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#6 /var/www/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#7 /var/www/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 /var/www/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#9 /var/www/framework/zii/widgets/grid/CGridView.php(339): CBaseListView->init()
+#10 /var/www/framework/web/CBaseController.php(147): CGridView->init()
+#11 /var/www/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#12 /var/www/singulardev/venta/protected/views/distribuidora/deudores.php(30): CBaseController->widget('zii.widgets.gri...', Array)
+#13 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#14 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#15 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#16 /var/www/framework/web/CController.php(782): CController->renderPartial('deudores', Array, true)
+#17 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(487): CController->render('deudores', Array)
+#18 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionDeudores()
+#19 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#20 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#21 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#22 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#23 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#24 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#25 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#26 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#27 /var/www/framework/web/CWebApplication.php(282): CController->run('deudores')
+#28 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/d...')
+#29 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#30 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#31 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/deudores
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/
+---
+2014/05/19 16:43:30 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "Users" is not defined in active record class "Empleado".' in /var/www/framework/db/ar/CActiveFinder.php:226
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'Users')
+#1 /var/www/framework/db/ar/CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /var/www/framework/db/ar/CActiveRecord.php(909): CActiveFinder->__construct(Object(Empleado), Array)
+#3 /var/www/framework/db/ar/CActiveRecord.php(1355): CActiveRecord->getActiveFinder(Array)
+#4 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#5 /var/www/singulardev/venta/protected/controllers/CajaController.php(198): CActiveRecord->find('idUsers=1')
+#6 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboIngreso()
+#7 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/framework/web/CWebApplication.php(282): CController->run('reciboIngreso')
+#16 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/reciboIngr...')
+#17 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboIngreso
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/
+---
+2014/05/19 16:44:11 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "Users" is not defined in active record class "Empleado".' in /var/www/framework/db/ar/CActiveFinder.php:226
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'Users')
+#1 /var/www/framework/db/ar/CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /var/www/framework/db/ar/CActiveRecord.php(909): CActiveFinder->__construct(Object(Empleado), Array)
+#3 /var/www/framework/db/ar/CActiveRecord.php(1355): CActiveRecord->getActiveFinder(Array)
+#4 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#5 /var/www/singulardev/venta/protected/controllers/CajaController.php(198): CActiveRecord->find('idUsers=1')
+#6 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboIngreso()
+#7 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/framework/web/CWebApplication.php(282): CController->run('reciboIngreso')
+#16 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/reciboIngr...')
+#17 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboIngreso
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/
+---
+2014/05/19 16:45:50 [error] [php] include(Recibo.php): failed to open stream: No such file or directory (/var/www/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/singulardev/venta/protected/controllers/CajaController.php(198): spl_autoload_call()
+#1 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboIngreso()
+#2 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/framework/web/filters/CFilterChain.php(133): CajaController->runAction()
+#4 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#6 /var/www/framework/web/filters/CInlineFilter.php(58): CajaController->filterAccessControl()
+#7 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#8 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/framework/web/CController.php(265): CajaController->runActionWithFilters()
+#10 /var/www/framework/web/CWebApplication.php(282): CajaController->run()
+#11 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#12 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboIngreso
+in /var/www/singulardev/venta/protected/controllers/CajaController.php (198)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/19 16:46:19 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'tipo' in 'where clause'. The SQL statement executed was: SELECT count(*) as `max` FROM `recibos` `t` WHERE tipo=1 LIMIT 1.
+in /var/www/singulardev/venta/protected/controllers/CajaController.php (198)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/19 16:46:19 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'tipo' in 'where clause'. The SQL statement executed was: SELECT count(*) as `max` FROM `recibos` `t` WHERE tipo=1 LIMIT 1' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/singulardev/venta/protected/controllers/CajaController.php(198): CActiveRecord->find(Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboIngreso()
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#8 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#12 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/framework/web/CWebApplication.php(282): CController->run('reciboIngreso')
+#14 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/reciboIngr...')
+#15 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboIngreso
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/
+---
+2014/05/19 16:46:45 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'tipoRecibo' in 'where clause'. The SQL statement executed was: SELECT count(*) as `max` FROM `recibos` `t` WHERE tipoRecibo=1 LIMIT 1.
+in /var/www/singulardev/venta/protected/controllers/CajaController.php (198)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/19 16:46:45 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'tipoRecibo' in 'where clause'. The SQL statement executed was: SELECT count(*) as `max` FROM `recibos` `t` WHERE tipoRecibo=1 LIMIT 1' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/singulardev/venta/protected/controllers/CajaController.php(198): CActiveRecord->find(Array)
+#4 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboIngreso()
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#8 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#12 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/framework/web/CWebApplication.php(282): CController->run('reciboIngreso')
+#14 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/reciboIngr...')
+#15 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboIngreso
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/
+---
+2014/05/19 16:47:07 [error] [exception.CException] exception 'CException' with message 'Property "Recibos.fecha" is not defined.' in /var/www/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(161): CComponent->__set('fecha', '2014-05-19 04:0...')
+#1 /var/www/singulardev/venta/protected/controllers/CajaController.php(200): CActiveRecord->__set('fecha', '2014-05-19 04:0...')
+#2 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboIngreso()
+#3 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/framework/web/CWebApplication.php(282): CController->run('reciboIngreso')
+#12 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/reciboIngr...')
+#13 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboIngreso
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/
+---
+2014/05/19 16:47:25 [error] [exception.CException] exception 'CException' with message 'Property "Recibos.max" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(145): CComponent->__get('max')
+#1 /var/www/framework/base/CModel.php(596): CActiveRecord->__get('max')
+#2 /var/www/singulardev/venta/protected/controllers/CajaController.php(201): CModel->offsetGet('max')
+#3 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboIngreso()
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/framework/web/CWebApplication.php(282): CController->run('reciboIngreso')
+#13 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/reciboIngr...')
+#14 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboIngreso
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/
+---
+2014/05/19 16:47:47 [error] [exception.CException] exception 'CException' with message 'Property "Recibos.tipo" is not defined.' in /var/www/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(161): CComponent->__set('tipo', 1)
+#1 /var/www/singulardev/venta/protected/controllers/CajaController.php(202): CActiveRecord->__set('tipo', 1)
+#2 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboIngreso()
+#3 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/framework/web/CWebApplication.php(282): CController->run('reciboIngreso')
+#12 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/reciboIngr...')
+#13 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboIngreso
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/
+---
+2014/05/19 16:48:17 [error] [php] Undefined variable: empleado (/var/www/singulardev/venta/protected/controllers/CajaController.php:203)
+Stack trace:
+#0 /var/www/framework/web/filters/CFilterChain.php(133): CajaController->runAction()
+#1 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/framework/web/filters/CInlineFilter.php(58): CajaController->filterAccessControl()
+#4 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(265): CajaController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): CajaController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboIngreso
+in /var/www/singulardev/venta/protected/controllers/CajaController.php (203)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/19 16:59:21 [error] [exception.CException] exception 'CException' with message 'Property "CajaVenta.id" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(145): CComponent->__get('id')
+#1 /var/www/singulardev/venta/protected/controllers/CajaController.php(203): CActiveRecord->__get('id')
+#2 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboIngreso()
+#3 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/framework/web/CWebApplication.php(282): CController->run('reciboIngreso')
+#12 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/reciboIngr...')
+#13 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboIngreso
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/
+---
+2014/05/19 17:00:15 [error] [exception.CException] exception 'CException' with message 'Property "CajaVenta.id" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(145): CComponent->__get('id')
+#1 /var/www/singulardev/venta/protected/controllers/CajaController.php(203): CActiveRecord->__get('id')
+#2 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboIngreso()
+#3 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/framework/web/CWebApplication.php(282): CController->run('reciboIngreso')
+#12 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/reciboIngr...')
+#13 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboIngreso
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/
+---
+2014/05/19 17:00:16 [error] [exception.CException] exception 'CException' with message 'Property "CajaVenta.id" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(145): CComponent->__get('id')
+#1 /var/www/singulardev/venta/protected/controllers/CajaController.php(203): CActiveRecord->__get('id')
+#2 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboIngreso()
+#3 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/framework/web/CWebApplication.php(282): CController->run('reciboIngreso')
+#12 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/reciboIngr...')
+#13 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboIngreso
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/
+---
+2014/05/19 17:02:58 [error] [exception.CException] exception 'CException' with message 'Property "Recibos.nro" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(145): CComponent->__get('nro')
+#1 /var/www/framework/web/helpers/CHtml.php(2529): CActiveRecord->__get('nro')
+#2 /var/www/framework/web/helpers/CHtml.php(2252): CHtml::resolveValue(Object(Recibos), 'nro')
+#3 /var/www/framework/web/helpers/CHtml.php(1434): CHtml::activeInputField('text', Object(Recibos), 'nro', Array)
+#4 /var/www/singulardev/venta/protected/views/caja/reciboIngreso.php(94): CHtml::activeTextField(Object(Recibos), 'nro', Array)
+#5 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#6 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#7 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(782): CController->renderPartial('reciboIngreso', Array, true)
+#9 /var/www/singulardev/venta/protected/controllers/CajaController.php(224): CController->render('reciboIngreso', Array)
+#10 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboIngreso()
+#11 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#12 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#13 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#14 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#15 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#16 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#17 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#18 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /var/www/framework/web/CWebApplication.php(282): CController->run('reciboIngreso')
+#20 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/reciboIngr...')
+#21 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboIngreso
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/
+---
+2014/05/19 18:28:09 [error] [php] Creating default object from empty value (/var/www/singulardev/venta/protected/controllers/CajaController.php:234)
+Stack trace:
+#0 /var/www/framework/web/filters/CFilterChain.php(133): CajaController->runAction()
+#1 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/framework/web/filters/CInlineFilter.php(58): CajaController->filterAccessControl()
+#4 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(265): CajaController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): CajaController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/caja/buscar
+in /var/www/singulardev/venta/protected/controllers/CajaController.php (234)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/19 18:28:34 [error] [exception.CException] exception 'CException' with message 'Property "Recibos.1" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(145): CComponent->__get('1')
+#1 /var/www/singulardev/venta/protected/controllers/CajaController.php(237): CActiveRecord->__get('1')
+#2 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionBuscar()
+#3 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/framework/web/CWebApplication.php(282): CController->run('buscar')
+#12 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/buscar')
+#13 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/buscar?t=1
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/buscar
+---
+2014/05/19 18:35:15 [error] [php] Undefined variable: ventas (/var/www/singulardev/venta/protected/views/caja/buscar.php:59)
+Stack trace:
+#0 /var/www/framework/web/CController.php(869): CajaController->renderFile()
+#1 /var/www/framework/web/CController.php(782): CajaController->renderPartial()
+#2 /var/www/singulardev/venta/protected/controllers/CajaController.php(244): CajaController->render()
+#3 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionBuscar()
+#4 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/framework/web/filters/CFilterChain.php(133): CajaController->runAction()
+#6 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#8 /var/www/framework/web/filters/CInlineFilter.php(58): CajaController->filterAccessControl()
+#9 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#10 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/framework/web/CController.php(265): CajaController->runActionWithFilters()
+#12 /var/www/framework/web/CWebApplication.php(282): CajaController->run()
+#13 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#14 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/caja/buscar?t=0
+in /var/www/singulardev/venta/protected/views/caja/buscar.php (59)
+in /var/www/singulardev/venta/protected/controllers/CajaController.php (244)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/19 18:58:36 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/framework/web/CWebApplication.php(282): CController->run('llenado')
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('recibos/llenado')
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/singulardev/venta/index.php/recibos/llenado?nitCi=5999242
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/reciboIngreso
+---
+2014/05/19 19:16:30 [error] [php] Undefined variable: recibo (/var/www/singulardev/venta/protected/views/caja/formRecibo.php:8)
+Stack trace:
+#0 /var/www/framework/web/CController.php(869): CajaController->renderFile()
+#1 /var/www/singulardev/venta/protected/views/caja/reciboIngreso.php(69): CajaController->renderPartial()
+#2 /var/www/framework/web/CBaseController.php(126): require()
+#3 /var/www/framework/web/CBaseController.php(95): CajaController->renderInternal()
+#4 /var/www/framework/web/CController.php(869): CajaController->renderFile()
+#5 /var/www/framework/web/CController.php(782): CajaController->renderPartial()
+#6 /var/www/singulardev/venta/protected/controllers/CajaController.php(224): CajaController->render()
+#7 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboIngreso()
+#8 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#9 /var/www/framework/web/filters/CFilterChain.php(133): CajaController->runAction()
+#10 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#12 /var/www/framework/web/filters/CInlineFilter.php(58): CajaController->filterAccessControl()
+#13 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#14 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/framework/web/CController.php(265): CajaController->runActionWithFilters()
+#16 /var/www/framework/web/CWebApplication.php(282): CajaController->run()
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboIngreso
+in /var/www/singulardev/venta/protected/views/caja/formRecibo.php (8)
+in /var/www/singulardev/venta/protected/views/caja/reciboIngreso.php (69)
+in /var/www/singulardev/venta/protected/controllers/CajaController.php (224)
+2014/05/19 19:19:03 [error] [php] include(Recibo.php): failed to open stream: No such file or directory (/var/www/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/singulardev/venta/protected/controllers/CajaController.php(230): spl_autoload_call()
+#1 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboEgreso()
+#2 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/framework/web/filters/CFilterChain.php(133): CajaController->runAction()
+#4 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#6 /var/www/framework/web/filters/CInlineFilter.php(58): CajaController->filterAccessControl()
+#7 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#8 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/framework/web/CController.php(265): CajaController->runActionWithFilters()
+#10 /var/www/framework/web/CWebApplication.php(282): CajaController->run()
+#11 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#12 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboEgreso
+in /var/www/singulardev/venta/protected/controllers/CajaController.php (230)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/19 19:19:33 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "Users" is not defined in active record class "Empleado".' in /var/www/framework/db/ar/CActiveFinder.php:226
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'Users')
+#1 /var/www/framework/db/ar/CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /var/www/framework/db/ar/CActiveRecord.php(909): CActiveFinder->__construct(Object(Empleado), Array)
+#3 /var/www/framework/db/ar/CActiveRecord.php(1355): CActiveRecord->getActiveFinder(Array)
+#4 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#5 /var/www/singulardev/venta/protected/controllers/CajaController.php(231): CActiveRecord->find('idUsers=1')
+#6 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboEgreso()
+#7 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/framework/web/CWebApplication.php(282): CController->run('reciboEgreso')
+#16 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/reciboEgre...')
+#17 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboEgreso
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/
+---
+2014/05/19 19:20:18 [error] [exception.CException] exception 'CException' with message 'Property "Recibos.fecha" is not defined.' in /var/www/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(161): CComponent->__set('fecha', '2014-05-19 07:0...')
+#1 /var/www/singulardev/venta/protected/controllers/CajaController.php(234): CActiveRecord->__set('fecha', '2014-05-19 07:0...')
+#2 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboEgreso()
+#3 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/framework/web/CWebApplication.php(282): CController->run('reciboEgreso')
+#12 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/reciboEgre...')
+#13 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboEgreso
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/
+---
+2014/05/19 19:20:28 [error] [php] Undefined variable: empleado (/var/www/singulardev/venta/protected/controllers/CajaController.php:237)
+Stack trace:
+#0 /var/www/framework/web/filters/CFilterChain.php(133): CajaController->runAction()
+#1 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/framework/web/filters/CInlineFilter.php(58): CajaController->filterAccessControl()
+#4 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(265): CajaController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): CajaController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboEgreso
+in /var/www/singulardev/venta/protected/controllers/CajaController.php (237)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/19 19:20:37 [error] [exception.CException] exception 'CException' with message 'Property "CajaVenta.id" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(145): CComponent->__get('id')
+#1 /var/www/singulardev/venta/protected/controllers/CajaController.php(239): CActiveRecord->__get('id')
+#2 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboEgreso()
+#3 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/framework/web/CWebApplication.php(282): CController->run('reciboEgreso')
+#12 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/reciboEgre...')
+#13 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboEgreso
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/
+---
+2014/05/19 19:42:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'La Respuesta de la pagina no Existe.' in /var/www/singulardev/venta/protected/controllers/CajaController.php:298
+Stack trace:
+#0 /var/www/singulardev/venta/protected/controllers/CajaController.php(234): CajaController->verifyModel(NULL)
+#1 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionReciboEgreso()
+#2 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#4 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#6 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#8 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/framework/web/CWebApplication.php(282): CController->run('reciboEgreso')
+#11 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/reciboEgre...')
+#12 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/reciboEgreso/1
+---

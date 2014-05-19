@@ -190,6 +190,114 @@ class CajaController extends Controller
 		$this->render("arqueo",array('movimiento'=>$movimiento));
 	}
 	
+	public function actionReciboIngreso()
+	{
+		$cliente = new Cliente;
+		$recibo = new Recibos;
+		$caja = CajaVenta::model()->find('idUser='.Yii::app()->user->id);
+		$row = Recibos::model()->find(array("select"=>"count(*) as `max`",'condition'=>'tipoRecivo=1'));
+	
+		$recibo->fechaRegistro = date("Y-m-d h:m:s");
+		$recibo->codigo = "I-".($row['max']+1);
+		$recibo->tipoRecivo = 1;
+		$recibo->idCaja = $caja->idCajaVenta;
+	
+		if(isset($_POST['Recibos']))
+		{
+			$recibo->attributes = $_POST['Recibos'];
+			$cliente->attributes = $_POST['Cliente'];
+			$cliente = Cliente::model()->find("nitCi='".$cliente->nitCi."'");
+			$recibo->idCliente = $cliente->idCliente;
+			
+			if($recibo->validate())
+			{
+				$caja->saldo = $caja->saldo+$recibo->monto;
+				if($recibo->save())
+				if($caja->save())
+					$this->redirect('index');
+			}
+				
+		}
+		$this->render("reciboIngreso",array(
+				'cliente'=>$cliente,
+				'recibo'=>$recibo,
+		));
+	}
+	
+	public function actionReciboEgreso()
+	{
+		$cliente = new Cliente;
+		$recibo="";$caja="";
+		
+		if(isset($_GET['id']))
+		{
+			$recibo = $this->verifyModel(Recibos::model()->findByPk($_GET['id']));
+			$caja = CajaVenta::model()->findByPk($recibo->idCajaVenta);
+		}
+		else
+		{
+			$recibo = new Recibos;
+			$caja = CajaVenta::model()->find('idUser='.Yii::app()->user->id);
+			$row = Recibos::model()->find(array("select"=>"count(*) as `max`",'condition'=>'tipoRecivo=0'));
+			
+			$recibo->fechaRegistro=date("Y-m-d h:m:s");
+			$recibo->codigo = "E-".($row['max']+1);
+			$recibo->tipoRecivo=0;
+			$recibo->responsable="Miriam Martinez";
+			
+			$recibo->idCaja = $caja->idCajaVenta;
+		}
+		
+		if(isset($_POST['Recibos']))
+		{
+			$saldobkp="";
+			if(empty($recibo->acuenta))
+				$saldobkp= $recibo->acuenta;
+			$recibo->attributes=$_POST['Recibos'];
+			if($recibo->validate())
+			{
+				if(!empty($recibo->idRecibos))
+					$caja->saldo = $caja->saldo + $saldobkp;
+				
+				$caja->saldo = $caja->saldo-$recibo->acuenta;
+				if($caja->saldo>=0)
+				{
+					if($recibo->save())
+						if($caja->save())
+							$this->redirect('index');
+				}
+				else
+				{
+					$recibo->addError('acuenta','No existen suficientes fondos');
+				}
+			}
+		}
+		$this->render("reciboEgreso",array(
+				'cliente'=>$cliente,
+				'recibo'=>$recibo,
+					
+		));
+	}
+	
+	public function actionBuscar()
+	{
+		$recibos = new Recibos('search');
+		
+		
+		$recibos->unsetAttributes();
+		if(!isset($_GET["t"]))
+		{	$recibos->tipoRecivo=1;}
+		else 
+		{	$recibos->tipoRecivo=$_GET["t"];	}
+		
+		if (isset($_GET['Recibos']))
+		{
+			$recibos->attributes = $_GET['Recibos'];
+		}
+		
+		$this->render("buscar",array('recibos'=>$recibos));
+	}
+	
 	private function verifyModel($model)
 	{
 		if($model===null)

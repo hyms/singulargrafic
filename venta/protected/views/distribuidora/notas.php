@@ -18,10 +18,11 @@
 		<h3 class="col-sm-4 text-right"><?php echo date("d/m/Y",strtotime($venta->fechaVenta));?></h3>
 		
 	</div>
+	<?php ?>
 	<?php
 		$form=$this->beginWidget('CActiveForm', array(
 				'id'=>'detalle-venta-detalleVenta-form',
-				'action'=>CHtml::normalizeUrl(array('/distribuidora/index')),
+				'action'=>CHtml::normalizeUrl(array((empty($venta->id))?'/distribuidora/notas':"/distribuidora/modificar'")),
 				'htmlOptions'=>array(
 						'class'=>'form-horizontal',
 						'role'=>'form'
@@ -53,6 +54,12 @@
 	  	<div class="panel-body" style="overflow: auto;">
 	  	<?php $this->renderPartial("condicionesVenta",array('venta'=>$venta));?>
 	  	</div>
+	</div>
+	<div class="form-group">
+		<div class="text-center">
+		<?php echo CHtml::resetButton('Cancelar', array('class' => 'btn btn-default hidden-print')); ?>
+		<?php echo CHtml::submitButton('Guardar', array("class"=>"btn btn-default hidden-print")); ?>
+		</div>
 	</div>
 	<?php $this->endWidget(); ?>	
 </div>

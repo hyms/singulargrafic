@@ -28,6 +28,7 @@
  */
 class Recibos extends CActiveRecord
 {
+	public $max;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -113,7 +114,9 @@ class Recibos extends CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
+		
+		$criteria->order='fechaRegistro Desc';
+		
 		$criteria->compare('idRecibos',$this->idRecibos);
 		$criteria->compare('categoria',$this->categoria,true);
 		$criteria->compare('codigo',$this->codigo,true);
@@ -134,6 +137,9 @@ class Recibos extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination'=>array(
+						'pageSize'=>20,
+				),
 		));
 	}
 
