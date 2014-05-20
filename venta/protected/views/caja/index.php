@@ -10,34 +10,12 @@ $this->breadcrumbs=array(
 </div>
 
 <div class="col-sm-10">
-<?php
-	$this->widget('zii.widgets.CMenu',array(
-		'htmlOptions' => array('class' => 'nav nav-tabs hidden-print col-sm-6'),
-		'activeCssClass'	=> 'active',
-		'encodeLabel' => false,
-		'items'=>array(
-			array('label'=>'Ventas Dia','url'=>array('caja/index','vd'=>date('d'))),
-			array('label'=>'Registro Diario', 'url'=>array('caja/index','ld'=>date('d'))),
-			//array('label'=>'Recibos Dia', 'url'=>array('caja/index','rd'=>date('d'))),
-		),
-	));
-?>
-	<div class="col-sm-6 hidden-print">
-	<div class="form-group">
-	<?php echo CHtml::link('Imprimir', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"printView()")); ?>
-	</div>
-	</div>
+<?php $this->renderPartial("menuCaja");?>
 <?php 
-	if($vd)
-	{
-		$this->renderPartial('ventaDia',array('tabla'=>$tabla));
-	}
-	
 	if($ld)
 	{
-		$this->renderPartial('libroDiario',array('tabla'=>$tabla,'caja'=>$caja,'sf'=>$sf));
+		$this->renderPartial('libroDiario',array('tabla'=>$tabla,'caja'=>$caja,));
 	}
-	
 	if($ce)
 	{
 		$this->renderPartial('comprobante',array('caja'=>$caja));

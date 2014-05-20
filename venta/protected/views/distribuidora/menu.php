@@ -8,7 +8,7 @@ $this->widget('zii.widgets.CMenu',array(
 							array('label'=>'Nueva Venta', 'url'=>array('distribuidora/notas')),
 							array('label'=>'Buscar Venta', 'url'=>array('distribuidora/buscar')),
 							array('label'=>'Deudores', 'url'=>array('distribuidora/deudores')),
-							array('label'=>'Movimientos', 'url'=>array('#')),
+							array('label'=>'Movimientos', 'url'=>array('distribuidora/movimientos')),
 							
 						),
 				)); 

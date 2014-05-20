@@ -8,12 +8,12 @@
  * @property double $monto
  * @property string $motivo
  * @property string $fechaMovimiento
- * @property integer $idCaja
  * @property integer $idUser
+ * @property integer $idCaja
  *
  * The followings are the available model relations:
- * @property Caja $idCaja0
  * @property User $idUser0
+ * @property CajaVenta $idCaja0
  */
 class MovimientoCaja extends CActiveRecord
 {
@@ -33,13 +33,13 @@ class MovimientoCaja extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idCaja, idUser', 'numerical', 'integerOnly'=>true),
+			array('idUser, idCaja', 'numerical', 'integerOnly'=>true),
 			array('monto', 'numerical'),
 			array('motivo', 'length', 'max'=>100),
 			array('fechaMovimiento', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idMovimientoCaja, monto, motivo, fechaMovimiento, idCaja, idUser', 'safe', 'on'=>'search'),
+			array('idMovimientoCaja, monto, motivo, fechaMovimiento, idUser, idCaja', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,8 +51,8 @@ class MovimientoCaja extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
 			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
+			'idCaja0' => array(self::BELONGS_TO, 'CajaVenta', 'idCaja'),
 		);
 	}
 
@@ -66,8 +66,8 @@ class MovimientoCaja extends CActiveRecord
 			'monto' => 'Monto',
 			'motivo' => 'Motivo',
 			'fechaMovimiento' => 'Fecha Movimiento',
-			'idCaja' => 'Id Caja',
 			'idUser' => 'Id User',
+			'idCaja' => 'Id Caja',
 		);
 	}
 
@@ -93,8 +93,8 @@ class MovimientoCaja extends CActiveRecord
 		$criteria->compare('monto',$this->monto);
 		$criteria->compare('motivo',$this->motivo,true);
 		$criteria->compare('fechaMovimiento',$this->fechaMovimiento,true);
-		$criteria->compare('idCaja',$this->idCaja);
 		$criteria->compare('idUser',$this->idUser);
+		$criteria->compare('idCaja',$this->idCaja);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

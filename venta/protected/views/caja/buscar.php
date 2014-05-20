@@ -70,12 +70,12 @@
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("Modificar",array("#","id"=>$data->idRecibos),array("class"=>"hidden-print"))',
+					'value'=>'CHtml::link("Modificar",array(($data->tipoRecivo==1)?"caja/reciboIngreso":"caja/reciboEgreso","id"=>$data->idRecibos),array("class"=>"hidden-print"))',
 			),
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("Imprimir",array("#","id"=>$data->idRecibos),array("class"=>"hidden-print"))',
+					'value'=>'CHtml::link("Imprimir",array("caja/preview","id"=>$data->idRecibos),array("class"=>"hidden-print"))',
 			),
 		)
 	));

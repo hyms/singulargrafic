@@ -7,11 +7,11 @@
 </div>
 
 <div class="form-group" >
-	<?php echo CHtml::activeLabelEx($model,'obs',array('class'=>'control-label col-sm-2')); ?>
+	<?php echo CHtml::activeLabelEx($model,'motivo',array('class'=>'control-label col-sm-2')); ?>
 	<div class="col-sm-8">
-		<?php echo CHtml::activeTextField($model,'obs',array('class'=>'form-control ',"id"=>"concepto")); ?>
+		<?php echo CHtml::activeTextArea($model,'motivo',array('class'=>'form-control ',"id"=>"concepto")); ?>
 	</div>
-	<?php echo CHtml::error($model,'obs',array('class'=>'label label-danger')); ?>
+	<?php echo CHtml::error($model,'motivo',array('class'=>'label label-danger')); ?>
 </div>
 
 <div class="form-group">

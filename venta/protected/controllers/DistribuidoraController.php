@@ -25,7 +25,24 @@ class DistribuidoraController extends Controller
 	
 	public function actionIndex()
 	{
-		$this->render('index');
+		$ventas = new CActiveDataProvider('Venta',
+					array('criteria'=>array(
+								'group'=>'`t`.idCliente',
+								'select'=>'count(*) as cantidad, `t`.`idCliente`',
+								'order'=>'cantidad ASC',
+								'with'=>array('idCliente0'),
+							
+								'limit'=>'5',
+						),));
+		$productos = new CActiveDataProvider('DetalleVenta',
+					array('criteria'=>array(
+							'with'=>array('idAlmacenProducto0','idAlmacenProducto0.idProducto0'),
+							'group'=>'`t`.idAlmacenProducto',
+							'select'=>'count(*) as cantidad, `t`.idAlmacenProducto',
+							'order'=>'cantidad ASC',
+							'limit'=>'5',
+					),));
+		$this->render('index',array("ventas"=>$ventas,"productos"=>$productos));
 	}
 	
 	public function actionNotas()
@@ -34,7 +51,7 @@ class DistribuidoraController extends Controller
 		$cliente = new Cliente;
 		$detalle = new DetalleVenta;
 		$venta = new Venta;
-		$caja = CajaVenta::model()->find(array('condition'=>'idCaja=2 and idUser='.Yii::app()->user->id));
+		$caja = CajaVenta::model()->find(array('condition'=>'idCaja=2 and idUser='.Yii::app()->user->id.' and fechaArqueo is NULL'));
 		//Yii::app()->user->id;
 		
 		//init default values
@@ -486,132 +503,57 @@ class DistribuidoraController extends Controller
 										),));
 		$this->render('deudores',array('deudores'=>$deudores));
 	}
-	/*public function actionVenta()
-	{
-		$ventas = new CActiveDataProvider('Venta',array('criteria'=>array(
-												        'condition'=>'estado=1',
-												        'with'=>array('Cliente'),
-														'order'=>'fechaVenta DESC',
-												    ),
-												    'pagination'=>array(
-												        'pageSize'=>20,
-										    ),));
-		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas por Confirmar",'estado'=>"1"));
-	}*/
 	
-	
-	/*public function actionCredito()
+	public function actionMovimientos()
 	{
-		$ventas = new CActiveDataProvider('Venta',
-									array('criteria'=>array(
-											'condition'=>'estado=2',
-											'with'=>array('Cliente'),
-									),
-									'pagination'=>array(
+		$ventas="";
+		if(isset($_GET['d']) || isset($_GET['m']))
+		{
+			$d=date("d");
+			$m=date("m");
+			$y=date("Y");
+			$start=date("Y-m-d H:i:s"); $end=date("Y-m-d H:i:s");
+			if(isset($_GET['d']))
+			{
+				$d=$_GET['d'];
+				if($d==0)
+				{
+					$m--;
+					$d=$this->getUltimoDiaMes($y, $m);
+				}
+				$start=$y."-".$m."-".$d." 00:00:00";
+				$end=$y."-".$m."-".$d." 23:59:59";
+			}
+			if(isset($_GET['m']))
+			{
+				$m=$_GET['m'];
+				$d=$this->getUltimoDiaMes($y, $m);
+				$start=$y."-".$m."-1 00:00:00";
+				$end=$y."-".$m."-".$d." 23:59:59";
+			}
+			$condition="'".$start."'<=fechaVenta AND fechaVenta<='".$end."'";
+			$ventas = new CActiveDataProvider('Venta',
+					array('criteria'=>array(
+							'condition'=>$condition,
+							'with'=>array('idCliente0'),
+							'order'=>'fechaPlazo ASC',
+					),
+							'pagination'=>array(
 									'pageSize'=>20,
-									),));
-		$this->render('credito',array('ventas'=>$ventas,'titulo'=>"Ventas a Credito",'estado'=>"2"));
-	} */
-	
-	public function actionVentas()
-	{
-		$tiempo="";
-		if (isset($_GET['d']))
-		{
-			$date = date("Y-m")."-".$_GET['d'];
-			$tiempo=" and fechaVenta between '".$date." 00:00:00' and '".$date." 23:59:59'";
+							),));
+			
 		}
-		if (isset($_GET['m']))
-		{
-			$date1 = date("Y")."-".$_GET['m']."-1";
-			$date2 = date("Y")."-".($_GET['m']+1)."-1";
-			$tiempo=" and fechaVenta between '".$date1."' and '".$date2."'";
-		}
-		$ventas = new CActiveDataProvider('Venta',
-				array('criteria'=>array(
-						'condition'=>'estado=0'.$tiempo,
-						'with'=>array('Cliente'),),
-						'pagination'=>array(
-						'pageSize'=>20,
-				),));
-		$this->render('venta',array('ventas'=>$ventas,'titulo'=>"Ventas Realizadas",'estado'=>"0"));
+		else 
+			$ventas = new CActiveDataProvider('Venta',
+					array('criteria'=>array(
+							'with'=>array('idCliente0'),
+							'order'=>'fechaPlazo ASC',
+					),
+							'pagination'=>array(
+									'pageSize'=>20,
+							),));
+		$this->render('movimientos',array('ventas'=>$ventas));
 	}
-	
-	
-	
-	/*public function actionConfirm()
-	{
-		if(Yii::app()->request->isAjaxRequest && isset($_GET['id']))
-		{
-			$venta = Venta::model()
-							->with("Detalle")
-							->with("Detalle.Almacen")
-							->findByPk($_GET['id']);
-			$caja = Caja::model()->findByPk($venta->idCaja);	
-			if(isset($_GET['factura']))
-				$venta->factura=$_GET['factura'];
-			if($venta->formaPago==0)
-				$caja->saldo = $caja->saldo+($venta->montoPagado-$venta->montoCambio);
-			
-			if($venta->formaPago==1)
-				$caja->saldo = $caja->saldo+$venta->montoPagado;
-			/*foreach ($venta->Detalle as $detalle)
-			{
-				$almacenes = Almacen::model()->with('Producto')->findByPk($detalle->idAlmacen);
-				$almacenes->stockUnidad = $almacenes->stockUnidad - $detalle->cantUnidad;
-				if($almacenes->stockUnidad<0)
-				{
-					$almacenes->stockPaquete = $almacenes->stockPaquete - 1;
-					$almacenes->stockUnidad = $almacenes->stockUnidad + $almacenes->Producto->cantidad;
-				}
-				$almacenes->stockPaquete = $almacenes->stockPaquete - $detalle->cantPaquete;
-	
-				$almacenes->save();
-			}
-			
-			$venta->estado = 0;
-			if($venta->formaPago==1)
-				$venta->estado = 2;
-			
-			$venta->save();
-		}
-		else
-			throw new CHttpException(400,'Petición no válida.');
-	
-	}*/
-	
-	/*public function actionCancelar()
-	{
-		if(Yii::app()->request->isAjaxRequest && isset($_GET['id']))
-		{
-			$venta = Venta::model()
-						->findByPk($_GET['id']);
-			$venta->estado = -1;
-			$venta->obs = $_GET['obs'];
-			$venta->fechaVenta = date("Y-m-d H:i:s");
-			if($venta->save())
-			{
-				$venta = Venta::model()
-								->with("Detalle")
-								->findByPk($venta->id);
-				foreach ($venta->Detalle as $detalle)
-				{
-					$almacenes = Almacen::model()->with('Producto')->findByPk($detalle->idAlmacen);
-					$almacenes->stockUnidad = $almacenes->stockUnidad + $detalle->cantUnidad;
-					if($almacenes->stockUnidad>$almacenes->Producto->cantidad)
-					{
-						$almacenes->stockPaquete = $almacenes->stockPaquete + 1;
-						$almacenes->stockUnidad = $almacenes->stockUnidad - $almacenes->Producto->cantidad;
-					}
-					$almacenes->stockPaquete = $almacenes->stockPaquete + $detalle->cantPaquete;
-					$almacenes->save();
-				}
-			}
-		}
-		else
-			throw new CHttpException(400,'Petición no válida.');
-		
-	}*/
 	
 	public function actionAjaxCliente()
 	{
@@ -675,5 +617,9 @@ class DistribuidoraController extends Controller
 		$removeLink=CHtml::link('Quitar', '#', array('class'=>'btn btn-danger tabular-input-remove')).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />';
 		$removeLink=strtr("<td>{link}</td>", array('{link}'=>$removeLink));
 		return $removeLink;
+	}
+	
+	protected function getUltimoDiaMes($elAnio,$elMes) {
+		return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
 	}
 }

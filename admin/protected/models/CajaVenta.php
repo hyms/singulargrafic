@@ -14,6 +14,7 @@
  * The followings are the available model relations:
  * @property Caja $idCaja0
  * @property User $idUser0
+ * @property MovimientoCaja[] $movimientoCajas
  * @property Recibos[] $reciboses
  * @property Venta[] $ventas
  */
@@ -54,6 +55,7 @@ class CajaVenta extends CActiveRecord
 		return array(
 			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
 			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
+			'movimientoCajas' => array(self::HAS_MANY, 'MovimientoCaja', 'idCaja'),
 			'reciboses' => array(self::HAS_MANY, 'Recibos', 'idCaja'),
 			'ventas' => array(self::HAS_MANY, 'Venta', 'idCaja'),
 		);

@@ -1,6 +1,8 @@
 <div class="form-group" style="width:793px; height:529px;">
 <?php if(!empty($caja)){?>
-<?php echo CHtml::link('Comprobante', array('index','ce'=>$caja->id), array("class"=>"btn btn-default hidden-print")); ?>
+
+<?php echo CHtml::link('Imprimir', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"printView()")); ?>
+<?php echo CHtml::link('Comprobante', array('index','ce'=>$caja->idCajaVenta), array("class"=>"btn btn-default hidden-print")); ?>
 <?php 
 
 	$dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
@@ -58,13 +60,18 @@
 		<td><?php $saldo=$saldo+$importe; echo $saldo; ?></td>
 	</tr>
 	<?php
-		foreach ($caja->Movimiento as $item)
+		$count = count($caja->movimientoCajas);
+		foreach ($caja->movimientoCajas as $item)
 		{ 
 	?>
 		<tr>
 			<td><?php $index++; echo $index;?></td>
-			
-			<td><?php echo ($item->idComprovante>=0)?$item->idComprovante:""?></td>
+			<?php 
+			if($index==$count)
+				echo "<td>".((empty($caja->Comprovante))?$caja->idComprovante:"")."</td>";
+			else
+				echo "<td></td>";
+			?>
 			
 			<td><?php echo "Saldo del dia Anterior"; ?></td>
 			<?php if($item->tipo==1) {?>
@@ -85,14 +92,14 @@
 		</tr>
 	<?php
 		} 
-		foreach ($caja->Recibo as $item)
+		foreach ($caja->reciboses as $item)
 		{
 			?>
 				<tr>
 					<td><?php $index++; echo $index;?></td>
 					<td><?php ?></td>
 					<td><?php echo "Saldo del dia Anterior"; ?></td>
-					<?php if($item->tipo==1) {?>
+					<?php if($item->tipoRecivo==1) {?>
 					<td><?php echo $item->monto; ?></td>
 					<td><?php echo 0; ?></td>
 					<?php }else{?>

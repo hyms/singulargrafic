@@ -20,7 +20,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 				),
 				array(
 						'header'=>'Saldo',
-						'value'=>'$montoVenta - $montoPagado',
+						'value'=>'$data->montoVenta - $data->montoPagado',
 				),
 				array(
 						'header'=>'FechaPlazo',
@@ -29,7 +29,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 				array(
 						'header'=>'',
 						'type'=>'raw',
-						'value'=>'CHtml::link("cancelar",array("#","id"=>$data->idVenta))',
+						'value'=>'CHtml::link("cancelar",array("caja/deuda","id"=>$data->idVenta,"serv"=>1))',
 				),
 		)
 )); 

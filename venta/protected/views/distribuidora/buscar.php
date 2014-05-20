@@ -65,11 +65,3 @@
 	));
 ?>
 </div>
-<?php 
-/*Yii::app()->clientScript->registerScript('re-install-date-picker', "
-function reinstallDatePicker(id, data) {
-        //use the same parameters that you had set in your widget else the datepicker will be refreshed by default
-    $('#datepicker_for_due_date').datepicker(jQuery.extend({showMonthAfterYear:false},jQuery.datepicker.regional['es'],{'dateFormat':'yy/mm/dd'}));
-}
-");*/
-?>

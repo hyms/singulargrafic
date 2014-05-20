@@ -10,15 +10,18 @@
  * @property double $saldo
  * @property string $fechaArqueo
  * @property integer $entregado
+ * @property string $comprobante
  *
  * The followings are the available model relations:
  * @property Caja $idCaja0
- * @property Users $idUser0
+ * @property User $idUser0
+ * @property MovimientoCaja[] $movimientoCajas
  * @property Recibos[] $reciboses
  * @property Venta[] $ventas
  */
 class CajaVenta extends CActiveRecord
 {
+	public $max;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -37,10 +40,11 @@ class CajaVenta extends CActiveRecord
 		return array(
 			array('idCaja, idUser, entregado', 'numerical', 'integerOnly'=>true),
 			array('saldo', 'numerical'),
+			array('comprobante', 'length', 'max'=>20),
 			array('fechaArqueo', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCajaVenta, idCaja, idUser, saldo, fechaArqueo, entregado', 'safe', 'on'=>'search'),
+			array('idCajaVenta, idCaja, idUser, saldo, fechaArqueo, entregado, comprobante', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,7 +57,8 @@ class CajaVenta extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
-			'idUser0' => array(self::BELONGS_TO, 'Users', 'idUser'),
+			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
+			'movimientoCajas' => array(self::HAS_MANY, 'MovimientoCaja', 'idCaja'),
 			'reciboses' => array(self::HAS_MANY, 'Recibos', 'idCaja'),
 			'ventas' => array(self::HAS_MANY, 'Venta', 'idCaja'),
 		);
@@ -71,6 +76,7 @@ class CajaVenta extends CActiveRecord
 			'saldo' => 'Saldo',
 			'fechaArqueo' => 'Fecha Arqueo',
 			'entregado' => 'Entregado',
+			'comprobante' => 'Comprobante',
 		);
 	}
 
@@ -98,6 +104,7 @@ class CajaVenta extends CActiveRecord
 		$criteria->compare('saldo',$this->saldo);
 		$criteria->compare('fechaArqueo',$this->fechaArqueo,true);
 		$criteria->compare('entregado',$this->entregado);
+		$criteria->compare('comprobante',$this->comprobante,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

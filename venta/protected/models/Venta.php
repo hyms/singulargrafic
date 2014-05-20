@@ -30,6 +30,14 @@
  */
 class Venta extends CActiveRecord
 {
+	public function behaviors()
+	{
+		return array(
+				'dateRangeSearch'=>array(
+						'class'=>'application.components.behaviors.EDateRangeSearchBehavior',
+				),
+		);
+	}
 	/**
 	 * @return string the associated database table name
 	 */
@@ -139,7 +147,7 @@ class Venta extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
+	public $cantidad;
 	public $nit;
 	public $apellido;
 	public $codigos;
@@ -167,6 +175,9 @@ class Venta extends CActiveRecord
 		$criteria->compare('idCliente0.apellido',$this->apellido);
 		$criteria->compare('codigo',$this->codigos);
 		$criteria->compare('serie',$this->codigos);
+		
+		//$criteria->mergeWith($this->dateRangeSearchCriteria('fechaVenta', $this->fechaVenta));
+		//$criteria->mergeWith($this->dateRangeSearchCriteria('fechaPlazo', $this->fechaPlazo));
 		
 		return new CActiveDataProvider($this, array(
 				'criteria'=>$criteria,
