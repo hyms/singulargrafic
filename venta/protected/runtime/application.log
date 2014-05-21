@@ -10887,3 +10887,91 @@ Stack trace:
 REQUEST_URI=/singulardev/venta/index.php/distribuidora/index
 HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos
 ---
+2014/05/21 16:44:31 [error] [php] Undefined variable: tabla (/var/www/singulardev/venta/protected/controllers/DistribuidoraController.php:521)
+Stack trace:
+#0 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#1 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#4 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/movimientos?d=21
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (521)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/21 17:18:10 [error] [php] Trying to get property of non-object (/var/www/singulardev/venta/protected/controllers/DistribuidoraController.php:645)
+Stack trace:
+#0 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#1 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#4 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=1&d=21
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (645)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/21 17:18:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'La Respuesta de la pagina no Existe.' in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php:703
+Stack trace:
+#0 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(644): DistribuidoraController->verifyModel(NULL)
+#1 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionPreviewDay()
+#2 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#4 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#6 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#8 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/framework/web/CWebApplication.php(282): CController->run('previewDay')
+#11 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/p...')
+#12 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=1&d=21
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos?f=1&d=21
+---
+2014/05/21 17:20:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'La Respuesta de la pagina no Existe.' in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php:703
+Stack trace:
+#0 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(644): DistribuidoraController->verifyModel(NULL)
+#1 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionPreviewDay()
+#2 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#4 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#6 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#8 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/framework/web/CWebApplication.php(282): CController->run('previewDay')
+#11 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/p...')
+#12 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=1&d=21
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos?f=1&d=21
+---
+2014/05/21 17:24:50 [error] [php] Undefined index: f (/var/www/singulardev/venta/protected/controllers/DistribuidoraController.php:572)
+Stack trace:
+#0 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#1 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#4 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/movimientos
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (572)
+in /var/www/singulardev/venta/index.php (13)

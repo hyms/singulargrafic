@@ -8187,3 +8187,39 @@ Stack trace:
 REQUEST_URI=/singulardev/admin/index.php/inventario/stock/1
 HTTP_REFERER=http://localhost/singulardev/admin/index.php/inventario/stock/1
 ---
+2014/05/21 18:45:08 [error] [php] Missing argument 1 for CHtml::link(), called in /var/www/singulardev/admin/protected/views/stock/distribuidora.php on line 8 and defined (/var/www/framework/web/helpers/CHtml.php:407)
+Stack trace:
+#0 /var/www/framework/web/CBaseController.php(95): StockController->renderInternal()
+#1 /var/www/framework/web/CController.php(869): StockController->renderFile()
+#2 /var/www/framework/web/CController.php(782): StockController->renderPartial()
+#3 /var/www/singulardev/admin/protected/controllers/StockController.php(77): StockController->render()
+#4 /var/www/framework/web/actions/CInlineAction.php(49): StockController->actionDistribuidora()
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#6 /var/www/framework/web/CController.php(286): StockController->runAction()
+#7 /var/www/framework/web/CController.php(265): StockController->runActionWithFilters()
+#8 /var/www/framework/web/CWebApplication.php(282): StockController->run()
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singulardev/admin/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/admin/index.php/stock/distribuidora
+in /var/www/singulardev/admin/protected/views/stock/distribuidora.php (8)
+in /var/www/singulardev/admin/protected/controllers/StockController.php (77)
+in /var/www/singulardev/admin/index.php (13)
+2014/05/21 18:45:21 [error] [php] Missing argument 1 for CHtml::link(), called in /var/www/singulardev/admin/protected/views/stock/distribuidora.php on line 8 and defined (/var/www/framework/web/helpers/CHtml.php:407)
+Stack trace:
+#0 /var/www/framework/web/CBaseController.php(95): StockController->renderInternal()
+#1 /var/www/framework/web/CController.php(869): StockController->renderFile()
+#2 /var/www/framework/web/CController.php(782): StockController->renderPartial()
+#3 /var/www/singulardev/admin/protected/controllers/StockController.php(77): StockController->render()
+#4 /var/www/framework/web/actions/CInlineAction.php(49): StockController->actionDistribuidora()
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#6 /var/www/framework/web/CController.php(286): StockController->runAction()
+#7 /var/www/framework/web/CController.php(265): StockController->runActionWithFilters()
+#8 /var/www/framework/web/CWebApplication.php(282): StockController->run()
+#9 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/singulardev/admin/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/admin/index.php/stock/distribuidora
+in /var/www/singulardev/admin/protected/views/stock/distribuidora.php (8)
+in /var/www/singulardev/admin/protected/controllers/StockController.php (77)
+in /var/www/singulardev/admin/index.php (13)

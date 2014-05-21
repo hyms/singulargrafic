@@ -1,6 +1,6 @@
 <?php 
 $this->widget('zii.widgets.CMenu',array(
-				'htmlOptions' => array('class' => 'nav nav-tabs'),
+				'htmlOptions' => array('class' => 'nav nav-tabs hidden-print'),
 				'activeCssClass'	=> 'active',
 				'submenuHtmlOptions' => array('class' => 'dropdown-menu'),
 				'encodeLabel' => false,

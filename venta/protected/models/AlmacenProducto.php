@@ -110,7 +110,7 @@ class AlmacenProducto extends CActiveRecord
 		$criteria->with= array(
 				'idProducto0',
 		);
-		$criteria->condition = 'idAlmacen=1';
+		$criteria->condition = 'idAlmacen=2';
 	
 		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
 		$criteria->compare('idProducto',$this->idProducto);

@@ -70,7 +70,7 @@
 								array('label'=>'Cajas y Libro Mayor', 'url'=>array('#')),
 								array('label'=>'Recibos', 'url'=>array('#')),
 						)),
-						array('label'=>'Servicios <b class="caret"></b>', 'url'=>array('#'),
+						array('label'=>'Stocks <b class="caret"></b>', 'url'=>array('#'),
 							'linkOptions'=> array(
 								'class' => 'dropdown-toggle',
 								'data-toggle' => 'dropdown',
@@ -78,7 +78,7 @@
 							'itemOptions' => array('class'=>'dropdown'),
 							'items'=>array(
 								array('label'=>'Pre-Prensa CTP', 'url'=>array('#')),
-								array('label'=>'Distribuidora', 'url'=>array('#')),
+								array('label'=>'Distribuidora', 'url'=>array('stock/distribuidora')),
 								array('label'=>'Imprenta', 'url'=>array('#')),
 								array('label'=>'Editorial', 'url'=>array('#')),
 						)),

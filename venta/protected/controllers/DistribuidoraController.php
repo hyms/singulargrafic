@@ -507,12 +507,116 @@ class DistribuidoraController extends Controller
 	public function actionMovimientos()
 	{
 		$ventas="";
+		$cond1="";
+		$cond2="";
+		$cond3="";
+		$factura="";
+		$f="";
+		if(isset($_GET['f']))
+		{
+			$f=$_GET['f'];
+			if($_GET['f']==0)
+			{
+				$factura=" and tipoVenta=0"; 
+			}
+			else
+			{
+				$factura=" and tipoVenta=1";
+			}
+		}
 		if(isset($_GET['d']) || isset($_GET['m']))
 		{
 			$d=date("d");
 			$m=date("m");
 			$y=date("Y");
 			$start=date("Y-m-d H:i:s"); $end=date("Y-m-d H:i:s");
+			
+			if(isset($_GET['d']))
+			{
+				$cond1=array("distribuidora/movimientos","f"=>0,"d"=>$_GET['d']);
+				$cond2=array("distribuidora/movimientos","f"=>1,"d"=>$_GET['d']);
+				$cond3=array("distribuidora/previewDay","f"=>$f,"d"=>$_GET['d']);
+				$d=$_GET['d'];
+				if($d==0)
+				{
+					$m--;
+					$d=$this->getUltimoDiaMes($y, $m);
+				}
+				$start=$y."-".$m."-".$d." 00:00:00";
+				$end=$y."-".$m."-".$d." 23:59:59";
+			}
+			if(isset($_GET['m']))
+			{
+				$cond1=array("distribuidora/movimientos","f"=>0,"m"=>$_GET['m']);
+				$cond1=array("distribuidora/movimientos","f"=>1,"m"=>$_GET['m']);
+				$cond3=array("distribuidora/previewDay","f"=>$f,"m"=>$_GET['m']);
+				$m=$_GET['m'];
+				$d=$this->getUltimoDiaMes($y, $m);
+				$start=$y."-".$m."-1 00:00:00";
+				$end=$y."-".$m."-".$d." 23:59:59";
+			}
+			$condition="'".$start."'<=fechaVenta AND fechaVenta<='".$end."'";
+			$ventas = new CActiveDataProvider('Venta',
+					array('criteria'=>array(
+							'condition'=>$condition.$factura,
+							'with'=>array('idCliente0'),
+							'order'=>'fechaPlazo ASC',
+					),
+							'pagination'=>array(
+									'pageSize'=>20,
+							),));
+			
+		}
+		else 
+		{
+			$cond1=array("distribuidora/movimientos","f"=>0);
+			$cond2=array("distribuidora/movimientos","f"=>1);
+			$cond3=array("distribuidora/previewDay","f"=>$f);
+			if($factura="")
+			$ventas = new CActiveDataProvider('Venta',
+					array('criteria'=>array(
+							'with'=>array('idCliente0'),
+							'order'=>'fechaPlazo ASC',
+					),
+							'pagination'=>array(
+									'pageSize'=>20,
+							),));
+			else
+				$ventas = new CActiveDataProvider('Venta',
+						array('criteria'=>array(
+								'with'=>array('idCliente0'),
+								'condition'=>$factura,
+								'order'=>'fechaPlazo ASC',
+						),
+								'pagination'=>array(
+										'pageSize'=>20,
+								),));
+					
+		}
+		$this->render('movimientos',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'cond3'=>$cond3));
+	}
+	
+	public function actionPreviewDay()
+	{
+		$fact="";$cond="";
+		if(isset($_GET['f']))
+		{
+			if($_GET['f']==0)
+			{
+				$factura=" and tipoVenta=0";
+			}
+			else
+			{
+				$factura=" and tipoVenta=1";
+			}
+		}
+		if(isset($_GET['d']) || isset($_GET['m']))
+		{
+			$d=date("d");
+			$m=date("m");
+			$y=date("Y");
+			$start=date("Y-m-d H:i:s"); $end=date("Y-m-d H:i:s");
+	
 			if(isset($_GET['d']))
 			{
 				$d=$_GET['d'];
@@ -531,28 +635,17 @@ class DistribuidoraController extends Controller
 				$start=$y."-".$m."-1 00:00:00";
 				$end=$y."-".$m."-".$d." 23:59:59";
 			}
-			$condition="'".$start."'<=fechaVenta AND fechaVenta<='".$end."'";
-			$ventas = new CActiveDataProvider('Venta',
-					array('criteria'=>array(
-							'condition'=>$condition,
-							'with'=>array('idCliente0'),
-							'order'=>'fechaPlazo ASC',
-					),
-							'pagination'=>array(
-									'pageSize'=>20,
-							),));
-			
+			$cond=" and '".$start."'<=fechaVenta AND fechaVenta<='".$end."'";
 		}
-		else 
-			$ventas = new CActiveDataProvider('Venta',
-					array('criteria'=>array(
-							'with'=>array('idCliente0'),
-							'order'=>'fechaPlazo ASC',
-					),
-							'pagination'=>array(
-									'pageSize'=>20,
-							),));
-		$this->render('movimientos',array('ventas'=>$ventas));
+		$caja = $this->verifyModel(CajaVenta::model()
+		->with('ventas')
+		->with('ventas.idCliente0')
+		->with('ventas.detalleVentas')
+		->with('ventas.detalleVentas.idAlmacenProducto0')
+		->with('ventas.detalleVentas.idAlmacenProducto0.idProducto0')
+		->find(array('condition'=>'`t`.idCaja=2'.$fact.$cond)));
+		$tabla = $caja->ventas;
+		$this->render("previewVentas",array('tabla'=>$tabla,));
 	}
 	
 	public function actionAjaxCliente()
@@ -603,6 +696,8 @@ class DistribuidoraController extends Controller
 		else
 			throw new CHttpException(400,'Petición no válida.');
 	}
+	
+	
 	
 	private function verifyModel($model)
 	{

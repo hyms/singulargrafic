@@ -1,19 +1,9 @@
-<?php
-/* @var $this EmpleadoController */
-/* @var $dataProvider CActiveDataProvider */
-
-$this->breadcrumbs=array(
-	'Inventario',
-);
-
-?>
- 
-<h1>Inventario</h1>
-
-<?php echo CHtml::link('Añadir',array('inventario/Create'), array('class' => 'btn btn-default') ); ?>
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'dataProvider'=>$dataProvider,
+<h2>Distribuidora Inventario</h2>
+<?php 
+	echo CHtml::link('Añadir',array('inventario/Create'), array('class' => 'btn btn-default') );
+	
+	$this->widget('zii.widgets.grid.CGridView', array(
+	'dataProvider'=>$productos,
 	'itemsCssClass' => 'table table-hover table-condensed',
 	'htmlOptions' => array('class' => 'table-responsive'),
 	'columns'=>array(

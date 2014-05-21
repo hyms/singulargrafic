@@ -4,7 +4,13 @@
 
 <div class="col-sm-10">
 <?php $this->renderPartial('menuMovimientos');?>
-
+<div class="row">
+<div class="text-center">
+<?php echo CHtml::link('Con Factura', $cond1, array("class"=>"btn btn-default hidden-print")); ?>
+<?php echo CHtml::link('Sin Factura', $cond2, array("class"=>"btn btn-default hidden-print")); ?>
+<?php echo CHtml::link('Imprimir', $cond3, array("class"=>"btn btn-default hidden-print")); ?>
+</div>
+</div>
 <?php 
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$ventas,
@@ -40,3 +46,4 @@
 ?>
 
 </div>
+

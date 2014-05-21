@@ -95,14 +95,14 @@ class ClienteController extends Controller
 		{
 			$datos00=array();
 			$cliente = Cliente::model()
-									->with("Venta")
-									->with("Venta.detalleVentas")
-									->with("Venta.detalleVentas.idAlmacenProducto0")
-									->with("Venta.detalleVentas.idAlmacenProducto0.idProducto0")
-									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and Venta.formaPago=0 and Venta.tipoPago=0','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
+									->with("ventas")
+									->with("ventas.detalleVentas")
+									->with("ventas.detalleVentas.idAlmacenProducto0")
+									->with("ventas.detalleVentas.idAlmacenProducto0.idProducto0")
+									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and ventas.formaPago=0 and ventas.tipoVenta=0','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
 			$temp="";
 			if(!empty($cliente))
-			foreach ($cliente->Venta as $ventas)
+			foreach ($cliente->ventas as $ventas)
 			{
 				foreach ($ventas->detalleVentas as $detalle)
 				{
@@ -112,14 +112,14 @@ class ClienteController extends Controller
 			}
 			$datos01=array();
 			$cliente = Cliente::model()
-									->with("Venta")
-									->with("Venta.detalleVentas")
-									->with("Venta.detalleVentas.idAlmacenProducto0")
-									->with("Venta.detalleVentas.idAlmacenProducto0.idProducto0")
-									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and Venta.formaPago=1 and Venta.tipoPago=0','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
+									->with("ventas")
+									->with("ventas.detalleVentas")
+									->with("ventas.detalleVentas.idAlmacenProducto0")
+									->with("ventas.detalleVentas.idAlmacenProducto0.idProducto0")
+									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and ventas.formaPago=1 and ventas.tipoVenta=0','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
 			$temp="";
 			if(!empty($cliente))
-			foreach ($cliente->Venta as $ventas)
+			foreach ($cliente->ventas as $ventas)
 			{
 				foreach ($ventas->Detalle as $detalle)
 				{
@@ -129,14 +129,14 @@ class ClienteController extends Controller
 			}
 			$datos10=array();
 			$cliente = Cliente::model()
-									->with("Venta")
-									->with("Venta.detalleVentas")
-									->with("Venta.detalleVentas.idAlmacenProducto0")
-									->with("Venta.detalleVentas.idAlmacenProducto0.idProducto0")
-									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and Venta.formaPago=0 and Venta.tipoPago=1','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
+									->with("ventas")
+									->with("ventas.detalleVentas")
+									->with("ventas.detalleVentas.idAlmacenProducto0")
+									->with("ventas.detalleVentas.idAlmacenProducto0.idProducto0")
+									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and ventas.formaPago=0 and ventas.tipoVenta=1','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
 			$temp="";
 			if(!empty($cliente))
-			foreach ($cliente->Venta as $ventas)
+			foreach ($cliente->ventas as $ventas)
 			{
 				foreach ($ventas->Detalle as $detalle)
 				{
@@ -146,14 +146,14 @@ class ClienteController extends Controller
 			}
 			$datos11=array();
 			$cliente = Cliente::model()
-									->with("Venta")
-									->with("Venta.detalleVentas")
-									->with("Venta.detalleVentas.idAlmacenProducto0")
-									->with("Venta.detalleVentas.idAlmacenProducto0.idProducto0")
-									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and Venta.formaPago=1	and Venta.tipoPago=1','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
+									->with("ventas")
+									->with("ventas.detalleVentas")
+									->with("ventas.detalleVentas.idAlmacenProducto0")
+									->with("ventas.detalleVentas.idAlmacenProducto0.idProducto0")
+									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and ventas.formaPago=1	and ventas.tipoVenta=1','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
 			$temp="";
 			if(!empty($cliente))
-			foreach ($cliente->Venta as $ventas)
+			foreach ($cliente->ventas as $ventas)
 			{
 				foreach ($ventas->Detalle as $detalle)
 				{
