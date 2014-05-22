@@ -1,6 +1,5 @@
 <h2>Distribuidora Inventario</h2>
 <?php 
-	echo CHtml::link('Añadir',array('stock/distribuidoraAdd'), array('class' => 'btn btn-default') );
 	
 	$this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$productos,
@@ -55,10 +54,13 @@
 				'value'=>'CHtml::link("Editar",array("inventario/update","id"=>$data->idProducto0->idProducto))'
 		),
 		array(
-				'header'=>'',
+				'header'=>'Distribuidora',
 				'type'=>'raw',
-				'value'=>'CHtml::link("Añadir a Stock",array("stock/stockDistribuidora","id"=>$data->idAlmacenProducto))'
+				'value'=>'$data->distribuidoraLink($data->idAlmacenProducto)',
 		),
 	)
 	));
 ?>
+<div class="text-right">
+<?php echo CHtml::link("Finalizar",array("stock/distribuidora"),array("class"=>"btn btn-default"));?>
+</div>

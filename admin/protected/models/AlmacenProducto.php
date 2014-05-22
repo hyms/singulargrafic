@@ -107,4 +107,15 @@ class AlmacenProducto extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	public function distribuidoraLink($id)
+	{
+		$producto=AlmacenProducto::model()->find('idProducto='.$id." and idAlmacen=2");
+		$return="";
+		if(empty($producto))
+			$return = CHtml::link("Añadir",array("stock/DistribuidoraAdd","id"=>$id));
+		else
+			$return=$producto->stockU."/".$producto->stockP;
+		return $return;
+	}
 }

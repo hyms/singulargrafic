@@ -67,6 +67,7 @@
 							'itemOptions' => array('class'=>'dropdown'),
 							'items'=>array(
 								array('label'=>'Inventario Gral', 'url'=>array('inventario/index')),
+								array('label'=>'Movimientos Almacenes', 'url'=>array('inventario/movimientos')),
 								array('label'=>'Cajas y Libro Mayor', 'url'=>array('#')),
 								array('label'=>'Recibos', 'url'=>array('#')),
 						)),
@@ -82,7 +83,7 @@
 								array('label'=>'Imprenta', 'url'=>array('#')),
 								array('label'=>'Editorial', 'url'=>array('#')),
 						)),
-						array('label'=>'Reportes', 'url'=>array('#')),
+						array('label'=>'Reportes', 'url'=>array('report/')),
 						
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)

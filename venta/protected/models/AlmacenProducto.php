@@ -146,4 +146,6 @@ class AlmacenProducto extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	
 }

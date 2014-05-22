@@ -144,6 +144,22 @@ class InventarioController extends Controller
 			throw new CHttpException(400,'La Respuesta de la pagina no Existe.');
 	}
 	
+	public function actionMovimientos()
+	{
+		$movimientos=new CActiveDataProvider('MovimientoAlmacen',
+				array(
+						'criteria'=>array(
+								'with'=>array('idAlmacenOrigen0','idAlmacenDestino0','idProducto0'),
+								'order'=>'fechaMovimiento DESC',
+						),
+						'pagination'=>array(
+								'pageSize'=>'20',
+						),));
+		$this->render('movimientos',array(
+				'movimientos'=>$movimientos
+		));		
+	}
+	
 	private function initStock($id)
 	{
 		$almacen = new AlmacenProducto;
