@@ -9554,3 +9554,27 @@ Stack trace:
 REQUEST_URI=/singulardev/admin/index.php/report
 HTTP_REFERER=http://localhost/singulardev/admin/index.php/report
 ---
+2014/05/23 15:35:38 [error] [exception.CException] exception 'CException' with message 'ReportController cannot find the requested view "menuMovimientos".' in /var/www/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/singulardev/admin/protected/views/report/venta/movimientos.php(6): CController->renderPartial('menuMovimientos')
+#1 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#2 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#3 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#4 /var/www/singulardev/admin/protected/views/report/venta.php(6): CController->renderPartial('venta/movimient...', Array)
+#5 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#6 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#7 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(782): CController->renderPartial('venta', Array, true)
+#9 /var/www/singulardev/admin/protected/controllers/ReportController.php(146): CController->render('venta', Array)
+#10 /var/www/framework/web/actions/CInlineAction.php(49): ReportController->actionVenta()
+#11 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#12 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#13 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), NULL)
+#14 /var/www/framework/web/CWebApplication.php(282): CController->run('venta')
+#15 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('report/venta')
+#16 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#17 /var/www/singulardev/admin/index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/singulardev/admin/index.php/report/venta
+HTTP_REFERER=http://localhost/singulardev/admin/index.php/report/producto
+---
