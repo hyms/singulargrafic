@@ -121,12 +121,7 @@
 	
 	<div class="form-group">
 		<p class="text-center">
-			<?php echo CHtml::button('Atras', array(
-	            'name' => 'btnBack',
-	            'class' => 'btn btn-default',
-	            'onclick' => "history.go(-1)",
-	                )
-	        ); ?>
+			<?php echo CHtml::link('Atras', array('inventario/index'),array('class'=>'btn btn-default')); ?>
 			<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default')); ?>
 		</p>
 	</div>
