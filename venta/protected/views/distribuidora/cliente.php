@@ -15,7 +15,6 @@
 	
 <?php Yii::app()->getClientScript()->registerScript("ajax_cliente",
 "
-   
 	function cliente (nitCi)
 	{
 		nitCi = jQuery.trim(nitCi);
@@ -26,8 +25,10 @@
 	            data: { nitCi: nitCi},
 	            success: function (data){ 
 				 			data = JSON.parse(data);
-	            			$('#apellido').val(data[\"apellido\"]); 
-	            			$('#clienteNit').val(data[\"nitCi\"]);
+							if(data[\"deuda\"])
+								alert(\"El Cliente data[\"cliente\"][\"apellido\"] tiene una deuda\");
+	            			$('#apellido').val(data[\"cliente\"][\"apellido\"]); 
+	            			$('#clienteNit').val(data[\"cliente\"][\"nitCi\"]);
 						 },
 				error:	$('#clienteNit').val(nitCi),
 	        });

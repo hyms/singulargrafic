@@ -124,7 +124,7 @@ class SiteController extends Controller
 			if(isset($_POST['Users']))
 			{
 				$model->attributes = $_POST['Users'];
-	
+				$model->password = $_POST['Users']['password'];
 				if($model->idUser!=null)
 				{
 				$userBpk = Users::model()->findByPk($model->idUser);

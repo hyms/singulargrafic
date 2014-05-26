@@ -11015,3 +11015,25 @@ Stack trace:
 REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=1&d=21
 HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos?f=1&d=21
 ---
+2014/05/26 16:20:05 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in /var/www/singulardev/venta/protected/controllers/SiteController.php (126)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/26 16:20:24 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in /var/www/singulardev/venta/protected/controllers/SiteController.php (126)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/26 16:23:50 [error] [php] Trying to get property of non-object (/var/www/singulardev/venta/protected/controllers/DistribuidoraController.php:75)
+Stack trace:
+#0 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#1 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#4 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/notas
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (75)
+in /var/www/singulardev/venta/index.php (13)

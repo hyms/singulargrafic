@@ -23,7 +23,7 @@
 </head>
 
 <body>
-	<div class="navbar navbar-default navbar-static-top">
+	<div class="navbar navbar-default ">
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">

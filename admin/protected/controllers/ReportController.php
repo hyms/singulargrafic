@@ -85,8 +85,8 @@ class ReportController extends Controller
 				
 			if(isset($_GET['d']))
 			{
-				$cond1=array("distribuidora/movimientos","f"=>0,"d"=>$_GET['d']);
-				$cond2=array("distribuidora/movimientos","f"=>1,"d"=>$_GET['d']);
+				$cond1=array("report/venta","f"=>0,"d"=>$_GET['d']);
+				$cond2=array("report/venta","f"=>1,"d"=>$_GET['d']);
 				$d=$_GET['d'];
 				if($d==0)
 				{
@@ -98,8 +98,8 @@ class ReportController extends Controller
 			}
 			if(isset($_GET['m']))
 			{
-				$cond1=array("distribuidora/movimientos","f"=>0,"m"=>$_GET['m']);
-				$cond1=array("distribuidora/movimientos","f"=>1,"m"=>$_GET['m']);
+				$cond1=array("report/venta","f"=>0,"m"=>$_GET['m']);
+				$cond1=array("report/venta","f"=>1,"m"=>$_GET['m']);
 				$m=$_GET['m'];
 				$d=$this->getUltimoDiaMes($y, $m);
 				$start=$y."-".$m."-1 00:00:00";
@@ -119,8 +119,8 @@ class ReportController extends Controller
 		}
 		else
 		{
-			$cond1=array("distribuidora/movimientos","f"=>0);
-			$cond2=array("distribuidora/movimientos","f"=>1);
+			$cond1=array("report/venta","f"=>0);
+			$cond2=array("report/venta","f"=>1);
 			if($factura="")
 				$ventas = new CActiveDataProvider('Venta',
 						array('criteria'=>array(

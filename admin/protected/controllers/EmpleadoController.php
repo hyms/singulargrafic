@@ -131,7 +131,6 @@ class EmpleadoController extends Controller
 		if(isset($_GET['id']))
 		{
 			$model = Users::model()->find('idEmpleado='.$_GET['id']);
-			$empleado = new Empleado;
 			if(empty($model))
 			{
 				$model = new Users;
@@ -146,17 +145,18 @@ class EmpleadoController extends Controller
 			    Yii::app()->end();
 			}
 			*/
-			
+			//print_r($model);
 			$empleado = Empleado::model()->findByPk($model->idEmpleado);
 			
 			if(isset($_POST['Users']))
 			{
 				$model->attributes = $_POST['Users'];
-				
-				if($model->idUser!=null)
+				$model->password = $_POST['Users']['password'];
+				if(!empty($model->idUser))
 				{
 					$userBpk = Users::model()->findByPk($model->idUser);
-					if($userBpk->password != $model->password)
+					//print_r($userBpk->password." ".$model->password);
+					if($userBpk->password !== $model->password)
 						$model->password = md5($model->password);
 				}
 				else 
@@ -164,10 +164,12 @@ class EmpleadoController extends Controller
 					$model->password = md5($model->password);
 				}
 				
-				//print_r($model);
+				
 				//$model->validate();
 				if($model->save())
+				{
 					$this->redirect(array('index'));
+				}
 			}
 			$this->render('formDate',array('model'=>$model,'empleado'=>$empleado));
 		}

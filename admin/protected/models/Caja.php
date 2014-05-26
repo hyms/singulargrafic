@@ -63,7 +63,7 @@ class Caja extends CActiveRecord
 		return array(
 			'idCaja' => 'Id Caja',
 			'nombre' => 'Nombre',
-			'idParent' => 'Id Parent',
+			'idParent' => 'Caja Superior',
 		);
 	}
 
@@ -93,7 +93,15 @@ class Caja extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-
+	
+	public function getCajas()
+	{
+		$cajas = Caja::model()->findAll();
+		if(!empty($this->idCaja))
+			$cajas = Caja::model()->findAll("idCaja!=".$this->idCaja);
+		$cajas = CHtml::listData($cajas,'idCaja','nombre');
+		return $cajas;
+	}
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

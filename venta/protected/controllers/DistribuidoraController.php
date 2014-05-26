@@ -51,7 +51,7 @@ class DistribuidoraController extends Controller
 		$cliente = new Cliente;
 		$detalle = new DetalleVenta;
 		$venta = new Venta;
-		$caja = CajaVenta::model()->find(array('condition'=>'idCaja=2 and idUser='.Yii::app()->user->id.' and fechaArqueo is NULL'));
+		$caja = $this->verifyModel(CajaVenta::model()->find(array('condition'=>'idCaja=2 and idUser='.Yii::app()->user->id.' and fechaArqueo is NULL')));
 		//Yii::app()->user->id;
 		
 		//init default values
@@ -652,7 +652,11 @@ class DistribuidoraController extends Controller
 	{
 		if(Yii::app()->request->isAjaxRequest && isset($_GET['nitCi']))
 		{
-			$cliente = $this->verifyModel(Cliente::model()->find('nitCi='.$_GET['nitCi']));
+			$cliente = $this->verifyModel(Cliente::model()->with('ventas')->find('nitCi='.$_GET['nitCi']));
+			$deuda=false;
+			if($cliente->ventas->montoVenta > $cliente->ventas->montoPagado)
+				$deuda=true;
+			$cliente = array('cliente'=>$cliente,'deuda'=>$deuda);
 			echo CJSON::encode($cliente);
 		}
 	}

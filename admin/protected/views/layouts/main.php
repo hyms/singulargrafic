@@ -27,7 +27,7 @@
 </head>
 
 <body>
-	<div class="navbar navbar-inverse navbar-static-top">
+	<div class="navbar navbar-inverse ">
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
@@ -68,7 +68,7 @@
 							'items'=>array(
 								array('label'=>'Inventario Gral', 'url'=>array('inventario/index')),
 								array('label'=>'Movimientos Almacenes', 'url'=>array('inventario/movimientos')),
-								array('label'=>'Cajas y Libro Mayor', 'url'=>array('#')),
+								array('label'=>'Cajas y Libro Mayor', 'url'=>array('caja/')),
 								array('label'=>'Recibos', 'url'=>array('#')),
 						)),
 						array('label'=>'Stocks <b class="caret"></b>', 'url'=>array('#'),

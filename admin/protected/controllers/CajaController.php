@@ -15,19 +15,47 @@ class CajaController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Caja');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-				'criteria'=>array(
-					'with'=>'CajaTipo',
-				),
-				
-			'pagination'=>array(
-				'pageSize'=>20,
-			),
-		));
+		/*$dataProvider=new CActiveDataProvider('Caja',
+				array(	
+						'criteria'=>array(
+							'with'=>array('cajaVentas','cajaVentas.idUser0'),
+						),
+						'pagination'=>array(
+						'pageSize'=>'20',
+				),));*/
+		$cajas = Caja::model()->with('cajaVentas')->with('cajaVentas.idUser0')->findAll();
+		$this->render('index',array('cajas'=>$cajas));
 	}
-
+	
+	public function actionCaja()
+	{
+		$model=new Caja;
+		
+		if(isset($_GET['id']))
+			$model=Caja::model()->findByPk($_GET['id']);
+	
+		// uncomment the following code to enable ajax-based validation
+		/*
+		if(isset($_POST['ajax']) && $_POST['ajax']==='caja-cajaForm-form')
+		{
+		echo CActiveForm::validate($model);
+		Yii::app()->end();
+		}
+		*/
+	
+		if(isset($_POST['Caja']))
+		{
+			$model->attributes=$_POST['Caja'];
+			if($model->save())
+			{
+			// form inputs are valid, do something here
+				$this->redirect(array('index'));
+			}
+		}
+		$this->render('cajaForm',array('model'=>$model));
+	}
+			
+			
 	/**
 	 * Performs the AJAX validation.
 	 * @param Caja $model the model to be validated

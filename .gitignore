@@ -12,6 +12,7 @@ venta/assets/
 venta/protected/runtime/
 venta/protected/config/main.php
 venta/themes/classic/views/
+
 .buildpath
 .project
 .settings/

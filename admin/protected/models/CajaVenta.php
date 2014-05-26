@@ -54,7 +54,7 @@ class CajaVenta extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
-			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
+			'idUser0' => array(self::BELONGS_TO, 'Users', 'idUser'),
 			'movimientoCajas' => array(self::HAS_MANY, 'MovimientoCaja', 'idCaja'),
 			'reciboses' => array(self::HAS_MANY, 'Recibos', 'idCaja'),
 			'ventas' => array(self::HAS_MANY, 'Venta', 'idCaja'),
