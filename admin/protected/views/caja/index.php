@@ -32,7 +32,7 @@ $index=0;
 			echo $us;
 		?></td>
 		<td><?php echo CHtml::link("Editar",array("caja/caja","id"=>$item->idCaja));?></td>
-		<td><?php echo CHtml::link("Asignar a",array("#","id"=>$item->idCaja));?></td>
+		<td><?php echo CHtml::link("Asignar a",array("caja/assign","id"=>$item->idCaja));?></td>
 		</tr>
 		<?php 
 	} 
