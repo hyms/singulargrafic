@@ -25,8 +25,8 @@
 	            data: { nitCi: nitCi},
 	            success: function (data){ 
 				 			data = JSON.parse(data);
-							if(data[\"deuda\"])
-								alert(\"El Cliente data[\"cliente\"][\"apellido\"] tiene una deuda\");
+							if(data[\"deuda\"]==true)
+							{	alert(\"El Cliente \"+data[\"cliente\"][\"apellido\"]+\" tiene una deuda\");	}
 	            			$('#apellido').val(data[\"cliente\"][\"apellido\"]); 
 	            			$('#clienteNit').val(data[\"cliente\"][\"nitCi\"]);
 						 },

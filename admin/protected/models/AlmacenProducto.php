@@ -96,7 +96,44 @@ class AlmacenProducto extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-
+	
+	public $codigo;
+	public $detalle;
+	public $material;
+	public $color;
+	public $marca;
+	public $paquete;
+	public function searchDistribuidora()
+	{
+		$criteria=new CDbCriteria;
+	
+		$criteria->with= array(
+				'idProducto0',
+		);
+		$criteria->condition = 'idAlmacen=1';
+	
+		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
+		$criteria->compare('idProducto',$this->idProducto);
+		$criteria->compare('stockU',$this->stockU);
+		$criteria->compare('stockP',$this->stockP);
+		//$criteria->compare('idAlmacen',$this->idAlmacen);
+	
+		$criteria->compare('idProducto0.codigo',$this->codigo,true);
+		$criteria->compare('idProducto0.detalle',$this->detalle,true);
+		$criteria->compare('idProducto0.material',$this->material,true);
+		$criteria->compare('idProducto0.color',$this->color,true);
+		$criteria->compare('idProducto0.marca',$this->marca,true);
+		$criteria->compare('idProducto0.cantXPaquete',$this->paquete,true);
+		//$criteria->compare('idProducto',$this->idProducto);
+		//$criteria->compare('stockU',$this->stockU);
+		//$criteria->compare('stockP',$this->stockP);
+		//$criteria->compare('idAlmacen',$this->idAlmacen);
+	
+		return new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
+				
+		));
+	}
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

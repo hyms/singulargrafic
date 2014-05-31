@@ -11,8 +11,10 @@ $this->breadcrumbs=array(
 <h1>Inventario</h1>
 
 <?php echo CHtml::link('Añadir',array('inventario/Create'), array('class' => 'btn btn-default') ); ?>
+<?php echo CHtml::link('Dercargar Excel',array('inventario/excel'), array('class' => 'btn btn-link') ); ?>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php 
+$this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
 	'itemsCssClass' => 'table table-hover table-condensed',
 	'htmlOptions' => array('class' => 'table-responsive'),
@@ -32,7 +34,7 @@ $this->breadcrumbs=array(
 		),
 		array(
 				'header'=>'Detalle Producto',
-				'value'=>'$data->idProducto0->color." ".$data->idProducto0->detalle'
+				'value'=>'$data->idProducto0->color." ".$data->idProducto0->detalle." ".$data->idProducto0->marca'
 		),
 		array(
 				'header'=>'Precio S/F',

@@ -98,17 +98,17 @@ if(count($detalle)>=1)
 	
 	function resta(a,b)
 	{
-		
 		return ((a*1) - (b*1));
 	}
    
 ",CClientScript::POS_HEAD); ?>
 
 <?php Yii::app()->getClientScript()->registerScript("ajax_detalleventa","
-$('#pagado').blur(function(e){
+	$('#pagado').blur(function(e){
 		$('#cambio').val(resta($('#pagado').val(),$('#total').val()).toFixed(2));
 		return true;
 	});
+		
 	$('#pagado').keydown(function(e){
 		if(e.keyCode==13 || e.keyCode==9) 
 	    { 

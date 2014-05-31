@@ -279,7 +279,7 @@ class DistribuidoraController extends Controller
 					$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($detalle[$i]->idAlmacenProducto);
 					if($venta->tipoVenta==0)
 					{
-						$detalle[$i]->costoTotal=($almacen->idProducto0->precioSFP*$detalle[$i]->cantidadU)+($almacen->idProducto0->precioCFP*$detalle[$i]->cantidadP)+$detalle[$i]->costoAdicional;
+						$detalle[$i]->costoTotal=($almacen->idProducto0->precioCFU*$detalle[$i]->cantidadU)+($almacen->idProducto0->precioCFP*$detalle[$i]->cantidadP)+$detalle[$i]->costoAdicional;
 						$detalle[$i]->costoP = $almacen->idProducto0->precioCFP;
 						$detalle[$i]->costoU = $almacen->idProducto0->precioCFU;
 					}

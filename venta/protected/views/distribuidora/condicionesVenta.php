@@ -71,6 +71,7 @@ function formaPago(value)
 $('#Venta_tipoVenta_0').change(function(){
 	factura();
 });
+			
 $('#Venta_tipoVenta_1').change(function(){
 	factura();
 });
@@ -103,4 +104,5 @@ $('#descuento').blur(function(e){
 	$('#total').val(resta($('#total').val(),$('#descuento').val()).toFixed(2));
 	cambio();
 });
+			
 ",CClientScript::POS_READY);?>

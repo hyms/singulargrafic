@@ -11037,3 +11037,57 @@ Stack trace:
 REQUEST_URI=/singulardev/venta/index.php/distribuidora/notas
 in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (75)
 in /var/www/singulardev/venta/index.php (13)
+2014/05/31 12:53:25 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 12:53:31 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 12:53:36 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 12:53:44 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 12:53:50 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 12:56:41 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 12:57:12 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 12:57:15 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 12:58:49 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 12:59:18 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 12:59:28 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 13:00:00 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 13:00:09 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 13:01:03 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 13:01:06 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 13:02:09 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 13:02:16 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)
+2014/05/31 13:03:57 [warning] [application] Failed to set unsafe attribute "obs" of "Venta".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (252)
+in /var/www/singulardev/venta/index.php (13)

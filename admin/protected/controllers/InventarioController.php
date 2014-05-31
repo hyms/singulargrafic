@@ -160,6 +160,109 @@ class InventarioController extends Controller
 		));		
 	}
 	
+	public function actionExcel()
+	{
+		$dataProvider=new AlmacenProducto;
+		
+		$this->widget('ext.EExcelView.EExcelView', array(
+				'dataProvider'=> $dataProvider->searchDistribuidora(),
+				'title'=>'Title',
+				'autoWidth'=>true,
+				'exportType'=>'Excel2007',
+				'filename'=>'report',
+				'grid_mode'=>'export',
+		));
+		/*
+		Yii::import('ext.phpexcel.XPHPExcel');      
+		$objPHPExcel= XPHPExcel::createPHPExcel();
+	    $objPHPExcel->getProperties()->setCreator("Grafica Singular")
+	    						->setLastModifiedBy("Grafica Singular")
+	                            ->setTitle("Office 2007 XLSX Test Document")
+	                            ->setSubject("Office 2007 XLSX Test Document")
+	                            ->setDescription("Reports.");
+	 
+	 
+		// Add some data
+		$objPHPExcel->setActiveSheetIndex(0)
+		            ->setCellValue('A1', 'Hello')
+		            ->setCellValue('B2', 'world!')
+		            ->setCellValue('C1', 'Hello')
+		            ->setCellValue('D2', 'world!');
+		 
+		// Rename worksheet
+		$objPHPExcel->getActiveSheet()->setTitle('Report');
+		 
+		 
+		// Set active sheet index to the first sheet, so Excel opens this as the first sheet
+		$objPHPExcel->setActiveSheetIndex(0);
+		 
+		 
+		// Redirect output to a clientâ€™s web browser (Excel5)
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="Report.xls"');
+		header('Cache-Control: max-age=0');
+		// If you're serving to IE 9, then the following may be needed
+		header('Cache-Control: max-age=1');
+		 
+		// If you're serving to IE over SSL, then the following may be needed
+		header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+		header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+		header ('Pragma: public'); // HTTP/1.0
+		 
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+		$objWriter->save('php://output');
+     	Yii::app()->end();*/
+		//$this->redirect("index");		
+	}
+	
+	
+	private function createExcel($columnsTitle,$content,$sum=array(),$title="")
+	{
+		if($title=="")
+		{
+			$title="Reports";
+		}
+		Yii::import('ext.phpexcel.XPHPExcel');
+		$objPHPExcel= XPHPExcel::createPHPExcel();
+		$objPHPExcel->getProperties()->setCreator("Grafica Singular")
+		->setLastModifiedBy("Grafica Singular")
+		->setTitle($title)
+		->setSubject($title)
+		->setDescription($title.".xlsx");
+		
+		
+		// Add some data
+		$objPHPExcel->setActiveSheetIndex(0)
+		->setCellValue('A1', 'Hello')
+		->setCellValue('B2', 'world!')
+		->setCellValue('C1', 'Hello')
+		->setCellValue('D2', 'world!');
+			
+		// Rename worksheet
+		$objPHPExcel->getActiveSheet()->setTitle('Report');
+			
+			
+		// Set active sheet index to the first sheet, so Excel opens this as the first sheet
+		$objPHPExcel->setActiveSheetIndex(0);
+			
+			
+		// Redirect output to a clientâ€™s web browser (Excel5)
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="Report.xls"');
+		header('Cache-Control: max-age=0');
+		// If you're serving to IE 9, then the following may be needed
+		header('Cache-Control: max-age=1');
+			
+		// If you're serving to IE over SSL, then the following may be needed
+		header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+		header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+		header ('Pragma: public'); // HTTP/1.0
+			
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+		$objWriter->save('php://output');
+		Yii::app()->end();
+	}
+	
 	private function initStock($id)
 	{
 		$almacen = new AlmacenProducto;
