@@ -11,7 +11,7 @@ $this->breadcrumbs=array(
 <h1>Inventario</h1>
 
 <?php echo CHtml::link('Añadir',array('inventario/Create'), array('class' => 'btn btn-default') ); ?>
-<?php echo CHtml::link('Dercargar Excel',array('inventario/excel'), array('class' => 'btn btn-link') ); ?>
+<?php echo CHtml::link('Dercargar Excel',array('inventario/index','excel'=>true), array('class' => 'btn btn-link') ); ?>
 
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(

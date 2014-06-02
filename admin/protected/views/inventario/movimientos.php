@@ -1,4 +1,5 @@
 <h1>Movimientos de Alamacenes</h1>
+<?php echo CHtml::link('Dercargar Excel',array('inventario/movimientos','excel'=>true), array('class' => 'btn btn-link') ); ?>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$movimientos,
 	'itemsCssClass' => 'table table-hover table-condensed',
@@ -39,7 +40,7 @@
 		),
 		array(
 				'header'=>'Cant. Paquete',
-				'value'=>'$data->cantidadU'
+				'value'=>'$data->cantidadP'
 		),
 		array(
 				'header'=>'Fecha',

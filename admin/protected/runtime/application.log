@@ -10939,3 +10939,14 @@ Stack trace:
 REQUEST_URI=/singulardev/admin/index.php/inventario/excel
 HTTP_REFERER=http://localhost/singulardev/admin/index.php/inventario/index
 ---
+2014/06/02 18:20:22 [error] [php] Undefined variable: almacenProducto (/var/www/singulardev/admin/protected/controllers/InventarioController.php:187)
+Stack trace:
+#0 /var/www/framework/web/CController.php(286): InventarioController->runAction()
+#1 /var/www/framework/web/CController.php(265): InventarioController->runActionWithFilters()
+#2 /var/www/framework/web/CWebApplication.php(282): InventarioController->run()
+#3 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#5 /var/www/singulardev/admin/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/admin/index.php/inventario/movimientos?excel=1
+in /var/www/singulardev/admin/protected/controllers/InventarioController.php (187)
+in /var/www/singulardev/admin/index.php (13)

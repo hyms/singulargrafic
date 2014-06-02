@@ -45,6 +45,32 @@ class InventarioController extends Controller
 	
 	public function actionIndex()
 	{
+		if(isset($_GET['excel']))
+		{
+			if($_GET['excel'])
+			{
+				$almacenProducto= AlmacenProducto::model()->with('idProducto0')->findAll('idAlmacen=1');
+				
+				$columnsTitle=array('Nro','Codigo','Material','Detalle Producto','Precio S/F','Precio C/F','Industria','Cant.xPaqt.','Stock Unidad','Stock Paquete');
+				$content=array();
+				$index=1;
+				foreach ($almacenProducto as $item)
+				{
+					array_push($content,array($index,
+					$item->idProducto0->codigo,
+					$item->idProducto0->material,
+					$item->idProducto0->color." ".$item->idProducto0->detalle." ".$item->idProducto0->marca,
+					$item->idProducto0->precioSFU."/".$item->idProducto0->precioSFP,
+					$item->idProducto0->precioCFU."/".$item->idProducto0->precioCFP,
+					$item->idProducto0->industria,
+					$item->idProducto0->cantXPaquete,
+					$item->stockU,
+					$item->stockP));
+					$index++;
+				}
+				$this->createExcel($columnsTitle, $content);
+			}
+		}
 		$dataProvider=new CActiveDataProvider('AlmacenProducto',
 				array(	
 						'criteria'=>array(
@@ -146,6 +172,35 @@ class InventarioController extends Controller
 	
 	public function actionMovimientos()
 	{
+		if(isset($_GET['excel']))
+		{
+			if($_GET['excel'])
+			{
+				$movimientos=MovimientoAlmacen::model()
+													->with('idAlmacenOrigen0')
+													->with('idAlmacenDestino0')
+													->with('idProducto0')
+													->findAll(array('order'=>'fechaMovimiento DESC'));
+				$columnsTitle=array('Nro','Codigo','Material','Detalle Producto','Industria','De','A','Cant. Unidad','Cant. Paquete','Fecha');
+				$content=array();
+				$index=1;
+				foreach ($movimientos as $item)
+				{
+					array_push($content,array($index,
+					$item->idProducto0->codigo,
+					$item->idProducto0->material,
+					$item->idProducto0->color." ".$item->idProducto0->detalle." ".$item->idProducto0->marca,
+					$item->idProducto0->industria,
+					(!empty($item->idAlmacenOrigen0))?$item->idAlmacenOrigen0->nombre:"",
+					$item->idAlmacenDestino0->nombre,
+					$item->cantidadU,
+					$item->cantidadP,
+					$item->fechaMovimiento));
+					$index++;
+				}
+				$this->createExcel($columnsTitle, $content);
+			}
+		}
 		$movimientos=new CActiveDataProvider('MovimientoAlmacen',
 				array(
 						'criteria'=>array(
@@ -160,62 +215,6 @@ class InventarioController extends Controller
 		));		
 	}
 	
-	public function actionExcel()
-	{
-		$dataProvider=new AlmacenProducto;
-		
-		$this->widget('ext.EExcelView.EExcelView', array(
-				'dataProvider'=> $dataProvider->searchDistribuidora(),
-				'title'=>'Title',
-				'autoWidth'=>true,
-				'exportType'=>'Excel2007',
-				'filename'=>'report',
-				'grid_mode'=>'export',
-		));
-		/*
-		Yii::import('ext.phpexcel.XPHPExcel');      
-		$objPHPExcel= XPHPExcel::createPHPExcel();
-	    $objPHPExcel->getProperties()->setCreator("Grafica Singular")
-	    						->setLastModifiedBy("Grafica Singular")
-	                            ->setTitle("Office 2007 XLSX Test Document")
-	                            ->setSubject("Office 2007 XLSX Test Document")
-	                            ->setDescription("Reports.");
-	 
-	 
-		// Add some data
-		$objPHPExcel->setActiveSheetIndex(0)
-		            ->setCellValue('A1', 'Hello')
-		            ->setCellValue('B2', 'world!')
-		            ->setCellValue('C1', 'Hello')
-		            ->setCellValue('D2', 'world!');
-		 
-		// Rename worksheet
-		$objPHPExcel->getActiveSheet()->setTitle('Report');
-		 
-		 
-		// Set active sheet index to the first sheet, so Excel opens this as the first sheet
-		$objPHPExcel->setActiveSheetIndex(0);
-		 
-		 
-		// Redirect output to a clientâ€™s web browser (Excel5)
-		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename="Report.xls"');
-		header('Cache-Control: max-age=0');
-		// If you're serving to IE 9, then the following may be needed
-		header('Cache-Control: max-age=1');
-		 
-		// If you're serving to IE over SSL, then the following may be needed
-		header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
-		header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-		header ('Pragma: public'); // HTTP/1.0
-		 
-		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-		$objWriter->save('php://output');
-     	Yii::app()->end();*/
-		//$this->redirect("index");		
-	}
-	
-	
 	private function createExcel($columnsTitle,$content,$sum=array(),$title="")
 	{
 		if($title=="")
@@ -224,28 +223,42 @@ class InventarioController extends Controller
 		}
 		Yii::import('ext.phpexcel.XPHPExcel');
 		$objPHPExcel= XPHPExcel::createPHPExcel();
-		$objPHPExcel->getProperties()->setCreator("Grafica Singular")
+		$objPHPExcel->getProperties()
+		->setCreator("Grafica Singular")
 		->setLastModifiedBy("Grafica Singular")
 		->setTitle($title)
 		->setSubject($title)
 		->setDescription($title.".xlsx");
 		
+		$column=65;
+		//assign titles 
+		foreach ($columnsTitle as $item)
+		{
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).'1', $item);
+			$objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
+			$column++;
+		}
 		
-		// Add some data
-		$objPHPExcel->setActiveSheetIndex(0)
-		->setCellValue('A1', 'Hello')
-		->setCellValue('B2', 'world!')
-		->setCellValue('C1', 'Hello')
-		->setCellValue('D2', 'world!');
-			
+		//create content
+		$index=2;
+		foreach ($content as $items)
+		{
+			$column=65;
+			foreach ($items as $item)
+			{
+				
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).($index), $item);
+				$objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
+				$column++;
+			}
+			$index++;
+		}
 		// Rename worksheet
 		$objPHPExcel->getActiveSheet()->setTitle('Report');
 			
 			
 		// Set active sheet index to the first sheet, so Excel opens this as the first sheet
 		$objPHPExcel->setActiveSheetIndex(0);
-			
-			
 		// Redirect output to a clientâ€™s web browser (Excel5)
 		header('Content-Type: application/vnd.ms-excel');
 		header('Content-Disposition: attachment;filename="Report.xls"');
