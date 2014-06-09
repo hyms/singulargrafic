@@ -76,6 +76,7 @@ class InventarioController extends Controller
 						'criteria'=>array(
 							'condition'=>'idAlmacen=1',
 							'with'=>array('idProducto0'),
+							'order'=>'idProducto0.Material, idProducto0.codigo, idProducto0.detalle',
 						),
 						'pagination'=>array(
 						'pageSize'=>'20',

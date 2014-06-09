@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-05-2014 a las 13:10:22
+-- Tiempo de generación: 09-06-2014 a las 19:29:07
 -- Versión del servidor: 5.5.37
--- Versión de PHP: 5.4.4-14+deb7u9
+-- Versión de PHP: 5.4.4-14+deb7u10
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `almacen` (
   `idParent` int(11) DEFAULT NULL,
   PRIMARY KEY (`idAlmacen`),
   KEY `fk_almacen_almacen1` (`idParent`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `almacen`
@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS `almacen` (
 
 INSERT INTO `almacen` (`idAlmacen`, `nombre`, `idParent`) VALUES
 (1, 'Deposito Central', NULL),
-(2, 'Tienda', 1);
+(2, 'Tienda', 1),
+(3, 'CTP', 1);
 
 -- --------------------------------------------------------
 
@@ -57,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `almacenProducto` (
   PRIMARY KEY (`idAlmacenProducto`),
   KEY `fk_almacenProducto_producto1` (`idProducto`),
   KEY `fk_almacenProducto_almacen1` (`idAlmacen`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=75 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=114 ;
 
 --
 -- Volcado de datos para la tabla `almacenProducto`
@@ -137,7 +138,46 @@ INSERT INTO `almacenProducto` (`idAlmacenProducto`, `idProducto`, `stockU`, `sto
 (71, 70, 0, 0, 1),
 (72, 71, 0, 0, 1),
 (73, 72, 0, 0, 1),
-(74, 73, 0, 0, 1);
+(74, 73, 0, 0, 1),
+(75, 3, 0, 0, 2),
+(76, 4, 0, 0, 2),
+(77, 5, 0, 0, 2),
+(78, 6, 0, 0, 2),
+(79, 7, 0, 0, 2),
+(80, 8, 0, 0, 2),
+(81, 9, 0, 0, 2),
+(82, 10, 0, 0, 2),
+(83, 74, 0, 0, 1),
+(84, 75, 0, 0, 1),
+(85, 76, 0, 0, 1),
+(86, 77, 0, 0, 1),
+(87, 78, 0, 0, 1),
+(88, 79, 0, 0, 1),
+(89, 80, 0, 0, 1),
+(90, 81, 0, 0, 1),
+(91, 82, 0, 0, 1),
+(92, 83, 0, 0, 1),
+(93, 84, 0, 0, 1),
+(94, 85, 0, 0, 1),
+(95, 86, 0, 0, 1),
+(96, 87, 0, 0, 1),
+(97, 88, 0, 0, 1),
+(98, 89, 0, 0, 1),
+(99, 90, 0, 0, 1),
+(100, 91, 0, 0, 1),
+(101, 92, 0, 0, 1),
+(102, 93, 0, 0, 1),
+(103, 94, 0, 0, 1),
+(104, 95, 0, 0, 1),
+(105, 96, 0, 0, 1),
+(106, 97, 0, 0, 1),
+(107, 98, 0, 0, 1),
+(108, 99, 0, 0, 1),
+(109, 100, 0, 0, 1),
+(110, 101, 0, 0, 1),
+(111, 102, 0, 0, 1),
+(112, 103, 0, 0, 1),
+(113, 104, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -181,8 +221,8 @@ CREATE TABLE IF NOT EXISTS `caja` (
 --
 
 INSERT INTO `caja` (`idCaja`, `nombre`, `idParent`) VALUES
-(1, 'administracion', NULL),
-(2, 'papeles', 1);
+(1, 'Administracion', NULL),
+(2, 'Papeles', 1);
 
 -- --------------------------------------------------------
 
@@ -201,14 +241,15 @@ CREATE TABLE IF NOT EXISTS `cajaVenta` (
   PRIMARY KEY (`idCajaVenta`),
   KEY `fk_cajaVenta_caja1` (`idCaja`),
   KEY `fk_cajaVenta_user1` (`idUser`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `cajaVenta`
 --
 
 INSERT INTO `cajaVenta` (`idCajaVenta`, `idCaja`, `idUser`, `saldo`, `fechaArqueo`, `entregado`, `comprobante`) VALUES
-(1, 2, 1, 0, NULL, 0, NULL);
+(1, 2, 1, 0, NULL, 0, NULL),
+(2, 2, 2, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -264,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `telefono` varchar(20) DEFAULT NULL,
   `ci` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`idEmpleado`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `empleado`
@@ -272,7 +313,8 @@ CREATE TABLE IF NOT EXISTS `empleado` (
 
 INSERT INTO `empleado` (`idEmpleado`, `nombre`, `apellido`, `fechaRegistro`, `email`, `telefono`, `ci`) VALUES
 (1, '', '', NULL, '', '', ''),
-(2, 'Helier', 'Cortez', NULL, 'hdnymib@gmail.com', '73221183', '5999242');
+(2, 'Helier', 'Cortez', NULL, 'hdnymib@gmail.com', '73221183', '5999242'),
+(3, 'Erika', 'Lecoña ', '2014-05-26 15:46:49', '', '', '4846615');
 
 -- --------------------------------------------------------
 
@@ -372,45 +414,45 @@ CREATE TABLE IF NOT EXISTS `producto` (
   `familia` varchar(40) NOT NULL,
   `detalle` varchar(100) NOT NULL,
   PRIMARY KEY (`idProducto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=74 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=105 ;
 
 --
 -- Volcado de datos para la tabla `producto`
 --
 
 INSERT INTO `producto` (`idProducto`, `servicio`, `codigo`, `material`, `color`, `marca`, `industria`, `cantXPaquete`, `precioSFU`, `precioSFP`, `precioCFU`, `precioCFP`, `familia`, `detalle`) VALUES
-(1, 1, 'CB90-6787AT', 'Couché Brillo', 'blanco', 'Art Tech', 'China', 250, 0, 0, 0, 0, 'papales', '90G 67x87CM'),
-(2, 0, 'CB90-77110N', 'Couché Brillo', 'blanco', 'Nevia', 'China', 250, 0, 0, 0, 0, 'papales', '90G 77x110CM'),
-(3, 0, 'CB90-77110SP', 'Couché Brillo', 'blanco', 'Sarrio Papel', 'China', 250, 0, 0, 0, 0, 'papales', '90G 77x110CM'),
-(4, 0, 'CB115-6787GE', 'Couché Brillo', 'blanco', 'Gold East', 'China', 250, 0, 0, 0, 0, 'papales', '115G 67x87CM'),
-(5, 0, 'CB115-6789GE', 'Couché Brillo', 'blanco', 'Gold East', 'China', 250, 0, 0, 0, 0, 'papales', '115G 67x89CM'),
-(6, 0, 'CB115-77110AT', 'Couché Brillo', 'blanco', 'Art Tech', 'China', 250, 0, 0, 0, 0, 'papales', '115G 77x110CM'),
-(7, 0, 'CB200-77110GE', 'Couché Brillo', 'blanco', 'Gold East', 'China', 250, 0, 0, 0, 0, 'papales', '200G 77x110CM'),
-(8, 0, 'CB170-6787AT', 'Couché Brillo', 'blanco', 'Art Tech', 'China', 250, 0, 0, 0, 0, 'papales', '170G 67x87CM'),
-(9, 0, 'CB300-77110GHS', 'Couché Brillo', 'blanco', 'GHS', 'China', 250, 0, 0, 0, 0, 'papales', '300G 77x110CM'),
-(10, 0, 'CM300-77110GHS', 'Couché Mate', 'blanco', 'GHS', 'China', 100, 0, 0, 0, 0, 'papales', '300G 77x110CM'),
-(11, 0, 'PB63-6787T', 'Papel Bond', 'blanco', 'Tucuman', 'China', 500, 0, 0, 0, 0, 'papales', '63G 67x87CM'),
-(12, 0, 'PB75-6787T', 'Papel Bond', 'blanco', 'Tucuman', 'China', 500, 0, 0, 0, 0, 'papales', '75G 67x87CM'),
-(13, 0, 'PB75-6787P', 'Papel Bond', 'blanco', 'Primapres', 'China', 500, 0, 0, 0, 0, 'papales', '75G 67x87CM'),
-(14, 0, 'PB75-6787A', 'Papel Bond', 'blanco', 'Ahuesado', 'China', 250, 0, 0, 0, 0, 'papales', '75G 67x87CM'),
-(15, 0, 'PB90-6787T', 'Papel Bond', 'blanco', 'Tucuman', 'China', 250, 0, 0, 0, 0, 'papales', '90G 67x87CM'),
-(16, 0, 'PB90-77110T', 'Papel Bond', 'blanco', 'Tucuman', 'China', 250, 0, 0, 0, 0, 'papales', '90G 77x110CM'),
-(17, 0, 'PB54-6787I', 'Papel Bond', 'blanco', 'Indu', 'China', 500, 0, 0, 0, 0, 'papales', '54G 67x87CM'),
+(1, 1, 'CB250-6787N', 'Couché Brillo', 'Blanco', 'Nevia', 'China', 100, 1.79, 175, 1.86, 182, 'Couche', '250G 67x87CM'),
+(2, 0, 'CB090-77110N', 'Couché Brillo', 'blanco', 'Nevia', 'China', 250, 0.99, 240, 1.03, 250, 'papales', '90G 77x110CM'),
+(3, 0, 'CB300-6787N', 'Couché Brillo', 'Blanco', 'Nevia', 'China', 100, 2.16, 212, 2.26, 222, 'Couche', '300G 67x87CM'),
+(4, 0, 'CB115-6787N', 'Couché Brillo', 'Blanco', 'Nevia', 'China', 250, 0.83, 195, 0.87, 207, 'Couche', '115G 67x87CM'),
+(5, 0, 'CB115-6789N', 'Couché Brillo', 'blanco', 'Nevia', 'China', 250, 0.89, 215, 0.92, 223, 'Couche', '115G 67x89CM'),
+(6, 0, 'CB115-77110N', 'Couché Brillo', 'Blanco', 'Nevia', 'China', 250, 1.19, 287, 1.24, 299, 'Couche', '115G 77x110CM'),
+(7, 0, 'CB200-77110N', 'Couché Brillo', 'Blanco', 'Nevia', 'China', 125, 1.98, 240, 2.15, 259, 'Couche', '200G 77x110CM'),
+(8, 0, 'CB170-6787N', 'Couché Brillo', 'Blanco', 'Nevia', 'China', 250, 1.2, 291, 1.25, 303, 'Couche', '170G 67x87CM'),
+(9, 0, 'CB300-77110N', 'Couché Brillo', 'Blanco', 'Nevia', 'China', 100, 3.08, 304, 3.21, 317, 'Couche', '300G 77x110CM'),
+(10, 0, 'CM300-77110N', 'Couché Mate', 'Blanco', 'Nevia', 'China', 100, 3.08, 304, 3.21, 317, 'Couche', '300G 77x110CM'),
+(11, 0, 'PB063-6787T', 'Papel Bond', 'Blanco', 'Tucuman', 'Argentina', 250, 0.45, 211, 0.47, 218, 'Papel', '63G 67x87CM'),
+(12, 0, 'PB090-6787S', 'Papel Bond', 'Blanco Alcalino', 'Suzano', 'Brazil', 250, 0.73, 169, 0.77, 179, 'Papel', '75G 67x87CM'),
+(13, 0, 'PB075-77110S', 'Papel Bond', 'Blanco Alcalino', 'Suzano', 'Brazil', 250, 0.8, 194, 0.83, 203, 'Papel', '75G 77x110CM'),
+(14, 0, 'PB075-77110T', 'Papel Bond', 'Blanco', 'Tucuman', 'Argentina', 250, 0.77, 184, 0.79, 191, 'Papel', '75G 77x110CM'),
+(15, 0, 'PB090-77110T', 'Papel Bond', 'Blanco', 'Tucuman', 'Argentina', 250, 0.91, 219, 0.95, 228, 'Papel', '90G 77x110CM'),
+(16, 0, 'PB120-6787S', 'Papel Bond', 'Blanco', 'Tucuman', 'China', 250, 0.85, 200, 0.89, 210, 'Papel', '120G 67x87CM'),
+(17, 0, 'PB054-6787B', 'Papel Bond', 'Blanco Alcalino', 'Bilt', 'India', 500, 0.42, 190, 0.44, 200, 'Papel', '54G 67x87CM'),
 (18, 0, 'CH240-65100', 'Cartulina Hilada', 'Crema', '', 'China', 0, 0, 0, 0, 0, 'Cartulina', '240G 65x100CM'),
 (19, 0, 'CH240-65100-2', 'Cartulina Hilada', 'blanco', '', 'China', 0, 0, 0, 0, 0, 'Cartulina', '240G 65x100CM'),
-(20, 0, 'PB75-21528', 'Papel Bond', 'blanco', '', 'China', 0, 0, 0, 0, 0, 'papales', '75G 21.5x28CM'),
-(21, 0, 'PB75-21533', 'Papel Bond', 'blanco', '', 'China', 0, 0, 0, 0, 0, 'papales', '75G 21.5x33CM'),
+(20, 0, 'PB075-6787T', 'Papel Bond', 'Blanco', 'Tucuman', 'Argentina', 500, 0.53, 250, 0.55, 257, 'Papel', '75G 67x87CM'),
+(21, 0, 'PB075-6787S', 'Papel Bond', 'Blanco Alcalino', 'Suzano', 'Brazil', 500, 0.55, 255, 0.58, 273, 'papales', '75G 67x87M'),
 (22, 0, '', 'Adhesivo', '', '', 'China', 100, 0, 0, 0, 0, 'Adhesivo', ''),
 (23, 0, '', 'Adhesivo', 'Transparente', '', 'China', 100, 0, 0, 0, 0, 'Adhesivo', ''),
 (24, 0, '', 'Adhesivo', 'blanco', '', 'China', 100, 0, 0, 0, 0, 'Adhesivo', '70x100CM'),
-(25, 0, 'PB75-6787S', 'Papel Bond', 'Blanco Alcalino', 'Suzano', 'China', 500, 0, 0, 0, 0, 'papales', '75G 67x87CM'),
-(26, 0, '', 'Triplex', '', 'CMPC', 'China', 100, 0, 0, 0, 0, 'papales', '225G 77x110CM'),
+(25, 0, 'PB090-6787T', 'Papel Bond', 'Blanco', 'Tucuman', 'Argentina', 250, 0.65, 154, 0.67, 159, 'Papel', '90G 67x87CM'),
+(26, 0, 'CT225-77110C', 'Cartulina Triplex', 'Blanco', 'CMPC', 'China', 100, 2.91, 276, 3.03, 288, 'Cartulina', '225G 77x110CM'),
 (27, 0, '', 'Triplex', '', 'Sosein', 'China', 100, 0, 0, 0, 0, 'papales', '255G 77x110CM'),
 (28, 0, '', 'Triplex', '', 'Sosein', 'China', 100, 0, 0, 0, 0, 'papales', '300G 77x110CM'),
-(29, 0, '', 'Duplex', '', 'CMPC', 'China', 100, 0, 0, 0, 0, 'papales', '180G 77x110CM'),
-(30, 0, '', 'Duplex', '', 'CMPC', 'China', 100, 0, 0, 0, 0, 'papales', '225G 77x110CM'),
-(31, 0, '', 'Duplex', '', 'CMPC', 'China', 100, 0, 0, 0, 0, 'papales', '250G 77x110CM'),
-(32, 0, '', 'Duplex', '', 'CMPC', 'China', 100, 0, 0, 0, 0, 'papales', '275G 77x110CM'),
+(29, 0, 'CD180-77110C', 'Cartulina Duplex', 'Blanco/Café', 'CMPC', '', 100, 2.48, 2333, 2.63, 248, 'Cartulina', '180G 77x110CM'),
+(30, 0, 'CD205-77110C', 'Cartulina Duplex', 'Blanco/Café', 'CMPC', 'Chile', 100, 2.76, 261, 2.86, 271, 'Cartulina', '205G 77x110CM'),
+(31, 0, 'CD250-77110C', 'Cartulina Duplex', 'Blanco/Café', 'CMPC', 'Chile', 100, 3.03, 288, 3.15, 300, 'Cartulina', '250G 77x110CM'),
+(32, 0, 'CD275-77110C', 'Cartulina Duplex', 'Blanco/Café', 'CMPC', 'Chile', 100, 3.3, 340, 3.69, 354, 'Cartulina', '275G 77x110CM'),
 (33, 0, '', 'Papel Kraft', '', '', '', 100, 0, 0, 0, 0, 'papales', '125G 102x160CM'),
 (34, 0, '', 'Papel Kraft', '', '', '', 250, 0, 0, 0, 0, 'papales', '80G 81.5x125CM'),
 (35, 0, '', 'Papel Quimico', 'blanco', '', '', 500, 0, 0, 0, 0, 'papales', '50G 67x87CM'),
@@ -451,7 +493,38 @@ INSERT INTO `producto` (`idProducto`, `servicio`, `codigo`, `material`, `color`,
 (70, 0, '', 'Placas MO 015', '', '', '', 0, 0, 0, 0, 0, '', ''),
 (71, 0, '', 'Placas Roland', '', '', '', 0, 0, 0, 0, 0, '', ''),
 (72, 0, '', 'Placas Sorm', '', '', '', 0, 0, 0, 0, 0, '', '72.4x61.5CM'),
-(73, 0, '', 'Placas Resmas', '', '', '', 0, 0, 0, 0, 0, '', '');
+(73, 0, '', 'Placas Resmas', '', '', '', 0, 0, 0, 0, 0, '', ''),
+(74, 0, 'CB090-6787N', 'Couché Brillo', 'blanco', 'Nevia', 'China', 250, 0.68, 158, 0.71, 166, 'Couche', '90G 67x87CM'),
+(75, 0, 'CB250-77110N', 'Couché Brillo', 'Blanco', 'Nevia', 'China', 100, 2.57, 253, 2.69, 265, 'Couche', '250G 77x110CM'),
+(76, 0, 'CB150-6787N', 'Couché Brillo', 'Blanco', 'Nevia', 'China', 250, 1.08, 261, 1.13, 269, 'Couche', '150G 67x87CM'),
+(77, 0, 'CB150-77110N', 'Couché Brillo', 'Blanco', 'Nevia', 'China', 250, 1.54, 375, 1.59, 390, 'Couche', '150G 77x110CM'),
+(78, 0, 'CB170-77110N', 'Couché Brillo', 'Blanco', 'Nevia', 'China', 250, 1.76, 427, 1.83, 447, 'Couche', '170G 77x110CM'),
+(79, 0, 'CB200-6787N', 'Couché Brillo', 'Blanco', 'Nevia', 'China', 125, 1.63, 183, 1.69, 197, 'Couche', '200G 67x87CM'),
+(80, 0, 'CM090-6787N', 'Couché Mate', 'Blanco', 'Nevia', 'China', 250, 0.68, 158, 0.71, 166, 'Couche', '90G 67x87CM'),
+(81, 0, 'CM090-77110N', 'Couché Mate', 'Blanco', 'Nevia', 'China', 250, 0.99, 240, 1.03, 250, 'Couche', '90G 77x110CM'),
+(82, 0, 'CM115-6787N', 'Couché Mate', 'Blanco', 'Nevia', 'China', 250, 0.83, 195, 0.87, 207, 'Couche', '115G 67x87CM'),
+(83, 0, 'CM115-6789N', 'Couché Mate', 'Blanco', 'Nevia', 'China', 250, 0.89, 215, 0.92, 223, 'Couche', '115G 67x89CM'),
+(84, 0, 'CM115-77110N', 'Couché Mate', 'Blanco', 'Nevia', 'China', 250, 1.19, 287, 1.24, 299, 'Couche', '115G 77x110CM'),
+(85, 0, 'CM150-6787N', 'Couché Mate', 'Blanco', 'Nevia', 'China', 250, 1.08, 261, 1.13, 269, 'Couche', '150G 67x87CM'),
+(86, 0, 'CM150-77110N', 'Couché Mate', 'Blanco', 'Nevia', 'China', 250, 1.54, 375, 1.59, 390, 'Couche', '150G 77x110CM'),
+(87, 0, 'CM170-6787N', 'Couché Mate', 'Blanco', 'Nevia', 'China', 250, 1.2, 291, 1.25, 303, 'Couche', '170G 67x87CM'),
+(88, 0, 'CM170-77110N', 'Couché Mate', 'Blanco', 'Nevia', 'China', 250, 1.76, 427, 1.83, 447, 'Couche', '170G 77x110CM'),
+(89, 0, 'CM200-6787N', 'Couché Mate', 'Blanco', 'Nevia', 'China', 125, 1.63, 183, 1.69, 197, 'Couche', '200G 67x87CM'),
+(90, 0, 'CM200-77110N', 'Couché Mate', 'Blanco', 'Nevia', 'China', 125, 1.98, 240, 2.15, 259, 'Couche', '200G 77x110CM'),
+(91, 0, 'CM250-6787N', 'Couché Mate', 'Blanco', 'Nevia', 'China', 100, 1.79, 175, 1.86, 182, 'Couche', '250G 67x87CM'),
+(92, 0, 'CM250-77110N', 'Couché Mate', 'Blanco', 'Nevia', 'China', 100, 2.57, 253, 2.69, 265, 'Couche', '250G 77x110CM'),
+(93, 0, 'CM300-6787N', 'Couché Mate', 'Blanco', 'Nevia', 'China', 100, 2.16, 212, 2.26, 222, 'Couche', '300G 67x87CM'),
+(94, 0, 'PB063-6787S', 'Papel Bond', 'Blanco Alcalino', 'Suzano', 'Brazil', 500, 0.5, 235, 0.52, 246, 'Papel', '63G 67x87CM'),
+(95, 0, 'PB070-6787T', 'Papel Bond', 'Blanco', 'Tucuman', 'Argentina', 500, 0.5, 234, 0.52, 242, 'Papel', '70G 67x87CM'),
+(96, 0, 'PB070-6787S', 'Papel Bond', 'Blanco Alcalino', 'Suzano', 'Brazil', 500, 0.53, 247, 0.55, 259, 'Papel', '70G 67x87CM'),
+(97, 0, 'PB75-6787K-A', 'Papel Bond', 'Amarillo', 'Korab', 'China', 500, 0.6, 275, 0.62, 292, 'Papel', '75G 67x87CM'),
+(98, 0, 'PB75-6787K-C', 'Papel Bond', 'Celeste', 'Korab', 'China', 500, 0.6, 275, 0.62, 292, 'Papel', '75G 67x87CM'),
+(99, 0, 'PB75-6787K-V', 'Papel Bond', 'Verde', 'Korab', 'China', 500, 0.6, 275, 0.62, 292, 'Papel', '75G 67x87CM'),
+(100, 0, 'PB75-6787K-R', 'Papel Bond', 'Rosado', 'Korab', 'China', 500, 0.6, 275, 0.62, 292, 'Papel', '75G 67x87CM'),
+(101, 0, 'PB75-6787T', 'Papel Bond', 'Hueso', 'Tucuman', 'Argentina', 500, 0.57, 270, 0.6, 286, 'Papel', '75G 67x87CM'),
+(102, 0, 'PB80-6787T', 'Papel Bond', 'Hueso', 'Tucuman', 'Argentina', 500, 0.61, 287, 0.64, 305, 'Papel', '80G 67x87CM'),
+(103, 0, 'CD300-77110S', 'Cartulina Duplex', 'Blanco/Café', 'Sosein', 'China', 100, 3.55, 340, 3.69, 354, 'Cartulina', '300G 77x110CM'),
+(104, 0, 'CT205-77110C', 'Cartulina Triplex', 'Blanco', 'CMPC', 'Chile', 100, 2.7, 255, 2.8, 265, 'Cartulina', '205G 77x110CM');
 
 -- --------------------------------------------------------
 
@@ -498,14 +571,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   `idEmpleado` int(11) DEFAULT NULL,
   PRIMARY KEY (`idUser`),
   KEY `fk_user_empleado1` (`idEmpleado`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `user`
 --
 
 INSERT INTO `user` (`idUser`, `username`, `password`, `fechaLogin`, `estado`, `tipo`, `idEmpleado`) VALUES
-(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-05-23 18:37:42', 0, '1', 2);
+(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-06-02 17:30:05', 0, '1', 2),
+(2, 'erika', 'e10adc3949ba59abbe56e057f20f883e', '2014-06-02 17:05:08', 0, '3', 3);
 
 -- --------------------------------------------------------
 
