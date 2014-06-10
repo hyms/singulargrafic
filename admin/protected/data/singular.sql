@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 09-06-2014 a las 19:29:07
+-- Tiempo de generación: 10-06-2014 a las 17:33:58
 -- Versión del servidor: 5.5.37
 -- Versión de PHP: 5.4.4-14+deb7u10
 
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `almacenProducto` (
   PRIMARY KEY (`idAlmacenProducto`),
   KEY `fk_almacenProducto_producto1` (`idProducto`),
   KEY `fk_almacenProducto_almacen1` (`idAlmacen`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=114 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=126 ;
 
 --
 -- Volcado de datos para la tabla `almacenProducto`
@@ -87,7 +87,6 @@ INSERT INTO `almacenProducto` (`idAlmacenProducto`, `idProducto`, `stockU`, `sto
 (20, 19, 0, 0, 1),
 (21, 20, 0, 0, 1),
 (22, 21, 0, 0, 1),
-(23, 22, 0, 0, 1),
 (24, 23, 0, 0, 1),
 (25, 24, 0, 0, 1),
 (26, 25, 0, 0, 1),
@@ -177,7 +176,19 @@ INSERT INTO `almacenProducto` (`idAlmacenProducto`, `idProducto`, `stockU`, `sto
 (110, 101, 0, 0, 1),
 (111, 102, 0, 0, 1),
 (112, 103, 0, 0, 1),
-(113, 104, 0, 0, 1);
+(113, 104, 0, 0, 1),
+(114, 105, 0, 0, 1),
+(115, 106, 0, 0, 1),
+(116, 107, 0, 0, 1),
+(117, 108, 0, 0, 1),
+(118, 109, 0, 0, 1),
+(119, 110, 0, 0, 1),
+(120, 111, 0, 0, 1),
+(121, 112, 0, 0, 1),
+(122, 113, 0, 0, 1),
+(123, 114, 0, 0, 1),
+(124, 115, 0, 0, 1),
+(125, 116, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -414,7 +425,7 @@ CREATE TABLE IF NOT EXISTS `producto` (
   `familia` varchar(40) NOT NULL,
   `detalle` varchar(100) NOT NULL,
   PRIMARY KEY (`idProducto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=105 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=117 ;
 
 --
 -- Volcado de datos para la tabla `producto`
@@ -438,37 +449,36 @@ INSERT INTO `producto` (`idProducto`, `servicio`, `codigo`, `material`, `color`,
 (15, 0, 'PB090-77110T', 'Papel Bond', 'Blanco', 'Tucuman', 'Argentina', 250, 0.91, 219, 0.95, 228, 'Papel', '90G 77x110CM'),
 (16, 0, 'PB120-6787S', 'Papel Bond', 'Blanco', 'Tucuman', 'China', 250, 0.85, 200, 0.89, 210, 'Papel', '120G 67x87CM'),
 (17, 0, 'PB054-6787B', 'Papel Bond', 'Blanco Alcalino', 'Bilt', 'India', 500, 0.42, 190, 0.44, 200, 'Papel', '54G 67x87CM'),
-(18, 0, 'CH240-65100', 'Cartulina Hilada', 'Crema', '', 'China', 0, 0, 0, 0, 0, 'Cartulina', '240G 65x100CM'),
-(19, 0, 'CH240-65100-2', 'Cartulina Hilada', 'blanco', '', 'China', 0, 0, 0, 0, 0, 'Cartulina', '240G 65x100CM'),
+(18, 0, 'CH240-65100M-C', 'Cartulina Hilada', 'Crema', 'Multiverde', 'Brazil', 100, 2.82, 267, 3, 285, 'Cartulina', '240G 65x100CM'),
+(19, 0, 'CH240-65100M-B', 'Cartulina Hilada', 'Blanco', 'Multiverde', 'China', 100, 2.82, 267, 3, 285, 'Cartulina', '240G 65x100CM'),
 (20, 0, 'PB075-6787T', 'Papel Bond', 'Blanco', 'Tucuman', 'Argentina', 500, 0.53, 250, 0.55, 257, 'Papel', '75G 67x87CM'),
 (21, 0, 'PB075-6787S', 'Papel Bond', 'Blanco Alcalino', 'Suzano', 'Brazil', 500, 0.55, 255, 0.58, 273, 'papales', '75G 67x87M'),
-(22, 0, '', 'Adhesivo', '', '', 'China', 100, 0, 0, 0, 0, 'Adhesivo', ''),
 (23, 0, '', 'Adhesivo', 'Transparente', '', 'China', 100, 0, 0, 0, 0, 'Adhesivo', ''),
 (24, 0, '', 'Adhesivo', 'blanco', '', 'China', 100, 0, 0, 0, 0, 'Adhesivo', '70x100CM'),
 (25, 0, 'PB090-6787T', 'Papel Bond', 'Blanco', 'Tucuman', 'Argentina', 250, 0.65, 154, 0.67, 159, 'Papel', '90G 67x87CM'),
-(26, 0, 'CT225-77110C', 'Cartulina Triplex', 'Blanco', 'CMPC', 'China', 100, 2.91, 276, 3.03, 288, 'Cartulina', '225G 77x110CM'),
-(27, 0, '', 'Triplex', '', 'Sosein', 'China', 100, 0, 0, 0, 0, 'papales', '255G 77x110CM'),
-(28, 0, '', 'Triplex', '', 'Sosein', 'China', 100, 0, 0, 0, 0, 'papales', '300G 77x110CM'),
+(26, 0, 'CT225-77110C', 'Cartulina Triplex', 'Blanco', 'CMPC', 'Chile', 100, 2.91, 276, 3.03, 288, 'Cartulina', '225G 77x110CM'),
+(27, 0, 'CT255-77110C', 'Cartulina Triplex', 'Blanco', 'CMPC', 'Chile', 100, 3.38, 323, 3.54, 339, 'Cartulina', '255G 77x110CM'),
+(28, 0, 'CT300-77110C', 'Cartulina Triplex', 'Blanco', 'CMPC', 'Chile', 100, 3.57, 342, 3.71, 356, 'Cartulina', '300G 77x110CM'),
 (29, 0, 'CD180-77110C', 'Cartulina Duplex', 'Blanco/Café', 'CMPC', '', 100, 2.48, 2333, 2.63, 248, 'Cartulina', '180G 77x110CM'),
 (30, 0, 'CD205-77110C', 'Cartulina Duplex', 'Blanco/Café', 'CMPC', 'Chile', 100, 2.76, 261, 2.86, 271, 'Cartulina', '205G 77x110CM'),
 (31, 0, 'CD250-77110C', 'Cartulina Duplex', 'Blanco/Café', 'CMPC', 'Chile', 100, 3.03, 288, 3.15, 300, 'Cartulina', '250G 77x110CM'),
 (32, 0, 'CD275-77110C', 'Cartulina Duplex', 'Blanco/Café', 'CMPC', 'Chile', 100, 3.3, 340, 3.69, 354, 'Cartulina', '275G 77x110CM'),
 (33, 0, '', 'Papel Kraft', '', '', '', 100, 0, 0, 0, 0, 'papales', '125G 102x160CM'),
 (34, 0, '', 'Papel Kraft', '', '', '', 250, 0, 0, 0, 0, 'papales', '80G 81.5x125CM'),
-(35, 0, '', 'Papel Quimico', 'blanco', '', '', 500, 0, 0, 0, 0, 'papales', '50G 67x87CM'),
-(36, 0, '', 'Papel Quimico', 'verde', '', '', 500, 0, 0, 0, 0, 'papales', '50G 67x87CM'),
-(37, 0, '', 'Papel Quimico', 'Amarillo', '', '', 500, 0, 0, 0, 0, 'papales', '50G 67x87CM'),
-(38, 0, '', 'Papel Quimico', 'Rosado', '', '', 500, 0, 0, 0, 0, 'papales', '50G 67x87CM'),
-(39, 0, '', 'Papel Copia', 'blanco', '', '', 500, 0, 0, 0, 0, 'papales', '35G 67x87CM'),
-(40, 0, '', 'Papel Copia', 'verde', '', '', 500, 0, 0, 0, 0, 'papales', '35G 67x87CM'),
-(41, 0, '', 'Papel Quimico', 'celeste', '', '', 500, 0, 0, 0, 0, 'papales', '35G 67x87CM'),
-(42, 0, '', 'Papel Copia', 'Amarillo', '', '', 500, 0, 0, 0, 0, 'papales', '35G 67x87CM'),
-(43, 0, '', 'Papel Quimico', 'Rosado', '', '', 500, 0, 0, 0, 0, 'papales', '35G 67x87CM'),
-(44, 0, '', 'Cartulina', 'blanco', '', '', 0, 0, 0, 0, 0, 'Cartulina', '180G 65x100CM'),
-(45, 0, '', 'Cartulina', 'Amarillo', '', '', 0, 0, 0, 0, 0, 'Cartulina', '180G 65x100CM'),
-(46, 0, '', 'Cartulina', 'Rosado', '', '', 0, 0, 0, 0, 0, 'Cartulina', '180G 65x100CM'),
-(47, 0, '', 'Cartulina', 'verde', '', '', 0, 0, 0, 0, 0, 'Cartulina', '180G 65x100CM'),
-(48, 0, '', 'Cartulina', 'celeste', '', '', 0, 0, 0, 0, 0, 'Cartulina', '180G 65x100CM'),
+(35, 0, 'PQI35-6787F-B', 'Papel Quimico Int.', 'Blanco', 'Focus', 'Colombia', 500, 0.66, 315, 0.68, 327, 'Papel', '35G 67x87CM'),
+(36, 0, 'PQI35-6787F-V', 'Papel Quimico Int.', 'Verde', 'Focus', 'Colombia', 500, 0.66, 315, 0.68, 327, 'Papel', '35G 67x87CM'),
+(37, 0, 'PQI35-6787F-A', 'Papel Quimico Int.', 'Amarillo', 'Focus', 'Colombia', 500, 0.66, 315, 0.68, 327, 'Papel', '35G 67x87CM'),
+(38, 0, 'PQI35-6787F-R', 'Papel Quimico Int.', 'Rosado', 'Focus', 'Colombia', 500, 0.66, 315, 0.68, 327, 'Papel', '35G 67x87CM'),
+(39, 0, 'PC35-6787P-B', 'Papel Copia', 'Blanco', 'Propal', 'Colombia', 500, 0.31, 140, 0.33, 147, 'Papel', '35G 67x87CM'),
+(40, 0, 'PC35-6787P-V', 'Papel Copia', 'Verde', 'Propal', 'Colombia', 500, 0.31, 140, 0.33, 147, 'Papel', '35G 67x87CM'),
+(41, 0, 'PQI35-6787F-C', 'Papel Quimico Int.', 'Celeste', 'Focus', 'Colombia', 500, 0.66, 315, 0.68, 327, 'Papel', '35G 67x87CM'),
+(42, 0, 'PC35-6787P-A', 'Papel Copia', 'Amarillo', 'Propal', 'Colombia', 500, 0.31, 140, 0.33, 147, 'Papel', '35G 67x87CM'),
+(43, 0, 'PQO35-6787F', 'Papel Quimico Orig.', 'Blanco', 'Focus', 'Colombia', 500, 0.62, 295, 0.65, 310, 'Papel', '35G 67x87CM'),
+(44, 0, 'CC180-65100M-B', 'Cartulina Corriente', 'Blanco', 'Multiverde', 'Brazil', 125, 2.62, 247, 2.74, 259, 'Cartulina', '180G 65x100CM'),
+(45, 0, 'CC180-65100M-A', 'Cartulina Corriente', 'Amarillo', 'Multiverde', 'Brazil', 125, 2.62, 247, 2.74, 259, 'Cartulina', '180G 65x100CM'),
+(46, 0, 'CC180-65100M-R', 'Cartulina Corriente', 'Rosado', 'Multiverde', 'Brazil', 125, 2.62, 247, 2.74, 259, 'Cartulina', '180G 65x100CM'),
+(47, 0, 'CC180-65100M-V', 'Cartulina Corriente', 'Verde', 'Multiverde', 'Brazil', 125, 2.62, 247, 2.74, 259, 'Cartulina', '180G 65x100CM'),
+(48, 0, 'CC180-65100M-C', 'Cartulina Corriente', 'Celeste', 'Multiverde', 'Brazil', 125, 2.62, 247, 2.74, 259, 'Cartulina', '180G 65x100CM'),
 (49, 0, '', 'Tintas', 'Cyan', 'Amstrong', '', 0, 0, 0, 0, 0, 'Tintas', '1Kg'),
 (50, 0, '', 'Tintas', 'Magenta', 'Amstrong', '', 0, 0, 0, 0, 0, 'Tintas', '1Kg'),
 (51, 0, '', 'Tintas', 'Amarillo', 'Amstrong', '', 0, 0, 0, 0, 0, 'Tintas', '1Kg'),
@@ -524,7 +534,19 @@ INSERT INTO `producto` (`idProducto`, `servicio`, `codigo`, `material`, `color`,
 (101, 0, 'PB75-6787T', 'Papel Bond', 'Hueso', 'Tucuman', 'Argentina', 500, 0.57, 270, 0.6, 286, 'Papel', '75G 67x87CM'),
 (102, 0, 'PB80-6787T', 'Papel Bond', 'Hueso', 'Tucuman', 'Argentina', 500, 0.61, 287, 0.64, 305, 'Papel', '80G 67x87CM'),
 (103, 0, 'CD300-77110S', 'Cartulina Duplex', 'Blanco/Café', 'Sosein', 'China', 100, 3.55, 340, 3.69, 354, 'Cartulina', '300G 77x110CM'),
-(104, 0, 'CT205-77110C', 'Cartulina Triplex', 'Blanco', 'CMPC', 'Chile', 100, 2.7, 255, 2.8, 265, 'Cartulina', '205G 77x110CM');
+(104, 0, 'CT205-77110C', 'Cartulina Triplex', 'Blanco', 'CMPC', 'Chile', 100, 2.7, 255, 2.8, 265, 'Cartulina', '205G 77x110CM'),
+(105, 0, 'CT280-77110C', 'Cartulina Triplex', 'Blanco', 'CMPC', 'Chile', 100, 3.59, 334, 3.62, 347, 'Cartulina', '280G 77x110CM'),
+(106, 0, 'CT330-77110C', 'Cartulina Triplex', 'Blanco', 'CMPC', 'Chile', 100, 4.05, 390, 4.31, 416, 'Cartulina', '330G 77x110CM'),
+(107, 0, 'CT360-77110C', 'Cartulina Triplex', 'Blanco', 'CMPC', 'Chile', 100, 4.4, 425, 4.67, 452, 'Cartulina', '360G 77x110CM'),
+(108, 0, 'CH180-65100M-B', 'Cartulina Hilada', 'Blanco', 'Multiverde', 'Brazil', 100, 2.22, 207, 2.37, 221, 'Cartulina', '180G 65x100CM'),
+(109, 0, 'CH180-65100M-C', 'Cartulina Hilada', 'Crema', 'Multiverde', 'Brazil', 100, 2.22, 207, 2.37, 221, 'Cartulina', '180G 65x100CM'),
+(110, 0, 'PC35-6787P-C', 'Papel Copia', 'Celeste', 'Propal', 'Colombia', 500, 0.31, 140, 0.33, 147, 'Papel', '35G 67x87CM'),
+(111, 0, 'PC35-6787P-R', 'Papel Copia', 'Rosado', 'Propal', 'Colombia', 500, 0.31, 140, 0.33, 147, 'Papel', '35G 67x87CM'),
+(112, 0, 'PQF35-6787F-B', 'Papel Quimico Fin.', 'Blanco', 'Focus', 'Colombia', 500, 0.65, 310, 0.67, 322, 'Papel', '35G 67x87CM'),
+(113, 0, 'PQF35-6787F-A', 'Papel Quimico Fin.', 'Amarillo', 'Focus', 'Colombia', 500, 0.65, 310, 0.67, 322, 'Papel', '35G 67x87CM'),
+(114, 0, 'PQF35-6787F-C', 'Papel Quimico Fin.', 'Celeste', 'Focus', 'Colombia', 500, 0.65, 310, 0.67, 322, 'Papel', '35G 67x87CM'),
+(115, 0, 'PQF35-6787F-V', 'Papel Quimico Fin.', 'Verde', 'Focus', 'Colombia', 500, 0.65, 310, 0.67, 322, 'Papel', '35G 67x87CM'),
+(116, 0, 'PQF35-6787F-R', 'Papel Quimico Fin.', 'Rosado', 'Focus', 'Colombia', 500, 0.65, 310, 0.67, 322, 'Papel', '35G 67x87CM');
 
 -- --------------------------------------------------------
 

@@ -11130,3 +11130,33 @@ REQUEST_URI=/singulardev/admin/index.php/inventario/index
 in /var/www/singulardev/admin/protected/views/inventario/index.php (75)
 in /var/www/singulardev/admin/protected/controllers/InventarioController.php (86)
 in /var/www/singulardev/admin/index.php (13)
+2014/06/10 18:03:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'La Respuesta de la pagina no Existe.' in /var/www/singulardev/admin/protected/controllers/StockController.php:172
+Stack trace:
+#0 /var/www/singulardev/admin/protected/controllers/StockController.php(85): StockController->verifyModel(NULL)
+#1 /var/www/framework/web/actions/CInlineAction.php(49): StockController->actionDistribuidoraAdd()
+#2 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#4 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), NULL)
+#5 /var/www/framework/web/CWebApplication.php(282): CController->run('DistribuidoraAd...')
+#6 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('stock/Distribui...')
+#7 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/singulardev/admin/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/singulardev/admin/index.php/stock/DistribuidoraAdd/22
+HTTP_REFERER=http://localhost/singulardev/admin/index.php/stock/DistribuidoraAdd/21
+---
+2014/06/10 18:04:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'La Respuesta de la pagina no Existe.' in /var/www/singulardev/admin/protected/controllers/StockController.php:172
+Stack trace:
+#0 /var/www/singulardev/admin/protected/controllers/StockController.php(85): StockController->verifyModel(NULL)
+#1 /var/www/framework/web/actions/CInlineAction.php(49): StockController->actionDistribuidoraAdd()
+#2 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#4 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), NULL)
+#5 /var/www/framework/web/CWebApplication.php(282): CController->run('DistribuidoraAd...')
+#6 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('stock/Distribui...')
+#7 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#8 /var/www/singulardev/admin/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/singulardev/admin/index.php/stock/DistribuidoraAdd/22
+HTTP_REFERER=http://localhost/singulardev/admin/index.php/stock/DistribuidoraAdd/21
+---

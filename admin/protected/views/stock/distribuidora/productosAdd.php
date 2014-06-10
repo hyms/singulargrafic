@@ -56,7 +56,7 @@
 		array(
 				'header'=>'Distribuidora',
 				'type'=>'raw',
-				'value'=>'$data->distribuidoraLink($data->idAlmacenProducto)',
+				'value'=>'$data->distribuidoraLink($data->idProducto0->idProducto)',
 		),
 	)
 	));
