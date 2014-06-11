@@ -67,6 +67,7 @@ class StockController extends Controller
 				array(
 						'criteria'=>array(
 								'condition'=>'idAlmacen=2',
+								'order'=>'idProducto0.material',
 								'with'=>array('idProducto0'),
 						),
 						'pagination'=>array(
@@ -82,14 +83,20 @@ class StockController extends Controller
 		//$productos=AlmacenProducto::model()->findAll('idAlmacen=2');
 		if(isset($_GET['id']))
 		{
+			//$res=false;
 			$productos= $this->verifyModel(Producto::model()->findByPk($_GET['id']));
-			$this->initStock($productos->idProducto);
+			/*$almacen=AlmacenProducto::model()->find('idProducto='.$productos->idProducto.' and idAlmacen=2');
+			if(empty($almacen))*/
+			
+			if($this->initStock($productos->idProducto))
+				$this->redirect(array("stock/distribuidoraAdd"));
 		}
 		
 		$productos=new CActiveDataProvider('AlmacenProducto',
 				array(
 						'criteria'=>array(
 								'condition'=>'idAlmacen=1',
+								'order'=>'idProducto0.material',
 								'with'=>array('idProducto0'),
 						),
 						'pagination'=>array(
@@ -163,7 +170,8 @@ class StockController extends Controller
 		$almacen->idProducto=$id;
 		$almacen->stockU=0;
 		$almacen->stockP=0;
-		return $almacen->save();
+		$res=$almacen->save();
+		return $res;
 	} 
 	
 	public function verifyModel($model)

@@ -11234,3 +11234,895 @@ Stack trace:
 REQUEST_URI=/singulardev/venta/index.php/distribuidora/notas
 HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/buscar
 ---
+2014/06/11 17:01:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "venta".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('venta')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('venta')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/v...')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/venta
+---
+2014/06/11 17:04:24 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:24 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:24 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:24 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:24 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:24 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:32 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:32 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:32 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:32 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:32 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:32 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:35 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:35 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:35 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:35 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:35 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:35 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:36 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:36 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:36 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:36 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:36 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:36 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:43 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:43 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:43 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:43 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:43 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:43 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:45 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:45 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:45 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:45 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:45 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:45 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:48 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:48 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:48 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:48 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:48 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:48 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:56 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:56 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:56 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:56 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:56 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:56 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:58 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:58 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:58 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:58 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:58 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:04:58 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:00 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:00 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:00 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:00 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:00 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:00 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:04 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:04 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:04 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:04 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:04 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:04 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:07 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:07 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:07 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:07 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:07 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:07 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:10 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:10 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:10 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:10 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:10 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:10 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:12 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:12 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:12 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:12 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:12 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:12 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:38 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:38 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:38 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:38 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:38 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:38 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:50 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:50 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:50 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:50 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:50 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:05:50 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:17:55 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:17:55 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:17:55 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:17:55 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:17:55 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:17:55 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:01 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:01 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:01 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:01 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:01 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:01 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:18 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:18 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:18 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:18 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:18 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:18 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:22 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:22 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:22 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:22 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:22 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:22 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:40 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:40 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:40 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:40 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:40 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:40 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:45 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:45 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:45 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:45 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:45 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:18:45 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:26:09 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:26:09 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:26:09 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:26:09 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:26:09 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:26:09 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:28:10 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:28:10 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:28:10 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:28:10 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:28:10 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:28:10 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:28:13 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:28:13 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:28:13 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:28:13 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:28:13 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:28:13 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:43:57 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:43:57 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:43:57 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:43:57 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:43:57 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:43:57 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:45:19 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:45:19 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:45:19 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:45:19 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:45:19 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:45:19 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:08 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:08 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:08 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:08 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:08 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:08 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:10 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:10 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:10 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:10 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:10 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:10 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:11 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:11 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:11 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:11 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:11 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:11 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:13 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:13 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:13 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:13 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:13 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:13 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:17 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:17 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:17 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:17 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:17 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:17 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:19 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:19 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:19 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:19 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:19 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:19 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:20 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:20 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:20 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:20 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:20 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:20 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:21 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:21 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:21 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:21 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:21 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:21 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:25 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:25 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:25 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:25 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:25 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:25 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:30 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:30 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:30 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:30 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:30 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:30 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:35 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:35 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:35 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:35 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:35 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:35 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:37 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:37 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:37 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:37 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:37 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:37 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:39 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:39 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:39 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:39 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:39 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:39 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:42 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:42 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:42 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:42 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:42 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:42 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:46 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:46 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:46 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:46 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:46 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:46 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:57 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:57 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:57 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:57 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:57 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:56:57 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:01 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:01 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:01 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:01 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:01 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:01 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:04 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:04 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:04 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:04 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:04 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:04 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:06 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:06 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:06 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:06 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:06 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:06 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:08 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:08 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:08 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:08 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:08 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:08 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:11 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:11 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:11 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:11 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:11 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:11 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:15 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:15 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:15 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:15 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:15 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/11 17:57:15 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (82)
+in /var/www/singulardev/venta/index.php (13)

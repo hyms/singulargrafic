@@ -107,6 +107,8 @@ class DistribuidoraController extends Controller
 		{
 			$venta->attributes = $_POST['Venta'];
 			$row = Venta::model()->find(array("condition"=>"tipoVenta=".$venta->tipoVenta,'order'=>'fechaVenta Desc'));
+			if(empty($row))
+				$row=new Venta;
 			if(empty($row->serie) && $venta->tipoVenta==1)
 				$row->serie = 65;
 			$venta->codigo = $row->codigo +1;

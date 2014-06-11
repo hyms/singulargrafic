@@ -49,7 +49,7 @@ class InventarioController extends Controller
 		{
 			if($_GET['excel'])
 			{
-				$almacenProducto= AlmacenProducto::model()->with('idProducto0')->findAll('idAlmacen=1');
+				$almacenProducto= AlmacenProducto::model()->with('idProducto0')->findAll(array('condition'=>'idAlmacen=1','order'=>'idProducto0.Material, idProducto0.codigo, idProducto0.detalle'));
 				
 				$columnsTitle=array('Nro','Codigo','Material','Detalle Producto','Precio S/F','Precio C/F','Industria','Cant.xPaqt.','Stock Unidad','Stock Paquete');
 				$content=array();
