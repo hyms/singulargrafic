@@ -55,7 +55,7 @@ class Venta extends CActiveRecord
 			array('idVenta, idCaja, fechaVenta, tipoVenta, formaPago, idCliente, fechaPlazo, codigo, serie, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable', 'safe', 'on'=>'search'),
 		);
 	}
-
+	public $cant; 
 	/**
 	 * @return array relational rules.
 	 */

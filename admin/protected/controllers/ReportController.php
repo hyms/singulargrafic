@@ -99,7 +99,7 @@ class ReportController extends Controller
 			if(isset($_GET['m']))
 			{
 				$cond1=array("report/venta","f"=>0,"m"=>$_GET['m']);
-				$cond1=array("report/venta","f"=>1,"m"=>$_GET['m']);
+				$cond2=array("report/venta","f"=>1,"m"=>$_GET['m']);
 				$m=$_GET['m'];
 				$d=$this->getUltimoDiaMes($y, $m);
 				$start=$y."-".$m."-1 00:00:00";
@@ -110,7 +110,7 @@ class ReportController extends Controller
 					array('criteria'=>array(
 							'condition'=>$condition.$factura,
 							'with'=>array('idCliente0'),
-							'order'=>'fechaPlazo ASC',
+							'order'=>'fechaVenta ASC',
 					),
 							'pagination'=>array(
 									'pageSize'=>20,
@@ -125,7 +125,7 @@ class ReportController extends Controller
 				$ventas = new CActiveDataProvider('Venta',
 						array('criteria'=>array(
 								'with'=>array('idCliente0'),
-								'order'=>'fechaPlazo ASC',
+								'order'=>'fechaVenta ASC',
 						),
 								'pagination'=>array(
 										'pageSize'=>20,
@@ -135,7 +135,7 @@ class ReportController extends Controller
 						array('criteria'=>array(
 								'with'=>array('idCliente0'),
 								'condition'=>$factura,
-								'order'=>'fechaPlazo ASC',
+								'order'=>'fechaVenta ASC',
 						),
 								'pagination'=>array(
 										'pageSize'=>20,

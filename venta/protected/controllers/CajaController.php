@@ -44,13 +44,13 @@ class CajaController extends Controller
 		{
 			$caja = MovimientoCaja::model()->with('idCaja0')->with('idUser0')->with('idUser0.idEmpleado0')->find(array('condition'=>'`t`.idCaja='.$_GET['ce'],'order'=>'fechaMovimiento DESC'));
 			$ce=true;
+			//print_r($caja);
 		}		
 		if(isset($_GET['ar']) && !empty($_GET['ar']))
 		{
 			$caja = CajaVenta::model()->with('movimientoCajas')->with('reciboses')->with('ventas')->find(array('condition'=>'`t`.idCajaVenta='.$_GET['ar'].' and (`ventas`.estado=1 or `ventas`.estado=2)'));
 			if(!empty($caja))
 				$tabla = $caja->ventas;
-		
 			$ld=true;
 		}
 		$this->render("index",array('ld'=>$ld,'ce'=>$ce,'tabla'=>$tabla,'caja'=>$caja));
@@ -123,6 +123,7 @@ class CajaController extends Controller
 				$movimiento->fechaMovimiento = date("Y-m-d",strtotime($comprovante->fechaMovimiento))." 23:00:00";
 			$movimiento->tipo = 0;
 			$movimiento->idCaja = $caja->idCajaVenta;
+			$movimiento->idUser = $caja->idUser;
 			if($movimiento->validate())
 			{
 				$caja->saldo = $caja->saldo-$movimiento->monto;

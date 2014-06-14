@@ -26,24 +26,24 @@
 					'value'=>'$data->idCliente0->apellido',
 			),
 			array(
-					'header'=>'Cant. Productos',
+					'header'=>'NitCI',
 					'type'=>'raw',
-					'value'=>'$data->idCliente0->apellido',
+					'value'=>'$data->idCliente0->nitCi',
 			),
 			array(
 					'header'=>'Monto de la Venta',
 					'type'=>'raw',
-					'value'=>'$data->idCliente0->montoVenta',
+					'value'=>'$data->montoVenta',
 			),
 			array(
 					'header'=>'Monto Pagado',
 					'type'=>'raw',
-					'value'=>'$data->idCliente0->montoPagado',
+					'value'=>'$data->montoPagado',
 			),
 			array(
 					'header'=>'Monto del Cambio',
 					'type'=>'raw',
-					'value'=>'$data->idCliente0->montoCambio',
+					'value'=>'$data->montoCambio',
 			),
 			array(
 					'header'=>'Fecha',

@@ -52,7 +52,7 @@ if(!empty($tabla))
 					echo $producto->idAlmacenProducto0->idProducto0->material
 					." ".$producto->idAlmacenProducto0->idProducto0->color
 					." ".$producto->idAlmacenProducto0->idProducto0->detalle
-					." ".$producto->idAlmacenProducto0->idProducto0->procedencia;
+					." ".$producto->idAlmacenProducto0->idProducto0->marca;
 				?>
 			</td>
 			<td><?php echo $producto->cantidadU."/".$producto->cantidadP; ?></td>

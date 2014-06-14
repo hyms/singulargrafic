@@ -22,13 +22,16 @@
 	<?php
 		$form=$this->beginWidget('CActiveForm', array(
 				'id'=>'detalle-venta-detalleVenta-form',
-				'action'=>CHtml::normalizeUrl(array((empty($venta->id))?'/distribuidora/notas':"/distribuidora/modificar'")),
+				'action'=>CHtml::normalizeUrl(array((empty($venta->idVenta))?'/distribuidora/notas':"/distribuidora/modificar")),
 				'htmlOptions'=>array(
 						'class'=>'form-horizontal',
 						'role'=>'form'
 				),
 		));
+	
+		echo ((!empty($venta->idVenta))?CHtml::activeHiddenField($venta,'idVenta'):'');
 	?>
+	
 	
 	
 	<div class="panel panel-default">

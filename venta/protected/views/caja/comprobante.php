@@ -8,7 +8,7 @@
 <span class="col-xs-6"><strong>La suma de:</strong><?php echo " ".$caja->idCaja0->entregado;?></span>
 <span class="col-xs-6"><strong>Cancelado a:</strong><?php echo " ADMINISTRACION"?></span>
 
-<span class="row"><strong>Por concepto:</strong><?php " ".$caja->obs;?></span>
+<span class="row"><strong>Por concepto:</strong><?php echo " ".$caja->motivo;?></span>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-4 well">
 		<br><br>

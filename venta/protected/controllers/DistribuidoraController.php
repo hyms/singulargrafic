@@ -330,11 +330,15 @@ class DistribuidoraController extends Controller
 	
 	public function actionModificar()
 	{
+		if(isset($_POST['Venta']['idVenta']))
+			$_GET['id']=$_POST['Venta']['idVenta'];
+		
 		if(isset($_GET['id']))
 		{
 			$venta = $this->verifyModel(Venta::model()->with('idCliente0')->findByPk($_GET['id']));
 			$cliente = $venta->idCliente0;
-			$detalle = DetalleVenta::model()->findAll($venta->idVenta);
+			$detalle = DetalleVenta::model()->findAll('idVenta='.$venta->idVenta);
+			//print_r($detalle);
 			$productos = new AlmacenProducto('searchDistribuidora');
 			$caja = CajaVenta::model()->findByPk($venta->idCaja);
 			//init seccion on filter
@@ -361,18 +365,6 @@ class DistribuidoraController extends Controller
 			if(isset($_POST['Venta']))
 			{
 				$venta->attributes = $_POST['Venta'];
-				$row = Venta::model()->find(array("condition"=>"tipoVenta=".$venta->tipoVenta,'order'=>'fechaVenta Desc'));
-				if(empty($row->serie) && $venta->tipoVenta==1)
-					$row->serie = 65;
-				$venta->codigo = $row->codigo +1;
-				if($row->codigo==1001 && $venta->tipoVenta==1)
-				{
-					$row->codigo;
-					$row->serie++;
-					if($row->serie==91)
-						$row->serie = 65;
-				}
-				$venta->serie = $row->serie;
 				$venta->estado = 1;
 				if($venta->formaPago==1)
 				{
@@ -429,15 +421,18 @@ class DistribuidoraController extends Controller
 			{
 				foreach ($detalle as $item)
 				{
-					$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto);
-					$almacenes->stockU = $almacenes->stockUnidad + $item->cantidadU;
+					$almacenes = AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto);
+					$almacenes->stockU = $almacenes->stockU + $item->cantidadU;
 					if($almacenes->stockU>$almacenes->idProducto0->cantXPaquete)
 					{
 						$almacenes->stockP = $almacenes->stockP + 1;
 						$almacenes->stockU = $almacenes->stockU - $almacenes->idProducto0->cantXPaquete;
 					}
 					$almacenes->stockP = $almacenes->stockP + $item->cantidadP;
-					$almacenes->save();
+					if($item->delete())
+					{
+						$almacenes->save();
+					}
 				}
 				foreach ($detalle2 as $item)
 				{
@@ -455,7 +450,7 @@ class DistribuidoraController extends Controller
 						$almacenes->save();
 					}
 				}
-				$this->redirect(array('preview'));		
+				$this->redirect(array('preview',"id"=>$venta->idVenta));		
 			}
 			
 			$this->render('notas',array(
@@ -549,7 +544,7 @@ class DistribuidoraController extends Controller
 			if(isset($_GET['m']))
 			{
 				$cond1=array("distribuidora/movimientos","f"=>0,"m"=>$_GET['m']);
-				$cond1=array("distribuidora/movimientos","f"=>1,"m"=>$_GET['m']);
+				$cond2=array("distribuidora/movimientos","f"=>1,"m"=>$_GET['m']);
 				$cond3=array("distribuidora/previewDay","f"=>$f,"m"=>$_GET['m']);
 				$m=$_GET['m'];
 				$d=$this->getUltimoDiaMes($y, $m);
@@ -561,7 +556,7 @@ class DistribuidoraController extends Controller
 					array('criteria'=>array(
 							'condition'=>$condition.$factura,
 							'with'=>array('idCliente0'),
-							'order'=>'fechaPlazo ASC',
+							'order'=>'fechaVenta ASC',
 					),
 							'pagination'=>array(
 									'pageSize'=>20,
@@ -577,7 +572,7 @@ class DistribuidoraController extends Controller
 			$ventas = new CActiveDataProvider('Venta',
 					array('criteria'=>array(
 							'with'=>array('idCliente0'),
-							'order'=>'fechaPlazo ASC',
+							'order'=>'fechaVenta ASC',
 					),
 							'pagination'=>array(
 									'pageSize'=>20,
@@ -587,7 +582,7 @@ class DistribuidoraController extends Controller
 						array('criteria'=>array(
 								'with'=>array('idCliente0'),
 								'condition'=>$factura,
-								'order'=>'fechaPlazo ASC',
+								'order'=>'fechaVenta ASC',
 						),
 								'pagination'=>array(
 										'pageSize'=>20,
