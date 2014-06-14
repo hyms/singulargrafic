@@ -49,7 +49,7 @@ class CajaController extends Controller
 		{
 			$caja = CajaVenta::model()->with('movimientoCajas')->with('reciboses')->with('ventas')->find(array('condition'=>'`t`.idCajaVenta='.$_GET['ar'].' and (`ventas`.estado=1 or `ventas`.estado=2)'));
 			if(!empty($caja))
-				$tabla = $caja->Venta;
+				$tabla = $caja->ventas;
 		
 			$ld=true;
 		}
@@ -112,11 +112,13 @@ class CajaController extends Controller
 		if(isset($_POST['MovimientoCaja']))
 		{
 			$movimiento->attributes = $_POST['MovimientoCaja'];
-			$movimiento->obs = "Traspaso de efectivo a Administracion";
-			$comprovante = CajaVenta::model()->find(array('select'=>'max(comprovante) as max'));
-			$caja->comprovante = $comprovante->max +1;
+			$movimiento->motivo = "Traspaso de efectivo a Administracion";
+			$comprovante = CajaVenta::model()->find(array('select'=>'max(comprobante) as max'));
+			$caja->comprobante = $comprovante->max +1;
 			$movimiento->fechaMovimiento = date("Y-m-d H:i:s");
 			$comprovante = MovimientoCaja::model()->find(array('order'=>'fechaMovimiento Desc'));
+			if(empty($comprovante))
+				$comprovante=new MovimientoCaja;
 			if(date("d",strtotime($movimiento->fechaMovimiento)) > date("d",strtotime($comprovante->fechaMovimiento)))
 				$movimiento->fechaMovimiento = date("Y-m-d",strtotime($comprovante->fechaMovimiento))." 23:00:00";
 			$movimiento->tipo = 0;
@@ -128,7 +130,7 @@ class CajaController extends Controller
 				$caja->entregado=$movimiento->monto;
 				if($movimiento->monto==0)
 				{
-					$caja->comprovante="";
+					$caja->comprobante="";
 					if($caja->save())
 					{
 						if($this->initCaja($caja->saldo))

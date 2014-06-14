@@ -51,7 +51,7 @@ $this->breadcrumbs=array(
 	  	<div class="panel-body" style="overflow: auto;">
 <?php
 	$this->widget('zii.widgets.grid.CGridView', array(
-		'dataProvider'=>$ventas,
+		'dataProvider'=>$productos,
 		'itemsCssClass' => 'table table-hover table-condensed',
 		'htmlOptions' => array('class' => 'table-responsive'),
 		'columns'=>array(
@@ -62,12 +62,12 @@ $this->breadcrumbs=array(
 				array(
 						'header'=>'Codigo',
 						'type'=>'raw',
-						'value'=>'$data->idProducto0->codigo',
+						'value'=>'$data->idAlmacenProducto0->idProducto0->codigo',
 				),
 				array(
 						'header'=>'Detalle',
 						'type'=>'raw',
-						'value'=>'$data->idProducto0->material." ".$data->idProducto0->color." ".$data->idProducto0->detalle." ".$data->idProducto0->procedencia',
+						'value'=>'$data->idAlmacenProducto0->idProducto0->material." ".$data->idAlmacenProducto0->idProducto0->color." ".$data->idAlmacenProducto0->idProducto0->detalle." ".$data->idAlmacenProducto0->idProducto0->marca',
 				),
 				array(
 						'header'=>'cantidad',

@@ -45,7 +45,7 @@ class numerosALetras extends CWidget
 			case '5': return $valores[101]; break;
 			case '7': return $valores[102]; break;
 			case '9': return $valores[103]; break;
-			default: return $valores[$VCentena];
+			default: return $valores[$centenas];
 		}
 	}
 

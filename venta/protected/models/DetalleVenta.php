@@ -27,7 +27,8 @@ class DetalleVenta extends CActiveRecord
 	{
 		return 'detalleVenta';
 	}
-
+	
+	public $cantidad;
 	/**
 	 * @return array validation rules for model attributes.
 	 */

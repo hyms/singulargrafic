@@ -39,7 +39,7 @@
 			array(
 					'header'=>'codigo',
 					'type'=>'raw',
-					'value'=>'$data->serie." ".$data->codigo',
+					'value'=>'chr($data->serie)." ".$data->codigo',
 			),
 		)
 	));

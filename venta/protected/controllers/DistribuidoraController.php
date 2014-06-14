@@ -30,13 +30,13 @@ class DistribuidoraController extends Controller
 								'group'=>'`t`.idCliente',
 								'select'=>'count(*) as cantidad, `t`.`idCliente`',
 								'order'=>'cantidad ASC',
-								'with'=>array('idCliente0'),
+								'with'=>array('idCliente0'=>array('select'=>'nitCi, apellido')),
 							
 								'limit'=>'5',
 						),));
 		$productos = new CActiveDataProvider('DetalleVenta',
 					array('criteria'=>array(
-							'with'=>array('idAlmacenProducto0','idAlmacenProducto0.idProducto0'),
+							'with'=>array('idAlmacenProducto0'=>array('select'=>'*'),'idAlmacenProducto0.idProducto0'=>array('select'=>'*')),
 							'group'=>'`t`.idAlmacenProducto',
 							'select'=>'count(*) as cantidad, `t`.idAlmacenProducto',
 							'order'=>'cantidad ASC',
@@ -99,7 +99,7 @@ class DistribuidoraController extends Controller
 			$cliente->attributes = $_POST['Cliente'];
 			if(empty($cliente->fechaRegistro))
 				$cliente->fechaRegistro = date("Y-m-d");
-			if($cliente->validate())
+			if($cliente->save())
 				$swc=1;
 		}
 		
@@ -163,7 +163,7 @@ class DistribuidoraController extends Controller
 					$item->idVenta = $venta->idVenta;
 					if($item->validate())
 					{
-						$almacenes = array_push($almacenes,AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto));
+						array_push($almacenes,AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto));
 						$almacenes[$i]->stockU = $almacenes[$i]->stockU - $item->cantidadU;
 						if($almacenes[$i]->stockU<0)
 						{
@@ -206,7 +206,7 @@ class DistribuidoraController extends Controller
 					if($venta->formaPago==1)
 						$caja->saldo = $caja->saldo+$venta->montoPagado;
 					if($caja->save())
-						$this->redirect(array('preview'));
+						$this->redirect(array('preview','id'=>$venta->idVenta));
 				}
 				//finish section for save datas
 			}
@@ -482,7 +482,6 @@ class DistribuidoraController extends Controller
 			->with("idCaja0.idUser0")
 			->with("idCaja0.idUser0.idEmpleado0")
 			->findByPk($_GET['id']);
-	
 			if($ventas!=null)
 				$this->render('preview',array('venta'=>$ventas));
 			else
@@ -496,7 +495,7 @@ class DistribuidoraController extends Controller
 	{
 		$deudores = new CActiveDataProvider('Venta',
 										array('criteria'=>array(
-											'condition'=>'montoVenta>montoPagado and formaPago=1',
+											'condition'=>'montoVenta>montoPagado',
 											'with'=>array('idCliente0'),
 											'order'=>'fechaPlazo ASC',
 										),

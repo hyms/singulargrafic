@@ -48,18 +48,18 @@
 			array(
 					'header'=>'codigo',
 					'type'=>'raw',
-					'value'=>'$data->serie." ".$data->codigo',
+					'value'=>'chr($data->serie)." ".$data->codigo',
 					'filter'=>CHtml::activeTextField($ventas, 'codigos',array("class"=>"form-control input-sm")),
 			),
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("Modificar",array("caja/modificar","id"=>data->idVenta),array("class"=>"hidden-print"))',
+					'value'=>'CHtml::link("Modificar",array("distribuidora/modificar","id"=>$data->idVenta),array("class"=>"hidden-print"))',
 			),
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("Imprimir",array("caja/preview","id"=>data->idVenta),array("class"=>"hidden-print"))',
+					'value'=>'CHtml::link("Imprimir",array("distribuidora/preview","id"=>$data->idVenta),array("class"=>"hidden-print"))',
 			),
 		)
 	));

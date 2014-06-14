@@ -9,7 +9,7 @@
 </div>
 <div id="print-recived" class="form-group" style="width:793px; height:529px;">
 
-	<h4 class="col-xs-offset-10 text-right"><?php echo $venta->serie." ".$venta->codigo; ?></h4>
+	<h4 class="col-xs-offset-10 text-right"><?php echo chr($venta->serie)." ".$venta->codigo; ?></h4>
 	<h3 class="col-xs-offset-8 text-right"><?php echo "NOTA DE VENTA";?></h3>
 	<p class="row">
 	<span class="col-xs-3" > <strong><?php echo "CLIENTE:";?></strong> <?php echo $venta->idCliente0->apellido;?></span>
