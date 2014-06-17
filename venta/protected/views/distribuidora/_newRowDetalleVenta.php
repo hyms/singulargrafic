@@ -38,8 +38,8 @@
 	<?php echo CHtml::link('Quitar', '#', array("class"=>"btn btn-danger btn-sm tabular-input-remove")).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />'; ?>
 </td>
 </tr>
-<?php  echo 
-"
+<?php  
+echo "
 <script>
 	$('#stockUnidad_". $index ."').blur(function(e){ 
 	    $('#costoTotal_". $index ."').val(suma(suma($('#stockUnidad_".  $index ."').val()*$('#costoUnidad_". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#costoPaquete_". $index ."').val()),$('#adicional_". $index ."').val()));
@@ -63,5 +63,4 @@
 		return true;
 	})
 </script>
-
 ";?>

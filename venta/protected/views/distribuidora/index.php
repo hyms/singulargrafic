@@ -45,10 +45,10 @@ $this->breadcrumbs=array(
 	</div>
 
 <div class="panel panel-default">
-		<div class="panel-heading">
-			<strong class="panel-title">Top 5 Productos</strong>
-		</div>
-	  	<div class="panel-body" style="overflow: auto;">
+	<div class="panel-heading">
+		<strong class="panel-title">Top 5 Productos</strong>
+	</div>
+	<div class="panel-body" style="overflow: auto;">
 <?php
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$productos,
@@ -77,7 +77,7 @@ $this->breadcrumbs=array(
 		)
 	));
  ?>
- </div>
+ 	</div>
 	</div>
 	
 </div>

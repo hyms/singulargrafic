@@ -171,9 +171,9 @@ class DistribuidoraController extends Controller
 							$almacenes[$i]->stockU = $almacenes[$i]->stockU + $almacenes[$i]->idProducto0->cantXPaquete;
 						}
 						$almacenes[$i]->stockP = $almacenes[$i]->stockP - $item->cantidadP;
-						if($almacenes[$i]->stockU<0 && $almacenes[$i]->stockP<0)
+						if($almacenes[$i]->stockP<0)
 						{
-							$venta->addError('montoTotal', 'No existen suficientes Insumos');
+							$venta->addError('obs', 'No existen suficientes Insumos');
 							$venta->delete();
 							break;
 						}
@@ -207,6 +207,10 @@ class DistribuidoraController extends Controller
 						$caja->saldo = $caja->saldo+$venta->montoPagado;
 					if($caja->save())
 						$this->redirect(array('preview','id'=>$venta->idVenta));
+				}
+				else
+				{
+					$venta->delete();
 				}
 				//finish section for save datas
 			}
@@ -647,11 +651,19 @@ class DistribuidoraController extends Controller
 	public function actionAjaxCliente()
 	{
 		if(Yii::app()->request->isAjaxRequest && isset($_GET['nitCi']))
+		//if(isset($_GET['nitCi']))
 		{
 			$cliente = $this->verifyModel(Cliente::model()->with('ventas')->find('nitCi='.$_GET['nitCi']));
 			$deuda=false;
-			if($cliente->ventas->montoVenta > $cliente->ventas->montoPagado)
-				$deuda=true;
+			foreach ($cliente->ventas as $item)
+			{
+				if($item->montoVenta > $item->montoPagado)
+				{
+					$deuda=true;
+					break;
+				}
+			}
+			$cliente = CJSON::encode($cliente);
 			$cliente = array('cliente'=>$cliente,'deuda'=>$deuda);
 			echo CJSON::encode($cliente);
 		}

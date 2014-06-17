@@ -103,6 +103,5 @@ $('#Descuento_0').change(function(){
 $('#descuento').blur(function(e){
 	$('#total').val(resta($('#total').val(),$('#descuento').val()).toFixed(2));
 	cambio();
-});
-			
+});		
 ",CClientScript::POS_READY);?>

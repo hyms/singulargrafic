@@ -13,7 +13,9 @@
 	<?php echo CHtml::error($cliente,'apellido',array('class'=>'label label-danger')); ?>
 </div>
 	
-<?php Yii::app()->getClientScript()->registerScript("ajax_cliente",
+<?php
+
+Yii::app()->getClientScript()->registerScript("ajax_cliente",
 "
 	function cliente (nitCi)
 	{
@@ -25,6 +27,7 @@
 	            data: { nitCi: nitCi},
 	            success: function (data){ 
 				 			data = JSON.parse(data);
+							data[\"cliente\"] = JSON.parse(data[\"cliente\"]);
 							if(data[\"deuda\"]==true)
 							{	alert(\"El Cliente \"+data[\"cliente\"][\"apellido\"]+\" tiene una deuda\");	}
 	            			$('#apellido').val(data[\"cliente\"][\"apellido\"]); 

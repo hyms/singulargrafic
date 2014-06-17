@@ -46,6 +46,7 @@ if(count($detalle)>=1)
     <div class="col-sm-8">
 	<?php echo CHtml::activeTextArea($venta,"obs",array('class'=>'form-control'))?>
 	</div>
+	 <?php echo CHtml::error($venta,"obs",array('class'=>'label label-danger')); ?>
 </div>
 
 <div class="col-sm-5" >
