@@ -2158,3 +2158,499 @@ in /var/www/singulardev/venta/index.php (13)
 2014/06/17 18:50:05 [warning] [application] Failed to set unsafe attribute "codigos" of "Venta".
 in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (327)
 in /var/www/singulardev/venta/index.php (13)
+2014/06/18 16:05:51 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fechaArqueoa' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCajaVenta` AS `t0_c0`, `t`.`idCaja` AS `t0_c1`, `t`.`idUser` AS `t0_c2`, `t`.`saldo` AS `t0_c3`, `t`.`fechaArqueo` AS `t0_c4`, `t`.`entregado` AS `t0_c5`, `t`.`comprobante` AS `t0_c6`, `reciboses`.`idRecibos` AS `t1_c0`, `reciboses`.`categoria` AS `t1_c1`, `reciboses`.`codigo` AS `t1_c2`, `reciboses`.`idCliente` AS `t1_c3`, `reciboses`.`responsable` AS `t1_c4`, `reciboses`.`celular` AS `t1_c5`, `reciboses`.`fechaRegistro` AS `t1_c6`, `reciboses`.`concepto` AS `t1_c7`, `reciboses`.`codigoNumero` AS `t1_c8`, `reciboses`.`servicio` AS `t1_c9`, `reciboses`.`monto` AS `t1_c10`, `reciboses`.`acuenta` AS `t1_c11`, `reciboses`.`saldo` AS `t1_c12`, `reciboses`.`obs` AS `t1_c13`, `reciboses`.`tipoRecivo` AS `t1_c14`, `reciboses`.`idCaja` AS `t1_c15`, `reciboses`.`descuento` AS `t1_c16`, `movimientoCajas`.`idMovimientoCaja` AS `t2_c0`, `movimientoCajas`.`monto` AS `t2_c1`, `movimientoCajas`.`motivo` AS `t2_c2`, `movimientoCajas`.`fechaMovimiento` AS `t2_c3`, `movimientoCajas`.`idUser` AS `t2_c4`, `movimientoCajas`.`idCaja` AS `t2_c5`, `movimientoCajas`.`tipo` AS `t2_c6`, `ventas`.`idVenta` AS `t3_c0`, `ventas`.`idCaja` AS `t3_c1`, `ventas`.`fechaVenta` AS `t3_c2`, `ventas`.`tipoVenta` AS `t3_c3`, `ventas`.`formaPago` AS `t3_c4`, `ventas`.`idCliente` AS `t3_c5`, `ventas`.`fechaPlazo` AS `t3_c6`, `ventas`.`codigo` AS `t3_c7`, `ventas`.`serie` AS `t3_c8`, `ventas`.`montoVenta` AS `t3_c9`, `ventas`.`montoPagado` AS `t3_c10`, `ventas`.`montoCambio` AS `t3_c11`, `ventas`.`montoDescuento` AS `t3_c12`, `ventas`.`estado` AS `t3_c13`, `ventas`.`factura` AS `t3_c14`, `ventas`.`autorizado` AS `t3_c15`, `ventas`.`responsable` AS `t3_c16`, `ventas`.`obs` AS `t3_c17` FROM `cajaVenta` `t`  LEFT OUTER JOIN `recibos` `reciboses` ON (`reciboses`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `movimientoCaja` `movimientoCajas` ON (`movimientoCajas`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCaja`=`t`.`idCajaVenta`)  WHERE (`t`.idCaja=2 and fechaArqueoa is NULL).
+in /var/www/singulardev/venta/protected/controllers/CajaController.php (41)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/18 16:05:51 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fechaArqueoa' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCajaVenta` AS `t0_c0`, `t`.`idCaja` AS `t0_c1`, `t`.`idUser` AS `t0_c2`, `t`.`saldo` AS `t0_c3`, `t`.`fechaArqueo` AS `t0_c4`, `t`.`entregado` AS `t0_c5`, `t`.`comprobante` AS `t0_c6`, `reciboses`.`idRecibos` AS `t1_c0`, `reciboses`.`categoria` AS `t1_c1`, `reciboses`.`codigo` AS `t1_c2`, `reciboses`.`idCliente` AS `t1_c3`, `reciboses`.`responsable` AS `t1_c4`, `reciboses`.`celular` AS `t1_c5`, `reciboses`.`fechaRegistro` AS `t1_c6`, `reciboses`.`concepto` AS `t1_c7`, `reciboses`.`codigoNumero` AS `t1_c8`, `reciboses`.`servicio` AS `t1_c9`, `reciboses`.`monto` AS `t1_c10`, `reciboses`.`acuenta` AS `t1_c11`, `reciboses`.`saldo` AS `t1_c12`, `reciboses`.`obs` AS `t1_c13`, `reciboses`.`tipoRecivo` AS `t1_c14`, `reciboses`.`idCaja` AS `t1_c15`, `reciboses`.`descuento` AS `t1_c16`, `movimientoCajas`.`idMovimientoCaja` AS `t2_c0`, `movimientoCajas`.`monto` AS `t2_c1`, `movimientoCajas`.`motivo` AS `t2_c2`, `movimientoCajas`.`fechaMovimiento` AS `t2_c3`, `movimientoCajas`.`idUser` AS `t2_c4`, `movimientoCajas`.`idCaja` AS `t2_c5`, `movimientoCajas`.`tipo` AS `t2_c6`, `ventas`.`idVenta` AS `t3_c0`, `ventas`.`idCaja` AS `t3_c1`, `ventas`.`fechaVenta` AS `t3_c2`, `ventas`.`tipoVenta` AS `t3_c3`, `ventas`.`formaPago` AS `t3_c4`, `ventas`.`idCliente` AS `t3_c5`, `ventas`.`fechaPlazo` AS `t3_c6`, `ventas`.`codigo` AS `t3_c7`, `ventas`.`serie` AS `t3_c8`, `ventas`.`montoVenta` AS `t3_c9`, `ventas`.`montoPagado` AS `t3_c10`, `ventas`.`montoCambio` AS `t3_c11`, `ventas`.`montoDescuento` AS `t3_c12`, `ventas`.`estado` AS `t3_c13`, `ventas`.`factura` AS `t3_c14`, `ventas`.`autorizado` AS `t3_c15`, `ventas`.`responsable` AS `t3_c16`, `ventas`.`obs` AS `t3_c17` FROM `cajaVenta` `t`  LEFT OUTER JOIN `recibos` `reciboses` ON (`reciboses`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `movimientoCaja` `movimientoCajas` ON (`movimientoCajas`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCaja`=`t`.`idCajaVenta`)  WHERE (`t`.idCaja=2 and fechaArqueoa is NULL)' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/framework/db/ar/CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/framework/db/ar/CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 /var/www/framework/db/ar/CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), false)
+#5 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#6 /var/www/singulardev/venta/protected/controllers/CajaController.php(41): CActiveRecord->find(Array)
+#7 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionIndex()
+#8 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/framework/web/CWebApplication.php(282): CController->run('index')
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/index')
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/singulardev/venta/index.php/caja/index?ld=18
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/caja/index
+---
+2014/06/18 18:46:37 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and tipoVenta=1)' at line 1. The SQL statement executed was: SELECT COUNT(DISTINCT `t`.`idVenta`) FROM `venta` `t`  LEFT OUTER JOIN `cliente` `idCliente0` ON (`t`.`idCliente`=`idCliente0`.`idCliente`)  WHERE ( and tipoVenta=1).
+in /var/www/singulardev/venta/protected/views/distribuidora/movimientos.php (45)
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (601)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/18 18:46:37 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and tipoVenta=1)' at line 1. The SQL statement executed was: SELECT COUNT(DISTINCT `t`.`idVenta`) FROM `venta` `t`  LEFT OUTER JOIN `cliente` `idCliente0` ON (`t`.`idCliente`=`idCliente0`.`idCliente`)  WHERE ( and tipoVenta=1)' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/framework/db/ar/CActiveFinder.php(759): CDbCommand->queryScalar()
+#2 /var/www/framework/db/ar/CActiveFinder.php(151): CJoinElement->count(Object(CDbCriteria))
+#3 /var/www/framework/db/ar/CActiveRecord.php(1605): CActiveFinder->count(Object(CDbCriteria))
+#4 /var/www/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#5 /var/www/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#6 /var/www/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#7 /var/www/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 /var/www/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#9 /var/www/framework/zii/widgets/grid/CGridView.php(339): CBaseListView->init()
+#10 /var/www/framework/web/CBaseController.php(147): CGridView->init()
+#11 /var/www/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#12 /var/www/singulardev/venta/protected/views/distribuidora/movimientos.php(45): CBaseController->widget('zii.widgets.gri...', Array)
+#13 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#14 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#15 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#16 /var/www/framework/web/CController.php(782): CController->renderPartial('movimientos', Array, true)
+#17 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(601): CController->render('movimientos', Array)
+#18 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionMovimientos()
+#19 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#20 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#21 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#22 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#23 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#24 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#25 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#26 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#27 /var/www/framework/web/CWebApplication.php(282): CController->run('movimientos')
+#28 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/m...')
+#29 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#30 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#31 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/movimientos?f=1
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos?f=0
+---
+2014/06/18 18:48:09 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1. The SQL statement executed was: SELECT COUNT(DISTINCT `t`.`idVenta`) FROM `venta` `t`  LEFT OUTER JOIN `cliente` `idCliente0` ON (`t`.`idCliente`=`idCliente0`.`idCliente`)  WHERE ('2014-06-18 00:00:00'<=fechaVenta AND fechaVenta<='2014-06-18 23:59:59' and ).
+in /var/www/singulardev/venta/protected/views/distribuidora/movimientos.php (45)
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (602)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/18 18:48:09 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1. The SQL statement executed was: SELECT COUNT(DISTINCT `t`.`idVenta`) FROM `venta` `t`  LEFT OUTER JOIN `cliente` `idCliente0` ON (`t`.`idCliente`=`idCliente0`.`idCliente`)  WHERE ('2014-06-18 00:00:00'<=fechaVenta AND fechaVenta<='2014-06-18 23:59:59' and )' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 /var/www/framework/db/ar/CActiveFinder.php(759): CDbCommand->queryScalar()
+#2 /var/www/framework/db/ar/CActiveFinder.php(151): CJoinElement->count(Object(CDbCriteria))
+#3 /var/www/framework/db/ar/CActiveRecord.php(1605): CActiveFinder->count(Object(CDbCriteria))
+#4 /var/www/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#5 /var/www/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#6 /var/www/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#7 /var/www/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 /var/www/framework/zii/widgets/CBaseListView.php(111): CDataProvider->getData()
+#9 /var/www/framework/zii/widgets/grid/CGridView.php(339): CBaseListView->init()
+#10 /var/www/framework/web/CBaseController.php(147): CGridView->init()
+#11 /var/www/framework/web/CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#12 /var/www/singulardev/venta/protected/views/distribuidora/movimientos.php(45): CBaseController->widget('zii.widgets.gri...', Array)
+#13 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#14 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#15 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#16 /var/www/framework/web/CController.php(782): CController->renderPartial('movimientos', Array, true)
+#17 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(602): CController->render('movimientos', Array)
+#18 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionMovimientos()
+#19 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#20 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#21 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#22 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#23 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#24 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#25 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#26 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#27 /var/www/framework/web/CWebApplication.php(282): CController->run('movimientos')
+#28 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/m...')
+#29 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#30 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#31 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/movimientos?d=18
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/previewDay?f=1
+---
+2014/06/18 18:52:14 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.idCajas' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCajaVenta` AS `t0_c0`, `t`.`idCaja` AS `t0_c1`, `t`.`idUser` AS `t0_c2`, `t`.`saldo` AS `t0_c3`, `t`.`fechaArqueo` AS `t0_c4`, `t`.`entregado` AS `t0_c5`, `t`.`comprobante` AS `t0_c6`, `ventas`.`idVenta` AS `t1_c0`, `ventas`.`idCaja` AS `t1_c1`, `ventas`.`fechaVenta` AS `t1_c2`, `ventas`.`tipoVenta` AS `t1_c3`, `ventas`.`formaPago` AS `t1_c4`, `ventas`.`idCliente` AS `t1_c5`, `ventas`.`fechaPlazo` AS `t1_c6`, `ventas`.`codigo` AS `t1_c7`, `ventas`.`serie` AS `t1_c8`, `ventas`.`montoVenta` AS `t1_c9`, `ventas`.`montoPagado` AS `t1_c10`, `ventas`.`montoCambio` AS `t1_c11`, `ventas`.`montoDescuento` AS `t1_c12`, `ventas`.`estado` AS `t1_c13`, `ventas`.`factura` AS `t1_c14`, `ventas`.`autorizado` AS `t1_c15`, `ventas`.`responsable` AS `t1_c16`, `ventas`.`obs` AS `t1_c17`, `idCliente0`.`idCliente` AS `t2_c0`, `idCliente0`.`nitCi` AS `t2_c1`, `idCliente0`.`apellido` AS `t2_c2`, `idCliente0`.`nombre` AS `t2_c3`, `idCliente0`.`correo` AS `t2_c4`, `idCliente0`.`fechaRegistro` AS `t2_c5`, `idCliente0`.`telefono` AS `t2_c6`, `idCliente0`.`direccion` AS `t2_c7`, `detalleVentas`.`idDetalleVenta` AS `t3_c0`, `detalleVentas`.`idVenta` AS `t3_c1`, `detalleVentas`.`cantidadU` AS `t3_c2`, `detalleVentas`.`costoU` AS `t3_c3`, `detalleVentas`.`cantidadP` AS `t3_c4`, `detalleVentas`.`costoP` AS `t3_c5`, `detalleVentas`.`costoAdicional` AS `t3_c6`, `detalleVentas`.`costoTotal` AS `t3_c7`, `detalleVentas`.`idAlmacenProducto` AS `t3_c8`, `idAlmacenProducto0`.`idAlmacenProducto` AS `t4_c0`, `idAlmacenProducto0`.`idProducto` AS `t4_c1`, `idAlmacenProducto0`.`stockU` AS `t4_c2`, `idAlmacenProducto0`.`stockP` AS `t4_c3`, `idAlmacenProducto0`.`idAlmacen` AS `t4_c4`, `idProducto0`.`idProducto` AS `t5_c0`, `idProducto0`.`servicio` AS `t5_c1`, `idProducto0`.`codigo` AS `t5_c2`, `idProducto0`.`material` AS `t5_c3`, `idProducto0`.`color` AS `t5_c4`, `idProducto0`.`marca` AS `t5_c5`, `idProducto0`.`industria` AS `t5_c6`, `idProducto0`.`cantXPaquete` AS `t5_c7`, `idProducto0`.`precioSFU` AS `t5_c8`, `idProducto0`.`precioSFP` AS `t5_c9`, `idProducto0`.`precioCFU` AS `t5_c10`, `idProducto0`.`precioCFP` AS `t5_c11`, `idProducto0`.`familia` AS `t5_c12`, `idProducto0`.`detalle` AS `t5_c13` FROM `cajaVenta` `t`  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `cliente` `idCliente0` ON (`ventas`.`idCliente`=`idCliente0`.`idCliente`)  LEFT OUTER JOIN `detalleVenta` `detalleVentas` ON (`detalleVentas`.`idVenta`=`ventas`.`idVenta`)  LEFT OUTER JOIN `almacenProducto` `idAlmacenProducto0` ON (`detalleVentas`.`idAlmacenProducto`=`idAlmacenProducto0`.`idAlmacenProducto`)  LEFT OUTER JOIN `producto` `idProducto0` ON (`idAlmacenProducto0`.`idProducto`=`idProducto0`.`idProducto`)  WHERE (`t`.idCajas=2 and tipoVenta=0 and '2014-06-1 00:00:00'<=fechaVenta AND fechaVenta<='2014-06-30 23:59:59').
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (657)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/18 18:52:14 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.idCajas' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCajaVenta` AS `t0_c0`, `t`.`idCaja` AS `t0_c1`, `t`.`idUser` AS `t0_c2`, `t`.`saldo` AS `t0_c3`, `t`.`fechaArqueo` AS `t0_c4`, `t`.`entregado` AS `t0_c5`, `t`.`comprobante` AS `t0_c6`, `ventas`.`idVenta` AS `t1_c0`, `ventas`.`idCaja` AS `t1_c1`, `ventas`.`fechaVenta` AS `t1_c2`, `ventas`.`tipoVenta` AS `t1_c3`, `ventas`.`formaPago` AS `t1_c4`, `ventas`.`idCliente` AS `t1_c5`, `ventas`.`fechaPlazo` AS `t1_c6`, `ventas`.`codigo` AS `t1_c7`, `ventas`.`serie` AS `t1_c8`, `ventas`.`montoVenta` AS `t1_c9`, `ventas`.`montoPagado` AS `t1_c10`, `ventas`.`montoCambio` AS `t1_c11`, `ventas`.`montoDescuento` AS `t1_c12`, `ventas`.`estado` AS `t1_c13`, `ventas`.`factura` AS `t1_c14`, `ventas`.`autorizado` AS `t1_c15`, `ventas`.`responsable` AS `t1_c16`, `ventas`.`obs` AS `t1_c17`, `idCliente0`.`idCliente` AS `t2_c0`, `idCliente0`.`nitCi` AS `t2_c1`, `idCliente0`.`apellido` AS `t2_c2`, `idCliente0`.`nombre` AS `t2_c3`, `idCliente0`.`correo` AS `t2_c4`, `idCliente0`.`fechaRegistro` AS `t2_c5`, `idCliente0`.`telefono` AS `t2_c6`, `idCliente0`.`direccion` AS `t2_c7`, `detalleVentas`.`idDetalleVenta` AS `t3_c0`, `detalleVentas`.`idVenta` AS `t3_c1`, `detalleVentas`.`cantidadU` AS `t3_c2`, `detalleVentas`.`costoU` AS `t3_c3`, `detalleVentas`.`cantidadP` AS `t3_c4`, `detalleVentas`.`costoP` AS `t3_c5`, `detalleVentas`.`costoAdicional` AS `t3_c6`, `detalleVentas`.`costoTotal` AS `t3_c7`, `detalleVentas`.`idAlmacenProducto` AS `t3_c8`, `idAlmacenProducto0`.`idAlmacenProducto` AS `t4_c0`, `idAlmacenProducto0`.`idProducto` AS `t4_c1`, `idAlmacenProducto0`.`stockU` AS `t4_c2`, `idAlmacenProducto0`.`stockP` AS `t4_c3`, `idAlmacenProducto0`.`idAlmacen` AS `t4_c4`, `idProducto0`.`idProducto` AS `t5_c0`, `idProducto0`.`servicio` AS `t5_c1`, `idProducto0`.`codigo` AS `t5_c2`, `idProducto0`.`material` AS `t5_c3`, `idProducto0`.`color` AS `t5_c4`, `idProducto0`.`marca` AS `t5_c5`, `idProducto0`.`industria` AS `t5_c6`, `idProducto0`.`cantXPaquete` AS `t5_c7`, `idProducto0`.`precioSFU` AS `t5_c8`, `idProducto0`.`precioSFP` AS `t5_c9`, `idProducto0`.`precioCFU` AS `t5_c10`, `idProducto0`.`precioCFP` AS `t5_c11`, `idProducto0`.`familia` AS `t5_c12`, `idProducto0`.`detalle` AS `t5_c13` FROM `cajaVenta` `t`  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `cliente` `idCliente0` ON (`ventas`.`idCliente`=`idCliente0`.`idCliente`)  LEFT OUTER JOIN `detalleVenta` `detalleVentas` ON (`detalleVentas`.`idVenta`=`ventas`.`idVenta`)  LEFT OUTER JOIN `almacenProducto` `idAlmacenProducto0` ON (`detalleVentas`.`idAlmacenProducto`=`idAlmacenProducto0`.`idAlmacenProducto`)  LEFT OUTER JOIN `producto` `idProducto0` ON (`idAlmacenProducto0`.`idProducto`=`idProducto0`.`idProducto`)  WHERE (`t`.idCajas=2 and tipoVenta=0 and '2014-06-1 00:00:00'<=fechaVenta AND fechaVenta<='2014-06-30 23:59:59')' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/framework/db/ar/CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/framework/db/ar/CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 /var/www/framework/db/ar/CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), false)
+#5 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#6 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(657): CActiveRecord->find(Array)
+#7 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionPreviewDay()
+#8 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/framework/web/CWebApplication.php(282): CController->run('previewDay')
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/p...')
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=&m=06
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos?m=06
+---
+2014/06/18 18:53:16 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.idCajas' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCajaVenta` AS `t0_c0`, `t`.`idCaja` AS `t0_c1`, `t`.`idUser` AS `t0_c2`, `t`.`saldo` AS `t0_c3`, `t`.`fechaArqueo` AS `t0_c4`, `t`.`entregado` AS `t0_c5`, `t`.`comprobante` AS `t0_c6`, `ventas`.`idVenta` AS `t1_c0`, `ventas`.`idCaja` AS `t1_c1`, `ventas`.`fechaVenta` AS `t1_c2`, `ventas`.`tipoVenta` AS `t1_c3`, `ventas`.`formaPago` AS `t1_c4`, `ventas`.`idCliente` AS `t1_c5`, `ventas`.`fechaPlazo` AS `t1_c6`, `ventas`.`codigo` AS `t1_c7`, `ventas`.`serie` AS `t1_c8`, `ventas`.`montoVenta` AS `t1_c9`, `ventas`.`montoPagado` AS `t1_c10`, `ventas`.`montoCambio` AS `t1_c11`, `ventas`.`montoDescuento` AS `t1_c12`, `ventas`.`estado` AS `t1_c13`, `ventas`.`factura` AS `t1_c14`, `ventas`.`autorizado` AS `t1_c15`, `ventas`.`responsable` AS `t1_c16`, `ventas`.`obs` AS `t1_c17`, `idCliente0`.`idCliente` AS `t2_c0`, `idCliente0`.`nitCi` AS `t2_c1`, `idCliente0`.`apellido` AS `t2_c2`, `idCliente0`.`nombre` AS `t2_c3`, `idCliente0`.`correo` AS `t2_c4`, `idCliente0`.`fechaRegistro` AS `t2_c5`, `idCliente0`.`telefono` AS `t2_c6`, `idCliente0`.`direccion` AS `t2_c7`, `detalleVentas`.`idDetalleVenta` AS `t3_c0`, `detalleVentas`.`idVenta` AS `t3_c1`, `detalleVentas`.`cantidadU` AS `t3_c2`, `detalleVentas`.`costoU` AS `t3_c3`, `detalleVentas`.`cantidadP` AS `t3_c4`, `detalleVentas`.`costoP` AS `t3_c5`, `detalleVentas`.`costoAdicional` AS `t3_c6`, `detalleVentas`.`costoTotal` AS `t3_c7`, `detalleVentas`.`idAlmacenProducto` AS `t3_c8`, `idAlmacenProducto0`.`idAlmacenProducto` AS `t4_c0`, `idAlmacenProducto0`.`idProducto` AS `t4_c1`, `idAlmacenProducto0`.`stockU` AS `t4_c2`, `idAlmacenProducto0`.`stockP` AS `t4_c3`, `idAlmacenProducto0`.`idAlmacen` AS `t4_c4`, `idProducto0`.`idProducto` AS `t5_c0`, `idProducto0`.`servicio` AS `t5_c1`, `idProducto0`.`codigo` AS `t5_c2`, `idProducto0`.`material` AS `t5_c3`, `idProducto0`.`color` AS `t5_c4`, `idProducto0`.`marca` AS `t5_c5`, `idProducto0`.`industria` AS `t5_c6`, `idProducto0`.`cantXPaquete` AS `t5_c7`, `idProducto0`.`precioSFU` AS `t5_c8`, `idProducto0`.`precioSFP` AS `t5_c9`, `idProducto0`.`precioCFU` AS `t5_c10`, `idProducto0`.`precioCFP` AS `t5_c11`, `idProducto0`.`familia` AS `t5_c12`, `idProducto0`.`detalle` AS `t5_c13` FROM `cajaVenta` `t`  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `cliente` `idCliente0` ON (`ventas`.`idCliente`=`idCliente0`.`idCliente`)  LEFT OUTER JOIN `detalleVenta` `detalleVentas` ON (`detalleVentas`.`idVenta`=`ventas`.`idVenta`)  LEFT OUTER JOIN `almacenProducto` `idAlmacenProducto0` ON (`detalleVentas`.`idAlmacenProducto`=`idAlmacenProducto0`.`idAlmacenProducto`)  LEFT OUTER JOIN `producto` `idProducto0` ON (`idAlmacenProducto0`.`idProducto`=`idProducto0`.`idProducto`)  WHERE (`t`.idCajas=2 and tipoVenta=0 and '2014-06-1 00:00:00'<=fechaVenta AND fechaVenta<='2014-06-30 23:59:59').
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (657)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/18 18:53:16 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.idCajas' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCajaVenta` AS `t0_c0`, `t`.`idCaja` AS `t0_c1`, `t`.`idUser` AS `t0_c2`, `t`.`saldo` AS `t0_c3`, `t`.`fechaArqueo` AS `t0_c4`, `t`.`entregado` AS `t0_c5`, `t`.`comprobante` AS `t0_c6`, `ventas`.`idVenta` AS `t1_c0`, `ventas`.`idCaja` AS `t1_c1`, `ventas`.`fechaVenta` AS `t1_c2`, `ventas`.`tipoVenta` AS `t1_c3`, `ventas`.`formaPago` AS `t1_c4`, `ventas`.`idCliente` AS `t1_c5`, `ventas`.`fechaPlazo` AS `t1_c6`, `ventas`.`codigo` AS `t1_c7`, `ventas`.`serie` AS `t1_c8`, `ventas`.`montoVenta` AS `t1_c9`, `ventas`.`montoPagado` AS `t1_c10`, `ventas`.`montoCambio` AS `t1_c11`, `ventas`.`montoDescuento` AS `t1_c12`, `ventas`.`estado` AS `t1_c13`, `ventas`.`factura` AS `t1_c14`, `ventas`.`autorizado` AS `t1_c15`, `ventas`.`responsable` AS `t1_c16`, `ventas`.`obs` AS `t1_c17`, `idCliente0`.`idCliente` AS `t2_c0`, `idCliente0`.`nitCi` AS `t2_c1`, `idCliente0`.`apellido` AS `t2_c2`, `idCliente0`.`nombre` AS `t2_c3`, `idCliente0`.`correo` AS `t2_c4`, `idCliente0`.`fechaRegistro` AS `t2_c5`, `idCliente0`.`telefono` AS `t2_c6`, `idCliente0`.`direccion` AS `t2_c7`, `detalleVentas`.`idDetalleVenta` AS `t3_c0`, `detalleVentas`.`idVenta` AS `t3_c1`, `detalleVentas`.`cantidadU` AS `t3_c2`, `detalleVentas`.`costoU` AS `t3_c3`, `detalleVentas`.`cantidadP` AS `t3_c4`, `detalleVentas`.`costoP` AS `t3_c5`, `detalleVentas`.`costoAdicional` AS `t3_c6`, `detalleVentas`.`costoTotal` AS `t3_c7`, `detalleVentas`.`idAlmacenProducto` AS `t3_c8`, `idAlmacenProducto0`.`idAlmacenProducto` AS `t4_c0`, `idAlmacenProducto0`.`idProducto` AS `t4_c1`, `idAlmacenProducto0`.`stockU` AS `t4_c2`, `idAlmacenProducto0`.`stockP` AS `t4_c3`, `idAlmacenProducto0`.`idAlmacen` AS `t4_c4`, `idProducto0`.`idProducto` AS `t5_c0`, `idProducto0`.`servicio` AS `t5_c1`, `idProducto0`.`codigo` AS `t5_c2`, `idProducto0`.`material` AS `t5_c3`, `idProducto0`.`color` AS `t5_c4`, `idProducto0`.`marca` AS `t5_c5`, `idProducto0`.`industria` AS `t5_c6`, `idProducto0`.`cantXPaquete` AS `t5_c7`, `idProducto0`.`precioSFU` AS `t5_c8`, `idProducto0`.`precioSFP` AS `t5_c9`, `idProducto0`.`precioCFU` AS `t5_c10`, `idProducto0`.`precioCFP` AS `t5_c11`, `idProducto0`.`familia` AS `t5_c12`, `idProducto0`.`detalle` AS `t5_c13` FROM `cajaVenta` `t`  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `cliente` `idCliente0` ON (`ventas`.`idCliente`=`idCliente0`.`idCliente`)  LEFT OUTER JOIN `detalleVenta` `detalleVentas` ON (`detalleVentas`.`idVenta`=`ventas`.`idVenta`)  LEFT OUTER JOIN `almacenProducto` `idAlmacenProducto0` ON (`detalleVentas`.`idAlmacenProducto`=`idAlmacenProducto0`.`idAlmacenProducto`)  LEFT OUTER JOIN `producto` `idProducto0` ON (`idAlmacenProducto0`.`idProducto`=`idProducto0`.`idProducto`)  WHERE (`t`.idCajas=2 and tipoVenta=0 and '2014-06-1 00:00:00'<=fechaVenta AND fechaVenta<='2014-06-30 23:59:59')' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/framework/db/ar/CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/framework/db/ar/CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 /var/www/framework/db/ar/CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 /var/www/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(657): CActiveRecord->findAll(Array)
+#7 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionPreviewDay()
+#8 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/framework/web/CWebApplication.php(282): CController->run('previewDay')
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/p...')
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=&m=06
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos?m=06
+---
+2014/06/18 18:53:24 [error] [php] Trying to get property of non-object (/var/www/singulardev/venta/protected/controllers/DistribuidoraController.php:658)
+Stack trace:
+#0 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#1 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#4 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=&m=06
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (658)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/18 18:53:50 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.idCajas' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCajaVenta` AS `t0_c0`, `t`.`idCaja` AS `t0_c1`, `t`.`idUser` AS `t0_c2`, `t`.`saldo` AS `t0_c3`, `t`.`fechaArqueo` AS `t0_c4`, `t`.`entregado` AS `t0_c5`, `t`.`comprobante` AS `t0_c6`, `ventas`.`idVenta` AS `t1_c0`, `ventas`.`idCaja` AS `t1_c1`, `ventas`.`fechaVenta` AS `t1_c2`, `ventas`.`tipoVenta` AS `t1_c3`, `ventas`.`formaPago` AS `t1_c4`, `ventas`.`idCliente` AS `t1_c5`, `ventas`.`fechaPlazo` AS `t1_c6`, `ventas`.`codigo` AS `t1_c7`, `ventas`.`serie` AS `t1_c8`, `ventas`.`montoVenta` AS `t1_c9`, `ventas`.`montoPagado` AS `t1_c10`, `ventas`.`montoCambio` AS `t1_c11`, `ventas`.`montoDescuento` AS `t1_c12`, `ventas`.`estado` AS `t1_c13`, `ventas`.`factura` AS `t1_c14`, `ventas`.`autorizado` AS `t1_c15`, `ventas`.`responsable` AS `t1_c16`, `ventas`.`obs` AS `t1_c17`, `idCliente0`.`idCliente` AS `t2_c0`, `idCliente0`.`nitCi` AS `t2_c1`, `idCliente0`.`apellido` AS `t2_c2`, `idCliente0`.`nombre` AS `t2_c3`, `idCliente0`.`correo` AS `t2_c4`, `idCliente0`.`fechaRegistro` AS `t2_c5`, `idCliente0`.`telefono` AS `t2_c6`, `idCliente0`.`direccion` AS `t2_c7`, `detalleVentas`.`idDetalleVenta` AS `t3_c0`, `detalleVentas`.`idVenta` AS `t3_c1`, `detalleVentas`.`cantidadU` AS `t3_c2`, `detalleVentas`.`costoU` AS `t3_c3`, `detalleVentas`.`cantidadP` AS `t3_c4`, `detalleVentas`.`costoP` AS `t3_c5`, `detalleVentas`.`costoAdicional` AS `t3_c6`, `detalleVentas`.`costoTotal` AS `t3_c7`, `detalleVentas`.`idAlmacenProducto` AS `t3_c8`, `idAlmacenProducto0`.`idAlmacenProducto` AS `t4_c0`, `idAlmacenProducto0`.`idProducto` AS `t4_c1`, `idAlmacenProducto0`.`stockU` AS `t4_c2`, `idAlmacenProducto0`.`stockP` AS `t4_c3`, `idAlmacenProducto0`.`idAlmacen` AS `t4_c4`, `idProducto0`.`idProducto` AS `t5_c0`, `idProducto0`.`servicio` AS `t5_c1`, `idProducto0`.`codigo` AS `t5_c2`, `idProducto0`.`material` AS `t5_c3`, `idProducto0`.`color` AS `t5_c4`, `idProducto0`.`marca` AS `t5_c5`, `idProducto0`.`industria` AS `t5_c6`, `idProducto0`.`cantXPaquete` AS `t5_c7`, `idProducto0`.`precioSFU` AS `t5_c8`, `idProducto0`.`precioSFP` AS `t5_c9`, `idProducto0`.`precioCFU` AS `t5_c10`, `idProducto0`.`precioCFP` AS `t5_c11`, `idProducto0`.`familia` AS `t5_c12`, `idProducto0`.`detalle` AS `t5_c13` FROM `cajaVenta` `t`  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `cliente` `idCliente0` ON (`ventas`.`idCliente`=`idCliente0`.`idCliente`)  LEFT OUTER JOIN `detalleVenta` `detalleVentas` ON (`detalleVentas`.`idVenta`=`ventas`.`idVenta`)  LEFT OUTER JOIN `almacenProducto` `idAlmacenProducto0` ON (`detalleVentas`.`idAlmacenProducto`=`idAlmacenProducto0`.`idAlmacenProducto`)  LEFT OUTER JOIN `producto` `idProducto0` ON (`idAlmacenProducto0`.`idProducto`=`idProducto0`.`idProducto`)  WHERE (`t`.idCajas=2 and tipoVenta=0 and '2014-06-1 00:00:00'<=fechaVenta AND fechaVenta<='2014-06-30 23:59:59').
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (657)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/18 18:53:50 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.idCajas' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCajaVenta` AS `t0_c0`, `t`.`idCaja` AS `t0_c1`, `t`.`idUser` AS `t0_c2`, `t`.`saldo` AS `t0_c3`, `t`.`fechaArqueo` AS `t0_c4`, `t`.`entregado` AS `t0_c5`, `t`.`comprobante` AS `t0_c6`, `ventas`.`idVenta` AS `t1_c0`, `ventas`.`idCaja` AS `t1_c1`, `ventas`.`fechaVenta` AS `t1_c2`, `ventas`.`tipoVenta` AS `t1_c3`, `ventas`.`formaPago` AS `t1_c4`, `ventas`.`idCliente` AS `t1_c5`, `ventas`.`fechaPlazo` AS `t1_c6`, `ventas`.`codigo` AS `t1_c7`, `ventas`.`serie` AS `t1_c8`, `ventas`.`montoVenta` AS `t1_c9`, `ventas`.`montoPagado` AS `t1_c10`, `ventas`.`montoCambio` AS `t1_c11`, `ventas`.`montoDescuento` AS `t1_c12`, `ventas`.`estado` AS `t1_c13`, `ventas`.`factura` AS `t1_c14`, `ventas`.`autorizado` AS `t1_c15`, `ventas`.`responsable` AS `t1_c16`, `ventas`.`obs` AS `t1_c17`, `idCliente0`.`idCliente` AS `t2_c0`, `idCliente0`.`nitCi` AS `t2_c1`, `idCliente0`.`apellido` AS `t2_c2`, `idCliente0`.`nombre` AS `t2_c3`, `idCliente0`.`correo` AS `t2_c4`, `idCliente0`.`fechaRegistro` AS `t2_c5`, `idCliente0`.`telefono` AS `t2_c6`, `idCliente0`.`direccion` AS `t2_c7`, `detalleVentas`.`idDetalleVenta` AS `t3_c0`, `detalleVentas`.`idVenta` AS `t3_c1`, `detalleVentas`.`cantidadU` AS `t3_c2`, `detalleVentas`.`costoU` AS `t3_c3`, `detalleVentas`.`cantidadP` AS `t3_c4`, `detalleVentas`.`costoP` AS `t3_c5`, `detalleVentas`.`costoAdicional` AS `t3_c6`, `detalleVentas`.`costoTotal` AS `t3_c7`, `detalleVentas`.`idAlmacenProducto` AS `t3_c8`, `idAlmacenProducto0`.`idAlmacenProducto` AS `t4_c0`, `idAlmacenProducto0`.`idProducto` AS `t4_c1`, `idAlmacenProducto0`.`stockU` AS `t4_c2`, `idAlmacenProducto0`.`stockP` AS `t4_c3`, `idAlmacenProducto0`.`idAlmacen` AS `t4_c4`, `idProducto0`.`idProducto` AS `t5_c0`, `idProducto0`.`servicio` AS `t5_c1`, `idProducto0`.`codigo` AS `t5_c2`, `idProducto0`.`material` AS `t5_c3`, `idProducto0`.`color` AS `t5_c4`, `idProducto0`.`marca` AS `t5_c5`, `idProducto0`.`industria` AS `t5_c6`, `idProducto0`.`cantXPaquete` AS `t5_c7`, `idProducto0`.`precioSFU` AS `t5_c8`, `idProducto0`.`precioSFP` AS `t5_c9`, `idProducto0`.`precioCFU` AS `t5_c10`, `idProducto0`.`precioCFP` AS `t5_c11`, `idProducto0`.`familia` AS `t5_c12`, `idProducto0`.`detalle` AS `t5_c13` FROM `cajaVenta` `t`  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `cliente` `idCliente0` ON (`ventas`.`idCliente`=`idCliente0`.`idCliente`)  LEFT OUTER JOIN `detalleVenta` `detalleVentas` ON (`detalleVentas`.`idVenta`=`ventas`.`idVenta`)  LEFT OUTER JOIN `almacenProducto` `idAlmacenProducto0` ON (`detalleVentas`.`idAlmacenProducto`=`idAlmacenProducto0`.`idAlmacenProducto`)  LEFT OUTER JOIN `producto` `idProducto0` ON (`idAlmacenProducto0`.`idProducto`=`idProducto0`.`idProducto`)  WHERE (`t`.idCajas=2 and tipoVenta=0 and '2014-06-1 00:00:00'<=fechaVenta AND fechaVenta<='2014-06-30 23:59:59')' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/framework/db/ar/CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/framework/db/ar/CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 /var/www/framework/db/ar/CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 /var/www/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(657): CActiveRecord->findAll(Array)
+#7 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionPreviewDay()
+#8 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/framework/web/CWebApplication.php(282): CController->run('previewDay')
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/p...')
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=&m=06
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos?m=06
+---
+2014/06/18 18:55:07 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.idCajas' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCajaVenta` AS `t0_c0`, `t`.`idCaja` AS `t0_c1`, `t`.`idUser` AS `t0_c2`, `t`.`saldo` AS `t0_c3`, `t`.`fechaArqueo` AS `t0_c4`, `t`.`entregado` AS `t0_c5`, `t`.`comprobante` AS `t0_c6`, `ventas`.`idVenta` AS `t1_c0`, `ventas`.`idCaja` AS `t1_c1`, `ventas`.`fechaVenta` AS `t1_c2`, `ventas`.`tipoVenta` AS `t1_c3`, `ventas`.`formaPago` AS `t1_c4`, `ventas`.`idCliente` AS `t1_c5`, `ventas`.`fechaPlazo` AS `t1_c6`, `ventas`.`codigo` AS `t1_c7`, `ventas`.`serie` AS `t1_c8`, `ventas`.`montoVenta` AS `t1_c9`, `ventas`.`montoPagado` AS `t1_c10`, `ventas`.`montoCambio` AS `t1_c11`, `ventas`.`montoDescuento` AS `t1_c12`, `ventas`.`estado` AS `t1_c13`, `ventas`.`factura` AS `t1_c14`, `ventas`.`autorizado` AS `t1_c15`, `ventas`.`responsable` AS `t1_c16`, `ventas`.`obs` AS `t1_c17`, `idCliente0`.`idCliente` AS `t2_c0`, `idCliente0`.`nitCi` AS `t2_c1`, `idCliente0`.`apellido` AS `t2_c2`, `idCliente0`.`nombre` AS `t2_c3`, `idCliente0`.`correo` AS `t2_c4`, `idCliente0`.`fechaRegistro` AS `t2_c5`, `idCliente0`.`telefono` AS `t2_c6`, `idCliente0`.`direccion` AS `t2_c7`, `detalleVentas`.`idDetalleVenta` AS `t3_c0`, `detalleVentas`.`idVenta` AS `t3_c1`, `detalleVentas`.`cantidadU` AS `t3_c2`, `detalleVentas`.`costoU` AS `t3_c3`, `detalleVentas`.`cantidadP` AS `t3_c4`, `detalleVentas`.`costoP` AS `t3_c5`, `detalleVentas`.`costoAdicional` AS `t3_c6`, `detalleVentas`.`costoTotal` AS `t3_c7`, `detalleVentas`.`idAlmacenProducto` AS `t3_c8`, `idAlmacenProducto0`.`idAlmacenProducto` AS `t4_c0`, `idAlmacenProducto0`.`idProducto` AS `t4_c1`, `idAlmacenProducto0`.`stockU` AS `t4_c2`, `idAlmacenProducto0`.`stockP` AS `t4_c3`, `idAlmacenProducto0`.`idAlmacen` AS `t4_c4`, `idProducto0`.`idProducto` AS `t5_c0`, `idProducto0`.`servicio` AS `t5_c1`, `idProducto0`.`codigo` AS `t5_c2`, `idProducto0`.`material` AS `t5_c3`, `idProducto0`.`color` AS `t5_c4`, `idProducto0`.`marca` AS `t5_c5`, `idProducto0`.`industria` AS `t5_c6`, `idProducto0`.`cantXPaquete` AS `t5_c7`, `idProducto0`.`precioSFU` AS `t5_c8`, `idProducto0`.`precioSFP` AS `t5_c9`, `idProducto0`.`precioCFU` AS `t5_c10`, `idProducto0`.`precioCFP` AS `t5_c11`, `idProducto0`.`familia` AS `t5_c12`, `idProducto0`.`detalle` AS `t5_c13` FROM `cajaVenta` `t`  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `cliente` `idCliente0` ON (`ventas`.`idCliente`=`idCliente0`.`idCliente`)  LEFT OUTER JOIN `detalleVenta` `detalleVentas` ON (`detalleVentas`.`idVenta`=`ventas`.`idVenta`)  LEFT OUTER JOIN `almacenProducto` `idAlmacenProducto0` ON (`detalleVentas`.`idAlmacenProducto`=`idAlmacenProducto0`.`idAlmacenProducto`)  LEFT OUTER JOIN `producto` `idProducto0` ON (`idAlmacenProducto0`.`idProducto`=`idProducto0`.`idProducto`)  WHERE (`t`.idCajas=2 and tipoVenta=0 and '2014-06-1 00:00:00'<=fechaVenta AND fechaVenta<='2014-06-30 23:59:59').
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (657)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/18 18:55:07 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.idCajas' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCajaVenta` AS `t0_c0`, `t`.`idCaja` AS `t0_c1`, `t`.`idUser` AS `t0_c2`, `t`.`saldo` AS `t0_c3`, `t`.`fechaArqueo` AS `t0_c4`, `t`.`entregado` AS `t0_c5`, `t`.`comprobante` AS `t0_c6`, `ventas`.`idVenta` AS `t1_c0`, `ventas`.`idCaja` AS `t1_c1`, `ventas`.`fechaVenta` AS `t1_c2`, `ventas`.`tipoVenta` AS `t1_c3`, `ventas`.`formaPago` AS `t1_c4`, `ventas`.`idCliente` AS `t1_c5`, `ventas`.`fechaPlazo` AS `t1_c6`, `ventas`.`codigo` AS `t1_c7`, `ventas`.`serie` AS `t1_c8`, `ventas`.`montoVenta` AS `t1_c9`, `ventas`.`montoPagado` AS `t1_c10`, `ventas`.`montoCambio` AS `t1_c11`, `ventas`.`montoDescuento` AS `t1_c12`, `ventas`.`estado` AS `t1_c13`, `ventas`.`factura` AS `t1_c14`, `ventas`.`autorizado` AS `t1_c15`, `ventas`.`responsable` AS `t1_c16`, `ventas`.`obs` AS `t1_c17`, `idCliente0`.`idCliente` AS `t2_c0`, `idCliente0`.`nitCi` AS `t2_c1`, `idCliente0`.`apellido` AS `t2_c2`, `idCliente0`.`nombre` AS `t2_c3`, `idCliente0`.`correo` AS `t2_c4`, `idCliente0`.`fechaRegistro` AS `t2_c5`, `idCliente0`.`telefono` AS `t2_c6`, `idCliente0`.`direccion` AS `t2_c7`, `detalleVentas`.`idDetalleVenta` AS `t3_c0`, `detalleVentas`.`idVenta` AS `t3_c1`, `detalleVentas`.`cantidadU` AS `t3_c2`, `detalleVentas`.`costoU` AS `t3_c3`, `detalleVentas`.`cantidadP` AS `t3_c4`, `detalleVentas`.`costoP` AS `t3_c5`, `detalleVentas`.`costoAdicional` AS `t3_c6`, `detalleVentas`.`costoTotal` AS `t3_c7`, `detalleVentas`.`idAlmacenProducto` AS `t3_c8`, `idAlmacenProducto0`.`idAlmacenProducto` AS `t4_c0`, `idAlmacenProducto0`.`idProducto` AS `t4_c1`, `idAlmacenProducto0`.`stockU` AS `t4_c2`, `idAlmacenProducto0`.`stockP` AS `t4_c3`, `idAlmacenProducto0`.`idAlmacen` AS `t4_c4`, `idProducto0`.`idProducto` AS `t5_c0`, `idProducto0`.`servicio` AS `t5_c1`, `idProducto0`.`codigo` AS `t5_c2`, `idProducto0`.`material` AS `t5_c3`, `idProducto0`.`color` AS `t5_c4`, `idProducto0`.`marca` AS `t5_c5`, `idProducto0`.`industria` AS `t5_c6`, `idProducto0`.`cantXPaquete` AS `t5_c7`, `idProducto0`.`precioSFU` AS `t5_c8`, `idProducto0`.`precioSFP` AS `t5_c9`, `idProducto0`.`precioCFU` AS `t5_c10`, `idProducto0`.`precioCFP` AS `t5_c11`, `idProducto0`.`familia` AS `t5_c12`, `idProducto0`.`detalle` AS `t5_c13` FROM `cajaVenta` `t`  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `cliente` `idCliente0` ON (`ventas`.`idCliente`=`idCliente0`.`idCliente`)  LEFT OUTER JOIN `detalleVenta` `detalleVentas` ON (`detalleVentas`.`idVenta`=`ventas`.`idVenta`)  LEFT OUTER JOIN `almacenProducto` `idAlmacenProducto0` ON (`detalleVentas`.`idAlmacenProducto`=`idAlmacenProducto0`.`idAlmacenProducto`)  LEFT OUTER JOIN `producto` `idProducto0` ON (`idAlmacenProducto0`.`idProducto`=`idProducto0`.`idProducto`)  WHERE (`t`.idCajas=2 and tipoVenta=0 and '2014-06-1 00:00:00'<=fechaVenta AND fechaVenta<='2014-06-30 23:59:59')' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/framework/db/ar/CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/framework/db/ar/CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 /var/www/framework/db/ar/CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), false)
+#5 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#6 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(657): CActiveRecord->find(Array)
+#7 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionPreviewDay()
+#8 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/framework/web/CWebApplication.php(282): CController->run('previewDay')
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/p...')
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=&m=06
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos?m=06
+---
+2014/06/18 18:55:10 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.idCajas' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCajaVenta` AS `t0_c0`, `t`.`idCaja` AS `t0_c1`, `t`.`idUser` AS `t0_c2`, `t`.`saldo` AS `t0_c3`, `t`.`fechaArqueo` AS `t0_c4`, `t`.`entregado` AS `t0_c5`, `t`.`comprobante` AS `t0_c6`, `ventas`.`idVenta` AS `t1_c0`, `ventas`.`idCaja` AS `t1_c1`, `ventas`.`fechaVenta` AS `t1_c2`, `ventas`.`tipoVenta` AS `t1_c3`, `ventas`.`formaPago` AS `t1_c4`, `ventas`.`idCliente` AS `t1_c5`, `ventas`.`fechaPlazo` AS `t1_c6`, `ventas`.`codigo` AS `t1_c7`, `ventas`.`serie` AS `t1_c8`, `ventas`.`montoVenta` AS `t1_c9`, `ventas`.`montoPagado` AS `t1_c10`, `ventas`.`montoCambio` AS `t1_c11`, `ventas`.`montoDescuento` AS `t1_c12`, `ventas`.`estado` AS `t1_c13`, `ventas`.`factura` AS `t1_c14`, `ventas`.`autorizado` AS `t1_c15`, `ventas`.`responsable` AS `t1_c16`, `ventas`.`obs` AS `t1_c17`, `idCliente0`.`idCliente` AS `t2_c0`, `idCliente0`.`nitCi` AS `t2_c1`, `idCliente0`.`apellido` AS `t2_c2`, `idCliente0`.`nombre` AS `t2_c3`, `idCliente0`.`correo` AS `t2_c4`, `idCliente0`.`fechaRegistro` AS `t2_c5`, `idCliente0`.`telefono` AS `t2_c6`, `idCliente0`.`direccion` AS `t2_c7`, `detalleVentas`.`idDetalleVenta` AS `t3_c0`, `detalleVentas`.`idVenta` AS `t3_c1`, `detalleVentas`.`cantidadU` AS `t3_c2`, `detalleVentas`.`costoU` AS `t3_c3`, `detalleVentas`.`cantidadP` AS `t3_c4`, `detalleVentas`.`costoP` AS `t3_c5`, `detalleVentas`.`costoAdicional` AS `t3_c6`, `detalleVentas`.`costoTotal` AS `t3_c7`, `detalleVentas`.`idAlmacenProducto` AS `t3_c8`, `idAlmacenProducto0`.`idAlmacenProducto` AS `t4_c0`, `idAlmacenProducto0`.`idProducto` AS `t4_c1`, `idAlmacenProducto0`.`stockU` AS `t4_c2`, `idAlmacenProducto0`.`stockP` AS `t4_c3`, `idAlmacenProducto0`.`idAlmacen` AS `t4_c4`, `idProducto0`.`idProducto` AS `t5_c0`, `idProducto0`.`servicio` AS `t5_c1`, `idProducto0`.`codigo` AS `t5_c2`, `idProducto0`.`material` AS `t5_c3`, `idProducto0`.`color` AS `t5_c4`, `idProducto0`.`marca` AS `t5_c5`, `idProducto0`.`industria` AS `t5_c6`, `idProducto0`.`cantXPaquete` AS `t5_c7`, `idProducto0`.`precioSFU` AS `t5_c8`, `idProducto0`.`precioSFP` AS `t5_c9`, `idProducto0`.`precioCFU` AS `t5_c10`, `idProducto0`.`precioCFP` AS `t5_c11`, `idProducto0`.`familia` AS `t5_c12`, `idProducto0`.`detalle` AS `t5_c13` FROM `cajaVenta` `t`  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `cliente` `idCliente0` ON (`ventas`.`idCliente`=`idCliente0`.`idCliente`)  LEFT OUTER JOIN `detalleVenta` `detalleVentas` ON (`detalleVentas`.`idVenta`=`ventas`.`idVenta`)  LEFT OUTER JOIN `almacenProducto` `idAlmacenProducto0` ON (`detalleVentas`.`idAlmacenProducto`=`idAlmacenProducto0`.`idAlmacenProducto`)  LEFT OUTER JOIN `producto` `idProducto0` ON (`idAlmacenProducto0`.`idProducto`=`idProducto0`.`idProducto`)  WHERE (`t`.idCajas=2).
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (657)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/18 18:55:10 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.idCajas' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCajaVenta` AS `t0_c0`, `t`.`idCaja` AS `t0_c1`, `t`.`idUser` AS `t0_c2`, `t`.`saldo` AS `t0_c3`, `t`.`fechaArqueo` AS `t0_c4`, `t`.`entregado` AS `t0_c5`, `t`.`comprobante` AS `t0_c6`, `ventas`.`idVenta` AS `t1_c0`, `ventas`.`idCaja` AS `t1_c1`, `ventas`.`fechaVenta` AS `t1_c2`, `ventas`.`tipoVenta` AS `t1_c3`, `ventas`.`formaPago` AS `t1_c4`, `ventas`.`idCliente` AS `t1_c5`, `ventas`.`fechaPlazo` AS `t1_c6`, `ventas`.`codigo` AS `t1_c7`, `ventas`.`serie` AS `t1_c8`, `ventas`.`montoVenta` AS `t1_c9`, `ventas`.`montoPagado` AS `t1_c10`, `ventas`.`montoCambio` AS `t1_c11`, `ventas`.`montoDescuento` AS `t1_c12`, `ventas`.`estado` AS `t1_c13`, `ventas`.`factura` AS `t1_c14`, `ventas`.`autorizado` AS `t1_c15`, `ventas`.`responsable` AS `t1_c16`, `ventas`.`obs` AS `t1_c17`, `idCliente0`.`idCliente` AS `t2_c0`, `idCliente0`.`nitCi` AS `t2_c1`, `idCliente0`.`apellido` AS `t2_c2`, `idCliente0`.`nombre` AS `t2_c3`, `idCliente0`.`correo` AS `t2_c4`, `idCliente0`.`fechaRegistro` AS `t2_c5`, `idCliente0`.`telefono` AS `t2_c6`, `idCliente0`.`direccion` AS `t2_c7`, `detalleVentas`.`idDetalleVenta` AS `t3_c0`, `detalleVentas`.`idVenta` AS `t3_c1`, `detalleVentas`.`cantidadU` AS `t3_c2`, `detalleVentas`.`costoU` AS `t3_c3`, `detalleVentas`.`cantidadP` AS `t3_c4`, `detalleVentas`.`costoP` AS `t3_c5`, `detalleVentas`.`costoAdicional` AS `t3_c6`, `detalleVentas`.`costoTotal` AS `t3_c7`, `detalleVentas`.`idAlmacenProducto` AS `t3_c8`, `idAlmacenProducto0`.`idAlmacenProducto` AS `t4_c0`, `idAlmacenProducto0`.`idProducto` AS `t4_c1`, `idAlmacenProducto0`.`stockU` AS `t4_c2`, `idAlmacenProducto0`.`stockP` AS `t4_c3`, `idAlmacenProducto0`.`idAlmacen` AS `t4_c4`, `idProducto0`.`idProducto` AS `t5_c0`, `idProducto0`.`servicio` AS `t5_c1`, `idProducto0`.`codigo` AS `t5_c2`, `idProducto0`.`material` AS `t5_c3`, `idProducto0`.`color` AS `t5_c4`, `idProducto0`.`marca` AS `t5_c5`, `idProducto0`.`industria` AS `t5_c6`, `idProducto0`.`cantXPaquete` AS `t5_c7`, `idProducto0`.`precioSFU` AS `t5_c8`, `idProducto0`.`precioSFP` AS `t5_c9`, `idProducto0`.`precioCFU` AS `t5_c10`, `idProducto0`.`precioCFP` AS `t5_c11`, `idProducto0`.`familia` AS `t5_c12`, `idProducto0`.`detalle` AS `t5_c13` FROM `cajaVenta` `t`  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `cliente` `idCliente0` ON (`ventas`.`idCliente`=`idCliente0`.`idCliente`)  LEFT OUTER JOIN `detalleVenta` `detalleVentas` ON (`detalleVentas`.`idVenta`=`ventas`.`idVenta`)  LEFT OUTER JOIN `almacenProducto` `idAlmacenProducto0` ON (`detalleVentas`.`idAlmacenProducto`=`idAlmacenProducto0`.`idAlmacenProducto`)  LEFT OUTER JOIN `producto` `idProducto0` ON (`idAlmacenProducto0`.`idProducto`=`idProducto0`.`idProducto`)  WHERE (`t`.idCajas=2)' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/framework/db/ar/CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/framework/db/ar/CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 /var/www/framework/db/ar/CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), false)
+#5 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#6 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(657): CActiveRecord->find(Array)
+#7 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionPreviewDay()
+#8 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/framework/web/CWebApplication.php(282): CController->run('previewDay')
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/p...')
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay
+---
+2014/06/18 18:55:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'La Respuesta de la pagina no Existe.' in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php:728
+Stack trace:
+#0 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(657): DistribuidoraController->verifyModel(NULL)
+#1 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionPreviewDay()
+#2 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#4 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#6 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#8 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/framework/web/CWebApplication.php(282): CController->run('previewDay')
+#11 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/p...')
+#12 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=&d=18
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos?d=18
+---
+2014/06/18 18:59:32 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.idCajas' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCajaVenta` AS `t0_c0`, `t`.`idCaja` AS `t0_c1`, `t`.`idUser` AS `t0_c2`, `t`.`saldo` AS `t0_c3`, `t`.`fechaArqueo` AS `t0_c4`, `t`.`entregado` AS `t0_c5`, `t`.`comprobante` AS `t0_c6`, `ventas`.`idVenta` AS `t1_c0`, `ventas`.`idCaja` AS `t1_c1`, `ventas`.`fechaVenta` AS `t1_c2`, `ventas`.`tipoVenta` AS `t1_c3`, `ventas`.`formaPago` AS `t1_c4`, `ventas`.`idCliente` AS `t1_c5`, `ventas`.`fechaPlazo` AS `t1_c6`, `ventas`.`codigo` AS `t1_c7`, `ventas`.`serie` AS `t1_c8`, `ventas`.`montoVenta` AS `t1_c9`, `ventas`.`montoPagado` AS `t1_c10`, `ventas`.`montoCambio` AS `t1_c11`, `ventas`.`montoDescuento` AS `t1_c12`, `ventas`.`estado` AS `t1_c13`, `ventas`.`factura` AS `t1_c14`, `ventas`.`autorizado` AS `t1_c15`, `ventas`.`responsable` AS `t1_c16`, `ventas`.`obs` AS `t1_c17`, `idCliente0`.`idCliente` AS `t2_c0`, `idCliente0`.`nitCi` AS `t2_c1`, `idCliente0`.`apellido` AS `t2_c2`, `idCliente0`.`nombre` AS `t2_c3`, `idCliente0`.`correo` AS `t2_c4`, `idCliente0`.`fechaRegistro` AS `t2_c5`, `idCliente0`.`telefono` AS `t2_c6`, `idCliente0`.`direccion` AS `t2_c7`, `detalleVentas`.`idDetalleVenta` AS `t3_c0`, `detalleVentas`.`idVenta` AS `t3_c1`, `detalleVentas`.`cantidadU` AS `t3_c2`, `detalleVentas`.`costoU` AS `t3_c3`, `detalleVentas`.`cantidadP` AS `t3_c4`, `detalleVentas`.`costoP` AS `t3_c5`, `detalleVentas`.`costoAdicional` AS `t3_c6`, `detalleVentas`.`costoTotal` AS `t3_c7`, `detalleVentas`.`idAlmacenProducto` AS `t3_c8`, `idAlmacenProducto0`.`idAlmacenProducto` AS `t4_c0`, `idAlmacenProducto0`.`idProducto` AS `t4_c1`, `idAlmacenProducto0`.`stockU` AS `t4_c2`, `idAlmacenProducto0`.`stockP` AS `t4_c3`, `idAlmacenProducto0`.`idAlmacen` AS `t4_c4`, `idProducto0`.`idProducto` AS `t5_c0`, `idProducto0`.`servicio` AS `t5_c1`, `idProducto0`.`codigo` AS `t5_c2`, `idProducto0`.`material` AS `t5_c3`, `idProducto0`.`color` AS `t5_c4`, `idProducto0`.`marca` AS `t5_c5`, `idProducto0`.`industria` AS `t5_c6`, `idProducto0`.`cantXPaquete` AS `t5_c7`, `idProducto0`.`precioSFU` AS `t5_c8`, `idProducto0`.`precioSFP` AS `t5_c9`, `idProducto0`.`precioCFU` AS `t5_c10`, `idProducto0`.`precioCFP` AS `t5_c11`, `idProducto0`.`familia` AS `t5_c12`, `idProducto0`.`detalle` AS `t5_c13` FROM `cajaVenta` `t`  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `cliente` `idCliente0` ON (`ventas`.`idCliente`=`idCliente0`.`idCliente`)  LEFT OUTER JOIN `detalleVenta` `detalleVentas` ON (`detalleVentas`.`idVenta`=`ventas`.`idVenta`)  LEFT OUTER JOIN `almacenProducto` `idAlmacenProducto0` ON (`detalleVentas`.`idAlmacenProducto`=`idAlmacenProducto0`.`idAlmacenProducto`)  LEFT OUTER JOIN `producto` `idProducto0` ON (`idAlmacenProducto0`.`idProducto`=`idProducto0`.`idProducto`)  WHERE (`t`.idCajas=2 ).
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (657)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/18 18:59:32 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.idCajas' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCajaVenta` AS `t0_c0`, `t`.`idCaja` AS `t0_c1`, `t`.`idUser` AS `t0_c2`, `t`.`saldo` AS `t0_c3`, `t`.`fechaArqueo` AS `t0_c4`, `t`.`entregado` AS `t0_c5`, `t`.`comprobante` AS `t0_c6`, `ventas`.`idVenta` AS `t1_c0`, `ventas`.`idCaja` AS `t1_c1`, `ventas`.`fechaVenta` AS `t1_c2`, `ventas`.`tipoVenta` AS `t1_c3`, `ventas`.`formaPago` AS `t1_c4`, `ventas`.`idCliente` AS `t1_c5`, `ventas`.`fechaPlazo` AS `t1_c6`, `ventas`.`codigo` AS `t1_c7`, `ventas`.`serie` AS `t1_c8`, `ventas`.`montoVenta` AS `t1_c9`, `ventas`.`montoPagado` AS `t1_c10`, `ventas`.`montoCambio` AS `t1_c11`, `ventas`.`montoDescuento` AS `t1_c12`, `ventas`.`estado` AS `t1_c13`, `ventas`.`factura` AS `t1_c14`, `ventas`.`autorizado` AS `t1_c15`, `ventas`.`responsable` AS `t1_c16`, `ventas`.`obs` AS `t1_c17`, `idCliente0`.`idCliente` AS `t2_c0`, `idCliente0`.`nitCi` AS `t2_c1`, `idCliente0`.`apellido` AS `t2_c2`, `idCliente0`.`nombre` AS `t2_c3`, `idCliente0`.`correo` AS `t2_c4`, `idCliente0`.`fechaRegistro` AS `t2_c5`, `idCliente0`.`telefono` AS `t2_c6`, `idCliente0`.`direccion` AS `t2_c7`, `detalleVentas`.`idDetalleVenta` AS `t3_c0`, `detalleVentas`.`idVenta` AS `t3_c1`, `detalleVentas`.`cantidadU` AS `t3_c2`, `detalleVentas`.`costoU` AS `t3_c3`, `detalleVentas`.`cantidadP` AS `t3_c4`, `detalleVentas`.`costoP` AS `t3_c5`, `detalleVentas`.`costoAdicional` AS `t3_c6`, `detalleVentas`.`costoTotal` AS `t3_c7`, `detalleVentas`.`idAlmacenProducto` AS `t3_c8`, `idAlmacenProducto0`.`idAlmacenProducto` AS `t4_c0`, `idAlmacenProducto0`.`idProducto` AS `t4_c1`, `idAlmacenProducto0`.`stockU` AS `t4_c2`, `idAlmacenProducto0`.`stockP` AS `t4_c3`, `idAlmacenProducto0`.`idAlmacen` AS `t4_c4`, `idProducto0`.`idProducto` AS `t5_c0`, `idProducto0`.`servicio` AS `t5_c1`, `idProducto0`.`codigo` AS `t5_c2`, `idProducto0`.`material` AS `t5_c3`, `idProducto0`.`color` AS `t5_c4`, `idProducto0`.`marca` AS `t5_c5`, `idProducto0`.`industria` AS `t5_c6`, `idProducto0`.`cantXPaquete` AS `t5_c7`, `idProducto0`.`precioSFU` AS `t5_c8`, `idProducto0`.`precioSFP` AS `t5_c9`, `idProducto0`.`precioCFU` AS `t5_c10`, `idProducto0`.`precioCFP` AS `t5_c11`, `idProducto0`.`familia` AS `t5_c12`, `idProducto0`.`detalle` AS `t5_c13` FROM `cajaVenta` `t`  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCaja`=`t`.`idCajaVenta`)  LEFT OUTER JOIN `cliente` `idCliente0` ON (`ventas`.`idCliente`=`idCliente0`.`idCliente`)  LEFT OUTER JOIN `detalleVenta` `detalleVentas` ON (`detalleVentas`.`idVenta`=`ventas`.`idVenta`)  LEFT OUTER JOIN `almacenProducto` `idAlmacenProducto0` ON (`detalleVentas`.`idAlmacenProducto`=`idAlmacenProducto0`.`idAlmacenProducto`)  LEFT OUTER JOIN `producto` `idProducto0` ON (`idAlmacenProducto0`.`idProducto`=`idProducto0`.`idProducto`)  WHERE (`t`.idCajas=2 )' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/framework/db/ar/CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/framework/db/ar/CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 /var/www/framework/db/ar/CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), false)
+#5 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#6 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(657): CActiveRecord->find(Array)
+#7 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionPreviewDay()
+#8 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/framework/web/CWebApplication.php(282): CController->run('previewDay')
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/p...')
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos?t=all
+---
+2014/06/18 19:05:51 [error] [php] Trying to get property of non-object (/var/www/singulardev/venta/protected/controllers/DistribuidoraController.php:659)
+Stack trace:
+#0 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#1 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#4 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (659)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/18 19:07:07 [error] [php] Undefined offset: 2 (/var/www/singulardev/venta/protected/controllers/DistribuidoraController.php:659)
+Stack trace:
+#0 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#1 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#4 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (659)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/18 19:12:28 [error] [php] Trying to get property of non-object (/var/www/singulardev/venta/protected/controllers/DistribuidoraController.php:660)
+Stack trace:
+#0 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#1 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#4 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (660)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/18 19:13:19 [error] [exception.CException] exception 'CException' with message 'Property "CajaVenta.fechaVenta" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(145): CComponent->__get('fechaVenta')
+#1 /var/www/singulardev/venta/protected/views/distribuidora/previewVentas.php(15): CActiveRecord->__get('fechaVenta')
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/framework/web/CController.php(782): CController->renderPartial('previewVentas', Array, true)
+#6 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(661): CController->render('previewVentas', Array)
+#7 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionPreviewDay()
+#8 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/framework/web/CWebApplication.php(282): CController->run('previewDay')
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/p...')
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos?t=all
+---
+2014/06/18 19:13:49 [error] [php] Undefined offset: 1 (/var/www/singulardev/venta/protected/controllers/DistribuidoraController.php:660)
+Stack trace:
+#0 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#1 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#4 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=&d=17
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (660)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/18 19:14:00 [error] [php] Trying to get property of non-object (/var/www/singulardev/venta/protected/controllers/DistribuidoraController.php:660)
+Stack trace:
+#0 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#1 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#4 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#7 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#8 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/singulardev/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=&d=17
+in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php (660)
+in /var/www/singulardev/venta/index.php (13)
+2014/06/18 19:14:33 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "ventas" is not defined in active record class "Caja".' in /var/www/framework/db/ar/CActiveFinder.php:226
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'ventas')
+#1 /var/www/framework/db/ar/CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /var/www/framework/db/ar/CActiveRecord.php(909): CActiveFinder->__construct(Object(Caja), Array)
+#3 /var/www/framework/db/ar/CActiveRecord.php(1355): CActiveRecord->getActiveFinder(Array)
+#4 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#5 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(657): CActiveRecord->find(Array)
+#6 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionPreviewDay()
+#7 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/framework/web/CWebApplication.php(282): CController->run('previewDay')
+#16 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/p...')
+#17 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=&d=17
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos?d=17
+---
+2014/06/18 19:14:59 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "ventas" is not defined in active record class "Caja".' in /var/www/framework/db/ar/CActiveFinder.php:226
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'ventas')
+#1 /var/www/framework/db/ar/CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 /var/www/framework/db/ar/CActiveRecord.php(909): CActiveFinder->__construct(Object(Caja), Array)
+#3 /var/www/framework/db/ar/CActiveRecord.php(1355): CActiveRecord->getActiveFinder(Array)
+#4 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#5 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(657): CActiveRecord->find(Array)
+#6 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionPreviewDay()
+#7 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/framework/web/CWebApplication.php(282): CController->run('previewDay')
+#16 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/p...')
+#17 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=&d=17
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos?d=17
+---
+2014/06/18 19:21:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'La Respuesta de la pagina no Existe.' in /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php:738
+Stack trace:
+#0 /var/www/singulardev/venta/protected/controllers/DistribuidoraController.php(658): DistribuidoraController->verifyModel(NULL)
+#1 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionPreviewDay()
+#2 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#4 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#6 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#8 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/framework/web/CWebApplication.php(282): CController->run('previewDay')
+#11 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/p...')
+#12 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/singulardev/venta/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=&d=18
+HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos?d=18
+---

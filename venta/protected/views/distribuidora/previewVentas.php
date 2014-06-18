@@ -13,7 +13,11 @@ if(!empty($tabla))
 ?>
 <p class="text-center"><strong><?php echo "REPORTE DE VENTAS DEL DIA"?></strong></p>
 <p class="text-right"><?php echo "La Paz, ".$dias[date('w',strtotime($tabla[0]->fechaVenta))]." ".date('d',strtotime($tabla[0]->fechaVenta))." de ".$meses[date('n',strtotime($tabla[0]->fechaVenta))-1]. " del ".date('Y',strtotime($tabla[0]->fechaVenta));?></p>
-<table class="table table-bordered table-condensed">
+
+<div class="panel panel-default">
+	  <div class="panel-body">
+
+<table class="table table-hover table-condensed">
 	<thead>
 	<tr>
 		<th>Nº</th>
@@ -44,7 +48,7 @@ if(!empty($tabla))
 	?>	
 		<tr>
 			<td><?php echo $i;?></td>
-			<td><?php echo (chr($item->serie)."-".$item->codigo);?></td>
+			<td><?php echo (chr($item->serie)." ".$item->codigo);?></td>
 			<td><?php echo $item->idCliente0->apellido." ".$item->idCliente0->nombre;?></td>
 			<td><?php echo $producto->idAlmacenProducto0->idProducto0->codigo;?></td>
 			<td>
@@ -83,6 +87,9 @@ if(!empty($tabla))
 	</tr>
 	</tbody>
 </table>
+
+		</div>
+	</div>
 <?php 
 }
 else{

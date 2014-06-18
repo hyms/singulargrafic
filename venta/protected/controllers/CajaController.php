@@ -35,7 +35,10 @@ class CajaController extends Controller
 		if(isset($_GET['ld']))
 		{
 			$date = date("Y-m")."-".$_GET['ld'];
-			$caja = CajaVenta::model()->with('reciboses')->with('movimientoCajas')->with('ventas')->find(array('condition'=>'`t`.idCaja=2 and fechaArqueo is NULL'));
+			$caja = CajaVenta::model()	->with('reciboses')
+										->with('movimientoCajas')
+										->with('ventas')
+										->find(array('condition'=>'`t`.idCaja=2 and fechaArqueo is NULL'));
 			if(!empty($caja))
 				$tabla = $caja->ventas;
 			$ld=true;

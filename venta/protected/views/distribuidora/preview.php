@@ -9,16 +9,18 @@
 </div>
 <div id="print-recived" class="form-group" style="width:793px; height:529px;">
 
-	<h4 class="col-xs-offset-10 text-right"><?php echo chr($venta->serie)." ".$venta->codigo; ?></h4>
-	<h3 class="col-xs-offset-8 text-right"><?php echo "NOTA DE VENTA";?></h3>
+	<h4 class="col-xs-offset-10 text-right"><strong><?php echo chr($venta->serie)." ".$venta->codigo; ?></strong></h4>
+	<h3 class="col-xs-offset-8 text-right"><strong><?php echo "NOTA DE VENTA";?></strong></h3>
 	<p class="row">
 	<span class="col-xs-3" > <strong><?php echo "CLIENTE:";?></strong> <?php echo $venta->idCliente0->apellido;?></span>
 	<span class="col-xs-2"> <strong><?php echo "NIT:";?></strong> <?php echo $venta->idCliente0->nitCi;?></span>
 	<span class="col-xs-4"> <strong><?php echo "RESPONSABLE";?></strong> <?php echo $venta->idCaja0->idUser0->idEmpleado0->apellido." ".$venta->idCaja0->idUser0->idEmpleado0->nombre;?></span>
 	<span class="col-xs-3"> <strong><?php echo "FECHA:";?></strong> <?php echo date("d-m-Y",strtotime($venta->fechaVenta));?></span>
 	</p>
-	
-	<table class="table table-bordered table-condensed ">
+	<div class="panel panel-default">
+	  <div class="panel-body">
+
+	  <table class="table table-hover table-condensed ">
 		<thead>
 		<tr>
 			<th>
@@ -74,6 +76,10 @@
 		</tbody>
 	
 	</table>
+	  
+	  </div>
+	</div>
+	
 	<p class="row">
 	<span class="col-xs-8"><strong>Son:</strong> <?php $this->widget('ext.numerosALetras', array('valor'=>$venta->montoVenta,'despues'=>''))?></span>
 	<span class="col-xs-offset-1 col-xs-3"><strong>Total:</strong> <?php echo $venta->montoVenta." Bs.";?></span>

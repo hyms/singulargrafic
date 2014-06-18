@@ -517,15 +517,17 @@ class DistribuidoraController extends Controller
 			$f=$_GET['f'];
 			if($_GET['f']==0)
 			{
-				$factura=" and tipoVenta=0"; 
+				$factura=" tipoVenta=0"; 
 			}
 			else
 			{
-				$factura=" and tipoVenta=1";
+				$factura=" tipoVenta=1";
 			}
 		}
 		if(isset($_GET['d']) || isset($_GET['m']))
 		{
+			if($factura!="")
+				$factura=" and ".$factura;
 			$d=date("d");
 			$m=date("m");
 			$y=date("Y");
@@ -571,8 +573,9 @@ class DistribuidoraController extends Controller
 		{
 			$cond1=array("distribuidora/movimientos","f"=>0);
 			$cond2=array("distribuidora/movimientos","f"=>1);
-			$cond3=array("distribuidora/previewDay","f"=>$f);
-			if($factura="")
+			
+			if($factura=="")
+			{
 			$ventas = new CActiveDataProvider('Venta',
 					array('criteria'=>array(
 							'with'=>array('idCliente0'),
@@ -581,7 +584,9 @@ class DistribuidoraController extends Controller
 							'pagination'=>array(
 									'pageSize'=>20,
 							),));
-			else
+				$cond3=array("distribuidora/previewDay");
+			}
+			else{
 				$ventas = new CActiveDataProvider('Venta',
 						array('criteria'=>array(
 								'with'=>array('idCliente0'),
@@ -591,6 +596,8 @@ class DistribuidoraController extends Controller
 								'pagination'=>array(
 										'pageSize'=>20,
 								),));
+				$cond3=array("distribuidora/previewDay","f"=>$f);
+			}
 					
 		}
 		$this->render('movimientos',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'cond3'=>$cond3));
@@ -601,14 +608,19 @@ class DistribuidoraController extends Controller
 		$fact="";$cond="";
 		if(isset($_GET['f']))
 		{
+			if($_GET['f']!=""){
 			if($_GET['f']==0)
 			{
-				$factura=" and tipoVenta=0";
+				$fact=" and tipoVenta=0";
 			}
 			else
 			{
-				$factura=" and tipoVenta=1";
-			}
+				$fact=" and tipoVenta=1";
+			}}
+		}
+		else
+		{
+			
 		}
 		if(isset($_GET['d']) || isset($_GET['m']))
 		{
@@ -638,12 +650,21 @@ class DistribuidoraController extends Controller
 			$cond=" and '".$start."'<=fechaVenta AND fechaVenta<='".$end."'";
 		}
 		$caja = $this->verifyModel(CajaVenta::model()
-		->with('ventas')
-		->with('ventas.idCliente0')
-		->with('ventas.detalleVentas')
-		->with('ventas.detalleVentas.idAlmacenProducto0')
-		->with('ventas.detalleVentas.idAlmacenProducto0.idProducto0')
-		->find(array('condition'=>'`t`.idCaja=2'.$fact.$cond)));
+				->with('ventas')
+				->with('ventas.idCliente0')
+				->with('ventas.detalleVentas')
+				->with('ventas.detalleVentas.idAlmacenProducto0')
+				->with('ventas.detalleVentas.idAlmacenProducto0.idProducto0')
+				->find(array('condition'=>'`t`.idCaja=2 '.$fact.$cond)));
+		/*$caja = $this->verifyModel(Caja::model()
+		->with('cajaVentas')
+		->with('cajaVentas.ventas')
+		->with('cajaVentas.ventas.idCliente0')
+		->with('cajaVentas.ventas.detalleVentas')
+		->with('cajaVentas.ventas.detalleVentas.idAlmacenProducto0')
+		->with('cajaVentas.ventas.detalleVentas.idAlmacenProducto0.idProducto0')
+		->find(array('condition'=>'`t`.idCaja=2 '.$fact.$cond)));
+		//print_r($caja);*/
 		$tabla = $caja->ventas;
 		$this->render("previewVentas",array('tabla'=>$tabla,));
 	}
