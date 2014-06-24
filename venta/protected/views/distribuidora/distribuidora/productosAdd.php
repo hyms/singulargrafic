@@ -48,16 +48,19 @@
 				'value'=>'$data->stockP'
 		),
 		
-		/*array(
-				'header'=>'',
-				'type'=>'raw',
-				'value'=>'CHtml::link("Editar",array("inventario/update","id"=>$data->idProducto0->idProducto))'
-		),*/
 		array(
 				'header'=>'',
 				'type'=>'raw',
-				'value'=>'CHtml::link("Añadir a Stock",array("distribuidora/productos","id"=>$data->idAlmacenProducto))'
+				'value'=>'CHtml::link("Editar",array("inventario/update","id"=>$data->idProducto0->idProducto))'
+		),
+		array(
+				'header'=>'Distribuidora',
+				'type'=>'raw',
+				'value'=>'$data->distribuidoraLink($data->idProducto0->idProducto)',
 		),
 	)
 	));
 ?>
+<div class="text-right">
+<?php echo CHtml::link("Finalizar",array("stock/distribuidora"),array("class"=>"btn btn-default"));?>
+</div>

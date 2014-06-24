@@ -730,7 +730,68 @@ class DistribuidoraController extends Controller
 			throw new CHttpException(400,'Petición no válida.');
 	}
 	
-	
+	public function actionProductos()
+	{	
+		if(isset($_GET['id']))
+		{
+			$almacen=$this->verifyModel(AlmacenProducto::model()->with('idProducto0')->findByPk($_GET['id']));
+			$deposito=AlmacenProducto::model()->find('idAlmacen=1 and idProducto='.$almacen->idProducto);
+			$model=new MovimientoAlmacen;
+			
+			$model->idProducto = $almacen->idProducto;
+			$model->idAlmacenDestino = $almacen->idAlmacen;
+			$model->idAlmacenOrigen = $deposito->idAlmacen;
+			//$idUser->idUser = Yii::app()->user->id;
+			$model->fechaMovimiento = date("Y-m-d H:i:s");
+		
+			if(isset($_POST['MovimientoAlmacen']))
+			{
+				$model->attributes=$_POST['MovimientoAlmacen'];
+		
+						$deposito->stockU = $deposito->stockU - $model->cantidadU;
+						if($deposito->stockU<0)
+						{
+						$deposito->stockU=$deposito->stockU+$almacen->idProducto0->cantXPaquete;
+						$deposito->stockP = $deposito->stockP - 1;
+						}
+						$deposito->stockP = $deposito->stockP - $model->cantidadP;
+		
+						if($deposito->stockP < 0)
+							$model->addError('cantidadP','No existen suficientes insumos');
+									else{
+					if($model->save())
+						{
+						// form inputs are valid, do something here
+							$almacen->stockU = $almacen->stockU + $model->cantidadU;
+							$almacen->stockP = $almacen->stockP + $model->cantidadP;
+		
+							if($almacen->save() && $deposito->save())
+								$this->redirect(array('distribuidora'));
+						}
+						}
+						}
+						$index=2;
+			$this->render('distribuidora',array('model'=>$model,'almacen'=>$almacen,'deposito'=>$deposito,'index'=>$index));
+						
+		}
+		else
+		{
+			
+			$productos=new CActiveDataProvider('AlmacenProducto',
+					array(
+							'criteria'=>array(
+									'condition'=>'idAlmacen=2',
+									'order'=>'idProducto0.material',
+									'with'=>array('idProducto0'),
+							),
+							'pagination'=>array(
+									'pageSize'=>'20',
+							),
+					));
+			$index=1;
+			$this->render('distribuidora',array('productos'=>$productos,'index'=>$index));
+		}
+	}
 	
 	private function verifyModel($model)
 	{
