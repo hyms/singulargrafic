@@ -5,8 +5,8 @@
 <div class="col-sm-10">
 	<div>
 	<ul class="nav nav-tabs">
-	  <li><?php echo CHtml::link("Recibos Ingreso",array("caja/buscar","t"=>1),array("class"=>"hidden-print")) ?></li>
-	  <li><?php echo CHtml::link("Recibos Egreso",array("caja/buscar","t"=>0),array("class"=>"hidden-print")) ?></li>
+	  <li><?php echo CHtml::link("Recibos Ingreso",array("recibos/buscar","t"=>1),array("class"=>"hidden-print")) ?></li>
+	  <li><?php echo CHtml::link("Recibos Egreso",array("recibos/buscar","t"=>0),array("class"=>"hidden-print")) ?></li>
 	</ul>
 	</div>
 	<div>

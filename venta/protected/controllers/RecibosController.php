@@ -1,6 +1,6 @@
 <?php
 
-class CajaController extends Controller
+class RecibosController extends Controller
 {
 
 	public function filters()
@@ -290,13 +290,20 @@ class CajaController extends Controller
 	
 	public function actionDeuda()
 	{
-		if(isset($_GET['id']) && isset($_GET['serv']))
+		if(isset($_GET['id']) && isset($_GET['tv']))
 		{
 			$cliente = new Cliente;
 			$recibo = new Recibos;
 			$venta="";
-			if($_GET['serv']=="1")
-				$venta = $this->verifyModel(Venta::model()->with('idCliente0')->findByPk($_GET['id']));
+			if($_GET['tv']=="nv")
+			{
+				$venta = $this->verifyModel(Venta::model()
+						->with('idCliente0')
+						->with('detalleVentas')
+						->with('detalleVentas.idAlmacenProducto0')
+						->with('detalleVentas.idAlmacenProducto0.idProducto0')
+						->findByPk($_GET['id']));
+			}
 			else 
 				$venta = Venta::model()->findByPk($_GET['id']);
 			
@@ -309,6 +316,26 @@ class CajaController extends Controller
 			$recibo->idCaja = $caja->idCajaVenta;
 			$recibo->saldo = $venta->montoVenta - $venta->montoPagado;
 			$recibo->idCliente = $cliente->idCliente;
+			
+			if($_GET['tv']=="nv")
+			{
+				$i=0;
+				foreach ($venta->detalleVentas as $data)
+				{
+					if($i>0)
+						$recibo->concepto = $recibo->concepto.", ";
+					
+					$recibo->concepto=$recibo->concepto.$data->idAlmacenProducto0->idProducto0->material." ".$data->idAlmacenProducto0->idProducto0->color." ".$data->idAlmacenProducto0->idProducto0->detalle." ".$data->idAlmacenProducto0->idProducto0->marca;
+					$i++;
+				}
+				$recibo->categoria = "Nota de Venta";
+				$recibo->codigoNumero = ((empty($venta->serie))?($venta->serie)." ":"").$venta->codigo; 
+				
+			}
+			else
+			{
+				//code for ctp
+			}
 			
 			if(isset($_POST['Recibos']))
 			{
