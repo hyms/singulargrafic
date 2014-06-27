@@ -42,6 +42,7 @@ class DistribuidoraController extends Controller
 							'order'=>'cantidad ASC',
 							'limit'=>'5',
 					),));
+		
 		$this->render('index',array("ventas"=>$ventas,"productos"=>$productos));
 	}
 	
@@ -51,8 +52,15 @@ class DistribuidoraController extends Controller
 		$cliente = new Cliente;
 		$detalle = new DetalleVenta;
 		$venta = new Venta;
-		$caja = $this->verifyModel(CajaVenta::model()->find(array('condition'=>'idCaja=2 and idUser='.Yii::app()->user->id.' and fechaArqueo is NULL')));
+		$caja = $this->verifyModel(Caja::model()->findByPk(2));
+		
+		$cajaMovimiento = new CajaMovimientoVenta;
 		//Yii::app()->user->id;
+		$cajaMovimiento->idUser = Yii::app()->user->id;
+		$cajaMovimiento->motivo = "Nota de Venta";
+		$cajaMovimiento->idCaja = $caja->idCaja;
+		$cajaMovimiento->arqueo = 0;
+		$cajaMovimiento->tipo = 0;
 		
 		//init default values
 		$row = Venta::model()->find(array("condition"=>"tipoVenta=1",'order'=>'fechaVenta Desc'));
@@ -60,19 +68,20 @@ class DistribuidoraController extends Controller
 			$row=new Venta;
 		if(empty($row->serie))
 			$row->serie = 65;
-		$venta->codigo = $row->codigo +1;
-		if($row->codigo==1001)
+		$venta->numero = $row->numero +1;
+		if($row->numero==1001)
 		{
-			$row->codigo;
+			$row->numero=1;
 			$row->serie++;
 			if($row->serie==91)
 				$row->serie = 65;
 		}
 		$venta->serie = $row->serie;
+		$venta->codigo = chr($venta->serie)."P-".$venta->numero."-".date("y");
 		$venta->fechaVenta = date("Y-m-d H:i:s");
 		$venta->formaPago = 0;
 		$venta->tipoVenta = 1;
-		$venta->idCaja = $caja->idCajaVenta;
+		//$venta->idCaja = $caja->idCaja;
 		//end default values
 		
 		//init filter
@@ -109,12 +118,17 @@ class DistribuidoraController extends Controller
 			$row = Venta::model()->find(array("condition"=>"tipoVenta=".$venta->tipoVenta,'order'=>'fechaVenta Desc'));
 			if(empty($row))
 				$row=new Venta;
+			if($venta->tipoVenta==1)
+				$venta->codigo = chr($venta->serie)."P-".$venta->numero."-".date("y");
+			else
+				$venta->codigo = $venta->numero."-P";
+			
 			if(empty($row->serie) && $venta->tipoVenta==1)
 				$row->serie = 65;
-			$venta->codigo = $row->codigo +1;
-			if($row->codigo==1001 && $venta->tipoVenta==1)
+			$venta->numero = $row->numero +1;
+			if($row->numero==1001 && $venta->tipoVenta==1)
 			{
-				$row->codigo;
+				$row->numero=1;
 				$row->serie++;
 				if($row->serie==91)
 					$row->serie = 65;
@@ -201,11 +215,21 @@ class DistribuidoraController extends Controller
 						$i++;
 					}
 					if($venta->formaPago==0)
-						$caja->saldo = $caja->saldo+($venta->montoPagado-$venta->montoCambio);
-						
+					{
+						$cajaMovimiento->monto = $venta->montoPagado-$venta->montoCambio;
+					}
 					if($venta->formaPago==1)
-						$caja->saldo = $caja->saldo+$venta->montoPagado;
-					if($caja->save())
+					{
+						$cajaMovimiento->monto = $venta->montoPagado;
+					}
+					$cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
+					if($cajaMovimiento->save())
+					{
+						$caja->saldo = $caja->saldo + $cajaMovimiento->monto;
+						$venta->idCajaMovimientoVenta = $cajaMovimiento->idCajaMovimientoVenta; 
+					}
+						
+					if($caja->save()&& $venta->save())
 						$this->redirect(array('preview','id'=>$venta->idVenta));
 				}
 				else
@@ -263,15 +287,19 @@ class DistribuidoraController extends Controller
 				$row=new Venta;
 			if(empty($row->serie) && $venta->tipoVenta==1)
 				$row->serie = 65;
-			$venta->codigo = $row->codigo +1;
-			if($row->codigo==1001 && $venta->tipoVenta==1)
+			$venta->numero = $row->numero +1;
+			if($row->numero==1001 && $venta->tipoVenta==1)
 			{
-				$row->codigo;
+				$row->numero;
 				$row->serie++;
 				if($row->serie==91)
 					$row->serie = 65;
 			}
 			$venta->serie = $row->serie;
+			if($venta->tipoVenta==1)
+				$venta->codigo = chr($venta->serie)."P-".$venta->numero."-".date("y");
+			else
+				$venta->codigo = $venta->numero."-P";
 			$venta->fechaVenta = date("Y-m-d H:i:s");
 			$total=0;
 			if(isset($_POST['DetalleVenta']))
@@ -340,11 +368,12 @@ class DistribuidoraController extends Controller
 		if(isset($_GET['id']))
 		{
 			$venta = $this->verifyModel(Venta::model()->with('idCliente0')->findByPk($_GET['id']));
+			$cajaMovimiento= CajaMovimientoVenta::model()->findByPk($venta->idCajaMovimientoVenta);
 			$cliente = $venta->idCliente0;
 			$detalle = DetalleVenta::model()->findAll('idVenta='.$venta->idVenta);
 			//print_r($detalle);
 			$productos = new AlmacenProducto('searchDistribuidora');
-			$caja = CajaVenta::model()->findByPk($venta->idCaja);
+			$caja = Caja::model()->findByPk($cajaMovimiento->idCaja);
 			//init seccion on filter
 			
 			$productos->unsetAttributes();
@@ -370,6 +399,10 @@ class DistribuidoraController extends Controller
 			{
 				$venta->attributes = $_POST['Venta'];
 				$venta->estado = 1;
+				if($venta->tipoVenta==1)
+					$venta->codigo = chr($venta->serie)."P-".$venta->numero."-".date("y");
+				else
+					$venta->codigo = $venta->numero."-P";
 				if($venta->formaPago==1)
 				{
 					$venta->estado = 2;
@@ -392,13 +425,13 @@ class DistribuidoraController extends Controller
 						$saldo1=$venta->montoPagado;
 						$saldo2=$ventabkp->montoPagado;
 					}
-					
+					$cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
 					if($saldo1!=$saldo2)
 					{
 						$caja->saldo = $caja->saldo - $saldo2 + $saldo1;
-						
+						$cajaMovimiento->monto = $saldo1;
 					}
-					if($venta->save())
+					if($venta->save() && $cajaMovimiento->save())
 						$caja->save();
 					$swv=1;
 				}	
@@ -454,6 +487,7 @@ class DistribuidoraController extends Controller
 						$almacenes->save();
 					}
 				}
+				
 				$this->redirect(array('preview',"id"=>$venta->idVenta));		
 			}
 			
@@ -477,9 +511,9 @@ class DistribuidoraController extends Controller
 			->with("detalleVentas")
 			->with("detalleVentas.idAlmacenProducto0")
 			->with("detalleVentas.idAlmacenProducto0.idProducto0")
-			->with("idCaja0")
-			->with("idCaja0.idUser0")
-			->with("idCaja0.idUser0.idEmpleado0")
+			->with("idCajaMovimientoVenta0")
+			->with("idCajaMovimientoVenta0.idUser0")
+			->with("idCajaMovimientoVenta0.idUser0.idEmpleado0")
 			->findByPk($_GET['id']);
 			if($ventas!=null)
 				$this->render('preview',array('venta'=>$ventas));
@@ -557,49 +591,19 @@ class DistribuidoraController extends Controller
 				$start=$y."-".$m."-1 00:00:00";
 				$end=$y."-".$m."-".$d." 23:59:59";
 			}
-			$condition="'".$start."'<=fechaVenta AND fechaVenta<='".$end."'";
+			$condition="'".$start."'<=idCajaMovimientoVenta0.fechaMovimiento AND idCajaMovimientoVenta0.fechaMovimiento<='".$end."'";
 			$ventas = new CActiveDataProvider('Venta',
 					array('criteria'=>array(
 							'condition'=>$condition.$factura,
-							'with'=>array('idCliente0'),
-							'order'=>'fechaVenta ASC',
+							'with'=>array('idCliente0','idCajaMovimientoVenta0'),
+							'order'=>'fechaMovimiento ASC',
 					),
 							'pagination'=>array(
 									'pageSize'=>20,
 							),));
 			
 		}
-		else 
-		{
-			$cond1=array("distribuidora/movimientos","f"=>0);
-			$cond2=array("distribuidora/movimientos","f"=>1);
-			
-			if($factura=="")
-			{
-			$ventas = new CActiveDataProvider('Venta',
-					array('criteria'=>array(
-							'with'=>array('idCliente0'),
-							'order'=>'fechaVenta ASC',
-					),
-							'pagination'=>array(
-									'pageSize'=>20,
-							),));
-				$cond3=array("distribuidora/previewDay");
-			}
-			else{
-				$ventas = new CActiveDataProvider('Venta',
-						array('criteria'=>array(
-								'with'=>array('idCliente0'),
-								'condition'=>$factura,
-								'order'=>'fechaVenta ASC',
-						),
-								'pagination'=>array(
-										'pageSize'=>20,
-								),));
-				$cond3=array("distribuidora/previewDay","f"=>$f);
-			}
-					
-		}
+		
 		$this->render('movimientos',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'cond3'=>$cond3));
 	}
 	
@@ -649,21 +653,20 @@ class DistribuidoraController extends Controller
 			}
 			$cond=" and '".$start."'<=fechaVenta AND fechaVenta<='".$end."'";
 		}
-		$caja = $this->verifyModel(CajaVenta::model()
+		/*$caja = $this->verifyModel(CajaMovimientoVenta::model()
 				->with('ventas')
 				->with('ventas.idCliente0')
 				->with('ventas.detalleVentas')
 				->with('ventas.detalleVentas.idAlmacenProducto0')
 				->with('ventas.detalleVentas.idAlmacenProducto0.idProducto0')
-				->find(array('condition'=>'`t`.idCaja=2 '.$fact.$cond)));
-		/*$caja = $this->verifyModel(Caja::model()
-		->with('cajaVentas')
-		->with('cajaVentas.ventas')
-		->with('cajaVentas.ventas.idCliente0')
-		->with('cajaVentas.ventas.detalleVentas')
-		->with('cajaVentas.ventas.detalleVentas.idAlmacenProducto0')
-		->with('cajaVentas.ventas.detalleVentas.idAlmacenProducto0.idProducto0')
-		->find(array('condition'=>'`t`.idCaja=2 '.$fact.$cond)));
+				->find(array('condition'=>'`t`.idCaja=2 and arqueo=0 '.$fact.$cond)));*/
+		$caja = $this->verifyModel(Venta::model()
+		->with('idCliente0')
+		->with('detalleVentas')
+		->with('detalleVentas.idAlmacenProducto0')
+		->with('detalleVentas.idAlmacenProducto0.idProducto0')
+		->with('idCajaMovimientoVenta0')
+		->find(array('condition'=>'idCajaMovimientoVenta0.idCaja=2 and idCajaMovimientoVenta0.arqueo=0'.$fact.$cond)));
 		//print_r($caja);*/
 		$tabla = $caja->ventas;
 		$this->render("previewVentas",array('tabla'=>$tabla,));

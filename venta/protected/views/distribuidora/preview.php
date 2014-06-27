@@ -9,12 +9,12 @@
 </div>
 <div id="print-recived" class="form-group" style="width:793px; height:529px;">
 
-	<h4 class="col-xs-offset-10 text-right"><strong><?php echo chr($venta->serie)." ".$venta->codigo; ?></strong></h4>
+	<h4 class="col-xs-offset-10 text-right"><strong><?php echo $venta->codigo; ?></strong></h4>
 	<h3 class="col-xs-offset-8 text-right"><strong><?php echo "NOTA DE VENTA";?></strong></h3>
 	<p class="row">
 	<span class="col-xs-3" > <strong><?php echo "CLIENTE:";?></strong> <?php echo $venta->idCliente0->apellido;?></span>
 	<span class="col-xs-2"> <strong><?php echo "NIT:";?></strong> <?php echo $venta->idCliente0->nitCi;?></span>
-	<span class="col-xs-4"> <strong><?php echo "RESPONSABLE";?></strong> <?php echo $venta->idCaja0->idUser0->idEmpleado0->apellido." ".$venta->idCaja0->idUser0->idEmpleado0->nombre;?></span>
+	<span class="col-xs-4"> <strong><?php echo "RESPONSABLE";?></strong> <?php echo $venta->idCajaMovimientoVenta0->idUser0->idEmpleado0->apellido." ".$venta->idCajaMovimientoVenta0->idUser0->idEmpleado0->nombre;?></span>
 	<span class="col-xs-3"> <strong><?php echo "FECHA:";?></strong> <?php echo date("d-m-Y",strtotime($venta->fechaVenta));?></span>
 	</p>
 	<div class="panel panel-default">
@@ -87,7 +87,7 @@
 	<p class="row">
 	<span class="col-xs-4"><strong>Forma de pago:</strong> <?php echo ($venta->formaPago==0)?CHtml::encode("Contado"):CHtml::encode("Credito")?></span>
 	<span class="col-xs-4"><strong><?php echo ($venta->formaPago==1)?CHtml::encode("Fecha/Cobro:"):""?></strong> <?php echo ($venta->formaPago==1)?CHtml::encode(date("d/m/Y",strtotime($venta->fechaPlazo))):"" ?></span>
-	<span class="col-xs-4"><strong><?php echo ($venta->formaPago==1)?CHtml::encode("Autorizado:"):""?></strong> <?php echo ($venta->formaPago==1)?CHtml::encode($venta->autorizado):""?></span>
+	<span class="col-xs-4"><strong><?php echo ($venta->formaPago==1)?CHtml::encode("Autorizado:"):""?></strong> <?php echo ($venta->formaPago==1)?CHtml::encode(($venta->autorizado==0)?'Erick Paredes':'Miriam Martinez'):""?></span>
 	
 	</p>
 	<p class="row">

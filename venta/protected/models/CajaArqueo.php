@@ -1,32 +1,29 @@
 <?php
 
 /**
- * This is the model class for table "movimientoAlmacen".
+ * This is the model class for table "cajaArqueo".
  *
- * The followings are the available columns in table 'movimientoAlmacen':
- * @property integer $idMovimientoAlmacen
- * @property integer $idProducto
- * @property integer $idAlmacenOrigen
- * @property integer $idAlmacenDestino
- * @property integer $cantidadU
- * @property integer $cantidadP
+ * The followings are the available columns in table 'cajaArqueo':
+ * @property integer $idCajaVenta
+ * @property integer $idCaja
  * @property integer $idUser
- * @property string $fechaMovimiento
+ * @property double $monto
+ * @property string $fechaArqueo
+ * @property string $fechaVentas
+ * @property string $comprobante
  *
  * The followings are the available model relations:
- * @property Producto $idProducto0
- * @property Almacen $idAlmacenOrigen0
- * @property Almacen $idAlmacenDestino0
+ * @property Caja $idCaja0
  * @property User $idUser0
  */
-class MovimientoAlmacen extends CActiveRecord
+class CajaArqueo extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'movimientoAlmacen';
+		return 'cajaArqueo';
 	}
 
 	/**
@@ -37,11 +34,14 @@ class MovimientoAlmacen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idProducto, idAlmacenOrigen, idAlmacenDestino, cantidadU, cantidadP, idUser', 'numerical', 'integerOnly'=>true),
-			array('fechaMovimiento', 'safe'),
+			array('monto', 'required'),
+			array('idCaja, idUser', 'numerical', 'integerOnly'=>true),
+			array('monto', 'numerical'),
+			array('comprobante', 'length', 'max'=>20),
+			array('fechaArqueo, fechaVentas', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idMovimientoAlmacen, idProducto, idAlmacenOrigen, idAlmacenDestino, cantidadU, cantidadP, idUser, fechaMovimiento', 'safe', 'on'=>'search'),
+			array('idCajaVenta, idCaja, idUser, monto, fechaArqueo, fechaVentas, comprobante', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,9 +53,7 @@ class MovimientoAlmacen extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idProducto0' => array(self::BELONGS_TO, 'Producto', 'idProducto'),
-			'idAlmacenOrigen0' => array(self::BELONGS_TO, 'Almacen', 'idAlmacenOrigen'),
-			'idAlmacenDestino0' => array(self::BELONGS_TO, 'Almacen', 'idAlmacenDestino'),
+			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
 			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
 		);
 	}
@@ -66,14 +64,13 @@ class MovimientoAlmacen extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idMovimientoAlmacen' => 'Id Movimiento Almacen',
-			'idProducto' => 'Id Producto',
-			'idAlmacenOrigen' => 'Id Almacen Origen',
-			'idAlmacenDestino' => 'Id Almacen Destino',
-			'cantidadU' => 'Cantidad U',
-			'cantidadP' => 'Cantidad P',
+			'idCajaVenta' => 'Id Caja Venta',
+			'idCaja' => 'Id Caja',
 			'idUser' => 'Id User',
-			'fechaMovimiento' => 'Fecha Movimiento',
+			'monto' => 'Monto',
+			'fechaArqueo' => 'Fecha Arqueo',
+			'fechaVentas' => 'Fecha Ventas',
+			'comprobante' => 'Comprobante',
 		);
 	}
 
@@ -95,14 +92,13 @@ class MovimientoAlmacen extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idMovimientoAlmacen',$this->idMovimientoAlmacen);
-		$criteria->compare('idProducto',$this->idProducto);
-		$criteria->compare('idAlmacenOrigen',$this->idAlmacenOrigen);
-		$criteria->compare('idAlmacenDestino',$this->idAlmacenDestino);
-		$criteria->compare('cantidadU',$this->cantidadU);
-		$criteria->compare('cantidadP',$this->cantidadP);
+		$criteria->compare('idCajaVenta',$this->idCajaVenta);
+		$criteria->compare('idCaja',$this->idCaja);
 		$criteria->compare('idUser',$this->idUser);
-		$criteria->compare('fechaMovimiento',$this->fechaMovimiento,true);
+		$criteria->compare('monto',$this->monto);
+		$criteria->compare('fechaArqueo',$this->fechaArqueo,true);
+		$criteria->compare('fechaVentas',$this->fechaVentas,true);
+		$criteria->compare('comprobante',$this->comprobante,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -113,7 +109,7 @@ class MovimientoAlmacen extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return MovimientoAlmacen the static model class
+	 * @return CajaArqueo the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

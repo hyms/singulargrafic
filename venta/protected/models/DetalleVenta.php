@@ -15,11 +15,12 @@
  * @property integer $idAlmacenProducto
  *
  * The followings are the available model relations:
- * @property AlmacenProducto $idAlmacenProducto0
  * @property Venta $idVenta0
+ * @property AlmacenProducto $idAlmacenProducto0
  */
 class DetalleVenta extends CActiveRecord
 {
+	public $cantidad;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -27,8 +28,7 @@ class DetalleVenta extends CActiveRecord
 	{
 		return 'detalleVenta';
 	}
-	
-	public $cantidad;
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -37,7 +37,6 @@ class DetalleVenta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('costoU, costoP', 'required'),
 			array('idVenta, cantidadU, cantidadP, idAlmacenProducto', 'numerical', 'integerOnly'=>true),
 			array('costoU, costoP, costoAdicional, costoTotal', 'numerical'),
 			// The following rule is used by search().
@@ -54,8 +53,8 @@ class DetalleVenta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idAlmacenProducto0' => array(self::BELONGS_TO, 'AlmacenProducto', 'idAlmacenProducto'),
 			'idVenta0' => array(self::BELONGS_TO, 'Venta', 'idVenta'),
+			'idAlmacenProducto0' => array(self::BELONGS_TO, 'AlmacenProducto', 'idAlmacenProducto'),
 		);
 	}
 

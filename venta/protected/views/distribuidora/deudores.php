@@ -29,7 +29,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 				array(
 						'header'=>'',
 						'type'=>'raw',
-						'value'=>'CHtml::link("cancelar",array("recibos/deuda","id"=>$data->idVenta,"tv"=>"nv"))',
+						'value'=>'CHtml::link("cancelar",array("caja/deuda","id"=>$data->idVenta,"serv"=>1))',
 				),
 		)
 )); 

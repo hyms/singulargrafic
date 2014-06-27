@@ -48,7 +48,7 @@
 			array(
 					'header'=>'codigo',
 					'type'=>'raw',
-					'value'=>'chr($data->serie)." ".$data->codigo',
+					'value'=>'$data->codigo',
 					'filter'=>CHtml::activeTextField($ventas, 'codigos',array("class"=>"form-control input-sm")),
 			),
 			array(

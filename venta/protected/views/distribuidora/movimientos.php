@@ -6,11 +6,14 @@
 <?php $this->renderPartial('menuMovimientos');?>
 <div class="row">
 <div class="text-center">
+<?php if($cond1!="" && $cond2!=""){?>
 <?php echo CHtml::link('Con Factura', $cond1, array("class"=>"btn btn-default hidden-print")); ?>
 <?php echo CHtml::link('Sin Factura', $cond2, array("class"=>"btn btn-default hidden-print")); ?>
 <?php echo CHtml::link('Imprimir', $cond3, array("class"=>"btn btn-default hidden-print")); ?>
+<?php }?>
 </div>
 </div>
+<?php if($ventas!=""){?>
 <?php 
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$ventas,
@@ -37,13 +40,18 @@
 					'value'=>'$data->fechaVenta',
 			),
 			array(
-					'header'=>'codigo',
+					'header'=>'Codigo',
 					'type'=>'raw',
-					'value'=>'chr($data->serie)." ".$data->codigo',
+					'value'=>'$data->codigo',
+			),
+			array(
+					'header'=>'Monto',
+					'type'=>'raw',
+					'value'=>'$data->idCajaMovimientoVenta0->monto',
 			),
 		)
 	));
 ?>
-
+<?php }?>
 </div>
 

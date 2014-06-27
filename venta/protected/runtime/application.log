@@ -2654,6 +2654,7 @@ Stack trace:
 REQUEST_URI=/singulardev/venta/index.php/distribuidora/previewDay?f=&d=18
 HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/movimientos?d=18
 ---
+<<<<<<< HEAD
 2014/06/23 16:11:14 [error] [exception.CException] exception 'CException' with message 'Property "Cliente.id" is not defined.' in /var/www/framework/base/CComponent.php:130
 Stack trace:
 #0 /var/www/framework/db/ar/CActiveRecord.php(145): CComponent->__get('id')
@@ -3244,3 +3245,5 @@ Stack trace:
 REQUEST_URI=/singulardev/venta/index.php/stock/distribuidoraAdd
 HTTP_REFERER=http://localhost/singulardev/venta/index.php/distribuidora/productos
 ---
+=======
+>>>>>>> parent of c02117a... fixed commit

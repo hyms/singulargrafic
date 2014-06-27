@@ -11,8 +11,5 @@ $this->widget('zii.widgets.CMenu',array(
 							array('label'=>'Movimientos', 'url'=>array('distribuidora/movimientos')),
 							array('label'=>'Productos', 'url'=>array('distribuidora/productos')),
 							array('label'=>'Caja', 'url'=>array('#')),
-						),
-				)); 
-
-
+				)));
 ?>
