@@ -666,10 +666,10 @@ class DistribuidoraController extends Controller
 		->with('detalleVentas.idAlmacenProducto0')
 		->with('detalleVentas.idAlmacenProducto0.idProducto0')
 		->with('idCajaMovimientoVenta0')
-		->find(array('condition'=>'idCajaMovimientoVenta0.idCaja=2 and idCajaMovimientoVenta0.arqueo=0'.$fact.$cond)));
+		->findAll(array('condition'=>'idCajaMovimientoVenta0.idCaja=2 and idCajaMovimientoVenta0.arqueo=0'.$fact.$cond)));
 		//print_r($caja);*/
-		$tabla = $caja->ventas;
-		$this->render("previewVentas",array('tabla'=>$tabla,));
+		//$tabla = $caja->ventas;
+		$this->render("previewVentas",array('tabla'=>$caja,));
 	}
 	
 	public function actionAjaxCliente()
