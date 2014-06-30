@@ -667,10 +667,158 @@ class DistribuidoraController extends Controller
 		->with('detalleVentas.idAlmacenProducto0.idProducto0')
 		->with('idCajaMovimientoVenta0')
 		->findAll(array('condition'=>'idCajaMovimientoVenta0.idCaja=2 and idCajaMovimientoVenta0.arqueo=0'.$fact.$cond)));
-		//print_r($caja);*/
 		//$tabla = $caja->ventas;
 		$this->render("previewVentas",array('tabla'=>$caja,));
 	}
+	
+	public function actionProductos()
+	{
+		if(isset($_GET['id']))
+		{
+			$almacen=$this->verifyModel(AlmacenProducto::model()->with('idProducto0')->findByPk($_GET['id']));
+			$deposito=AlmacenProducto::model()->find('idAlmacen=1 and idProducto='.$almacen->idProducto);
+			$model=new MovimientoAlmacen;
+				
+			$model->idProducto = $almacen->idProducto;
+			$model->idAlmacenDestino = $almacen->idAlmacen;
+			$model->idAlmacenOrigen = $deposito->idAlmacen;
+			//$idUser->idUser = Yii::app()->user->id;
+			$model->fechaMovimiento = date("Y-m-d H:i:s");
+	
+			if(isset($_POST['MovimientoAlmacen']))
+			{
+				$model->attributes=$_POST['MovimientoAlmacen'];
+	
+				$deposito->stockU = $deposito->stockU - $model->cantidadU;
+				if($deposito->stockU<0)
+				{
+					$deposito->stockU=$deposito->stockU+$almacen->idProducto0->cantXPaquete;
+					$deposito->stockP = $deposito->stockP - 1;
+				}
+				$deposito->stockP = $deposito->stockP - $model->cantidadP;
+	
+				if($deposito->stockP < 0)
+					$model->addError('cantidadP','No existen suficientes insumos');
+				else{
+					if($model->save())
+					{
+						// form inputs are valid, do something here
+						$almacen->stockU = $almacen->stockU + $model->cantidadU;
+						$almacen->stockP = $almacen->stockP + $model->cantidadP;
+	
+						if($almacen->save() && $deposito->save())
+							$this->redirect(array('distribuidora'));
+					}
+				}
+			}
+			$index=2;
+			$this->render('distribuidora',array('model'=>$model,'almacen'=>$almacen,'deposito'=>$deposito,'index'=>$index));
+	
+		}
+		else
+		{
+				
+			$productos=new CActiveDataProvider('AlmacenProducto',
+					array(
+							'criteria'=>array(
+									'condition'=>'idAlmacen=2',
+									'order'=>'idProducto0.material',
+									'with'=>array('idProducto0'),
+							),
+							'pagination'=>array(
+									'pageSize'=>'20',
+							),
+					));
+			$index=1;
+			$this->render('distribuidora',array('productos'=>$productos,'index'=>$index));
+		}
+	}
+	
+	public function actionArqueo()
+	{
+		$arqueo = new CajaArqueo;
+		if(isset($_GET['d']))
+		{
+			$d=$_GET['d']; $m=date("m");
+			if($d==0)
+			{
+				$m--;
+				$d=$this->getUltimoDiaMes($y, $m);
+			}
+			$start=date("Y")."-".$m."-".$d." 00:00:00";
+			$end=date("Y")."-".$m."-".$d." 23:59:59";
+			$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
+			$caja = Caja::model()->findByPk('2');
+			$this->render("arqueo",array('arqueo'=>$arqueo,'caja'=>$caja));
+		}
+		else
+		{
+			$arqueos=new CActiveDataProvider('CajaArqueo',
+					array(
+							'criteria'=>array(
+									'condition'=>'idCaja=2',
+									'order'=>'fechaArqueo Desc',
+									'with'=>array('idUser0','idUser0.idEmpleado0'),
+							),
+							'pagination'=>array(
+									'pageSize'=>'20',
+							),
+					));
+			$this->render('arqueos',array('arqueos'=>$arqueos,));
+		}
+		if(isset($_POST['CajaArqueo']))
+		{
+			$arqueo->attributes = $_POST['CajaArqueo'];
+			$cajaMovimiento = new CajaMovimientoVenta;
+			$cajaMovimiento->motivo = "Traspaso de efectivo a Administracion";
+			$comprovante = CajaVenta::model()->find(array('select'=>'max(comprobante) as max'));
+			$caja->comprobante = $comprovante->max +1;
+			$movimiento->fechaMovimiento = date("Y-m-d H:i:s");
+			$comprovante = MovimientoCaja::model()->find(array('order'=>'fechaMovimiento Desc'));
+			if(empty($comprovante))
+				$comprovante=new MovimientoCaja;
+			if(date("d",strtotime($movimiento->fechaMovimiento)) > date("d",strtotime($comprovante->fechaMovimiento)))
+				$movimiento->fechaMovimiento = date("Y-m-d",strtotime($comprovante->fechaMovimiento))." 23:00:00";
+			$movimiento->tipo = 0;
+			$movimiento->idCaja = $caja->idCajaVenta;
+			$movimiento->idUser = $caja->idUser;
+			if($movimiento->validate())
+			{
+				$caja->saldo = $caja->saldo-$movimiento->monto;
+				$caja->fechaArqueo=date("Y-m-d H:i:s");
+				$caja->entregado=$movimiento->monto;
+				if($movimiento->monto==0)
+				{
+					$caja->comprobante="";
+					if($caja->save())
+					{
+						if($this->initCaja($caja->saldo))
+							$this->redirect(array('index','ar'=>$caja->idCajaVenta));
+					}
+				}
+				else
+				{
+					if($movimiento->monto > 0)
+					{
+						if($movimiento->save())
+						{
+							if($caja->save())
+							{
+								if($this->initCaja($caja->saldo))
+									$this->redirect(array('index','ar'=>$caja->idCajaVenta));
+							}
+						}
+					}
+					else
+					{
+						$movimiento->addError('monto',"El numero debe ser positivo");
+					}
+				}
+			}
+		}
+	}
+	
+	
 	
 	public function actionAjaxCliente()
 	{
@@ -731,69 +879,6 @@ class DistribuidoraController extends Controller
 		}
 		else
 			throw new CHttpException(400,'Petición no válida.');
-	}
-	
-	public function actionProductos()
-	{	
-		if(isset($_GET['id']))
-		{
-			$almacen=$this->verifyModel(AlmacenProducto::model()->with('idProducto0')->findByPk($_GET['id']));
-			$deposito=AlmacenProducto::model()->find('idAlmacen=1 and idProducto='.$almacen->idProducto);
-			$model=new MovimientoAlmacen;
-			
-			$model->idProducto = $almacen->idProducto;
-			$model->idAlmacenDestino = $almacen->idAlmacen;
-			$model->idAlmacenOrigen = $deposito->idAlmacen;
-			//$idUser->idUser = Yii::app()->user->id;
-			$model->fechaMovimiento = date("Y-m-d H:i:s");
-		
-			if(isset($_POST['MovimientoAlmacen']))
-			{
-				$model->attributes=$_POST['MovimientoAlmacen'];
-		
-						$deposito->stockU = $deposito->stockU - $model->cantidadU;
-						if($deposito->stockU<0)
-						{
-						$deposito->stockU=$deposito->stockU+$almacen->idProducto0->cantXPaquete;
-						$deposito->stockP = $deposito->stockP - 1;
-						}
-						$deposito->stockP = $deposito->stockP - $model->cantidadP;
-		
-						if($deposito->stockP < 0)
-							$model->addError('cantidadP','No existen suficientes insumos');
-									else{
-					if($model->save())
-						{
-						// form inputs are valid, do something here
-							$almacen->stockU = $almacen->stockU + $model->cantidadU;
-							$almacen->stockP = $almacen->stockP + $model->cantidadP;
-		
-							if($almacen->save() && $deposito->save())
-								$this->redirect(array('distribuidora'));
-						}
-						}
-						}
-						$index=2;
-			$this->render('distribuidora',array('model'=>$model,'almacen'=>$almacen,'deposito'=>$deposito,'index'=>$index));
-						
-		}
-		else
-		{
-			
-			$productos=new CActiveDataProvider('AlmacenProducto',
-					array(
-							'criteria'=>array(
-									'condition'=>'idAlmacen=2',
-									'order'=>'idProducto0.material',
-									'with'=>array('idProducto0'),
-							),
-							'pagination'=>array(
-									'pageSize'=>'20',
-							),
-					));
-			$index=1;
-			$this->render('distribuidora',array('productos'=>$productos,'index'=>$index));
-		}
 	}
 	
 	private function verifyModel($model)

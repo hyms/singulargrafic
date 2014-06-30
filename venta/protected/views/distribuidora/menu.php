@@ -10,6 +10,6 @@ $this->widget('zii.widgets.CMenu',array(
 							array('label'=>'Deudores', 'url'=>array('distribuidora/deudores')),
 							array('label'=>'Movimientos', 'url'=>array('distribuidora/movimientos')),
 							array('label'=>'Productos', 'url'=>array('distribuidora/productos')),
-							array('label'=>'Caja', 'url'=>array('#')),
+							array('label'=>'Arqueo', 'url'=>array('distribuidora/arqueo')),
 				)));
 ?>

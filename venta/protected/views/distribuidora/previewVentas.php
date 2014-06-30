@@ -48,7 +48,7 @@ if(!empty($tabla))
 	?>	
 		<tr>
 			<td><?php echo $i;?></td>
-			<td><?php echo (chr($item->serie)." ".$item->codigo);?></td>
+			<td><?php echo $item->codigo;?></td>
 			<td><?php echo $item->idCliente0->apellido." ".$item->idCliente0->nombre;?></td>
 			<td><?php echo $producto->idAlmacenProducto0->idProducto0->codigo;?></td>
 			<td>

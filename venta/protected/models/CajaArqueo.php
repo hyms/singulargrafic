@@ -4,7 +4,7 @@
  * This is the model class for table "cajaArqueo".
  *
  * The followings are the available columns in table 'cajaArqueo':
- * @property integer $idCajaVenta
+ * @property integer $idCajaArqueo
  * @property integer $idCaja
  * @property integer $idUser
  * @property double $monto
@@ -41,7 +41,7 @@ class CajaArqueo extends CActiveRecord
 			array('fechaArqueo, fechaVentas', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCajaVenta, idCaja, idUser, monto, fechaArqueo, fechaVentas, comprobante', 'safe', 'on'=>'search'),
+			array('idCajaArqueo, idCaja, idUser, monto, fechaArqueo, fechaVentas, comprobante', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,7 +64,7 @@ class CajaArqueo extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idCajaVenta' => 'Id Caja Venta',
+			'idCajaArqueo' => 'Id Caja Arqueo',
 			'idCaja' => 'Id Caja',
 			'idUser' => 'Id User',
 			'monto' => 'Monto',
@@ -92,7 +92,7 @@ class CajaArqueo extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idCajaVenta',$this->idCajaVenta);
+		$criteria->compare('idCajaArqueo',$this->idCajaArqueo);
 		$criteria->compare('idCaja',$this->idCaja);
 		$criteria->compare('idUser',$this->idUser);
 		$criteria->compare('monto',$this->monto);
