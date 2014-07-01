@@ -3,9 +3,9 @@
 </div>
 
 <div class="col-sm-10">
-<?php $this->renderPartial('menuArqueo');?>
-
-	<div class="panel panel-default">
+<?php $this->renderPartial('arqueo/menuArqueo');?>
+<?php $arqueo->fechaVentas=$fecha;?>
+	<div class="panel panel-default hidden-print">
 		<div class="panel-heading">
 			<span class="panel-title"><strong>Arqueo</strong></span>
 			
@@ -33,6 +33,7 @@
 			<?php echo CHtml::label('Monto a Entregar','monto',array('class'=>'control-label col-sm-5')); ?>
 			<div class="col-sm-4">
 				<?php echo CHtml::activeTextField($arqueo,'monto',array('class'=>'form-control')); ?>
+				<?php echo CHtml::activeHiddenField($arqueo,'fechaVentas',array('class'=>'form-control')); ?>
 			</div>
 			<?php echo CHtml::error($arqueo,'monto',array('class'=>'label label-danger')); ?>
 		
@@ -41,4 +42,19 @@
 		<?php $this->endWidget(); ?>	
 		</div>
 	</div>
+	
+	<?php
+	$comprobante='';
+	$detalle='';
+	$arqueo='';
+	$this->renderPartial('arqueo/registroDiario',
+						array(	'fecha'=>$fecha,
+								'saldo'=>($caja->saldo-($ventas+$recibos)),
+								'ventas'=>$ventas,
+								'recibos'=>$recibos,
+								'comprobante'=>$comprobante,
+								'detalle'=>$detalle,
+								'arqueo'=>$arqueo,
+	));
+	?>
 </div>

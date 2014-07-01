@@ -14,10 +14,11 @@
  *
  * The followings are the available model relations:
  * @property Caja $idCaja0
- * @property User $idUser0
+ * @property Users $idUser0
  */
 class CajaArqueo extends CActiveRecord
 {
+	public $max;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -54,7 +55,7 @@ class CajaArqueo extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
-			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
+			'idUser0' => array(self::BELONGS_TO, 'Users', 'idUser'),
 		);
 	}
 

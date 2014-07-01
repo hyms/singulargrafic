@@ -743,13 +743,35 @@ class DistribuidoraController extends Controller
 			if($d==0)
 			{
 				$m--;
-				$d=$this->getUltimoDiaMes($y, $m);
+				$d=$this->getUltimoDiaMes(date("Y"), $m);
 			}
 			$start=date("Y")."-".$m."-".$d." 00:00:00";
 			$end=date("Y")."-".$m."-".$d." 23:59:59";
-			$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
+			$cajaMovimiento = CajaMovimientoVenta::model()->with('reciboses')->with('ventas')->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
 			$caja = Caja::model()->findByPk('2');
-			$this->render("arqueo",array('arqueo'=>$arqueo,'caja'=>$caja));
+			$ventas=0;$recibos=0;
+			foreach ($cajaMovimiento as $item)
+			{
+				foreach ($item->ventas as $venta)
+				{
+					$tmp = Venta::model()->with('idCajaMovimientoVenta0')->findByPk($venta->idVenta);
+					$ventas = $ventas + $tmp->idCajaMovimientoVenta0->monto;
+				}
+				foreach ($item->reciboses as $venta)
+				{
+					$tmp = Recibos::model()->with('idCajaMovimientoVenta0')->findByPk($venta->idRecibos);
+					$recibos = $recibos + $tmp->idCajaMovimientoVenta0->monto;
+				}
+			}
+			
+			$this->render("arqueo",
+					array(
+							'arqueo'=>$arqueo,
+							'caja'=>$caja,
+							'fecha'=>date('Y-m-d',strtotime($start)),
+							'ventas'=>$ventas,
+							'recibos'=>$recibos,
+			));
 		}
 		else
 		{
@@ -769,44 +791,60 @@ class DistribuidoraController extends Controller
 		if(isset($_POST['CajaArqueo']))
 		{
 			$arqueo->attributes = $_POST['CajaArqueo'];
-			$cajaMovimiento = new CajaMovimientoVenta;
-			$cajaMovimiento->motivo = "Traspaso de efectivo a Administracion";
-			$comprovante = CajaVenta::model()->find(array('select'=>'max(comprobante) as max'));
+			$arqueo->fechaArqueo = date("Y-m-d H:i:s");
+			$arqueo->idUser = Yii::app()->user->id;
+			$arqueo->idCaja = 2;
+			$movimiento = new CajaMovimientoVenta;
+			$movimiento->motivo = "Traspaso de efectivo a Administracion";
+			$comprovante = CajaArqueo::model()->find(array('select'=>'max(comprobante) as max'));
 			$caja->comprobante = $comprovante->max +1;
 			$movimiento->fechaMovimiento = date("Y-m-d H:i:s");
-			$comprovante = MovimientoCaja::model()->find(array('order'=>'fechaMovimiento Desc'));
+			/*$comprovante = MovimientoCaja::model()->find(array('order'=>'fechaMovimiento Desc'));
 			if(empty($comprovante))
 				$comprovante=new MovimientoCaja;
 			if(date("d",strtotime($movimiento->fechaMovimiento)) > date("d",strtotime($comprovante->fechaMovimiento)))
 				$movimiento->fechaMovimiento = date("Y-m-d",strtotime($comprovante->fechaMovimiento))." 23:00:00";
+			*/
 			$movimiento->tipo = 0;
-			$movimiento->idCaja = $caja->idCajaVenta;
-			$movimiento->idUser = $caja->idUser;
-			if($movimiento->validate())
+			$movimiento->idCaja = $arqueo->idCaja;
+			$movimiento->idUser = $arqueo->idUser;
+			$movimiento->monto = $arqueo->monto;
+			if($movimiento->validate() && $arqueo->validate())
 			{
 				$caja->saldo = $caja->saldo-$movimiento->monto;
-				$caja->fechaArqueo=date("Y-m-d H:i:s");
-				$caja->entregado=$movimiento->monto;
+				
 				if($movimiento->monto==0)
 				{
-					$caja->comprobante="";
-					if($caja->save())
+					$arqueo->comprobante="";
+					if($arqueo->save())
 					{
-						if($this->initCaja($caja->saldo))
-							$this->redirect(array('index','ar'=>$caja->idCajaVenta));
+						$start=$arqueo->fechaVentas." 00:00:00";
+						$end=$arqueo->fechaVentas." 23:59:59";
+						$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
+						foreach ($cajaMovimiento as $item)
+						{
+							$item->arqueo = $arqueo->idCajaArqueo;
+							$item->save();
+						}
+						$this->redirect(array('distribuidora/arqueo','d'=>date("d",strtotime($arqueo->fechaVentas))));
 					}
 				}
 				else
 				{
 					if($movimiento->monto > 0)
 					{
-						if($movimiento->save())
+						if($arqueo->save())
 						{
-							if($caja->save())
+							$start=$arqueo->fechaVentas." 00:00:00";
+							$end=$arqueo->fechaVentas." 23:59:59";
+							$movimiento->save();
+							$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
+							foreach ($cajaMovimiento as $item)
 							{
-								if($this->initCaja($caja->saldo))
-									$this->redirect(array('index','ar'=>$caja->idCajaVenta));
+								$item->arqueo = $arqueo->idCajaArqueo;
+								$item->save();
 							}
+							$this->redirect(array('distribuidora/arqueo','d'=>date("d",strtotime($arqueo->fechaVentas))));
 						}
 					}
 					else

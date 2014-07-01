@@ -14,7 +14,7 @@
  * @property integer $idCaja
  *
  * The followings are the available model relations:
- * @property User $idUser0
+ * @property Users $idUser0
  * @property Caja $idCaja0
  * @property Recibos[] $reciboses
  * @property Venta[] $ventas

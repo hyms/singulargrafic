@@ -3,7 +3,7 @@
 </div>
 
 <div class="col-sm-10">
-<?php $this->renderPartial('menuArqueo');?>
+<?php $this->renderPartial('arqueo/menuArqueo');?>
 <?php 
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$arqueos,
