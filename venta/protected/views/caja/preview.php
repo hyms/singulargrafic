@@ -9,7 +9,7 @@
 	
 	<div id="print-recived" class="form-group" style="width:793px; height:529px;">
 		<h4 class="text-center"><?php echo "<strong>RECIBO DE ".(($recibo->tipoRecivo==0)?"EGRESO":"INGRESO")."</strong> Nro. ".$recibo->codigo; ?></h4>
-		<h4 class="col-xs-offset-8 text-right"><strong>Fecha: </strong><?php echo date("d-m-Y",strtotime($recibo->fecha));?></h4>
+		<h4 class="col-xs-offset-8 text-right"><strong>Fecha: </strong><?php echo date("d-m-Y",strtotime($recibo->fechaRegistro));?></h4>
 	
 		<p class="row">
 			<?php if(!empty($recibo->idCliente0)){?>
@@ -56,8 +56,8 @@
 			<div class="col-xs-offset-1 col-xs-4 well">
 				<br><br>
 				<p class="text-center"><?php echo "firma";?></p>
-				<?php $empleado=Empleado::model()->find('idUser='.Yii::app()->user->id)?>
-				<span><?php echo "Nombre: ".((!empty($recibo->idCliente0))?$empleado->nombre." ".$empleado->apellido:"")?></span>
+				<?php $empleado=Users::model()->with('idEmpleado0')->findByPk(Yii::app()->user->id)?>
+				<span><?php echo "Nombre: ".$empleado->idEmpleado0->nombre." ".$empleado->idEmpleado0->apellido?></span>
 				<p class="text-center"><?php echo "Recibi conforme";?></p>
 			</div>
 		</div>

@@ -21,7 +21,7 @@
 			),
 			array(
 					'header'=>'Monto',
-					'value'=>'$data->idProducto0->material',
+					'value'=>'$data->monto',
 			),
 			array(
 					'header'=>'Fecha de Arqueo',
@@ -30,6 +30,11 @@
 			array(
 					'header'=>'Comprobante',
 					'value'=>'$data->comprobante',
+			),
+			array(
+					'header'=>'',
+					'type'=>'raw',
+					'value'=>'CHtml::link("Imprimir", array("distribuidora/comprobante","id"=>$data->idCajaArqueo))',
 			),
 		)
 	));

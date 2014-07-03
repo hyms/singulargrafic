@@ -11,9 +11,7 @@
 		<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 	    		'name'=>'fechaPlazo',
 				'attribute'=>'fechaPlazo',
-			    //'id'=>'fechaPlazo',
 			    'model'=>$venta,
-			    // additional javascript options for the date picker plugin
 			    'options'=>array(
 			        'showAnim'=>'fold',
 					'dateFormat'=>'dd-mm-yy',
@@ -21,7 +19,6 @@
 			    'htmlOptions'=>array(
 			        'class'=>'form-control input-sm',
 					'disabled'=>(($venta->formaPago==0)?true:false),
-					//'id'=>"fechaPlazo",
 			    ),
 			));
 		?>

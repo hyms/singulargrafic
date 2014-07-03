@@ -7,7 +7,6 @@
 		'dataProvider'=>$ventas->searchVenta(),
 		'filter'=>$ventas,
 		'ajaxUpdate'=>true,
-		//'afterAjaxUpdate' => 'reinstallDatePicker',
 		'itemsCssClass' => 'table table-hover table-condensed',
 		'htmlOptions' => array('class' => 'table-responsive'),
 		'columns'=>array(

@@ -29,9 +29,8 @@ class DistribuidoraController extends Controller
 					array('criteria'=>array(
 								'group'=>'`t`.idCliente',
 								'select'=>'count(*) as cantidad, `t`.`idCliente`',
-								'order'=>'cantidad ASC',
+								'order'=>'cantidad Desc',
 								'with'=>array('idCliente0'=>array('select'=>'nitCi, apellido')),
-							
 								'limit'=>'5',
 						),));
 		$productos = new CActiveDataProvider('DetalleVenta',
@@ -39,7 +38,7 @@ class DistribuidoraController extends Controller
 							'with'=>array('idAlmacenProducto0'=>array('select'=>'*'),'idAlmacenProducto0.idProducto0'=>array('select'=>'*')),
 							'group'=>'`t`.idAlmacenProducto',
 							'select'=>'count(*) as cantidad, `t`.idAlmacenProducto',
-							'order'=>'cantidad ASC',
+							'order'=>'cantidad Desc',
 							'limit'=>'5',
 					),));
 		
@@ -737,6 +736,89 @@ class DistribuidoraController extends Controller
 	public function actionArqueo()
 	{
 		$arqueo = new CajaArqueo;
+		$caja = Caja::model()->findByPk('2');
+		if(isset($_POST['CajaArqueo']))
+		{
+			$arqueo->attributes = $_POST['CajaArqueo'];
+			$arqueo->fechaArqueo = date("Y-m-d H:i:s");
+			$arqueo->idUser = Yii::app()->user->id;
+			$arqueo->idCaja = 2;
+			
+			$movimiento = new CajaMovimientoVenta;
+			$movimiento->motivo = "Traspaso de efectivo a Administracion";
+			$comprovante = CajaArqueo::model()->find(array('select'=>'max(comprobante) as max'));
+			$arqueo->comprobante = $comprovante->max +1;
+			$movimiento->fechaMovimiento = $arqueo->fechaVentas." 23:59:59";
+			
+			$movimiento->tipo = 0;
+			$movimiento->idCaja = $arqueo->idCaja;
+			$movimiento->idUser = $arqueo->idUser;
+			$movimiento->monto = $arqueo->monto;
+			$movimiento->arqueo =0;
+			if($movimiento->validate() && $arqueo->validate())
+			{
+				$caja->saldo = $caja->saldo-$movimiento->monto;
+				if($caja->saldo >=0){
+				if($movimiento->monto==0)
+				{
+					$arqueo->comprobante="";
+					
+					if($arqueo->save())
+					{
+						$start=$arqueo->fechaVentas." 00:00:00";
+						$end=$arqueo->fechaVentas." 23:59:59";
+						$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
+						foreach ($cajaMovimiento as $item)
+						{
+							$item->arqueo = $arqueo->idCajaArqueo;
+							$item->save();
+						}
+						$arqueos=new CActiveDataProvider('CajaArqueo',
+								array(
+										'criteria'=>array(
+												'condition'=>'idCaja=2',
+												'order'=>'fechaArqueo Desc',
+												'with'=>array('idUser0','idUser0.idEmpleado0'),
+										),
+										'pagination'=>array(
+												'pageSize'=>'20',
+										),
+								));
+						$this->render('arqueos',array('arqueos'=>$arqueos,));
+					}					
+				}
+				else
+				{
+					if($movimiento->monto > 0)
+					{
+						if($arqueo->save() && $caja->save())
+						{
+							$start=$arqueo->fechaVentas." 00:00:00";
+							$end=$arqueo->fechaVentas." 23:59:59";
+							$movimiento->save();
+							$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
+							foreach ($cajaMovimiento as $item)
+							{
+								$item->arqueo = $arqueo->idCajaArqueo;
+								$item->save();
+							}
+							$cajaAdmin= Caja::model()->findByPk(1);
+							$cajaAdmin->saldo = $cajaAdmin->saldo + $movimiento->monto;
+							$cajaAdmin->save();
+							$this->redirect(array('distribuidora/comprobante', 'id'=>$arqueo->idCajaArqueo));
+						}
+						
+					}
+					else
+					{
+						$movimiento->addError('monto',"El numero debe ser positivo");
+						$this->redirect(array('distribuidora/arqueo'));
+					}
+				}
+				}
+			}
+		}
+		
 		if(isset($_GET['d']))
 		{
 			$d=$_GET['d']; $m=date("m");
@@ -748,7 +830,6 @@ class DistribuidoraController extends Controller
 			$start=date("Y")."-".$m."-".$d." 00:00:00";
 			$end=date("Y")."-".$m."-".$d." 23:59:59";
 			$cajaMovimiento = CajaMovimientoVenta::model()->with('reciboses')->with('ventas')->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
-			$caja = Caja::model()->findByPk('2');
 			$ventas=0;$recibos=0;
 			foreach ($cajaMovimiento as $item)
 			{
@@ -763,7 +844,7 @@ class DistribuidoraController extends Controller
 					$recibos = $recibos + $tmp->idCajaMovimientoVenta0->monto;
 				}
 			}
-			
+				
 			$this->render("arqueo",
 					array(
 							'arqueo'=>$arqueo,
@@ -771,7 +852,7 @@ class DistribuidoraController extends Controller
 							'fecha'=>date('Y-m-d',strtotime($start)),
 							'ventas'=>$ventas,
 							'recibos'=>$recibos,
-			));
+					));
 		}
 		else
 		{
@@ -788,75 +869,19 @@ class DistribuidoraController extends Controller
 					));
 			$this->render('arqueos',array('arqueos'=>$arqueos,));
 		}
-		if(isset($_POST['CajaArqueo']))
-		{
-			$arqueo->attributes = $_POST['CajaArqueo'];
-			$arqueo->fechaArqueo = date("Y-m-d H:i:s");
-			$arqueo->idUser = Yii::app()->user->id;
-			$arqueo->idCaja = 2;
-			$movimiento = new CajaMovimientoVenta;
-			$movimiento->motivo = "Traspaso de efectivo a Administracion";
-			$comprovante = CajaArqueo::model()->find(array('select'=>'max(comprobante) as max'));
-			$caja->comprobante = $comprovante->max +1;
-			$movimiento->fechaMovimiento = date("Y-m-d H:i:s");
-			/*$comprovante = MovimientoCaja::model()->find(array('order'=>'fechaMovimiento Desc'));
-			if(empty($comprovante))
-				$comprovante=new MovimientoCaja;
-			if(date("d",strtotime($movimiento->fechaMovimiento)) > date("d",strtotime($comprovante->fechaMovimiento)))
-				$movimiento->fechaMovimiento = date("Y-m-d",strtotime($comprovante->fechaMovimiento))." 23:00:00";
-			*/
-			$movimiento->tipo = 0;
-			$movimiento->idCaja = $arqueo->idCaja;
-			$movimiento->idUser = $arqueo->idUser;
-			$movimiento->monto = $arqueo->monto;
-			if($movimiento->validate() && $arqueo->validate())
-			{
-				$caja->saldo = $caja->saldo-$movimiento->monto;
-				
-				if($movimiento->monto==0)
-				{
-					$arqueo->comprobante="";
-					if($arqueo->save())
-					{
-						$start=$arqueo->fechaVentas." 00:00:00";
-						$end=$arqueo->fechaVentas." 23:59:59";
-						$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
-						foreach ($cajaMovimiento as $item)
-						{
-							$item->arqueo = $arqueo->idCajaArqueo;
-							$item->save();
-						}
-						$this->redirect(array('distribuidora/arqueo','d'=>date("d",strtotime($arqueo->fechaVentas))));
-					}
-				}
-				else
-				{
-					if($movimiento->monto > 0)
-					{
-						if($arqueo->save())
-						{
-							$start=$arqueo->fechaVentas." 00:00:00";
-							$end=$arqueo->fechaVentas." 23:59:59";
-							$movimiento->save();
-							$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
-							foreach ($cajaMovimiento as $item)
-							{
-								$item->arqueo = $arqueo->idCajaArqueo;
-								$item->save();
-							}
-							$this->redirect(array('distribuidora/arqueo','d'=>date("d",strtotime($arqueo->fechaVentas))));
-						}
-					}
-					else
-					{
-						$movimiento->addError('monto',"El numero debe ser positivo");
-					}
-				}
-			}
-		}
 	}
 	
-	
+	public function actionComprobante()
+	{
+		if(isset($_GET['id']))
+		{
+			$arqueo = CajaArqueo::model()	->with('idUser0')
+											->with('cajaMovimientoVenta')
+											->with('idUser0.idEmpleado0')
+											->find(array('condition'=>'idCajaArqueo='.$_GET['id'],'order'=>'fechaMovimiento Desc'));
+			$this->render('arqueo/comprobante',array('arqueo'=>$arqueo));
+		}
+	}
 	
 	public function actionAjaxCliente()
 	{

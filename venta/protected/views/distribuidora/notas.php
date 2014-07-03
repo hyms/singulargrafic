@@ -39,7 +39,7 @@
 			<strong class="panel-title">Datos Cliente</strong>
 		</div>
 	  	<div class="panel-body" style="overflow: auto;">
-	  	<?php $this->renderPartial('cliente',array('cliente'=>$cliente))?>
+	  	<?php $this->renderPartial('nota/cliente',array('cliente'=>$cliente))?>
 	  	</div>
 	</div>
 	<div class="panel panel-default">
@@ -47,7 +47,7 @@
 			<strong class="panel-title">Datos Compra</strong>
 		</div>
 	  	<div class="panel-body" style="overflow: auto;">
-	  	<?php $this->renderPartial('detalleVenta',array('detalle'=>$detalle,'venta'=>$venta))?>
+	  	<?php $this->renderPartial('nota/detalleVenta',array('detalle'=>$detalle,'venta'=>$venta))?>
 	  	</div>
 	</div>
 	<div class="panel panel-default">
@@ -55,7 +55,7 @@
 			<strong class="panel-title">Condiciones de Venta</strong>
 		</div>
 	  	<div class="panel-body" style="overflow: auto;">
-	  	<?php $this->renderPartial("condicionesVenta",array('venta'=>$venta));?>
+	  	<?php $this->renderPartial("nota/condicionesVenta",array('venta'=>$venta));?>
 	  	</div>
 	</div>
 	<div class="form-group">

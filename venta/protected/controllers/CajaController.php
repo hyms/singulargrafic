@@ -329,7 +329,7 @@ class CajaController extends Controller
 				$venta = Venta::model()->findByPk($_GET['id']);
 			
 			$cliente = $venta->idCliente0;
-			$caja = CajaMovimientoVenta::model()->find('idUser='.Yii::app()->user->id.' and arqueo=0');
+			$caja = CajaMovimientoVenta::model()->findByPk($venta->idCajaMovimientoVenta0->idCajaMovimientoVenta);
 			$row = Recibos::model()->find(array("select"=>"count(*) as `max`",'condition'=>'tipoRecivo=1'));
 			$recibo->fechaRegistro = date("Y-m-d h:m:s");
 			$recibo->codigo = "I-".($row['max']+1);
@@ -342,13 +342,17 @@ class CajaController extends Controller
 			{
 				$recibo->attributes = $_POST['Recibos'];
 				$cliente->attributes = $_POST['Cliente'];
-					
 				if($recibo->validate())
 				{
-					$caja->saldo = $caja->saldo+$recibo->monto;
-					$venta->montoPagado=$venta->montoPagado+$recibo->monto;
+					$caja->monto = $recibo->saldo;
+					if($recibo->categoria == "Nota de Venta")
+					{
+						$cajaVenta = Caja::model()->findByPk(2);
+						$cajaVenta->saldo = $cajaVenta->saldo + $caja->monto;
+						$cajaVenta->save();
+					}
 					if($recibo->save()) 
-						if($caja->save() && $venta->save())
+						if($caja->save())
 							$this->redirect(array('preview','id'=>$recibo->idRecibos));
 				}
 		
