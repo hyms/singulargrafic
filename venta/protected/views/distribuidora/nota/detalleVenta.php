@@ -83,13 +83,13 @@ if(count($detalle)>=1)
 				importe_total = importe_total + parseFloat($(this).val()*1);
 			}
 		);
-		$('#total').val(parseFloat(importe_total).toFixed(2));
+		$('#total').val(parseFloat(importe_total).toFixed(1));
 		cambio();
 	}
 	
 	function cambio()
 	{
-		$('#cambio').val(resta($('#pagado').val(),$('#total').val()).toFixed(2));
+		$('#cambio').val(resta($('#pagado').val(),$('#total').val()).toFixed(1));
 	}
 			
 	function suma(a,b)
@@ -106,14 +106,14 @@ if(count($detalle)>=1)
 
 <?php Yii::app()->getClientScript()->registerScript("ajax_detalleventa","
 	$('#pagado').blur(function(e){
-		$('#cambio').val(resta($('#pagado').val(),$('#total').val()).toFixed(2));
+		$('#cambio').val(resta($('#pagado').val(),$('#total').val()).toFixed(1));
 		return true;
 	});
 		
 	$('#pagado').keydown(function(e){
 		if(e.keyCode==13 || e.keyCode==9) 
 	    { 
-			$('#cambio').val(resta($('#pagado').val(),$('#total').val()).toFixed(2));
+			$('#cambio').val(resta($('#pagado').val(),$('#total').val()).toFixed(1));
 			return true;
 		}
 	});

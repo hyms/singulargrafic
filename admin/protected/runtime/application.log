@@ -11234,3 +11234,6 @@ Stack trace:
 REQUEST_URI=/singulardev/admin/index.php/report/venta
 HTTP_REFERER=http://localhost/singulardev/admin/index.php/report
 ---
+2014/07/07 17:59:03 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in /var/www/singular/admin/protected/controllers/EmpleadoController.php (153)
+in /var/www/singular/admin/index.php (13)
