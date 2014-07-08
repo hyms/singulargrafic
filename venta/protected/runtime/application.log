@@ -4849,3 +4849,33 @@ in /var/www/singular/venta/index.php (13)
 2014/07/03 16:45:49 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
 in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (90)
 in /var/www/singular/venta/index.php (13)
+2014/07/08 11:10:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "venta".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('venta')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('venta')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/v...')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/venta/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/venta
+---
+2014/07/08 13:23:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "venta".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('venta')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('venta')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/v...')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/venta/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/venta
+---
+2014/07/08 13:23:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "venta".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('venta')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('venta')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/v...')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/venta/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/venta
+---

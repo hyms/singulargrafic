@@ -155,4 +155,15 @@ class AlmacenProducto extends CActiveRecord
 			$return=$producto->stockU."/".$producto->stockP;
 		return $return;
 	}
+	
+	public function ctpLink($id)
+	{
+		$producto=AlmacenProducto::model()->find('idProducto='.$id." and idAlmacen=3");
+		$return="";
+		if(empty($producto))
+			$return = CHtml::link("Añadir",array("stock/ctpAdd","id"=>$id));
+		else
+			$return=$producto->stockU."/".$producto->stockP;
+		return $return;
+	}
 }

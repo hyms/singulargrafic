@@ -14,14 +14,14 @@
  * @property integer $idCaja
  *
  * The followings are the available model relations:
- * @property Users $idUser0
+ * @property CTP[] $cTPs
  * @property Caja $idCaja0
+ * @property User $idUser0
  * @property Recibos[] $reciboses
  * @property Venta[] $ventas
  */
 class CajaMovimientoVenta extends CActiveRecord
 {
-	public $max;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -29,7 +29,8 @@ class CajaMovimientoVenta extends CActiveRecord
 	{
 		return 'cajaMovimientoVenta';
 	}
-
+	
+	public $max;
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -57,8 +58,9 @@ class CajaMovimientoVenta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idUser0' => array(self::BELONGS_TO, 'Users', 'idUser'),
+			'cTPs' => array(self::HAS_MANY, 'CTP', 'idCajaMovimientoVenta'),
 			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
+			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
 			'reciboses' => array(self::HAS_MANY, 'Recibos', 'idCajaMovimientoVenta'),
 			'ventas' => array(self::HAS_MANY, 'Venta', 'idCajaMovimientoVenta'),
 		);

@@ -78,7 +78,7 @@
 							),
 							'itemOptions' => array('class'=>'dropdown'),
 							'items'=>array(
-								array('label'=>'Pre-Prensa CTP', 'url'=>array('#')),
+								array('label'=>'Pre-Prensa CTP', 'url'=>array('stock/ctp')),
 								array('label'=>'Distribuidora', 'url'=>array('stock/distribuidora')),
 								array('label'=>'Imprenta', 'url'=>array('#')),
 								array('label'=>'Editorial', 'url'=>array('#')),

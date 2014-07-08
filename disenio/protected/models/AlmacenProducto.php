@@ -103,14 +103,14 @@ class AlmacenProducto extends CActiveRecord
 	public $color;
 	public $marca;
 	public $paquete;
-	public function searchDistribuidora()
+	public function searchCTP()
 	{
 		$criteria=new CDbCriteria;
 	
 		$criteria->with= array(
 				'idProducto0',
 		);
-		$criteria->condition = 'idAlmacen=2';
+		$criteria->condition = 'idAlmacen=3';
 	
 		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
 		$criteria->compare('idProducto',$this->idProducto);

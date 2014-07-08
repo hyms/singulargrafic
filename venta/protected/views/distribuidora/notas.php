@@ -61,7 +61,7 @@
 	<div class="form-group">
 		<div class="text-center">
 		<?php echo CHtml::resetButton('Cancelar', array('class' => 'btn btn-default hidden-print')); ?>
-		<?php echo CHtml::submitButton('Guardar', array("class"=>"btn btn-default hidden-print")); ?>
+		<?php echo CHtml::submitButton('Guardar', array('class' => 'btn btn-default hidden-print')); ?>
 		</div>
 	</div>
 	<?php $this->endWidget(); ?>	
