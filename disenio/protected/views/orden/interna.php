@@ -3,33 +3,28 @@
 </div>
 
 <div class="col-sm-10">
-
-<div class="col-sm-6 panel panel-default">
-	<div class="panel-heading">
-		<strong class="panel-title">Placas</strong>
-	</div>
-	<div class="panel-body" style="overflow: auto;">
-	
- 	</div>
-</div>
-
-<div class="col-sm-6 panel panel-default">
-	<div class="panel-heading">
-		<strong class="panel-title">Datos de Cliente</strong>
-	</div>
-	<div class="panel-body" style="overflow: auto;">
-	
- 	</div>
-</div>
-
-
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<strong class="panel-title">Datos de Orden</strong>
-	</div>
-	<div class="panel-body" style="overflow: auto;">
-	
- 	</div>
-</div>
+<h3><?php echo "Ordenes de trabajo Imprenta";?></h3>
+<?php 
+$this->widget('zii.widgets.grid.CGridView', array(
+		'dataProvider'=>$ordenes,
+		'itemsCssClass' => 'table table-hover table-condensed',
+		'htmlOptions' => array('class' => 'table-responsive'),
+		'columns'=>array(
+			array(
+					'header'=>'Nro',
+					'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+			),
+			array(
+					'header'=>'codigo',
+					'value'=>'$data->codigo',
+			),
+			array(
+					'header'=>'',
+					'type'=>'raw',
+					'value'=>'CHtml::link("Ver","#",array("class"=>"btn btn-success btn-sm"))',
+			),
+		)
+	));
+?>
 
 </div>

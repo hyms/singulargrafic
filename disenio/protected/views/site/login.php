@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1 class="text-center">Sistema de Ventas</h1>
+<h1 class="text-center">Sistema de CTP</h1>
 
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(

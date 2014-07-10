@@ -4,7 +4,10 @@
 		<td><?php echo CHtml::label('Nº','number')?></td>
 		<td><?php echo CHtml::label('Formato','formato')?></td>
 		<td><?php echo CHtml::label('Nº de placas','nro placas')?></td>
-		<td><?php echo CHtml::label('Nº de colores','nro colores')?></td>
+		<td><?php echo CHtml::label('C','c')?></td>
+		<td><?php echo CHtml::label('M','m')?></td>
+		<td><?php echo CHtml::label('Y','y')?></td>
+		<td><?php echo CHtml::label('B','k')?></td>
 		<td><?php echo CHtml::label('Trabajo','trabajo')?></td>
 		<td><?php echo CHtml::label('Pinza','pinza')?></td>
 		<td><?php echo CHtml::label('Resolucion','resolucion')?></td>

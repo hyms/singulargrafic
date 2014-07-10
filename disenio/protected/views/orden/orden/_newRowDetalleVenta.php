@@ -10,11 +10,23 @@
 
 <td>
 	<?php echo CHtml::activeTextField($model,"[$index]nroPlacas",array('class'=>'form-control input-sm','id'=>'nroPlacas_'.$index)); ?>
+	<?php echo CHtml::hiddenField("[$index]costo",$costo,array('id'=>'costo_'.$index)); ?>
 </td>
 
 <td>
-	<?php echo CHtml::activeTextField($model,"[$index]nroColores",array('class'=>'form-control input-sm','id'=>'snroColores_'.$index)); ?>
+	<?php //echo CHtml::activeTextField($model,"[$index]nroColores",array('class'=>'form-control input-sm','id'=>'snroColores_'.$index)); ?>
+	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]C",array('id'=>'c_'.$index)); ?></div>
 </td>
+<td>
+	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]M",array('id'=>'m_'.$index)); ?></div>
+</td>
+<td>
+	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]Y",array('id'=>'y_'.$index)); ?></div>
+</td>
+<td>
+	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]K",array('id'=>'k_'.$index)); ?></div>
+</td>
+
 <td>
 	<?php echo CHtml::activeTextField($model,"[$index]trabajo",array('class'=>'form-control input-sm','id'=>'trabajo_'.$index)); ?>
 </td>
@@ -26,11 +38,11 @@
 	<?php echo CHtml::activeTextField($model,"[$index]resolucion",array('class'=>'form-control input-sm','id'=>'resolucion_'.$index)); ?>
 </td>
 
-<td>
+<td class="col-sm-1">
 	<?php echo CHtml::activeTextField($model,"[$index]costoAdicional",array('class'=>'form-control input-sm','id'=>'adicional_'.$index)); ?>
 </td>
 
-<td>
+<td class="col-sm-1">
 	<?php echo CHtml::activeTextField($model,"[$index]costoTotal",array('class'=>'costo form-control input-sm','readonly'=>true,'id'=>'costoTotal_'.$index)); ?>
 </td>
 
@@ -41,23 +53,18 @@
 <?php  
 echo "
 <script>
-	$('#stockUnidad_". $index ."').blur(function(e){ 
-	    $('#costoTotal_". $index ."').val(suma(suma($('#stockUnidad_".  $index ."').val()*$('#costoUnidad_". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#costoPaquete_". $index ."').val()),$('#adicional_". $index ."').val()));
+	$('#nroPlacas_". $index ."').blur(function(e){ 
+	    $('#costoTotal_". $index ."').val(suma($('#nroPlacas_".  $index ."').val()*$('#costo_". $index ."').val(),$('#adicional_". $index ."').val()));
 		calcular_total();
 		return true;
 	});
 	
-	$('#stockPaquete_". $index ."').blur(function(e){ 
-	    $('#costoTotal_". $index ."').val(suma(suma($('#stockUnidad_". $index ."').val()*$('#costoUnidad_". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#costoPaquete_". $index ."').val()),$('#adicional_". $index ."').val()));
-		calcular_total();
-	  	return true;
-	});
-	
 	$('#adicional_". $index ."').blur(function(e){ 
-	    $('#costoTotal_". $index ."').val(suma(suma($('#stockUnidad_". $index ."').val()*$('#costoUnidad_". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#costoPaquete_". $index ."').val()),$('#adicional_". $index ."').val()));
+	    $('#costoTotal_". $index ."').val(suma($('#nroPlacas_".  $index ."').val()*$('#costo_". $index ."').val(),$('#adicional_". $index ."').val()));
 		calcular_total();
 	  	return true;
 	});
+			
 	$('#costoTotal_". $index ."').change(function(e){ 
 	    calcular_total();
 		return true;

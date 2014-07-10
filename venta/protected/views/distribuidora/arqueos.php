@@ -36,6 +36,11 @@
 					'type'=>'raw',
 					'value'=>'CHtml::link("Imprimir", array("distribuidora/comprobante","id"=>$data->idCajaArqueo))',
 			),
+			array(
+					'header'=>'',
+					'type'=>'raw',
+					'value'=>'CHtml::link("registro Diario", array("distribuidora/registroDiario","id"=>$data->idCajaArqueo))',
+			),
 		)
 	));
 ?>

@@ -5,7 +5,7 @@
 ?>
 <p class="text-center"><strong><?php echo "REGISTRO DIARIO"?></strong></p>
 <p class="text-right"><?php echo "La Paz, ".$fecha;?></p>
-
+<?php $total=0;?>
 <table class="table table-hover table-condensed">
 	<thead>
 	<tr>
@@ -22,34 +22,34 @@
 		<td><?php echo "Saldo del día anterior";?></td>
 		<td><?php echo $saldo;?></td>
 		<td></td>
-		<td><?php echo $saldo;?></td>
+		<td><?php $total=$saldo;	echo $total;?></td>
 	</tr>
 	<tr>
 		<td></td>
 		<td><?php echo "Total Ventas del día";?></td>
 		<td><?php echo $ventas;?></td>
 		<td></td>
-		<td><?php echo ($saldo+$ventas);?></td>
+		<td><?php $total=$total+$ventas; 	echo $total;?></td>
 	</tr>
 	<tr>
 		<td></td>
 		<td><?php echo "Recibos del día";?></td>
 		<td><?php echo $recibos;?></td>
 		<td></td>
-		<td><?php echo ($saldo+$ventas+$recibos);?></td>
+		<td><?php $total=$total+$recibos;	echo $total;?></td>
 	</tr>
 	<?php if($arqueo!=""){?>
 	<tr>
-		<td><?php echo $comprobante;?></td>
-		<td><?php echo $detalle;?></td>
+		<td><?php echo $arqueo->comprobante;?></td>
+		<td><?php echo $arqueo->cajaMovimientoVenta->motivo;?></td>
 		<td></td>
-		<td><?php echo $arqueo;?></td>
-		<td><?php echo ($saldo+$ventas+$recibos-$arqueo);?></td>
+		<td><?php echo $arqueo->cajaMovimientoVenta->monto;?></td>
+		<td><?php $total=$total-$arqueo->cajaMovimientoVenta->monto; 	echo $total;?></td>
 	</tr>
 	<?php }?>
 	<tr>
 		<td colspan="4" class="text-right"><strong>Total Saldo</strong></td>
-		<td><?php echo ($saldo+$ventas+$recibos-$arqueo);?></td>
+		<td><?php echo $total;?></td>
 	</tr>
 	</tbody>
 </table>

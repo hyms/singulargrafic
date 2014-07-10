@@ -23,6 +23,6 @@ class CtpController extends Controller
 	}
 	public function actionIndex()
 	{
-		$this->render('menu');
+		$this->render('index');
 	}
 }

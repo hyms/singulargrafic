@@ -758,6 +758,7 @@ class DistribuidoraController extends Controller
 			if($movimiento->validate() && $arqueo->validate())
 			{
 				$caja->saldo = $caja->saldo-$movimiento->monto;
+				$arqueo->saldo = $caja->saldo;
 				if($caja->saldo >=0){
 				if($movimiento->monto==0)
 				{
@@ -871,6 +872,46 @@ class DistribuidoraController extends Controller
 		}
 	}
 	
+	public function actionRegistroDiario()
+	{
+		if(isset($_GET['id']))
+		{
+			$arqueo = CajaArqueo::model()
+						->with('cajaMovimientoVenta')
+						->find(array('condition'=>'idCajaArqueo='.$_GET['id'],'order'=>'cajaMovimientoVenta.fechaMovimiento Desc'));
+			$venta = Venta::model()
+						->with('idCajaMovimientoVenta0')
+						->findAll(array('condition'=>"fechaVenta>='".$arqueo->fechaVentas."' and fechaVenta<='".date("Y-m-d",strtotime($arqueo->fechaVentas))." 23:59:59'"));
+			$ventas = 0;
+			
+			foreach ($venta as $item)
+			{
+				$ventas=$ventas+$item->idCajaMovimientoVenta0->monto;
+			}
+			
+			$recibo = Recibos::model()
+			->with('idCajaMovimientoVenta0')
+			->findAll(array('condition'=>"fechaRegistro>='".$arqueo->fechaVentas."' and fechaRegistro<='".date("Y-m-d",strtotime($arqueo->fechaVentas))." 23:59:59'"));
+			$recibos = 0;
+				
+			foreach ($recibo as $item)
+			{
+				$recibos=$recibos+$item->idCajaMovimientoVenta0->monto;
+			}
+			
+			$this->render('arqueo/registroRealizado',
+							array(
+									'fecha'=>date("Y-m-d",strtotime($arqueo->fechaVentas)),
+									'arqueo'=>$arqueo,
+									'ventas'=>$ventas,
+									'recibos'=>$recibos,
+							)
+			);
+		}
+		else
+			throw new CHttpException(400,'Petición no válida.');	
+	}
+	
 	public function actionComprobante()
 	{
 		if(isset($_GET['id']))
@@ -881,6 +922,8 @@ class DistribuidoraController extends Controller
 											->find(array('condition'=>'idCajaArqueo='.$_GET['id'],'order'=>'fechaMovimiento Desc'));
 			$this->render('arqueo/comprobante',array('arqueo'=>$arqueo));
 		}
+		else
+			throw new CHttpException(400,'Petición no válida.');
 	}
 	
 	public function actionAjaxCliente()

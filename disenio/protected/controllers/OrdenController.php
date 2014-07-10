@@ -40,12 +40,20 @@ class OrdenController extends Controller
 	
 	public function actionInterna()
 	{
-		$this->render('interna');
+		$ordenes=new CActiveDataProvider('CTP',array(
+				'pagination'=>array(
+						'pageSize'=>'20',
+				),));
+		$this->render('interna',array('ordenes'=>$ordenes));
 	}
 	
 	public function actionRep()
 	{
-		$this->render('rep');
+		$ordenes=new CActiveDataProvider('CTP',array(
+				'pagination'=>array(
+						'pageSize'=>'20',
+				),));
+		$this->render('rep',array('ordenes'=>$ordenes));
 	}
 	
 	public function actionAddDetalle()
@@ -55,11 +63,13 @@ class OrdenController extends Controller
 		{
 			$detalle = new DetalleCTP;
 			$almacen = new AlmacenProducto;
+			$costo = 0;
 			if(isset($_GET['al']))
 			{
 				$almacen = AlmacenProducto::model()
 				->with("idProducto0")
 				->findByPk($_GET['al']);
+				$costo = $almacen->idProducto0->precioCFU;
 	
 			}
 				
@@ -80,6 +90,7 @@ class OrdenController extends Controller
 	
 			$this->renderPartial('orden/_newRowDetalleVenta', array(
 					'model'=>$detalle,
+					'costo'=>$costo,
 					'index'=>$_GET['index'],
 					'almacen'=>$almacen,
 			));
