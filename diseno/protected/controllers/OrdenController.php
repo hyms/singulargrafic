@@ -35,6 +35,102 @@ class OrdenController extends Controller
 		$ctp = new CTP;
 		$productos = new AlmacenProducto('searchCTP');
 		
+		$row = CTP::model()->find(array("condition"=>"tipoOrden=1",'order'=>'fechaOrden Desc'));
+		if(empty($row))
+			$row=new Venta;
+		if(empty($row->serie))
+			$row->serie = 65;
+		$ctp->numero = $row->numero +1;
+		if($row->numero==1001)
+		{
+			$row->numero=1;
+			$row->serie++;
+			if($row->serie==91)
+				$row->serie = 65;
+		}
+		$ctp->serie = $row->serie;
+		$ctp->codigo = chr($ctp->serie)."C-".$ctp->numero."-".date("y");
+		$ctp->formaPago = 0;
+		$ctp->tipoOrden = 1;
+		$ctp->fechaOrden = date("Y-m-d H:i:s");
+		$ctp->idUserOT= Yii::app()->user->id;
+		
+		$swc=0; $swv=0;
+		if(isset($_POST['Cliente']))
+		{
+			$cliente = Cliente::model()->find('nitCi="'.$_POST['Cliente']['nitCi'].'"');
+			if($cliente==null)
+				$cliente = new Cliente;
+		
+			$cliente->attributes = $_POST['Cliente'];
+			if(empty($cliente->fechaRegistro))
+				$cliente->fechaRegistro = date("Y-m-d");
+			if($cliente->save())
+				$swc=1;
+		}
+		
+		if(isset($_POST['CTP']))
+		{
+			$ctp->attributes = $_POST['CTP'];
+			$row = CTP::model()->find(array("condition"=>"tipoOrden=".$ctp->tipoOrden,'order'=>'fechaOrden Desc'));
+			if(empty($row))
+				$row=new Venta;
+			if($ctp->tipoOrden==1)
+				$ctp->codigo = chr($ctp->serie)."C-".$ctp->numero."-".date("y");
+			else
+				$ctp->codigo = $ctp->numero."-C";
+				
+			if(empty($row->serie) && $ctp->tipoOrden==1)
+				$row->serie = 65;
+			$ctp->numero = $row->numero +1;
+			if($row->numero==1001 && $ctp->tipoOrden==1)
+			{
+				$row->numero=1;
+				$row->serie++;
+				if($row->serie==91)
+					$row->serie = 65;
+			}
+			$ctp->serie = $row->serie;
+			$ctp->estado = 1;
+			if($ctp->formaPago==1)
+			{
+				$ctp->estado = 2;
+			}
+			if($ctp->validate())
+				$swv=1;
+		}
+		
+		if(isset($_POST['DetalleCTP']))
+		{
+			$detalle = array();
+			$i=0;
+			$det=count($_POST['DetalleCTP']);
+			foreach ($_POST['DetalleCTP'] as $item)
+			{
+				array_push($detalle,new DetalleCTP);
+				$detalle[$i]->attributes = $item;
+				if($detalle[$i]->validate())
+				{
+					$det--;
+				}
+				$i++;
+			}
+		}
+		//print_r($ctp);
+		if($swc==1 && $swv==1 && $det==0)
+		{
+			$ctp->idCliente = $cliente->idCliente;
+		
+			if($ctp->save())
+			{
+				foreach($detalle as $item)
+				{
+					$item->save();
+				}
+				$this->redirect(array('orden/rep'));
+			}
+		}
+		
 		$this->render('cliente',array('cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos));
 	}
 	
@@ -76,16 +172,14 @@ class OrdenController extends Controller
 			$detalle->idAlmacenProducto = $almacen->idAlmacenProducto;
 			if(isset($_GET['factura']))
 			{
-				/*if($_GET['factura']==0)
+				if($_GET['factura']==0)
 				{
-					$detalle->costoP = $almacen->idProducto0->precioCFP;
-					$detalle->costoU = $almacen->idProducto0->precioCFU;
+					$costo = $almacen->idProducto0->precioCFU;
 				}
 				else
 				{
-					$detalle->costoP = $almacen->idProducto0->precioSFP;
-					$detalle->costoU = $almacen->idProducto0->precioSFU;
-				}*/
+					$costo = $almacen->idProducto0->precioSFU;
+				}
 			}
 	
 			$this->renderPartial('orden/_newRowDetalleVenta', array(

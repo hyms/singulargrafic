@@ -891,7 +891,7 @@ class DistribuidoraController extends Controller
 			
 			$recibo = Recibos::model()
 			->with('idCajaMovimientoVenta0')
-			->findAll(array('condition'=>"fechaRegistro>='".$arqueo->fechaVentas."' and fechaRegistro<='".date("Y-m-d",strtotime($arqueo->fechaVentas))." 23:59:59'"));
+			->findAll(array('condition'=>"fechaRegistro	>='".$arqueo->fechaVentas."' and fechaRegistro<='".date("Y-m-d",strtotime($arqueo->fechaVentas))." 23:59:59'"));
 			$recibos = 0;
 				
 			foreach ($recibo as $item)

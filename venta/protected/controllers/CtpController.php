@@ -21,8 +21,26 @@ class CtpController extends Controller
 				),
 		);
 	}
+	
 	public function actionIndex()
 	{
 		$this->render('index');
+	}
+	
+	public function actionOrdenes()
+	{
+		$ordenes=new CActiveDataProvider('CTP',array(
+				'criteria'=>array(
+					'with'=>array('idCliente0'),
+				),
+				'pagination'=>array(
+						'pageSize'=>'20',
+				),));
+		$this->render('ordenes',array('ordenes'=>$ordenes));
+	}
+	
+	public function actionOrden()
+	{
+		$this->render('orden');
 	}
 }

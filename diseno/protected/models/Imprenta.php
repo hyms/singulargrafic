@@ -1,10 +1,10 @@
 <?php
 
 /**
- * This is the model class for table "CTP".
+ * This is the model class for table "Imprenta".
  *
- * The followings are the available columns in table 'CTP':
- * @property integer $idCTP
+ * The followings are the available columns in table 'Imprenta':
+ * @property integer $idImprenta
  * @property string $fechaOrden
  * @property integer $tipoOrden
  * @property integer $formaPago
@@ -25,24 +25,22 @@
  * @property integer $numero
  * @property integer $idUserOT
  * @property integer $idUserVenta
- * @property integer $idImprenta
  *
  * The followings are the available model relations:
+ * @property CTP[] $cTPs
  * @property Cliente $idCliente0
  * @property CajaMovimientoVenta $idCajaMovimientoVenta0
  * @property User $idUserOT0
  * @property User $idUserVenta0
- * @property Imprenta $idImprenta0
- * @property DetalleCTP[] $detalleCTPs
  */
-class CTP extends CActiveRecord
+class Imprenta extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'CTP';
+		return 'Imprenta';
 	}
 
 	/**
@@ -54,7 +52,7 @@ class CTP extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('montoVenta, montoPagado, montoCambio, montoDescuento, estado, idUserOT, idUserVenta', 'required'),
-			array('tipoOrden, formaPago, idCliente, serie, estado, idCajaMovimientoVenta, numero, idUserOT, idUserVenta, idImprenta', 'numerical', 'integerOnly'=>true),
+			array('tipoOrden, formaPago, idCliente, serie, estado, idCajaMovimientoVenta, numero, idUserOT, idUserVenta', 'numerical', 'integerOnly'=>true),
 			array('montoVenta, montoPagado, montoCambio, montoDescuento', 'numerical'),
 			array('codigo', 'length', 'max'=>45),
 			array('factura, autorizado, responsable', 'length', 'max'=>50),
@@ -62,7 +60,7 @@ class CTP extends CActiveRecord
 			array('fechaOrden, fechaPlazo', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCTP, fechaOrden, tipoOrden, formaPago, idCliente, fechaPlazo, codigo, serie, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, numero, idUserOT, idUserVenta, idImprenta', 'safe', 'on'=>'search'),
+			array('idImprenta, fechaOrden, tipoOrden, formaPago, idCliente, fechaPlazo, codigo, serie, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, numero, idUserOT, idUserVenta', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -74,12 +72,11 @@ class CTP extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'cTPs' => array(self::HAS_MANY, 'CTP', 'idImprenta'),
 			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
 			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
 			'idUserOT0' => array(self::BELONGS_TO, 'User', 'idUserOT'),
 			'idUserVenta0' => array(self::BELONGS_TO, 'User', 'idUserVenta'),
-			'idImprenta0' => array(self::BELONGS_TO, 'Imprenta', 'idImprenta'),
-			'detalleCTPs' => array(self::HAS_MANY, 'DetalleCTP', 'idCTP'),
 		);
 	}
 
@@ -89,7 +86,7 @@ class CTP extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idCTP' => 'Id Ctp',
+			'idImprenta' => 'Id Imprenta',
 			'fechaOrden' => 'Fecha Orden',
 			'tipoOrden' => 'Tipo Orden',
 			'formaPago' => 'Forma Pago',
@@ -110,7 +107,6 @@ class CTP extends CActiveRecord
 			'numero' => 'Numero',
 			'idUserOT' => 'Id User Ot',
 			'idUserVenta' => 'Id User Venta',
-			'idImprenta' => 'Id Imprenta',
 		);
 	}
 
@@ -132,7 +128,7 @@ class CTP extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idCTP',$this->idCTP);
+		$criteria->compare('idImprenta',$this->idImprenta);
 		$criteria->compare('fechaOrden',$this->fechaOrden,true);
 		$criteria->compare('tipoOrden',$this->tipoOrden);
 		$criteria->compare('formaPago',$this->formaPago);
@@ -153,7 +149,6 @@ class CTP extends CActiveRecord
 		$criteria->compare('numero',$this->numero);
 		$criteria->compare('idUserOT',$this->idUserOT);
 		$criteria->compare('idUserVenta',$this->idUserVenta);
-		$criteria->compare('idImprenta',$this->idImprenta);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -164,7 +159,7 @@ class CTP extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return CTP the static model class
+	 * @return Imprenta the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

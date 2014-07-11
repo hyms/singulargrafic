@@ -23,7 +23,7 @@
 <?php
 		$form=$this->beginWidget('CActiveForm', array(
 				'id'=>'detalle-venta-detalleVenta-form',
-				'action'=>CHtml::normalizeUrl(array((empty($ctp->idVenta))?'/ctp/orden':"/ctp/modificar")),
+				'action'=>CHtml::normalizeUrl(array((empty($ctp->idVenta))?'/orden/cliente':"/ctp/modificar")),
 				'htmlOptions'=>array(
 						'class'=>'form-horizontal',
 						'role'=>'form'

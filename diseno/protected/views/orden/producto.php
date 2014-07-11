@@ -18,6 +18,10 @@
 					'value'=>'$data->idProducto0->detalle',
 			),
 			array(
+					'header'=>'Stock',
+					'value'=>'$data->stockU',
+			),
+			array(
 					'header'=>'',
 					'type'=>'raw',
 					'value'=>'CHtml::link("Añadir","#",array("onclick"=>\'newRow("\'.$data->idAlmacenProducto.\'");\',"class"=>"btn btn-success btn-sm"))',
