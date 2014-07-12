@@ -37,7 +37,7 @@ class OrdenController extends Controller
 		
 		$row = CTP::model()->find(array("condition"=>"tipoOrden=1",'order'=>'fechaOrden Desc'));
 		if(empty($row))
-			$row=new Venta;
+			$row=new CTP;
 		if(empty($row->serie))
 			$row->serie = 65;
 		$ctp->numero = $row->numero +1;
@@ -125,6 +125,7 @@ class OrdenController extends Controller
 			{
 				foreach($detalle as $item)
 				{
+					$item->idCTP = $ctp->idCTP;
 					$item->save();
 				}
 				$this->redirect(array('orden/rep'));

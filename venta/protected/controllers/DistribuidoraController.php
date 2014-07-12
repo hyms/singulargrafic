@@ -251,7 +251,7 @@ class DistribuidoraController extends Controller
 	
 	public function actionFactura()
 	{
-		Yii::app()->user->id;
+		//Yii::app()->user->id;
 		
 		$productos = new AlmacenProducto('searchDistribuidora');
 		$cliente = new Cliente;

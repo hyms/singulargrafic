@@ -41,6 +41,53 @@ class CtpController extends Controller
 	
 	public function actionOrden()
 	{
-		$this->render('orden');
+		if(isset($_GET['id']))
+		{
+			$ctp = CTP::model()
+				->with('detalleCTPs')
+				->with('idCliente0')
+				->findByPk($_GET['id']);
+			$this->render('orden',array('ctp'=>$ctp,'detalle'=>$ctp->detalleCTPs,'cliente'=>$ctp->idCliente0));
+		}
+		else
+			throw new CHttpException(400,'Petición no válida.');	
 	}
+	
+	public function actionFactura()
+	{
+		if(isset($_GET['id']))
+		{
+			$ctp = CTP::model()
+			->with('detalleCTPs')
+			->with('idCliente0')
+			->findByPk($_GET['id']);
+			
+			$ctp->attributes = $_POST['CTP'];
+			
+			$row = CTP::model()->find(array("condition"=>"tipoOrden=".$ctp->tipoOrden,'order'=>'fechaOrden Desc'));
+			if(empty($row))
+				$row=new CTP;
+			if(empty($row->serie))
+				$row->serie = 65;
+			$ctp->numero = $row->numero +1;
+			if($row->numero==1001)
+			{
+				$row->numero=1;
+				$row->serie++;
+				if($row->serie==91)
+					$row->serie = 65;
+			}
+			$ctp->serie = $row->serie;
+			
+			if($ctp->tipoOrden==1)
+				$ctp->codigo = chr($ctp->serie)."C-".$ctp->numero."-".date("y");
+			else
+				$ctp->codigo = $ctp->numero."-P";
+			
+			$this->render('orden',array('ctp'=>$ctp,'detalle'=>$ctp->detalleCTPs,'cliente'=>$ctp->idCliente0));
+		}
+		else
+			throw new CHttpException(400,'Petición no válida.');
+	}
+	
 }

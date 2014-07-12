@@ -1,34 +1,34 @@
 <div class="col-sm-2">
-	<?php echo CHtml::activeRadioButtonList($venta,'formaPago',array('Contado','Credito'))?>
+	<?php echo CHtml::activeRadioButtonList($ctp,'formaPago',array('Contado','Credito'))?>
 </div>
 <div class="col-sm-2">
-	<?php echo CHtml::activeRadioButtonList($venta,'tipoVenta',array('Con Factura','Sin Factura'))?>
+	<?php echo CHtml::activeRadioButtonList($ctp,'tipoOrden',array('Con Factura','Sin Factura'))?>
 </div>
 <div class="col-sm-4">
 	<div class="form-group">
-		<?php echo CHtml::activeLabelEx($venta,'fechaPlazo',array('class'=>'col-sm-5 control-label')); ?>
+		<?php echo CHtml::activeLabelEx($ctp,'fechaPlazo',array('class'=>'col-sm-5 control-label')); ?>
 		<div class="col-sm-7">
 		<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 	    		'name'=>'fechaPlazo',
 				'attribute'=>'fechaPlazo',
-			    'model'=>$venta,
+			    'model'=>$ctp,
 			    'options'=>array(
 			        'showAnim'=>'fold',
 					'dateFormat'=>'dd-mm-yy',
 			    ),
 			    'htmlOptions'=>array(
 			        'class'=>'form-control input-sm',
-					'disabled'=>(($venta->formaPago==0)?true:false),
+					'disabled'=>(($ctp->formaPago==0)?true:false),
 			    ),
 			));
 		?>
 		</div>
-		<?php echo CHtml::error($venta,"fechaPlazo",array('class'=>'label label-danger')); ?>
+		<?php echo CHtml::error($ctp,"fechaPlazo",array('class'=>'label label-danger')); ?>
 	</div>
 	<div class="form-group">
-		<?php echo CHtml::activeLabelEx($venta,'autorizado',array('class'=>'col-sm-5 control-label')); ?>
+		<?php echo CHtml::activeLabelEx($ctp,'autorizado',array('class'=>'col-sm-5 control-label')); ?>
 		<div class="col-sm-7">
-		<?php echo CHtml::activeDropDownList($venta, 'autorizado',array('Erick Paredes','Miriam Martinez'),array('class'=>'form-control input-sm','disabled'=>(($venta->formaPago==0)?true:false),'id'=>"autorizado",'empty' => 'Selecciona Responsable')); ?>
+		<?php echo CHtml::activeDropDownList($ctp, 'autorizado',array('Erick Paredes','Miriam Martinez'),array('class'=>'form-control input-sm','disabled'=>(($ctp->formaPago==0)?true:false),'id'=>"autorizado",'empty' => 'Selecciona Responsable')); ?>
 	   	</div>
 	</div>
 </div>
@@ -38,15 +38,15 @@
 		<?php echo CHtml::checkBoxList('Descuento',false,array('Descuento')); ?>
 		</div>
 		<div class="col-sm-5">
-		<?php echo CHtml::activeTextField($venta,'montoDescuento',array('class'=>'form-control input-sm','disabled'=>(empty($venta->montoDescuento)?true:false),'id'=>'descuento')); ?>
+		<?php echo CHtml::activeTextField($ctp,'montoDescuento',array('class'=>'form-control input-sm','disabled'=>(empty($ctp->montoDescuento)?true:false),'id'=>'descuento')); ?>
 		</div>
 	</div>
 	<div class="form-group ">
 		<div class="col-sm-5">
-		<?php echo CHtml::activeLabelEx($venta,'factura',array('class'=>'col-sm-5 control-label')); ?>
+		<?php echo CHtml::activeLabelEx($ctp,'factura',array('class'=>'col-sm-5 control-label')); ?>
 		</div>
 		<div class="col-sm-7">
-		<?php echo CHtml::activeTextField($venta,'factura',array('class'=>'form-control input-sm','disabled'=>(($venta->tipoVenta==0)?false:(empty($venta->factura)?true:false)),'id'=>'factura')); ?>
+		<?php echo CHtml::activeTextField($ctp,'factura',array('class'=>'form-control input-sm','disabled'=>(($ctp->tipoOrden==0)?false:(empty($ctp->factura)?true:false)),'id'=>'factura')); ?>
 		</div>
 	</div>
 </div>
@@ -55,7 +55,7 @@
 Yii::app()->getClientScript()->registerScript("check","
 function factura()
 {
-	$('form').attr('action', '".CHtml::normalizeUrl(array('/distribuidora/factura'))."');
+	$('form').attr('action', '".CHtml::normalizeUrl(array('/ctp/factura','id'=>$ctp->idCTP))."');
    	$('form').submit();
 }
 
@@ -65,19 +65,19 @@ function formaPago(value)
 	$('#autorizado').prop('disabled', value);
 }
 					
-$('#Venta_tipoVenta_0').change(function(){
+$('#CTP_tipoOrden_0').change(function(){
 	factura();
 });
 			
-$('#Venta_tipoVenta_1').change(function(){
+$('#CTP_tipoOrden_1').change(function(){
 	factura();
 });
 					
-$('#Venta_formaPago_0').change(function(){
+$('#CTP_formaPago_0').change(function(){
 	formaPago(true);
 });
 
-$('#Venta_formaPago_1').change(function(){
+$('#CTP_formaPago_1').change(function(){
 	formaPago(false);
 });
 				
