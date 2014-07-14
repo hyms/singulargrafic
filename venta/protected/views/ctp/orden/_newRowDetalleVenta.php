@@ -9,7 +9,7 @@
 </td>
 
 <td>
-	<?php echo CHtml::activeTextField($model,"[$index]nroPlacas",array('class'=>'form-control input-sm','id'=>'nroPlacas_'.$index)); ?>
+	<?php echo CHtml::activeTextField($model,"[$index]nroPlacas",array('class'=>'form-control input-sm','readonly'=>true,'id'=>'nroPlacas_'.$index)); ?>
 	<?php echo CHtml::hiddenField("[$index]costo",$costo,array('id'=>'costo_'.$index)); ?>
 </td>
 
@@ -28,27 +28,24 @@
 </td>
 
 <td>
-	<?php echo CHtml::activeTextField($model,"[$index]trabajo",array('class'=>'form-control input-sm','id'=>'trabajo_'.$index)); ?>
+	<?php echo CHtml::activeTextField($model,"[$index]trabajo",array('class'=>'form-control input-sm','readonly'=>true,'id'=>'trabajo_'.$index)); ?>
 </td>
 
 <td>
-	<?php echo CHtml::activeTextField($model,"[$index]pinza",array('class'=>'form-control input-sm','id'=>'pinza_'.$index)); ?>
+	<?php echo CHtml::activeTextField($model,"[$index]pinza",array('class'=>'form-control input-sm','readonly'=>true,'id'=>'pinza_'.$index)); ?>
 </td>
 <td>
-	<?php echo CHtml::activeTextField($model,"[$index]resolucion",array('class'=>'form-control input-sm','id'=>'resolucion_'.$index)); ?>
+	<?php echo CHtml::activeTextField($model,"[$index]resolucion",array('class'=>'form-control input-sm','readonly'=>true,'id'=>'resolucion_'.$index)); ?>
 </td>
 
 <td class="col-sm-1">
-	<?php echo CHtml::activeTextField($model,"[$index]costoAdicional",array('class'=>'form-control input-sm','id'=>'adicional_'.$index)); ?>
+	<?php echo CHtml::activeTextField($model,"[$index]costoAdicional",array('class'=>'form-control input-sm','readonly'=>true,'id'=>'adicional_'.$index)); ?>
 </td>
 
 <td class="col-sm-1">
 	<?php echo CHtml::activeTextField($model,"[$index]costoTotal",array('class'=>'costo form-control input-sm','readonly'=>true,'id'=>'costoTotal_'.$index)); ?>
 </td>
 
-<td class="col-sm-1">
-	<?php echo CHtml::link('Quitar', '#', array("class"=>"btn btn-danger btn-sm tabular-input-remove")).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />'; ?>
-</td>
 </tr>
 <?php  
 echo "

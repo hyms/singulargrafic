@@ -76,8 +76,8 @@ class CTP extends CActiveRecord
 		return array(
 			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
 			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
-			'idUserOT0' => array(self::BELONGS_TO, 'User', 'idUserOT'),
-			'idUserVenta0' => array(self::BELONGS_TO, 'User', 'idUserVenta'),
+			'idUserOT0' => array(self::BELONGS_TO, 'Users', 'idUserOT'),
+			'idUserVenta0' => array(self::BELONGS_TO, 'Users', 'idUserVenta'),
 			'idImprenta0' => array(self::BELONGS_TO, 'Imprenta', 'idImprenta'),
 			'detalleCTPs' => array(self::HAS_MANY, 'DetalleCTP', 'idCTP'),
 		);

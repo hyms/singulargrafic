@@ -126,6 +126,8 @@ class OrdenController extends Controller
 				foreach($detalle as $item)
 				{
 					$item->idCTP = $ctp->idCTP;
+					$almacen = Almacen::model()->findByPk($item->idAlmacenProducto);
+					$item->formato = $almacen->idProducto0->detalle;
 					$item->save();
 				}
 				$this->redirect(array('orden/rep'));

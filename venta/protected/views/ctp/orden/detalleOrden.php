@@ -13,7 +13,6 @@
 		<td><?php echo CHtml::label('Resolucion','resolucion')?></td>
 		<td><?php echo CHtml::label('Adicional','adicional')?></td>
 		<td><?php echo CHtml::label('Total','total')?></td>
-       	<td></td>
  	</tr></thead>
 <tbody class="tabular-input-container">
 <?php

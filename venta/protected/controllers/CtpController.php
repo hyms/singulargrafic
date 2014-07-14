@@ -31,6 +31,7 @@ class CtpController extends Controller
 	{
 		$ordenes=new CActiveDataProvider('CTP',array(
 				'criteria'=>array(
+					'condition'=>'`t`.estado=1',
 					'with'=>array('idCliente0'),
 				),
 				'pagination'=>array(
@@ -46,8 +47,21 @@ class CtpController extends Controller
 			$ctp = CTP::model()
 				->with('detalleCTPs')
 				->with('idCliente0')
-				->findByPk($_GET['id']);
+				->find('`t`.idCTP='.$_GET['id']);
 			$this->render('orden',array('ctp'=>$ctp,'detalle'=>$ctp->detalleCTPs,'cliente'=>$ctp->idCliente0));
+		}
+		elseif(isset($_POST['CTP']))
+		{
+			$ctp = CTP::model()
+			->with('detalleCTPs')
+			->with('idCliente0')
+			->findByPk($_POST['CTP']['idCTP']);
+			
+			$ctp->attributes = $_POST['CTP'];
+			$ctp->idUserVenta = Yii::app()->user->id;
+			$ctp->estado = 2;
+			if($ctp->save())
+				$this->redirect("buscar");
 		}
 		else
 			throw new CHttpException(400,'Petición no válida.');	
@@ -90,4 +104,31 @@ class CtpController extends Controller
 			throw new CHttpException(400,'Petición no válida.');
 	}
 	
+	public function actionBuscar()
+	{
+		$ordenes=new CActiveDataProvider('CTP',array(
+				'criteria'=>array(
+						'condition'=>'`t`.estado=2',
+						'with'=>array('idCliente0'),
+				),
+				'pagination'=>array(
+						'pageSize'=>'20',
+				),));
+		$this->render('ordenes',array('ordenes'=>$ordenes));
+	}
+	
+	public function actionPreview()
+	{
+		if(isset($_GET['id']))
+		{
+			$ctp = CTP::model()
+					->with('idCliente0')
+					->with('idUserOT0')
+					->with('detalleCTPs')
+					->findByPk($_GET['id']);
+			$this->render('preview',array('ctp'=>$ctp));
+		}
+		else
+			throw new CHttpException(400,'Petición no válida.');
+	}
 }

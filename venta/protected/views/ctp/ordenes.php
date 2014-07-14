@@ -32,6 +32,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
 					'type'=>'raw',
 					'value'=>'CHtml::link("Ver",array("ctp/orden","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm"))',
 			),
+			array(
+					'header'=>'',
+					'type'=>'raw',
+					'value'=>'($data->estado==2)?CHtml::link("imprimir",array("ctp/preview","id"=>$data->idCTP)):""',
+			),
 		)
 	));
 ?>
