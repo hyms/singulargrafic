@@ -12,7 +12,9 @@
 	<h3 class="col-xs-offset-2 col-xs-7 text-center"><strong><?php echo "Orden de Trabajo";?></strong></h3>
 	<h4 class="col-xs-offset-2 text-right"><strong><?php echo $ctp->codigo; ?></strong></h4>
 	<h4 class="col-xs-offset-8 text-right"><strong><?php echo "FECHA:";?></strong> <?php echo date("d-m-Y",strtotime($ctp->fechaOrden));?></h4>
-	
+	<div class="col-xs-offset-8 col-xs-4 well well-sm">
+			fecha de entraga:
+	</div>
 	<div class="row">
 	<span class="col-xs-3"><strong><?php echo "CLIENTE:";?></strong> <?php echo $ctp->idCliente0->apellido;?></span>
 	<span class="col-xs-2"><strong><?php echo "NIT:";?></strong> <?php echo $ctp->idCliente0->nitCi;?></span>
@@ -76,34 +78,32 @@
 	</div>
 	
 	<div class="row">
-	<span class="col-xs-4"><strong>Recepcionado Por:</strong></span>
+	<span class="col-xs-7"><strong>Recepcionado Por:</strong> <?php echo $ctp->idUserOT0->idEmpleado0->nombre." ".$ctp->idUserOT0->idEmpleado0->apellido;?></span>
 	<span class="col-xs-5"><strong>Son:</strong> <?php $this->widget('ext.numerosALetras', array('valor'=>$ctp->montoVenta,'despues'=>''))?></span>
-	<div class="col-xs-3 well well-sm"><strong>Total:</strong> <?php echo $ctp->montoVenta." Bs.";?></div>
 	</div>
 	
 	<div class="row">
-	<div class="col-xs-7">
-		<div class="col-xs-6 well well-sm">
-			<br><br>
-			<p class="text-center"><?php echo "firma Cliente";?></p>
-			<span><?php echo "Nombre: "?></span>
-			<p class="text-center"><?php echo "autorizo su elavoración de la presente orden";?></p>
-		</div>
-		<div class="col-xs-offset-1 col-xs-5 well">
-			<br><br>
-			<p class="text-center"><?php echo "firma";?></p>
-			<span><?php echo "Nombre: "?></span>
-			<p class="text-center"><?php echo "Recibi conforme";?></p>
-		</div>
-	</div>
-		<div class="col-xs-5">
-			<span class="col-xs-6"><strong>Desc:</strong></span>
-			<span class="col-xs-6"><strong>A/C:</strong></span>
-			<span class="col-xs-offset-6 col-xs-6"><strong>Saldo:</strong></span>
-			<span class="col-xs-12"><strong>obs:</strong></span>
-			<div class="col-xs-12 well well-sm">
-			fecha de entraga:
+		<div class="col-xs-7">
+			<div class="col-xs-5 well well-sm">
+				<br><br>
+				<p class="text-center"><?php echo "firma Cliente";?></p>
+				<span><?php echo "Nombre: "?></span>
+				<p class="text-center"><?php echo "autorizo su elavoración de la presente orden";?></p>
 			</div>
+			<div class="col-xs-offset-1 col-xs-5 well">
+				<br><br>
+				<p class="text-center"><?php echo "firma";?></p>
+				<span><?php echo "Nombre: "?><?php echo $ctp->idUserVenta0->idEmpleado0->nombre." ".$ctp->idUserVenta0->idEmpleado0->apellido;?></span>
+				<p class="text-center"><?php echo "Recibi conforme";?></p>
+			</div>
+		</div>
+		<div class="col-xs-5">
+			<span class="col-xs-offset-6 col-xs-6"><strong>Total:</strong> <?php echo $ctp->montoVenta." Bs.";?></span>
+			<span class="col-xs-6"><strong>Desc:</strong> <?php echo $ctp->montoDescuento." Bs.";?></span>
+			<span class="col-xs-6"><strong>A/C:</strong> <?php echo $ctp->montoPagado." Bs.";?></span>
+			<span class="col-xs-offset-6 col-xs-6"><strong>Saldo:</strong> <?php echo ($ctp->montoVenta-$ctp->montoPagado)." Bs.";?></span>
+			<span class="col-xs-12"><strong>Aut. por:</strong> <?php echo ($ctp->formaPago==1)?CHtml::encode(($ctp->autorizado==0)?'Erick Paredes':'Miriam Martinez'):""?></span>
+			<span class="col-xs-12"><strong>obs:</strong></span>
 		</div>
 		
 	</div>

@@ -325,8 +325,26 @@ class CajaController extends Controller
 					$i++;
 				}
 			}
-			else 
-				$venta = Venta::model()->findByPk($_GET['id']);
+			elseif($_GET['serv']=="ot")
+			{
+				$ctp = $this->verifyModel(CTP::model()->with('idCliente0')
+						->with('idCajaMovimientoVenta0')
+						->with("detalleCTPs")
+						->with("detalleCTPs.idAlmacenProducto0")
+						->with("detalleCTPs.idAlmacenProducto0.idProducto0")
+						->findByPk($_GET['id']));
+				$recibo->categoria = "Orden de Trabajo";
+				$i=0;
+				$recibo->concepto="";
+				foreach ($ctp->detalleCTPs as $producto)
+				{
+					if($i>0)
+					{$recibo->concepto=$recibo->concepto.", ";}
+					$recibo->concepto=$recibo->concepto.$producto->formato."/".$ctp->nroPlacas."-".$producto->trabajo;
+					$i++;
+				}
+			} 
+				///$venta = Venta::model()->findByPk($_GET['id']);
 			
 			$cliente = $venta->idCliente0;
 			$caja = CajaMovimientoVenta::model()->findByPk($venta->idCajaMovimientoVenta0->idCajaMovimientoVenta);

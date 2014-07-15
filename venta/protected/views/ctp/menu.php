@@ -7,8 +7,9 @@ $this->widget('zii.widgets.CMenu',array(
 				'items'=>array(
 							array('label'=>'Ordenes de Trabajo', 'url'=>array('ctp/ordenes')),
 							array('label'=>'Buscar Ordenes', 'url'=>array('ctp/buscar')),
-							array('label'=>'Deudores', 'url'=>array('#')),
-							array('label'=>'Movimientos', 'url'=>array('#')),
+							array('label'=>'Deudores', 'url'=>array('ctp/deudores')),
+							array('label'=>'Movimientos', 'url'=>array('ctp/movimientos')),
+							array('label'=>'Arqueo', 'url'=>array('#')),
 						),
 				)); 
 ?>
