@@ -23,7 +23,7 @@ class CajaController extends Controller
 						'pagination'=>array(
 						'pageSize'=>'20',
 				),));*/
-		$cajas = Caja::model()->with('cajaVentas')->with('cajaVentas.idUser0')->findAll();
+		$cajas = Caja::model()->findAll();
 		$this->render('index',array('cajas'=>$cajas));
 	}
 	
@@ -46,6 +46,7 @@ class CajaController extends Controller
 		if(isset($_POST['Caja']))
 		{
 			$model->attributes=$_POST['Caja'];
+			
 			if($model->save())
 			{
 			// form inputs are valid, do something here
@@ -72,11 +73,45 @@ class CajaController extends Controller
 			throw new CHttpException(400,'Petición no válida.');	
 	} 	
 	
-	public function actionAdd()
+	public function actionChicas()
 	{
-		
+		$this->render('cajaChica');
 	}
 	
+	public function actionTipo()
+	{
+		//$model=new TipoMovimiento;
+		$model=new CActiveDataProvider('TipoMovimiento',
+				array(
+				'pagination'=>array(
+						'pageSize'=>'20',
+				),));
+		$this->render('tipo',array('model'=>$model));
+	}
+	
+	public function actionTipoAdd()
+	{
+		$model=new TipoMovimiento;
+		
+		// uncomment the following code to enable ajax-based validation
+		/*
+		 if(isset($_POST['ajax']) && $_POST['ajax']==='tipo-movimiento-movimientoForm-form')
+		 {
+		echo CActiveForm::validate($model);
+		Yii::app()->end();
+		}
+		*/
+		
+		if(isset($_POST['TipoMovimiento']))
+		{
+			$model->attributes=$_POST['TipoMovimiento'];
+			if($model->validate())
+			{
+		    	return;
+			}
+		}
+		$this->render('movimientoForm',array('model'=>$model));
+	} 
 	/**
 	 * Performs the AJAX validation.
 	 * @param Caja $model the model to be validated

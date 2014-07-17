@@ -1,29 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "caja".
+ * This is the model class for table "cajaChicaTipo".
  *
- * The followings are the available columns in table 'caja':
- * @property integer $idCaja
- * @property string $nombre
- * @property double $saldo
- * @property integer $idParent
+ * The followings are the available columns in table 'cajaChicaTipo':
+ * @property integer $idcajaChicaTipo
+ * @property integer $idcajaChica
+ * @property integer $idTipoMovimiento
  *
  * The followings are the available model relations:
- * @property Caja $idParent0
- * @property Caja[] $cajas
- * @property CajaArqueo[] $cajaArqueos
- * @property CajaChica[] $cajaChicas
- * @property CajaMovimientoVenta[] $cajaMovimientoVentas
+ * @property TipoMovimiento $idTipoMovimiento0
+ * @property CajaChica $idcajaChica0
  */
-class Caja extends CActiveRecord
+class CajaChicaTipo extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'caja';
+		return 'cajaChicaTipo';
 	}
 
 	/**
@@ -34,13 +30,11 @@ class Caja extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre', 'required'),
-			array('idParent', 'numerical', 'integerOnly'=>true),
-			array('saldo', 'numerical'),
-			array('nombre', 'length', 'max'=>50),
+			array('idcajaChica, idTipoMovimiento', 'required'),
+			array('idcajaChica, idTipoMovimiento', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCaja, nombre, saldo, idParent', 'safe', 'on'=>'search'),
+			array('idcajaChicaTipo, idcajaChica, idTipoMovimiento', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,11 +46,8 @@ class Caja extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idParent0' => array(self::BELONGS_TO, 'Caja', 'idParent'),
-			'cajas' => array(self::HAS_MANY, 'Caja', 'idParent'),
-			'cajaArqueos' => array(self::HAS_MANY, 'CajaArqueo', 'idCaja'),
-			'cajaChicas' => array(self::HAS_MANY, 'CajaChica', 'idCaja'),
-			'cajaMovimientoVentas' => array(self::HAS_MANY, 'CajaMovimientoVenta', 'idCaja'),
+			'idTipoMovimiento0' => array(self::BELONGS_TO, 'TipoMovimiento', 'idTipoMovimiento'),
+			'idcajaChica0' => array(self::BELONGS_TO, 'CajaChica', 'idcajaChica'),
 		);
 	}
 
@@ -66,10 +57,9 @@ class Caja extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idCaja' => 'Id Caja',
-			'nombre' => 'Nombre',
-			'saldo' => 'Saldo',
-			'idParent' => 'Id Parent',
+			'idcajaChicaTipo' => 'Idcaja Chica Tipo',
+			'idcajaChica' => 'Idcaja Chica',
+			'idTipoMovimiento' => 'Id Tipo Movimiento',
 		);
 	}
 
@@ -91,10 +81,9 @@ class Caja extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idCaja',$this->idCaja);
-		$criteria->compare('nombre',$this->nombre,true);
-		$criteria->compare('saldo',$this->saldo);
-		$criteria->compare('idParent',$this->idParent);
+		$criteria->compare('idcajaChicaTipo',$this->idcajaChicaTipo);
+		$criteria->compare('idcajaChica',$this->idcajaChica);
+		$criteria->compare('idTipoMovimiento',$this->idTipoMovimiento);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -105,20 +94,10 @@ class Caja extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Caja the static model class
+	 * @return CajaChicaTipo the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
-	}
-	
-	public function getCajas()
-	{
-		if(isset($this->idCaja))
-			$caja = Caja::model()->findAll(array('condition'=>'idCaja!='.$this->idCaja));
-		else
-			$caja = Caja::model()->findAll();
-	
-		return CHtml::listData($caja,'idCaja','nombre');
 	}
 }

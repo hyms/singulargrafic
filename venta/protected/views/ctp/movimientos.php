@@ -40,9 +40,9 @@
 					'value'=>'$data->fechaVenta',
 			),
 			array(
-					'header'=>'Codigo',
+					'header'=>'Formato',
 					'type'=>'raw',
-					'value'=>'$data->codigo',
+					'value'=>'$data->formato',
 			),
 			array(
 					'header'=>'Monto',

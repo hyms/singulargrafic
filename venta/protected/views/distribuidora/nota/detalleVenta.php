@@ -83,7 +83,7 @@ if(count($detalle)>=1)
 				importe_total = importe_total + parseFloat($(this).val()*1);
 			}
 		);
-		$('#total').val(parseFloat(importe_total).toFixed(1));
+		$('#total').val(importe_total.toFixed(1));
 		cambio();
 	}
 	

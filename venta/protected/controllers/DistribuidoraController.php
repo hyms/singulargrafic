@@ -37,7 +37,7 @@ class DistribuidoraController extends Controller
 					array('criteria'=>array(
 							'with'=>array('idAlmacenProducto0'=>array('select'=>'*'),'idAlmacenProducto0.idProducto0'=>array('select'=>'*')),
 							'group'=>'`t`.idAlmacenProducto',
-							'select'=>'count(*) as cantidad, `t`.idAlmacenProducto',
+							'select'=>'sum(`t`.cantidadU + (`t`.cantidadP*idProducto0.cantXPaquete)) as cantidad, `t`.idAlmacenProducto',
 							'order'=>'cantidad Desc',
 							'limit'=>'5',
 					),));
@@ -845,9 +845,10 @@ class DistribuidoraController extends Controller
 					$recibos = $recibos + $tmp->idCajaMovimientoVenta0->monto;
 				}
 			}
-				
+			$saldo = CajaArqueo::model()->find(array('condition'=>'idCaja=2','order'=>'idCajaArqueo Desc'));	
 			$this->render("arqueo",
 					array(
+							'saldo'=>$saldo->saldo,
 							'arqueo'=>$arqueo,
 							'caja'=>$caja,
 							'fecha'=>date('Y-m-d',strtotime($start)),

@@ -51,13 +51,13 @@
 echo "
 <script>
 	$('#nroPlacas_". $index ."').blur(function(e){ 
-	    $('#costoTotal_". $index ."').val(suma($('#nroPlacas_".  $index ."').val()*$('#costo_". $index ."').val(),$('#adicional_". $index ."').val()));
+	    $('#costoTotal_". $index ."').val(suma($('#nroPlacas_".  $index ."').val()*$('#costo_". $index ."').val(),$('#adicional_". $index ."').val()).toFixed(1));
 		calcular_total();
 		return true;
 	});
 	
 	$('#adicional_". $index ."').blur(function(e){ 
-	    $('#costoTotal_". $index ."').val(suma($('#nroPlacas_".  $index ."').val()*$('#costo_". $index ."').val(),$('#adicional_". $index ."').val()));
+	    $('#costoTotal_". $index ."').val(suma($('#nroPlacas_".  $index ."').val()*$('#costo_". $index ."').val(),$('#adicional_". $index ."').val()).toFixed(1));
 		calcular_total();
 	  	return true;
 	});

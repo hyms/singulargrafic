@@ -9,7 +9,7 @@ $this->widget('zii.widgets.CMenu',array(
 							array('label'=>'Buscar Ordenes', 'url'=>array('ctp/buscar')),
 							array('label'=>'Deudores', 'url'=>array('ctp/deudores')),
 							array('label'=>'Movimientos', 'url'=>array('ctp/movimientos')),
-							array('label'=>'Arqueo', 'url'=>array('#')),
+							array('label'=>'Arqueo', 'url'=>array('ctp/arqueo')),
 						),
 				)); 
 ?>

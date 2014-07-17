@@ -5,9 +5,9 @@ $this->widget('zii.widgets.CMenu',array(
 				'submenuHtmlOptions' => array('class' => 'dropdown-menu'),
 				'encodeLabel' => false,
 				'items'=>array(
-							array('label'=>'Ordenes de Hoy', 'url'=>array('ctp/movimientos','d'=>date('d'))),
-							array('label'=>'Ordenes de Ayer', 'url'=>array('ctp/movimientos','d'=>(date('d')-1))),
-							array('label'=>'Ordenes del Mes', 'url'=>array('ctp/movimientos','m'=>date('m'))),
+							array('label'=>'Hoy', 'url'=>array('ctp/arqueo','d'=>date('d'))),
+							array('label'=>'Ayer', 'url'=>array('ctp/arqueo','d'=>(date('d')-1))),
+							array('label'=>'Reporte de Arqueos', 'url'=>array('ctp/arqueo',)),
 							//array('label'=>'Productos', 'url'=>array('#')),
 							
 						),

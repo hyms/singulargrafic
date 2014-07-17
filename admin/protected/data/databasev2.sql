@@ -6,11 +6,11 @@ CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET latin1 COLLATE latin1_s
 USE `mydb` ;
 
 -- -----------------------------------------------------
--- Table `producto`
+-- Table  `producto`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `producto` ;
+DROP TABLE IF EXISTS  `producto` ;
 
-CREATE  TABLE IF NOT EXISTS `producto` (
+CREATE  TABLE IF NOT EXISTS  `producto` (
   `idProducto` INT NOT NULL AUTO_INCREMENT ,
   `servicio` INT NOT NULL ,
   `codigo` VARCHAR(40) NULL ,
@@ -30,11 +30,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `almacen`
+-- Table  `almacen`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `almacen` ;
+DROP TABLE IF EXISTS  `almacen` ;
 
-CREATE  TABLE IF NOT EXISTS `almacen` (
+CREATE  TABLE IF NOT EXISTS  `almacen` (
   `idAlmacen` INT NOT NULL AUTO_INCREMENT ,
   `nombre` VARCHAR(20) NULL ,
   `idParent` INT NULL ,
@@ -42,18 +42,18 @@ CREATE  TABLE IF NOT EXISTS `almacen` (
   INDEX `fk_almacen_almacen1` (`idParent` ASC) ,
   CONSTRAINT `fk_almacen_almacen1`
     FOREIGN KEY (`idParent` )
-    REFERENCES `almacen` (`idAlmacen` )
+    REFERENCES  `almacen` (`idAlmacen` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `cliente`
+-- Table  `cliente`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `cliente` ;
+DROP TABLE IF EXISTS  `cliente` ;
 
-CREATE  TABLE IF NOT EXISTS `cliente` (
+CREATE  TABLE IF NOT EXISTS  `cliente` (
   `idCliente` INT NOT NULL AUTO_INCREMENT ,
   `nitCi` VARCHAR(20) NULL ,
   `apellido` VARCHAR(40) NULL ,
@@ -67,11 +67,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empleado`
+-- Table  `empleado`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `empleado` ;
+DROP TABLE IF EXISTS  `empleado` ;
 
-CREATE  TABLE IF NOT EXISTS `empleado` (
+CREATE  TABLE IF NOT EXISTS  `empleado` (
   `idEmpleado` INT NOT NULL AUTO_INCREMENT ,
   `nombre` VARCHAR(40) NULL ,
   `apellido` VARCHAR(40) NULL ,
@@ -84,11 +84,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `user`
+-- Table  `user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `user` ;
+DROP TABLE IF EXISTS  `user` ;
 
-CREATE  TABLE IF NOT EXISTS `user` (
+CREATE  TABLE IF NOT EXISTS  `user` (
   `idUser` INT NOT NULL AUTO_INCREMENT ,
   `username` VARCHAR(20) NULL ,
   `password` VARCHAR(20) NULL ,
@@ -100,18 +100,18 @@ CREATE  TABLE IF NOT EXISTS `user` (
   INDEX `fk_user_empleado1` (`idEmpleado` ASC) ,
   CONSTRAINT `fk_user_empleado1`
     FOREIGN KEY (`idEmpleado` )
-    REFERENCES `empleado` (`idEmpleado` )
+    REFERENCES  `empleado` (`idEmpleado` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `caja`
+-- Table  `caja`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `caja` ;
+DROP TABLE IF EXISTS  `caja` ;
 
-CREATE  TABLE IF NOT EXISTS `caja` (
+CREATE  TABLE IF NOT EXISTS  `caja` (
   `idCaja` INT NOT NULL AUTO_INCREMENT ,
   `nombre` VARCHAR(50) NOT NULL ,
   `saldo` DOUBLE NOT NULL ,
@@ -120,18 +120,18 @@ CREATE  TABLE IF NOT EXISTS `caja` (
   INDEX `fk_caja_caja1` (`idParent` ASC) ,
   CONSTRAINT `fk_caja_caja1`
     FOREIGN KEY (`idParent` )
-    REFERENCES `caja` (`idCaja` )
+    REFERENCES  `caja` (`idCaja` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `cajaMovimientoVenta`
+-- Table  `cajaMovimientoVenta`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `cajaMovimientoVenta` ;
+DROP TABLE IF EXISTS  `cajaMovimientoVenta` ;
 
-CREATE  TABLE IF NOT EXISTS `cajaMovimientoVenta` (
+CREATE  TABLE IF NOT EXISTS  `cajaMovimientoVenta` (
   `idCajaMovimientoVenta` INT NOT NULL AUTO_INCREMENT ,
   `monto` DOUBLE NOT NULL ,
   `motivo` VARCHAR(100) NOT NULL ,
@@ -145,23 +145,23 @@ CREATE  TABLE IF NOT EXISTS `cajaMovimientoVenta` (
   INDEX `fk_cajaMovimientoVenta_caja1` (`idCaja` ASC) ,
   CONSTRAINT `fk_movimientoCaja_user1`
     FOREIGN KEY (`idUser` )
-    REFERENCES `user` (`idUser` )
+    REFERENCES  `user` (`idUser` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_cajaMovimientoVenta_caja1`
     FOREIGN KEY (`idCaja` )
-    REFERENCES `caja` (`idCaja` )
+    REFERENCES  `caja` (`idCaja` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `venta`
+-- Table  `venta`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `venta` ;
+DROP TABLE IF EXISTS  `venta` ;
 
-CREATE  TABLE IF NOT EXISTS `venta` (
+CREATE  TABLE IF NOT EXISTS  `venta` (
   `idVenta` INT NOT NULL AUTO_INCREMENT ,
   `fechaVenta` DATETIME NULL ,
   `tipoVenta` INT NULL ,
@@ -186,23 +186,23 @@ CREATE  TABLE IF NOT EXISTS `venta` (
   INDEX `fk_venta_cajaMovimientoVenta1` (`idCajaMovimientoVenta` ASC) ,
   CONSTRAINT `fk_venta_cliente1`
     FOREIGN KEY (`idCliente` )
-    REFERENCES `cliente` (`idCliente` )
+    REFERENCES  `cliente` (`idCliente` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_venta_cajaMovimientoVenta1`
     FOREIGN KEY (`idCajaMovimientoVenta` )
-    REFERENCES `cajaMovimientoVenta` (`idCajaMovimientoVenta` )
+    REFERENCES  `cajaMovimientoVenta` (`idCajaMovimientoVenta` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `almacenProducto`
+-- Table  `almacenProducto`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `almacenProducto` ;
+DROP TABLE IF EXISTS  `almacenProducto` ;
 
-CREATE  TABLE IF NOT EXISTS `almacenProducto` (
+CREATE  TABLE IF NOT EXISTS  `almacenProducto` (
   `idAlmacenProducto` INT NOT NULL AUTO_INCREMENT ,
   `idProducto` INT NULL ,
   `stockU` INT NOT NULL ,
@@ -213,23 +213,23 @@ CREATE  TABLE IF NOT EXISTS `almacenProducto` (
   INDEX `fk_almacenProducto_almacen1` (`idAlmacen` ASC) ,
   CONSTRAINT `fk_almacenProducto_producto1`
     FOREIGN KEY (`idProducto` )
-    REFERENCES `producto` (`idProducto` )
+    REFERENCES  `producto` (`idProducto` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_almacenProducto_almacen1`
     FOREIGN KEY (`idAlmacen` )
-    REFERENCES `almacen` (`idAlmacen` )
+    REFERENCES  `almacen` (`idAlmacen` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `detalleVenta`
+-- Table  `detalleVenta`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `detalleVenta` ;
+DROP TABLE IF EXISTS  `detalleVenta` ;
 
-CREATE  TABLE IF NOT EXISTS `detalleVenta` (
+CREATE  TABLE IF NOT EXISTS  `detalleVenta` (
   `idDetalleVenta` INT NOT NULL AUTO_INCREMENT ,
   `idVenta` INT NULL ,
   `cantidadU` INT NOT NULL ,
@@ -244,23 +244,23 @@ CREATE  TABLE IF NOT EXISTS `detalleVenta` (
   INDEX `fk_detalleVenta_almacenProducto1` (`idAlmacenProducto` ASC) ,
   CONSTRAINT `fk_detalleVenta_venta1`
     FOREIGN KEY (`idVenta` )
-    REFERENCES `venta` (`idVenta` )
+    REFERENCES  `venta` (`idVenta` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_detalleVenta_almacenProducto1`
     FOREIGN KEY (`idAlmacenProducto` )
-    REFERENCES `almacenProducto` (`idAlmacenProducto` )
+    REFERENCES  `almacenProducto` (`idAlmacenProducto` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `cajaArqueo`
+-- Table  `cajaArqueo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `cajaArqueo` ;
+DROP TABLE IF EXISTS  `cajaArqueo` ;
 
-CREATE  TABLE IF NOT EXISTS `cajaArqueo` (
+CREATE  TABLE IF NOT EXISTS  `cajaArqueo` (
   `idCajaVenta` INT NOT NULL AUTO_INCREMENT ,
   `idCaja` INT NULL ,
   `idUser` INT NULL ,
@@ -274,23 +274,23 @@ CREATE  TABLE IF NOT EXISTS `cajaArqueo` (
   INDEX `fk_cajaVenta_user1` (`idUser` ASC) ,
   CONSTRAINT `fk_cajaVenta_caja1`
     FOREIGN KEY (`idCaja` )
-    REFERENCES `caja` (`idCaja` )
+    REFERENCES  `caja` (`idCaja` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_cajaVenta_user1`
     FOREIGN KEY (`idUser` )
-    REFERENCES `user` (`idUser` )
+    REFERENCES  `user` (`idUser` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `recibos`
+-- Table  `recibos`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `recibos` ;
+DROP TABLE IF EXISTS  `recibos` ;
 
-CREATE  TABLE IF NOT EXISTS `recibos` (
+CREATE  TABLE IF NOT EXISTS  `recibos` (
   `idRecibos` INT NOT NULL AUTO_INCREMENT ,
   `categoria` VARCHAR(40) NULL ,
   `codigo` VARCHAR(20) NULL ,
@@ -313,23 +313,23 @@ CREATE  TABLE IF NOT EXISTS `recibos` (
   INDEX `fk_recibos_cajaMovimientoVenta1` (`idCajaMovimientoVenta` ASC) ,
   CONSTRAINT `fk_recibos_cliente1`
     FOREIGN KEY (`idCliente` )
-    REFERENCES `cliente` (`idCliente` )
+    REFERENCES  `cliente` (`idCliente` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_recibos_cajaMovimientoVenta1`
     FOREIGN KEY (`idCajaMovimientoVenta` )
-    REFERENCES `cajaMovimientoVenta` (`idCajaMovimientoVenta` )
+    REFERENCES  `cajaMovimientoVenta` (`idCajaMovimientoVenta` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `movimientoAlmacen`
+-- Table  `movimientoAlmacen`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `movimientoAlmacen` ;
+DROP TABLE IF EXISTS  `movimientoAlmacen` ;
 
-CREATE  TABLE IF NOT EXISTS `movimientoAlmacen` (
+CREATE  TABLE IF NOT EXISTS  `movimientoAlmacen` (
   `idMovimientoAlmacen` INT NOT NULL AUTO_INCREMENT ,
   `idProducto` INT NULL ,
   `idAlmacenOrigen` INT NULL ,
@@ -345,33 +345,33 @@ CREATE  TABLE IF NOT EXISTS `movimientoAlmacen` (
   INDEX `fk_movimientoAlmacen_user1` (`idUser` ASC) ,
   CONSTRAINT `fk_movimientoAlmacen_producto1`
     FOREIGN KEY (`idProducto` )
-    REFERENCES `producto` (`idProducto` )
+    REFERENCES  `producto` (`idProducto` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_movimientoAlmacen_almacen1`
     FOREIGN KEY (`idAlmacenOrigen` )
-    REFERENCES `almacen` (`idAlmacen` )
+    REFERENCES  `almacen` (`idAlmacen` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_movimientoAlmacen_almacen2`
     FOREIGN KEY (`idAlmacenDestino` )
-    REFERENCES `almacen` (`idAlmacen` )
+    REFERENCES  `almacen` (`idAlmacen` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_movimientoAlmacen_user1`
     FOREIGN KEY (`idUser` )
-    REFERENCES `user` (`idUser` )
+    REFERENCES  `user` (`idUser` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Imprenta`
+-- Table  `Imprenta`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Imprenta` ;
+DROP TABLE IF EXISTS  `Imprenta` ;
 
-CREATE  TABLE IF NOT EXISTS `Imprenta` (
+CREATE  TABLE IF NOT EXISTS  `Imprenta` (
   `idImprenta` INT NOT NULL AUTO_INCREMENT ,
   `fechaOrden` DATETIME NULL ,
   `tipoOrden` INT NULL ,
@@ -400,33 +400,33 @@ CREATE  TABLE IF NOT EXISTS `Imprenta` (
   INDEX `fk_CTP_user2` (`idUserVenta` ASC) ,
   CONSTRAINT `fk_venta_cliente100`
     FOREIGN KEY (`idCliente` )
-    REFERENCES `cliente` (`idCliente` )
+    REFERENCES  `cliente` (`idCliente` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_venta_cajaMovimientoVenta100`
     FOREIGN KEY (`idCajaMovimientoVenta` )
-    REFERENCES `cajaMovimientoVenta` (`idCajaMovimientoVenta` )
+    REFERENCES  `cajaMovimientoVenta` (`idCajaMovimientoVenta` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_CTP_user10`
     FOREIGN KEY (`idUserOT` )
-    REFERENCES `user` (`idUser` )
+    REFERENCES  `user` (`idUser` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_CTP_user20`
     FOREIGN KEY (`idUserVenta` )
-    REFERENCES `user` (`idUser` )
+    REFERENCES  `user` (`idUser` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `CTP`
+-- Table  `CTP`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `CTP` ;
+DROP TABLE IF EXISTS  `CTP` ;
 
-CREATE  TABLE IF NOT EXISTS `CTP` (
+CREATE  TABLE IF NOT EXISTS  `CTP` (
   `idCTP` INT NOT NULL AUTO_INCREMENT ,
   `fechaOrden` DATETIME NULL ,
   `tipoOrden` INT NULL ,
@@ -457,38 +457,38 @@ CREATE  TABLE IF NOT EXISTS `CTP` (
   INDEX `fk_CTP_Imprenta1` (`idImprenta` ASC) ,
   CONSTRAINT `fk_venta_cliente10`
     FOREIGN KEY (`idCliente` )
-    REFERENCES `cliente` (`idCliente` )
+    REFERENCES  `cliente` (`idCliente` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_venta_cajaMovimientoVenta10`
     FOREIGN KEY (`idCajaMovimientoVenta` )
-    REFERENCES `cajaMovimientoVenta` (`idCajaMovimientoVenta` )
+    REFERENCES  `cajaMovimientoVenta` (`idCajaMovimientoVenta` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_CTP_user1`
     FOREIGN KEY (`idUserOT` )
-    REFERENCES `user` (`idUser` )
+    REFERENCES  `user` (`idUser` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_CTP_user2`
     FOREIGN KEY (`idUserVenta` )
-    REFERENCES `user` (`idUser` )
+    REFERENCES  `user` (`idUser` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_CTP_Imprenta1`
     FOREIGN KEY (`idImprenta` )
-    REFERENCES `Imprenta` (`idImprenta` )
+    REFERENCES  `Imprenta` (`idImprenta` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `detalleCTP`
+-- Table  `detalleCTP`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `detalleCTP` ;
+DROP TABLE IF EXISTS  `detalleCTP` ;
 
-CREATE  TABLE IF NOT EXISTS `detalleCTP` (
+CREATE  TABLE IF NOT EXISTS  `detalleCTP` (
   `idDetalleCTP` INT NOT NULL AUTO_INCREMENT ,
   `idCTP` INT NULL ,
   `idAlmacenProducto` INT NULL ,
@@ -509,12 +509,107 @@ CREATE  TABLE IF NOT EXISTS `detalleCTP` (
   INDEX `fk_detalleCTP_almacenProducto1` (`idAlmacenProducto` ASC) ,
   CONSTRAINT `fk_detalleCTP_CTP1`
     FOREIGN KEY (`idCTP` )
-    REFERENCES `CTP` (`idCTP` )
+    REFERENCES  `CTP` (`idCTP` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_detalleCTP_almacenProducto1`
     FOREIGN KEY (`idAlmacenProducto` )
-    REFERENCES `almacenProducto` (`idAlmacenProducto` )
+    REFERENCES  `almacenProducto` (`idAlmacenProducto` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table  `cajaChica`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS  `cajaChica` ;
+
+CREATE  TABLE IF NOT EXISTS  `cajaChica` (
+  `idcajaChica` INT NOT NULL AUTO_INCREMENT ,
+  `idUser` INT NULL ,
+  `idCaja` INT NULL ,
+  `saldo` DOUBLE NOT NULL ,
+  `maximo` DOUBLE NULL ,
+  PRIMARY KEY (`idcajaChica`) ,
+  INDEX `fk_cajaChica_caja1` (`idCaja` ASC) ,
+  INDEX `fk_cajaChica_user1` (`idUser` ASC) ,
+  CONSTRAINT `fk_cajaChica_caja1`
+    FOREIGN KEY (`idCaja` )
+    REFERENCES  `caja` (`idCaja` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cajaChica_user1`
+    FOREIGN KEY (`idUser` )
+    REFERENCES  `user` (`idUser` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table  `TipoMovimiento`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS  `TipoMovimiento` ;
+
+CREATE  TABLE IF NOT EXISTS  `TipoMovimiento` (
+  `idTipoMovimiento` INT NOT NULL AUTO_INCREMENT ,
+  `nombre` VARCHAR(45) NOT NULL ,
+  `estado` INT NOT NULL ,
+  PRIMARY KEY (`idTipoMovimiento`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table  `cajaChicaMovimiento`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS  `cajaChicaMovimiento` ;
+
+CREATE  TABLE IF NOT EXISTS  `cajaChicaMovimiento` (
+  `idcajaChicaMovimiento` INT NOT NULL AUTO_INCREMENT ,
+  `idUser` INT NULL ,
+  `idTipoMovimiento` INT NULL ,
+  `monto` DOUBLE NOT NULL ,
+  `saldo` DOUBLE NOT NULL ,
+  `fechaMovimiento` DATETIME NOT NULL ,
+  `tipoMovimiento` INT NULL ,
+  `idcajaChica` INT NULL ,
+  PRIMARY KEY (`idcajaChicaMovimiento`) ,
+  INDEX `fk_cajaChicaMovimiento_cajaChica1` (`idcajaChica` ASC) ,
+  INDEX `fk_cajaChicaMovimiento_TipoMovimiento1` (`tipoMovimiento` ASC) ,
+  CONSTRAINT `fk_cajaChicaMovimiento_cajaChica1`
+    FOREIGN KEY (`idcajaChica` )
+    REFERENCES  `cajaChica` (`idcajaChica` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cajaChicaMovimiento_TipoMovimiento1`
+    FOREIGN KEY (`tipoMovimiento` )
+    REFERENCES  `TipoMovimiento` (`idTipoMovimiento` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table  `cajaChicaTipo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS  `cajaChicaTipo` ;
+
+CREATE  TABLE IF NOT EXISTS  `cajaChicaTipo` (
+  `idcajaChicaTipo` INT NOT NULL AUTO_INCREMENT ,
+  `idcajaChica` INT NOT NULL ,
+  `idTipoMovimiento` INT NOT NULL ,
+  PRIMARY KEY (`idcajaChicaTipo`) ,
+  INDEX `fk_cajaChicaTipo_TipoMovimiento1` (`idTipoMovimiento` ASC) ,
+  INDEX `fk_cajaChicaTipo_cajaChica1` (`idcajaChica` ASC) ,
+  CONSTRAINT `fk_cajaChicaTipo_TipoMovimiento1`
+    FOREIGN KEY (`idTipoMovimiento` )
+    REFERENCES  `TipoMovimiento` (`idTipoMovimiento` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cajaChicaTipo_cajaChica1`
+    FOREIGN KEY (`idcajaChica` )
+    REFERENCES  `cajaChica` (`idcajaChica` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

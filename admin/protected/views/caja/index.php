@@ -9,9 +9,9 @@
 	<tr>
 		<th>Nro</th>
 		<th>Nombre</th>
-		<th>Asignado a</th>
+		<th>Saldo</th>
 		<th></th>
-		<th></th>
+		
 	</tr>
 </thead>
 <tbody>
@@ -23,16 +23,8 @@ $index=0;
 		<tr>
 		<td><?php $index++; echo $index;?></td>
 		<td><?php echo $item->nombre;?></td>
-		<td><?php
-			$us="";
-			foreach($item->cajaVentas as $user)
-			{
-				$us=$us.$user->idUser0->username.", ";
-			} 
-			echo $us;
-		?></td>
+		<td><?php echo $item->saldo;?></td>
 		<td><?php echo CHtml::link("Editar",array("caja/caja","id"=>$item->idCaja));?></td>
-		<td><?php echo CHtml::link("Asignar a",array("caja/assign","id"=>$item->idCaja));?></td>
 		</tr>
 		<?php 
 	} 

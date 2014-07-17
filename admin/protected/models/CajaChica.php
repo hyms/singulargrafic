@@ -1,33 +1,29 @@
 <?php
 
 /**
- * This is the model class for table "cajaVenta".
+ * This is the model class for table "cajaChica".
  *
- * The followings are the available columns in table 'cajaVenta':
- * @property integer $idCajaVenta
- * @property integer $idCaja
+ * The followings are the available columns in table 'cajaChica':
+ * @property integer $idcajaChica
  * @property integer $idUser
+ * @property integer $idCaja
  * @property double $saldo
- * @property string $fechaArqueo
- * @property integer $entregado
- * @property string $comprobante
+ * @property double $maximo
  *
  * The followings are the available model relations:
  * @property Caja $idCaja0
  * @property User $idUser0
- * @property MovimientoCaja[] $movimientoCajas
- * @property Recibos[] $reciboses
- * @property Venta[] $ventas
+ * @property CajaChicaMovimiento[] $cajaChicaMovimientos
+ * @property CajaChicaTipo[] $cajaChicaTipos
  */
-class CajaVenta extends CActiveRecord
+class CajaChica extends CActiveRecord
 {
-	public $max;
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'cajaVenta';
+		return 'cajaChica';
 	}
 
 	/**
@@ -38,13 +34,12 @@ class CajaVenta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idCaja, idUser, entregado', 'numerical', 'integerOnly'=>true),
-			array('saldo', 'numerical'),
-			array('comprobante', 'length', 'max'=>20),
-			array('fechaArqueo', 'safe'),
+			array('saldo', 'required'),
+			array('idUser, idCaja', 'numerical', 'integerOnly'=>true),
+			array('saldo, maximo', 'numerical'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCajaVenta, idCaja, idUser, saldo, fechaArqueo, entregado, comprobante', 'safe', 'on'=>'search'),
+			array('idcajaChica, idUser, idCaja, saldo, maximo', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,10 +52,9 @@ class CajaVenta extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
-			'idUser0' => array(self::BELONGS_TO, 'Users', 'idUser'),
-			'movimientoCajas' => array(self::HAS_MANY, 'MovimientoCaja', 'idCaja'),
-			'reciboses' => array(self::HAS_MANY, 'Recibos', 'idCaja'),
-			'ventas' => array(self::HAS_MANY, 'Venta', 'idCaja'),
+			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
+			'cajaChicaMovimientos' => array(self::HAS_MANY, 'CajaChicaMovimiento', 'idcajaChica'),
+			'cajaChicaTipos' => array(self::HAS_MANY, 'CajaChicaTipo', 'idcajaChica'),
 		);
 	}
 
@@ -70,13 +64,11 @@ class CajaVenta extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idCajaVenta' => 'Id Caja Venta',
-			'idCaja' => 'Id Caja',
+			'idcajaChica' => 'Idcaja Chica',
 			'idUser' => 'Id User',
+			'idCaja' => 'Id Caja',
 			'saldo' => 'Saldo',
-			'fechaArqueo' => 'Fecha Arqueo',
-			'entregado' => 'Entregado',
-			'comprobante' => 'Comprobante',
+			'maximo' => 'Maximo',
 		);
 	}
 
@@ -98,13 +90,11 @@ class CajaVenta extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idCajaVenta',$this->idCajaVenta);
-		$criteria->compare('idCaja',$this->idCaja);
+		$criteria->compare('idcajaChica',$this->idcajaChica);
 		$criteria->compare('idUser',$this->idUser);
+		$criteria->compare('idCaja',$this->idCaja);
 		$criteria->compare('saldo',$this->saldo);
-		$criteria->compare('fechaArqueo',$this->fechaArqueo,true);
-		$criteria->compare('entregado',$this->entregado);
-		$criteria->compare('comprobante',$this->comprobante,true);
+		$criteria->compare('maximo',$this->maximo);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -115,7 +105,7 @@ class CajaVenta extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return CajaVenta the static model class
+	 * @return CajaChica the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

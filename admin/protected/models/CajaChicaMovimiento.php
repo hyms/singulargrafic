@@ -1,29 +1,30 @@
 <?php
 
 /**
- * This is the model class for table "caja".
+ * This is the model class for table "cajaChicaMovimiento".
  *
- * The followings are the available columns in table 'caja':
- * @property integer $idCaja
- * @property string $nombre
+ * The followings are the available columns in table 'cajaChicaMovimiento':
+ * @property integer $idcajaChicaMovimiento
+ * @property integer $idUser
+ * @property integer $idTipoMovimiento
+ * @property double $monto
  * @property double $saldo
- * @property integer $idParent
+ * @property string $fechaMovimiento
+ * @property integer $tipoMovimiento
+ * @property integer $idcajaChica
  *
  * The followings are the available model relations:
- * @property Caja $idParent0
- * @property Caja[] $cajas
- * @property CajaArqueo[] $cajaArqueos
- * @property CajaChica[] $cajaChicas
- * @property CajaMovimientoVenta[] $cajaMovimientoVentas
+ * @property CajaChica $idcajaChica0
+ * @property TipoMovimiento $tipoMovimiento0
  */
-class Caja extends CActiveRecord
+class CajaChicaMovimiento extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'caja';
+		return 'cajaChicaMovimiento';
 	}
 
 	/**
@@ -34,13 +35,12 @@ class Caja extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre', 'required'),
-			array('idParent', 'numerical', 'integerOnly'=>true),
-			array('saldo', 'numerical'),
-			array('nombre', 'length', 'max'=>50),
+			array('monto, saldo, fechaMovimiento', 'required'),
+			array('idUser, idTipoMovimiento, tipoMovimiento, idcajaChica', 'numerical', 'integerOnly'=>true),
+			array('monto, saldo', 'numerical'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCaja, nombre, saldo, idParent', 'safe', 'on'=>'search'),
+			array('idcajaChicaMovimiento, idUser, idTipoMovimiento, monto, saldo, fechaMovimiento, tipoMovimiento, idcajaChica', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,11 +52,8 @@ class Caja extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idParent0' => array(self::BELONGS_TO, 'Caja', 'idParent'),
-			'cajas' => array(self::HAS_MANY, 'Caja', 'idParent'),
-			'cajaArqueos' => array(self::HAS_MANY, 'CajaArqueo', 'idCaja'),
-			'cajaChicas' => array(self::HAS_MANY, 'CajaChica', 'idCaja'),
-			'cajaMovimientoVentas' => array(self::HAS_MANY, 'CajaMovimientoVenta', 'idCaja'),
+			'idcajaChica0' => array(self::BELONGS_TO, 'CajaChica', 'idcajaChica'),
+			'tipoMovimiento0' => array(self::BELONGS_TO, 'TipoMovimiento', 'tipoMovimiento'),
 		);
 	}
 
@@ -66,10 +63,14 @@ class Caja extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idCaja' => 'Id Caja',
-			'nombre' => 'Nombre',
+			'idcajaChicaMovimiento' => 'Idcaja Chica Movimiento',
+			'idUser' => 'Id User',
+			'idTipoMovimiento' => 'Id Tipo Movimiento',
+			'monto' => 'Monto',
 			'saldo' => 'Saldo',
-			'idParent' => 'Id Parent',
+			'fechaMovimiento' => 'Fecha Movimiento',
+			'tipoMovimiento' => 'Tipo Movimiento',
+			'idcajaChica' => 'Idcaja Chica',
 		);
 	}
 
@@ -91,10 +92,14 @@ class Caja extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idCaja',$this->idCaja);
-		$criteria->compare('nombre',$this->nombre,true);
+		$criteria->compare('idcajaChicaMovimiento',$this->idcajaChicaMovimiento);
+		$criteria->compare('idUser',$this->idUser);
+		$criteria->compare('idTipoMovimiento',$this->idTipoMovimiento);
+		$criteria->compare('monto',$this->monto);
 		$criteria->compare('saldo',$this->saldo);
-		$criteria->compare('idParent',$this->idParent);
+		$criteria->compare('fechaMovimiento',$this->fechaMovimiento,true);
+		$criteria->compare('tipoMovimiento',$this->tipoMovimiento);
+		$criteria->compare('idcajaChica',$this->idcajaChica);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -105,20 +110,10 @@ class Caja extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Caja the static model class
+	 * @return CajaChicaMovimiento the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
-	}
-	
-	public function getCajas()
-	{
-		if(isset($this->idCaja))
-			$caja = Caja::model()->findAll(array('condition'=>'idCaja!='.$this->idCaja));
-		else
-			$caja = Caja::model()->findAll();
-	
-		return CHtml::listData($caja,'idCaja','nombre');
 	}
 }

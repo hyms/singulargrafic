@@ -1,31 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "cajaVenta".
+ * This is the model class for table "TipoMovimiento".
  *
- * The followings are the available columns in table 'cajaVenta':
- * @property integer $idCajaVenta
- * @property integer $idCaja
- * @property integer $idUser
- * @property double $saldo
- * @property string $fechaArqueo
- * @property integer $entregado
+ * The followings are the available columns in table 'TipoMovimiento':
+ * @property integer $idTipoMovimiento
+ * @property string $nombre
+ * @property integer $estado
  *
  * The followings are the available model relations:
- * @property Caja $idCaja0
- * @property User $idUser0
- * @property MovimientoCaja[] $movimientoCajas
- * @property Recibos[] $reciboses
- * @property Venta[] $ventas
+ * @property CajaChicaMovimiento[] $cajaChicaMovimientos
+ * @property CajaChicaTipo[] $cajaChicaTipos
  */
-class CajaVenta extends CActiveRecord
+class TipoMovimiento extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'cajaVenta';
+		return 'TipoMovimiento';
 	}
 
 	/**
@@ -36,12 +30,12 @@ class CajaVenta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idCaja, idUser, entregado', 'numerical', 'integerOnly'=>true),
-			array('saldo', 'numerical'),
-			array('fechaArqueo', 'safe'),
+			array('nombre, estado', 'required'),
+			array('estado', 'numerical', 'integerOnly'=>true),
+			array('nombre', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCajaVenta, idCaja, idUser, saldo, fechaArqueo, entregado', 'safe', 'on'=>'search'),
+			array('idTipoMovimiento, nombre, estado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,11 +47,8 @@ class CajaVenta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
-			'idUser0' => array(self::BELONGS_TO, 'Users', 'idUser'),
-			'movimientoCajas' => array(self::HAS_MANY, 'MovimientoCaja', 'idCaja'),
-			'reciboses' => array(self::HAS_MANY, 'Recibos', 'idCaja'),
-			'ventas' => array(self::HAS_MANY, 'Venta', 'idCaja'),
+			'cajaChicaMovimientos' => array(self::HAS_MANY, 'CajaChicaMovimiento', 'tipoMovimiento'),
+			'cajaChicaTipos' => array(self::HAS_MANY, 'CajaChicaTipo', 'idTipoMovimiento'),
 		);
 	}
 
@@ -67,12 +58,9 @@ class CajaVenta extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idCajaVenta' => 'Id Caja Venta',
-			'idCaja' => 'Id Caja',
-			'idUser' => 'Id User',
-			'saldo' => 'Saldo',
-			'fechaArqueo' => 'Fecha Arqueo',
-			'entregado' => 'Entregado',
+			'idTipoMovimiento' => 'Id Tipo Movimiento',
+			'nombre' => 'Nombre',
+			'estado' => 'Estado',
 		);
 	}
 
@@ -94,12 +82,9 @@ class CajaVenta extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idCajaVenta',$this->idCajaVenta);
-		$criteria->compare('idCaja',$this->idCaja);
-		$criteria->compare('idUser',$this->idUser);
-		$criteria->compare('saldo',$this->saldo);
-		$criteria->compare('fechaArqueo',$this->fechaArqueo,true);
-		$criteria->compare('entregado',$this->entregado);
+		$criteria->compare('idTipoMovimiento',$this->idTipoMovimiento);
+		$criteria->compare('nombre',$this->nombre,true);
+		$criteria->compare('estado',$this->estado);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -110,7 +95,7 @@ class CajaVenta extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return CajaVenta the static model class
+	 * @return TipoMovimiento the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
