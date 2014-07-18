@@ -32,15 +32,18 @@ class DistribuidoraController extends Controller
 								'order'=>'cantidad Desc',
 								'with'=>array('idCliente0'=>array('select'=>'nitCi, apellido')),
 								'limit'=>'5',
-						),));
-		$productos = new CActiveDataProvider('DetalleVenta',
+						),
+							'pagination'=>false,));
+		$productos = new CActiveDataProvider(DetalleVenta::model(),
 					array('criteria'=>array(
+							'limit' => 5,
 							'with'=>array('idAlmacenProducto0'=>array('select'=>'*'),'idAlmacenProducto0.idProducto0'=>array('select'=>'*')),
 							'group'=>'`t`.idAlmacenProducto',
 							'select'=>'sum(`t`.cantidadU + (`t`.cantidadP*idProducto0.cantXPaquete)) as cantidad, `t`.idAlmacenProducto',
 							'order'=>'cantidad Desc',
-							'limit'=>'5',
-					),));
+					),
+							'pagination'=>false,
+					));
 		
 		$this->render('index',array("ventas"=>$ventas,"productos"=>$productos));
 	}
@@ -117,10 +120,7 @@ class DistribuidoraController extends Controller
 			$row = Venta::model()->find(array("condition"=>"tipoVenta=".$venta->tipoVenta,'order'=>'fechaVenta Desc'));
 			if(empty($row))
 				$row=new Venta;
-			if($venta->tipoVenta==1)
-				$venta->codigo = chr($venta->serie)."P-".$venta->numero."-".date("y");
-			else
-				$venta->codigo = $venta->numero."-P";
+			
 			
 			if(empty($row->serie) && $venta->tipoVenta==1)
 				$row->serie = 65;
@@ -133,6 +133,11 @@ class DistribuidoraController extends Controller
 					$row->serie = 65;
 			}
 			$venta->serie = $row->serie;
+			if($venta->tipoVenta==1)
+				$venta->codigo = chr($venta->serie)."P-".$venta->numero."-".date("y");
+			else
+				$venta->codigo = $venta->numero."-P";
+			
 			$venta->estado = 1;
 			if($venta->formaPago==1)
 			{
@@ -611,20 +616,19 @@ class DistribuidoraController extends Controller
 		$fact="";$cond="";
 		if(isset($_GET['f']))
 		{
-			if($_GET['f']!=""){
-			if($_GET['f']==0)
+			if($_GET['f']!="")
 			{
-				$fact=" and tipoVenta=0";
+				if($_GET['f']==0)
+				{
+					$fact=" and tipoVenta=0";
+				}
+				else
+				{
+					$fact=" and tipoVenta=1";
+				}
 			}
-			else
-			{
-				$fact=" and tipoVenta=1";
-			}}
 		}
-		else
-		{
-			
-		}
+		
 		if(isset($_GET['d']) || isset($_GET['m']))
 		{
 			$d=date("d");
@@ -665,7 +669,7 @@ class DistribuidoraController extends Controller
 		->with('detalleVentas.idAlmacenProducto0')
 		->with('detalleVentas.idAlmacenProducto0.idProducto0')
 		->with('idCajaMovimientoVenta0')
-		->findAll(array('condition'=>'idCajaMovimientoVenta0.idCaja=2 and idCajaMovimientoVenta0.arqueo=0'.$fact.$cond)));
+		->findAll(array('condition'=>'idCajaMovimientoVenta0.idCaja=2 '.$fact.$cond)));
 		//$tabla = $caja->ventas;
 		$this->render("previewVentas",array('tabla'=>$caja,));
 	}

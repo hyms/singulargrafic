@@ -9,6 +9,7 @@
  * @property integer $idCaja
  * @property double $saldo
  * @property double $maximo
+ * @property string $detalle
  *
  * The followings are the available model relations:
  * @property Caja $idCaja0
@@ -37,9 +38,10 @@ class CajaChica extends CActiveRecord
 			array('saldo', 'required'),
 			array('idUser, idCaja', 'numerical', 'integerOnly'=>true),
 			array('saldo, maximo', 'numerical'),
+			array('detalle', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idcajaChica, idUser, idCaja, saldo, maximo', 'safe', 'on'=>'search'),
+			array('idcajaChica, idUser, idCaja, saldo, maximo, detalle', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,7 +54,7 @@ class CajaChica extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
-			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
+			'idUser0' => array(self::BELONGS_TO, 'Users', 'idUser'),
 			'cajaChicaMovimientos' => array(self::HAS_MANY, 'CajaChicaMovimiento', 'idcajaChica'),
 			'cajaChicaTipos' => array(self::HAS_MANY, 'CajaChicaTipo', 'idcajaChica'),
 		);
@@ -69,6 +71,7 @@ class CajaChica extends CActiveRecord
 			'idCaja' => 'Id Caja',
 			'saldo' => 'Saldo',
 			'maximo' => 'Maximo',
+			'detalle' => 'Detalle',
 		);
 	}
 
@@ -95,6 +98,7 @@ class CajaChica extends CActiveRecord
 		$criteria->compare('idCaja',$this->idCaja);
 		$criteria->compare('saldo',$this->saldo);
 		$criteria->compare('maximo',$this->maximo);
+		$criteria->compare('detalle',$this->detalle,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

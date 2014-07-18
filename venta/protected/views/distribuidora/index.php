@@ -21,7 +21,7 @@ $this->breadcrumbs=array(
 		'columns'=>array(
 				array(
 						'header'=>'Nro',
-						'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+						'value'=>'($row+1)',
 				),
 				array(
 						'header'=>'NitCi',
@@ -57,7 +57,7 @@ $this->breadcrumbs=array(
 		'columns'=>array(
 				array(
 						'header'=>'Nro',
-						'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+						'value'=>'($row+1)',
 				),
 				array(
 						'header'=>'Codigo',

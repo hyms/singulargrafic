@@ -531,6 +531,7 @@ CREATE  TABLE IF NOT EXISTS  `cajaChica` (
   `idCaja` INT NULL ,
   `saldo` DOUBLE NOT NULL ,
   `maximo` DOUBLE NULL ,
+  `descripcion` VARCHAR(50) NULL ,
   PRIMARY KEY (`idcajaChica`) ,
   INDEX `fk_cajaChica_caja1` (`idCaja` ASC) ,
   INDEX `fk_cajaChica_user1` (`idUser` ASC) ,

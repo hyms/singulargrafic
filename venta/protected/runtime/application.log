@@ -8525,3 +8525,875 @@ in /var/www/singular/venta/index.php (13)
 2014/07/17 19:20:11 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
 in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (90)
 in /var/www/singular/venta/index.php (13)
+2014/07/18 11:48:52 [error] [php] Trying to get property of non-object (/var/www/framework/base/CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 /var/www/framework/zii/widgets/grid/CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 /var/www/framework/zii/widgets/grid/CGridView.php(616): CDataColumn->renderDataCell()
+#2 /var/www/framework/zii/widgets/grid/CGridView.php(572): CGridView->renderTableRow()
+#3 /var/www/framework/zii/widgets/grid/CGridView.php(482): CGridView->renderTableBody()
+#4 /var/www/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#7 /var/www/framework/zii/widgets/CBaseListView.php(135): CGridView->renderContent()
+#8 /var/www/framework/web/CBaseController.php(173): CGridView->run()
+#9 /var/www/singular/venta/protected/views/distribuidora/index.php(78): DistribuidoraController->widget()
+#10 /var/www/framework/web/CBaseController.php(126): require()
+#11 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#12 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#13 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#14 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(47): DistribuidoraController->render()
+#15 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionIndex()
+#16 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#17 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#18 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#19 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#20 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#21 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#22 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#23 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#24 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#25 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#26 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#27 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+in /var/www/singular/venta/protected/views/distribuidora/index.php (78)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 11:50:31 [error] [php] Trying to get property of non-object (/var/www/framework/base/CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 /var/www/framework/zii/widgets/grid/CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 /var/www/framework/zii/widgets/grid/CGridView.php(616): CDataColumn->renderDataCell()
+#2 /var/www/framework/zii/widgets/grid/CGridView.php(572): CGridView->renderTableRow()
+#3 /var/www/framework/zii/widgets/grid/CGridView.php(482): CGridView->renderTableBody()
+#4 /var/www/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#7 /var/www/framework/zii/widgets/CBaseListView.php(135): CGridView->renderContent()
+#8 /var/www/framework/web/CBaseController.php(173): CGridView->run()
+#9 /var/www/singular/venta/protected/views/distribuidora/index.php(78): DistribuidoraController->widget()
+#10 /var/www/framework/web/CBaseController.php(126): require()
+#11 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#12 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#13 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#14 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(48): DistribuidoraController->render()
+#15 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionIndex()
+#16 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#17 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#18 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#19 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#20 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#21 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#22 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#23 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#24 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#25 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#26 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#27 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+in /var/www/singular/venta/protected/views/distribuidora/index.php (78)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (48)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 11:51:51 [error] [php] Trying to get property of non-object (/var/www/framework/base/CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 /var/www/framework/zii/widgets/grid/CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 /var/www/framework/zii/widgets/grid/CGridView.php(616): CDataColumn->renderDataCell()
+#2 /var/www/framework/zii/widgets/grid/CGridView.php(572): CGridView->renderTableRow()
+#3 /var/www/framework/zii/widgets/grid/CGridView.php(482): CGridView->renderTableBody()
+#4 /var/www/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#7 /var/www/framework/zii/widgets/CBaseListView.php(135): CGridView->renderContent()
+#8 /var/www/framework/web/CBaseController.php(173): CGridView->run()
+#9 /var/www/singular/venta/protected/views/distribuidora/index.php(78): DistribuidoraController->widget()
+#10 /var/www/framework/web/CBaseController.php(126): require()
+#11 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#12 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#13 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#14 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(49): DistribuidoraController->render()
+#15 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionIndex()
+#16 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#17 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#18 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#19 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#20 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#21 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#22 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#23 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#24 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#25 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#26 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#27 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+in /var/www/singular/venta/protected/views/distribuidora/index.php (78)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (49)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 11:53:19 [error] [php] Trying to get property of non-object (/var/www/framework/base/CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 /var/www/framework/zii/widgets/grid/CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 /var/www/framework/zii/widgets/grid/CGridView.php(616): CDataColumn->renderDataCell()
+#2 /var/www/framework/zii/widgets/grid/CGridView.php(572): CGridView->renderTableRow()
+#3 /var/www/framework/zii/widgets/grid/CGridView.php(482): CGridView->renderTableBody()
+#4 /var/www/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#7 /var/www/framework/zii/widgets/CBaseListView.php(135): CGridView->renderContent()
+#8 /var/www/framework/web/CBaseController.php(173): CGridView->run()
+#9 /var/www/singular/venta/protected/views/distribuidora/index.php(78): DistribuidoraController->widget()
+#10 /var/www/framework/web/CBaseController.php(126): require()
+#11 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#12 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#13 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#14 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(47): DistribuidoraController->render()
+#15 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionIndex()
+#16 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#17 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#18 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#19 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#20 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#21 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#22 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#23 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#24 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#25 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#26 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#27 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+in /var/www/singular/venta/protected/views/distribuidora/index.php (78)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 11:53:56 [error] [php] Trying to get property of non-object (/var/www/framework/base/CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 /var/www/framework/zii/widgets/grid/CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 /var/www/framework/zii/widgets/grid/CGridView.php(616): CDataColumn->renderDataCell()
+#2 /var/www/framework/zii/widgets/grid/CGridView.php(572): CGridView->renderTableRow()
+#3 /var/www/framework/zii/widgets/grid/CGridView.php(482): CGridView->renderTableBody()
+#4 /var/www/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#7 /var/www/framework/zii/widgets/CBaseListView.php(135): CGridView->renderContent()
+#8 /var/www/framework/web/CBaseController.php(173): CGridView->run()
+#9 /var/www/singular/venta/protected/views/distribuidora/index.php(78): DistribuidoraController->widget()
+#10 /var/www/framework/web/CBaseController.php(126): require()
+#11 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#12 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#13 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#14 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(48): DistribuidoraController->render()
+#15 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionIndex()
+#16 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#17 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#18 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#19 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#20 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#21 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#22 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#23 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#24 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#25 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#26 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#27 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+in /var/www/singular/venta/protected/views/distribuidora/index.php (78)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (48)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 11:59:09 [error] [php] Trying to get property of non-object (/var/www/framework/base/CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 /var/www/framework/zii/widgets/grid/CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 /var/www/framework/zii/widgets/grid/CGridView.php(616): CDataColumn->renderDataCell()
+#2 /var/www/framework/zii/widgets/grid/CGridView.php(572): CGridView->renderTableRow()
+#3 /var/www/framework/zii/widgets/grid/CGridView.php(482): CGridView->renderTableBody()
+#4 /var/www/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#7 /var/www/framework/zii/widgets/CBaseListView.php(135): CGridView->renderContent()
+#8 /var/www/framework/web/CBaseController.php(173): CGridView->run()
+#9 /var/www/singular/venta/protected/views/distribuidora/index.php(78): DistribuidoraController->widget()
+#10 /var/www/framework/web/CBaseController.php(126): require()
+#11 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#12 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#13 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#14 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(47): DistribuidoraController->render()
+#15 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionIndex()
+#16 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#17 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#18 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#19 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#20 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#21 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#22 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#23 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#24 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#25 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#26 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#27 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+in /var/www/singular/venta/protected/views/distribuidora/index.php (78)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (47)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 12:00:52 [error] [php] Trying to get property of non-object (/var/www/framework/base/CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 /var/www/framework/zii/widgets/grid/CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 /var/www/framework/zii/widgets/grid/CGridView.php(616): CDataColumn->renderDataCell()
+#2 /var/www/framework/zii/widgets/grid/CGridView.php(572): CGridView->renderTableRow()
+#3 /var/www/framework/zii/widgets/grid/CGridView.php(482): CGridView->renderTableBody()
+#4 /var/www/framework/zii/widgets/CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 /var/www/framework/zii/widgets/CBaseListView.php(150): preg_replace_callback()
+#7 /var/www/framework/zii/widgets/CBaseListView.php(135): CGridView->renderContent()
+#8 /var/www/framework/web/CBaseController.php(173): CGridView->run()
+#9 /var/www/singular/venta/protected/views/distribuidora/index.php(78): DistribuidoraController->widget()
+#10 /var/www/framework/web/CBaseController.php(126): require()
+#11 /var/www/framework/web/CBaseController.php(95): DistribuidoraController->renderInternal()
+#12 /var/www/framework/web/CController.php(869): DistribuidoraController->renderFile()
+#13 /var/www/framework/web/CController.php(782): DistribuidoraController->renderPartial()
+#14 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(48): DistribuidoraController->render()
+#15 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionIndex()
+#16 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams()
+#17 /var/www/framework/web/filters/CFilterChain.php(133): DistribuidoraController->runAction()
+#18 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#19 /var/www/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#20 /var/www/framework/web/filters/CInlineFilter.php(58): DistribuidoraController->filterAccessControl()
+#21 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#22 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#23 /var/www/framework/web/CController.php(265): DistribuidoraController->runActionWithFilters()
+#24 /var/www/framework/web/CWebApplication.php(282): DistribuidoraController->run()
+#25 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#26 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#27 /var/www/singular/venta/index.php(13): CWebApplication->run()
+REQUEST_URI=/singular/venta/index.php/distribuidora/index
+in /var/www/singular/venta/protected/views/distribuidora/index.php (78)
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (48)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 14:53:57 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 14:53:57 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 14:53:57 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 14:53:57 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 14:53:57 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 14:53:57 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:00:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'La Respuesta de la pagina no Existe.' in /var/www/singular/venta/protected/controllers/DistribuidoraController.php:997
+Stack trace:
+#0 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(938): DistribuidoraController->verifyModel(NULL)
+#1 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionAjaxCliente()
+#2 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#4 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#6 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#8 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#11 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#12 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/singular/venta/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=6765717019
+HTTP_REFERER=http://192.168.0.5/singular/venta/index.php/distribuidora/notas
+---
+2014/07/18 15:02:37 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:02:37 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:02:37 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:02:37 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:02:37 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:02:37 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:06:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "distribuidora".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('distribuidora')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('distribuidora')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/d...')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/venta/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/distribuidora
+HTTP_REFERER=http://192.168.0.5/singular/venta/index.php/distribuidora/productos/449
+---
+2014/07/18 15:07:11 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:07:11 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:07:11 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:07:11 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:07:11 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:07:11 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:49:06 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:49:06 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:49:06 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:49:06 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:49:06 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:49:06 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:51:51 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column '000123º' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCliente` AS `t0_c0`, `t`.`nitCi` AS `t0_c1`, `t`.`apellido` AS `t0_c2`, `t`.`nombre` AS `t0_c3`, `t`.`correo` AS `t0_c4`, `t`.`fechaRegistro` AS `t0_c5`, `t`.`telefono` AS `t0_c6`, `t`.`direccion` AS `t0_c7`, `ventas`.`idVenta` AS `t1_c0`, `ventas`.`fechaVenta` AS `t1_c1`, `ventas`.`tipoVenta` AS `t1_c2`, `ventas`.`formaPago` AS `t1_c3`, `ventas`.`idCliente` AS `t1_c4`, `ventas`.`fechaPlazo` AS `t1_c5`, `ventas`.`codigo` AS `t1_c6`, `ventas`.`numero` AS `t1_c7`, `ventas`.`serie` AS `t1_c8`, `ventas`.`montoVenta` AS `t1_c9`, `ventas`.`montoPagado` AS `t1_c10`, `ventas`.`montoCambio` AS `t1_c11`, `ventas`.`montoDescuento` AS `t1_c12`, `ventas`.`estado` AS `t1_c13`, `ventas`.`factura` AS `t1_c14`, `ventas`.`autorizado` AS `t1_c15`, `ventas`.`responsable` AS `t1_c16`, `ventas`.`obs` AS `t1_c17`, `ventas`.`idCajaMovimientoVenta` AS `t1_c18` FROM `cliente` `t`  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCliente`=`t`.`idCliente`)  WHERE (nitCi=000123º).
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (938)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:51:51 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column '000123º' in 'where clause'. The SQL statement executed was: SELECT `t`.`idCliente` AS `t0_c0`, `t`.`nitCi` AS `t0_c1`, `t`.`apellido` AS `t0_c2`, `t`.`nombre` AS `t0_c3`, `t`.`correo` AS `t0_c4`, `t`.`fechaRegistro` AS `t0_c5`, `t`.`telefono` AS `t0_c6`, `t`.`direccion` AS `t0_c7`, `ventas`.`idVenta` AS `t1_c0`, `ventas`.`fechaVenta` AS `t1_c1`, `ventas`.`tipoVenta` AS `t1_c2`, `ventas`.`formaPago` AS `t1_c3`, `ventas`.`idCliente` AS `t1_c4`, `ventas`.`fechaPlazo` AS `t1_c5`, `ventas`.`codigo` AS `t1_c6`, `ventas`.`numero` AS `t1_c7`, `ventas`.`serie` AS `t1_c8`, `ventas`.`montoVenta` AS `t1_c9`, `ventas`.`montoPagado` AS `t1_c10`, `ventas`.`montoCambio` AS `t1_c11`, `ventas`.`montoDescuento` AS `t1_c12`, `ventas`.`estado` AS `t1_c13`, `ventas`.`factura` AS `t1_c14`, `ventas`.`autorizado` AS `t1_c15`, `ventas`.`responsable` AS `t1_c16`, `ventas`.`obs` AS `t1_c17`, `ventas`.`idCajaMovimientoVenta` AS `t1_c18` FROM `cliente` `t`  LEFT OUTER JOIN `venta` `ventas` ON (`ventas`.`idCliente`=`t`.`idCliente`)  WHERE (nitCi=000123º)' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/framework/db/ar/CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/framework/db/ar/CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 /var/www/framework/db/ar/CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), false)
+#5 /var/www/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#6 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(938): CActiveRecord->find('nitCi=000123??')
+#7 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionAjaxCliente()
+#8 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/framework/web/CWebApplication.php(282): CController->run('ajaxCliente')
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singular/venta/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/ajaxCliente?nitCi=000123%C2%BA
+HTTP_REFERER=http://192.168.0.5/singular/venta/index.php/distribuidora/notas
+---
+2014/07/18 15:54:52 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:54:52 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:54:52 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:54:52 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:54:52 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 15:54:52 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 16:25:16 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 16:25:16 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 16:25:16 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 16:25:16 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 16:25:16 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 16:25:16 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 16:25:19 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 16:25:19 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 16:25:19 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 16:25:19 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 16:25:19 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 16:25:19 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:06:58 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:06:58 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:06:58 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:06:58 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:06:58 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:06:58 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:07:11 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:07:11 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:07:11 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:07:11 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:07:11 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:07:11 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:08:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "distribuidora".' in /var/www/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/framework/web/CController.php(270): CController->missingAction('distribuidora')
+#1 /var/www/framework/web/CWebApplication.php(282): CController->run('distribuidora')
+#2 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/d...')
+#3 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/singular/venta/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/distribuidora
+HTTP_REFERER=http://192.168.0.5/singular/venta/index.php/distribuidora/productos/577
+---
+2014/07/18 17:24:05 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:24:05 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:24:05 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:24:05 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:24:05 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:24:05 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:26:36 [error] [exception.CException] exception 'CException' with message 'Property "Cliente.id" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(145): CComponent->__get('id')
+#1 /var/www/singular/venta/protected/views/cliente/listaCliente.php(21): CActiveRecord->__get('id')
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/cliente/index.php(14): CController->renderPartial('listaCliente', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/ClienteController.php(47): CController->render('index', Array)
+#11 /var/www/framework/web/actions/CInlineAction.php(49): ClienteController->actionIndex()
+#12 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#14 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#15 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#16 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#17 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#18 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#19 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/framework/web/CWebApplication.php(282): CController->run('index')
+#21 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('cliente/index')
+#22 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/singular/venta/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/singular/venta/index.php/cliente/index
+HTTP_REFERER=http://192.168.0.5/singular/venta/index.php/caja/index
+---
+2014/07/18 17:26:43 [error] [exception.CException] exception 'CException' with message 'Property "Cliente.id" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(145): CComponent->__get('id')
+#1 /var/www/singular/venta/protected/views/cliente/listaCliente.php(21): CActiveRecord->__get('id')
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/cliente/index.php(14): CController->renderPartial('listaCliente', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/ClienteController.php(47): CController->render('index', Array)
+#11 /var/www/framework/web/actions/CInlineAction.php(49): ClienteController->actionIndex()
+#12 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#14 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#15 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#16 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#17 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#18 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#19 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/framework/web/CWebApplication.php(282): CController->run('index')
+#21 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('cliente/index')
+#22 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/singular/venta/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/singular/venta/index.php/cliente/index
+HTTP_REFERER=http://192.168.0.5/singular/venta/index.php/distribuidora/index
+---
+2014/07/18 17:26:54 [error] [exception.CException] exception 'CException' with message 'Property "Cliente.id" is not defined.' in /var/www/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(145): CComponent->__get('id')
+#1 /var/www/singular/venta/protected/views/cliente/listaCliente.php(21): CActiveRecord->__get('id')
+#2 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#3 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#4 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#5 /var/www/singular/venta/protected/views/cliente/index.php(14): CController->renderPartial('listaCliente', Array)
+#6 /var/www/framework/web/CBaseController.php(126): require('/var/www/singul...')
+#7 /var/www/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/singul...', Array, true)
+#8 /var/www/framework/web/CController.php(869): CBaseController->renderFile('/var/www/singul...', Array, true)
+#9 /var/www/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/singular/venta/protected/controllers/ClienteController.php(47): CController->render('index', Array)
+#11 /var/www/framework/web/actions/CInlineAction.php(49): ClienteController->actionIndex()
+#12 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#14 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#15 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#16 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#17 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#18 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#19 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/framework/web/CWebApplication.php(282): CController->run('index')
+#21 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('cliente/index')
+#22 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/singular/venta/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/singular/venta/index.php/cliente/index
+HTTP_REFERER=http://192.168.0.5/singular/venta/index.php/caja/index
+---
+2014/07/18 17:31:31 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:31:31 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:31:31 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:31:31 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:31:31 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:31:31 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:34:40 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:34:40 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:34:40 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:34:40 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:34:40 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:34:40 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:34:57 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:34:57 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:34:57 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:34:57 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:34:57 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:34:57 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:03 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:03 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:03 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:03 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:03 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:03 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:09 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:09 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:09 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:09 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:09 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:09 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:16 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:16 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:16 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:16 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:16 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:35:16 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:43:55 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:43:55 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:43:55 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:43:55 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:43:55 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:43:55 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:44:20 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:44:20 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:44:20 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:44:20 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:44:20 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:44:20 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:44:29 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:44:29 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:44:29 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:44:29 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:44:29 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 17:44:29 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:00:25 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:00:25 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:00:25 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:00:25 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:00:25 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:00:25 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:02:54 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:02:54 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:02:54 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:02:54 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:02:54 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:02:54 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:29:44 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'singular.movimientoCaja' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `movimientoCaja`.
+in /var/www/singular/venta/protected/controllers/CajaController.php (64)
+in /var/www/singular/venta/protected/controllers/CajaController.php (396)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:29:44 [error] [exception.CDbException] exception 'CDbException' with message 'The table "movimientoCaja" for active record class "MovimientoCaja" cannot be found in the database.' in /var/www/framework/db/ar/CActiveRecord.php:2362
+Stack trace:
+#0 /var/www/framework/db/ar/CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(MovimientoCaja))
+#1 /var/www/framework/db/ar/CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 /var/www/singular/venta/protected/controllers/CajaController.php(64): CActiveRecord->__construct()
+#3 /var/www/singular/venta/protected/controllers/CajaController.php(396): CajaController->actionEgreso()
+#4 /var/www/framework/web/actions/CInlineAction.php(49): CajaController->actionChica()
+#5 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#8 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#12 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/framework/web/CWebApplication.php(282): CController->run('chica')
+#14 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('caja/chica')
+#15 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/singular/venta/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/singular/venta/index.php/caja/chica
+HTTP_REFERER=http://localhost/singular/venta/index.php/caja/index
+---
+2014/07/18 18:40:31 [warning] [application] Failed to set unsafe attribute "idVenta" of "Venta".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (286)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:48:22 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'idCajaMovimientoVenta0.idCajas' in 'where clause'. The SQL statement executed was: SELECT `t`.`idVenta` AS `t0_c0`, `t`.`fechaVenta` AS `t0_c1`, `t`.`tipoVenta` AS `t0_c2`, `t`.`formaPago` AS `t0_c3`, `t`.`idCliente` AS `t0_c4`, `t`.`fechaPlazo` AS `t0_c5`, `t`.`codigo` AS `t0_c6`, `t`.`numero` AS `t0_c7`, `t`.`serie` AS `t0_c8`, `t`.`montoVenta` AS `t0_c9`, `t`.`montoPagado` AS `t0_c10`, `t`.`montoCambio` AS `t0_c11`, `t`.`montoDescuento` AS `t0_c12`, `t`.`estado` AS `t0_c13`, `t`.`factura` AS `t0_c14`, `t`.`autorizado` AS `t0_c15`, `t`.`responsable` AS `t0_c16`, `t`.`obs` AS `t0_c17`, `t`.`idCajaMovimientoVenta` AS `t0_c18`, `idCliente0`.`idCliente` AS `t1_c0`, `idCliente0`.`nitCi` AS `t1_c1`, `idCliente0`.`apellido` AS `t1_c2`, `idCliente0`.`nombre` AS `t1_c3`, `idCliente0`.`correo` AS `t1_c4`, `idCliente0`.`fechaRegistro` AS `t1_c5`, `idCliente0`.`telefono` AS `t1_c6`, `idCliente0`.`direccion` AS `t1_c7`, `detalleVentas`.`idDetalleVenta` AS `t2_c0`, `detalleVentas`.`idVenta` AS `t2_c1`, `detalleVentas`.`cantidadU` AS `t2_c2`, `detalleVentas`.`costoU` AS `t2_c3`, `detalleVentas`.`cantidadP` AS `t2_c4`, `detalleVentas`.`costoP` AS `t2_c5`, `detalleVentas`.`costoAdicional` AS `t2_c6`, `detalleVentas`.`costoTotal` AS `t2_c7`, `detalleVentas`.`idAlmacenProducto` AS `t2_c8`, `idAlmacenProducto0`.`idAlmacenProducto` AS `t3_c0`, `idAlmacenProducto0`.`idProducto` AS `t3_c1`, `idAlmacenProducto0`.`stockU` AS `t3_c2`, `idAlmacenProducto0`.`stockP` AS `t3_c3`, `idAlmacenProducto0`.`idAlmacen` AS `t3_c4`, `idProducto0`.`idProducto` AS `t4_c0`, `idProducto0`.`servicio` AS `t4_c1`, `idProducto0`.`codigo` AS `t4_c2`, `idProducto0`.`material` AS `t4_c3`, `idProducto0`.`color` AS `t4_c4`, `idProducto0`.`marca` AS `t4_c5`, `idProducto0`.`industria` AS `t4_c6`, `idProducto0`.`cantXPaquete` AS `t4_c7`, `idProducto0`.`precioSFU` AS `t4_c8`, `idProducto0`.`precioSFP` AS `t4_c9`, `idProducto0`.`precioCFU` AS `t4_c10`, `idProducto0`.`precioCFP` AS `t4_c11`, `idProducto0`.`familia` AS `t4_c12`, `idProducto0`.`detalle` AS `t4_c13`, `idCajaMovimientoVenta0`.`idCajaMovimientoVenta` AS `t5_c0`, `idCajaMovimientoVenta0`.`monto` AS `t5_c1`, `idCajaMovimientoVenta0`.`motivo` AS `t5_c2`, `idCajaMovimientoVenta0`.`fechaMovimiento` AS `t5_c3`, `idCajaMovimientoVenta0`.`idUser` AS `t5_c4`, `idCajaMovimientoVenta0`.`tipo` AS `t5_c5`, `idCajaMovimientoVenta0`.`arqueo` AS `t5_c6`, `idCajaMovimientoVenta0`.`idCaja` AS `t5_c7` FROM `venta` `t`  LEFT OUTER JOIN `cliente` `idCliente0` ON (`t`.`idCliente`=`idCliente0`.`idCliente`)  LEFT OUTER JOIN `detalleVenta` `detalleVentas` ON (`detalleVentas`.`idVenta`=`t`.`idVenta`)  LEFT OUTER JOIN `almacenProducto` `idAlmacenProducto0` ON (`detalleVentas`.`idAlmacenProducto`=`idAlmacenProducto0`.`idAlmacenProducto`)  LEFT OUTER JOIN `producto` `idProducto0` ON (`idAlmacenProducto0`.`idProducto`=`idProducto0`.`idProducto`)  LEFT OUTER JOIN `cajaMovimientoVenta` `idCajaMovimientoVenta0` ON (`t`.`idCajaMovimientoVenta`=`idCajaMovimientoVenta0`.`idCajaMovimientoVenta`)  WHERE (idCajaMovimientoVenta0.idCajas=2 and idCajaMovimientoVenta0.arqueo=0 and '2014-07-18 00:00:00'<=fechaVenta AND fechaVenta<='2014-07-18 23:59:59').
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (672)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:48:22 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'idCajaMovimientoVenta0.idCajas' in 'where clause'. The SQL statement executed was: SELECT `t`.`idVenta` AS `t0_c0`, `t`.`fechaVenta` AS `t0_c1`, `t`.`tipoVenta` AS `t0_c2`, `t`.`formaPago` AS `t0_c3`, `t`.`idCliente` AS `t0_c4`, `t`.`fechaPlazo` AS `t0_c5`, `t`.`codigo` AS `t0_c6`, `t`.`numero` AS `t0_c7`, `t`.`serie` AS `t0_c8`, `t`.`montoVenta` AS `t0_c9`, `t`.`montoPagado` AS `t0_c10`, `t`.`montoCambio` AS `t0_c11`, `t`.`montoDescuento` AS `t0_c12`, `t`.`estado` AS `t0_c13`, `t`.`factura` AS `t0_c14`, `t`.`autorizado` AS `t0_c15`, `t`.`responsable` AS `t0_c16`, `t`.`obs` AS `t0_c17`, `t`.`idCajaMovimientoVenta` AS `t0_c18`, `idCliente0`.`idCliente` AS `t1_c0`, `idCliente0`.`nitCi` AS `t1_c1`, `idCliente0`.`apellido` AS `t1_c2`, `idCliente0`.`nombre` AS `t1_c3`, `idCliente0`.`correo` AS `t1_c4`, `idCliente0`.`fechaRegistro` AS `t1_c5`, `idCliente0`.`telefono` AS `t1_c6`, `idCliente0`.`direccion` AS `t1_c7`, `detalleVentas`.`idDetalleVenta` AS `t2_c0`, `detalleVentas`.`idVenta` AS `t2_c1`, `detalleVentas`.`cantidadU` AS `t2_c2`, `detalleVentas`.`costoU` AS `t2_c3`, `detalleVentas`.`cantidadP` AS `t2_c4`, `detalleVentas`.`costoP` AS `t2_c5`, `detalleVentas`.`costoAdicional` AS `t2_c6`, `detalleVentas`.`costoTotal` AS `t2_c7`, `detalleVentas`.`idAlmacenProducto` AS `t2_c8`, `idAlmacenProducto0`.`idAlmacenProducto` AS `t3_c0`, `idAlmacenProducto0`.`idProducto` AS `t3_c1`, `idAlmacenProducto0`.`stockU` AS `t3_c2`, `idAlmacenProducto0`.`stockP` AS `t3_c3`, `idAlmacenProducto0`.`idAlmacen` AS `t3_c4`, `idProducto0`.`idProducto` AS `t4_c0`, `idProducto0`.`servicio` AS `t4_c1`, `idProducto0`.`codigo` AS `t4_c2`, `idProducto0`.`material` AS `t4_c3`, `idProducto0`.`color` AS `t4_c4`, `idProducto0`.`marca` AS `t4_c5`, `idProducto0`.`industria` AS `t4_c6`, `idProducto0`.`cantXPaquete` AS `t4_c7`, `idProducto0`.`precioSFU` AS `t4_c8`, `idProducto0`.`precioSFP` AS `t4_c9`, `idProducto0`.`precioCFU` AS `t4_c10`, `idProducto0`.`precioCFP` AS `t4_c11`, `idProducto0`.`familia` AS `t4_c12`, `idProducto0`.`detalle` AS `t4_c13`, `idCajaMovimientoVenta0`.`idCajaMovimientoVenta` AS `t5_c0`, `idCajaMovimientoVenta0`.`monto` AS `t5_c1`, `idCajaMovimientoVenta0`.`motivo` AS `t5_c2`, `idCajaMovimientoVenta0`.`fechaMovimiento` AS `t5_c3`, `idCajaMovimientoVenta0`.`idUser` AS `t5_c4`, `idCajaMovimientoVenta0`.`tipo` AS `t5_c5`, `idCajaMovimientoVenta0`.`arqueo` AS `t5_c6`, `idCajaMovimientoVenta0`.`idCaja` AS `t5_c7` FROM `venta` `t`  LEFT OUTER JOIN `cliente` `idCliente0` ON (`t`.`idCliente`=`idCliente0`.`idCliente`)  LEFT OUTER JOIN `detalleVenta` `detalleVentas` ON (`detalleVentas`.`idVenta`=`t`.`idVenta`)  LEFT OUTER JOIN `almacenProducto` `idAlmacenProducto0` ON (`detalleVentas`.`idAlmacenProducto`=`idAlmacenProducto0`.`idAlmacenProducto`)  LEFT OUTER JOIN `producto` `idProducto0` ON (`idAlmacenProducto0`.`idProducto`=`idProducto0`.`idProducto`)  LEFT OUTER JOIN `cajaMovimientoVenta` `idCajaMovimientoVenta0` ON (`t`.`idCajaMovimientoVenta`=`idCajaMovimientoVenta0`.`idCajaMovimientoVenta`)  WHERE (idCajaMovimientoVenta0.idCajas=2 and idCajaMovimientoVenta0.arqueo=0 and '2014-07-18 00:00:00'<=fechaVenta AND fechaVenta<='2014-07-18 23:59:59')' in /var/www/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/framework/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/framework/db/ar/CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/framework/db/ar/CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 /var/www/framework/db/ar/CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 /var/www/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 /var/www/singular/venta/protected/controllers/DistribuidoraController.php(672): CActiveRecord->findAll(Array)
+#7 /var/www/framework/web/actions/CInlineAction.php(49): DistribuidoraController->actionPreviewDay()
+#8 /var/www/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /var/www/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /var/www/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /var/www/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /var/www/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /var/www/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/framework/web/CWebApplication.php(282): CController->run('previewDay')
+#17 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/p...')
+#18 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/singular/venta/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/singular/venta/index.php/distribuidora/previewDay?f=&d=18
+HTTP_REFERER=http://localhost/singular/venta/index.php/distribuidora/movimientos?d=18
+---
+2014/07/18 18:58:48 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:58:48 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:58:48 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:58:48 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:58:48 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:58:48 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:58:52 [warning] [application] Failed to set unsafe attribute "codigo" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:58:52 [warning] [application] Failed to set unsafe attribute "material" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:58:52 [warning] [application] Failed to set unsafe attribute "color" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:58:52 [warning] [application] Failed to set unsafe attribute "detalle" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:58:52 [warning] [application] Failed to set unsafe attribute "marca" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)
+2014/07/18 18:58:52 [warning] [application] Failed to set unsafe attribute "paquete" of "AlmacenProducto".
+in /var/www/singular/venta/protected/controllers/DistribuidoraController.php (93)
+in /var/www/singular/venta/index.php (13)

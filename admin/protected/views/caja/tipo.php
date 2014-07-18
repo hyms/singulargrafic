@@ -19,8 +19,17 @@ $this->widget('zii.widgets.grid.CGridView', array(
 						'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
 				),
 				array(
-						'header'=>'Nro',
-						'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+						'header'=>'Nombre',
+						'value'=>'$data->nombre',
+				),
+				array(
+						'header'=>'estado',
+						'value'=>'($data->estado)?"Activado":"Desactivado"',
+				),
+				array(
+						'header'=>'',
+						'type'=>'raw',
+						'value'=>'CHtml::link("Editar",array("caja/tipoAdd","id"=>$data->idTipoMovimiento))',
 				),
  		)
 ));
