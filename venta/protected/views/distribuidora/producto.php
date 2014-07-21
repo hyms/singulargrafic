@@ -61,6 +61,11 @@
 					'type'=>'raw',
 					'value'=>'CHtml::link("Añadir","#",array("onclick"=>\'newRow("\'.$data->idAlmacenProducto.\'");\',"class"=>"btn btn-success btn-sm"))',
 			),
+			array(
+					'header'=>'',
+					'type'=>'raw',
+					'value'=>'CHtml::link("Stock",array("distribuidora/productos","id"=>$data->idAlmacenProducto), array("class" => "openDlg divDialog"))',
+			),
 		)
 	));
 ?>
@@ -92,4 +97,29 @@ function newRow(almacen)
 	event.preventDefault();
 }
 
+$('#document').ready(function(){
+    $('.openDlg').live('click', function(){
+        var dialogId = $(this).attr('class').replace('openDlg ', '');
+        $.ajax({
+            'type': 'GET',
+            'url' : $(this).attr('href'),
+            success: function (data) {
+            	
+                $('#'+dialogId+' div.divForForm').html(data);
+               $( '#'+dialogId ).dialog( 'open' );
+            },
+            dataType: 'html',
+        });
+        return false; // prevent normal submit
+    })
+});
+
 ",CClientScript::POS_HEAD); ?>
+
+<?php
+$this->beginWidget('zii.widgets.jui.CJuiDialog', array('id'=>'divDialog',
+    'options'=>array( 'title'=>'Añadir a Stock', 'autoOpen'=>false, 'modal'=>true, 'width'=>800)));
+?>
+    <div class="divForForm"></div>
+
+<?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>

@@ -59,7 +59,7 @@
 	</div>
 
 	<div class="form-group">
-		<?php echo CHtml::link("Atras",array("stock/distribuidora"),array("class"=>"btn btn-default")); ?>
+		<?php // echo CHtml::link("Atras",array("stock/distribuidora"),array("class"=>"btn btn-default")); ?>
 		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default')); ?>
 	</div>
 

@@ -191,6 +191,7 @@ class DistribuidoraController extends Controller
 						$almacenes[$i]->stockP = $almacenes[$i]->stockP - $item->cantidadP;
 						if($almacenes[$i]->stockP<0)
 						{
+							
 							$venta->addError('obs', 'No existen suficientes Insumos');
 							$venta->delete();
 							break;
@@ -709,19 +710,33 @@ class DistribuidoraController extends Controller
 						$almacen->stockU = $almacen->stockU + $model->cantidadU;
 						$almacen->stockP = $almacen->stockP + $model->cantidadP;
 	
-						if($almacen->save() && $deposito->save())
-							$this->redirect(array('distribuidora'));
+						if($almacen->save() && $deposito->save()){
+							//$this->redirect(array('distribuidora/productos'));
+							$this->redirect(array('distribuidora/notas'));
+						}
 					}
 				}
 			}
 			$index=2;
-			$this->render('distribuidora',array('model'=>$model,'almacen'=>$almacen,'deposito'=>$deposito,'index'=>$index));
+			$this->renderPartial('distribuidora2',array('model'=>$model,'almacen'=>$almacen,'deposito'=>$deposito,'index'=>$index));
 	
 		}
 		else
 		{
-				
-			$productos=new CActiveDataProvider('AlmacenProducto',
+			$productos = new AlmacenProducto('searchDistribuidoraP');
+			//init filter
+			$productos->unsetAttributes();
+			if (isset($_GET['AlmacenProducto']))
+			{
+				$productos->attributes = $_GET['AlmacenProducto'];
+				//$productos->color = $_GET['AlmacenProducto']['color'];
+				$productos->material = $_GET['AlmacenProducto']['material'];
+				$productos->marca = $_GET['AlmacenProducto']['marca'];
+				$productos->detalle = $_GET['AlmacenProducto']['detalle'];
+				$productos->codigo = $_GET['AlmacenProducto']['codigo'];
+			}
+			//end filter
+			/*$productos=new CActiveDataProvider('AlmacenProducto',
 					array(
 							'criteria'=>array(
 									'condition'=>'idAlmacen=2',
@@ -731,9 +746,9 @@ class DistribuidoraController extends Controller
 							'pagination'=>array(
 									'pageSize'=>'20',
 							),
-					));
+					));*/
 			$index=1;
-			$this->render('distribuidora',array('productos'=>$productos,'index'=>$index));
+			$this->renderPartial('distribuidora2',array('productos'=>$productos,'index'=>$index));
 		}
 	}
 	
@@ -762,7 +777,23 @@ class DistribuidoraController extends Controller
 			if($movimiento->validate() && $arqueo->validate())
 			{
 				$caja->saldo = $caja->saldo-$movimiento->monto;
-				$arqueo->saldo = $caja->saldo;
+				$ventas=0;$recibos=0;
+				$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and fechaMovimiento<='".$end."'"));
+				foreach ($cajaMovimiento as $item)
+				{
+					foreach ($item->ventas as $venta)
+					{
+						$tmp = Venta::model()->with('idCajaMovimientoVenta0')->findByPk($venta->idVenta);
+						$ventas = $ventas + $tmp->idCajaMovimientoVenta0->monto;
+					}
+					foreach ($item->reciboses as $venta)
+					{
+						$tmp = Recibos::model()->with('idCajaMovimientoVenta0')->findByPk($venta->idRecibos);
+						$recibos = $recibos + $tmp->idCajaMovimientoVenta0->monto;
+					}
+				}
+				$saldo = CajaArqueo::model()->find(array('condition'=>'idCaja=2','order'=>'idCajaArqueo Desc'));
+				$arqueo->saldo = $saldo->saldo+$ventas+$recibos-$movimiento->monto;
 				if($caja->saldo >=0){
 				if($movimiento->monto==0)
 				{
@@ -770,9 +801,9 @@ class DistribuidoraController extends Controller
 					
 					if($arqueo->save())
 					{
-						$start=$arqueo->fechaVentas." 00:00:00";
+						//$start=$arqueo->fechaVentas." 00:00:00";
 						$end=$arqueo->fechaVentas." 23:59:59";
-						$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
+						//$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
 						foreach ($cajaMovimiento as $item)
 						{
 							$item->arqueo = $arqueo->idCajaArqueo;
@@ -798,10 +829,11 @@ class DistribuidoraController extends Controller
 					{
 						if($arqueo->save() && $caja->save())
 						{
-							$start=$arqueo->fechaVentas." 00:00:00";
+							//$start=$arqueo->fechaVentas." 00:00:00";
 							$end=$arqueo->fechaVentas." 23:59:59";
 							$movimiento->save();
-							$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
+							//$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
+							$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and fechaMovimiento<='".$end."'"));
 							foreach ($cajaMovimiento as $item)
 							{
 								$item->arqueo = $arqueo->idCajaArqueo;
@@ -832,9 +864,12 @@ class DistribuidoraController extends Controller
 				$m--;
 				$d=$this->getUltimoDiaMes(date("Y"), $m);
 			}
-			$start=date("Y")."-".$m."-".$d." 00:00:00";
+			//$start=date("Y")."-".$m."-".$d." 00:00:00";
 			$end=date("Y")."-".$m."-".$d." 23:59:59";
-			$cajaMovimiento = CajaMovimientoVenta::model()->with('reciboses')->with('ventas')->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
+			//$cajaMovimiento = CajaMovimientoVenta::model()->with('reciboses')->with('ventas')->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
+			$cajaMovimiento = CajaMovimientoVenta::model()->with('reciboses')->with('ventas')->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and fechaMovimiento<='".$end."'",'order'=>'fechaMovimiento Desc'));
+			if(!empty($cajaMovimiento))
+				$end = date('Y-m-d',strtotime($cajaMovimiento[0]->fechaMovimiento))." 23:59:59";
 			$ventas=0;$recibos=0;
 			foreach ($cajaMovimiento as $item)
 			{
@@ -855,7 +890,7 @@ class DistribuidoraController extends Controller
 							'saldo'=>$saldo->saldo,
 							'arqueo'=>$arqueo,
 							'caja'=>$caja,
-							'fecha'=>date('Y-m-d',strtotime($start)),
+							'fecha'=>date('Y-m-d',strtotime($end)),
 							'ventas'=>$ventas,
 							'recibos'=>$recibos,
 					));

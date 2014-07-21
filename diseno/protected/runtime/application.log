@@ -5946,3 +5946,12 @@ Stack trace:
 REQUEST_URI=/singular/diseno/index.php/orden/cliente
 HTTP_REFERER=http://localhost/singular/diseno/index.php/orden/cliente
 ---
+2014/07/21 15:31:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "distribuidora/ajaxCliente".' in /var/www/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/framework/web/CWebApplication.php(141): CWebApplication->runController('distribuidora/a...')
+#1 /var/www/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/singular/diseno/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/singular/diseno/index.php/distribuidora/ajaxCliente?nitCi=5999242
+HTTP_REFERER=http://192.168.0.5/singular/diseno/index.php/orden/cliente
+---
