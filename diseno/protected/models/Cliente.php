@@ -68,7 +68,7 @@ class Cliente extends CActiveRecord
 		return array(
 			'idCliente' => 'Id Cliente',
 			'nitCi' => 'Nit Ci',
-			'apellido' => 'Apellido',
+			'apellido' => 'Razon Social / Apellido',
 			'nombre' => 'Nombre',
 			'correo' => 'Correo',
 			'fechaRegistro' => 'Fecha Registro',

@@ -46,7 +46,7 @@ function newRow(almacen)
 	}		
 	$.ajax({
 		type: 'GET',
-		url: '".CHtml::normalizeUrl(array('/orden/addDetalle'))."',
+		url: '".(($index=='cliente')?CHtml::normalizeUrl(array('/orden/addDetalle')):CHtml::normalizeUrl(array('/orden/addDetalleI')))."',
 		data: 'index='+index+'&al='+almacen+'&factura='+factura,
 		dataType: 'html',
 		success: function(html){

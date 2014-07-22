@@ -449,12 +449,15 @@ CREATE  TABLE IF NOT EXISTS  `CTP` (
   `idUserOT` INT NULL ,
   `idUserVenta` INT NULL ,
   `idImprenta` INT NULL ,
+  `idCTPParent` INT NULL ,
+  `tipoCTP` INT NULL ,
   PRIMARY KEY (`idCTP`) ,
   INDEX `fk_venta_cliente1` (`idCliente` ASC) ,
   INDEX `fk_venta_cajaMovimientoVenta1` (`idCajaMovimientoVenta` ASC) ,
   INDEX `fk_CTP_user1` (`idUserOT` ASC) ,
   INDEX `fk_CTP_user2` (`idUserVenta` ASC) ,
   INDEX `fk_CTP_Imprenta1` (`idImprenta` ASC) ,
+  INDEX `fk_CTP_CTP1` (`idCTPParent` ASC) ,
   CONSTRAINT `fk_venta_cliente10`
     FOREIGN KEY (`idCliente` )
     REFERENCES  `cliente` (`idCliente` )
@@ -479,6 +482,11 @@ CREATE  TABLE IF NOT EXISTS  `CTP` (
     FOREIGN KEY (`idImprenta` )
     REFERENCES  `Imprenta` (`idImprenta` )
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_CTP_CTP1`
+    FOREIGN KEY (`idCTPParent` )
+    REFERENCES  `CTP` (`idCTP` )
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -493,7 +501,7 @@ CREATE  TABLE IF NOT EXISTS  `detalleCTP` (
   `idCTP` INT NULL ,
   `idAlmacenProducto` INT NULL ,
   `nroPlacas` INT NULL ,
-  `formato` INT NULL ,
+  `formato` VARCHAR(100) NULL ,
   `trabajo` VARCHAR(100) NULL ,
   `pinza` INT NULL ,
   `resolucion` DOUBLE NULL ,

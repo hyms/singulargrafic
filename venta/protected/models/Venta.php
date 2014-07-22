@@ -155,7 +155,15 @@ class Venta extends CActiveRecord
 	
 		$criteria=new CDbCriteria;
 		$criteria->with=array('idCliente0');
-		$criteria->condition='estado=1 or estado=2';
+		$d=date("d")-1; $m=date("m");
+		if($d==0)
+		{
+			$m--;
+			$d=$this->getUltimoDiaMes(date("Y"), $m);
+		}
+		$start=date("Y")."-".$m."-".$d." 00:00:00";
+		
+		$criteria->condition="(estado=1 or estado=2) and fechaVenta>='".$start."'";
 	
 		$criteria->compare('idVenta',$this->idVenta);
 		$criteria->compare('fechaVenta',$this->fechaVenta,true);
@@ -191,5 +199,9 @@ class Venta extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+	
+	protected function getUltimoDiaMes($elAnio,$elMes) {
+		return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
 	}
 }

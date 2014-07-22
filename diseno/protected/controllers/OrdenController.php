@@ -50,11 +50,11 @@ class OrdenController extends Controller
 		}
 		$ctp->serie = $row->serie;
 		$ctp->codigo = chr($ctp->serie)."C-".$ctp->numero."-".date("y");
-		$ctp->formaPago = 0;
+		$ctp->formaPago = 1;
 		$ctp->tipoOrden = 1;
 		$ctp->fechaOrden = date("Y-m-d H:i:s");
 		$ctp->idUserOT= Yii::app()->user->id;
-		
+		$ctp->tipoCTP = 1;
 		$swc=0; $swv=0;
 		if(isset($_POST['Cliente']))
 		{
@@ -126,9 +126,10 @@ class OrdenController extends Controller
 				foreach($detalle as $item)
 				{
 					$item->idCTP = $ctp->idCTP;
-					$almacen = Almacen::model()->findByPk($item->idAlmacenProducto);
+					$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto);
 					$item->formato = $almacen->idProducto0->detalle;
 					$item->save();
+					//print_r($item);
 				}
 				$this->redirect(array('orden/rep'));
 			}
@@ -139,11 +140,33 @@ class OrdenController extends Controller
 	
 	public function actionInterna()
 	{
-		$ordenes=new CActiveDataProvider('CTP',array(
-				'pagination'=>array(
-						'pageSize'=>'20',
-				),));
-		$this->render('interna',array('ordenes'=>$ordenes));
+		$cliente = new Cliente;
+		$detalle = new DetalleCTP;
+		$ctp = new CTP;
+		$productos = new AlmacenProducto('searchCTP');
+		
+		$row = CTP::model()->find(array("condition"=>"tipoOrden=1",'order'=>'fechaOrden Desc'));
+		if(empty($row))
+			$row=new CTP;
+		if(empty($row->serie))
+			$row->serie = 65;
+		$ctp->numero = $row->numero +1;
+		if($row->numero==1001)
+		{
+			$row->numero=1;
+			$row->serie++;
+			if($row->serie==91)
+				$row->serie = 65;
+		}
+		$ctp->serie = $row->serie;
+		$ctp->codigo = chr($ctp->serie)."C-".$ctp->numero."-".date("y");
+		$ctp->formaPago = 1;
+		$ctp->tipoOrden = 1;
+		$ctp->fechaOrden = date("Y-m-d H:i:s");
+		$ctp->idUserOT= Yii::app()->user->id;
+		$ctp->tipoCTP = 2;
+		
+		$this->render('interna',array('cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos));
 	}
 	
 	public function actionRep()
@@ -153,6 +176,18 @@ class OrdenController extends Controller
 						'pageSize'=>'20',
 				),));
 		$this->render('rep',array('ordenes'=>$ordenes));
+	}
+	
+	public function actionRepOrden()
+	{
+		if(isset($_GET['id']))
+		{
+			$ctp = $this->verifyModel(CTP::model()->with('detalleCTPs')->findByPk($_GET['id']));
+			$repos = new CTP;
+			$this->render('rep/repos',array('ctp'=>$ctp,'repos'=>$repos));
+		}
+		else
+			throw new CHttpException(400,'Petición no válida.');
 	}
 	
 	public function actionAddDetalle()
@@ -196,6 +231,57 @@ class OrdenController extends Controller
 			throw new CHttpException(400,'Petición no válida.');
 	}
 	
+	public function actionAddDetalleI()
+	{
+		//if(Yii::app()->request->isAjaxRequest && isset($_GET['index']))
+		if(isset($_GET['index']))
+		{
+			$detalle = new DetalleCTP;
+			$almacen = new AlmacenProducto;
+			$costo = 0;
+			if(isset($_GET['al']))
+			{
+				$almacen = AlmacenProducto::model()
+				->with("idProducto0")
+				->findByPk($_GET['al']);	
+			}
+	
+			$detalle->idAlmacenProducto = $almacen->idAlmacenProducto;
+			
+			$this->renderPartial('ointerna/_newRowDetalleVenta', array(
+					'model'=>$detalle,
+					'index'=>$_GET['index'],
+					'almacen'=>$almacen,
+			));
+		}
+		else
+			throw new CHttpException(400,'Petición no válida.');
+	}
+	
+	public function actionAddDetalleR()
+	{
+		//if(Yii::app()->request->isAjaxRequest && isset($_GET['index']))
+		if(isset($_GET['index']) && isset($_GET['id']))
+		{
+			$detalle = DetalleCTP::model()->findByPk($_GET['id']);
+			$costo = 0;
+			$almacen = AlmacenProducto::model()
+				->with("idProducto0")
+				->findByPk($detalle->idAlmacenProducto);
+			
+	
+			$detalle->idAlmacenProducto = $almacen->idAlmacenProducto;
+				
+			$this->renderPartial('rep/_newRowDetalleRepos', array(
+					'model'=>$detalle,
+					'index'=>$_GET['index'],
+					'almacen'=>$almacen,
+			));
+		}
+		else
+			throw new CHttpException(400,'Petición no válida.');
+	}
+	
 	protected function getRemoveLinkAndIndexInput($index)
 	{
 		$removeLink=CHtml::link('Quitar', '#', array('class'=>'btn btn-danger tabular-input-remove')).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />';
@@ -205,5 +291,13 @@ class OrdenController extends Controller
 	
 	protected function getUltimoDiaMes($elAnio,$elMes) {
 		return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
+	}
+	
+	private function verifyModel($model)
+	{
+		if($model===null)
+			throw new CHttpException(404,'La Respuesta de la pagina no Existe.');
+	
+		return $model;
 	}
 }

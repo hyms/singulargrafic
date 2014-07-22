@@ -3,15 +3,7 @@
 </div>
 
 <div class="col-sm-10">
-
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<strong class="panel-title">Placas</strong>
-	</div>
-	<div class="panel-body" style="overflow: auto;">
-	<?php $this->renderPartial('producto',array('productos'=>$productos,'index'=>'cliente'));?>
- 	</div>
-</div>
+<h3><?php echo "Reposiciones";?></h3>
 
 	<div class = "row">
 		<h3 class="col-sm-4">Orden de Trabajo</h3> 
@@ -32,23 +24,22 @@
 	
 		echo ((!empty($ctp->idCtp))?CHtml::activeHiddenField($ctp,'idCtp'):'');
 	?>
-	
+
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<strong class="panel-title">Datos de Cliente</strong>
+		<strong class="panel-title">Detalle de Orden</strong>
 	</div>
 	<div class="panel-body" style="overflow: auto;">
-		<?php $this->renderPartial('orden/cliente',array('cliente'=>$cliente,'ctp'=>$ctp));?>
+	<?php $this->renderPartial('rep/detalleOrden',array('detalle'=>$ctp->detalleCTPs,'ctp'=>$ctp));?>
  	</div>
 </div>
 
-
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<strong class="panel-title">Datos de Orden</strong>
+		<strong class="panel-title">Detalle de Repeticion</strong>
 	</div>
 	<div class="panel-body" style="overflow: auto;">
-	<?php $this->renderPartial('orden/detalleOrden',array('detalle'=>$detalle,'ctp'=>$ctp));?>
+	<?php $this->renderPartial('rep/detalleRepos',array('detalle'=>array(),'ctp'=>$repos));?>
  	</div>
 </div>
 

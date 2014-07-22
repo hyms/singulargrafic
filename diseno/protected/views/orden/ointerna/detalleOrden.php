@@ -12,8 +12,6 @@
 		<td><?php echo CHtml::label('Trabajo','trabajo')?></td>
 		<td><?php echo CHtml::label('Pinza','pinza')?></td>
 		<td><?php echo CHtml::label('Resolucion','resolucion')?></td>
-		<td><?php echo CHtml::label('Adicional','adicional')?></td>
-		<td><?php echo CHtml::label('Total','total')?></td>
        	<td></td>
  	</tr></thead>
 <tbody class="tabular-input-container">
@@ -29,7 +27,7 @@ if(count($detalle)>=1)
 		{
 			if($item->idAlmacenProducto!=null)
 			{
-				$this->renderPartial('./orden/_newRowDetalleVenta', array(
+				$this->renderPartial('./ointerna/_newRowDetalleVenta', array(
 						'model'=>$item,
 						'index'=>$i,
 						'costo'=>0,
@@ -46,23 +44,14 @@ if(count($detalle)>=1)
 </tbody></table>
 </div>
 <div class="form-group">
-<div class="col-sm-7">
-    <?php echo CHtml::activeLabelEx($ctp,"obs",array('class'=>'control-label col-sm-4'))?>
-    <div class="col-sm-8">
-	<?php echo CHtml::activeTextArea($ctp,"obs",array('class'=>'form-control'))?>
-	</div>
-	 <?php echo CHtml::error($ctp,"obs",array('class'=>'label label-danger')); ?>
-</div>
-
-<div class="col-sm-5" >
-	<div class="form-group">
-		<?php echo CHtml::activeLabelEx($ctp,"montoVenta",array('class'=>'control-label col-sm-4'))?>
+	<div class="col-sm-7">
+	    <?php echo CHtml::activeLabelEx($ctp,"obs",array('class'=>'control-label col-sm-4'))?>
 	    <div class="col-sm-8">
-	    	<?php echo CHtml::activeTextField($ctp,"montoVenta",array('class'=>'form-control input-sm','readonly'=>true,"id"=>"total")); ?>
-	    </div>
-	    <?php echo CHtml::error($ctp,"montoVenta",array('class'=>'label label-danger')); ?>
+		<?php echo CHtml::activeTextArea($ctp,"obs",array('class'=>'form-control'))?>
+		</div>
+		 <?php echo CHtml::error($ctp,"obs",array('class'=>'label label-danger')); ?>
 	</div>
-</div>
+
 </div>
 
 <?php Yii::app()->getClientScript()->registerScript("ajax_total",

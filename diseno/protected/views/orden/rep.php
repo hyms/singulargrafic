@@ -22,7 +22,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("Ver","#",array("class"=>"btn btn-success btn-sm"))',
+					'value'=>'CHtml::link("Reponer",array("orden/repOrden","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm"))',
 			),
 		)
 	));

@@ -8,7 +8,7 @@
  * @property integer $idCTP
  * @property integer $idAlmacenProducto
  * @property integer $nroPlacas
- * @property integer $formato
+ * @property string $formato
  * @property string $trabajo
  * @property integer $pinza
  * @property double $resolucion
@@ -21,8 +21,8 @@
  * @property integer $K
  *
  * The followings are the available model relations:
- * @property CTP $idCTP0
  * @property AlmacenProducto $idAlmacenProducto0
+ * @property CTP $idCTP0
  */
 class DetalleCTP extends CActiveRecord
 {
@@ -43,8 +43,9 @@ class DetalleCTP extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('costoAdicional, costoTotal', 'required'),
-			array('idCTP, idAlmacenProducto, nroPlacas, formato, pinza, estado, C, M, Y, K', 'numerical', 'integerOnly'=>true),
+			array('idCTP, idAlmacenProducto, nroPlacas, pinza, estado, C, M, Y, K', 'numerical', 'integerOnly'=>true),
 			array('resolucion, costoAdicional, costoTotal', 'numerical'),
+			array('formato', 'length', 'max'=>50),
 			array('trabajo', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -60,8 +61,8 @@ class DetalleCTP extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idCTP0' => array(self::BELONGS_TO, 'CTP', 'idCTP'),
 			'idAlmacenProducto0' => array(self::BELONGS_TO, 'AlmacenProducto', 'idAlmacenProducto'),
+			'idCTP0' => array(self::BELONGS_TO, 'CTP', 'idCTP'),
 		);
 	}
 
@@ -111,7 +112,7 @@ class DetalleCTP extends CActiveRecord
 		$criteria->compare('idCTP',$this->idCTP);
 		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
 		$criteria->compare('nroPlacas',$this->nroPlacas);
-		$criteria->compare('formato',$this->formato);
+		$criteria->compare('formato',$this->formato,true);
 		$criteria->compare('trabajo',$this->trabajo,true);
 		$criteria->compare('pinza',$this->pinza);
 		$criteria->compare('resolucion',$this->resolucion);
