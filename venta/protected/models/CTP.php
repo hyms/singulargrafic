@@ -26,13 +26,17 @@
  * @property integer $idUserOT
  * @property integer $idUserVenta
  * @property integer $idImprenta
+ * @property integer $idCTPParent
+ * @property integer $tipoCTP
  *
  * The followings are the available model relations:
- * @property Cliente $idCliente0
- * @property CajaMovimientoVenta $idCajaMovimientoVenta0
+ * @property CTP $idCTPParent0
+ * @property CTP[] $cTPs
+ * @property Imprenta $idImprenta0
  * @property User $idUserOT0
  * @property User $idUserVenta0
- * @property Imprenta $idImprenta0
+ * @property CajaMovimientoVenta $idCajaMovimientoVenta0
+ * @property Cliente $idCliente0
  * @property DetalleCTP[] $detalleCTPs
  */
 class CTP extends CActiveRecord
@@ -53,8 +57,8 @@ class CTP extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array(' estado', 'required'),
-			array('tipoOrden, formaPago, idCliente, serie, estado, idCajaMovimientoVenta, numero, idUserOT, idUserVenta, idImprenta', 'numerical', 'integerOnly'=>true),
+			//array('montoVenta, montoPagado, montoCambio, montoDescuento, estado', 'required'),
+			array('tipoOrden, formaPago, idCliente, serie, estado, idCajaMovimientoVenta, numero, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP', 'numerical', 'integerOnly'=>true),
 			array('montoVenta, montoPagado, montoCambio, montoDescuento', 'numerical'),
 			array('codigo', 'length', 'max'=>45),
 			array('factura, autorizado, responsable', 'length', 'max'=>50),
@@ -62,7 +66,7 @@ class CTP extends CActiveRecord
 			array('fechaOrden, fechaPlazo', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCTP, fechaOrden, tipoOrden, formaPago, idCliente, fechaPlazo, codigo, serie, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, numero, idUserOT, idUserVenta, idImprenta', 'safe', 'on'=>'search'),
+			array('idCTP, fechaOrden, tipoOrden, formaPago, idCliente, fechaPlazo, codigo, serie, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, numero, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -74,11 +78,13 @@ class CTP extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
-			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
+			'idCTPParent0' => array(self::BELONGS_TO, 'CTP', 'idCTPParent'),
+			'cTPs' => array(self::HAS_MANY, 'CTP', 'idCTPParent'),
+			'idImprenta0' => array(self::BELONGS_TO, 'Imprenta', 'idImprenta'),
 			'idUserOT0' => array(self::BELONGS_TO, 'Users', 'idUserOT'),
 			'idUserVenta0' => array(self::BELONGS_TO, 'Users', 'idUserVenta'),
-			'idImprenta0' => array(self::BELONGS_TO, 'Imprenta', 'idImprenta'),
+			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
+			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
 			'detalleCTPs' => array(self::HAS_MANY, 'DetalleCTP', 'idCTP'),
 		);
 	}
@@ -111,6 +117,8 @@ class CTP extends CActiveRecord
 			'idUserOT' => 'Id User Ot',
 			'idUserVenta' => 'Id User Venta',
 			'idImprenta' => 'Id Imprenta',
+			'idCTPParent' => 'Id Ctpparent',
+			'tipoCTP' => 'Tipo Ctp',
 		);
 	}
 
@@ -154,6 +162,8 @@ class CTP extends CActiveRecord
 		$criteria->compare('idUserOT',$this->idUserOT);
 		$criteria->compare('idUserVenta',$this->idUserVenta);
 		$criteria->compare('idImprenta',$this->idImprenta);
+		$criteria->compare('idCTPParent',$this->idCTPParent);
+		$criteria->compare('tipoCTP',$this->tipoCTP);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -23,6 +23,7 @@
 	
 		echo CHtml::activeHiddenField($ctp,'idCTP');
 	?>
+	<?php if($ctp->tipoCTP !=3){?>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<strong class="panel-title">Datos Cliente</strong>
@@ -31,7 +32,7 @@
 	  	<?php $this->renderPartial('orden/cliente',array('cliente'=>$cliente,'ctp'=>$ctp))?>
 	  	</div>
 	</div>
-	
+	<?php }?>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<strong class="panel-title">Datos de Orden</strong>
@@ -40,7 +41,7 @@
 		<?php $this->renderPartial('orden/detalleOrden',array('detalle'=>$detalle,'ctp'=>$ctp));?>
 	 	</div>
 	</div>
-	
+	<?php if($ctp->tipoCTP ==1){?>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<strong class="panel-title">Condiciones de Venta</strong>
@@ -49,7 +50,7 @@
 	  	<?php $this->renderPartial("orden/condicionesVenta",array('ctp'=>$ctp));?>
 	  	</div>
 	</div>
-	
+	<?php }?>
 	<div class="form-group">
 		<div class="text-center">
 		<?php echo CHtml::resetButton('Cancelar', array('class' => 'btn btn-default hidden-print')); ?>

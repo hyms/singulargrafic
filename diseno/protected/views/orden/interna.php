@@ -3,7 +3,6 @@
 </div>
 
 <div class="col-sm-10">
-<h3><?php echo "Ordenes de trabajo Internas";?></h3>
 
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -15,8 +14,8 @@
 </div>
 
 	<div class = "row">
-		<h3 class="col-sm-4">Orden de Trabajo</h3> 
-		<h3 class="col-sm-4 text-center"><?php //echo $ctp->codigo;?></h3> 
+		<h3 class="col-sm-5 text-left"><?php echo "Ordenes de trabajo Internas";?></h3>
+		<h3 class="col-sm-3 text-center"><?php //echo $ctp->codigo;?></h3> 
 		<h3 class="col-sm-4 text-right"><?php echo date("d/m/Y",strtotime($ctp->fechaOrden));?></h3>
 		
 	</div>
@@ -24,7 +23,7 @@
 <?php
 		$form=$this->beginWidget('CActiveForm', array(
 				'id'=>'detalle-venta-detalleVenta-form',
-				'action'=>CHtml::normalizeUrl(array((empty($ctp->idCtp))?'/orden/cliente':"/ctp/modificar")),
+				//'action'=>CHtml::normalizeUrl(array('/orden/interna')),
 				'htmlOptions'=>array(
 						'class'=>'form-horizontal',
 						'role'=>'form'
@@ -62,28 +61,3 @@
 <?php $this->endWidget(); ?>	
 	
 </div>
-
-
-
-<?php 
-/*$this->widget('zii.widgets.grid.CGridView', array(
-		'dataProvider'=>$ordenes,
-		'itemsCssClass' => 'table table-hover table-condensed',
-		'htmlOptions' => array('class' => 'table-responsive'),
-		'columns'=>array(
-			array(
-					'header'=>'Nro',
-					'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
-			),
-			array(
-					'header'=>'codigo',
-					'value'=>'$data->codigo',
-			),
-			array(
-					'header'=>'',
-					'type'=>'raw',
-					'value'=>'CHtml::link("Ver","#",array("class"=>"btn btn-success btn-sm"))',
-			),
-		)
-	));*/
-?>

@@ -1,32 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "cliente".
+ * This is the model class for table "TiposClientes".
  *
- * The followings are the available columns in table 'cliente':
- * @property integer $idCliente
- * @property string $nitCi
- * @property string $apellido
+ * The followings are the available columns in table 'TiposClientes':
+ * @property integer $idTiposClientes
  * @property string $nombre
- * @property string $correo
- * @property string $fechaRegistro
- * @property string $telefono
- * @property string $direccion
  *
  * The followings are the available model relations:
- * @property CTP[] $cTPs
- * @property Imprenta[] $imprentas
- * @property Recibos[] $reciboses
- * @property Venta[] $ventas
+ * @property MatrizPreciosCTP[] $matrizPreciosCTPs
+ * @property Cliente[] $clientes
  */
-class Cliente extends CActiveRecord
+class TiposClientes extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'cliente';
+		return 'TiposClientes';
 	}
 
 	/**
@@ -37,15 +29,12 @@ class Cliente extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nitCi, apellido', 'required'),
-			array('nitCi, telefono', 'length', 'max'=>20),
-			array('apellido, nombre', 'length', 'max'=>40),
-			array('correo', 'length', 'max'=>50),
-			array('direccion', 'length', 'max'=>100),
-			array('fechaRegistro', 'safe'),
+			array('idTiposClientes', 'required'),
+			array('idTiposClientes', 'numerical', 'integerOnly'=>true),
+			array('nombre', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCliente, nitCi, apellido, nombre, correo, fechaRegistro, telefono, direccion', 'safe', 'on'=>'search'),
+			array('idTiposClientes, nombre', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,10 +46,8 @@ class Cliente extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'cTPs' => array(self::HAS_MANY, 'CTP', 'idCliente'),
-			'imprentas' => array(self::HAS_MANY, 'Imprenta', 'idCliente'),
-			'reciboses' => array(self::HAS_MANY, 'Recibos', 'idCliente'),
-			'ventas' => array(self::HAS_MANY, 'Venta', 'idCliente'),
+			'matrizPreciosCTPs' => array(self::HAS_MANY, 'MatrizPreciosCTP', 'idTiposClientes'),
+			'clientes' => array(self::HAS_MANY, 'Cliente', 'idTIposClientes'),
 		);
 	}
 
@@ -70,14 +57,8 @@ class Cliente extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idCliente' => 'Id Cliente',
-			'nitCi' => 'Nit Ci',
-			'apellido' => 'Razon Social / Apellido',
+			'idTiposClientes' => 'Id Tipos Clientes',
 			'nombre' => 'Nombre',
-			'correo' => 'Correo',
-			'fechaRegistro' => 'Fecha Registro',
-			'telefono' => 'Telefono',
-			'direccion' => 'Direccion',
 		);
 	}
 
@@ -99,14 +80,8 @@ class Cliente extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idCliente',$this->idCliente);
-		$criteria->compare('nitCi',$this->nitCi,true);
-		$criteria->compare('apellido',$this->apellido,true);
+		$criteria->compare('idTiposClientes',$this->idTiposClientes);
 		$criteria->compare('nombre',$this->nombre,true);
-		$criteria->compare('correo',$this->correo,true);
-		$criteria->compare('fechaRegistro',$this->fechaRegistro,true);
-		$criteria->compare('telefono',$this->telefono,true);
-		$criteria->compare('direccion',$this->direccion,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -117,7 +92,7 @@ class Cliente extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Cliente the static model class
+	 * @return TiposClientes the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -83,13 +83,13 @@ if(count($detalle)>=1)
 				importe_total = importe_total + parseFloat($(this).val()*1);
 			}
 		);
-		$('#total').val(importe_total.toFixed(1));
+		$('#total').val(redondeo(importe_total));
 		cambio();
 	}
 	
 	function cambio()
 	{
-		$('#cambio').val(resta($('#pagado').val(),$('#total').val()).toFixed(1));
+		$('#cambio').val(redondeo(resta($('#pagado').val(),$('#total').val())));
 	}
 			
 	function suma(a,b)
@@ -102,6 +102,10 @@ if(count($detalle)>=1)
 		return ((a*1) - (b*1));
 	}
    
+	function redondeo(num)
+	{
+		return (Math.round(num*10)/10);
+	}
 ",CClientScript::POS_HEAD); ?>
 
 <?php Yii::app()->getClientScript()->registerScript("ajax_detalleventa","

@@ -1,32 +1,28 @@
 <?php
 
 /**
- * This is the model class for table "cliente".
+ * This is the model class for table "almacenCTP".
  *
- * The followings are the available columns in table 'cliente':
- * @property integer $idCliente
- * @property string $nitCi
- * @property string $apellido
- * @property string $nombre
- * @property string $correo
- * @property string $fechaRegistro
- * @property string $telefono
- * @property string $direccion
+ * The followings are the available columns in table 'almacenCTP':
+ * @property integer $idAlmacenCTP
+ * @property integer $stock
+ * @property integer $idAlmacen
+ * @property integer $idMatrizPrecios
+ * @property integer $idProducto
  *
  * The followings are the available model relations:
- * @property CTP[] $cTPs
- * @property Imprenta[] $imprentas
- * @property Recibos[] $reciboses
- * @property Venta[] $ventas
+ * @property MatrizPreciosCTP[] $matrizPreciosCTPs
+ * @property Producto $idProducto0
+ * @property DetalleCTP[] $detalleCTPs
  */
-class Cliente extends CActiveRecord
+class AlmacenCTP extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'cliente';
+		return 'almacenCTP';
 	}
 
 	/**
@@ -37,15 +33,11 @@ class Cliente extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nitCi, apellido', 'required'),
-			array('nitCi, telefono', 'length', 'max'=>20),
-			array('apellido, nombre', 'length', 'max'=>40),
-			array('correo', 'length', 'max'=>50),
-			array('direccion', 'length', 'max'=>100),
-			array('fechaRegistro', 'safe'),
+			array('idAlmacenCTP, stock', 'required'),
+			array('idAlmacenCTP, stock, idAlmacen, idMatrizPrecios, idProducto', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCliente, nitCi, apellido, nombre, correo, fechaRegistro, telefono, direccion', 'safe', 'on'=>'search'),
+			array('idAlmacenCTP, stock, idAlmacen, idMatrizPrecios, idProducto', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,10 +49,9 @@ class Cliente extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'cTPs' => array(self::HAS_MANY, 'CTP', 'idCliente'),
-			'imprentas' => array(self::HAS_MANY, 'Imprenta', 'idCliente'),
-			'reciboses' => array(self::HAS_MANY, 'Recibos', 'idCliente'),
-			'ventas' => array(self::HAS_MANY, 'Venta', 'idCliente'),
+			'matrizPreciosCTPs' => array(self::HAS_MANY, 'MatrizPreciosCTP', 'idAlmacenCTP'),
+			'idProducto0' => array(self::BELONGS_TO, 'Producto', 'idProducto'),
+			'detalleCTPs' => array(self::HAS_MANY, 'DetalleCTP', 'idAlmacenCTP'),
 		);
 	}
 
@@ -70,14 +61,11 @@ class Cliente extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idCliente' => 'Id Cliente',
-			'nitCi' => 'Nit Ci',
-			'apellido' => 'Razon Social / Apellido',
-			'nombre' => 'Nombre',
-			'correo' => 'Correo',
-			'fechaRegistro' => 'Fecha Registro',
-			'telefono' => 'Telefono',
-			'direccion' => 'Direccion',
+			'idAlmacenCTP' => 'Id Almacen Ctp',
+			'stock' => 'Stock',
+			'idAlmacen' => 'Id Almacen',
+			'idMatrizPrecios' => 'Id Matriz Precios',
+			'idProducto' => 'Id Producto',
 		);
 	}
 
@@ -99,14 +87,11 @@ class Cliente extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idCliente',$this->idCliente);
-		$criteria->compare('nitCi',$this->nitCi,true);
-		$criteria->compare('apellido',$this->apellido,true);
-		$criteria->compare('nombre',$this->nombre,true);
-		$criteria->compare('correo',$this->correo,true);
-		$criteria->compare('fechaRegistro',$this->fechaRegistro,true);
-		$criteria->compare('telefono',$this->telefono,true);
-		$criteria->compare('direccion',$this->direccion,true);
+		$criteria->compare('idAlmacenCTP',$this->idAlmacenCTP);
+		$criteria->compare('stock',$this->stock);
+		$criteria->compare('idAlmacen',$this->idAlmacen);
+		$criteria->compare('idMatrizPrecios',$this->idMatrizPrecios);
+		$criteria->compare('idProducto',$this->idProducto);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -117,7 +102,7 @@ class Cliente extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Cliente the static model class
+	 * @return AlmacenCTP the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

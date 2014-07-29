@@ -74,7 +74,7 @@ class Producto extends CActiveRecord
 			'idProducto' => 'Id Producto',
 			'codigo' => 'Codigo',
 			'material' => 'Material',
-			'color' => 'Color',
+			'color' => 'Color / Formato',
 			'marca' => 'Marca',
 			'industria' => 'Industria',
 			'cantXPaquete' => 'Cant Xpaquete',

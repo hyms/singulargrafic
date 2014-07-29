@@ -29,28 +29,26 @@ class CtpController extends Controller
 	
 	public function actionOrdenes()
 	{
+		$t="";
+		if(isset($_GET['t']))
+		{
+			$t="and tipoCTP=".$_GET['t'];
+		}
 		$ordenes=new CActiveDataProvider('CTP',array(
 				'criteria'=>array(
-					'condition'=>'`t`.estado=1',
+					'condition'=>'`t`.estado=1 '.$t,
 					'with'=>array('idCliente0'),
+					'order'=>'fechaOrden Desc',
 				),
 				'pagination'=>array(
 						'pageSize'=>'20',
 				),));
-		$this->render('ordenes',array('ordenes'=>$ordenes));
+		$this->render('ordenes',array('ordenes'=>$ordenes,'estado'=>1));
 	}
 	
 	public function actionOrden()
 	{
-		if(isset($_GET['id']))
-		{
-			$ctp = CTP::model()
-				->with('detalleCTPs')
-				->with('idCliente0')
-				->find('`t`.idCTP='.$_GET['id']);
-			$this->render('orden',array('ctp'=>$ctp,'detalle'=>$ctp->detalleCTPs,'cliente'=>$ctp->idCliente0));
-		}
-		elseif(isset($_POST['CTP']))
+		if(isset($_POST['CTP']))
 		{
 			$ctp = CTP::model()
 			->with('detalleCTPs')
@@ -59,9 +57,44 @@ class CtpController extends Controller
 			
 			$ctp->attributes = $_POST['CTP'];
 			$ctp->idUserVenta = Yii::app()->user->id;
+			$ctp->fechaPlazo= date("Y-m-d H:i:s",strtotime($ctp->fechaPlazo));
 			$ctp->estado = 2;
 			if($ctp->save())
-				$this->redirect("buscar");
+			{
+				$almacen = array(); $i=0;
+				foreach ($ctp->detalleCTPs as $item)
+				{
+					array_push($almacen, AlmacenProducto::model()->findByPk($item->idAlmacenProducto));
+					$almacen[$i]->stockU = $almacen[$i]->stockU - $item->nroPlacas;
+					if($almacen[$i]->stockU < 0)
+						$ctp->estado = 1;
+					 
+					$i++;
+				}
+				if($ctp->estado == 2)
+				{
+					foreach ($almacen as $item)
+						$item->save();
+					
+					$this->redirect(array("ctp/buscar"));
+				}
+				else
+					$ctp->save();				
+				
+			}
+		}
+		if(isset($_GET['id']) || isset($_POST['CTP']['idCTP']))
+		{
+			$id=0;
+			if(isset($_GET['id']))
+				$id=$_GET['id'];
+			if(isset($_POST['CTP']['idCTP']))
+				$id=$_POST['CTP']['idCTP'];
+			$ctp = CTP::model()
+			->with('detalleCTPs')
+			->with('idCliente0')
+			->find('`t`.idCTP='.$id);
+			$this->render('orden',array('ctp'=>$ctp,'detalle'=>$ctp->detalleCTPs,'cliente'=>$ctp->idCliente0));
 		}
 		else
 			throw new CHttpException(400,'Petición no válida.');	
@@ -108,7 +141,7 @@ class CtpController extends Controller
 	{
 		$ordenes=new CActiveDataProvider('CTP',array(
 				'criteria'=>array(
-						'condition'=>'`t`.estado=2',
+						'condition'=>'`t`.estado=2 and `t`.tipoCTP=1',
 						'with'=>array('idCliente0'),
 				),
 				'pagination'=>array(
@@ -298,7 +331,23 @@ class CtpController extends Controller
 			if($movimiento->validate() && $arqueo->validate())
 			{
 				$caja->saldo = $caja->saldo-$movimiento->monto;
-				$arqueo->saldo = $caja->saldo;
+				$ventas=0;$recibos=0;
+				$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and fechaMovimiento<='".$end."'"));
+				foreach ($cajaMovimiento as $item)
+				{
+					foreach ($item->ventas as $venta)
+					{
+						$tmp = Venta::model()->with('idCajaMovimientoVenta0')->findByPk($venta->idVenta);
+						$ventas = $ventas + $tmp->idCajaMovimientoVenta0->monto;
+					}
+					foreach ($item->reciboses as $venta)
+					{
+						$tmp = Recibos::model()->with('idCajaMovimientoVenta0')->findByPk($venta->idRecibos);
+						$recibos = $recibos + $tmp->idCajaMovimientoVenta0->monto;
+					}
+				}
+				$saldo = CajaArqueo::model()->find(array('condition'=>'idCaja=2','order'=>'idCajaArqueo Desc'));
+				$arqueo->saldo = $saldo->saldo+$ventas+$recibos-$movimiento->monto;
 				if($caja->saldo >=0){
 					if($movimiento->monto==0)
 					{

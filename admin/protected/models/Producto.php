@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'producto':
  * @property integer $idProducto
+ * @property integer $servicio
  * @property string $codigo
  * @property string $material
  * @property string $color
@@ -19,6 +20,7 @@
  * @property string $detalle
  *
  * The followings are the available model relations:
+ * @property AlmacenCTP[] $almacenCTPs
  * @property AlmacenProducto[] $almacenProductos
  * @property MovimientoAlmacen[] $movimientoAlmacens
  */
@@ -46,7 +48,7 @@ class Producto extends CActiveRecord
 			array('detalle', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idProducto, codigo, material, color, marca, industria, cantXPaquete, precioSFU, precioSFP, precioCFU, precioCFP, familia, detalle', 'safe', 'on'=>'search'),
+			array('idProducto, servicio, codigo, material, color, marca, industria, cantXPaquete, precioSFU, precioSFP, precioCFU, precioCFP, familia, detalle', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,6 +60,7 @@ class Producto extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'almacenCTPs' => array(self::HAS_MANY, 'AlmacenCTP', 'idProducto'),
 			'almacenProductos' => array(self::HAS_MANY, 'AlmacenProducto', 'idProducto'),
 			'movimientoAlmacens' => array(self::HAS_MANY, 'MovimientoAlmacen', 'idProducto'),
 		);
@@ -70,16 +73,17 @@ class Producto extends CActiveRecord
 	{
 		return array(
 			'idProducto' => 'Id Producto',
+			'servicio' => 'Servicio',
 			'codigo' => 'Codigo',
 			'material' => 'Material',
-			'color' => 'Color',
+			'color' => 'Color/Formato',
 			'marca' => 'Marca',
 			'industria' => 'Industria',
 			'cantXPaquete' => 'Cant Xpaquete',
-			'precioSFU' => 'Precio Sf Unidad',
-			'precioSFP' => 'Precio Sf Paquete',
-			'precioCFU' => 'Precio Cf Unidad',
-			'precioCFP' => 'Precio Cf Paquete',
+			'precioSFU' => 'Precio Sinfu',
+			'precioSFP' => 'Precio Sfp',
+			'precioCFU' => 'Precio Cfu',
+			'precioCFP' => 'Precio Cfp',
 			'familia' => 'Familia',
 			'detalle' => 'Detalle',
 		);
@@ -104,6 +108,7 @@ class Producto extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('idProducto',$this->idProducto);
+		$criteria->compare('servicio',$this->servicio);
 		$criteria->compare('codigo',$this->codigo,true);
 		$criteria->compare('material',$this->material,true);
 		$criteria->compare('color',$this->color,true);

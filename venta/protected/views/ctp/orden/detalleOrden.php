@@ -53,7 +53,7 @@ if(count($detalle)>=1)
 	</div>
 	
 	<div class="col-sm-5">
-	
+	<?php if($ctp->tipoCTP ==1){?>
 		<div class="form-group">
 			<?php echo CHtml::activeLabelEx($ctp,"montoVenta",array('class'=>'control-label col-sm-4'))?>
 		    <div class="col-sm-8">
@@ -77,7 +77,7 @@ if(count($detalle)>=1)
 		    </div>
 		    <?php echo CHtml::error($ctp,"montoCambio",array('class'=>'label label-danger')); ?>
 		</div>
-		
+	<?php }?>
 	</div>
 	
 </div>

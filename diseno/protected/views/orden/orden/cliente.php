@@ -16,7 +16,7 @@
 <div class="form-group col-sm-6">
 	<?php echo CHtml::activeLabelEx($ctp,'responsable',array('class'=>'control-label col-sm-4')); ?>
 	<div class="col-sm-8">
-		<?php echo CHtml::activeTextField($ctp,'responsable',array('class'=>'form-control input-sm',"id"=>"NitCi")); ?>
+		<?php echo CHtml::activeTextField($ctp,'responsable',array('class'=>'form-control input-sm')); ?>
 	</div>
 	<?php echo CHtml::error($ctp,'responsable',array('class'=>'label label-danger')); ?>
 </div>
@@ -24,7 +24,7 @@
 <div class="form-group col-sm-6">
 	<?php echo CHtml::activeLabelEx($cliente,'telefono',array('class'=>'control-label col-sm-4')); ?>
 	<div class="col-sm-8">
-		<?php echo CHtml::activeTextField($cliente,'telefono',array('class'=>'form-control input-sm',"id"=>"NitCi")); ?>
+		<?php echo CHtml::activeTextField($cliente,'telefono',array('class'=>'form-control input-sm')); ?>
 	</div>
 	<?php echo CHtml::error($cliente,'telefono',array('class'=>'label label-danger')); ?>
 </div>
@@ -37,7 +37,7 @@ Yii::app()->getClientScript()->registerScript("ajax_cliente",
 		nitCi = jQuery.trim(nitCi);
 		if(nitCi.length>0){
 	        $.ajax({
-	            url: '".CHtml::normalizeUrl(array('/distribuidora/ajaxCliente'))."', 
+	            url: '".CHtml::normalizeUrl(array('/orden/ajaxCliente'))."', 
 	            type: 'GET', 
 	            data: { nitCi: nitCi},
 	            success: function (data){ 

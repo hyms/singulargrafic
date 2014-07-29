@@ -6,6 +6,27 @@
 
 <h3><?php echo "Ordenes de trabajo";?></h3>
 <?php 
+$sw=0;
+
+
+if(!empty($estado))
+	$sw=$estado;
+if($sw==1)
+{
+$this->widget('zii.widgets.CMenu',array(
+				'htmlOptions' => array('class' => 'nav nav-tabs hidden-print'),
+				'activeCssClass'	=> 'active',
+				'submenuHtmlOptions' => array('class' => 'dropdown-menu'),
+				'encodeLabel' => false,
+				'items'=>array(
+							array('label'=>'Cliente', 'url'=>array('ctp/ordenes','t'=>1)),
+							array('label'=>'Interna', 'url'=>array('ctp/ordenes','t'=>2)),
+							array('label'=>'Repeticion', 'url'=>array('ctp/ordenes','t'=>3)),
+						),
+				));
+} 
+?>
+<?php 
 $this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$ordenes,
 		'itemsCssClass' => 'table table-hover table-condensed',
@@ -21,7 +42,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			),
 			array(
 					'header'=>'Apellido Cliente',
-					'value'=>'$data->idCliente0->apellido',
+					'value'=>'(isset($data->idCliente0->apellido))?$data->idCliente0->apellido:""',
+					//'value'=>'',
 			),
 			array(
 					'header'=>'Costo',
@@ -35,7 +57,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'($data->estado==2)?CHtml::link("imprimir",array("ctp/preview","id"=>$data->idCTP)):""',
+					'value'=>'($data->estado==2)?CHtml::link("imprimir",array("ctp/preview","id"=>$data->idCTP)):""',	
 			),
 		)
 	));

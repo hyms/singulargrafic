@@ -216,6 +216,11 @@ class InventarioController extends Controller
 		));		
 	}
 	
+	public function actionMatrizCTP()
+	{
+		
+	}
+	
 	private function createExcel($columnsTitle,$content,$sum=array(),$title="")
 	{
 		if($title=="")

@@ -42,19 +42,19 @@
 echo "
 <script>
 	$('#stockUnidad_". $index ."').blur(function(e){ 
-	    $('#costoTotal_". $index ."').val(suma(suma($('#stockUnidad_".  $index ."').val()*$('#costoUnidad_". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#costoPaquete_". $index ."').val()),$('#adicional_". $index ."').val()).toFixed(1));
+	    $('#costoTotal_". $index ."').val(redondeo(suma(suma($('#stockUnidad_".  $index ."').val()*$('#costoUnidad_". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#costoPaquete_". $index ."').val()),$('#adicional_". $index ."').val())));
 		calcular_total();
 		return true;
 	});
 	
 	$('#stockPaquete_". $index ."').blur(function(e){ 
-	    $('#costoTotal_". $index ."').val(suma(suma($('#stockUnidad_". $index ."').val()*$('#costoUnidad_". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#costoPaquete_". $index ."').val()),$('#adicional_". $index ."').val()).toFixed(1));
+	    $('#costoTotal_". $index ."').val(redondeo(suma(suma($('#stockUnidad_". $index ."').val()*$('#costoUnidad_". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#costoPaquete_". $index ."').val()),$('#adicional_". $index ."').val())));
 		calcular_total();
 	  	return true;
 	});
 	
 	$('#adicional_". $index ."').blur(function(e){ 
-	    $('#costoTotal_". $index ."').val(suma(suma($('#stockUnidad_". $index ."').val()*$('#costoUnidad_". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#costoPaquete_". $index ."').val()),$('#adicional_". $index ."').val()).toFixed(1));
+	    $('#costoTotal_". $index ."').val(redondeo(suma(suma($('#stockUnidad_". $index ."').val()*$('#costoUnidad_". $index ."').val(),$('#stockPaquete_". $index ."').val()*$('#costoPaquete_". $index ."').val()),$('#adicional_". $index ."').val())));
 		calcular_total();
 	  	return true;
 	});

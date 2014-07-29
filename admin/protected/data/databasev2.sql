@@ -49,6 +49,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table  `TiposClientes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS  `TiposClientes` ;
+
+CREATE  TABLE IF NOT EXISTS  `TiposClientes` (
+  `idTiposClientes` INT NOT NULL ,
+  `nombre` VARCHAR(50) NULL ,
+  PRIMARY KEY (`idTiposClientes`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table  `cliente`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS  `cliente` ;
@@ -62,7 +74,14 @@ CREATE  TABLE IF NOT EXISTS  `cliente` (
   `fechaRegistro` DATETIME NULL ,
   `telefono` VARCHAR(20) NULL ,
   `direccion` VARCHAR(100) NULL ,
-  PRIMARY KEY (`idCliente`) )
+  `idTiposClientes` INT NULL ,
+  PRIMARY KEY (`idCliente`) ,
+  INDEX `fk_cliente_TiposClientes1` (`idTiposClientes` ASC) ,
+  CONSTRAINT `fk_cliente_TiposClientes1`
+    FOREIGN KEY (`idTiposClientes` )
+    REFERENCES  `TiposClientes` (`idTiposClientes` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -492,6 +511,27 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table  `almacenCTP`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS  `almacenCTP` ;
+
+CREATE  TABLE IF NOT EXISTS  `almacenCTP` (
+  `idAlmacenCTP` INT NOT NULL ,
+  `stock` INT NOT NULL ,
+  `idAlmacen` INT NULL ,
+  `idMatrizPrecios` INT NULL ,
+  `idProducto` INT NULL ,
+  PRIMARY KEY (`idAlmacenCTP`) ,
+  INDEX `fk_almacenCTP_producto1` (`idProducto` ASC) ,
+  CONSTRAINT `fk_almacenCTP_producto1`
+    FOREIGN KEY (`idProducto` )
+    REFERENCES  `producto` (`idProducto` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table  `detalleCTP`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS  `detalleCTP` ;
@@ -499,9 +539,9 @@ DROP TABLE IF EXISTS  `detalleCTP` ;
 CREATE  TABLE IF NOT EXISTS  `detalleCTP` (
   `idDetalleCTP` INT NOT NULL AUTO_INCREMENT ,
   `idCTP` INT NULL ,
-  `idAlmacenProducto` INT NULL ,
+  `idAlmacenCTP` INT NULL ,
   `nroPlacas` INT NULL ,
-  `formato` VARCHAR(100) NULL ,
+  `formato` VARCHAR(50) NULL ,
   `trabajo` VARCHAR(100) NULL ,
   `pinza` INT NULL ,
   `resolucion` DOUBLE NULL ,
@@ -514,15 +554,15 @@ CREATE  TABLE IF NOT EXISTS  `detalleCTP` (
   `K` TINYINT(1) NULL ,
   PRIMARY KEY (`idDetalleCTP`) ,
   INDEX `fk_detalleCTP_CTP1` (`idCTP` ASC) ,
-  INDEX `fk_detalleCTP_almacenProducto1` (`idAlmacenProducto` ASC) ,
+  INDEX `fk_detalleCTP_almacenCTP1` (`idAlmacenCTP` ASC) ,
   CONSTRAINT `fk_detalleCTP_CTP1`
     FOREIGN KEY (`idCTP` )
     REFERENCES  `CTP` (`idCTP` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_detalleCTP_almacenProducto1`
-    FOREIGN KEY (`idAlmacenProducto` )
-    REFERENCES  `almacenProducto` (`idAlmacenProducto` )
+  CONSTRAINT `fk_detalleCTP_almacenCTP1`
+    FOREIGN KEY (`idAlmacenCTP` )
+    REFERENCES  `almacenCTP` (`idAlmacenCTP` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -619,6 +659,74 @@ CREATE  TABLE IF NOT EXISTS  `cajaChicaTipo` (
   CONSTRAINT `fk_cajaChicaTipo_cajaChica1`
     FOREIGN KEY (`idcajaChica` )
     REFERENCES  `cajaChica` (`idcajaChica` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table  `horario`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS  `horario` ;
+
+CREATE  TABLE IF NOT EXISTS  `horario` (
+  `idHorario` INT NOT NULL ,
+  `inicio` TIME NULL ,
+  `final` TIME NULL ,
+  `prioridad` INT NULL ,
+  PRIMARY KEY (`idHorario`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table  `cantidadCTP`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS  `cantidadCTP` ;
+
+CREATE  TABLE IF NOT EXISTS  `cantidadCTP` (
+  `idCantidadCTP` INT NOT NULL ,
+  `Inicio` INT NULL ,
+  `final` INT NULL ,
+  PRIMARY KEY (`idCantidadCTP`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table  `MatrizPreciosCTP`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS  `MatrizPreciosCTP` ;
+
+CREATE  TABLE IF NOT EXISTS  `MatrizPreciosCTP` (
+  `idMatrizPreciosCTP` INT NOT NULL ,
+  `idTiposClientes` INT NULL ,
+  `idHorario` INT NULL ,
+  `idAlmacenCTP` INT NULL ,
+  `idCantidad` INT NULL ,
+  `precioSF` DOUBLE NULL ,
+  `precioCF` DOUBLE NULL ,
+  PRIMARY KEY (`idMatrizPreciosCTP`) ,
+  INDEX `fk_MatrizPreciosCTP_almacenCTP1` (`idAlmacenCTP` ASC) ,
+  INDEX `fk_MatrizPreciosCTP_horario1` (`idHorario` ASC) ,
+  INDEX `fk_MatrizPreciosCTP_cantidadCTP1` (`idCantidad` ASC) ,
+  INDEX `fk_MatrizPreciosCTP_TiposClientes1` (`idTiposClientes` ASC) ,
+  CONSTRAINT `fk_MatrizPreciosCTP_almacenCTP1`
+    FOREIGN KEY (`idAlmacenCTP` )
+    REFERENCES  `almacenCTP` (`idAlmacenCTP` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_MatrizPreciosCTP_horario1`
+    FOREIGN KEY (`idHorario` )
+    REFERENCES  `horario` (`idHorario` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_MatrizPreciosCTP_cantidadCTP1`
+    FOREIGN KEY (`idCantidad` )
+    REFERENCES  `cantidadCTP` (`idCantidadCTP` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_MatrizPreciosCTP_TiposClientes1`
+    FOREIGN KEY (`idTiposClientes` )
+    REFERENCES  `TiposClientes` (`idTiposClientes` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

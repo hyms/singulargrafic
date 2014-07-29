@@ -146,6 +146,28 @@ class ReportController extends Controller
 		$this->render('venta',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2));
 	}
 	
+	public function actionVentaDetalle()
+	{
+		if(isset($_GET['id']))
+		{
+			$ventas = Venta::model()
+			->with("idCliente0")
+			->with("detalleVentas")
+			->with("detalleVentas.idAlmacenProducto0")
+			->with("detalleVentas.idAlmacenProducto0.idProducto0")
+			->with("idCajaMovimientoVenta0")
+			->with("idCajaMovimientoVenta0.idUser0")
+			->with("idCajaMovimientoVenta0.idUser0.idEmpleado0")
+			->findByPk($_GET['id']);
+			if($ventas!=null)
+				$this->renderPartial('venta/detalle',array('venta'=>$ventas));
+			else
+				$this->redirect(array('report/venta'));
+		}
+		else
+			throw new CHttpException(400,'Petición no válida.');
+	}
+	
 	public function actionProducto()
 	{
 		$this->render('producto');
@@ -155,6 +177,7 @@ class ReportController extends Controller
 	{
 		$this->render('cliente');
 	}
+	
 	
 	public function verifyModel($model)
 	{

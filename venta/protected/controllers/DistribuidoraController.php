@@ -71,25 +71,23 @@ class DistribuidoraController extends Controller
 		if(empty($row->serie))
 			$row->serie = 65;
 		$venta->numero = $row->numero +1;
-		if($row->numero==1001)
-		{
+		if($row->numero==1001){
 			$row->numero=1;
 			$row->serie++;
 			if($row->serie==91)
 				$row->serie = 65;
 		}
+		
 		$venta->serie = $row->serie;
 		$venta->codigo = chr($venta->serie)."P-".$venta->numero."-".date("y");
 		$venta->fechaVenta = date("Y-m-d H:i:s");
 		$venta->formaPago = 0;
 		$venta->tipoVenta = 1;
-		//$venta->idCaja = $caja->idCaja;
 		//end default values
 		
 		//init filter
 		$productos->unsetAttributes();
-		if (isset($_GET['AlmacenProducto']))
-		{
+		if (isset($_GET['AlmacenProducto'])){
 			$productos->attributes = $_GET['AlmacenProducto'];
 			$productos->color = $_GET['AlmacenProducto']['color'];
 			$productos->material = $_GET['AlmacenProducto']['material'];
@@ -101,8 +99,7 @@ class DistribuidoraController extends Controller
 		//end filter
 		
 		$swc=0; $swv=0;
-		if(isset($_POST['Cliente']))
-		{
+		if(isset($_POST['Cliente'])){
 			$cliente = Cliente::model()->find('nitCi="'.$_POST['Cliente']['nitCi'].'"');
 			if($cliente==null)
 				$cliente = new Cliente;
@@ -121,12 +118,10 @@ class DistribuidoraController extends Controller
 			if(empty($row))
 				$row=new Venta;
 			
-			
 			if(empty($row->serie) && $venta->tipoVenta==1)
 				$row->serie = 65;
 			$venta->numero = $row->numero +1;
-			if($row->numero==1001 && $venta->tipoVenta==1)
-			{
+			if($row->numero==1001 && $venta->tipoVenta==1){
 				$row->numero=1;
 				$row->serie++;
 				if($row->serie==91)
@@ -139,8 +134,7 @@ class DistribuidoraController extends Controller
 				$venta->codigo = $venta->numero."-P";
 			
 			$venta->estado = 1;
-			if($venta->formaPago==1)
-			{
+			if($venta->formaPago==1){
 				$venta->estado = 2;
 				if(!empty($_POST['Venta']['fechaPlazo']))
 					$venta->fechaPlazo = date("Y-m-d",strtotime($_POST['Venta']['fechaPlazo']));
@@ -156,80 +150,62 @@ class DistribuidoraController extends Controller
 			$detalle = array();
 			$i=0;
 			$det=count($_POST['DetalleVenta']);
-			foreach ($_POST['DetalleVenta'] as $item)
-			{
+			foreach ($_POST['DetalleVenta'] as $item){
 				array_push($detalle,new DetalleVenta);
 				$detalle[$i]->attributes = $item;
 				if($detalle[$i]->validate())
-				{
 					$det--;
-				}
 				$i++;
 			}
 		}
 		
-		if($swc==1 && $swv==1 && $det==0)
-		{
+		if($swc==1 && $swv==1 && $det==0){
 			$venta->idCliente = $cliente->idCliente;
 				
-			if($venta->save())
-			{
+			if($venta->save()){
 				$det=count($detalle);
 				$almacenes=array();	$i=0;
-				foreach($detalle as $item)
-				{
+				foreach($detalle as $item){
 					$item->idVenta = $venta->idVenta;
-					if($item->validate())
-					{
+					if($item->validate()){
 						array_push($almacenes,AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto));
 						$almacenes[$i]->stockU = $almacenes[$i]->stockU - $item->cantidadU;
-						if($almacenes[$i]->stockU<0)
-						{
+						if($almacenes[$i]->stockU<0){
 							$almacenes[$i]->stockP = $almacenes[$i]->stockP - 1;
 							$almacenes[$i]->stockU = $almacenes[$i]->stockU + $almacenes[$i]->idProducto0->cantXPaquete;
 						}
 						$almacenes[$i]->stockP = $almacenes[$i]->stockP - $item->cantidadP;
-						if($almacenes[$i]->stockP<0)
-						{
-							
+						if($almacenes[$i]->stockP<0){
 							$venta->addError('obs', 'No existen suficientes Insumos');
 							$venta->delete();
 							break;
 						}
-						else
-						{
+						else{
 							$det--; $i++;
 						}
 					}
-					else
-					{
+					else{
 						$venta->delete();
 						break;
 					}
 				}
 		
-				if($det==0)
-				{
+				if($det==0){
 					$i=0;
-					foreach ($detalle as $item)
-					{
-						if($item->save())
-						{
+					foreach ($detalle as $item){
+						if($item->save()){
 							$almacenes[$i]->save();
 						}
 						$i++;
 					}
-					if($venta->formaPago==0)
-					{
+					if($venta->formaPago==0){
 						$cajaMovimiento->monto = $venta->montoPagado-$venta->montoCambio;
 					}
-					if($venta->formaPago==1)
-					{
+					if($venta->formaPago==1){
 						$cajaMovimiento->monto = $venta->montoPagado;
 					}
 					$cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
-					if($cajaMovimiento->save())
-					{
+					if($cajaMovimiento->save()){
 						$caja->saldo = $caja->saldo + $cajaMovimiento->monto;
 						$venta->idCajaMovimientoVenta = $cajaMovimiento->idCajaMovimientoVenta; 
 					}
@@ -237,8 +213,7 @@ class DistribuidoraController extends Controller
 					if($caja->save()&& $venta->save())
 						$this->redirect(array('preview','id'=>$venta->idVenta));
 				}
-				else
-				{
+				else{
 					$venta->delete();
 				}
 				//finish section for save datas
@@ -252,7 +227,6 @@ class DistribuidoraController extends Controller
 				'detalle'=>$detalle,
 				'venta'=>$venta,
 		));
-		
 	}
 	
 	public function actionFactura()
@@ -267,8 +241,7 @@ class DistribuidoraController extends Controller
 		//init seccion on filter
 	
 		$productos->unsetAttributes();
-		if (isset($_GET['AlmacenProducto']))
-		{
+		if (isset($_GET['AlmacenProducto'])){
 			$productos->attributes = $_GET['AlmacenProducto'];
 			$productos->color = $_GET['AlmacenProducto']['color'];
 			$productos->material = $_GET['AlmacenProducto']['material'];
@@ -278,23 +251,21 @@ class DistribuidoraController extends Controller
 			$productos->codigo = $_GET['AlmacenProducto']['codigo'];
 		}
 		
-		if(isset($_POST['Cliente']))
-		{
+		if(isset($_POST['Cliente'])){
 			$cliente->attributes = $_POST['Cliente'];
 		}
-		if(isset($_POST['Venta']))
-		{
+		if(isset($_POST['Venta'])){
 			$venta->attributes = $_POST['Venta'];
 			if(isset($_POST['Venta']['fechaPlazo']))
 				$venta->fechaPlazo = $_POST['Venta']['fechaPlazo'];
+			
 			$row = Venta::model()->find(array("condition"=>"tipoVenta=".$venta->tipoVenta,'order'=>'fechaVenta Desc'));
 			if(empty($row))
 				$row=new Venta;
 			if(empty($row->serie) && $venta->tipoVenta==1)
 				$row->serie = 65;
 			$venta->numero = $row->numero +1;
-			if($row->numero==1001 && $venta->tipoVenta==1)
-			{
+			if($row->numero==1001 && $venta->tipoVenta==1){
 				$row->numero;
 				$row->serie++;
 				if($row->serie==91)
@@ -307,23 +278,19 @@ class DistribuidoraController extends Controller
 				$venta->codigo = $venta->numero."-P";
 			$venta->fechaVenta = date("Y-m-d H:i:s");
 			$total=0;
-			if(isset($_POST['DetalleVenta']))
-			{
+			if(isset($_POST['DetalleVenta'])){
 				$i=0;
-					
-				foreach ($_POST['DetalleVenta'] as $item)
-				{
+				
+				foreach ($_POST['DetalleVenta'] as $item){
 					array_push($detalle,new DetalleVenta);
 					$detalle[$i]->attributes = $item;
 					$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($detalle[$i]->idAlmacenProducto);
-					if($venta->tipoVenta==0)
-					{
+					if($venta->tipoVenta==0){
 						$detalle[$i]->costoTotal=($almacen->idProducto0->precioCFU*$detalle[$i]->cantidadU)+($almacen->idProducto0->precioCFP*$detalle[$i]->cantidadP)+$detalle[$i]->costoAdicional;
 						$detalle[$i]->costoP = $almacen->idProducto0->precioCFP;
 						$detalle[$i]->costoU = $almacen->idProducto0->precioCFU;
 					}
-					else
-					{
+					else{
 						$detalle[$i]->costoTotal=($almacen->idProducto0->precioSFU*$detalle[$i]->cantidadU)+($almacen->idProducto0->precioSFP*$detalle[$i]->cantidadP)+$detalle[$i]->costoAdicional;
 						$detalle[$i]->costoP = $almacen->idProducto0->precioSFP;
 						$detalle[$i]->costoU = $almacen->idProducto0->precioSFU;
@@ -334,8 +301,7 @@ class DistribuidoraController extends Controller
 			}	
 			
 			$venta->montoVenta=$total;
-			if($venta->montoDescuento!=null)
-			{
+			if($venta->montoDescuento!=null){
 				$venta->montoVenta=$venta->montoVenta-$venta->montoDescuento;
 			}
 			$venta->montoCambio=$venta->montoPagado - $venta->montoVenta;
@@ -355,8 +321,7 @@ class DistribuidoraController extends Controller
 	{
 		$ventas = new Venta('searchVenta');
 		$ventas->unsetAttributes();
-		if (isset($_GET['Venta']))
-		{
+		if (isset($_GET['Venta'])){
 			$ventas->attributes = $_GET['Venta'];
 			$ventas->codigos = $_GET['Venta']['codigos'];
 			$ventas->nit = $_GET['Venta']['nit'];
@@ -370,20 +335,17 @@ class DistribuidoraController extends Controller
 		if(isset($_POST['Venta']['idVenta']))
 			$_GET['id']=$_POST['Venta']['idVenta'];
 		
-		if(isset($_GET['id']))
-		{
+		if(isset($_GET['id'])){
 			$venta = $this->verifyModel(Venta::model()->with('idCliente0')->findByPk($_GET['id']));
 			$cajaMovimiento= CajaMovimientoVenta::model()->findByPk($venta->idCajaMovimientoVenta);
 			$cliente = $venta->idCliente0;
 			$detalle = DetalleVenta::model()->findAll('idVenta='.$venta->idVenta);
-			//print_r($detalle);
-			$productos = new AlmacenProducto('searchDistribuidora');
-			$caja = Caja::model()->findByPk($cajaMovimiento->idCaja);
-			//init seccion on filter
 			
+			$caja = Caja::model()->findByPk($cajaMovimiento->idCaja);
+			$productos = new AlmacenProducto('searchDistribuidora');
+			//init seccion on filter
 			$productos->unsetAttributes();
-			if (isset($_GET['AlmacenProducto']))
-			{
+			if (isset($_GET['AlmacenProducto'])){
 				$productos->attributes = $_GET['AlmacenProducto'];
 				$productos->color = $_GET['AlmacenProducto']['color'];
 				$productos->material = $_GET['AlmacenProducto']['material'];
@@ -393,23 +355,20 @@ class DistribuidoraController extends Controller
 				$productos->codigo = $_GET['AlmacenProducto']['codigo'];
 			}
 			$swc=0;
-			if(isset($_POST['Cliente']))
-			{
+			if(isset($_POST['Cliente'])){
 				$cliente->attributes = $_POST['Cliente'];
 				if($cliente->save())
 					$swc=1;
 			}
 			$swv=0;
-			if(isset($_POST['Venta']))
-			{
+			if(isset($_POST['Venta'])){
 				$venta->attributes = $_POST['Venta'];
 				$venta->estado = 1;
 				if($venta->tipoVenta==1)
 					$venta->codigo = chr($venta->serie)."P-".$venta->numero."-".date("y");
 				else
 					$venta->codigo = $venta->numero."-P";
-				if($venta->formaPago==1)
-				{
+				if($venta->formaPago==1){
 					$venta->estado = 2;
 					if(!empty($_POST['Venta']['fechaPlazo']))
 						$venta->fechaPlazo = date("Y-m-d",strtotime($_POST['Venta']['fechaPlazo']));
@@ -420,19 +379,16 @@ class DistribuidoraController extends Controller
 				if($venta->validate())
 				{
 					$saldo1=0;$saldo2=0;
-					if($venta->formaPago==0)
-					{
+					if($venta->formaPago==0){
 						$saldo1=$venta->montoPagado-$venta->montoCambio;
 						$saldo2=$ventabkp->montoPagado-$ventabkp->montoCambio;
 					}
-					else
-					{
+					else{
 						$saldo1=$venta->montoPagado;
 						$saldo2=$ventabkp->montoPagado;
 					}
 					$cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
-					if($saldo1!=$saldo2)
-					{
+					if($saldo1!=$saldo2){
 						$caja->saldo = $caja->saldo - $saldo2 + $saldo1;
 						$cajaMovimiento->monto = $saldo1;
 					}
@@ -442,19 +398,15 @@ class DistribuidoraController extends Controller
 				}	
 			}
 			$det=1;
-			if(isset($_POST['DetalleVenta']))
-			{
+			if(isset($_POST['DetalleVenta'])){
 				$detalle2 = array();
 				$i=0;
 				$det=count($_POST['DetalleVenta']);
-				foreach ($_POST['DetalleVenta'] as $item)
-				{
+				foreach ($_POST['DetalleVenta'] as $item){	
 					array_push($detalle2,new DetalleVenta);
 					$detalle2[$i]->attributes = $item;
 					if($detalle2[$i]->validate())
-					{
 						$det--;
-					}
 					$i++;
 				}
 			}
@@ -736,17 +688,6 @@ class DistribuidoraController extends Controller
 				$productos->codigo = $_GET['AlmacenProducto']['codigo'];
 			}
 			//end filter
-			/*$productos=new CActiveDataProvider('AlmacenProducto',
-					array(
-							'criteria'=>array(
-									'condition'=>'idAlmacen=2',
-									'order'=>'idProducto0.material',
-									'with'=>array('idProducto0'),
-							),
-							'pagination'=>array(
-									'pageSize'=>'20',
-							),
-					));*/
 			$index=1;
 			$this->renderPartial('distribuidora2',array('productos'=>$productos,'index'=>$index));
 		}
@@ -762,6 +703,7 @@ class DistribuidoraController extends Controller
 			$arqueo->fechaArqueo = date("Y-m-d H:i:s");
 			$arqueo->idUser = Yii::app()->user->id;
 			$arqueo->idCaja = 2;
+			$end=$arqueo->fechaVentas." 23:59:59";
 			
 			$movimiento = new CajaMovimientoVenta;
 			$movimiento->motivo = "Traspaso de efectivo a Administracion";
@@ -792,66 +734,70 @@ class DistribuidoraController extends Controller
 						$recibos = $recibos + $tmp->idCajaMovimientoVenta0->monto;
 					}
 				}
-				$saldo = CajaArqueo::model()->find(array('condition'=>'idCaja=2','order'=>'idCajaArqueo Desc'));
-				$arqueo->saldo = $saldo->saldo+$ventas+$recibos-$movimiento->monto;
-				if($caja->saldo >=0){
-				if($movimiento->monto==0)
-				{
-					$arqueo->comprobante="";
-					
-					if($arqueo->save())
-					{
-						//$start=$arqueo->fechaVentas." 00:00:00";
-						$end=$arqueo->fechaVentas." 23:59:59";
-						//$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
-						foreach ($cajaMovimiento as $item)
-						{
-							$item->arqueo = $arqueo->idCajaArqueo;
-							$item->save();
-						}
-						$arqueos=new CActiveDataProvider('CajaArqueo',
-								array(
-										'criteria'=>array(
-												'condition'=>'idCaja=2',
-												'order'=>'fechaArqueo Desc',
-												'with'=>array('idUser0','idUser0.idEmpleado0'),
-										),
-										'pagination'=>array(
-												'pageSize'=>'20',
-										),
-								));
-						$this->render('arqueos',array('arqueos'=>$arqueos,));
-					}					
-				}
+				$saldo = CajaArqueo::model()->find(array('condition'=>"idCaja=2",'order'=>'idCajaArqueo Desc'));
+				if(empty($saldo))
+					$saldo = 0;
 				else
-				{
-					if($movimiento->monto > 0)
-					{
-						if($arqueo->save() && $caja->save())
+					$saldo = $saldo->saldo;
+				
+				$arqueo->saldo = $saldo+$ventas+$recibos-$movimiento->monto;
+				if($caja->saldo >=0){
+					if($movimiento->monto==0){
+						$arqueo->comprobante="";
+						
+						if($arqueo->save())
 						{
 							//$start=$arqueo->fechaVentas." 00:00:00";
-							$end=$arqueo->fechaVentas." 23:59:59";
-							$movimiento->save();
+							
 							//$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
-							$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and fechaMovimiento<='".$end."'"));
 							foreach ($cajaMovimiento as $item)
 							{
 								$item->arqueo = $arqueo->idCajaArqueo;
 								$item->save();
 							}
-							$cajaAdmin= Caja::model()->findByPk(1);
-							$cajaAdmin->saldo = $cajaAdmin->saldo + $movimiento->monto;
-							$cajaAdmin->save();
-							$this->redirect(array('distribuidora/comprobante', 'id'=>$arqueo->idCajaArqueo));
-						}
-						
+							$arqueos=new CActiveDataProvider('CajaArqueo',
+									array(
+											'criteria'=>array(
+													'condition'=>'idCaja=2',
+													'order'=>'fechaArqueo Desc',
+													'with'=>array('idUser0','idUser0.idEmpleado0'),
+											),
+											'pagination'=>array(
+													'pageSize'=>'20',
+											),
+									));
+							$this->render('arqueos',array('arqueos'=>$arqueos,));
+						}					
 					}
 					else
 					{
-						$movimiento->addError('monto',"El numero debe ser positivo");
-						$this->redirect(array('distribuidora/arqueo'));
+						if($movimiento->monto > 0)
+						{
+							if($arqueo->save() && $caja->save())
+							{
+								//$start=$arqueo->fechaVentas." 00:00:00";
+								$end=$arqueo->fechaVentas." 23:59:59";
+								$movimiento->save();
+								//$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
+								$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and fechaMovimiento<='".$end."'"));
+								foreach ($cajaMovimiento as $item)
+								{
+									$item->arqueo = $arqueo->idCajaArqueo;
+									$item->save();
+								}
+								$cajaAdmin= Caja::model()->findByPk(1);
+								$cajaAdmin->saldo = $cajaAdmin->saldo + $movimiento->monto;
+								$cajaAdmin->save();
+								$this->redirect(array('distribuidora/comprobante', 'id'=>$arqueo->idCajaArqueo));
+							}
+							
+						}
+						else
+						{
+							$movimiento->addError('monto',"El numero debe ser positivo");
+							$this->redirect(array('distribuidora/arqueo'));
+						}
 					}
-				}
 				}
 			}
 		}
@@ -884,10 +830,14 @@ class DistribuidoraController extends Controller
 					$recibos = $recibos + $tmp->idCajaMovimientoVenta0->monto;
 				}
 			}
-			$saldo = CajaArqueo::model()->find(array('condition'=>'idCaja=2','order'=>'idCajaArqueo Desc'));	
+			$saldo = CajaArqueo::model()->find(array('condition'=>"idCaja=2",'order'=>'idCajaArqueo Desc'));
+			if(empty($saldo))
+				$saldo = 0;
+			else
+				$saldo = $saldo->saldo;
 			$this->render("arqueo",
 					array(
-							'saldo'=>$saldo->saldo,
+							'saldo'=>$saldo,
 							'arqueo'=>$arqueo,
 							'caja'=>$caja,
 							'fecha'=>date('Y-m-d',strtotime($end)),
@@ -919,9 +869,19 @@ class DistribuidoraController extends Controller
 			$arqueo = CajaArqueo::model()
 						->with('cajaMovimientoVenta')
 						->find(array('condition'=>'idCajaArqueo='.$_GET['id'],'order'=>'cajaMovimientoVenta.fechaMovimiento Desc'));
+			$start =$arqueo->fechaVentas;
+			if(!empty($arqueo))
+			{
+				$arqueoA = CajaArqueo::model()->findByPk($arqueo->idCajaArqueo-1);
+				if(!empty($arqueoA))
+				{
+					$d=date("d",strtotime($arqueoA->fechaVentas))+1;
+					$start = date("Y-m",strtotime($arqueoA->fechaVentas))."-".$d." 00:00:00";
+				}
+			}
 			$venta = Venta::model()
 						->with('idCajaMovimientoVenta0')
-						->findAll(array('condition'=>"fechaVenta>='".$arqueo->fechaVentas."' and fechaVenta<='".date("Y-m-d",strtotime($arqueo->fechaVentas))." 23:59:59'"));
+						->findAll(array('condition'=>"fechaVenta>='".$start."' and fechaVenta<='".date("Y-m-d",strtotime($arqueo->fechaVentas))." 23:59:59'"));
 			$ventas = 0;
 			
 			foreach ($venta as $item)

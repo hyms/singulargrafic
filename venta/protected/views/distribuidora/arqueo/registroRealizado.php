@@ -7,8 +7,11 @@
 <?php
 
 $saldo = 0;
-$saldo = CajaArqueo::model()->findByPk($arqueo->idCajaArqueo-1);
-if(!isset($saldo))
+//$saldo = CajaArqueo::model()->findByPk($arqueo->idCajaArqueo-1);
+//$saldo = CajaArqueo::model()->find(array('condition'=>"idCajaArqueo=".($arqueo->idCajaArqueo-1)." and idCaja=2"));
+$saldo = CajaArqueo::model()->find(array('condition'=>"idCaja=2 and idCajaArqueo<".$arqueo->idCajaArqueo,'order'=>'idCajaArqueo Desc'));
+print_r($saldo);
+if(empty($saldo))
 	$saldo = 0;
 else
 	$saldo = $saldo->saldo;
