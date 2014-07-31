@@ -15,7 +15,9 @@ $this->breadcrumbs=array(
 
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
-	'dataProvider'=>$dataProvider,
+	//'dataProvider'=>$dataProvider,
+	'dataProvider'=>$dataProvider->searchInventarioGral(),
+	'filter'=>$dataProvider,
 	'itemsCssClass' => 'table table-hover table-condensed',
 	'htmlOptions' => array('class' => 'table-responsive'),
 	'columns'=>array(
@@ -26,15 +28,18 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		
 		array(
 				'header'=>'Codigo',
-				'value'=>'$data->idProducto0->codigo'
+				'value'=>'$data->idProducto0->codigo',
+				'filter'=>CHtml::activeTextField($dataProvider, 'codigo',array("class"=>"form-control")),
 		),
 		array(
 				'header'=>'Material',
-				'value'=>'$data->idProducto0->material'
+				'value'=>'$data->idProducto0->material',
+				'filter'=>CHtml::activeDropDownList($dataProvider,'material',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'material','select'=>'material','condition'=>'idAlmacen=1')),'material','material'),array("class"=>"form-control ",'empty'=>'')),
 		),
 		array(
 				'header'=>'Detalle Producto',
-				'value'=>'$data->idProducto0->color." ".$data->idProducto0->detalle." ".$data->idProducto0->marca'
+				'value'=>'$data->idProducto0->color." ".$data->idProducto0->detalle." ".$data->idProducto0->marca',
+				'filter'=>CHtml::activeTextField($dataProvider, 'detalle',array("class"=>"form-control")),
 		),
 		array(
 				'header'=>'Precio S/F',
@@ -46,7 +51,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		),
 		array(
 				'header'=>'Industria',
-				'value'=>'$data->idProducto0->industria'
+				'value'=>'$data->idProducto0->industria',
+				'filter'=>CHtml::activeDropDownList($dataProvider,'industria',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'industria','select'=>'industria','condition'=>'idAlmacen=1')),'industria','industria'),array("class"=>"form-control",'empty'=>'')),
 		),
 		array(
 				'header'=>'Cant.xPaqt.',

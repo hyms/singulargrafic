@@ -64,86 +64,61 @@ class ReportController extends Controller
 		$cond2="";
 		$factura="";
 		$f="";
-		if(isset($_GET['f']))
-		{
-			$f=$_GET['f'];
-			if($_GET['f']==0)
-			{
-				$factura=" and tipoVenta=0";
-			}
-			else
-			{
-				$factura=" and tipoVenta=1";
-			}
-		}
+		$saldo="";
+		$cf=array("report/venta",'f'=>0);
+		$sf=array("report/venta",'f'=>1);
+		$ventas = new Venta('searchDistribuidora');
+		
+		$ventas->unsetAttributes();
 		if(isset($_GET['d']) || isset($_GET['m']))
 		{
 			$d=date("d");
 			$m=date("m");
 			$y=date("Y");
-			$start=date("Y-m-d H:i:s"); $end=date("Y-m-d H:i:s");
-				
 			if(isset($_GET['d']))
 			{
-				$cond1=array("report/venta","f"=>0,"d"=>$_GET['d']);
-				$cond2=array("report/venta","f"=>1,"d"=>$_GET['d']);
 				$d=$_GET['d'];
 				if($d==0)
 				{
 					$m--;
 					$d=$this->getUltimoDiaMes($y, $m);
 				}
-				$start=$y."-".$m."-".$d." 00:00:00";
-				$end=$y."-".$m."-".$d." 23:59:59";
+				$ventas->fechaVenta = $y."-".$m."-".$d;
+				$cf=array("report/venta",'f'=>0,'d'=>$_GET['d']);
+				$sf=array("report/venta",'f'=>1,'d'=>$_GET['d']);
 			}
 			if(isset($_GET['m']))
 			{
-				$cond1=array("report/venta","f"=>0,"m"=>$_GET['m']);
-				$cond2=array("report/venta","f"=>1,"m"=>$_GET['m']);
 				$m=$_GET['m'];
-				$d=$this->getUltimoDiaMes($y, $m);
-				$start=$y."-".$m."-1 00:00:00";
-				$end=$y."-".$m."-".$d." 23:59:59";
+				$ventas->fechaVenta = $y."-".$m;
+				$cf=array("report/venta",'f'=>0,'m'=>$_GET['m']);
+				$sf=array("report/venta",'f'=>1,'m'=>$_GET['m']);
 			}
-			$condition="'".$start."'<=fechaVenta AND fechaVenta<='".$end."'";
-			$ventas = new CActiveDataProvider('Venta',
-					array('criteria'=>array(
-							'condition'=>$condition.$factura,
-							'with'=>array('idCliente0'),
-							'order'=>'fechaVenta ASC',
-					),
-							'pagination'=>array(
-									'pageSize'=>20,
-							),));
-				
+		
 		}
-		else
+		if(isset($_GET['f']))
+			$_GET['Venta']['tipoVenta']= $_GET['f'];
+		
+		//print_r($ventas);
+		if(isset($_GET['Venta']))
 		{
-			$cond1=array("report/venta","f"=>0);
-			$cond2=array("report/venta","f"=>1);
-			if($factura="")
-				$ventas = new CActiveDataProvider('Venta',
-						array('criteria'=>array(
-								'with'=>array('idCliente0'),
-								'order'=>'fechaVenta ASC',
-						),
-								'pagination'=>array(
-										'pageSize'=>20,
-								),));
-			else
-				$ventas = new CActiveDataProvider('Venta',
-						array('criteria'=>array(
-								'with'=>array('idCliente0'),
-								'condition'=>$factura,
-								'order'=>'fechaVenta ASC',
-						),
-								'pagination'=>array(
-										'pageSize'=>20,
-								),));
-				
+			$ventas->attributes = $_GET['Venta'];
+			
+			if(isset($_GET['Venta']['apellido']))
+			$ventas->apellido = $_GET['Venta']['apellido'];
+			if(isset($_GET['Venta']['nit']))
+			$ventas->nit = $_GET['Venta']['nit'];
+			
 		}
-		//$this->render('movimientos',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'cond3'=>$cond3));
-		$this->render('venta',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2));
+		
+		if(isset($_GET['d']))
+		{
+			$saldo = CajaArqueo::model()->find(array('condition'=>"idCaja=2 and fechaVentas<'".$ventas->fechaVenta."'",'order'=>'idCajaArqueo Desc'));
+			//print_r($saldo);
+			if(!empty($saldo))
+				$saldo = $saldo->saldo;
+		}
+		$this->render('venta',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'saldo'=>$saldo,'cf'=>$cf,'sf'=>$sf));
 	}
 	
 	public function actionVentaDetalle()

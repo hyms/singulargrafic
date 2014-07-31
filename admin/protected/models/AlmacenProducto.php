@@ -134,6 +134,44 @@ class AlmacenProducto extends CActiveRecord
 				
 		));
 	}
+	
+	public $industria;
+	public function searchInventarioGral()
+	{
+		$criteria=new CDbCriteria;
+		
+		$criteria->with= array('idProducto0',);
+		if(!empty($this->detalle))
+			$criteria->condition = 'idAlmacen=1 and (idProducto0.detalle like "%'.$this->detalle.'%" or idProducto0.color like "%'.$this->detalle.'%" or idProducto0.marca like "%'.$this->detalle.'%")';
+		else 
+			$criteria->condition = 'idAlmacen=1';
+		$criteria->order = 'idProducto0.Material,idProducto0.codigo, idProducto0.detalle'; 
+	
+		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
+		$criteria->compare('idProducto',$this->idProducto);
+		$criteria->compare('stockU',$this->stockU);
+		$criteria->compare('stockP',$this->stockP);
+		//$criteria->compare('idAlmacen',$this->idAlmacen);
+	
+		$criteria->compare('idProducto0.codigo',$this->codigo,true);
+		$criteria->compare('idProducto0.material',$this->material,true);
+		//$criteria->compare('idProducto0.detalle',$this->detalle,true);
+		//$criteria->compare('idProducto0.color',$this->detalle,true);
+		//$criteria->compare('idProducto0.marca',$this->detalle,true);
+		$criteria->compare('idProducto0.industria',$this->industria,true);
+		//$criteria->compare('concat(idProducto0.detalle, " ", idProducto0.color)', $this->detalle,true);
+		//$criteria->compare('CONCAT_WS(" ",idProducto0.detalle,idProducto0.color)',$this->detalle,true);
+		//$criteria->compare('idProducto0.cantXPaquete',$this->paquete,true);
+		//$criteria->compare('idProducto',$this->idProducto);
+		//$criteria->compare('stockU',$this->stockU);
+		//$criteria->compare('stockP',$this->stockP);
+		//$criteria->compare('idAlmacen',$this->idAlmacen);
+	
+		return new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
+	
+		));
+	}
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

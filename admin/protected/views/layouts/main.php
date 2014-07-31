@@ -56,7 +56,7 @@
 								array('label'=>'Banner', 'url'=>array('webpage/banner')),
 								array('label'=>'Paginas', 'url'=>array('webpage/pages')),
 						)),
-						
+						/*
 						array('label'=>'Empleados', 'url'=>array('empleado/index')),
 						array('label'=>'Clientes', 'url'=>array('cliente/index')),
 						array('label'=>'Administracion <b class="caret"></b>', 'url'=>array('#'),
@@ -84,7 +84,43 @@
 								array('label'=>'Editorial', 'url'=>array('#')),
 						)),
 						array('label'=>'Reportes', 'url'=>array('report/')),
-						
+						*/
+						array('label'=>'Administracion <b class="caret"></b>', 'url'=>array('#'),
+								'linkOptions'=> array(
+								'class' => 'dropdown-toggle',
+								'data-toggle' => 'dropdown',
+							),
+							'itemOptions' => array('class'=>'dropdown'),
+							'items'=>array(
+									array('label'=>'Inventario Gral', 'url'=>array('inventario/index')),
+									array('label'=>'Movimientos Almacenes', 'url'=>array('inventario/movimientos')),
+									array('label'=>'Cajas y Libro Mayor', 'url'=>array('caja/')),
+									array('label'=>'Recibos', 'url'=>array('#')),
+									array('label'=>'Empleados', 'url'=>array('empleado/index')),
+									array('label'=>'Clientes', 'url'=>array('cliente/index')),
+						)),
+							
+						array('label'=>'Distribuidora<b class="caret"></b>', 'url'=>array('#'),
+								'linkOptions'=> array(
+								'class' => 'dropdown-toggle',
+								'data-toggle' => 'dropdown',
+							),
+							'itemOptions' => array('class'=>'dropdown'),
+							'items'=>array(
+									array('label'=>'Inventario', 'url'=>array('stock/distribuidora')),
+						)),
+
+						array('label'=>'Pre-Prensa CTP<b class="caret"></b>', 'url'=>array('#'),
+								'linkOptions'=> array(
+								'class' => 'dropdown-toggle',
+								'data-toggle' => 'dropdown',
+							),
+							'itemOptions' => array('class'=>'dropdown'),
+							'items'=>array(
+									array('label'=>'Inventario', 'url'=>array('stock/ctp')),
+						)),
+						//array('label'=>'Imprenta', 'url'=>array('#')),
+						array('label'=>'Reportes', 'url'=>array('report/')),
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 					),

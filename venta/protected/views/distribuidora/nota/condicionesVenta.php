@@ -80,13 +80,24 @@ $('#Venta_formaPago_0').change(function(){
 $('#Venta_formaPago_1').change(function(){
 	formaPago(false);
 });
-				
+
+	function descuentoP(total,descuento)
+	{
+		if(descuento.indexOf('%')>0)
+		{
+			var tmp = parseInt(descuento.substring(0, descuento.length-1));
+			descuento = parseFloat((tmp/100)*total);
+			$('#descuento').val(redondeo(descuento));
+		}
+		total = redondeo(resta(total,descuento)); 
+		return total;
+	}
 $('#Descuento_0').change(function(){
 	var value;
 	if($('#Descuento_0').is(':checked'))
 	{
 		value = false;
-		$('#total').val(resta($('#total').val(),$('#descuento').val()).toFixed(1));
+		$('#total').val(descuentoP($('#total').val(),$('#descuento').val()));
 		cambio();
 	}
 	else
@@ -98,7 +109,7 @@ $('#Descuento_0').change(function(){
 });
 
 $('#descuento').blur(function(e){
-	$('#total').val(resta($('#total').val(),$('#descuento').val()).toFixed(1));
+	$('#total').val(descuentoP($('#total').val(),$('#descuento').val()));
 	cambio();
 });		
 ",CClientScript::POS_READY);?>

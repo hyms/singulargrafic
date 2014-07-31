@@ -13,32 +13,32 @@
 			array(
 					'header'=>'Codigo',
 					'value'=>'$data->idProducto0->codigo',
-					'filter'=>CHtml::activeTextField($productos, 'codigo',array("class"=>"form-control input-sm")),
+					'filter'=>CHtml::activeTextField($productos, 'codigo',array("class"=>"form-control")),
 			),
 			array(
 					'header'=>'Material',
 					'value'=>'$data->idProducto0->material',
-					'filter'=>CHtml::activeDropDownList($productos,'material',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'material','select'=>'material','condition'=>'idAlmacen=2')),'material','material'),array("class"=>"form-control input-sm",'empty'=>'')),
+					'filter'=>CHtml::activeDropDownList($productos,'material',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'material','select'=>'material','condition'=>'idAlmacen=2')),'material','material'),array("class"=>"form-control ",'empty'=>'')),
 			),
 			array(
 					'header'=>'Color',
 					'value'=>'$data->idProducto0->color',
-					'filter'=>CHtml::activeDropDownList($productos,'color',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'color','select'=>'color','condition'=>'idAlmacen=2')),'color','color'),array("class"=>"form-control input-sm",'empty'=>'')),
+					'filter'=>CHtml::activeDropDownList($productos,'color',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'color','select'=>'color','condition'=>'idAlmacen=2')),'color','color'),array("class"=>"form-control ",'empty'=>'')),
 			),
 			array(
 					'header'=>'Detalle',
 					'value'=>'$data->idProducto0->detalle',
-					'filter'=>CHtml::activeTextField($productos, 'detalle',array("class"=>"form-control input-sm")),
+					'filter'=>CHtml::activeTextField($productos, 'detalle',array("class"=>"form-control")),
 			),
 			array(
 					'header'=>'Industria',
 					'value'=>'$data->idProducto0->marca',
-					'filter'=>CHtml::activeDropDownList($productos,'marca',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'marca','select'=>'marca','condition'=>'idAlmacen=2')),'marca','marca'),array("class"=>"form-control input-sm",'empty'=>'')),
+					'filter'=>CHtml::activeDropDownList($productos,'marca',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'marca','select'=>'marca','condition'=>'idAlmacen=2')),'marca','marca'),array("class"=>"form-control",'empty'=>'')),
 			),
 			array(
 					'header'=>'Cant.xPaqt.',
 					'value'=>'$data->idProducto0->cantXPaquete',
-					'filter'=>CHtml::activeDropDownList($productos,'paquete',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'cantXPaquete','select'=>'cantXPaquete','condition'=>'idAlmacen=2')),'cantXPaquete','cantXPaquete'),array("class"=>"form-control input-sm",'empty'=>'')),
+					'filter'=>CHtml::activeDropDownList($productos,'paquete',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'cantXPaquete','select'=>'cantXPaquete','condition'=>'idAlmacen=2')),'cantXPaquete','cantXPaquete'),array("class"=>"form-control",'empty'=>'')),
 			),
 			array(
 					'header'=>'Precio CF',

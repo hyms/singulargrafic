@@ -1,4 +1,4 @@
-<h2>Distribuidora Inventario</h2>
+<h2>Pre-Prensa CTP Inventario</h2>
 <?php 
 	echo CHtml::link('Añadir',array('stock/ctpAdd'), array('class' => 'btn btn-default') );
 	

@@ -71,6 +71,7 @@ class InventarioController extends Controller
 				$this->createExcel($columnsTitle, $content);
 			}
 		}
+		/*
 		$dataProvider=new CActiveDataProvider('AlmacenProducto',
 				array(	
 						'criteria'=>array(
@@ -80,7 +81,20 @@ class InventarioController extends Controller
 						),
 						'pagination'=>array(
 						'pageSize'=>'20',
-				),));
+				),));*/
+		
+		$dataProvider = new AlmacenProducto('searchInventarioGral');
+		
+		$dataProvider->unsetAttributes();
+		if(isset($_GET['AlmacenProducto']))
+		{
+			$dataProvider->attributes = $_GET['AlmacenProducto'];
+			$dataProvider->codigo = $_GET['AlmacenProducto']['codigo'];
+			$dataProvider->industria = $_GET['AlmacenProducto']['industria'];
+			$dataProvider->material = $_GET['AlmacenProducto']['material'];
+			$dataProvider->detalle = $_GET['AlmacenProducto']['detalle'];
+		}
+		
 		$this->render('index',array(
 				'dataProvider'=>$dataProvider
 		));

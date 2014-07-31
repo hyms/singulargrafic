@@ -1,20 +1,24 @@
 <div class="row">
 <div class="text-center">
-<?php echo CHtml::link('Con Factura', $cond1, array("class"=>"btn btn-default hidden-print")); ?>
-<?php echo CHtml::link('Sin Factura', $cond2, array("class"=>"btn btn-default hidden-print")); ?>
-<?php echo CHtml::link('Imprimir', array("#"), array("class"=>"btn btn-default hidden-print")); ?>
+
+<?php echo CHtml::link('Con Factura', $cf, array("class"=>"btn btn-default hidden-print")); ?>
+<?php echo CHtml::link('Sin Factura', $sf, array("class"=>"btn btn-default hidden-print")); ?>
+<?php //echo CHtml::link('Imprimir', array("#"), array("class"=>"btn btn-default hidden-print")); ?>
 </div>
 </div>
 <div  style="height:500px; overflow:auto;">
 <?php 
 	$this->widget('zii.widgets.grid.CGridView', array(
-		'dataProvider'=>$ventas,
+		//'dataProvider'=>$ventas,
+		'dataProvider'=>$ventas->searchDistribuidora(),
+		'filter'=>$ventas,
+		'ajaxUpdate'=>false,
 		'itemsCssClass' => 'table table-hover table-condensed',
 		'htmlOptions' => array('class' => 'table-responsive'),
 		'columns'=>array(
 			array(
 					'header'=>'Nro',
-					'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+					'value'=>'($row+1)',
 			),
 			array(
 					'header'=>'Nº de Venta',
@@ -25,11 +29,13 @@
 					'header'=>'Apellido',
 					'type'=>'raw',
 					'value'=>'$data->idCliente0->apellido',
+					'filter'=>CHtml::activeTextField($ventas, 'apellido',array("class"=>"form-control input-sm")),
 			),
 			array(
 					'header'=>'NitCI',
 					'type'=>'raw',
 					'value'=>'$data->idCliente0->nitCi',
+					'filter'=>CHtml::activeTextField($ventas, 'nit',array("class"=>"form-control input-sm")),
 			),
 			array(
 					'header'=>'Monto de la Venta',
@@ -50,6 +56,7 @@
 					'header'=>'Fecha',
 					'type'=>'raw',
 					'value'=>'$data->fechaVenta',
+					'filter'=>CHtml::activeTextField($ventas, 'fechaVenta',array("class"=>"form-control input-sm")),
 			),
 			array(
 					'header'=>'',
@@ -61,7 +68,8 @@
 ?>
 </div>
 <?php 
-$datos=$ventas->getData();
+//$datos=$ventas->getData();
+$datos=$ventas->searchDistribuidora()->getData();
 $total=0;
 foreach ($datos as $item)
 {
@@ -69,12 +77,17 @@ foreach ($datos as $item)
 	if($dato>0)
 		$total = $total+$dato;
 }
-//print_r($total);
+//print_r(count($datos));
 ?>
 <div class="col-xs-offset-8 col-xs-4">
 <div class="well well-sm">
 	<span><strong>Total:</strong> <?php echo $total; ?> Bs.</span>
 </div>
+<?php if(!empty($saldo)){?>
+<div class="well well-sm">
+	<span><strong>Saldo:</strong> <?php echo $saldo; ?> Bs.</span>
+</div>
+<?php }?>
 </div>
 
 <?php

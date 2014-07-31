@@ -497,7 +497,7 @@ class DistribuidoraController extends Controller
 	
 	public function actionMovimientos()
 	{
-		$ventas="";
+		/*$ventas="";
 		$cond1="";
 		$cond2="";
 		$cond3="";
@@ -560,8 +560,74 @@ class DistribuidoraController extends Controller
 							),));
 			
 		}
+		*/
+		$ventas="";
+		$cond1="";
+		$cond2="";
+		$cond3="";
+		$factura="";
+		$f="";
+		$saldo="";
+		$cf=array("report/venta",'f'=>0);
+		$sf=array("report/venta",'f'=>1);
+		$ventas = new Venta('searchDistribuidora');
 		
-		$this->render('movimientos',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'cond3'=>$cond3));
+		$ventas->unsetAttributes();
+		if(isset($_GET['f']))
+			$ventas->tipoVenta = $_GET['f'];
+		
+		if(isset($_GET['d']) || isset($_GET['m']))
+		{
+			$d=date("d");
+			$m=date("m");
+			$y=date("Y");
+			if(isset($_GET['d']))
+			{
+				$d=$_GET['d'];
+				if($d==0)
+				{
+					$m--;
+					$d=$this->getUltimoDiaMes($y, $m);
+				}
+				$ventas->fechaVenta = $y."-".$m."-".$d;
+				$cf=array("report/venta",'f'=>0,'d'=>$_GET['d']);
+				$sf=array("report/venta",'f'=>1,'d'=>$_GET['d']);
+				$cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"d"=>$_GET['d']);
+			}
+			if(isset($_GET['m']))
+			{
+				$m=$_GET['m'];
+				$ventas->fechaVenta = $y."-".$m;
+				$cf=array("report/venta",'f'=>0,'m'=>$_GET['m']);
+				$sf=array("report/venta",'f'=>1,'m'=>$_GET['m']);
+				$cond3=array("distribuidora/previewDay","f"=>$f,"m"=>$_GET['m']);
+			}
+		
+		}
+		
+		
+		//print_r($ventas);
+		if(isset($_GET['Venta']))
+		{
+			$ventas->attributes = $_GET['Venta'];
+				
+			if(isset($_GET['Venta']['apellido']))
+				$ventas->apellido = $_GET['Venta']['apellido'];
+			if(isset($_GET['Venta']['nit']))
+				$ventas->nit = $_GET['Venta']['nit'];
+				
+		}
+		
+		if(isset($_GET['d']))
+		{
+			$saldo = CajaArqueo::model()->find(array('condition'=>"idCaja=2 and fechaVentas<'".$ventas->fechaVenta."'",'order'=>'idCajaArqueo Desc'));
+			//print_r($saldo);
+			if(!empty($saldo))
+				$saldo = $saldo->saldo;
+		}
+		
+		//$this->render('movimientos',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'cond3'=>$cond3));
+		$this->render('movimientos',array('ventas'=>$ventas,'saldo'=>$saldo,'cond3'=>$cond3,'cf'=>$cf,'sf'=>$sf));
 	}
 	
 	public function actionPreviewDay()
@@ -625,6 +691,28 @@ class DistribuidoraController extends Controller
 		->findAll(array('condition'=>'idCajaMovimientoVenta0.idCaja=2 '.$fact.$cond)));
 		//$tabla = $caja->ventas;
 		$this->render("previewVentas",array('tabla'=>$caja,));
+	}
+	
+	public function actionVentaDetalle()
+	{
+		if(isset($_GET['id']))
+		{
+			$ventas = Venta::model()
+			->with("idCliente0")
+			->with("detalleVentas")
+			->with("detalleVentas.idAlmacenProducto0")
+			->with("detalleVentas.idAlmacenProducto0.idProducto0")
+			->with("idCajaMovimientoVenta0")
+			->with("idCajaMovimientoVenta0.idUser0")
+			->with("idCajaMovimientoVenta0.idUser0.idEmpleado0")
+			->findByPk($_GET['id']);
+			if($ventas!=null)
+				$this->renderPartial('detalle',array('venta'=>$ventas));
+			else
+				$this->redirect(array('venta/venta'));
+		}
+		else
+			throw new CHttpException(400,'Petición no válida.');
 	}
 	
 	public function actionProductos()
@@ -740,7 +828,7 @@ class DistribuidoraController extends Controller
 				else
 					$saldo = $saldo->saldo;
 				
-				$arqueo->saldo = $saldo+$ventas+$recibos-$movimiento->monto;
+				$arqueo->saldo = round($saldo+$ventas+$recibos-$movimiento->monto,1, PHP_ROUND_HALF_UP);
 				if($caja->saldo >=0){
 					if($movimiento->monto==0){
 						$arqueo->comprobante="";

@@ -22,7 +22,8 @@
 		),
 		array(
 				'header'=>'Detalle Producto',
-				'value'=>'$data->idProducto0->color." ".$data->idProducto0->detalle'
+				//'value'=>'$data->idProducto0->color." ".$data->idProducto0->detalle'
+				'value'=>'$data->idProducto0->color." ".$data->idProducto0->detalle." ".$data->idProducto0->marca'
 		),
 		array(
 				'header'=>'Precio S/F',
