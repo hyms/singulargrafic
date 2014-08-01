@@ -81,6 +81,8 @@ class ReportController extends Controller
 				if($d==0)
 				{
 					$m--;
+					if($m<10 && $m>0)
+						$m = "0".$m;
 					$d=$this->getUltimoDiaMes($y, $m);
 				}
 				$ventas->fechaVenta = $y."-".$m."-".$d;

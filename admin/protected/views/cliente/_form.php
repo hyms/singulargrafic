@@ -70,6 +70,15 @@
 		</div>
 		<?php echo $form->error($model,'direccion'); ?>
 	</div>
+	
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'idTIposClientes',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-3">
+		<?php // echo $form->textField($model,'idTIposClientes',array('size'=>20,'maxlength'=>20,'class'=>'form-control')); ?>
+		<?php echo $form->dropDownList($model,'idTIposClientes',CHtml::listData(TiposClientes::model()->findAll(),'idTiposClientes','nombre'),array('maxlength'=>20,'class'=>'form-control','empty'=>'')); ?>
+		</div>
+		<?php echo $form->error($model,'idTIposClientes'); ?>
+	</div>
 
 	<div class="form-group">
 		<p class="text-center">
@@ -86,3 +95,5 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+		
+		<?php ?>

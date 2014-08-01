@@ -9,7 +9,7 @@
  * @property string $motivo
  * @property string $fechaMovimiento
  * @property integer $idUser
- * @property integer $tipo
+ * @property integer $tipo //0=entrada de dinero; 1= salida de dienero, -1=movimiento interno
  * @property integer $arqueo
  * @property integer $idCaja
  *
@@ -19,6 +19,7 @@
  * @property Recibos[] $reciboses
  * @property Venta[] $ventas
  */
+
 class CajaMovimientoVenta extends CActiveRecord
 {
 	public $max;

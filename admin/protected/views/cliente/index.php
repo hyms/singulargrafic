@@ -11,6 +11,8 @@ $this->breadcrumbs=array(
 <h1>Clientes</h1>
 
 <?php echo CHtml::link('Añadir',array('cliente/Create'), array('class' => 'btn btn-default') ); ?>
+<?php echo CHtml::link('Añadir Tipo Cliente',array('cliente/tipoCliente'), array('class' => 'openDlg divDialog') ); ?>
+
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
@@ -45,3 +47,30 @@ $this->breadcrumbs=array(
 	)
 	));
 ?>
+
+<?php
+Yii::app()->clientScript->registerScript('row',"
+$('#document').ready(function(){
+	$('.openDlg').click(function(){
+		var dialogId = $(this).attr('class').replace('openDlg ', '');
+		$.ajax({
+			'type': 'GET',
+			'url' : $(this).attr('href'),
+			success: function (data) {
+				 
+				$('#'+dialogId+' div.divForForm').html(data);
+				$( '#'+dialogId ).dialog( 'open' );
+			},
+			dataType: 'html',
+		});
+		return false; // prevent normal submit
+	})
+}); 
+",CClientScript::POS_READY);?>
+<?php
+$this->beginWidget('zii.widgets.jui.CJuiDialog', array('id'=>'divDialog',
+    'options'=>array( 'title'=>'Detalle de Venta', 'autoOpen'=>false, 'modal'=>true, 'width'=>800)));
+?>
+    <div class="divForForm"></div>
+
+<?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>

@@ -125,7 +125,33 @@ class ClienteController extends Controller
 			'dataProvider'=>$dataProvider
 		));
 	}
-
+	
+	public function actionTipoCliente()
+	{
+		$model=new TiposClientes;
+		
+		// uncomment the following code to enable ajax-based validation
+		/*
+		 if(isset($_POST['ajax']) && $_POST['ajax']==='tipos-clientes-tipoClientes-form')
+		 {
+		echo CActiveForm::validate($model);
+		Yii::app()->end();
+		}
+		*/
+		
+		if(isset($_POST['TiposClientes']))
+		{
+			$model->attributes=$_POST['TiposClientes'];
+			if($model->save())
+			{
+				// form inputs are valid, do something here
+				//return;
+				$this->redirect(array('cliente/index'));
+			}
+		}
+			$this->renderPartial('tipoClientes',array('model'=>$model));
+	}
+	
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

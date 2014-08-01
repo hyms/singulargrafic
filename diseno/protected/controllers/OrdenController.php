@@ -283,18 +283,23 @@ class OrdenController extends Controller
 			$sw=0;
 			if(isset($_POST['Cliente']))
 			{
-				$cliente = Cliente::model()->findByPk($ctp->idCliente);
+				$cliente = Cliente::model()->find('nitCi="'.$_POST['Cliente']['nitCi'].'"');
+				if($cliente==null)
+					$cliente = new Cliente;
+			
 				$cliente->attributes = $_POST['Cliente'];
+				if(empty($cliente->fechaRegistro))
+					$cliente->fechaRegistro = date("Y-m-d");
 				if($cliente->save())
-					$sw=1;
-				//print_r($_POST['Cliente']);
-				
+					$swc=1;
 			}
 			
 			if(isset($_POST['CTP']))
 			{
 				$orden = CTP::model()->findByPk($ctp->idCTP);
 				$orden->attributes = $_POST['CTP'];
+				$ctp->idCliente = $cliente->idCliente;
+				
 				$user = Users::model()->with('idEmpleado0')->findByPk(Yii::app()->user->id);
 				$orden->obs = "Modificado por el usuario ".$user->username." (".$user->idEmpleado0->nombre." ".$user->idEmpleado0->apellido.")";
 				

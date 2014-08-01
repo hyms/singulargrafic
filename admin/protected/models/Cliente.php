@@ -81,7 +81,7 @@ class Cliente extends CActiveRecord
 			'fechaRegistro' => 'Fecha Registro',
 			'telefono' => 'Telefono',
 			'direccion' => 'Direccion',
-			'idTIposClientes' => 'Id Tipos Clientes',
+			'idTIposClientes' => 'Tipo Cliente',
 		);
 	}
 

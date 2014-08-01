@@ -198,7 +198,7 @@ class Venta extends CActiveRecord
 				'idCliente0',
 		);
 		$criteria->order='fechaVenta ASC';
-	
+		$criteria->limit = 50;
 		//$criteria->condition = 'idAlmacen=2';
 	
 		$criteria->compare('idVenta',$this->idVenta);
@@ -215,7 +215,6 @@ class Venta extends CActiveRecord
 	
 		return new CActiveDataProvider($this, array(
 				'criteria'=>$criteria,
-	
 				'pagination'=>false,
 		));
 	}

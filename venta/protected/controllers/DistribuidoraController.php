@@ -198,15 +198,30 @@ class DistribuidoraController extends Controller
 						}
 						$i++;
 					}
+					
+					$cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
+					$cajaMovimiento->tipo = 0;
 					if($venta->formaPago==0){
 						$cajaMovimiento->monto = $venta->montoPagado-$venta->montoCambio;
 					}
 					if($venta->formaPago==1){
 						$cajaMovimiento->monto = $venta->montoPagado;
 					}
-					$cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
+					if($cliente->nitCi=="000")
+					{
+						$cajaMovimiento->tipo = -1;
+						//añadir descuento
+						if(empty($cajaMovimiento->monto)||$cajaMovimiento->monto==0)
+							$cajaMovimiento->monto = $venta->montoVenta;
+						$venta->montoVenta=0;
+						$venta->montoPagado=0;
+						$venta->montoCambio=0;
+					}
+					
 					if($cajaMovimiento->save()){
-						$caja->saldo = $caja->saldo + $cajaMovimiento->monto;
+						if($cliente->nitCi!="000")
+							$caja->saldo = $caja->saldo + $cajaMovimiento->monto;
+						
 						$venta->idCajaMovimientoVenta = $cajaMovimiento->idCajaMovimientoVenta; 
 					}
 						
@@ -338,7 +353,6 @@ class DistribuidoraController extends Controller
 		if(isset($_GET['id'])){
 			$venta = $this->verifyModel(Venta::model()->with('idCliente0')->findByPk($_GET['id']));
 			$cajaMovimiento= CajaMovimientoVenta::model()->findByPk($venta->idCajaMovimientoVenta);
-			$cliente = $venta->idCliente0;
 			$detalle = DetalleVenta::model()->findAll('idVenta='.$venta->idVenta);
 			
 			$caja = Caja::model()->findByPk($cajaMovimiento->idCaja);
@@ -356,7 +370,13 @@ class DistribuidoraController extends Controller
 			}
 			$swc=0;
 			if(isset($_POST['Cliente'])){
+				$cliente = Cliente::model()->find('nitCi="'.$_POST['Cliente']['nitCi'].'"');
+				if($cliente==null)
+					$cliente = new Cliente;
+			
 				$cliente->attributes = $_POST['Cliente'];
+				if(empty($cliente->fechaRegistro))
+					$cliente->fechaRegistro = date("Y-m-d");
 				if($cliente->save())
 					$swc=1;
 			}
@@ -364,6 +384,7 @@ class DistribuidoraController extends Controller
 			if(isset($_POST['Venta'])){
 				$venta->attributes = $_POST['Venta'];
 				$venta->estado = 1;
+				$venta->idCliente = $cliente->idCliente;
 				if($venta->tipoVenta==1)
 					$venta->codigo = chr($venta->serie)."P-".$venta->numero."-".date("y");
 				else
@@ -497,79 +518,11 @@ class DistribuidoraController extends Controller
 	
 	public function actionMovimientos()
 	{
-		/*$ventas="";
-		$cond1="";
-		$cond2="";
 		$cond3="";
-		$factura="";
-		$f="";
-		if(isset($_GET['f']))
-		{
-			$f=$_GET['f'];
-			if($_GET['f']==0)
-			{
-				$factura=" tipoVenta=0"; 
-			}
-			else
-			{
-				$factura=" tipoVenta=1";
-			}
-		}
-		if(isset($_GET['d']) || isset($_GET['m']))
-		{
-			if($factura!="")
-				$factura=" and ".$factura;
-			$d=date("d");
-			$m=date("m");
-			$y=date("Y");
-			$start=date("Y-m-d H:i:s"); $end=date("Y-m-d H:i:s");
-			
-			if(isset($_GET['d']))
-			{
-				$cond1=array("distribuidora/movimientos","f"=>0,"d"=>$_GET['d']);
-				$cond2=array("distribuidora/movimientos","f"=>1,"d"=>$_GET['d']);
-				$cond3=array("distribuidora/previewDay","f"=>$f,"d"=>$_GET['d']);
-				$d=$_GET['d'];
-				if($d==0)
-				{
-					$m--;
-					$d=$this->getUltimoDiaMes($y, $m);
-				}
-				$start=$y."-".$m."-".$d." 00:00:00";
-				$end=$y."-".$m."-".$d." 23:59:59";
-			}
-			if(isset($_GET['m']))
-			{
-				$cond1=array("distribuidora/movimientos","f"=>0,"m"=>$_GET['m']);
-				$cond2=array("distribuidora/movimientos","f"=>1,"m"=>$_GET['m']);
-				$cond3=array("distribuidora/previewDay","f"=>$f,"m"=>$_GET['m']);
-				$m=$_GET['m'];
-				$d=$this->getUltimoDiaMes($y, $m);
-				$start=$y."-".$m."-1 00:00:00";
-				$end=$y."-".$m."-".$d." 23:59:59";
-			}
-			$condition="'".$start."'<=idCajaMovimientoVenta0.fechaMovimiento AND idCajaMovimientoVenta0.fechaMovimiento<='".$end."'";
-			$ventas = new CActiveDataProvider('Venta',
-					array('criteria'=>array(
-							'condition'=>$condition.$factura,
-							'with'=>array('idCliente0','idCajaMovimientoVenta0'),
-							'order'=>'fechaMovimiento ASC',
-					),
-							'pagination'=>array(
-									'pageSize'=>20,
-							),));
-			
-		}
-		*/
-		$ventas="";
-		$cond1="";
-		$cond2="";
-		$cond3="";
-		$factura="";
 		$f="";
 		$saldo="";
-		$cf=array("report/venta",'f'=>0);
-		$sf=array("report/venta",'f'=>1);
+		$cf=array("distribuidora/movimientos",'f'=>0);
+		$sf=array("distribuidora/movimientos",'f'=>1);
 		$ventas = new Venta('searchDistribuidora');
 		
 		$ventas->unsetAttributes();
@@ -586,20 +539,23 @@ class DistribuidoraController extends Controller
 				$d=$_GET['d'];
 				if($d==0)
 				{
-					$m--;
+					$m=$m-1;
+					if($m<10 && $m>0)
+						$m = "0".$m;
+					
 					$d=$this->getUltimoDiaMes($y, $m);
 				}
 				$ventas->fechaVenta = $y."-".$m."-".$d;
-				$cf=array("report/venta",'f'=>0,'d'=>$_GET['d']);
-				$sf=array("report/venta",'f'=>1,'d'=>$_GET['d']);
+				$cf=array("distribuidora/movimientos",'f'=>0,'d'=>$_GET['d']);
+				$sf=array("distribuidora/movimientos",'f'=>1,'d'=>$_GET['d']);
 				$cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"d"=>$_GET['d']);
 			}
 			if(isset($_GET['m']))
 			{
 				$m=$_GET['m'];
 				$ventas->fechaVenta = $y."-".$m;
-				$cf=array("report/venta",'f'=>0,'m'=>$_GET['m']);
-				$sf=array("report/venta",'f'=>1,'m'=>$_GET['m']);
+				$cf=array("distribuidora/movimientos",'f'=>0,'m'=>$_GET['m']);
+				$sf=array("distribuidora/movimientos",'f'=>1,'m'=>$_GET['m']);
 				$cond3=array("distribuidora/previewDay","f"=>$f,"m"=>$_GET['m']);
 			}
 		
@@ -675,13 +631,7 @@ class DistribuidoraController extends Controller
 			}
 			$cond=" and '".$start."'<=fechaVenta AND fechaVenta<='".$end."'";
 		}
-		/*$caja = $this->verifyModel(CajaMovimientoVenta::model()
-				->with('ventas')
-				->with('ventas.idCliente0')
-				->with('ventas.detalleVentas')
-				->with('ventas.detalleVentas.idAlmacenProducto0')
-				->with('ventas.detalleVentas.idAlmacenProducto0.idProducto0')
-				->find(array('condition'=>'`t`.idCaja=2 and arqueo=0 '.$fact.$cond)));*/
+		
 		$caja = $this->verifyModel(Venta::model()
 		->with('idCliente0')
 		->with('detalleVentas')
@@ -808,7 +758,7 @@ class DistribuidoraController extends Controller
 			{
 				$caja->saldo = $caja->saldo-$movimiento->monto;
 				$ventas=0;$recibos=0;
-				$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and fechaMovimiento<='".$end."'"));
+				$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and tipo=0 and arqueo=0 and fechaMovimiento<='".$end."'"));
 				foreach ($cajaMovimiento as $item)
 				{
 					foreach ($item->ventas as $venta)
@@ -836,7 +786,6 @@ class DistribuidoraController extends Controller
 						if($arqueo->save())
 						{
 							//$start=$arqueo->fechaVentas." 00:00:00";
-							
 							//$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
 							foreach ($cajaMovimiento as $item)
 							{
@@ -867,7 +816,7 @@ class DistribuidoraController extends Controller
 								$end=$arqueo->fechaVentas." 23:59:59";
 								$movimiento->save();
 								//$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
-								$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and fechaMovimiento<='".$end."'"));
+								$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and tipo=0 and arqueo=0 and fechaMovimiento<='".$end."'"));
 								foreach ($cajaMovimiento as $item)
 								{
 									$item->arqueo = $arqueo->idCajaArqueo;
@@ -901,7 +850,7 @@ class DistribuidoraController extends Controller
 			//$start=date("Y")."-".$m."-".$d." 00:00:00";
 			$end=date("Y")."-".$m."-".$d." 23:59:59";
 			//$cajaMovimiento = CajaMovimientoVenta::model()->with('reciboses')->with('ventas')->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
-			$cajaMovimiento = CajaMovimientoVenta::model()->with('reciboses')->with('ventas')->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and fechaMovimiento<='".$end."'",'order'=>'fechaMovimiento Desc'));
+			$cajaMovimiento = CajaMovimientoVenta::model()->with('reciboses')->with('ventas')->findAll(array('condition'=>"`t`.idCaja=2 and tipo=0 and arqueo=0 and fechaMovimiento<='".$end."'",'order'=>'fechaMovimiento Desc'));
 			if(!empty($cajaMovimiento))
 				$end = date('Y-m-d',strtotime($cajaMovimiento[0]->fechaMovimiento))." 23:59:59";
 			$ventas=0;$recibos=0;
@@ -956,7 +905,7 @@ class DistribuidoraController extends Controller
 		{
 			$arqueo = CajaArqueo::model()
 						->with('cajaMovimientoVenta')
-						->find(array('condition'=>'idCajaArqueo='.$_GET['id'],'order'=>'cajaMovimientoVenta.fechaMovimiento Desc'));
+						->find(array('condition'=>'idCajaArqueo='.$_GET['id'].' and cajaMovimientoVenta.tipo=0','order'=>'cajaMovimientoVenta.fechaMovimiento Desc'));
 			$start =$arqueo->fechaVentas;
 			if(!empty($arqueo))
 			{
@@ -969,7 +918,7 @@ class DistribuidoraController extends Controller
 			}
 			$venta = Venta::model()
 						->with('idCajaMovimientoVenta0')
-						->findAll(array('condition'=>"fechaVenta>='".$start."' and fechaVenta<='".date("Y-m-d",strtotime($arqueo->fechaVentas))." 23:59:59'"));
+						->findAll(array('condition'=>"fechaVenta>='".$start."' and fechaVenta<='".date("Y-m-d",strtotime($arqueo->fechaVentas))." 23:59:59' and idCajaMovimientoVenta0.tipo=0"));
 			$ventas = 0;
 			
 			foreach ($venta as $item)
@@ -979,7 +928,7 @@ class DistribuidoraController extends Controller
 			
 			$recibo = Recibos::model()
 			->with('idCajaMovimientoVenta0')
-			->findAll(array('condition'=>"fechaRegistro	>='".$arqueo->fechaVentas."' and fechaRegistro<='".date("Y-m-d",strtotime($arqueo->fechaVentas))." 23:59:59'"));
+			->findAll(array('condition'=>"fechaRegistro	>='".$arqueo->fechaVentas."' and fechaRegistro<='".date("Y-m-d",strtotime($arqueo->fechaVentas))." 23:59:59' and idCajaMovimientoVenta0.tipo=0"));
 			$recibos = 0;
 				
 			foreach ($recibo as $item)
