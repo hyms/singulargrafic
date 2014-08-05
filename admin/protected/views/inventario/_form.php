@@ -88,6 +88,15 @@
 	</div>
 
 	<div class="form-group">
+		<?php echo $form->labelEx($model,'idMatrizPrecios',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-4">
+		<?php // echo $form->textField($model,'idMatrizPrecios',array('class'=>'form-control')); ?>
+		<?php echo $form->dropDownList($model,'idMatrizPrecios',CHtml::listData(MatrizPreciosCTP::model()->findAll(),'idMatrizPreciosCTP','nombre'),array('class'=>'form-control','empty'=>"Seleccione Tabla de Precios")); ?>
+		</div>
+		<?php echo $form->error($model,'idMatrizPrecios'); ?>
+	</div>
+	
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'precioSFU',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-4">
 		<?php echo $form->textField($model,'precioSFU',array('class'=>'form-control')); ?>

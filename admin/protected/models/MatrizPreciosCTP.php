@@ -7,16 +7,16 @@
  * @property integer $idMatrizPreciosCTP
  * @property integer $idTiposClientes
  * @property integer $idHorario
- * @property integer $idAlmacenCTP
  * @property integer $idCantidad
  * @property double $precioSF
  * @property double $precioCF
+ * @property string $nombre
  *
  * The followings are the available model relations:
- * @property AlmacenCTP $idAlmacenCTP0
  * @property CantidadCTP $idCantidad0
  * @property Horario $idHorario0
  * @property TiposClientes $idTiposClientes0
+ * @property Producto[] $productos
  */
 class MatrizPreciosCTP extends CActiveRecord
 {
@@ -36,12 +36,13 @@ class MatrizPreciosCTP extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idMatrizPreciosCTP', 'required'),
-			array('idMatrizPreciosCTP, idTiposClientes, idHorario, idAlmacenCTP, idCantidad', 'numerical', 'integerOnly'=>true),
+			array('precioSF, precioCF', 'required'),
+			array('idTiposClientes, idHorario, idCantidad', 'numerical', 'integerOnly'=>true),
 			array('precioSF, precioCF', 'numerical'),
+			array('nombre', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idMatrizPreciosCTP, idTiposClientes, idHorario, idAlmacenCTP, idCantidad, precioSF, precioCF', 'safe', 'on'=>'search'),
+			array('idMatrizPreciosCTP, idTiposClientes, idHorario, idCantidad, precioSF, precioCF, nombre', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,10 +54,10 @@ class MatrizPreciosCTP extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idAlmacenCTP0' => array(self::BELONGS_TO, 'AlmacenCTP', 'idAlmacenCTP'),
 			'idCantidad0' => array(self::BELONGS_TO, 'CantidadCTP', 'idCantidad'),
 			'idHorario0' => array(self::BELONGS_TO, 'Horario', 'idHorario'),
 			'idTiposClientes0' => array(self::BELONGS_TO, 'TiposClientes', 'idTiposClientes'),
+			'productos' => array(self::HAS_MANY, 'Producto', 'idMatrizPrecios'),
 		);
 	}
 
@@ -69,10 +70,10 @@ class MatrizPreciosCTP extends CActiveRecord
 			'idMatrizPreciosCTP' => 'Id Matriz Precios Ctp',
 			'idTiposClientes' => 'Id Tipos Clientes',
 			'idHorario' => 'Id Horario',
-			'idAlmacenCTP' => 'Id Almacen Ctp',
 			'idCantidad' => 'Id Cantidad',
 			'precioSF' => 'Precio Sf',
 			'precioCF' => 'Precio Cf',
+			'nombre' => 'Nombre',
 		);
 	}
 
@@ -97,10 +98,10 @@ class MatrizPreciosCTP extends CActiveRecord
 		$criteria->compare('idMatrizPreciosCTP',$this->idMatrizPreciosCTP);
 		$criteria->compare('idTiposClientes',$this->idTiposClientes);
 		$criteria->compare('idHorario',$this->idHorario);
-		$criteria->compare('idAlmacenCTP',$this->idAlmacenCTP);
 		$criteria->compare('idCantidad',$this->idCantidad);
 		$criteria->compare('precioSF',$this->precioSF);
 		$criteria->compare('precioCF',$this->precioCF);
+		$criteria->compare('nombre',$this->nombre,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'TiposClientes':
  * @property integer $idTiposClientes
  * @property string $nombre
+ * @property integer $servicio
  *
  * The followings are the available model relations:
  * @property MatrizPreciosCTP[] $matrizPreciosCTPs
@@ -29,10 +30,11 @@ class TiposClientes extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('servicio', 'numerical', 'integerOnly'=>true),
 			array('nombre', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idTiposClientes, nombre', 'safe', 'on'=>'search'),
+			array('idTiposClientes, nombre, servicio', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -45,7 +47,7 @@ class TiposClientes extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'matrizPreciosCTPs' => array(self::HAS_MANY, 'MatrizPreciosCTP', 'idTiposClientes'),
-			'clientes' => array(self::HAS_MANY, 'Cliente', 'idTIposClientes'),
+			'clientes' => array(self::HAS_MANY, 'Cliente', 'idTiposClientes'),
 		);
 	}
 
@@ -57,6 +59,7 @@ class TiposClientes extends CActiveRecord
 		return array(
 			'idTiposClientes' => 'Id Tipos Clientes',
 			'nombre' => 'Nombre',
+			'servicio' => 'Servicio',
 		);
 	}
 
@@ -80,6 +83,7 @@ class TiposClientes extends CActiveRecord
 
 		$criteria->compare('idTiposClientes',$this->idTiposClientes);
 		$criteria->compare('nombre',$this->nombre,true);
+		$criteria->compare('servicio',$this->servicio);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -377,9 +377,9 @@ class OrdenController extends Controller
 				->with("idProducto0")
 				->findByPk($_GET['al']);
 				$costo = $almacen->idProducto0->precioCFU;
-	
-			}
 				
+			}
+			//print_r($almacen);
 			$detalle->idAlmacenProducto = $almacen->idAlmacenProducto;
 			if(isset($_GET['factura']))
 			{

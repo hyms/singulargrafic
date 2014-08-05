@@ -111,7 +111,8 @@ class AlmacenProducto extends CActiveRecord
 				'idProducto0',
 		);
 		$criteria->condition = 'idAlmacen=2';
-	
+		$criteria->order = 'idProducto0.codigo asc, idProducto0.material asc';
+		
 		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
 		$criteria->compare('idProducto',$this->idProducto);
 		$criteria->compare('stockU',$this->stockU);

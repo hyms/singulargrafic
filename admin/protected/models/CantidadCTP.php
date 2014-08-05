@@ -29,8 +29,7 @@ class CantidadCTP extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idCantidadCTP', 'required'),
-			array('idCantidadCTP, Inicio, final', 'numerical', 'integerOnly'=>true),
+			array('Inicio, final', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('idCantidadCTP, Inicio, final', 'safe', 'on'=>'search'),

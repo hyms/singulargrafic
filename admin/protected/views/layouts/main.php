@@ -118,6 +118,7 @@
 							'itemOptions' => array('class'=>'dropdown'),
 							'items'=>array(
 									array('label'=>'Inventario', 'url'=>array('stock/ctp')),
+									array('label'=>'Precios', 'url'=>array('ctp/matrizPrecios')),
 						)),
 						//array('label'=>'Imprenta', 'url'=>array('#')),
 						array('label'=>'Reportes', 'url'=>array('report/')),

@@ -72,12 +72,11 @@
 	</div>
 	
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'idTIposClientes',array('class'=>'col-sm-2 control-label')); ?>
+		<?php echo $form->labelEx($model,'idTiposClientes',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-3">
-		<?php // echo $form->textField($model,'idTIposClientes',array('size'=>20,'maxlength'=>20,'class'=>'form-control')); ?>
-		<?php echo $form->dropDownList($model,'idTIposClientes',CHtml::listData(TiposClientes::model()->findAll(),'idTiposClientes','nombre'),array('maxlength'=>20,'class'=>'form-control','empty'=>'')); ?>
+		<?php echo $form->dropDownList($model,'idTiposClientes',CHtml::listData(TiposClientes::model()->findAll(),'idTiposClientes','nombre'),array('maxlength'=>20,'class'=>'form-control','empty'=>'')); ?>
 		</div>
-		<?php echo $form->error($model,'idTIposClientes'); ?>
+		<?php echo $form->error($model,'idTiposClientes'); ?>
 	</div>
 
 	<div class="form-group">

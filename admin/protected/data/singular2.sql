@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 04-08-2014 a las 10:12:35
+-- Tiempo de generación: 04-08-2014 a las 11:22:52
 -- Versión del servidor: 5.5.38
 -- Versión de PHP: 5.4.4-14+deb7u12
 
@@ -661,7 +661,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `idTiposClientes` int(11) DEFAULT NULL,
   PRIMARY KEY (`idCliente`),
   KEY `fk_cliente_TiposClientes1` (`idTiposClientes`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -676,7 +676,8 @@ INSERT INTO `cliente` (`idCliente`, `nitCi`, `apellido`, `nombre`, `correo`, `fe
 (6, '8435336', 'PINEDO', NULL, NULL, '2014-07-21 00:00:00', NULL, NULL, NULL),
 (7, '2364915011', 'TICONA', NULL, NULL, '2014-07-21 00:00:00', NULL, NULL, NULL),
 (8, '4865513019', 'VILLA', NULL, NULL, '2014-07-25 00:00:00', NULL, NULL, NULL),
-(9, '000', 'singular', 'singular', '', '2014-08-01 15:26:36', '', '', 2);
+(9, '000', 'singular', 'singular', '', '2014-08-01 15:26:36', '', '', 2),
+(10, '000123', 'DESCONOCIDO', NULL, NULL, '2014-08-04 00:00:00', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1409,7 +1410,7 @@ CREATE TABLE IF NOT EXISTS `venta` (
   PRIMARY KEY (`idVenta`),
   KEY `fk_venta_cliente1` (`idCliente`),
   KEY `fk_venta_cajaMovimientoVenta1` (`idCajaMovimientoVenta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 --
 -- Volcado de datos para la tabla `venta`

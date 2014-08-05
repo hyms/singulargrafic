@@ -1,14 +1,13 @@
 <?php
-/* @var $this TiposClientesController */
-/* @var $model TiposClientes */
+/* @var $this HorarioController */
+/* @var $model Horario */
 /* @var $form CActiveForm */
-$servicios = array('Distribuidora','CTP','Imprenta');
 ?>
-<h2>Añadir Tipo Cliente</h2>
+
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'tipos-clientes-tipoClientes-form',
+	'id'=>'horario-horario-form',
 	'htmlOptions'=>array(
 		'class'=>'form-horizontal',
 		'role'=>'form'
@@ -25,20 +24,27 @@ $servicios = array('Distribuidora','CTP','Imprenta');
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'nombre',array('class'=>'col-sm-2 control-label')); ?>
+		<?php echo $form->labelEx($model,'prioridad',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-4">
-		<?php echo $form->textField($model,'nombre',array('class'=>'form-control')); ?>
+		<?php echo $form->textField($model,'prioridad',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'nombre'); ?>
+		<?php echo $form->error($model,'prioridad'); ?>
 	</div>
-	
+
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'servicio',array('class'=>'col-sm-2 control-label')); ?>
+		<?php echo $form->labelEx($model,'inicio',array('class'=>'col-sm-2 control-label')); ?>
 		<div class="col-sm-4">
-		<?php // echo $form->textField($model,'servicio',array('class'=>'form-control')); ?>
-		<?php echo $form->dropDownList($model,'servicio', $servicios, array('empty'=>'Seleccione Servicio','class'=>'form-control'));?>
+		<?php echo $form->textField($model,'inicio',array('class'=>'form-control')); ?>
 		</div>
-		<?php echo $form->error($model,'servicio'); ?>
+		<?php echo $form->error($model,'inicio'); ?>
+	</div>
+
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'final',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-4">
+		<?php echo $form->textField($model,'final',array('class'=>'form-control')); ?>
+		</div>
+		<?php echo $form->error($model,'final'); ?>
 	</div>
 
 
