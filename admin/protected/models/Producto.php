@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'producto':
  * @property integer $idProducto
- * @property integer $idMatrizPrecios
+ * @property integer $servicio
  * @property string $codigo
  * @property string $material
  * @property string $color
@@ -22,7 +22,6 @@
  * The followings are the available model relations:
  * @property AlmacenProducto[] $almacenProductos
  * @property MovimientoAlmacen[] $movimientoAlmacens
- * @property MatrizPreciosCTP $idMatrizPrecios0
  */
 class Producto extends CActiveRecord
 {
@@ -42,14 +41,14 @@ class Producto extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			//array('codigo, material, color, marca, industria, cantXPaquete, precioSFU, precioSFP, precioCFU, precioCFP, familia, detalle', 'required'),
-			array('idMatrizPrecios, cantXPaquete', 'numerical', 'integerOnly'=>true),
+			array('codigo, material, color, marca, industria, cantXPaquete, precioSFU, precioSFP, precioCFU, precioCFP, familia, detalle', 'required'),
+			array('servicio, cantXPaquete', 'numerical', 'integerOnly'=>true),
 			array('precioSFU, precioSFP, precioCFU, precioCFP', 'numerical'),
 			array('codigo, material, color, marca, industria, familia', 'length', 'max'=>40),
 			array('detalle', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idProducto, idMatrizPrecios, codigo, material, color, marca, industria, cantXPaquete, precioSFU, precioSFP, precioCFU, precioCFP, familia, detalle', 'safe', 'on'=>'search'),
+			array('idProducto, servicio, codigo, material, color, marca, industria, cantXPaquete, precioSFU, precioSFP, precioCFU, precioCFP, familia, detalle', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,7 +62,6 @@ class Producto extends CActiveRecord
 		return array(
 			'almacenProductos' => array(self::HAS_MANY, 'AlmacenProducto', 'idProducto'),
 			'movimientoAlmacens' => array(self::HAS_MANY, 'MovimientoAlmacen', 'idProducto'),
-			'idMatrizPrecios0' => array(self::BELONGS_TO, 'MatrizPreciosCTP', 'idMatrizPrecios'),
 		);
 	}
 
@@ -74,7 +72,7 @@ class Producto extends CActiveRecord
 	{
 		return array(
 			'idProducto' => 'Id Producto',
-			'idMatrizPrecios' => 'Tabla de Precios',
+			'servicio' => 'Servicio',
 			'codigo' => 'Codigo',
 			'material' => 'Material',
 			'color' => 'Color',
@@ -109,7 +107,7 @@ class Producto extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('idProducto',$this->idProducto);
-		$criteria->compare('idMatrizPrecios',$this->idMatrizPrecios);
+		$criteria->compare('servicio',$this->servicio);
 		$criteria->compare('codigo',$this->codigo,true);
 		$criteria->compare('material',$this->material,true);
 		$criteria->compare('color',$this->color,true);

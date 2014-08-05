@@ -10,6 +10,42 @@ class CtpController extends Controller
 		$cantidades = CantidadCTP::model()->findAll();
 		$horarios = Horario::model()->findAll();
 		
+		if(isset($_POST['MatrizPreciosCTP']))
+		{
+			$model = array(array(array(array())));
+			//$model->attributes = $_POST['MatrizPreciosCTP'];
+			$placas = array();
+			foreach ($_POST['MatrizPreciosCTP'] as $key => $placa)
+			{
+				array_push($placas, AlmacenProducto::model()->with('idProducto0')->findByPk($key));
+				$tiposClientes = array();
+				foreach ($_POST['MatrizPreciosCTP'][$key] as $keyTC => $tipoCliente)
+				{
+					array_push($tiposClientes, TiposClientes::model()->find('servicio=1 and idTiposClientes='.$keyTC));
+					$cantidades = array();
+					foreach ($_POST['MatrizPreciosCTP'][$key][$keyTC] as $keyC => $cantidad)
+					{
+						array_push($cantidades, CantidadCTP::model()->findByPk($keyC));
+						$horarios = array();
+						foreach ($_POST['MatrizPreciosCTP'][$key][$keyTC][$keyC] as $keyH => $horario)
+						{
+							array_push($horarios, Horario::model()->findByPk($keyH));
+							$model[$key][$keyTC][$keyC][$keyH] = MatrizPreciosCTP::model()->find('idAlmacenProducto='.$key.' and idTiposClientes='.$keyTC.' and idCantidad='.$keyC.' and idHorario='.$keyH);
+							if(empty($model[$key][$keyTC][$keyC][$keyH]))
+								$model[$key][$keyTC][$keyC][$keyH] = new MatrizPreciosCTP;
+							
+							$model[$key][$keyTC][$keyC][$keyH]->attributes = $horario;
+							$model[$key][$keyTC][$keyC][$keyH]->idAlmacenProducto = $key;
+							$model[$key][$keyTC][$keyC][$keyH]->idTiposClientes = $keyTC;
+							$model[$key][$keyTC][$keyC][$keyH]->idCantidad = $keyC;
+							$model[$key][$keyTC][$keyC][$keyH]->idHorario = $keyH;
+							if($model[$key][$keyTC][$keyC][$keyH]->validate())
+								$model[$key][$keyTC][$keyC][$keyH]->save();
+						}
+					}
+				} 
+			}
+		}
 		$this->render('matriz',array('model'=>$model,'placas'=>$placas,'tiposClientes'=>$tiposClientes,'cantidades'=>$cantidades,'horarios'=>$horarios));
 	}
 	
