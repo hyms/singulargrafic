@@ -11,7 +11,7 @@ $this->breadcrumbs=array(
 <h1>Clientes</h1>
 
 <?php echo CHtml::link('Añadir',array('cliente/Create'), array('class' => 'btn btn-default') ); ?>
-<?php echo CHtml::link('Añadir Tipo Cliente',array('cliente/tipoCliente'), array('class' => 'openDlg divDialog') ); ?>
+<?php echo "  ".CHtml::link('Añadir Tipo Cliente',array('cliente/tipoCliente'), array('class' => 'openDlg divDialog') ); ?>
 
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
