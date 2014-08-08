@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 08-08-2014 a las 15:20:35
+-- Tiempo de generación: 08-08-2014 a las 18:49:09
 -- Versión del servidor: 5.5.38
 -- Versión de PHP: 5.4.4-14+deb7u12
 
@@ -537,6 +537,10 @@ CREATE TABLE IF NOT EXISTS `cajaChicaMovimiento` (
   `fechaMovimiento` datetime NOT NULL,
   `tipoMovimiento` int(11) DEFAULT NULL,
   `idcajaChica` int(11) DEFAULT NULL,
+  `detalle` varchar(100) NOT NULL,
+  `Obs` varchar(100) NOT NULL,
+  `registro` int(11) NOT NULL,
+  `factura` varchar(50) NOT NULL,
   PRIMARY KEY (`idcajaChicaMovimiento`),
   KEY `fk_cajaChicaMovimiento_cajaChica1` (`idcajaChica`),
   KEY `fk_cajaChicaMovimiento_TipoMovimiento1` (`tipoMovimiento`)
@@ -1474,7 +1478,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`idUser`, `username`, `password`, `fechaLogin`, `estado`, `tipo`, `idEmpleado`) VALUES
-(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-08-08 15:16:06', 0, '1', 2),
+(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-08-08 17:46:14', 0, '1', 2),
 (2, 'erika', 'e10adc3949ba59abbe56e057f20f883e', '2014-08-05 12:31:05', 0, '3', 3),
 (3, 'sergio', 'e10adc3949ba59abbe56e057f20f883e', '2014-07-21 15:14:21', 0, '4', 4),
 (4, 'erick', '202cb962ac59075b964b07152d234b70', '2014-07-24 17:30:27', 0, '1', 1);

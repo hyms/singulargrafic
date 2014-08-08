@@ -78,7 +78,7 @@ DROP TABLE IF EXISTS `singular`.`cajaMovimientoVenta` ;
 
 CREATE  TABLE IF NOT EXISTS `singular`.`cajaMovimientoVenta` (
   `idCajaMovimientoVenta` INT(11) NOT NULL AUTO_INCREMENT ,
-  `idUser` INT(11) NULL DEFAULT NULL ,  
+  `idUser` INT(11) NULL DEFAULT NULL ,
   `monto` DOUBLE NOT NULL ,
   `motivo` VARCHAR(100) NOT NULL ,
   `fechaMovimiento` DATETIME NULL DEFAULT NULL ,
@@ -99,7 +99,6 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cajaMovimientoVenta` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 45
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -111,9 +110,10 @@ DROP TABLE IF EXISTS `singular`.`TiposClientes` ;
 CREATE  TABLE IF NOT EXISTS `singular`.`TiposClientes` (
   `idTiposClientes` INT(11) NOT NULL AUTO_INCREMENT ,
   `nombre` VARCHAR(50) NULL DEFAULT NULL ,
+  `servicio` INT(11) NULL DEFAULT NULL ,
   PRIMARY KEY (`idTiposClientes`) )
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -133,9 +133,9 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cliente` (
   `direccion` VARCHAR(100) NULL DEFAULT NULL ,
   `idTiposClientes` INT(11) NULL DEFAULT NULL ,
   PRIMARY KEY (`idCliente`) ,
-  INDEX `fk_cliente_TiposClientes1` (`idTIposClientes` ASC) ,
+  INDEX `fk_cliente_TiposClientes1` (`idTiposClientes` ASC) ,
   CONSTRAINT `fk_cliente_TiposClientes1`
-    FOREIGN KEY (`idTIposClientes` )
+    FOREIGN KEY (`idTiposClientes` )
     REFERENCES `singular`.`TiposClientes` (`idTiposClientes` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -268,86 +268,6 @@ CREATE  TABLE IF NOT EXISTS `singular`.`CTP` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 12
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `singular`.`cantidadCTP`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `singular`.`cantidadCTP` ;
-
-CREATE  TABLE IF NOT EXISTS `singular`.`cantidadCTP` (
-  `idCantidadCTP` INT(11) NOT NULL ,
-  `Inicio` INT(11) NULL DEFAULT NULL ,
-  `final` INT(11) NULL DEFAULT NULL ,
-  PRIMARY KEY (`idCantidadCTP`) )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `singular`.`horario`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `singular`.`horario` ;
-
-CREATE  TABLE IF NOT EXISTS `singular`.`horario` (
-  `idHorario` INT(11) NOT NULL ,
-  `inicio` TIME NULL DEFAULT NULL ,
-  `final` TIME NULL DEFAULT NULL ,
-  `prioridad` INT(11) NULL DEFAULT NULL ,
-  PRIMARY KEY (`idHorario`) )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `singular`.`MatrizPreciosCTP`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `singular`.`MatrizPreciosCTP` ;
-
-CREATE  TABLE IF NOT EXISTS `singular`.`MatrizPreciosCTP` (
-  `idMatrizPreciosCTP` INT(11) NOT NULL AUTO_INCREMENT ,
-  `idTiposClientes` INT(11) NULL DEFAULT NULL ,
-  `idHorario` INT(11) NULL DEFAULT NULL ,
-  `idCantidad` INT(11) NULL DEFAULT NULL ,
-  `precioSF` DOUBLE NOT NULL ,
-  `precioCF` DOUBLE NOT NULL ,
-  `nombre` VARCHAR(45) NULL ,
-  PRIMARY KEY (`idMatrizPreciosCTP`) ,
-  INDEX `fk_MatrizPreciosCTP_horario1` (`idHorario` ASC) ,
-  INDEX `fk_MatrizPreciosCTP_cantidadCTP1` (`idCantidad` ASC) ,
-  INDEX `fk_MatrizPreciosCTP_TiposClientes1` (`idTiposClientes` ASC) ,
-  CONSTRAINT `fk_MatrizPreciosCTP_cantidadCTP1`
-    FOREIGN KEY (`idCantidad` )
-    REFERENCES `singular`.`cantidadCTP` (`idCantidadCTP` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_MatrizPreciosCTP_horario1`
-    FOREIGN KEY (`idHorario` )
-    REFERENCES `singular`.`horario` (`idHorario` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_MatrizPreciosCTP_TiposClientes1`
-    FOREIGN KEY (`idTiposClientes` )
-    REFERENCES `singular`.`TiposClientes` (`idTiposClientes` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `singular`.`TipoMovimiento`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `singular`.`TipoMovimiento` ;
-
-CREATE  TABLE IF NOT EXISTS `singular`.`TipoMovimiento` (
-  `idTipoMovimiento` INT(11) NOT NULL AUTO_INCREMENT ,
-  `nombre` VARCHAR(100) NOT NULL ,
-  `estado` INT(11) NOT NULL ,
-  PRIMARY KEY (`idTipoMovimiento`) )
-ENGINE = InnoDB
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = latin1;
 
@@ -380,7 +300,7 @@ DROP TABLE IF EXISTS `singular`.`producto` ;
 
 CREATE  TABLE IF NOT EXISTS `singular`.`producto` (
   `idProducto` INT(11) NOT NULL AUTO_INCREMENT ,
-  `idMatrizPrecios` INT(11) NULL ,
+  `servicio` INT(11) NULL DEFAULT NULL ,
   `codigo` VARCHAR(40) NOT NULL ,
   `material` VARCHAR(40) NOT NULL ,
   `color` VARCHAR(40) NOT NULL ,
@@ -393,15 +313,9 @@ CREATE  TABLE IF NOT EXISTS `singular`.`producto` (
   `precioCFP` DOUBLE NOT NULL ,
   `familia` VARCHAR(40) NOT NULL ,
   `detalle` VARCHAR(100) NOT NULL ,
-  PRIMARY KEY (`idProducto`) ,
-  INDEX `fk_producto_MatrizPreciosCTP1` (`idMatrizPrecios` ASC) ,
-  CONSTRAINT `fk_producto_MatrizPreciosCTP1`
-    FOREIGN KEY (`idMatrizPrecios` )
-    REFERENCES `singular`.`MatrizPreciosCTP` (`idMatrizPreciosCTP` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`idProducto`) )
 ENGINE = InnoDB
-AUTO_INCREMENT = 182
+AUTO_INCREMENT = 184
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -430,7 +344,97 @@ CREATE  TABLE IF NOT EXISTS `singular`.`almacenProducto` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 705
+AUTO_INCREMENT = 709
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `singular`.`cantidadCTP`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `singular`.`cantidadCTP` ;
+
+CREATE  TABLE IF NOT EXISTS `singular`.`cantidadCTP` (
+  `idCantidadCTP` INT(11) NOT NULL AUTO_INCREMENT ,
+  `Inicio` INT(11) NULL DEFAULT NULL ,
+  `final` INT(11) NULL DEFAULT NULL ,
+  PRIMARY KEY (`idCantidadCTP`) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 10
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `singular`.`horario`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `singular`.`horario` ;
+
+CREATE  TABLE IF NOT EXISTS `singular`.`horario` (
+  `idHorario` INT(11) NOT NULL AUTO_INCREMENT ,
+  `inicio` TIME NULL DEFAULT NULL ,
+  `final` TIME NULL DEFAULT NULL ,
+  `prioridad` INT(11) NULL DEFAULT NULL ,
+  PRIMARY KEY (`idHorario`) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `singular`.`MatrizPreciosCTP`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `singular`.`MatrizPreciosCTP` ;
+
+CREATE  TABLE IF NOT EXISTS `singular`.`MatrizPreciosCTP` (
+  `idMatrizPreciosCTP` INT(11) NOT NULL AUTO_INCREMENT ,
+  `idTiposClientes` INT(11) NULL DEFAULT NULL ,
+  `idHorario` INT(11) NULL DEFAULT NULL ,
+  `idCantidad` INT(11) NULL DEFAULT NULL ,
+  `idAlmacenProducto` INT(11) NULL DEFAULT NULL ,
+  `precioSF` DOUBLE NOT NULL ,
+  `precioCF` DOUBLE NOT NULL ,
+  `nombre` VARCHAR(45) NULL DEFAULT NULL ,
+  PRIMARY KEY (`idMatrizPreciosCTP`) ,
+  INDEX `fk_MatrizPreciosCTP_horario1` (`idHorario` ASC) ,
+  INDEX `fk_MatrizPreciosCTP_cantidadCTP1` (`idCantidad` ASC) ,
+  INDEX `fk_MatrizPreciosCTP_TiposClientes1` (`idTiposClientes` ASC) ,
+  INDEX `fk_MatrizPreciosCTP_almacenProductos1` (`idAlmacenProducto` ASC) ,
+  CONSTRAINT `fk_MatrizPreciosCTP_almacenProductos1`
+    FOREIGN KEY (`idAlmacenProducto` )
+    REFERENCES `singular`.`almacenProducto` (`idAlmacenProducto` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_MatrizPreciosCTP_cantidadCTP1`
+    FOREIGN KEY (`idCantidad` )
+    REFERENCES `singular`.`cantidadCTP` (`idCantidadCTP` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_MatrizPreciosCTP_horario1`
+    FOREIGN KEY (`idHorario` )
+    REFERENCES `singular`.`horario` (`idHorario` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_MatrizPreciosCTP_TiposClientes1`
+    FOREIGN KEY (`idTiposClientes` )
+    REFERENCES `singular`.`TiposClientes` (`idTiposClientes` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 34
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `singular`.`TipoMovimiento`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `singular`.`TipoMovimiento` ;
+
+CREATE  TABLE IF NOT EXISTS `singular`.`TipoMovimiento` (
+  `idTipoMovimiento` INT(11) NOT NULL AUTO_INCREMENT ,
+  `nombre` VARCHAR(100) NOT NULL ,
+  `estado` INT(11) NOT NULL ,
+  PRIMARY KEY (`idTipoMovimiento`) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -479,7 +483,6 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cajaArqueo` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 20
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -527,6 +530,10 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cajaChicaMovimiento` (
   `fechaMovimiento` DATETIME NOT NULL ,
   `tipoMovimiento` INT(11) NULL DEFAULT NULL ,
   `idcajaChica` INT(11) NULL DEFAULT NULL ,
+  `detalle` VARCHAR(100) NOT NULL ,
+  `Obs` VARCHAR(100) NOT NULL ,
+  `registro` INT(11) NOT NULL ,
+  `factura` VARCHAR(50) NOT NULL ,
   PRIMARY KEY (`idcajaChicaMovimiento`) ,
   INDEX `fk_cajaChicaMovimiento_cajaChica1` (`idcajaChica` ASC) ,
   INDEX `fk_cajaChicaMovimiento_TipoMovimiento1` (`tipoMovimiento` ASC) ,
@@ -585,6 +592,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`detalleCTP` (
   `trabajo` VARCHAR(100) NULL DEFAULT NULL ,
   `pinza` INT(11) NULL DEFAULT NULL ,
   `resolucion` DOUBLE NULL DEFAULT NULL ,
+  `costo` DOUBLE NOT NULL ,
   `costoAdicional` DOUBLE NOT NULL ,
   `costoTotal` DOUBLE NOT NULL ,
   `estado` INT(11) NULL DEFAULT NULL ,
@@ -594,18 +602,19 @@ CREATE  TABLE IF NOT EXISTS `singular`.`detalleCTP` (
   `K` TINYINT(1) NULL DEFAULT NULL ,
   PRIMARY KEY (`idDetalleCTP`) ,
   INDEX `fk_detalleCTP_CTP1` (`idCTP` ASC) ,
-  INDEX `fk_detalleCTP_almacenProducto1` (`idAlmacen` ASC) ,
+  INDEX `fk_detalleCTP_almacenProducto1` (`idAlmacenProducto` ASC) ,
+  CONSTRAINT `fk_detalleCTP_almacenProducto1`
+    FOREIGN KEY (`idAlmacenProducto` )
+    REFERENCES `singular`.`almacenProducto` (`idAlmacenProducto` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_detalleCTP_CTP1`
     FOREIGN KEY (`idCTP` )
     REFERENCES `singular`.`CTP` (`idCTP` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_detalleCTP_almacenProducto1`
-    FOREIGN KEY (`idAlmacen` )
-    REFERENCES `singular`.`almacenProducto` (`idAlmacenProducto` )
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -648,7 +657,6 @@ CREATE  TABLE IF NOT EXISTS `singular`.`venta` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 37
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -681,7 +689,6 @@ CREATE  TABLE IF NOT EXISTS `singular`.`detalleVenta` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 32
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -725,7 +732,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`movimientoAlmacen` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 109
+AUTO_INCREMENT = 349
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -784,7 +791,6 @@ CREATE  TABLE IF NOT EXISTS `singular`.`recibos` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = latin1;
 
 
