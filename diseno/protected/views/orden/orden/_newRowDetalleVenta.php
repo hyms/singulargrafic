@@ -43,19 +43,20 @@
 <td class="col-sm-1">
 	<?php echo CHtml::activeTextField($model,"[$index]costoAdicional",array('class'=>'form-control input-sm','id'=>'adicional_'.$index)); ?>
 </td>
-
+<?php /*?>
 <td class="col-sm-1">
 	<?php echo CHtml::activeTextField($model,"[$index]costoTotal",array('class'=>'costo form-control input-sm','readonly'=>true,'id'=>'costoTotal_'.$index)); ?>
 </td>
-
+<?php */?>
 <td class="col-sm-1">
 	<?php echo CHtml::link('Quitar', '#', array("class"=>"btn btn-danger btn-sm tabular-input-remove")).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />'; ?>
 </td>
 </tr>
-<?php  
-echo "
-<script>
-	$('#nroPlacas_". $index ."').blur(function(e){ 
+<?php
+
+/*
+ 
+ $('#nroPlacas_". $index ."').blur(function(e){ 
 	    $('#costoTotal_". $index ."').val(suma($('#nroPlacas_".  $index ."').val()*$('#costo_". $index ."').val(),$('#adicional_". $index ."').val()));
 		calcular_total();
 		return true;
@@ -71,7 +72,12 @@ echo "
 	    calcular_total();
 		return true;
 	})
-		
+	
+	
+ 
+ */
+echo "
+<script>
 	$('#f_". $index ."').change(function(e){ 
 	    $('#c_". $index ."').prop('checked',$('#f_". $index ."').is(':checked'));
 		$('#m_". $index ."').prop('checked',$('#f_". $index ."').is(':checked'));

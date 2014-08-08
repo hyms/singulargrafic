@@ -13,7 +13,7 @@
 		<td><?php echo CHtml::label('Pinza','pinza')?></td>
 		<td><?php echo CHtml::label('Resolucion','resolucion')?></td>
 		<td><?php echo CHtml::label('Adicional','adicional')?></td>
-		<td><?php echo CHtml::label('Total','total')?></td>
+		<?php /*?><td><?php echo CHtml::label('Total','total')?></td><?php */?>
        	<td></td>
  	</tr></thead>
 <tbody class="tabular-input-container">
@@ -53,7 +53,7 @@ if(count($detalle)>=1)
 	</div>
 	 <?php echo CHtml::error($ctp,"obs",array('class'=>'label label-danger')); ?>
 </div>
-
+<?php /*?>
 <div class="col-sm-5" >
 	<div class="form-group">
 		<?php echo CHtml::activeLabelEx($ctp,"montoVenta",array('class'=>'control-label col-sm-4'))?>
@@ -64,7 +64,7 @@ if(count($detalle)>=1)
 	</div>
 </div>
 </div>
-
+<?php */?>
 <?php Yii::app()->getClientScript()->registerScript("ajax_total",
 "
    	function calcular_total() {

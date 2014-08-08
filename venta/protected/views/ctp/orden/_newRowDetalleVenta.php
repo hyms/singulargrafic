@@ -39,6 +39,10 @@
 </td>
 
 <td class="col-sm-1">
+	<?php echo CHtml::activeTextField($model,"[$index]costo",array('class'=>'form-control input-sm','readonly'=>true,'id'=>'adicional_'.$index)); ?>
+</td>
+
+<td class="col-sm-1">
 	<?php echo CHtml::activeTextField($model,"[$index]costoAdicional",array('class'=>'form-control input-sm','readonly'=>true,'id'=>'adicional_'.$index)); ?>
 </td>
 

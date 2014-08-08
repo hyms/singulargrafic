@@ -4,15 +4,43 @@ class CtpController extends Controller
 	
 	public function actionMatrizPrecios()
 	{
-		$model = new MatrizPreciosCTP;
+		$model ="";//  new MatrizPreciosCTP;	
 		$placas = AlmacenProducto::model()->with('idProducto0')->findAll('idAlmacen=3');
 		$tiposClientes = TiposClientes::model()->findAll('servicio=1');
 		$cantidades = CantidadCTP::model()->findAll();
 		$horarios = Horario::model()->findAll();
 		
+		$matriz = MatrizPreciosCTP::model()->findAll();
+		if(!empty($matriz))
+		{
+			$model = array();
+			$i=0;
+			foreach ($matriz as $item)
+			{
+				$model[$item->idAlmacenProducto][$item->idTiposClientes][$item->idCantidad][$item->idHorario] = $item;
+				if($i<$item->idCantidad)
+					$i=$item->idCantidad;
+			}
+			$cantidad = end($cantidades);
+			if($i<$cantidad->idCantidadCTP)
+			{
+				foreach ($placas as $placa)
+					foreach ($tiposClientes as $tipoCliente)
+						foreach ($horarios as $horario)
+						{
+							$model[$placa->idAlmacenProducto][$tipoCliente->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario] = new MatrizPreciosCTP;
+						}
+						
+			}
+		}
+		else
+		{
+			$model = new MatrizPreciosCTP;	
+		}		
+		
 		if(isset($_POST['MatrizPreciosCTP']))
 		{
-			$model = array(array(array(array())));
+			$model = array();
 			//$model->attributes = $_POST['MatrizPreciosCTP'];
 			$placas = array();
 			foreach ($_POST['MatrizPreciosCTP'] as $key => $placa)
@@ -102,7 +130,35 @@ class CtpController extends Controller
 	   	}
 	   	$this->renderPartial('cantidad',array('model'=>$model));
 	}
-					
+
+	public function actionDelCantidad()
+	{
+		if(isset($_GET['id']))
+		{
+			$model = $this->verifyModel(CantidadCTP::model()->findByPk($_GET['id']));
+			$matriz = MatrizPreciosCTP::model()->findAll('idCantidad='.$model->idCantidadCTP);
+			//print_r($matriz);
+			if(!empty($matriz))
+			{
+				$i = count($matriz);
+				foreach ($matriz as $item)
+				{
+					if($item->delete())
+						$i--;
+				}
+				if($i==0){
+					if($model->delete())
+						$this->redirect(array('ctp/matrizPrecios'));
+				}
+			}
+			else
+			{
+				if($model->delete())
+					$this->redirect(array('ctp/matrizPrecios'));
+			}
+		}
+	}
+	
 	public function verifyModel($model)
 	{
 		if($model===null)

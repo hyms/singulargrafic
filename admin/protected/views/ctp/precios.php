@@ -1,6 +1,6 @@
 <?php foreach ($placas as $placa){?>
 <?php foreach ($clienteTipos as $clienteTipo){?>
-
+<?php $nombres = new MatrizPreciosCTP?>
 <div class="col-xs-6">
 
 	<h4><strong><?php echo $placa->idProducto0->detalle; ?></strong></h4>
@@ -15,10 +15,10 @@
 	</tr>
 	<?php foreach ($horarios as $horario){?>
 	<tr>
-		<td><strong><?php echo CHtml::link($horario->inicio." - ".$horario->final,array('ctp/horario','id'=>$horario->idHorario), array('class' => 'openDlg divDialog')); ?></strong></td>
+		<td class="text-center"><strong><?php echo CHtml::link($horario->inicio." - ".$horario->final,array('ctp/horario','id'=>$horario->idHorario), array('class' => 'openDlg divDialog')); ?></strong></td>
 		<?php foreach ($cantidades as $cantidad){?>
 		<td>
-		<?php if(count($model)==1){?>
+		<?php if(!is_array($model)){?>
 			<div class="col-xs-6">
 			<div class="form-group">
 				<?php echo CHtml::activeLabelEx($model,"[$placa->idAlmacenProducto][$clienteTipo->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario]precioSF",array('class'=>'control-label')); ?>

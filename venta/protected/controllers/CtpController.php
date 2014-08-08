@@ -90,10 +90,37 @@ class CtpController extends Controller
 				$id=$_GET['id'];
 			if(isset($_POST['CTP']['idCTP']))
 				$id=$_POST['CTP']['idCTP'];
-			$ctp = CTP::model()
-			->with('detalleCTPs')
-			->with('idCliente0')
-			->find('`t`.idCTP='.$id);
+			$ctp = $this->verifyModel(CTP::model()
+				->with('detalleCTPs')
+				->with('idCliente0')
+				->find('`t`.idCTP='.$id));
+			$detalle = array();
+			$total=0;
+			$horas = Horario::model()->findAll();
+			foreach ($ctp->detalleCTPs as $key => $item)
+			{
+				$detalle[$key] = $ctp->detalleCTPs[$key];
+				$condAlmacen = 'idAlmacenProducto='.$item->idAlmacenProducto;
+				$condCliente ='idTiposClientes='.$ctp->idCliente0->idTiposClientes;
+				$condCantidad ='idCantidad0.Inicio<='.$item->nroPlacas.' and '.$item->nroPlacas.'<=idCantidad0.final';
+				$condHora ="";
+				foreach ($horas as $h)
+				{	if($h->inicio<date("H:0:s"))
+					//if($h->inicio<"19:30:00")
+						$condHora ="idHorario=".$h->idHorario;
+				}
+				$matriz = MatrizPreciosCTP::model()->with('idCantidad0')->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
+				//$matriz = MatrizPreciosCTP::model()->with('idHorario0')->with('idCantidad0')->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
+				if($ctp->tipoOrden ==0)
+					$detalle[$key]->costo = $matriz->precioCF;
+				else
+					$detalle[$key]->costo = $matriz->precioSF;
+				
+				$detalle[$key]->costoTotal = ($detalle[$key]->costo*$detalle[$key]->nroPlacas)+$detalle[$key]->costoAdicional;
+				$total = $total +$detalle[$key]->costoTotal;
+			}
+			$ctp->detalleCTPs = $detalle;
+			$ctp->montoVenta = $total;
 			$this->render('orden',array('ctp'=>$ctp,'detalle'=>$ctp->detalleCTPs,'cliente'=>$ctp->idCliente0));
 		}
 		else
@@ -104,10 +131,10 @@ class CtpController extends Controller
 	{
 		if(isset($_GET['id']))
 		{
-			$ctp = CTP::model()
+			$ctp = $this->verifyModel(CTP::model()
 			->with('detalleCTPs')
 			->with('idCliente0')
-			->findByPk($_GET['id']);
+			->findByPk($_GET['id']));
 			
 			$ctp->attributes = $_POST['CTP'];
 			
@@ -131,6 +158,35 @@ class CtpController extends Controller
 			else
 				$ctp->codigo = $ctp->numero."-P";
 			
+			$detalle = array();
+			$total=0;
+			$horas = Horario::model()->findAll();
+			foreach ($ctp->detalleCTPs as $key => $item)
+			{
+				$detalle[$key] = $ctp->detalleCTPs[$key];
+				//$hora = date('H:m:i');
+				$hora = "19:30:00";
+				$condAlmacen = 'idAlmacenProducto='.$item->idAlmacenProducto;
+				$condCliente ='idTiposClientes='.$ctp->idCliente0->idTiposClientes;
+				$condCantidad =$item->nroPlacas.' between idCantidad0.Inicio and idCantidad0.final';
+				$condHora ="";
+				foreach ($horas as $h)
+				{	if($h->inicio<date("H:0:s"))
+					//if($h->inicio<"19:30:00")
+						$condHora ="idHorario=".$h->idHorario;
+				}
+				$matriz = MatrizPreciosCTP::model()->with('idCantidad0')->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
+				//print_r($matriz);return;
+				if($ctp->tipoOrden ==0)
+					$detalle[$key]->costo = $matriz->precioCF;
+				else
+					$detalle[$key]->costo = $matriz->precioSF;
+			
+				$detalle[$key]->costoTotal = ($detalle[$key]->costo*$detalle[$key]->nroPlacas)+$detalle[$key]->costoAdicional;
+				$total = $total +$detalle[$key]->costoTotal;
+			}
+			$ctp->detalleCTPs = $detalle;
+			$ctp->montoVenta = $total;
 			$this->render('orden',array('ctp'=>$ctp,'detalle'=>$ctp->detalleCTPs,'cliente'=>$ctp->idCliente0));
 		}
 		else

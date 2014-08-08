@@ -11,6 +11,7 @@
 		<td><?php echo CHtml::label('Trabajo','trabajo')?></td>
 		<td><?php echo CHtml::label('Pinza','pinza')?></td>
 		<td><?php echo CHtml::label('Resolucion','resolucion')?></td>
+		<td><?php echo CHtml::label('Costo','costo')?></td>
 		<td><?php echo CHtml::label('Adicional','adicional')?></td>
 		<td><?php echo CHtml::label('Total','total')?></td>
  	</tr></thead>
