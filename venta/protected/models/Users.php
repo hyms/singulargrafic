@@ -13,8 +13,14 @@
  * @property integer $idEmpleado
  *
  * The followings are the available model relations:
- * @property CajaVenta[] $cajaVentas
- * @property MovimientoCaja[] $movimientoCajas
+ * @property CTP[] $cTPs
+ * @property CTP[] $cTPs1
+ * @property Imprenta[] $imprentas
+ * @property Imprenta[] $imprentas1
+ * @property CajaArqueo[] $cajaArqueos
+ * @property CajaChica[] $cajaChicas
+ * @property CajaMovimientoVenta[] $cajaMovimientoVentas
+ * @property MovimientoAlmacen[] $movimientoAlmacens
  * @property Empleado $idEmpleado0
  */
 class Users extends CActiveRecord
@@ -35,9 +41,9 @@ class Users extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idEmpleado', 'required'),
 			array('estado, idEmpleado', 'numerical', 'integerOnly'=>true),
 			array('username', 'length', 'max'=>20),
+			array('password', 'length', 'max'=>150),
 			array('tipo', 'length', 'max'=>10),
 			array('fechaLogin', 'safe'),
 			// The following rule is used by search().
@@ -45,20 +51,7 @@ class Users extends CActiveRecord
 			array('idUser, username, password, fechaLogin, estado, tipo, idEmpleado', 'safe', 'on'=>'search'),
 		);
 	}
-	
-	public function getTipos()
-	{
-		return array('admin'=>'admin','ventas'=>'ventas');
-	}
-	
-	public function validatePassword($password){
-		return $this->hashPassword($password)===$this->password;
-	}
-	
-	public function hashPassword($password){
-		return md5($password);
-	}
-	
+
 	/**
 	 * @return array relational rules.
 	 */
@@ -67,8 +60,14 @@ class Users extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'cajaVentas' => array(self::HAS_MANY, 'CajaVenta', 'idUser'),
-			'movimientoCajas' => array(self::HAS_MANY, 'MovimientoCaja', 'idUser'),
+			'cTPs' => array(self::HAS_MANY, 'CTP', 'idUserOT'),
+			'cTPs1' => array(self::HAS_MANY, 'CTP', 'idUserVenta'),
+			'imprentas' => array(self::HAS_MANY, 'Imprenta', 'idUserOT'),
+			'imprentas1' => array(self::HAS_MANY, 'Imprenta', 'idUserVenta'),
+			'cajaArqueos' => array(self::HAS_MANY, 'CajaArqueo', 'idUser'),
+			'cajaChicas' => array(self::HAS_MANY, 'CajaChica', 'idUser'),
+			'cajaMovimientoVentas' => array(self::HAS_MANY, 'CajaMovimientoVenta', 'idUser'),
+			'movimientoAlmacens' => array(self::HAS_MANY, 'MovimientoAlmacen', 'idUser'),
 			'idEmpleado0' => array(self::BELONGS_TO, 'Empleado', 'idEmpleado'),
 		);
 	}
@@ -89,15 +88,29 @@ class Users extends CActiveRecord
 		);
 	}
 	
+	
+	public function getTipos()
+	{
+		return array('admin'=>'admin','ventas'=>'ventas');
+	}
+	
+	public function validatePassword($password){
+		return $this->hashPassword($password)===$this->password;
+	}
+	
+	public function hashPassword($password){
+		return md5($password);
+	}
+	
 	public function tipos()
 	{
 		return array(
-			'1' => 'Admin',
-			'2' => 'Administracion',
-			'3' => 'Ventas',
-			'4' => 'Diseño',
+				'1' => 'Admin',
+				'2' => 'Administracion',
+				'3' => 'Ventas',
+				'4' => 'Diseño',
 		);
-	} //*/
+	}
 	
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

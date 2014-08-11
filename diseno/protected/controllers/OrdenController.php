@@ -64,7 +64,11 @@ class OrdenController extends Controller
 		
 			$cliente->attributes = $_POST['Cliente'];
 			if(empty($cliente->fechaRegistro))
+			{
 				$cliente->fechaRegistro = date("Y-m-d");
+				$tmp = TiposClientes::model()->find('nombre=nuevo');
+				$cliente->idTiposClientes = $tmp->idTiposClientes;
+			}
 			if($cliente->save())
 				$swc=1;
 		}
@@ -201,7 +205,7 @@ class OrdenController extends Controller
 	{
 		$ordenes=new CActiveDataProvider('CTP',array(
 				'criteria'=>array(
-				'condition'=>'tipoCTP!=3',
+				'condition'=>'tipoCTP!=3 and estado=1',
 						),
 				'pagination'=>array(
 						'pageSize'=>'20',
@@ -231,21 +235,24 @@ class OrdenController extends Controller
 				$repos->idUserOT= Yii::app()->user->id;
 				$repos->estado=1;
 				$repos->idCTPParent=$ctp->idCTP;
-				
 				if($repos->responsable=="Otro")
 				{
 					$otro=$_POST['respOtro'];
 					$repos->responsable = $otro;
+					
 				}
-				$i=0;
+				$i=0;$c=0;
 				foreach ($_POST['DetalleCTP'] as $item)
 				{
 					array_push($detalle,new DetalleCTP);
 					$detalle[$i]->attributes=$item;
+					if($detalle[$i]->validate())
+						$c++;
 					$i++;
 				}
-				if($repos->save())
+				if($repos->validate() && ($c==$i) && !empty($repos->obs))
 				{
+					$repos->save();
 					foreach ($detalle as $item)
 					{
 						$item->idCTP=$repos->idCTP;
@@ -266,6 +273,7 @@ class OrdenController extends Controller
 	{
 		$ordenes=new CActiveDataProvider('CTP',array(
 				'criteria'=>array(
+						'condition'=>'estado=1',
 						'with'=>array('idCliente0'),
 						'order'=>'fechaOrden Desc',
 				),
@@ -298,7 +306,8 @@ class OrdenController extends Controller
 			{
 				$orden = CTP::model()->findByPk($ctp->idCTP);
 				$orden->attributes = $_POST['CTP'];
-				$ctp->idCliente = $cliente->idCliente;
+				if(!empty($cliente->idCliente))
+					$ctp->idCliente = $cliente->idCliente;
 				
 				$user = Users::model()->with('idEmpleado0')->findByPk(Yii::app()->user->id);
 				$orden->obs = "Modificado por el usuario ".$user->username." (".$user->idEmpleado0->nombre." ".$user->idEmpleado0->apellido.")";

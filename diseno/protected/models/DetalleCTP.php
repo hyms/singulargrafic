@@ -43,6 +43,7 @@ class DetalleCTP extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			//array('costoAdicional, costoTotal', 'required'),
+			array('formato, nroPlacas, trabajo, pinza', 'required'),
 			array('idCTP, idAlmacenProducto, nroPlacas, pinza, estado, C, M, Y, K', 'numerical', 'integerOnly'=>true),
 			array('resolucion, costoAdicional, costoTotal', 'numerical'),
 			array('formato', 'length', 'max'=>50),

@@ -10,7 +10,6 @@ $this->breadcrumbs=array(
 </div>
 
 <div class="col-sm-10">
-<?php $this->renderPartial('menuCaja');?>
 <div class="row">
 <div class="text-center">
 <?php echo CHtml::link('Egreso', array("caja/chica","t"=>0), array("class"=>"btn btn-default hidden-print")); ?>

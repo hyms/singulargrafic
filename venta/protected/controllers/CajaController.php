@@ -25,7 +25,7 @@ class CajaController extends Controller
 
 	public function actionIndex()
 	{
-		$vd = false;
+		/*$vd = false;
 		$ld = false;
 		$ce = false;
 		$sf = 0;
@@ -55,17 +55,22 @@ class CajaController extends Controller
 			if(!empty($caja))
 				$tabla = $caja->ventas;
 			$ld=true;
-		}
-		$this->render("index",array('ld'=>$ld,'ce'=>$ce,'tabla'=>$tabla,'caja'=>$caja));
+		}*/
+		$tabla = CajaChicaMovimiento::model()
+					->with('idcajaChica0')
+					->with('idcajaChica0.idUser0')
+					->findAll();
+		$caja = CajaChica::model()->with('cajaChicaTipos')->with('cajaChicaTipos.idTipoMovimiento0')->find('idUser='.Yii::app()->user->id);
+		$this->render("index",array('tabla'=>$tabla,'caja'=>$caja));
 	}
 	
 	public function actionEgreso()
 	{
-		$egreso = new MovimientoCaja;
+		$egreso = new CajaChicaMovimiento;
 		$egreso->fechaMovimiento=date("Y-m-d H:i:s");
-		$egreso->tipo=0;
-		$caja = $caja = CajaVenta::model()->find(array('condition'=>'`t`.idCaja=2 and fechaArqueo is NULL'));
-		$egreso->idCaja = $caja->idCajaVenta;
+		$egreso->tipoMovimiento=0;
+		$caja = CajaChica::model()->with('idCaja0')->find('idUser='.Yii::app()->user->id);
+		$egreso->idcajaChica = $caja->idcajaChica;
 		if(isset($_POST['MovimientoCaja']))
 		{
 			$egreso->attributes=$_POST['MovimientoCaja'];

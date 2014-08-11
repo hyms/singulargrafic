@@ -67,6 +67,12 @@ if($repos->responsable!="")
 	</div>
 	<div class="panel-body" style="overflow: auto;">
 	<?php $this->renderPartial('repo/detalleRepos',array('detalle'=>$detalle,'ctp'=>$repos));?>
+		<div class="form-group">
+		<?php echo $form->labelEx($repos,'obs',array('class'=>'col-sm-1 control-label')); ?>
+		<div class="col-sm-6">
+			<?php echo CHtml::activeTextArea($repos,'obs',array('class'=>'form-control input-sm','id'=>'resp'))?>
+		</div>
+		</div>
  	</div>
 </div>
 

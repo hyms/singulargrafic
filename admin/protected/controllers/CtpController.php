@@ -14,12 +14,14 @@ class CtpController extends Controller
 		if(!empty($matriz))
 		{
 			$model = array();
-			$i=0;
+			$i=0; $j=0;
 			foreach ($matriz as $item)
 			{
 				$model[$item->idAlmacenProducto][$item->idTiposClientes][$item->idCantidad][$item->idHorario] = $item;
 				if($i<$item->idCantidad)
 					$i=$item->idCantidad;
+				if($j<$item->idTiposClientes)
+					$j=$item->idTiposClientes;
 			}
 			$cantidad = end($cantidades);
 			if($i<$cantidad->idCantidadCTP)
@@ -31,6 +33,17 @@ class CtpController extends Controller
 							$model[$placa->idAlmacenProducto][$tipoCliente->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario] = new MatrizPreciosCTP;
 						}
 						
+			}
+			$tipoCliente = end($tiposClientes);
+			if($j<$tipoCliente->idTiposClientes)
+			{
+				foreach ($placas as $placa)
+					foreach ($cantidades as $cantidad)
+						foreach ($horarios as $horario)
+						{
+							$model[$placa->idAlmacenProducto][$tipoCliente->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario] = new MatrizPreciosCTP;
+						}
+			
 			}
 		}
 		else

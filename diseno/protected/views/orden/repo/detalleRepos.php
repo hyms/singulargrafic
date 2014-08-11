@@ -41,7 +41,8 @@ if(count($detalle)>=1)
 }
 ?>
 </tbody></table>
-</div>
+
+<div>
 
 
 <?php Yii::app()->getClientScript()->registerScript("ajax_total",
