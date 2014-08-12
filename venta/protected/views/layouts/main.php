@@ -6,8 +6,6 @@
 		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap-responsive.css')
 		
 		->registerCoreScript( 'jquery' )
-		//->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.js', CClientScript::POS_END )
-		//->registerScriptFile( Yii::app()->request->baseUrl . '/js/print.js')
 		->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END )
 		
 		//*/

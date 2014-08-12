@@ -1,1 +1,0 @@
-<?php echo $this->renderPartial('_formOnPage', array('model'=>$model)); ?>

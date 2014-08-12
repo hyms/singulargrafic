@@ -2,7 +2,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-CREATE SCHEMA IF NOT EXISTS `singular` DEFAULT CHARACTER SET latin1 ;
+CREATE SCHEMA IF NOT EXISTS `singular` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
 USE `singular` ;
 
 -- -----------------------------------------------------
@@ -21,7 +21,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`empleado` (
   PRIMARY KEY (`idEmpleado`) )
 ENGINE = InnoDB
 AUTO_INCREMENT = 5
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -46,7 +47,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`user` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 5
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -57,7 +59,7 @@ DROP TABLE IF EXISTS `singular`.`caja` ;
 CREATE  TABLE IF NOT EXISTS `singular`.`caja` (
   `idCaja` INT(11) NOT NULL AUTO_INCREMENT ,
   `nombre` VARCHAR(50) NOT NULL ,
-  `saldo` DOUBLE NOT NULL ,
+  `saldo` DOUBLE(11) NOT NULL ,
   `idParent` INT(11) NULL DEFAULT NULL ,
   PRIMARY KEY (`idCaja`) ,
   INDEX `fk_caja_caja1` (`idParent` ASC) ,
@@ -68,7 +70,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`caja` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 5
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -79,7 +82,7 @@ DROP TABLE IF EXISTS `singular`.`cajaMovimientoVenta` ;
 CREATE  TABLE IF NOT EXISTS `singular`.`cajaMovimientoVenta` (
   `idCajaMovimientoVenta` INT(11) NOT NULL AUTO_INCREMENT ,
   `idUser` INT(11) NULL DEFAULT NULL ,
-  `monto` DOUBLE NOT NULL ,
+  `monto` DOUBLE(11) NOT NULL ,
   `motivo` VARCHAR(100) NOT NULL ,
   `fechaMovimiento` DATETIME NULL DEFAULT NULL ,
   `tipo` INT(11) NOT NULL ,
@@ -99,7 +102,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cajaMovimientoVenta` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -113,8 +117,9 @@ CREATE  TABLE IF NOT EXISTS `singular`.`TiposClientes` (
   `servicio` INT(11) NULL DEFAULT NULL ,
   PRIMARY KEY (`idTiposClientes`) )
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
-DEFAULT CHARACTER SET = latin1;
+AUTO_INCREMENT = 5
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -141,7 +146,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cliente` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 10
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -158,10 +164,10 @@ CREATE  TABLE IF NOT EXISTS `singular`.`Imprenta` (
   `fechaPlazo` DATETIME NULL DEFAULT NULL ,
   `codigo` VARCHAR(45) NULL DEFAULT NULL ,
   `serie` INT(11) NULL DEFAULT NULL ,
-  `montoVenta` DOUBLE NOT NULL ,
-  `montoPagado` DOUBLE NOT NULL ,
-  `montoCambio` DOUBLE NOT NULL ,
-  `montoDescuento` DOUBLE NOT NULL ,
+  `montoVenta` DOUBLE(11) NOT NULL ,
+  `montoPagado` DOUBLE(11) NOT NULL ,
+  `montoCambio` DOUBLE(11) NOT NULL ,
+  `montoDescuento` DOUBLE(11) NOT NULL ,
   `estado` INT(11) NOT NULL ,
   `factura` VARCHAR(50) NULL DEFAULT NULL ,
   `autorizado` VARCHAR(50) NULL DEFAULT NULL ,
@@ -197,7 +203,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`Imprenta` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -215,10 +222,10 @@ CREATE  TABLE IF NOT EXISTS `singular`.`CTP` (
   `codigo` VARCHAR(45) NULL DEFAULT NULL ,
   `serie` INT(11) NULL DEFAULT NULL ,
   `numero` INT(11) NULL DEFAULT NULL ,
-  `montoVenta` DOUBLE NOT NULL ,
-  `montoPagado` DOUBLE NOT NULL ,
-  `montoCambio` DOUBLE NOT NULL ,
-  `montoDescuento` DOUBLE NOT NULL ,
+  `montoVenta` DOUBLE(11) NOT NULL ,
+  `montoPagado` DOUBLE(11) NOT NULL ,
+  `montoCambio` DOUBLE(11) NOT NULL ,
+  `montoDescuento` DOUBLE(11) NOT NULL ,
   `estado` INT(11) NOT NULL ,
   `factura` VARCHAR(50) NULL DEFAULT NULL ,
   `autorizado` VARCHAR(50) NULL DEFAULT NULL ,
@@ -268,8 +275,9 @@ CREATE  TABLE IF NOT EXISTS `singular`.`CTP` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = latin1;
+AUTO_INCREMENT = 10
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -290,7 +298,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`almacen` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 4
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -307,16 +316,17 @@ CREATE  TABLE IF NOT EXISTS `singular`.`producto` (
   `marca` VARCHAR(40) NOT NULL ,
   `industria` VARCHAR(40) NOT NULL ,
   `cantXPaquete` INT(11) NOT NULL ,
-  `precioSFU` DOUBLE NOT NULL ,
-  `precioSFP` DOUBLE NOT NULL ,
-  `precioCFU` DOUBLE NOT NULL ,
-  `precioCFP` DOUBLE NOT NULL ,
+  `precioSFU` DOUBLE(11) NOT NULL ,
+  `precioSFP` DOUBLE(11) NOT NULL ,
+  `precioCFU` DOUBLE(11) NOT NULL ,
+  `precioCFP` DOUBLE(11) NOT NULL ,
   `familia` VARCHAR(40) NOT NULL ,
   `detalle` VARCHAR(100) NOT NULL ,
   PRIMARY KEY (`idProducto`) )
 ENGINE = InnoDB
 AUTO_INCREMENT = 184
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -345,7 +355,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`almacenProducto` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 709
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -360,7 +371,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cantidadCTP` (
   PRIMARY KEY (`idCantidadCTP`) )
 ENGINE = InnoDB
 AUTO_INCREMENT = 10
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -376,7 +388,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`horario` (
   PRIMARY KEY (`idHorario`) )
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -390,8 +403,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`MatrizPreciosCTP` (
   `idHorario` INT(11) NULL DEFAULT NULL ,
   `idCantidad` INT(11) NULL DEFAULT NULL ,
   `idAlmacenProducto` INT(11) NULL DEFAULT NULL ,
-  `precioSF` DOUBLE NOT NULL ,
-  `precioCF` DOUBLE NOT NULL ,
+  `precioSF` DOUBLE(11) NOT NULL ,
+  `precioCF` DOUBLE(11) NOT NULL ,
   `nombre` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`idMatrizPreciosCTP`) ,
   INDEX `fk_MatrizPreciosCTP_horario1` (`idHorario` ASC) ,
@@ -419,8 +432,9 @@ CREATE  TABLE IF NOT EXISTS `singular`.`MatrizPreciosCTP` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 34
-DEFAULT CHARACTER SET = latin1;
+AUTO_INCREMENT = 42
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -435,7 +449,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`TipoMovimiento` (
   PRIMARY KEY (`idTipoMovimiento`) )
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -452,7 +467,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`banner` (
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -464,11 +480,11 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cajaArqueo` (
   `idCajaArqueo` INT(11) NOT NULL AUTO_INCREMENT ,
   `idCaja` INT(11) NULL DEFAULT NULL ,
   `idUser` INT(11) NULL DEFAULT NULL ,
-  `monto` DOUBLE NOT NULL ,
+  `monto` DOUBLE(11) NOT NULL ,
   `fechaArqueo` DATETIME NULL DEFAULT NULL ,
   `fechaVentas` DATETIME NULL DEFAULT NULL ,
   `comprobante` VARCHAR(20) NULL DEFAULT NULL ,
-  `saldo` DOUBLE NOT NULL ,
+  `saldo` DOUBLE(11) NOT NULL ,
   PRIMARY KEY (`idCajaArqueo`) ,
   INDEX `fk_cajaVenta_caja1` (`idCaja` ASC) ,
   INDEX `fk_cajaVenta_user1` (`idUser` ASC) ,
@@ -483,7 +499,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cajaArqueo` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -495,8 +512,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cajaChica` (
   `idcajaChica` INT(11) NOT NULL AUTO_INCREMENT ,
   `idUser` INT(11) NULL DEFAULT NULL ,
   `idCaja` INT(11) NULL DEFAULT NULL ,
-  `saldo` DOUBLE NOT NULL ,
-  `maximo` DOUBLE NULL DEFAULT NULL ,
+  `saldo` DOUBLE(11) NOT NULL ,
+  `maximo` DOUBLE(11) NULL DEFAULT NULL ,
   `detalle` VARCHAR(50) NULL DEFAULT NULL ,
   PRIMARY KEY (`idcajaChica`) ,
   INDEX `fk_cajaChica_caja1` (`idCaja` ASC) ,
@@ -513,7 +530,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cajaChica` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -525,8 +543,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cajaChicaMovimiento` (
   `idcajaChicaMovimiento` INT(11) NOT NULL AUTO_INCREMENT ,
   `idUser` INT(11) NULL DEFAULT NULL ,
   `idTipoMovimiento` INT(11) NULL DEFAULT NULL ,
-  `monto` DOUBLE NOT NULL ,
-  `saldo` DOUBLE NOT NULL ,
+  `monto` DOUBLE(11) NOT NULL ,
+  `saldo` DOUBLE(11) NOT NULL ,
   `fechaMovimiento` DATETIME NOT NULL ,
   `tipoMovimiento` INT(11) NULL DEFAULT NULL ,
   `idcajaChica` INT(11) NULL DEFAULT NULL ,
@@ -548,7 +566,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cajaChicaMovimiento` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -575,7 +594,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cajaChicaTipo` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 9
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -591,10 +611,10 @@ CREATE  TABLE IF NOT EXISTS `singular`.`detalleCTP` (
   `formato` VARCHAR(50) NULL DEFAULT NULL ,
   `trabajo` VARCHAR(100) NULL DEFAULT NULL ,
   `pinza` INT(11) NULL DEFAULT NULL ,
-  `resolucion` DOUBLE NULL DEFAULT NULL ,
-  `costo` DOUBLE NOT NULL ,
-  `costoAdicional` DOUBLE NOT NULL ,
-  `costoTotal` DOUBLE NOT NULL ,
+  `resolucion` DOUBLE(11) NULL DEFAULT NULL ,
+  `costo` DOUBLE(11) NOT NULL ,
+  `costoAdicional` DOUBLE(11) NOT NULL ,
+  `costoTotal` DOUBLE(11) NOT NULL ,
   `estado` INT(11) NULL DEFAULT NULL ,
   `C` TINYINT(1) NULL DEFAULT NULL ,
   `M` TINYINT(1) NULL DEFAULT NULL ,
@@ -614,8 +634,9 @@ CREATE  TABLE IF NOT EXISTS `singular`.`detalleCTP` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = latin1;
+AUTO_INCREMENT = 9
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -633,10 +654,10 @@ CREATE  TABLE IF NOT EXISTS `singular`.`venta` (
   `codigo` VARCHAR(45) NULL DEFAULT NULL ,
   `numero` INT(11) NOT NULL ,
   `serie` INT(11) NULL DEFAULT NULL ,
-  `montoVenta` DOUBLE NULL DEFAULT NULL ,
-  `montoPagado` DOUBLE NULL DEFAULT NULL ,
-  `montoCambio` DOUBLE NULL DEFAULT NULL ,
-  `montoDescuento` DOUBLE NULL DEFAULT NULL ,
+  `montoVenta` DOUBLE(11) NULL DEFAULT NULL ,
+  `montoPagado` DOUBLE(11) NULL DEFAULT NULL ,
+  `montoCambio` DOUBLE(11) NULL DEFAULT NULL ,
+  `montoDescuento` DOUBLE(11) NULL DEFAULT NULL ,
   `estado` INT(11) NULL DEFAULT NULL ,
   `factura` VARCHAR(50) NULL DEFAULT NULL ,
   `autorizado` VARCHAR(50) NULL DEFAULT NULL ,
@@ -657,7 +678,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`venta` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -669,11 +691,11 @@ CREATE  TABLE IF NOT EXISTS `singular`.`detalleVenta` (
   `idDetalleVenta` INT(11) NOT NULL AUTO_INCREMENT ,
   `idVenta` INT(11) NULL DEFAULT NULL ,
   `cantidadU` INT(11) NOT NULL ,
-  `costoU` DOUBLE NOT NULL ,
+  `costoU` DOUBLE(11) NOT NULL ,
   `cantidadP` INT(11) NOT NULL ,
-  `costoP` DOUBLE NOT NULL ,
-  `costoAdicional` DOUBLE NULL DEFAULT NULL ,
-  `costoTotal` DOUBLE NULL DEFAULT NULL ,
+  `costoP` DOUBLE(11) NOT NULL ,
+  `costoAdicional` DOUBLE(11) NULL DEFAULT NULL ,
+  `costoTotal` DOUBLE(11) NULL DEFAULT NULL ,
   `idAlmacenProducto` INT(11) NULL DEFAULT NULL ,
   PRIMARY KEY (`idDetalleVenta`) ,
   INDEX `fk_detalleVenta_venta1` (`idVenta` ASC) ,
@@ -689,7 +711,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`detalleVenta` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -733,7 +756,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`movimientoAlmacen` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 349
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -751,7 +775,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`pages` (
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB
 AUTO_INCREMENT = 7
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
@@ -770,12 +795,12 @@ CREATE  TABLE IF NOT EXISTS `singular`.`recibos` (
   `concepto` VARCHAR(100) NULL DEFAULT NULL ,
   `codigoNumero` VARCHAR(20) NULL DEFAULT NULL ,
   `servicio` VARCHAR(20) NULL DEFAULT NULL ,
-  `monto` DOUBLE NULL DEFAULT NULL ,
-  `acuenta` DOUBLE NULL DEFAULT NULL ,
-  `saldo` DOUBLE NULL DEFAULT NULL ,
+  `monto` DOUBLE(11) NULL DEFAULT NULL ,
+  `acuenta` DOUBLE(11) NULL DEFAULT NULL ,
+  `saldo` DOUBLE(11) NULL DEFAULT NULL ,
   `obs` VARCHAR(200) NULL DEFAULT NULL ,
   `tipoRecivo` INT(11) NULL DEFAULT NULL ,
-  `descuento` DOUBLE NULL DEFAULT NULL ,
+  `descuento` DOUBLE(11) NULL DEFAULT NULL ,
   `idCajaMovimientoVenta` INT(11) NOT NULL ,
   PRIMARY KEY (`idRecibos`) ,
   INDEX `fk_recibos_cliente1` (`idCliente` ASC) ,
@@ -791,7 +816,33 @@ CREATE  TABLE IF NOT EXISTS `singular`.`recibos` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `singular`.`fallasCTP`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `singular`.`fallasCTP` ;
+
+CREATE  TABLE IF NOT EXISTS `singular`.`fallasCTP` (
+  `idfallasCTP` INT(11) NOT NULL AUTO_INCREMENT ,
+  `idCtpRep` INT(11) NULL DEFAULT NULL ,
+  `obs` VARCHAR(60) NULL DEFAULT NULL ,
+  `fecha` DATETIME NULL DEFAULT NULL ,
+  `nombre` VARCHAR(45) NULL DEFAULT NULL ,
+  `costoU` DOUBLE(11) NULL DEFAULT NULL ,
+  `costoT` DOUBLE(11) NULL DEFAULT NULL ,
+  PRIMARY KEY (`idfallasCTP`) ,
+  INDEX `fk_fallasCTP_idCTP1` (`idCtpRep` ASC) ,
+  CONSTRAINT `fk_fallasCTP_idCTP1`
+    FOREIGN KEY (`idCtpRep` )
+    REFERENCES `singular`.`CTP` (`idCTP` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
 
 
 

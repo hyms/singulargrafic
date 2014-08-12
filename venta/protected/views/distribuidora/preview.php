@@ -12,10 +12,10 @@
 	<h4 class="col-xs-offset-10 text-right"><strong><?php echo $venta->codigo; ?></strong></h4>
 	<h3 class="col-xs-offset-8 text-right"><strong><?php echo "NOTA DE VENTA";?></strong></h3>
 	<div class="row">
-	<span class="col-xs-3"><strong><?php echo "CLIENTE:";?></strong> <?php echo $venta->idCliente0->apellido;?></span>
-	<span class="col-xs-2"><strong><?php echo "NIT:";?></strong> <?php echo $venta->idCliente0->nitCi;?></span>
-	<span class="col-xs-4"><strong><?php echo "RESPONSABLE:";?></strong> <?php echo $venta->idCajaMovimientoVenta0->idUser0->idEmpleado0->apellido." ".$venta->idCajaMovimientoVenta0->idUser0->idEmpleado0->nombre;?></span>
-	<span class="col-xs-3"><strong><?php echo "FECHA:";?></strong> <?php echo date("d-m-Y",strtotime($venta->fechaVenta));?></span>
+		<span class="col-xs-3"><strong><?php echo "CLIENTE:";?></strong> <?php echo $venta->idCliente0->apellido;?></span>
+		<span class="col-xs-2"><strong><?php echo "NIT:";?></strong> <?php echo $venta->idCliente0->nitCi;?></span>
+		<span class="col-xs-4"><strong><?php echo "RESPONSABLE:";?></strong> <?php echo $venta->idCajaMovimientoVenta0->idUser0->idEmpleado0->apellido." ".$venta->idCajaMovimientoVenta0->idUser0->idEmpleado0->nombre;?></span>
+		<span class="col-xs-3"><strong><?php echo "FECHA:";?></strong> <?php echo date("d-m-Y",strtotime($venta->fechaVenta));?></span>
 	</div>
 	<!-- <div class="panel panel-default">-->
 	 <!-- <div class="panel-body">-->

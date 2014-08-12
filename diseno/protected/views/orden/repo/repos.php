@@ -54,12 +54,13 @@ if($repos->responsable!="")
 
 
 <div class="form-group">
-	<div class="col-sm-7">
-		<div class="col-sm-3">Atribuible:</div>
-		<div class="col-sm-5"><?php echo CHtml::activeDropDownList($repos,'responsable',$listaResp,array('class'=>'form-control input-sm','id'=>'resp'))?></div>
+	<div class="col-sm-9">
+		<div class="col-sm-2"><div class="text-right">Atribuible:</div></div>
+		<div class="col-sm-4"><?php echo CHtml::activeDropDownList($repos,'responsable',$listaResp,array('class'=>'form-control input-sm','id'=>'resp'))?></div>
+		<div class="col-sm-2"><div class="text-right"><?php echo "Diseñador:";?></div></div>
 		<div class="col-sm-4"><?php echo CHtml::textField('respOtro',$otro,array('class'=>'form-control input-sm','id'=>'respOtro','disabled'=>(($otro=="")?true:false)))?></div>
 	</div>
-	<div class="col-sm-5"></div>
+	<div class="col-sm-3"></div>
 </div>
 <div class="panel panel-default">
 	<div class="panel-heading">

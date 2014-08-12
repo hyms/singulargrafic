@@ -130,7 +130,6 @@ class OrdenController extends Controller
 					$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto);
 					$item->formato = $almacen->idProducto0->detalle;
 					$item->save();
-					//print_r($item);
 				}
 				$this->redirect(array('orden/buscar'));
 			}
