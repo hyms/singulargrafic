@@ -152,6 +152,31 @@ class ClienteController extends Controller
 			$this->renderPartial('tipoClientes',array('model'=>$model));
 	}
 	
+	public function actionPreferencia()
+	{
+		$clientes = Cliente::model()->with('cTPs',array('select'=>'idCliente'))->findAll(array('condition'=>'`cTPs`.tipoCTP=1','group'=>'`cTPs`.idCliente'));
+		//$clientes = Cliente::model()->with('cTPs',array('select'=>'idCliente'))->findAll();
+		
+		if(isset($_POST['Cliente']))
+		{
+			foreach ($clientes as $key => &$cliente)
+			{
+				if(isset($_POST['Cliente'][$key+1]))
+				{
+					$cliente->attributes = $_POST['Cliente'][$key+1];
+					$cliente->save();
+				}
+			}
+			print_r($_POST['Cliente']);
+		}
+		
+		/*$clientes = new CActiveDataProvider('Cliente',
+						array(
+								'pagination'=>array(
+		                'pageSize'=>'20',
+		            	),));*/
+		$this->render('preferencia',array('clientes'=>$clientes));
+	}
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

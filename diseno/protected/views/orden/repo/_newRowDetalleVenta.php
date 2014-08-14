@@ -9,7 +9,7 @@
 </td>
 
 <td>
-	<?php echo CHtml::activeTextField($model,"[$index]nroPlacas",array('class'=>'form-control input-sm','id'=>'nroPlacas_'.$index)); ?>
+	<?php echo CHtml::activeTextField($model,"[$index]nroPlacas",array('class'=>'form-control input-sm')); ?>
 </td>
 <td>
 

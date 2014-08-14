@@ -7,7 +7,9 @@ $this->widget('zii.widgets.CMenu',array(
 				'items'=>array(
 							array('label'=>'Cliente', 'url'=>array('orden/cliente')),
 							array('label'=>'Interna', 'url'=>array('orden/interna')),
-							array('label'=>'Repeticion', 'url'=>array('orden/rep')),
 							array('label'=>'Buscar Orden', 'url'=>array('orden/buscar')),
+							array('label'=>'Repeticion', 'url'=>array('orden/rep')),
+							array('label'=>'Buscar Repeticion', 'url'=>array('orden/buscarR')),
+							
 				)));
 ?>

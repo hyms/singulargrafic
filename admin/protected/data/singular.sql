@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 08-08-2014 a las 18:49:09
+-- Tiempo de generación: 13-08-2014 a las 12:02:47
 -- Versión del servidor: 5.5.38
 -- Versión de PHP: 5.4.4-14+deb7u12
 
@@ -644,7 +644,7 @@ INSERT INTO `cliente` (`idCliente`, `nitCi`, `apellido`, `nombre`, `correo`, `fe
 (6, '8435336', 'PINEDO', NULL, NULL, '2014-07-21 00:00:00', NULL, NULL, NULL),
 (7, '2364915011', 'TICONA', NULL, NULL, '2014-07-21 00:00:00', NULL, NULL, NULL),
 (8, '4865513019', 'VILLA', NULL, NULL, '2014-07-25 00:00:00', NULL, NULL, NULL),
-(9, '000', 'singular', 'singular', '', '2014-08-01 15:26:36', '73221183', '', 1);
+(9, '000', 'singular', 'singular', '', '2014-08-01 15:26:36', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -684,14 +684,16 @@ CREATE TABLE IF NOT EXISTS `CTP` (
   KEY `fk_CTP_user2` (`idUserVenta`),
   KEY `fk_CTP_Imprenta1` (`idImprenta`),
   KEY `fk_CTP_CTP1` (`idCTPParent`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `CTP`
 --
 
 INSERT INTO `CTP` (`idCTP`, `fechaOrden`, `tipoOrden`, `formaPago`, `idCliente`, `fechaPlazo`, `codigo`, `serie`, `numero`, `montoVenta`, `montoPagado`, `montoCambio`, `montoDescuento`, `estado`, `factura`, `autorizado`, `responsable`, `obs`, `idCajaMovimientoVenta`, `idUserOT`, `idUserVenta`, `idImprenta`, `idCTPParent`, `tipoCTP`) VALUES
-(1, '2014-08-07 17:05:23', 1, 1, 9, NULL, 'AC-1-14', 65, 1, 0, 0, 0, 0, 1, NULL, NULL, 'helier cortez', '', NULL, 1, NULL, NULL, NULL, 1);
+(1, '2014-08-07 17:05:23', 1, 1, 9, NULL, 'AC-1-14', 65, 1, 0, 0, 0, 0, 1, NULL, NULL, 'helier cortez', '', NULL, 1, NULL, NULL, NULL, 1),
+(2, '2014-08-11 15:55:14', 1, 1, 9, NULL, 'AC-2-14', 65, 2, 0, 0, 0, 0, 1, NULL, NULL, '', 'armado', NULL, 4, NULL, NULL, NULL, 1),
+(3, '2014-08-11 15:58:11', NULL, NULL, NULL, NULL, 'CR-1', NULL, 1, 0, 0, 0, 0, 1, NULL, NULL, 'CTP', 'Modificado por el usuario helier (Helier Cortez)', NULL, 4, NULL, NULL, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -719,14 +721,16 @@ CREATE TABLE IF NOT EXISTS `detalleCTP` (
   PRIMARY KEY (`idDetalleCTP`),
   KEY `fk_detalleCTP_CTP1` (`idCTP`),
   KEY `fk_detalleCTP_almacenProducto1` (`idAlmacenProducto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `detalleCTP`
 --
 
 INSERT INTO `detalleCTP` (`idDetalleCTP`, `idCTP`, `idAlmacenProducto`, `nroPlacas`, `formato`, `trabajo`, `pinza`, `resolucion`, `costo`, `costoAdicional`, `costoTotal`, `estado`, `C`, `M`, `Y`, `K`) VALUES
-(1, 1, 583, 4, 'MO 015', 'afiche', 6, 175, 0, 2, 0, NULL, 1, 1, 1, 1);
+(1, 1, 583, 4, 'MO 015', 'afiche', 6, 175, 0, 2, 0, NULL, 1, 1, 1, 1),
+(2, 2, 583, 4, 'MO 015', 'aa', 6, 150, 0, 10, 0, NULL, 1, 1, 1, 1),
+(8, 3, 583, 6, 'MO 015', 'aa', 7, 175, 0, 0, 0, NULL, 1, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -775,6 +779,23 @@ INSERT INTO `empleado` (`idEmpleado`, `nombre`, `apellido`, `fechaRegistro`, `em
 (2, 'Helier', 'Cortez', NULL, 'hdnymib@gmail.com', '73221183', '5999242'),
 (3, 'Erika', 'Lecoña ', '2014-05-26 15:46:49', '', '', '4846615'),
 (4, 'sergio', '', '2014-07-07 17:58:35', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `fallasCTP`
+--
+
+CREATE TABLE IF NOT EXISTS `fallasCTP` (
+  `idfallasCTP` int(11) NOT NULL AUTO_INCREMENT,
+  `idCtpRep` int(11) DEFAULT NULL,
+  `obs` varchar(60) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
+  `costoT` double DEFAULT NULL,
+  PRIMARY KEY (`idfallasCTP`),
+  KEY `fk_fallasCTP_idCTP1` (`idCtpRep`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -853,14 +874,14 @@ CREATE TABLE IF NOT EXISTS `MatrizPreciosCTP` (
   KEY `fk_MatrizPreciosCTP_cantidadCTP1` (`idCantidad`),
   KEY `fk_MatrizPreciosCTP_TiposClientes1` (`idTiposClientes`),
   KEY `fk_MatrizPreciosCTP_almacenProductos1` (`idAlmacenProducto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
 
 --
 -- Volcado de datos para la tabla `MatrizPreciosCTP`
 --
 
 INSERT INTO `MatrizPreciosCTP` (`idMatrizPreciosCTP`, `idTiposClientes`, `idHorario`, `idCantidad`, `idAlmacenProducto`, `precioSF`, `precioCF`, `nombre`) VALUES
-(6, 1, 1, 1, 583, 1.7, 1, NULL),
+(6, 1, 1, 1, 583, 18, 1, NULL),
 (7, 1, 2, 1, 583, 0, 0, NULL),
 (8, 1, 1, 2, 583, 1, 0, NULL),
 (9, 1, 2, 2, 583, 0, 0, NULL),
@@ -875,7 +896,15 @@ INSERT INTO `MatrizPreciosCTP` (`idMatrizPreciosCTP`, `idTiposClientes`, `idHora
 (30, 1, 1, 9, 583, 0, 0, NULL),
 (31, 1, 2, 9, 583, 0, 0, NULL),
 (32, 3, 1, 9, 583, 0, 0, NULL),
-(33, 3, 2, 9, 583, 0, 0, NULL);
+(33, 3, 2, 9, 583, 0, 0, NULL),
+(34, 4, 1, 1, 583, 0, 0, NULL),
+(35, 4, 2, 1, 583, 0, 0, NULL),
+(36, 4, 1, 2, 583, 0, 0, NULL),
+(37, 4, 2, 2, 583, 0, 0, NULL),
+(38, 4, 1, 3, 583, 0, 0, NULL),
+(39, 4, 2, 3, 583, 0, 0, NULL),
+(40, 4, 1, 9, 583, 0, 0, NULL),
+(41, 4, 2, 9, 583, 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -1444,7 +1473,7 @@ CREATE TABLE IF NOT EXISTS `TiposClientes` (
   `nombre` varchar(50) DEFAULT NULL,
   `servicio` int(11) DEFAULT NULL,
   PRIMARY KEY (`idTiposClientes`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `TiposClientes`
@@ -1453,7 +1482,8 @@ CREATE TABLE IF NOT EXISTS `TiposClientes` (
 INSERT INTO `TiposClientes` (`idTiposClientes`, `nombre`, `servicio`) VALUES
 (1, 'Preferencial A', 1),
 (2, 'singular', 0),
-(3, 'Preferencial B', 1);
+(3, 'Preferencial B', 1),
+(4, 'nuevo', 1);
 
 -- --------------------------------------------------------
 
@@ -1478,10 +1508,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`idUser`, `username`, `password`, `fechaLogin`, `estado`, `tipo`, `idEmpleado`) VALUES
-(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-08-08 17:46:14', 0, '1', 2),
-(2, 'erika', 'e10adc3949ba59abbe56e057f20f883e', '2014-08-05 12:31:05', 0, '3', 3),
+(1, 'helier', '5629500575ffe706d9d57fca5472153e', '2014-08-13 11:38:12', 0, '1', 2),
+(2, 'erika', 'e10adc3949ba59abbe56e057f20f883e', '2014-08-13 10:30:07', 0, '3', 3),
 (3, 'sergio', 'e10adc3949ba59abbe56e057f20f883e', '2014-07-21 15:14:21', 0, '4', 4),
-(4, 'erick', '202cb962ac59075b964b07152d234b70', '2014-07-24 17:30:27', 0, '1', 1);
+(4, 'erick', '202cb962ac59075b964b07152d234b70', '2014-08-11 15:43:29', 0, '1', 1);
 
 -- --------------------------------------------------------
 
@@ -1602,6 +1632,12 @@ ALTER TABLE `detalleCTP`
 ALTER TABLE `detalleVenta`
   ADD CONSTRAINT `fk_detalleVenta_almacenProducto1` FOREIGN KEY (`idAlmacenProducto`) REFERENCES `almacenProducto` (`idAlmacenProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_detalleVenta_venta1` FOREIGN KEY (`idVenta`) REFERENCES `venta` (`idVenta`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `fallasCTP`
+--
+ALTER TABLE `fallasCTP`
+  ADD CONSTRAINT `fk_fallasCTP_idCTP1` FOREIGN KEY (`idCtpRep`) REFERENCES `CTP` (`idCTP`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `Imprenta`

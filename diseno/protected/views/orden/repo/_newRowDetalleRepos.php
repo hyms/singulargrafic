@@ -1,7 +1,7 @@
 <tr class="tabular-input">
 <td >
 	<p class="form-control-static"><?php echo CHtml::encode($index + 1)?></p>
-	<?php echo CHtml::activeHiddenField($model,"[$index]idAlmacenProducto")?>
+	<?php //echo CHtml::activeHiddenField($model,"[$index]idAlmacenProducto")?>
 </td>
 
 <td>
@@ -39,6 +39,7 @@
 	<?php echo CHtml::activeTextField($model,"[$index]resolucion",array('class'=>'form-control input-sm','id'=>'resolucion_'.$index)); ?>
 </td>
 <td class="col-sm-1">
+	<?php echo CHtml::activeHiddenField($model,"[$index]costo",array('class'=>'costo','id'=>'costo_'.$index))?>
 	<?php echo CHtml::link('Quitar', '#', array("class"=>"btn btn-danger btn-sm tabular-input-remove")).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />'; ?>
 </td>
 </tr>

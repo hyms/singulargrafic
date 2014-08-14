@@ -68,10 +68,16 @@ if($repos->responsable!="")
 	</div>
 	<div class="panel-body" style="overflow: auto;">
 	<?php $this->renderPartial('repo/detalleRepos',array('detalle'=>$detalle,'ctp'=>$repos));?>
-		<div class="form-group">
-		<?php echo $form->labelEx($repos,'obs',array('class'=>'col-sm-1 control-label')); ?>
-		<div class="col-sm-6">
+		<div class="form-group col-sm-8">
+		<?php echo $form->labelEx($repos,'obs',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-10">
 			<?php echo CHtml::activeTextArea($repos,'obs',array('class'=>'form-control input-sm','id'=>'resp'))?>
+		</div>
+		</div>
+		<div class="form-group col-sm-4">
+		<span class="col-sm-4"><strong><?php echo "Total"; ?></strong></span>
+		<div class="col-sm-6">
+			<?php echo CHtml::activeTextField($repos,'montoVenta',array('class'=>'form-control input-sm','id'=>'total','disabled'=>true))?>
 		</div>
 		</div>
  	</div>
@@ -88,15 +94,32 @@ if($repos->responsable!="")
 </div>
 
 <?php Yii::app()->clientScript->registerScript('otro',"
-
+	function total()
+	{
+		var importe_total = 0;
+		$('.costo*').each(
+			function(index, value) {
+				importe_total = importe_total + ($('#costo_'+index).val()*$('#nroPlacas_'+index).val());
+			}
+		);
+		$('#total').val(redondeo(importe_total));
+	}
+		
+	function redondeo(num)
+	{
+		return (Math.round(num*10)/10);
+	}
+		
 $('#resp').change(function() {
   	if($('#resp').val()=='Otro')
 	{
 		$('#respOtro').prop( 'disabled', false );
+		total();
 	}
 	else
 	{
 		$('#respOtro').prop( 'disabled', true );
+		$('#total').val('');
 	}
 });
 

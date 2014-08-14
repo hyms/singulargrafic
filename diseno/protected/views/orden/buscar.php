@@ -30,7 +30,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("Modificar",array("orden/modificar","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm"))',
+					'value'=>'CHtml::link("Modificar",array(empty($data->idCliente0)?"orden/modificarR":"orden/modificar","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm"))',
 			),
 		)
 	));
