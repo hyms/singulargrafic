@@ -1,4 +1,4 @@
-<h2>Distribuidora Inventario</h2>
+<h2><h2>Añadir producto a Inventario de CTP</h2></h2>
 <?php 
 	
 	$this->widget('zii.widgets.grid.CGridView', array(

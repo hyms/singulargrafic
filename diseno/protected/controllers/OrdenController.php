@@ -340,7 +340,7 @@ class OrdenController extends Controller
 					$ctp->idCliente = $cliente->idCliente;
 				
 				$user = Users::model()->with('idEmpleado0')->findByPk(Yii::app()->user->id);
-				$orden->obs = "Modificado por el usuario ".$user->username." (".$user->idEmpleado0->nombre." ".$user->idEmpleado0->apellido.")";
+				$orden->obs = $orden->obs."(Modificado por el usuario ".$user->username." (".$user->idEmpleado0->nombre." ".$user->idEmpleado0->apellido."))";
 				
 				if($orden->save())
 					$sw=1;

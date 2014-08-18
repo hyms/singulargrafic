@@ -151,7 +151,7 @@ class StockController extends Controller
 						$almacen->stockP = $almacen->stockP + $model->cantidadP;
 						
 						if($almacen->save() && $deposito->save())
-							$this->redirect(array('distribuidora'));
+							$this->redirect(array('stock/distribuidora'));
 					}
 				}
 			}
@@ -265,7 +265,7 @@ class StockController extends Controller
 							$almacen->stockP = $almacen->stockP + $model->cantidadP;
 	
 							if($almacen->save() && $deposito->save())
-								$this->redirect(array('ctp'));
+								$this->redirect(array('stock/ctp'));
 						}
 						}
 			}

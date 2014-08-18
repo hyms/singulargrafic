@@ -19,7 +19,8 @@
 	</div>
 	<!-- <div class="panel panel-default">-->
 	 <!-- <div class="panel-body">-->
-	<div class="row well well-sm">
+	 
+	<div class="row well well-sm" style="min-height:230px;">
 	  <table class="table table-hover table-condensed">
 		<thead>
 		<tr>
@@ -65,6 +66,7 @@
 	  
 	<!--   </div> -->
 	</div>
+	
 	
 	<div class="row">
 	<span class="col-xs-8"><strong>Son:</strong> <?php $this->widget('ext.numerosALetras', array('valor'=>$venta->montoVenta,'despues'=>''))?></span>

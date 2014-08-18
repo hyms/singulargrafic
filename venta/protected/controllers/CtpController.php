@@ -36,7 +36,7 @@ class CtpController extends Controller
 		}
 		$ordenes=new CActiveDataProvider('CTP',array(
 				'criteria'=>array(
-					'condition'=>'`t`.estado=1 '.$t,
+					'condition'=>'`t`.estado=1 '.$t.' and `t`.tipoCTP!=3',
 					'with'=>array('idCliente0'),
 					'order'=>'fechaOrden Desc',
 				),
@@ -218,7 +218,18 @@ class CtpController extends Controller
 					//->with('idUserVenta0.idEmpleado0')
 					->with('detalleCTPs')
 					->findByPk($_GET['id']);
-			$this->render('preview',array('ctp'=>$ctp));
+			if($ctp->tipoCTP==1)
+			{
+				$this->render('preview',array('ctp'=>$ctp,'tipo'=>''));
+			}
+			if($ctp->tipoCTP==2)
+			{
+				throw new CHttpException(203 ,'Non-Authoritative Information');
+			}
+			if($ctp->tipoCTP==3)
+			{
+				throw new CHttpException(203 ,'Non-Authoritative Information');
+			}
 		}
 		else
 			throw new CHttpException(400,'Petición no válida.');
