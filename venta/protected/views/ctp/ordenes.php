@@ -21,7 +21,7 @@ $this->widget('zii.widgets.CMenu',array(
 				'items'=>array(
 							array('label'=>'Cliente', 'url'=>array('ctp/ordenes','t'=>1)),
 							array('label'=>'Interna', 'url'=>array('ctp/ordenes','t'=>2)),
-							array('label'=>'Repeticion', 'url'=>array('ctp/ordenes','t'=>3)),
+							//array('label'=>'Repeticion', 'url'=>array('ctp/ordenes','t'=>3)),
 						),
 				));
 } 
@@ -57,7 +57,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'($data->estado==2)?CHtml::link("imprimir",array("ctp/preview","id"=>$data->idCTP)):""',	
+					'value'=>'($data->estado==2 || $data->tipoCTP==3)?CHtml::link("imprimir",array("ctp/preview","id"=>$data->idCTP)):""',	
 			),
 		)
 	));

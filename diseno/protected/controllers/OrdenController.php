@@ -254,7 +254,7 @@ class OrdenController extends Controller
 					$detalle[$i]->costo = $costo->precioSF;
 					if(!empty($falla))
 						$falla->costoT=$falla->costoT+($detalle[$i]->nroPlacas*$detalle[$i]->costo);
-					
+					$detalle[$i]->costoTotal = $detalle[$i]->nroPlacas*$detalle[$i]->costo;
 					if($detalle[$i]->validate())
 						$c++;
 					$i++;

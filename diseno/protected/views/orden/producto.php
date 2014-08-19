@@ -14,7 +14,7 @@
 					'value'=>'$data->idProducto0->material',
 			),
 			array(
-					'header'=>'Detalle',
+					'header'=>'Formato',
 					'value'=>'$data->idProducto0->detalle',
 			),
 			array(

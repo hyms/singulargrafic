@@ -197,7 +197,7 @@ class CtpController extends Controller
 	{
 		$ordenes=new CActiveDataProvider('CTP',array(
 				'criteria'=>array(
-						'condition'=>'`t`.estado=2 and `t`.tipoCTP=1',
+						'condition'=>'(`t`.estado=2) or (`t`.estado=1 and `t`.tipoCTP=3)',
 						'with'=>array('idCliente0'),
 				),
 				'pagination'=>array(
@@ -228,7 +228,15 @@ class CtpController extends Controller
 			}
 			if($ctp->tipoCTP==3)
 			{
-				throw new CHttpException(203 ,'Non-Authoritative Information');
+				$ctpP= CTP::model()
+							->with('idCliente0')
+							->with('idUserVenta0')
+							->with('idUserVenta0.idEmpleado0')
+							->findByPk($ctp->idCTPParent);
+				$ctp->idCliente0 = $ctpP->idCliente0;
+				$ctp->idUserVenta0 = $ctpP->idUserVenta0;
+				//$ctp->idUserVenta0->idEmpleado0 = $ctpP->idUserVenta0->idEmpleado0;
+				$this->render('preview',array('ctp'=>$ctp,'tipo'=>'Reposición'));
 			}
 		}
 		else

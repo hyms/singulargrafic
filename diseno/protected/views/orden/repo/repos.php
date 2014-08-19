@@ -24,7 +24,7 @@ if($repos->responsable!="")
 <h3><?php echo "Reposiciones";?></h3>
 
 	<div class = "row">
-		<h3 class="col-sm-4">Orden de Trabajo</h3> 
+		<h3 class="col-sm-4">Orden de Trabajo <?php echo $ctp->codigo;?></h3> 
 		<h3 class="col-sm-4 text-center"><?php //echo $ctp->codigo;?></h3> 
 		<h3 class="col-sm-4 text-right"><?php echo date("d/m/Y",strtotime($ctp->fechaOrden));?></h3>
 		
@@ -74,12 +74,14 @@ if($repos->responsable!="")
 			<?php echo CHtml::activeTextArea($repos,'obs',array('class'=>'form-control input-sm','id'=>'resp'))?>
 		</div>
 		</div>
+		<?php /*?>
 		<div class="form-group col-sm-4">
 		<span class="col-sm-4"><strong><?php echo "Total"; ?></strong></span>
 		<div class="col-sm-6">
 			<?php echo CHtml::activeTextField($repos,'montoVenta',array('class'=>'form-control input-sm','id'=>'total','disabled'=>true))?>
 		</div>
 		</div>
+		<?php */?>
  	</div>
 </div>
 
@@ -94,7 +96,7 @@ if($repos->responsable!="")
 </div>
 
 <?php Yii::app()->clientScript->registerScript('otro',"
-	function total()
+	/*function total()
 	{
 		var importe_total = 0;
 		$('.costo*').each(
@@ -103,7 +105,7 @@ if($repos->responsable!="")
 			}
 		);
 		$('#total').val(redondeo(importe_total));
-	}
+	}*/
 		
 	function redondeo(num)
 	{
@@ -114,7 +116,7 @@ $('#resp').change(function() {
   	if($('#resp').val()=='Otro')
 	{
 		$('#respOtro').prop( 'disabled', false );
-		total();
+		//total();
 	}
 	else
 	{

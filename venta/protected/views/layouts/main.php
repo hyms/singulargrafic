@@ -16,6 +16,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	
 	<meta name="language" content="es" />
+	<style type="text/css" media="print">
+		@page{
+			
+			margin: 0.8cm;
+		}
+</style>
 	
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>

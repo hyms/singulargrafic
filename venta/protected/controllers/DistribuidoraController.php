@@ -354,7 +354,7 @@ class DistribuidoraController extends Controller
 			$venta = $this->verifyModel(Venta::model()->with('idCliente0')->findByPk($_GET['id']));
 			$cajaMovimiento= CajaMovimientoVenta::model()->findByPk($venta->idCajaMovimientoVenta);
 			$detalle = DetalleVenta::model()->findAll('idVenta='.$venta->idVenta);
-			
+			$cliente = $venta->idCliente0;
 			$caja = Caja::model()->findByPk($cajaMovimiento->idCaja);
 			$productos = new AlmacenProducto('searchDistribuidora');
 			//init seccion on filter
@@ -412,6 +412,16 @@ class DistribuidoraController extends Controller
 					if($saldo1!=$saldo2){
 						$caja->saldo = $caja->saldo - $saldo2 + $saldo1;
 						$cajaMovimiento->monto = $saldo1;
+					}
+					if($cliente->nitCi=="000")
+					{
+						$cajaMovimiento->tipo = -1;
+						//añadir descuento
+						if(empty($cajaMovimiento->monto)||$cajaMovimiento->monto==0)
+							$cajaMovimiento->monto = $venta->montoVenta;
+						$venta->montoVenta=0;
+						$venta->montoPagado=0;
+						$venta->montoCambio=0;
 					}
 					if($venta->save() && $cajaMovimiento->save())
 						$caja->save();
