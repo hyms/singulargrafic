@@ -6,6 +6,7 @@ $this->widget('zii.widgets.CMenu',array(
 				'encodeLabel' => false,
 				'items'=>array(
 							array('label'=>'Notas de Ventas', 'url'=>array('report/venta')),
+							array('label'=>'Notas de Ventas (Singular)', 'url'=>array('report/ventaSingular')),
 							array('label'=>'Ordenes de Trabajo', 'url'=>array('#')),
 							array('label'=>'Clientes', 'url'=>array('report/cliente')),
 							array('label'=>'Productos', 'url'=>array('report/producto')),

@@ -123,6 +123,66 @@ class ReportController extends Controller
 		$this->render('venta',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'saldo'=>$saldo,'cf'=>$cf,'sf'=>$sf));
 	}
 	
+	public function actionVentaSingular()
+	{
+		$ventas="";
+		$cond1="";
+		$cond2="";
+		$factura="";
+		$f="";
+		$saldo="";
+		$cf=array("report/venta",'f'=>0);
+		$sf=array("report/venta",'f'=>1);
+		$ventas = new Venta('searchDistribuidora');
+	
+		$ventas->unsetAttributes();
+		$ventas->nit="000";
+		if(isset($_GET['d']) || isset($_GET['m']))
+		{
+			$d=date("d");
+			$m=date("m");
+			$y=date("Y");
+			if(isset($_GET['d']))
+			{
+				$d=$_GET['d'];
+				if($d==0)
+				{
+					$m--;
+					if($m<10 && $m>0)
+						$m = "0".$m;
+					$d=$this->getUltimoDiaMes($y, $m);
+				}
+				$ventas->fechaVenta = $y."-".$m."-".$d;
+				$cf=array("report/venta",'f'=>0,'d'=>$_GET['d']);
+				$sf=array("report/venta",'f'=>1,'d'=>$_GET['d']);
+			}
+			if(isset($_GET['m']))
+			{
+				$m=$_GET['m'];
+				$ventas->fechaVenta = $y."-".$m;
+				$cf=array("report/venta",'f'=>0,'m'=>$_GET['m']);
+				$sf=array("report/venta",'f'=>1,'m'=>$_GET['m']);
+			}
+	
+		}
+		if(isset($_GET['f']))
+			$_GET['Venta']['tipoVenta']= $_GET['f'];
+	
+		//print_r($ventas);
+		if(isset($_GET['Venta']))
+		{
+			$ventas->attributes = $_GET['Venta'];
+				
+			if(isset($_GET['Venta']['apellido']))
+				$ventas->apellido = $_GET['Venta']['apellido'];
+			if(isset($_GET['Venta']['nit']))
+				$ventas->nit = $_GET['Venta']['nit'];
+				
+		}
+	
+		$this->render('ventaSingular',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'cf'=>$cf,'sf'=>$sf));
+	}
+	
 	public function actionVentaDetalle()
 	{
 		if(isset($_GET['id']))

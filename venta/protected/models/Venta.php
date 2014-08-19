@@ -164,7 +164,8 @@ class Venta extends CActiveRecord
 		$start=date("Y")."-".$m."-".$d." 00:00:00";
 		
 		$criteria->condition="(estado=1 or estado=2) and fechaVenta>='".$start."'";
-	
+		$criteria->order = "fechaVenta DESC";
+		
 		$criteria->compare('idVenta',$this->idVenta);
 		$criteria->compare('fechaVenta',$this->fechaVenta,true);
 		$criteria->compare('tipoVenta',$this->tipoVenta);

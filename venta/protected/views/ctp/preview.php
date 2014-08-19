@@ -15,16 +15,16 @@
 	<h4 class="col-xs-3 text-right"><strong><?php echo $ctp->codigo; ?></strong></h4>
 	<h5 class="col-xs-offset-8 text-right"><strong><?php echo "FECHA:";?></strong> <?php echo date("d-m-Y",strtotime($ctp->fechaOrden));?></h5>
 	<small class="col-xs-offset-3 col-xs-5 text-center"><?php echo $tipo?></small>
-	<div class="col-xs-4 well well-sm">Fecha de Entrega:Fecha de Entrega:</div>
+	<div class="col-xs-4 well well-sm">Fecha de Entrega:<?php echo (!empty($ctp->fechaEntega))?date("d-m-Y",strtotime($ctp->fechaEntega))."/":"";?></div>
 </div>
-	<div >
-	<span class="col-xs-3"><strong><?php echo "CLIENTE:";?></strong> <?php echo $ctp->idCliente0->apellido;?></span>
-	<span class="col-xs-2"><strong><?php echo "NIT:";?></strong> <?php echo $ctp->idCliente0->nitCi;?></span>
-	<span class="col-xs-4"><strong><?php echo "RESPONSABLE:";?></strong> <?php echo $ctp->responsable;?></span>
-	<span class="col-xs-3"><strong><?php echo "TELEFONO:";?></strong> <?php echo $ctp->idCliente0->telefono;;?></span>
+	<div class="row">
+		<div class="col-xs-3"><strong><?php echo "CLIENTE:";?></strong> <?php echo $ctp->idCliente0->apellido;?></div>
+		<div class="col-xs-2"><strong><?php echo "NIT:";?></strong> <?php echo $ctp->idCliente0->nitCi;?></div>
+		<div class="col-xs-4"><strong><?php echo "RESPONSABLE:";?></strong> <?php echo $ctp->responsable;?></div>
+		<div class="col-xs-3"><strong><?php echo "TELEFONO:";?></strong> <?php echo $ctp->idCliente0->telefono;;?></div>
 	</div>
-	<div >
-	 <table class="table table-hover table-condensed" style="min-height:200px;" border=1>
+	<div class="row well well-sm" style="min-height:200px;">
+	 <table class="table table-hover table-condensed">
 		<thead>
 		<tr>
 			<th><?php echo "Nº"; ?></th>
@@ -81,47 +81,42 @@
 	
 	<div class="row">
 		<div class="col-xs-7"> 
-		<span class="col-xs-8"><strong>Recepcionado Por:</strong> <?php echo $ctp->idUserOT0->idEmpleado0->nombre." ".$ctp->idUserOT0->idEmpleado0->apellido;?></span>
-		<span class="col-xs-4">
-		<?php if(empty($tipo)){?>
-			<?php }else{?>
-			<strong>Repos. atribuible a:</strong> <?php echo $ctp->responsable;?>
-			<?php }?>
-		
-		</div>
-		<div class="col-xs-5">
-			<span class="col-xs-7"><strong>Son:</strong> <?php $this->widget('ext.numerosALetras', array('valor'=>$ctp->montoVenta,'despues'=>''))?></span>
-			<table class="col-xs-5" border=1><tr><td><strong>Total:</strong> <?php echo $ctp->montoVenta." Bs.";?></td></tr></table>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-xs-7">
+			<div class="col-xs-8"><strong>Recepcionado Por:</strong> <?php echo $ctp->idUserOT0->idEmpleado0->nombre." ".$ctp->idUserOT0->idEmpleado0->apellido;?></div>
+			<div class="col-xs-4">
+			<?php if(empty($tipo)){?>
+				<?php }else{?>
+				<strong>Atrib. a:</strong> <?php echo $ctp->responsable;?>
+				<?php }?>
+			</div>
+			
 			<div class="col-xs-5 well well-sm">
 				<br><br>
 				<p class="text-center"><?php echo "firma Cliente";?></p>
-				<span><?php echo "Nombre: "?></span>
+				<div><?php echo "Nombre: "?></div>
 				<div class="text-center"><small><?php echo "Autorizo la elaboración de la presente orden";?></small></div>
 			</div>
 			<div class="col-xs-offset-1 col-xs-5 well">
 				<br><br>
 				<p class="text-center"><?php echo "firma";?></p>
-				<span><?php echo "Nombre: "?><?php echo (empty($tipo))?$ctp->idUserVenta0->idEmpleado0->nombre." ".$ctp->idUserVenta0->idEmpleado0->apellido:"";?></span>
+				<div><?php echo "Nombre: "?><?php echo (empty($tipo))?$ctp->idUserVenta0->idEmpleado0->nombre." ".$ctp->idUserVenta0->idEmpleado0->apellido:"";?></div>
 				<div class="text-center"><small><?php echo "Recibi conforme";?></small></div>
 			</div>
 		</div>
 		<div class="col-xs-5">
+			<div class="col-xs-7"><strong>Son:</strong> <?php $this->widget('ext.numerosALetras', array('valor'=>$ctp->montoVenta,'despues'=>''))?></div>
+			<div class="col-xs-5 well well-sm" ><strong>Total:</strong> <?php echo $ctp->montoVenta." Bs.";?></div>
+			<?php /*<table class="col-xs-5" border=1><tr><td><strong>Total:</strong> <?php echo $ctp->montoVenta." Bs.";?></td></tr></table>*/ ?>
 			<?php if(empty($tipo)){?>
 				<?php if($ctp->montoDescuento>0){?>
-				<span class="col-xs-7"><strong>Aut. por:</strong> <?php echo ($ctp->formaPago==1)?CHtml::encode(($ctp->autorizado==0)?'Erick Paredes':'Miriam Martinez'):""?></span>
-				<span class="col-xs-5"><strong>Desc:</strong> <?php echo $ctp->montoDescuento." Bs.";?></span>
+				<div class="col-xs-7"><strong>Aut. por:</strong> <?php echo ($ctp->formaPago==1)?CHtml::encode(($ctp->autorizado==0)?'Erick Paredes':'Miriam Martinez'):""?></div>
+				<div class="col-xs-5"><strong>Desc:</strong> <?php echo $ctp->montoDescuento." Bs.";?></div>
 				<?php }?>
-			<span class="col-xs-6"><strong>A/C:</strong> <?php echo $ctp->montoPagado." Bs.";?></span>
-			<span class="col-xs-6"><strong>Saldo:</strong> <?php echo ((($ctp->montoVenta-$ctp->montoPagado)>0)?($ctp->montoVenta-$ctp->montoPagado):"0")." Bs.";?></span>
+			<div class="col-xs-6"><strong>A/C:</strong> <?php echo $ctp->montoPagado." Bs.";?></div>
+			<div class="col-xs-6"><strong>Saldo:</strong> <?php echo ((($ctp->montoVenta-$ctp->montoPagado)>0)?($ctp->montoVenta-$ctp->montoPagado):"0")." Bs.";?></div>
 			<?php }else{?>
-			<span class="col-xs-12"><strong>Nro de Orden:</strong> <?php echo $ctp->idCTPParent0->codigo;?></span>
+			<div class="col-xs-12"><strong>Nro de Orden:</strong> <?php echo $ctp->idCTPParent0->codigo;?></div>
 			<?php }?>
-			<span class="col-xs-12"><strong>obs:</strong></span>
+			<div class="col-xs-12"><strong>obs:</strong></div>
 		</div>
 		
 	</div>

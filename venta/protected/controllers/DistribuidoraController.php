@@ -338,7 +338,6 @@ class DistribuidoraController extends Controller
 		$ventas->unsetAttributes();
 		if (isset($_GET['Venta'])){
 			$ventas->attributes = $_GET['Venta'];
-			$ventas->codigos = $_GET['Venta']['codigos'];
 			$ventas->nit = $_GET['Venta']['nit'];
 			$ventas->apellido = $_GET['Venta']['apellido'];
 		}
@@ -410,7 +409,8 @@ class DistribuidoraController extends Controller
 					}
 					$cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
 					if($saldo1!=$saldo2){
-						$caja->saldo = $caja->saldo - $saldo2 + $saldo1;
+						if($cliente->nitCi!="000")
+							$caja->saldo = $caja->saldo - $saldo2 + $saldo1;
 						$cajaMovimiento->monto = $saldo1;
 					}
 					if($cliente->nitCi=="000")

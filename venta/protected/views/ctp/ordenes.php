@@ -43,7 +43,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			array(
 					'header'=>'Apellido Cliente',
 					'value'=>'(isset($data->idCliente0->apellido))?$data->idCliente0->apellido:""',
-					//'value'=>'',
 			),
 			array(
 					'header'=>'Costo',
@@ -52,7 +51,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("Ver",array("ctp/orden","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm"))',
+					'value'=>'($data->estado==2 && $data->tipoCTP!=3)?CHtml::link("Ver",array("ctp/orden","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm")):""',
 			),
 			array(
 					'header'=>'',

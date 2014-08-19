@@ -14,17 +14,15 @@
 </td>
 
 <td>
-	<?php //echo CHtml::activeTextField($model,"[$index]nroColores",array('class'=>'form-control input-sm','id'=>'snroColores_'.$index)); ?>
-	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]C",array('id'=>'c_'.$index)); ?></div>
+	<?php echo CHtml::activeCheckBox($model,"[$index]C",array('id'=>'c_'.$index)); ?>
 </td>
 <td>
-	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]M",array('id'=>'m_'.$index)); ?></div>
+	<?php echo CHtml::activeCheckBox($model,"[$index]M",array('id'=>'m_'.$index)); ?>
+<td>
+	<?php echo CHtml::activeCheckBox($model,"[$index]Y",array('id'=>'y_'.$index)); ?>
 </td>
 <td>
-	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]Y",array('id'=>'y_'.$index)); ?></div>
-</td>
-<td>
-	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]K",array('id'=>'k_'.$index)); ?></div>
+	<?php echo CHtml::activeCheckBox($model,"[$index]K",array('id'=>'k_'.$index)); ?>
 </td>
 
 <td>

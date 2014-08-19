@@ -53,6 +53,27 @@ if(count($detalle)>=1)
 	</div>
 	 <?php echo CHtml::error($ctp,"obs",array('class'=>'label label-danger')); ?>
 </div>
+<div class="col-sm-5" >
+	<div class="form-group">
+		<?php echo CHtml::activeLabelEx($ctp,"fechaEntega",array('class'=>'control-label col-sm-5'))?>
+	    <div class="col-sm-7">
+	    	<?php //echo CHtml::activeTextField($ctp,"fechaEntega",array('class'=>'form-control input-sm','readonly'=>true,"id"=>"total")); ?>
+	    	<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+								'name'=>'fechaEntega',
+								'attribute'=>'fechaEntega',
+								'model'=>$ctp,
+								'options'=>array(
+										'showAnim'=>'fold',
+										'dateFormat'=>'yy-mm-d',
+								),
+								'htmlOptions'=>array(
+										'class'=>'form-control input-sm',
+								),
+							)); ?>
+	    </div>
+	    <?php echo CHtml::error($ctp,"fechaEntega",array('class'=>'label label-danger')); ?>
+	</div>
+</div>
 <?php /*?>
 <div class="col-sm-5" >
 	<div class="form-group">
@@ -63,8 +84,9 @@ if(count($detalle)>=1)
 	    <?php echo CHtml::error($ctp,"montoVenta",array('class'=>'label label-danger')); ?>
 	</div>
 </div>
-</div>
+
 <?php */?>
+</div>
 <?php Yii::app()->getClientScript()->registerScript("ajax_total",
 "
    	function calcular_total() {

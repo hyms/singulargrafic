@@ -97,19 +97,30 @@ class CtpController extends Controller
 			$detalle = array();
 			$total=0;
 			$horas = Horario::model()->findAll();
+			$cantidades = CantidadCTP::model()->findAll();
 			foreach ($ctp->detalleCTPs as $key => $item)
 			{
 				$detalle[$key] = $ctp->detalleCTPs[$key];
 				$condAlmacen = 'idAlmacenProducto='.$item->idAlmacenProducto;
 				$condCliente ='idTiposClientes='.$ctp->idCliente0->idTiposClientes;
-				$condCantidad ='idCantidad0.Inicio<='.$item->nroPlacas.' and '.$item->nroPlacas.'<=idCantidad0.final';
+				$condCantidad="";
+				foreach ($cantidades as $c)
+				{	if($c->Inicio<$item->nroPlacas)
+						$condCantidad ="idCantidad=".$c->idCantidadCTP;
+					else
+						break;
+				}
+				//$condCantidad ='idCantidad0.Inicio<='.$item->nroPlacas.' and '.$item->nroPlacas.'<=idCantidad0.final';
 				$condHora ="";
 				foreach ($horas as $h)
 				{	if($h->inicio<date("H:0:s"))
 					//if($h->inicio<"19:30:00")
 						$condHora ="idHorario=".$h->idHorario;
+					else 
+						break;
 				}
-				$matriz = MatrizPreciosCTP::model()->with('idCantidad0')->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
+				$matriz = MatrizPreciosCTP::model()->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
+				//$matriz = MatrizPreciosCTP::model()->with('idCantidad0')->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
 				//$matriz = MatrizPreciosCTP::model()->with('idHorario0')->with('idCantidad0')->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
 				if($ctp->tipoOrden ==0)
 					$detalle[$key]->costo = $matriz->precioCF;
@@ -161,21 +172,27 @@ class CtpController extends Controller
 			$detalle = array();
 			$total=0;
 			$horas = Horario::model()->findAll();
+			$cantidades = CantidadCTP::model()->findAll();
 			foreach ($ctp->detalleCTPs as $key => $item)
 			{
 				$detalle[$key] = $ctp->detalleCTPs[$key];
-				//$hora = date('H:m:i');
-				$hora = "19:30:00";
+				$hora = date('H:m:i');
+				//$hora = "19:30:00";
 				$condAlmacen = 'idAlmacenProducto='.$item->idAlmacenProducto;
 				$condCliente ='idTiposClientes='.$ctp->idCliente0->idTiposClientes;
-				$condCantidad =$item->nroPlacas.' between idCantidad0.Inicio and idCantidad0.final';
+				foreach ($cantidades as $c)
+				{	if($c->Inicio<$item->nroPlacas)
+						$condCantidad ="idCantidad=".$c->idCantidadCTP;
+					else
+						break;
+				}
 				$condHora ="";
 				foreach ($horas as $h)
 				{	if($h->inicio<date("H:0:s"))
 					//if($h->inicio<"19:30:00")
 						$condHora ="idHorario=".$h->idHorario;
 				}
-				$matriz = MatrizPreciosCTP::model()->with('idCantidad0')->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
+				$matriz = MatrizPreciosCTP::model()->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
 				//print_r($matriz);return;
 				if($ctp->tipoOrden ==0)
 					$detalle[$key]->costo = $matriz->precioCF;
@@ -225,6 +242,7 @@ class CtpController extends Controller
 			if($ctp->tipoCTP==2)
 			{
 				throw new CHttpException(203 ,'Non-Authoritative Information');
+				$this->render('previewSC',array('ctp'=>$ctp,'tipo'=>'','titulo'=>'Reposición'));
 			}
 			if($ctp->tipoCTP==3)
 			{
@@ -236,7 +254,10 @@ class CtpController extends Controller
 				$ctp->idCliente0 = $ctpP->idCliente0;
 				$ctp->idUserVenta0 = $ctpP->idUserVenta0;
 				//$ctp->idUserVenta0->idEmpleado0 = $ctpP->idUserVenta0->idEmpleado0;
-				$this->render('preview',array('ctp'=>$ctp,'tipo'=>'Reposición'));
+				if($ctp->montoVenta>0)
+					$this->render('preview',array('ctp'=>$ctp,'tipo'=>'Reposición'));
+				else
+					$this->render('previewSC',array('ctp'=>$ctp,'tipo'=>'1','titulo'=>'Reposición'));
 			}
 		}
 		else

@@ -1,9 +1,10 @@
+<div class="form-group">
 <?php echo "  ".CHtml::link('Añadir Cantidades',array('ctp/cantidad'),array('class' => 'openDlg divDialog')); ?>
 
 <?php $cantidad= end($cantidades); echo "  ".CHtml::link('Eliminar Ultima Cantidad',array('ctp/delCantidad','id'=>$cantidad->idCantidadCTP),array('class' => 'btn btn-default','onClick'=>'confirm("Realmente desea eliminar?")')); ?>
 <?php ///echo "  ".CHtml::link('Añadir Horario',array('ctp/horario'),array('class' => 'openDlg1 divDialog1')); ?>
-
-<div class="form">
+</div>
+<div class="form" >
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'matriz-precios-ctp-precios-form',
@@ -17,12 +18,13 @@
 	// you need to use the performAjaxValidation()-method described there.
 	'enableAjaxValidation'=>false,
 )); ?>
-
-<?php $this->renderPartial('precios',array('model'=>$model,'placas'=>$placas,'clienteTipos'=>$tiposClientes,'cantidades'=>$cantidades,'horarios'=>$horarios)); ?>
-
-<div class="form-group">
-		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
-</div>
+	<div class="form-group">
+	<?php $this->renderPartial('precios',array('model'=>$model,'placas'=>$placas,'clienteTipos'=>$tiposClientes,'cantidades'=>$cantidades,'horarios'=>$horarios)); ?>
+	</div>
+	
+	<div class="form-group">
+			<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
+	</div>
 
 
 <?php $this->endWidget(); ?>

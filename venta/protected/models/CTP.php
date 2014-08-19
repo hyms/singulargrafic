@@ -12,6 +12,7 @@
  * @property string $fechaPlazo
  * @property string $codigo
  * @property integer $serie
+ * @property integer $numero
  * @property double $montoVenta
  * @property double $montoPagado
  * @property double $montoCambio
@@ -22,12 +23,12 @@
  * @property string $responsable
  * @property string $obs
  * @property integer $idCajaMovimientoVenta
- * @property integer $numero
  * @property integer $idUserOT
  * @property integer $idUserVenta
  * @property integer $idImprenta
  * @property integer $idCTPParent
  * @property integer $tipoCTP
+ * @property string $fechaEntega
  *
  * The followings are the available model relations:
  * @property CTP $idCTPParent0
@@ -38,6 +39,7 @@
  * @property CajaMovimientoVenta $idCajaMovimientoVenta0
  * @property Cliente $idCliente0
  * @property DetalleCTP[] $detalleCTPs
+ * @property FallasCTP[] $fallasCTPs
  */
 class CTP extends CActiveRecord
 {
@@ -58,15 +60,15 @@ class CTP extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			//array('montoVenta, montoPagado, montoCambio, montoDescuento, estado', 'required'),
-			array('tipoOrden, formaPago, idCliente, serie, estado, idCajaMovimientoVenta, numero, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP', 'numerical', 'integerOnly'=>true),
+			array('tipoOrden, formaPago, idCliente, serie, numero, estado, idCajaMovimientoVenta, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP', 'numerical', 'integerOnly'=>true),
 			array('montoVenta, montoPagado, montoCambio, montoDescuento', 'numerical'),
 			array('codigo', 'length', 'max'=>45),
 			array('factura, autorizado, responsable', 'length', 'max'=>50),
 			array('obs', 'length', 'max'=>200),
-			array('fechaOrden, fechaPlazo', 'safe'),
+			array('fechaOrden, fechaPlazo, fechaEntega', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCTP, fechaOrden, tipoOrden, formaPago, idCliente, fechaPlazo, codigo, serie, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, numero, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP', 'safe', 'on'=>'search'),
+			array('idCTP, fechaOrden, tipoOrden, formaPago, idCliente, fechaPlazo, codigo, serie, numero, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP, fechaEntega', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -86,6 +88,7 @@ class CTP extends CActiveRecord
 			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
 			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
 			'detalleCTPs' => array(self::HAS_MANY, 'DetalleCTP', 'idCTP'),
+			'fallasCTPs' => array(self::HAS_MANY, 'FallasCTP', 'idCtpRep'),
 		);
 	}
 
@@ -103,6 +106,7 @@ class CTP extends CActiveRecord
 			'fechaPlazo' => 'Fecha Plazo',
 			'codigo' => 'Codigo',
 			'serie' => 'Serie',
+			'numero' => 'Numero',
 			'montoVenta' => 'Monto Venta',
 			'montoPagado' => 'Monto Pagado',
 			'montoCambio' => 'Monto Cambio',
@@ -113,12 +117,12 @@ class CTP extends CActiveRecord
 			'responsable' => 'Responsable',
 			'obs' => 'Obs',
 			'idCajaMovimientoVenta' => 'Id Caja Movimiento Venta',
-			'numero' => 'Numero',
 			'idUserOT' => 'Id User Ot',
 			'idUserVenta' => 'Id User Venta',
 			'idImprenta' => 'Id Imprenta',
 			'idCTPParent' => 'Id Ctpparent',
 			'tipoCTP' => 'Tipo Ctp',
+			'fechaEntega' => 'Fecha Entega',
 		);
 	}
 
@@ -148,6 +152,7 @@ class CTP extends CActiveRecord
 		$criteria->compare('fechaPlazo',$this->fechaPlazo,true);
 		$criteria->compare('codigo',$this->codigo,true);
 		$criteria->compare('serie',$this->serie);
+		$criteria->compare('numero',$this->numero);
 		$criteria->compare('montoVenta',$this->montoVenta);
 		$criteria->compare('montoPagado',$this->montoPagado);
 		$criteria->compare('montoCambio',$this->montoCambio);
@@ -158,12 +163,12 @@ class CTP extends CActiveRecord
 		$criteria->compare('responsable',$this->responsable,true);
 		$criteria->compare('obs',$this->obs,true);
 		$criteria->compare('idCajaMovimientoVenta',$this->idCajaMovimientoVenta);
-		$criteria->compare('numero',$this->numero);
 		$criteria->compare('idUserOT',$this->idUserOT);
 		$criteria->compare('idUserVenta',$this->idUserVenta);
 		$criteria->compare('idImprenta',$this->idImprenta);
 		$criteria->compare('idCTPParent',$this->idCTPParent);
 		$criteria->compare('tipoCTP',$this->tipoCTP);
+		$criteria->compare('fechaEntega',$this->fechaEntega,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

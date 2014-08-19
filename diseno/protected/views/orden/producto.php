@@ -15,7 +15,7 @@
 			),
 			array(
 					'header'=>'Formato',
-					'value'=>'$data->idProducto0->detalle',
+					'value'=>'$data->idProducto0->color." - ".$data->idProducto0->detalle',
 			),
 			array(
 					'header'=>'Stock',
