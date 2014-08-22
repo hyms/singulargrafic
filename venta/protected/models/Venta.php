@@ -198,7 +198,7 @@ class Venta extends CActiveRecord
 		$criteria->with= array(
 				'idCliente0',
 		);
-		$criteria->order='fechaVenta ASC';
+		$criteria->order='fechaVenta DESC';
 		$criteria->limit = 50;
 		//$criteria->condition = 'idAlmacen=2';
 	

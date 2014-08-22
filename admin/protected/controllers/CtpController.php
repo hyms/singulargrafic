@@ -5,7 +5,7 @@ class CtpController extends Controller
 	public function actionMatrizPrecios()
 	{
 		$model ="";//  new MatrizPreciosCTP;	
-		$placas = AlmacenProducto::model()->with('idProducto0')->findAll('idAlmacen=3');
+		$placas = AlmacenProducto::model()->with('idProducto0')->findAll(array('condition'=>'idAlmacen=3', 'order'=>'idProducto0.detalle'));
 		$tiposClientes = TiposClientes::model()->findAll('servicio=1');
 		$cantidades = CantidadCTP::model()->findAll();
 		$horarios = Horario::model()->findAll();
@@ -15,6 +15,14 @@ class CtpController extends Controller
 		{
 			$model = array();
 			$i=0; $j=0; $k=0;
+			foreach ($placas as $placa)
+				foreach ($tiposClientes as $tipoCliente)
+					foreach ($cantidades as $cantidad)
+						foreach ($horarios as $horario)
+						{
+							$model[$placa->idAlmacenProducto][$tipoCliente->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario] = new MatrizPreciosCTP;
+						}
+					
 			foreach ($matriz as $item)
 			{
 				$model[$item->idAlmacenProducto][$item->idTiposClientes][$item->idCantidad][$item->idHorario] = $item;
@@ -24,39 +32,6 @@ class CtpController extends Controller
 					$j=$item->idTiposClientes;
 				if($k<$item->idAlmacenProducto)
 					$k=$item->idAlmacenProducto;
-			}
-			$cantidad = end($cantidades);
-			if($i<$cantidad->idCantidadCTP)
-			{
-				foreach ($placas as $placa)
-					foreach ($tiposClientes as $tipoCliente)
-						foreach ($horarios as $horario)
-						{
-							$model[$placa->idAlmacenProducto][$tipoCliente->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario] = new MatrizPreciosCTP;
-						}
-						
-			}
-			$tipoCliente = end($tiposClientes);
-			if($j<$tipoCliente->idTiposClientes)
-			{
-				foreach ($placas as $placa)
-					foreach ($cantidades as $cantidad)
-						foreach ($horarios as $horario)
-						{
-							$model[$placa->idAlmacenProducto][$tipoCliente->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario] = new MatrizPreciosCTP;
-						}
-			
-			}
-			$placa = end($placas);
-			if($k<$placa->idAlmacenProducto)
-			{
-				foreach ($tiposClientes as $tipoCliente)
-					foreach ($cantidades as $cantidad)
-						foreach ($horarios as $horario)
-						{
-							$model[$placa->idAlmacenProducto][$tipoCliente->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario] = new MatrizPreciosCTP;
-						}
-						
 			}
 		}
 		else

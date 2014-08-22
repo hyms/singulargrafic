@@ -193,6 +193,10 @@ class DistribuidoraController extends Controller
 				if($det==0){
 					$i=0;
 					foreach ($detalle as $item){
+						if($cliente->nitCi=="000")
+						{
+							$item->costoTotal=0;
+						}
 						if($item->save()){
 							$almacenes[$i]->save();
 						}
@@ -470,6 +474,10 @@ class DistribuidoraController extends Controller
 						$almacenes->stockU = $almacenes->stockU + $almacenes->idProducto0->cantXPaquete;
 					}
 					$almacenes->stockP = $almacenes->stockP - $item->cantidadP;
+					if($cliente->nitCi=="000")
+					{
+						$item->costoTotal=0;
+					}
 					if($item->save())
 					{
 						$almacenes->save();
@@ -507,6 +515,34 @@ class DistribuidoraController extends Controller
 				$this->render('preview',array('venta'=>$ventas));
 			else
 				$this->redirect('index');
+		}
+		else
+			throw new CHttpException(400,'Petición no válida.');
+	}
+	
+	public function actionPreviewTest()
+	{
+		if(isset($_GET['id']))
+		{
+			$this->layout = 'print';
+			//$mPDF1 = Yii::app()->ePdf->mpdf();
+ 			# You can easily override default constructor's params
+	        //$mPDF1 = Yii::app()->ePdf->mpdf('', array('215.9','279.4')); //letter
+			$mPDF1 = Yii::app()->ePdf->mpdf('', array('215.9','139.7'));
+	       
+	       $ventas = $this->verifyModel(Venta::model()
+			->with("idCliente0")
+			->with("detalleVentas")
+			->with("detalleVentas.idAlmacenProducto0")
+			->with("detalleVentas.idAlmacenProducto0.idProducto0")
+			->with("idCajaMovimientoVenta0")
+			->with("idCajaMovimientoVenta0.idUser0")
+			->with("idCajaMovimientoVenta0.idUser0.idEmpleado0")
+			->findByPk($_GET['id']));
+	       	# render (full page)
+			$mPDF1->WriteHTML($this->render('previewTest',array('venta'=>$ventas),true));
+			# Outputs ready PDF
+			$mPDF1->Output(date('d-m-Y H:i:s'), EYiiPdf::OUTPUT_TO_BROWSER);
 		}
 		else
 			throw new CHttpException(400,'Petición no válida.');
@@ -566,7 +602,7 @@ class DistribuidoraController extends Controller
 				$ventas->fechaVenta = $y."-".$m;
 				$cf=array("distribuidora/movimientos",'f'=>0,'m'=>$_GET['m']);
 				$sf=array("distribuidora/movimientos",'f'=>1,'m'=>$_GET['m']);
-				$cond3=array("distribuidora/previewDay","f"=>$f,"m"=>$_GET['m']);
+				$cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"m"=>$_GET['m']);
 			}
 		
 		}

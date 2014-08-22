@@ -19,9 +19,9 @@ $this->widget('zii.widgets.CMenu',array(
 				'submenuHtmlOptions' => array('class' => 'dropdown-menu'),
 				'encodeLabel' => false,
 				'items'=>array(
-							array('label'=>'Cliente', 'url'=>array('ctp/ordenes','t'=>1)),
-							array('label'=>'Interna', 'url'=>array('ctp/ordenes','t'=>2)),
-							//array('label'=>'Repeticion', 'url'=>array('ctp/ordenes','t'=>3)),
+							array('label'=>'Cliente', 'url'=>array('ctp/buscar','t'=>1)),
+							array('label'=>'Interna', 'url'=>array('ctp/buscar','t'=>2)),
+							array('label'=>'Repeticion', 'url'=>array('ctp/buscar','t'=>3)),
 						),
 				));
 } 
@@ -51,12 +51,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'($data->estado==2 && $data->tipoCTP!=3)?CHtml::link("Ver",array("ctp/orden","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm")):""',
+					'value'=>'($data->tipoCTP==1)?CHtml::link("Ver",array("ctp/orden","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm")):""',
 			),
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'($data->estado==2 || $data->tipoCTP==3)?CHtml::link("imprimir",array("ctp/preview","id"=>$data->idCTP)):""',	
+					'value'=>'($data->estado==2 || $data->tipoCTP!=1)?CHtml::link("imprimir",array("ctp/preview","id"=>$data->idCTP)):""',	
 			),
 		)
 	));

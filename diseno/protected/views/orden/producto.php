@@ -2,7 +2,9 @@
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$productos->searchCTP(),
 		'ajaxUpdate'=>true,
+		'cssFile' => false,
 		'itemsCssClass' => 'table table-hover table-condensed',
+		//'pagerCssClass' => 'pagination', // override default css
 		'htmlOptions' => array('class' => 'table-responsive'),
 		'columns'=>array(
 			array(
@@ -26,7 +28,8 @@
 					'type'=>'raw',
 					'value'=>'CHtml::link("Añadir","#",array("onclick"=>\'newRow("\'.$data->idAlmacenProducto.\'");\',"class"=>"btn btn-success btn-sm"))',
 			),
-		)
+		),
+		
 	));
 ?>
 <?php Yii::app()->clientScript->registerScript('row',"

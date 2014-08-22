@@ -4,10 +4,10 @@
 
 <div class="col-xs-10" >
 
-<div class="col-xs-offset-3 col-xs-7">
+<div class="col-xs-offset-3 col-xs-7 hidden-print">
 <?php echo CHtml::link('Imprimir', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"printView()")); ?>
 </div>
-<div style="width:816px; height:528px;">
+<div class="col-xs-12" style="width:816px; height:528px;">
 
 <div class="row">
 	<h3 class="col-xs-offset-2 col-xs-7 text-center"><strong><?php echo "Orden de Trabajo";?></strong></h3>

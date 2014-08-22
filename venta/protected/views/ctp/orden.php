@@ -1,4 +1,4 @@
-<div class="col-sm-2">
+	<div class="col-sm-2">
 <?php $this->renderPartial('menu'); ?>
 </div>
 

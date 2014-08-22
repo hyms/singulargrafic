@@ -35,7 +35,7 @@ class OrdenController extends Controller
 		$ctp = new CTP;
 		$productos = new AlmacenProducto('searchCTP');
 		
-		$row = CTP::model()->find(array("condition"=>"tipoOrden=1",'order'=>'fechaOrden Desc'));
+		$row = CTP::model()->find(array("condition"=>"tipoCTP=1",'order'=>'fechaOrden Desc'));
 		if(empty($row))
 			$row=new CTP;
 		if(empty($row->serie))
@@ -63,11 +63,12 @@ class OrdenController extends Controller
 				$cliente = new Cliente;
 		
 			$cliente->attributes = $_POST['Cliente'];
-			if(empty($cliente->fechaRegistro))
+			
+			if(empty($cliente->id))
 			{
-				$cliente->fechaRegistro = date("Y-m-d");
-				$tmp = TiposClientes::model()->find('nombre=nuevo');
+				$tmp = TiposClientes::model()->find('`nombre`="nuevo"');
 				$cliente->idTiposClientes = $tmp->idTiposClientes;
+				$cliente->fechaRegistro = date("Y-m-d");
 			}
 			if($cliente->save())
 				$swc=1;
@@ -110,6 +111,9 @@ class OrdenController extends Controller
 			{
 				array_push($detalle,new DetalleCTP);
 				$detalle[$i]->attributes = $item;
+				$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($detalle[$i]->idAlmacenProducto);
+				$detalle[$i]->formato = $almacen->idProducto0->color;
+					
 				if($detalle[$i]->validate())
 				{
 					$det--;
@@ -117,7 +121,7 @@ class OrdenController extends Controller
 				$i++;
 			}
 		}
-		//print_r($ctp);
+		
 		if($swc==1 && $swv==1 && $det==0)
 		{
 			$ctp->idCliente = $cliente->idCliente;
@@ -127,8 +131,6 @@ class OrdenController extends Controller
 				foreach($detalle as $item)
 				{
 					$item->idCTP = $ctp->idCTP;
-					$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto);
-					$item->formato = $almacen->idProducto0->detalle;
 					$item->save();
 				}
 				$this->redirect(array('orden/buscar'));
@@ -148,6 +150,7 @@ class OrdenController extends Controller
 		$row = CTP::model()->find(array("condition"=>"tipoCTP=2",'order'=>'fechaOrden Desc'));
 		if(empty($row))
 			$row=new CTP;
+		$ctp->numero = $row->numero +1;
 		$ctp->codigo = "CI-".$ctp->numero;
 		$ctp->formaPago = 1;
 		$ctp->tipoOrden = 1;
@@ -156,7 +159,7 @@ class OrdenController extends Controller
 		$ctp->tipoCTP = 2;
 		$ctp->estado =1;
 		
-		$d=0;$c=0;$swc=1;
+		$det=0;$c=0;$swc=1;
 		
 		if(isset($_POST['Cliente']))
 		{
@@ -189,11 +192,28 @@ class OrdenController extends Controller
 			{
 				array_push($detalle,new DetalleCTP);
 				$detalle[$i]->attributes = $item;
+				$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($detalle[$i]->idAlmacenProducto);
+				$detalle[$i]->formato = $almacen->idProducto0->color;
 				if($detalle[$i]->validate())
 				{
 					$det--;
 				}
 				$i++;
+			}
+		}
+		//print_r($detalle);
+		if($swc==1 && $c==1 && $det==0)
+		{
+			$ctp->idCliente = $cliente->idCliente;
+		
+			if($ctp->save())
+			{
+				foreach($detalle as $item)
+				{
+					$item->idCTP = $ctp->idCTP;
+					$item->save();
+				}
+				$this->redirect(array('orden/buscar'));
 			}
 		}
 		
@@ -365,17 +385,19 @@ class OrdenController extends Controller
 							$item->delete();
 					}
 				}
-				$detalle = array();$i=0;
-				foreach ($_POST['DetalleCTP'] as $item)
+				$detalle = array();
+				foreach ($_POST['DetalleCTP'] as $key=>$item)
 				{
-					array_push($detalle,New DetalleCTP);
-					$detalle[$i]->attributes=$item;
-					$detalle[$i]->idCTP=$ctp->idCTP;
-					$detalle[$i]->save();
-					$i++;
+					$detalle[$key] = New DetalleCTP;
+					$detalle[$key]->attributes=$item;
+					$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($detalle[$key]->idAlmacenProducto);
+					$detalle[$key]->formato = $almacen->idProducto0->color;
+					$detalle[$key]->idCTP=$ctp->idCTP;
+					$detalle[$key]->save();
 				}
+				$ctp->detalleCTPs = $detalle;
 				$sw=1;
-				print_r($_POST['DetalleCTP']);
+				//print_r($detalle);
 			}
 			if($sw==1)
 				$ctp = $this->verifyModel(CTP::model()->with('idCliente0')->with('detalleCTPs')->findByPk($_GET['id']));
@@ -606,4 +628,6 @@ class OrdenController extends Controller
 	
 		return $model;
 	}
+	
+	
 }

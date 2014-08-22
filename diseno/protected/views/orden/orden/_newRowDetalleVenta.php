@@ -5,7 +5,8 @@
 </td>
 
 <td>
-	<p class="form-control-static"><?php echo CHtml::encode($almacen->idProducto0->detalle) ?></p>
+	<p class="form-control-static"><?php echo CHtml::encode($almacen->idProducto0->color) ?></p>
+	<?php echo CHtml::activeHiddenField($model,"[$index]formato")?>
 </td>
 
 <td>
@@ -13,20 +14,20 @@
 	<?php echo CHtml::hiddenField("[$index]costo",$costo,array('id'=>'costo_'.$index)); ?>
 </td>
 <td>
-	<div class="checkbox"><?php echo CHtml::checkBox("[$index]F",false,array('id'=>'f_'.$index)); ?></div>
+	<?php echo CHtml::checkBox("[$index]F",false,array('id'=>'f_'.$index)); ?>
 </td>
 <td>
 	<?php //echo CHtml::activeTextField($model,"[$index]nroColores",array('class'=>'form-control input-sm','id'=>'snroColores_'.$index)); ?>
-	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]C",array('id'=>'c_'.$index)); ?></div>
+	<?php echo CHtml::activeCheckBox($model,"[$index]C",array('id'=>'c_'.$index)); ?>
 </td>
 <td>
-	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]M",array('id'=>'m_'.$index)); ?></div>
+	<?php echo CHtml::activeCheckBox($model,"[$index]M",array('id'=>'m_'.$index)); ?>
 </td>
 <td>
-	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]Y",array('id'=>'y_'.$index)); ?></div>
+	<?php echo CHtml::activeCheckBox($model,"[$index]Y",array('id'=>'y_'.$index)); ?>
 </td>
 <td>
-	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]K",array('id'=>'k_'.$index)); ?></div>
+	<?php echo CHtml::activeCheckBox($model,"[$index]K",array('id'=>'k_'.$index)); ?>
 </td>
 
 <td>
@@ -46,7 +47,7 @@
 <?php /*?>
 <td class="col-sm-1">
 	<?php echo CHtml::activeTextField($model,"[$index]costoTotal",array('class'=>'costo form-control input-sm','readonly'=>true,'id'=>'costoTotal_'.$index)); ?>
-</td>
+</td>glyphicon glyphicon-remove-circle
 <?php */?>
 <td class="col-sm-1">
 	<?php echo CHtml::link('Quitar', '#', array("class"=>"btn btn-danger btn-sm tabular-input-remove")).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />'; ?>

@@ -42,7 +42,8 @@ Yii::app()->getClientScript()->registerScript("ajax_cliente",
         if(e.keyCode==13 || e.keyCode==9) 
 	    { 
 	    	if($('#NitCi').val()!=\"\")
-	     		cliente($('#NitCi').val())
+	     		cliente($('#NitCi').val());
+			$('#apellido').focus();
 	      	return true; 
 	    } 
            
@@ -65,5 +66,21 @@ Yii::app()->getClientScript()->registerScript("ajax_cliente",
     $('#apellido').blur(function(e){ 
         $('#clienteApellido').val($('#apellido').val());
 	      	return true;
+    });
+				
+	$('#apellido').keydown(function(e){ 
+        if(e.keyCode==13 || e.keyCode==9) 
+	    { 
+	    	if($('#stockUnidad_0').length>0)
+			{
+	    		$('#stockUnidad_0').focus();
+	    	}
+	    	else
+	    	{
+	    		$('#apellido').focus();
+	    	}
+	      	return true; 
+	    } 
+           
     });
  ",CClientScript::POS_READY); ?>

@@ -1,6 +1,6 @@
 <?php foreach ($placas as $placa){?>
 <div class="col-xs-6">
-<h4><strong><?php echo $placa->idProducto0->color; ?></strong> <small><?php echo $placa->idProducto0->detalle; ?></small></h4>
+<h2><strong><?php echo $placa->idProducto0->color; ?></strong> <small><?php echo $placa->idProducto0->detalle; ?></small></h2>
 <table class="table table-condensed table-hover">
 	<tr>
 		<td></td>
@@ -12,7 +12,7 @@
 	</tr>
 	<?php foreach ($cantidades as $cantidad){?>
 	<tr>
-		<td class="text-left col-xs-2"><strong><?php echo CHtml::link($cantidad->Inicio." - ".$cantidad->final,array('ctp/cantidad','id'=>$cantidad->idCantidadCTP), array('class' => 'openDlg divDialog','style'=>'color:#000'));?></strong></td>
+		<td class="text-left col-xs-2"><h4><strong><?php echo CHtml::link($cantidad->Inicio." - ".$cantidad->final,array('ctp/cantidad','id'=>$cantidad->idCantidadCTP), array('class' => 'openDlg divDialog','style'=>'color:#000'));?></strong></h4></td>
 		<?php foreach ($clienteTipos as $clienteTipo){?>
 		<td>
 			<div class="col-xs-6">
@@ -26,7 +26,7 @@
 	</tr>
 		<?php foreach ($horarios as $horario){?>
 	<tr>
-		<td class="text-right"><strong><?php echo CHtml::link(date("H:m",strtotime($horario->inicio))." - ".date("H:m",strtotime($horario->final)),array('ctp/horario','id'=>$horario->idHorario), array('class' => 'openDlg divDialog')); ?></strong></td>
+		<td class="text-right"><strong><?php echo CHtml::link(date("H:i",strtotime($horario->inicio))." - ".date("H:i",strtotime($horario->final)),array('ctp/horario','id'=>$horario->idHorario), array('class' => 'openDlg divDialog')); ?></strong></td>
 		<?php foreach ($clienteTipos as $clienteTipo){?>
 		<td>
 		<?php if(!is_array($model)){?>

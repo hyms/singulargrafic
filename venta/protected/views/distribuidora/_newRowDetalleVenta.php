@@ -62,5 +62,55 @@ echo "
 	    calcular_total();
 		return true;
 	})
+
+			
+	$('#stockUnidad_". $index ."').keydown(function(e){ 
+        if(e.keyCode==13 || e.keyCode==9) 
+	    { 
+	    	$('#costoUnidad_". $index ."').focus();
+	      	return true; 
+	    } 
+           
+    });	
+	$('#costoUnidad_". $index ."').keydown(function(e){ 
+        if(e.keyCode==13 || e.keyCode==9) 
+	    { 
+	    	$('#stockPaquete_". $index ."').focus();
+	      	return true; 
+	    } 
+           
+    });
+	$('#stockPaquete_". $index ."').keydown(function(e){ 
+        if(e.keyCode==13 || e.keyCode==9) 
+	    { 
+	    	$('#costoPaquete_". $index ."').focus();
+	      	return true; 
+	    } 
+           
+    });	
+	$('#costoPaquete_". $index ."').keydown(function(e){ 
+        if(e.keyCode==13 || e.keyCode==9) 
+	    { 
+	    	$('#adicional_". $index ."').focus();
+	      	return true; 
+	    } 
+           
+    });
+	$('#adicional_". $index ."').keydown(function(e){ 
+        if(e.keyCode==13 || e.keyCode==9) 
+	    { 
+	    	if($('#stockUnidad_".($index+1)."').length>0)
+			{
+	    		$('#stockUnidad_".($index+1)."').focus();
+	    	}
+	    	else
+	    	{
+	    		$('#pagado').focus();
+	    	}
+	      	return true; 
+	    } 
+           
+    });		
+	
 </script>
 ";?>

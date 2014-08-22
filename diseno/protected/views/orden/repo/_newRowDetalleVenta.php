@@ -16,16 +16,16 @@
 </td>
 <td>
 	<?php //echo CHtml::activeTextField($model,"[$index]nroColores",array('class'=>'form-control input-sm','id'=>'snroColores_'.$index)); ?>
-	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]C"); ?></div>
+	<?php echo CHtml::activeCheckBox($model,"[$index]C"); ?>
 </td>
 <td>
-	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]M"); ?></div>
+	<?php echo CHtml::activeCheckBox($model,"[$index]M"); ?>
 </td>
 <td>
-	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]Y"); ?></div>
+	<?php echo CHtml::activeCheckBox($model,"[$index]Y"); ?>
 </td>
 <td>
-	<div class="checkbox"><?php echo CHtml::activeCheckBox($model,"[$index]K"); ?></div>
+	<?php echo CHtml::activeCheckBox($model,"[$index]K"); ?>
 </td>
 
 <td>

@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div >
 <table id="yw3" class="table table-condensed">
 	<thead class="tabular-header"><tr>
 		<td><?php echo CHtml::label('Nº','number')?></td>
@@ -118,6 +118,7 @@ if(count($detalle)>=1)
 		if(e.keyCode==13 || e.keyCode==9) 
 	    { 
 			$('#cambio').val(resta($('#pagado').val(),$('#total').val()).toFixed(1));
+			$('#cambio').focus();
 			return true;
 		}
 	});
@@ -127,4 +128,6 @@ if(count($detalle)>=1)
 		$(this).parents(\".tabular-input:first\").remove();
 		$('.tabular-input-container').filter(function(){return $.trim($(this).text())==='' && $(this).children().length == 0}).siblings('.tabular-header').hide();
 	});
+			
+			
 ",CClientScript::POS_READY); ?>

@@ -163,6 +163,21 @@ class StockController extends Controller
 						throw new CHttpException(400,'La Respuesta de la pagina no Existe.');
 	}
 	
+	public function actionDeleteDetalle()
+	{
+		if(isset($_GET['id']))
+		{
+			
+			/*//$res=false;
+			$productos= $this->verifyModel(Producto::model()->findByPk($_GET['id']));
+				
+			if($this->initStock($productos->idProducto,2))
+				$this->redirect(array("stock/distribuidoraAdd"));*/
+		}
+		
+		$this->redirect(array('stock/distribuidora'));
+	}
+	
 	private function initStock($id,$idAlmacen)
 	{
 		$almacen = new AlmacenProducto;

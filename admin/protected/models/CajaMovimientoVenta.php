@@ -38,7 +38,7 @@ class CajaMovimientoVenta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('monto, motivo, tipo', 'required'),
+			//array('monto, motivo, tipo', 'required'),
 			array('idUser, tipo, arqueo, idCaja', 'numerical', 'integerOnly'=>true),
 			array('monto', 'numerical'),
 			array('motivo', 'length', 'max'=>100),

@@ -60,6 +60,11 @@
 				'type'=>'raw',
 				'value'=>'CHtml::link("Añadir a Stock",array("stock/stockDistribuidora","id"=>$data->idAlmacenProducto))'
 		),
+		array(
+				'header'=>'',
+				'type'=>'raw',
+				'value'=>'CHtml::link("Eliminar",array("stock/deleteDetalle","id"=>$data->idAlmacenProducto),array("onClick"=>"confirm(\"Realmente desea eliminar el producto?\")"))'
+		),
 	)
 	));
 ?>

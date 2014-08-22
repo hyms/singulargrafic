@@ -36,7 +36,7 @@ class DetalleVenta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('costoU, costoP', 'required'),
+			//array('costoU, costoP', 'required'),
 			array('idVenta, cantidadU, cantidadP, idAlmacenProducto', 'numerical', 'integerOnly'=>true),
 			array('costoU, costoP, costoAdicional, costoTotal', 'numerical'),
 			// The following rule is used by search().

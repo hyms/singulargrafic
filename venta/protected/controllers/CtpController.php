@@ -36,14 +36,14 @@ class CtpController extends Controller
 		}
 		$ordenes=new CActiveDataProvider('CTP',array(
 				'criteria'=>array(
-					'condition'=>'`t`.estado=1 '.$t.' and `t`.tipoCTP!=3',
+					'condition'=>'`t`.estado=1 '.$t.' and `t`.tipoCTP=1',
 					'with'=>array('idCliente0'),
 					'order'=>'fechaOrden Desc',
 				),
 				'pagination'=>array(
 						'pageSize'=>'20',
 				),));
-		$this->render('ordenes',array('ordenes'=>$ordenes,'estado'=>1));
+		$this->render('ordenes',array('ordenes'=>$ordenes));
 	}
 	
 	public function actionOrden()
@@ -57,13 +57,24 @@ class CtpController extends Controller
 			
 			$ctp->attributes = $_POST['CTP'];
 			$ctp->idUserVenta = Yii::app()->user->id;
+			if(!empty($ctp->fechaPlazo))
 			$ctp->fechaPlazo= date("Y-m-d H:i:s",strtotime($ctp->fechaPlazo));
 			$ctp->estado = 2;
+			$tmp = array();
+			foreach ($_POST['DetalleCTP'] as $key => $item)
+			{
+				$tmp[$key] = $ctp->detalleCTPs[$key];
+				$tmp[$key]->attributes = $item;
+			}
+			$ctp->detalleCTPs=$tmp;
+			//print_r($tmp);
+			//return;
 			if($ctp->save())
 			{
 				$almacen = array(); $i=0;
 				foreach ($ctp->detalleCTPs as $item)
 				{
+					$item->save();
 					array_push($almacen, AlmacenProducto::model()->findByPk($item->idAlmacenProducto));
 					$almacen[$i]->stockU = $almacen[$i]->stockU - $item->nroPlacas;
 					if($almacen[$i]->stockU < 0)
@@ -212,15 +223,33 @@ class CtpController extends Controller
 	
 	public function actionBuscar()
 	{
+		$t="";
+		if(isset($_GET['t']))
+		{
+			$t='(`t`.estado=1 and `t`.tipoCTP='.$_GET['t'].')';
+			if($_GET['t']==1)
+			$t="(`t`.estado=2 and `t`.tipoCTP=1)";
+		}
+		else 
+			$t='(`t`.estado=2 and `t`.tipoCTP=1) or (`t`.estado=1 and `t`.tipoCTP!=1)';
 		$ordenes=new CActiveDataProvider('CTP',array(
+				'criteria'=>array(
+						'condition'=>$t,
+						'with'=>array('idCliente0'),
+						'order'=>'fechaOrden Desc',
+				),
+				'pagination'=>array(
+						'pageSize'=>'20',
+				),));
+		/*$ordenes=new CActiveDataProvider('CTP',array(
 				'criteria'=>array(
 						'condition'=>'(`t`.estado=2) or (`t`.estado=1 and `t`.tipoCTP=3)',
 						'with'=>array('idCliente0'),
 				),
 				'pagination'=>array(
 						'pageSize'=>'20',
-				),));
-		$this->render('ordenes',array('ordenes'=>$ordenes));
+				),));*/
+		$this->render('ordenes',array('ordenes'=>$ordenes,'estado'=>1));
 	}
 	
 	public function actionPreview()
