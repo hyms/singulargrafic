@@ -170,7 +170,7 @@ class DistribuidoraController extends Controller
 					if($item->validate()){
 						array_push($almacenes,AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto));
 						$almacenes[$i]->stockU = $almacenes[$i]->stockU - $item->cantidadU;
-						if($almacenes[$i]->stockU<0){
+						while($almacenes[$i]->stockU<0){
 							$almacenes[$i]->stockP = $almacenes[$i]->stockP - 1;
 							$almacenes[$i]->stockU = $almacenes[$i]->stockU + $almacenes[$i]->idProducto0->cantXPaquete;
 						}
@@ -452,7 +452,7 @@ class DistribuidoraController extends Controller
 				{
 					$almacenes = AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto);
 					$almacenes->stockU = $almacenes->stockU + $item->cantidadU;
-					if($almacenes->stockU>$almacenes->idProducto0->cantXPaquete)
+					while($almacenes->stockU>$almacenes->idProducto0->cantXPaquete)
 					{
 						$almacenes->stockP = $almacenes->stockP + 1;
 						$almacenes->stockU = $almacenes->stockU - $almacenes->idProducto0->cantXPaquete;
@@ -468,7 +468,7 @@ class DistribuidoraController extends Controller
 					$item->idVenta = $venta->idVenta;
 					$almacenes = AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto);
 					$almacenes->stockU = $almacenes->stockU - $item->cantidadU;
-					if($almacenes->stockU<0)
+					while($almacenes->stockU<0)
 					{
 						$almacenes->stockP = $almacenes->stockP - 1;
 						$almacenes->stockU = $almacenes->stockU + $almacenes->idProducto0->cantXPaquete;
@@ -730,7 +730,7 @@ class DistribuidoraController extends Controller
 				$model->attributes=$_POST['MovimientoAlmacen'];
 	
 				$deposito->stockU = $deposito->stockU - $model->cantidadU;
-				if($deposito->stockU<0)
+				while($deposito->stockU<0)
 				{
 					$deposito->stockU=$deposito->stockU+$almacen->idProducto0->cantXPaquete;
 					$deposito->stockP = $deposito->stockP - 1;
@@ -825,7 +825,7 @@ class DistribuidoraController extends Controller
 					$saldo = $saldo->saldo;
 				
 				$arqueo->saldo = round($saldo+$ventas+$recibos-$movimiento->monto,1, PHP_ROUND_HALF_UP);
-				if($caja->saldo >=0){
+				if($caja->saldo >=0 && $arqueo->saldo>=0 ){
 					if($movimiento->monto==0){
 						$arqueo->comprobante="";
 						
@@ -1068,6 +1068,56 @@ class DistribuidoraController extends Controller
 		}
 		else
 			throw new CHttpException(400,'Petición no válida.');
+	}
+	
+	public function actionEnvio()
+	{
+		$productos = new AlmacenProducto('searchDistribuidora');
+		$envio = new EnvioMaterial;
+		$envio = new DetalleEnvio;
+		
+		//init filter
+		$productos->unsetAttributes();
+		if (isset($_GET['AlmacenProducto'])){
+			$productos->attributes = $_GET['AlmacenProducto'];
+			$productos->color = $_GET['AlmacenProducto']['color'];
+			$productos->material = $_GET['AlmacenProducto']['material'];
+			$productos->marca = $_GET['AlmacenProducto']['marca'];
+			$productos->paquete = $_GET['AlmacenProducto']['paquete'];
+			$productos->detalle = $_GET['AlmacenProducto']['detalle'];
+			$productos->codigo = $_GET['AlmacenProducto']['codigo'];
+		}
+		//end filter
+		if(isset($_POST['EnvioMaterial']))
+		{
+			
+			if(isset($_POST['EnvioMaterial']))
+			{
+				
+			}	
+			
+			if(isset($_POST['EnvioMaterial']))
+			{
+					
+			}
+		}
+		
+		$this->render();
+	}
+	
+	public function actionEnvios()
+	{
+		/*$envios=new CActiveDataProvider('EnvioMaterial',
+				array(
+						'criteria'=>array(
+								'order'=>'fechaEnvio Desc',
+						),
+						'pagination'=>array(
+								'pageSize'=>'20',
+						),
+				));*/
+		$envios = new EnvioMaterial('search');
+		$this->render("envios",array("envios"=>$envios));
 	}
 	
 	private function verifyModel($model)

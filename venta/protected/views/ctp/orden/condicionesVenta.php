@@ -11,6 +11,7 @@
 		<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 	    		'name'=>'fechaPlazo',
 				'attribute'=>'fechaPlazo',
+				'language'=>'es',
 			    'model'=>$ctp,
 			    'options'=>array(
 			        'showAnim'=>'fold',

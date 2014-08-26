@@ -102,6 +102,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cajaMovimientoVenta` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 80
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
@@ -137,15 +138,90 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cliente` (
   `telefono` VARCHAR(20) NULL DEFAULT NULL ,
   `direccion` VARCHAR(100) NULL DEFAULT NULL ,
   `idTiposClientes` INT(11) NULL DEFAULT NULL ,
+  `idParent` INT NULL ,
   PRIMARY KEY (`idCliente`) ,
   INDEX `fk_cliente_TiposClientes1` (`idTiposClientes` ASC) ,
+  INDEX `fk_cliente_cliente1` (`idParent` ASC) ,
   CONSTRAINT `fk_cliente_TiposClientes1`
     FOREIGN KEY (`idTiposClientes` )
     REFERENCES `singular`.`TiposClientes` (`idTiposClientes` )
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cliente_cliente1`
+    FOREIGN KEY (`idParent` )
+    REFERENCES `singular`.`cliente` (`idCliente` )
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 10
+AUTO_INCREMENT = 12
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `singular`.`CTP`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `singular`.`CTP` ;
+
+CREATE  TABLE IF NOT EXISTS `singular`.`CTP` (
+  `idCTP` INT(11) NOT NULL AUTO_INCREMENT ,
+  `fechaOrden` DATETIME NULL DEFAULT NULL ,
+  `tipoOrden` INT(11) NULL DEFAULT NULL ,
+  `formaPago` INT(11) NULL DEFAULT NULL ,
+  `idCliente` INT(11) NULL DEFAULT NULL ,
+  `fechaPlazo` DATETIME NULL DEFAULT NULL ,
+  `codigo` VARCHAR(45) NULL DEFAULT NULL ,
+  `serie` INT(11) NULL DEFAULT NULL ,
+  `numero` INT(11) NULL DEFAULT NULL ,
+  `montoVenta` DOUBLE(11) NOT NULL ,
+  `montoPagado` DOUBLE(11) NOT NULL ,
+  `montoCambio` DOUBLE(11) NOT NULL ,
+  `montoDescuento` DOUBLE(11) NOT NULL ,
+  `estado` INT(11) NOT NULL ,
+  `factura` VARCHAR(50) NULL DEFAULT NULL ,
+  `autorizado` VARCHAR(50) NULL DEFAULT NULL ,
+  `responsable` VARCHAR(50) NULL DEFAULT NULL ,
+  `obs` VARCHAR(200) NULL DEFAULT NULL ,
+  `idCajaMovimientoVenta` INT(11) NULL DEFAULT NULL ,
+  `idUserOT` INT(11) NULL DEFAULT NULL ,
+  `idUserVenta` INT(11) NULL DEFAULT NULL ,
+  `idImprenta` INT(11) NULL DEFAULT NULL ,
+  `idCTPParent` INT(11) NULL DEFAULT NULL ,
+  `tipoCTP` INT(11) NULL DEFAULT NULL ,
+  `fechaEntega` DATETIME NULL DEFAULT NULL ,
+  PRIMARY KEY (`idCTP`) ,
+  INDEX `fk_venta_cliente1` (`idCliente` ASC) ,
+  INDEX `fk_venta_cajaMovimientoVenta1` (`idCajaMovimientoVenta` ASC) ,
+  INDEX `fk_CTP_user1` (`idUserOT` ASC) ,
+  INDEX `fk_CTP_user2` (`idUserVenta` ASC) ,
+  INDEX `fk_CTP_CTP1` (`idCTPParent` ASC) ,
+  CONSTRAINT `fk_CTP_CTP1`
+    FOREIGN KEY (`idCTPParent` )
+    REFERENCES `singular`.`CTP` (`idCTP` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_CTP_user1`
+    FOREIGN KEY (`idUserOT` )
+    REFERENCES `singular`.`user` (`idUser` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_CTP_user2`
+    FOREIGN KEY (`idUserVenta` )
+    REFERENCES `singular`.`user` (`idUser` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_venta_cajaMovimientoVenta10`
+    FOREIGN KEY (`idCajaMovimientoVenta` )
+    REFERENCES `singular`.`cajaMovimientoVenta` (`idCajaMovimientoVenta` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_venta_cliente10`
+    FOREIGN KEY (`idCliente` )
+    REFERENCES `singular`.`cliente` (`idCliente` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 8
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
@@ -208,79 +284,6 @@ COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
--- Table `singular`.`CTP`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `singular`.`CTP` ;
-
-CREATE  TABLE IF NOT EXISTS `singular`.`CTP` (
-  `idCTP` INT(11) NOT NULL AUTO_INCREMENT ,
-  `fechaOrden` DATETIME NULL DEFAULT NULL ,
-  `tipoOrden` INT(11) NULL DEFAULT NULL ,
-  `formaPago` INT(11) NULL DEFAULT NULL ,
-  `idCliente` INT(11) NULL DEFAULT NULL ,
-  `fechaPlazo` DATETIME NULL DEFAULT NULL ,
-  `codigo` VARCHAR(45) NULL DEFAULT NULL ,
-  `serie` INT(11) NULL DEFAULT NULL ,
-  `numero` INT(11) NULL DEFAULT NULL ,
-  `montoVenta` DOUBLE(11) NOT NULL ,
-  `montoPagado` DOUBLE(11) NOT NULL ,
-  `montoCambio` DOUBLE(11) NOT NULL ,
-  `montoDescuento` DOUBLE(11) NOT NULL ,
-  `estado` INT(11) NOT NULL ,
-  `factura` VARCHAR(50) NULL DEFAULT NULL ,
-  `autorizado` VARCHAR(50) NULL DEFAULT NULL ,
-  `responsable` VARCHAR(50) NULL DEFAULT NULL ,
-  `obs` VARCHAR(200) NULL DEFAULT NULL ,
-  `idCajaMovimientoVenta` INT(11) NULL DEFAULT NULL ,
-  `idUserOT` INT(11) NULL DEFAULT NULL ,
-  `idUserVenta` INT(11) NULL DEFAULT NULL ,
-  `idImprenta` INT(11) NULL DEFAULT NULL ,
-  `idCTPParent` INT(11) NULL DEFAULT NULL ,
-  `tipoCTP` INT(11) NULL DEFAULT NULL ,
-  PRIMARY KEY (`idCTP`) ,
-  INDEX `fk_venta_cliente1` (`idCliente` ASC) ,
-  INDEX `fk_venta_cajaMovimientoVenta1` (`idCajaMovimientoVenta` ASC) ,
-  INDEX `fk_CTP_user1` (`idUserOT` ASC) ,
-  INDEX `fk_CTP_user2` (`idUserVenta` ASC) ,
-  INDEX `fk_CTP_Imprenta1` (`idImprenta` ASC) ,
-  INDEX `fk_CTP_CTP1` (`idCTPParent` ASC) ,
-  CONSTRAINT `fk_CTP_CTP1`
-    FOREIGN KEY (`idCTPParent` )
-    REFERENCES `singular`.`CTP` (`idCTP` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_CTP_Imprenta1`
-    FOREIGN KEY (`idImprenta` )
-    REFERENCES `singular`.`Imprenta` (`idImprenta` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_CTP_user1`
-    FOREIGN KEY (`idUserOT` )
-    REFERENCES `singular`.`user` (`idUser` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_CTP_user2`
-    FOREIGN KEY (`idUserVenta` )
-    REFERENCES `singular`.`user` (`idUser` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_venta_cajaMovimientoVenta10`
-    FOREIGN KEY (`idCajaMovimientoVenta` )
-    REFERENCES `singular`.`cajaMovimientoVenta` (`idCajaMovimientoVenta` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_venta_cliente10`
-    FOREIGN KEY (`idCliente` )
-    REFERENCES `singular`.`cliente` (`idCliente` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-AUTO_INCREMENT = 4
-DEFAULT CHARACTER SET = latin1
-COLLATE = latin1_swedish_ci;
-
-
--- -----------------------------------------------------
 -- Table `singular`.`almacen`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `singular`.`almacen` ;
@@ -324,7 +327,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`producto` (
   `detalle` VARCHAR(100) NOT NULL ,
   PRIMARY KEY (`idProducto`) )
 ENGINE = InnoDB
-AUTO_INCREMENT = 184
+AUTO_INCREMENT = 190
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
@@ -354,7 +357,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`almacenProducto` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 709
+AUTO_INCREMENT = 721
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
@@ -432,7 +435,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`MatrizPreciosCTP` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 42
+AUTO_INCREMENT = 196
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
@@ -499,6 +502,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cajaArqueo` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
@@ -634,7 +638,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`detalleCTP` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 9
+AUTO_INCREMENT = 16
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
@@ -678,6 +682,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`venta` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 82
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
@@ -711,6 +716,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`detalleVenta` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 119
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
@@ -755,7 +761,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`movimientoAlmacen` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 349
+AUTO_INCREMENT = 373
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
@@ -840,8 +846,52 @@ CREATE  TABLE IF NOT EXISTS `singular`.`fallasCTP` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `singular`.`envioMaterial`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `singular`.`envioMaterial` ;
+
+CREATE  TABLE IF NOT EXISTS `singular`.`envioMaterial` (
+  `idEnvioMaterial` INT NOT NULL ,
+  `fechaEnvio` DATETIME NULL ,
+  `origen` VARCHAR(45) NULL ,
+  `destino` VARCHAR(45) NULL ,
+  `responsable` VARCHAR(45) NULL ,
+  `idUser` INT NULL ,
+  PRIMARY KEY (`idEnvioMaterial`) ,
+  INDEX `fk_envioMaterial_user1` (`idUser` ASC) ,
+  CONSTRAINT `fk_envioMaterial_user1`
+    FOREIGN KEY (`idUser` )
+    REFERENCES `singular`.`user` (`idUser` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `singular`.`detalleEnvio`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `singular`.`detalleEnvio` ;
+
+CREATE  TABLE IF NOT EXISTS `singular`.`detalleEnvio` (
+  `idDetalleEnvio` INT NOT NULL ,
+  `idAlmacenProducto` INT NOT NULL ,
+  `cantidadP` INT NOT NULL ,
+  `cantidadU` INT NOT NULL ,
+  `idEnvioMaterial` INT NOT NULL ,
+  PRIMARY KEY (`idDetalleEnvio`) ,
+  INDEX `fk_detalleEnvio_envioMaterial1` (`idEnvioMaterial` ASC) ,
+  CONSTRAINT `fk_detalleEnvio_envioMaterial1`
+    FOREIGN KEY (`idEnvioMaterial` )
+    REFERENCES `singular`.`envioMaterial` (`idEnvioMaterial` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 
 

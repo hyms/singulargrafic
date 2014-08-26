@@ -13,10 +13,13 @@
  * @property string $telefono
  * @property string $direccion
  * @property integer $idTiposClientes
+ * @property integer $idParent
  *
  * The followings are the available model relations:
  * @property CTP[] $cTPs
  * @property Imprenta[] $imprentas
+ * @property Cliente $idParent0
+ * @property Cliente[] $clientes
  * @property TiposClientes $idTiposClientes0
  * @property Recibos[] $reciboses
  * @property Venta[] $ventas
@@ -39,7 +42,7 @@ class Cliente extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idTiposClientes', 'numerical', 'integerOnly'=>true),
+			array('idTiposClientes, idParent', 'numerical', 'integerOnly'=>true),
 			array('nitCi, telefono', 'length', 'max'=>20),
 			array('apellido, nombre', 'length', 'max'=>40),
 			array('correo', 'length', 'max'=>50),
@@ -47,7 +50,7 @@ class Cliente extends CActiveRecord
 			array('fechaRegistro', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCliente, nitCi, apellido, nombre, correo, fechaRegistro, telefono, direccion, idTiposClientes', 'safe', 'on'=>'search'),
+			array('idCliente, nitCi, apellido, nombre, correo, fechaRegistro, telefono, direccion, idTiposClientes, idParent', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,6 +64,8 @@ class Cliente extends CActiveRecord
 		return array(
 			'cTPs' => array(self::HAS_MANY, 'CTP', 'idCliente'),
 			'imprentas' => array(self::HAS_MANY, 'Imprenta', 'idCliente'),
+			'idParent0' => array(self::BELONGS_TO, 'Cliente', 'idParent'),
+			'clientes' => array(self::HAS_MANY, 'Cliente', 'idParent'),
 			'idTiposClientes0' => array(self::BELONGS_TO, 'TiposClientes', 'idTiposClientes'),
 			'reciboses' => array(self::HAS_MANY, 'Recibos', 'idCliente'),
 			'ventas' => array(self::HAS_MANY, 'Venta', 'idCliente'),
@@ -81,7 +86,8 @@ class Cliente extends CActiveRecord
 			'fechaRegistro' => 'Fecha Registro',
 			'telefono' => 'Telefono',
 			'direccion' => 'Direccion',
-			'idTiposClientes' => 'Tipos de Clientes',
+			'idTiposClientes' => 'Tipos Clientes',
+			'idParent' => 'Pertenece A',
 		);
 	}
 
@@ -112,6 +118,7 @@ class Cliente extends CActiveRecord
 		$criteria->compare('telefono',$this->telefono,true);
 		$criteria->compare('direccion',$this->direccion,true);
 		$criteria->compare('idTiposClientes',$this->idTiposClientes);
+		$criteria->compare('idParent',$this->idParent);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -127,5 +134,15 @@ class Cliente extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+	
+	public function getClientes()
+	{
+		if(isset($this->idCliente))
+			$cliente = Cliente::model()->findAll(array('condition'=>'idCliente!='.$this->idCliente));
+		else
+			$cliente = Cliente::model()->findAll();
+	
+		return CHtml::listData($cliente,'idCliente','apellido');
 	}
 }

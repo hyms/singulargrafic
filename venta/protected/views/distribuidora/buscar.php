@@ -32,6 +32,7 @@
 					'value'=>'$data->fechaVenta',
 					'filter'=>$this->widget('zii.widgets.jui.CJuiDatePicker', array(
 								'name'=>'fechaVenta',
+								'language'=>'es',
 								'attribute'=>'fechaVenta',
 								'model'=>$ventas,
 								'options'=>array(

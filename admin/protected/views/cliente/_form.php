@@ -78,6 +78,14 @@
 		</div>
 		<?php echo $form->error($model,'idTiposClientes'); ?>
 	</div>
+	
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'idParent',array('class'=>'col-sm-2 control-label')); ?>
+		<div class="col-sm-3">
+		<?php echo $form->dropDownList($model,'idParent',$model->getClientes(),array('maxlength'=>20,'class'=>'form-control','empty'=>'')); ?>
+		</div>
+		<?php echo $form->error($model,'idParent'); ?>
+	</div>
 
 	<div class="form-group">
 		<p class="text-center">
@@ -94,5 +102,3 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
-		
-		<?php ?>

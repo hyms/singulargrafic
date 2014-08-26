@@ -134,7 +134,7 @@ class StockController extends Controller
 				$model->attributes=$_POST['MovimientoAlmacen'];
 				
 				$deposito->stockU = $deposito->stockU - $model->cantidadU;
-				if($deposito->stockU<0)
+				while($deposito->stockU<0)
 				{
 					$deposito->stockU=$deposito->stockU+$almacen->idProducto0->cantXPaquete;
 					$deposito->stockP = $deposito->stockP - 1;

@@ -64,7 +64,20 @@
 					'header'=>'Fecha',
 					'type'=>'raw',
 					'value'=>'$data->fechaVenta',
-					'filter'=>CHtml::activeTextField($ventas, 'fechaVenta',array("class"=>"form-control input-sm")),
+					'filter'=>$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+										'name'=>'fechaVenta',
+										'attribute'=>'fechaVenta',
+										'language'=>'es',
+										'model'=>$ventas,
+										'options'=>array(
+												'showAnim'=>'fold',
+												'dateFormat'=>'yy-mm-d',
+										),
+										'htmlOptions'=>array(
+												'class'=>'form-control input-sm',
+										),
+								),
+										true),
 			),
 			array(
 					'header'=>'',

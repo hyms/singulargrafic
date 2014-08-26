@@ -61,6 +61,7 @@ if(count($detalle)>=1)
 	    	<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 								'name'=>'fechaEntega',
 								'attribute'=>'fechaEntega',
+	    						'language'=>'es',
 								'model'=>$ctp,
 								'options'=>array(
 										'showAnim'=>'fold',

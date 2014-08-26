@@ -56,6 +56,7 @@
 					'filter'=>$this->widget('zii.widgets.jui.CJuiDatePicker', array(
 							'name'=>'fechaRegistro',
 							'attribute'=>'fechaRegistro',
+							'language'=>'es',
 							'model'=>$recibos,
 							'options'=>array(
 									'showAnim'=>'fold',

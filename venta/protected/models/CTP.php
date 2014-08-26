@@ -34,8 +34,8 @@
  * @property CTP $idCTPParent0
  * @property CTP[] $cTPs
  * @property Imprenta $idImprenta0
- * @property User $idUserOT0
- * @property User $idUserVenta0
+ * @property Users $idUserOT0
+ * @property Users $idUserVenta0
  * @property CajaMovimientoVenta $idCajaMovimientoVenta0
  * @property Cliente $idCliente0
  * @property DetalleCTP[] $detalleCTPs
@@ -107,9 +107,9 @@ class CTP extends CActiveRecord
 			'codigo' => 'Codigo',
 			'serie' => 'Serie',
 			'numero' => 'Numero',
-			'montoVenta' => 'Monto Venta',
-			'montoPagado' => 'Monto Pagado',
-			'montoCambio' => 'Monto Cambio',
+			'montoVenta' => 'Total',
+			'montoPagado' => 'Cancelado',
+			'montoCambio' => 'Saldo',
 			'montoDescuento' => 'Monto Descuento',
 			'estado' => 'Estado',
 			'factura' => 'Factura',

@@ -155,7 +155,7 @@ class Venta extends CActiveRecord
 				'idCliente0','idCajaMovimientoVenta0',
 		);
 		$criteria->order='fechaVenta ASC';
-		$criteria->limit = 50;
+		$criteria->limit = 200;
 		//$criteria->condition = 'idAlmacen=2';
 		
 		$criteria->compare('idVenta',$this->idVenta);

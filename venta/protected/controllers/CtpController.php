@@ -270,8 +270,13 @@ class CtpController extends Controller
 			}
 			if($ctp->tipoCTP==2)
 			{
-				throw new CHttpException(203 ,'Non-Authoritative Information');
-				$this->render('previewSC',array('ctp'=>$ctp,'tipo'=>'','titulo'=>'Reposición'));
+				$ctpP= CTP::model()
+				->with('idCliente0')
+				->with('idUserOT0')
+				->with('idUserOT0.idEmpleado0')
+				->findByPk($ctp->idCTPParent);
+				//throw new CHttpException(203 ,'Non-Authoritative Information');
+				$this->render('previewTI',array('ctp'=>$ctp,'tipo'=>'','titulo'=>'Interna'));
 			}
 			if($ctp->tipoCTP==3)
 			{

@@ -14,15 +14,16 @@
 </td>
 
 <td>
-	<?php echo CHtml::activeCheckBox($model,"[$index]C",array('id'=>'c_'.$index)); ?>
+	<?php echo CHtml::activeCheckBox($model,"[$index]C",array('id'=>'c_'.$index,'onClick'=>"return false")); ?>
 </td>
 <td>
-	<?php echo CHtml::activeCheckBox($model,"[$index]M",array('id'=>'m_'.$index)); ?>
-<td>
-	<?php echo CHtml::activeCheckBox($model,"[$index]Y",array('id'=>'y_'.$index)); ?>
+	<?php echo CHtml::activeCheckBox($model,"[$index]M",array('id'=>'m_'.$index,'onClick'=>"return false")); ?>
 </td>
 <td>
-	<?php echo CHtml::activeCheckBox($model,"[$index]K",array('id'=>'k_'.$index)); ?>
+	<?php echo CHtml::activeCheckBox($model,"[$index]Y",array('id'=>'y_'.$index,'onClick'=>"return false")); ?>
+</td>
+<td>
+	<?php echo CHtml::activeCheckBox($model,"[$index]K",array('id'=>'k_'.$index,'onClick'=>"return false")); ?>
 </td>
 
 <td>
@@ -37,7 +38,7 @@
 </td>
 
 <td class="col-sm-1">
-	<?php echo CHtml::activeTextField($model,"[$index]costo",array('class'=>'form-control input-sm','readonly'=>true,'id'=>'adicional_'.$index)); ?>
+	<?php echo CHtml::activeTextField($model,"[$index]costo",array('class'=>'form-control input-sm','readonly'=>true,'id'=>'costo_'.$index)); ?>
 </td>
 
 <td class="col-sm-1">
@@ -49,24 +50,3 @@
 </td>
 
 </tr>
-<?php  
-echo "
-<script>
-	$('#nroPlacas_". $index ."').blur(function(e){ 
-	    $('#costoTotal_". $index ."').val(suma($('#nroPlacas_".  $index ."').val()*$('#costo_". $index ."').val(),$('#adicional_". $index ."').val()).toFixed(1));
-		calcular_total();
-		return true;
-	});
-	
-	$('#adicional_". $index ."').blur(function(e){ 
-	    $('#costoTotal_". $index ."').val(suma($('#nroPlacas_".  $index ."').val()*$('#costo_". $index ."').val(),$('#adicional_". $index ."').val()).toFixed(1));
-		calcular_total();
-	  	return true;
-	});
-			
-	$('#costoTotal_". $index ."').change(function(e){ 
-	    calcular_total();
-		return true;
-	})
-</script>
-";?>

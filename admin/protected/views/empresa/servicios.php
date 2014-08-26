@@ -89,6 +89,7 @@
 		<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
     	    'name'=>'fechaCreacion',
 			'attribute'=>'fechaCreacion',
+			'language'=>'es',
 		    //'id'=>'user_Birthdate',
 		    'model'=>$model,
 		    // additional javascript options for the date picker plugin
