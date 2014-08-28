@@ -219,6 +219,37 @@ class Venta extends CActiveRecord
 				'pagination'=>false,
 		));
 	}
+	
+	public $material;
+	public $detalle;
+	
+	public function searchVentaProducto()
+	{
+		$criteria=new CDbCriteria;
+	
+		$criteria->with= array(
+				'idCliente0',
+				'detalleVentas',
+				'detalleVentas.idAlmacenProducto0',
+				'detalleVentas.idAlmacenProducto0.idProducto0',
+		);
+		$criteria->order='fechaVenta DESC';
+		$criteria->limit = 50;
+		//$criteria->condition = 'idAlmacen=2';
+		
+		$criteria->compare('idVenta',$this->idVenta);
+		$criteria->compare('fechaVenta',$this->fechaVenta,true);
+		$criteria->compare('idCliente',$this->idCliente);
+		$criteria->compare('codigo',$this->codigo,true);
+		
+		$criteria->compare('idCliente0.apellido',$this->apellido,true);
+		$criteria->compare('idCliente0.nitCi',$this->nit);
+	
+		return new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
+				'pagination'=>false,
+		));
+	}
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

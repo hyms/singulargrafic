@@ -1,7 +1,8 @@
 <tr class="tabular-input">
 <td >
 	<p class="form-control-static"><?php echo CHtml::encode($index + 1)?></p>
-	<?php echo CHtml::activeHiddenField($model,"[$index]idAlmacenProducto")?>
+	<?php echo CHtml::activeHiddenField($model,"[$index]idAlmacenProducto",array('id'=>'idAlmacen'))?>
+	<?php echo CHtml::hiddenField('index',$index,array('id'=>'indexs'))?>
 </td>
 
 <td>

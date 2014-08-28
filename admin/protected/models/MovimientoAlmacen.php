@@ -108,7 +108,45 @@ class MovimientoAlmacen extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-
+	
+	public $codigo;
+	public $material;
+	public $detalle;
+	public $origen;
+	public $destino;
+	public function searchReporte()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+	
+		$criteria=new CDbCriteria;
+		$criteria->with=array('idAlmacenOrigen0','idAlmacenDestino0','idProducto0');
+		$criteria->order='fechaMovimiento DESC';
+		
+		$criteria->compare('idMovimientoAlmacen',$this->idMovimientoAlmacen);
+		$criteria->compare('idProducto',$this->idProducto);
+		$criteria->compare('idAlmacenOrigen',$this->idAlmacenOrigen);
+		$criteria->compare('idAlmacenDestino',$this->idAlmacenDestino);
+		$criteria->compare('cantidadU',$this->cantidadU);
+		$criteria->compare('cantidadP',$this->cantidadP);
+		$criteria->compare('idUser',$this->idUser);
+		$criteria->compare('fechaMovimiento',$this->fechaMovimiento,true);
+		
+		$criteria->compare('idProducto0.codigo',$this->codigo,true);
+		$criteria->compare('idProducto0.material',$this->material,true);
+		$criteria->compare('idProducto0.detalle',$this->detalle,true);
+		
+		$criteria->compare('idAlmacenOrigen0.nombre',$this->origen,true);
+		$criteria->compare('idAlmacenDestino0.nombre',$this->destino,true);
+		
+		return new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
+				'pagination'=>array(
+						'pageSize'=>'20',
+				),
+		));
+	}
+	
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

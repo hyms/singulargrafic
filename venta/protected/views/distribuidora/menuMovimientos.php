@@ -8,7 +8,7 @@ $this->widget('zii.widgets.CMenu',array(
 							array('label'=>'Ventas de Hoy', 'url'=>array('distribuidora/movimientos','d'=>date('d'))),
 							array('label'=>'Ventas de Ayer', 'url'=>array('distribuidora/movimientos','d'=>(date('d')-1))),
 							array('label'=>'Ventas del Mes', 'url'=>array('distribuidora/movimientos','m'=>date('m'))),
-							//array('label'=>'Productos', 'url'=>array('#')),
+							array('label'=>'Productos', 'url'=>array('distribuidora/movimientosProducto')),
 							
 						),
 				)); 

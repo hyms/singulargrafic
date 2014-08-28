@@ -632,6 +632,23 @@ class DistribuidoraController extends Controller
 		$this->render('movimientos',array('ventas'=>$ventas,'saldo'=>$saldo,'cond3'=>$cond3,'cf'=>$cf,'sf'=>$sf));
 	}
 	
+	public function actionMovimientosProducto()
+	{
+		$movimentoProducto=new DetalleVenta('searchVenta');
+		//init filter
+		$movimentoProducto->unsetAttributes();
+		if (isset($_GET['DetalleVenta'])){
+			//$movimentoProducto->attributes = $_GET['DetalleVenta'];
+			$movimentoProducto->codigo=$_GET['DetalleVenta']['codigo'];
+			$movimentoProducto->fecha=$_GET['DetalleVenta']['fecha'];
+			//$movimentoProducto->apellido=$_GET['DetalleVenta'];
+			$movimentoProducto->material=$_GET['DetalleVenta']['material'];
+			$movimentoProducto->detalle=$_GET['DetalleVenta']['detalle'];
+		}
+		//end filter
+		$this->render('movimientosProducto',array('ventas'=>$movimentoProducto));
+	}
+	
 	public function actionPreviewDay()
 	{
 		$fact="";$cond="";
@@ -1009,6 +1026,9 @@ class DistribuidoraController extends Controller
 			throw new CHttpException(400,'Petición no válida.');
 	}
 	
+	
+	//acciones con ajax
+	//init
 	public function actionAjaxCliente()
 	{
 		if(Yii::app()->request->isAjaxRequest && isset($_GET['nitCi']))
@@ -1069,6 +1089,69 @@ class DistribuidoraController extends Controller
 		else
 			throw new CHttpException(400,'Petición no válida.');
 	}
+	
+	public function actionAjaxFactura()
+	{
+		//Yii::app()->user->id;
+		$detalle=array();
+		$tipo =0;
+		if(isset($_POST['tipo']))
+		{
+			$tipo=$_POST['tipo'];
+		}
+		
+		if(isset($_POST['detalle']))
+		{
+			//$detalles = $_POST['detalle'];
+			foreach ($_POST['detalle'] as $key => $item)
+			{
+				$detalles[$key] = $item; 
+			}
+			
+			$resultado = array();
+			
+			foreach ($detalles as $key => $item)
+			{
+				$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($item['idAlmacenProducto']);
+				$producto = $almacen->idProducto0;
+				//$resutado[$item['index']]=CJSON::encode($producto);
+				$resultado[$key]['index']=$item['index'];
+				if($tipo == 0){
+					$resultado[$key]['precioU']=$almacen->idProducto0->precioCFU;
+					$resultado[$key]['precioP']=$almacen->idProducto0->precioCFP;
+				}
+				else{
+					$resultado[$key]['precioU']=$almacen->idProducto0->precioSFU;
+					$resultado[$key]['precioP']=$almacen->idProducto0->precioSFP;
+				}
+			}
+			
+			$row = Venta::model()->find(array("condition"=>"tipoVenta=".$tipo,'order'=>'fechaVenta Desc'));
+			if(empty($row))
+				$row=new Venta;
+			if(empty($row->serie) && $tipo==1)
+				$row->serie = 65;
+			$numero = $row->numero +1;
+			if($row->numero==1001 && $tipo==1){
+				$row->numero;
+				$row->serie++;
+				if($row->serie==91)
+					$row->serie = 65;
+			}
+			$serie = $row->serie;
+			$codigo="";
+			if($tipo==1)
+				$codigo = chr($serie)."P-".$numero."-".date("y");
+			else
+				$codigo = $numero."-P";
+			
+			$resultado['codigo']=$codigo;
+			echo CJSON::encode($resultado);
+		}
+		
+	}
+
+	//end
 	
 	public function actionEnvio()
 	{

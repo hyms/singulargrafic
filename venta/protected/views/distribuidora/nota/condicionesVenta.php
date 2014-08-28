@@ -54,10 +54,37 @@
 
 <?php 
 Yii::app()->getClientScript()->registerScript("check","
-function factura()
+function factura(tipo)
 {
-	$('form').attr('action', '".CHtml::normalizeUrl(array('/distribuidora/factura'))."');
-   	$('form').submit();
+	jsonObj = [];
+		        
+	$('#yw3 > tbody  > tr').each(function(index, value) {
+		id = $(this).find('#idAlmacen').val();
+		index = $(this).find('#indexs').val();
+		item = {};
+        item ['idAlmacenProducto'] = id;
+		item ['index'] = index;
+		jsonObj.push(item);
+	});
+		$.ajax({
+			type 		: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+			url 		: '".CHtml::normalizeUrl(array('/distribuidora/ajaxFactura'))."', // the url where we want to POST
+			data 		: {detalle:jsonObj,tipo:tipo}, // our data object
+			dataType 	: 'json', // what type of data do we expect back from the server
+            encode  	: true
+		})
+			.done(function(data) {
+				$('#codigo').text(data['codigo']);
+				var key;
+				for(key in data) {
+					if(data.hasOwnProperty(key)) {
+			    		
+					$('#costoUnidad_'+data[key]['index']).val(data[key]['precioU']);
+					$('#costoPaquete_'+data[key]['index']).val(data[key]['precioP']);
+			    	$('#costoTotal_'+data[key]['index']).val(redondeo(suma(suma($('#stockUnidad_'+data[key]['index']).val()*$('#costoUnidad_'+data[key]['index']).val(),$('#stockPaquete_'+data[key]['index']).val()*$('#costoPaquete_'+data[key]['index']).val()),$('#adicional_'+data[key]['index']).val())));
+				}}
+			   calcular_total();
+			});
 }
 
 function formaPago(value)
@@ -67,11 +94,11 @@ function formaPago(value)
 }
 					
 $('#Venta_tipoVenta_0').change(function(){
-	factura();
+	factura(0);
 });
 			
 $('#Venta_tipoVenta_1').change(function(){
-	factura();
+	factura(1);
 });
 					
 $('#Venta_formaPago_0').change(function(){
@@ -109,8 +136,12 @@ $('#Descuento_0').change(function(){
 	$('#descuento').prop('disabled', value);
 });
 
-$('#descuento').blur(function(e){
-	$('#total').val(descuentoP($('#total').val(),$('#descuento').val()));
-	cambio();
+$('#descuento').keydown(function(e){ 
+   	if(e.keyCode==13 || e.keyCode==9) 
+	{ 
+		$('#total').val(descuentoP($('#total').val(),$('#descuento').val()));
+		cambio();
+	}
 });		
+			
 ",CClientScript::POS_READY);?>

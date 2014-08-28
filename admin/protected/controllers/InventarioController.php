@@ -216,7 +216,19 @@ class InventarioController extends Controller
 				$this->createExcel($columnsTitle, $content);
 			}
 		}
-		$movimientos=new CActiveDataProvider('MovimientoAlmacen',
+		
+		$movimientos=new MovimientoAlmacen('searchReporte');
+		$movimientos->unsetAttributes();
+		if(isset($_GET['MovimientoAlmacen']))
+		{
+			$movimientos->attributes = $_GET['MovimientoAlmacen'];
+			$movimientos->codigo = $_GET['MovimientoAlmacen']['codigo'];
+			$movimientos->material = $_GET['MovimientoAlmacen']['material'];
+			$movimientos->detalle = $_GET['MovimientoAlmacen']['detalle'];
+			$movimientos->origen = $_GET['MovimientoAlmacen']['origen'];
+			$movimientos->destino = $_GET['MovimientoAlmacen']['destino'];
+		}
+		/*$movimientos=new CActiveDataProvider('MovimientoAlmacen',
 				array(
 						'criteria'=>array(
 								'with'=>array('idAlmacenOrigen0','idAlmacenDestino0','idProducto0'),
@@ -225,6 +237,7 @@ class InventarioController extends Controller
 						'pagination'=>array(
 								'pageSize'=>'20',
 						),));
+		*/
 		$this->render('movimientos',array(
 				'movimientos'=>$movimientos
 		));		
