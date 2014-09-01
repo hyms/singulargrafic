@@ -25,7 +25,7 @@ class ClienteController extends Controller
 
 	public function actionIndex()
 	{
-		$venta = Venta::model()->findAll(array('select'=>'count(*) as max, idCliente','group'=>'`t`.idCliente'));
+		/*$venta = Venta::model()->findAll(array('select'=>'count(*) as max, idCliente','group'=>'`t`.idCliente'));
 		$datos1 = CHtml::listData($venta,'idCliente','max');
 		
 		$venta = Venta::model()->findAll(array('select'=>'count(*) as max, idCliente','group'=>'`t`.idCliente','condition'=>'formaPago=1'));
@@ -44,7 +44,8 @@ class ClienteController extends Controller
 		$pages->applyLimit($criteria);
 		$cliente=Cliente::model()->findAll($criteria);
 		
-		$this->render("index",array('cliente'=>$cliente,'datos'=>$datos,'pages' => $pages));
+		$this->render("index",array('cliente'=>$cliente,'datos'=>$datos,'pages' => $pages));*/
+		$this->render("index");
 	}
 	
 	public function actionRegister()
@@ -57,6 +58,8 @@ class ClienteController extends Controller
 		if(isset($_POST['Cliente']))
 		{
 			$model->attributes=$_POST['Cliente'];
+			$tipoCliente = TiposClientes::model()->find('nombre="nuevo"');
+			$model->idTiposClientes=$tipoCliente->idTiposClientes;
 			$model->fechaRegistro=date("Y-m-d H:i:s");
 			if($model->save())
 				$this->redirect(array('index'));

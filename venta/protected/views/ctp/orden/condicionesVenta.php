@@ -54,10 +54,38 @@
 
 <?php 
 Yii::app()->getClientScript()->registerScript("check","
-function factura()
+function factura(tipo)
 {
-	$('form').attr('action', '".CHtml::normalizeUrl(array('/ctp/factura','id'=>$ctp->idCTP))."');
-   	$('form').submit();
+	jsonObj = [];
+	nitCi = $('#NitCi').val();        
+	$('#yw3 > tbody  > tr').each(function(index, value) {
+		id = $(this).find('#idAlmacen').val();
+		index = $(this).find('#indexs').val();
+		item = {};
+        item ['idAlmacenProducto'] = id;
+		item ['index'] = index;
+		jsonObj.push(item);
+	});
+		$.ajax({
+			type 		: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+			url 		: '".CHtml::normalizeUrl(array('/ctp/ajaxFactura'))."', // the url where we want to POST
+			data 		: {detalle:jsonObj,tipo:tipo,id:".$ctp->idCTP.",cliente:nitCi}, // our data object
+			dataType 	: 'json', // what type of data do we expect back from the server
+            encode  	: true
+		})
+			.done(function(data) {
+				$('#codigo').text(data['codigo']);
+			    var key;
+				for(key in data) {
+					if(data.hasOwnProperty(key)) {
+			    	
+					$('#costo_'+key).val(data[key]['costo']);
+			        $('#costoTotal_'+key).val(redondeo(suma($('#nroPlacas_'+key).val()*$('#costo_'+key).val(),$('#adicional_'+key).val())));	
+				}}
+			   	calcular_total();
+				$('#factura').prop('disabled', tipo);
+				//alert(JSON.stringify(data));			
+			});
 }
 
 function formaPago(value)
@@ -67,11 +95,11 @@ function formaPago(value)
 }
 					
 $('#CTP_tipoOrden_0').change(function(){
-	factura();
+	factura(0);
 });
 			
 $('#CTP_tipoOrden_1').change(function(){
-	factura();
+	factura(1);
 });
 					
 $('#CTP_formaPago_0').change(function(){
@@ -87,7 +115,7 @@ $('#Descuento_0').change(function(){
 	if($('#Descuento_0').is(':checked'))
 	{
 		value = false;
-		$('#total').val(resta($('#total').val(),$('#descuento').val()).toFixed(1));
+		$('#total').val(redondeo(resta($('#total').val(),$('#descuento').val())));
 		cambio();
 	}
 	else
@@ -99,7 +127,7 @@ $('#Descuento_0').change(function(){
 });
 
 $('#descuento').blur(function(e){
-	$('#total').val(resta($('#total').val(),$('#descuento').val()).toFixed(1));
+	$('#total').val(redondeo(resta($('#total').val(),$('#descuento').val())));
 	cambio();
 });		
 ",CClientScript::POS_READY);?>

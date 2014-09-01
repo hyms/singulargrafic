@@ -79,12 +79,12 @@
 			<div class="col-xs-7 well well-sm">
 				<br><br>
 				<p class="text-center"><?php echo "firma";?></p>
-				<div><?php echo "Nombre: ".$ctp->responsable;?></div>
+				<div><?php echo "Nombre: "?><small><?php echo $ctp->responsable;?></small></div>
 				<div class="text-center"><small><?php echo "Diseñador responsable";?></small></div>
 			</div>
 		</div>
 		<div class="col-xs-7">
-			<div class="col-xs-12"><strong>obs:</strong></div>
+			<div class="col-xs-12"><strong>obs: </strong><?php echo $ctp->obs;?></div>
 		</div>
 		
 	</div>

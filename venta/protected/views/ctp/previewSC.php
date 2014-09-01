@@ -91,7 +91,7 @@
 			<div class="col-xs-offset-1 col-xs-5 well">
 				<br><br>
 				<p class="text-center"><?php echo "firma";?></p>
-				<div><?php echo "Nombre: "?><?php echo (empty($tipo))?$ctp->idUserVenta0->idEmpleado0->nombre." ".$ctp->idUserVenta0->idEmpleado0->apellido:"";?></div>
+				<div><?php echo "Nombre: "?><small><?php echo (empty($tipo))?$ctp->idUserVenta0->idEmpleado0->nombre." ".$ctp->idUserVenta0->idEmpleado0->apellido:"";?></small></div>
 				<div class="text-center"><small><?php echo "Recibi conforme";?></small></div>
 			</div>
 		</div>
@@ -106,7 +106,7 @@
 			<?php }else{?>
 			<div class="col-xs-12"><strong>Nro de Orden:</strong> <?php echo $ctp->idCTPParent0->codigo;?></div>
 			<?php }?>
-			<div class="col-xs-12"><strong>obs:</strong></div>
+			<div class="col-xs-12"><strong>obs: </strong><?php echo $ctp->obs;?></div>
 		</div>
 		
 	</div>

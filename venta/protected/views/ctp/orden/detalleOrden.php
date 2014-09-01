@@ -46,11 +46,21 @@ if(count($detalle)>=1)
 </div>
 <div class="form-group">
 	<div class="col-sm-7">
-	    <?php echo CHtml::activeLabelEx($ctp,"obs",array('class'=>'control-label col-sm-4'))?>
-	    <div class="col-sm-8">
-		<?php echo CHtml::activeTextArea($ctp,"obs",array('class'=>'form-control'))?>
+		<div class="form-group">
+		    <?php echo CHtml::activeLabelEx($ctp,"obs",array('class'=>'control-label col-sm-4'))?>
+		    <div class="col-sm-8">
+			<?php echo CHtml::activeTextArea($ctp,"obs",array('class'=>'form-control','readonly'=>true))?>
+			</div>
+			 <?php echo CHtml::error($ctp,"obs",array('class'=>'label label-danger')); ?>
 		</div>
-		 <?php echo CHtml::error($ctp,"obs",array('class'=>'label label-danger')); ?>
+		
+		<div class="form-group">
+		    <?php echo CHtml::activeLabelEx($ctp,"obsCaja",array('class'=>'control-label col-sm-4'))?>
+		    <div class="col-sm-8">
+			<?php echo CHtml::activeTextArea($ctp,"obsCaja",array('class'=>'form-control'))?>
+			</div>
+			 <?php echo CHtml::error($ctp,"obsCaja",array('class'=>'label label-danger')); ?>
+		</div>
 	</div>
 	
 	<div class="col-sm-5">
@@ -92,13 +102,13 @@ if(count($detalle)>=1)
 				importe_total = importe_total + parseFloat($(this).val()*1);
 			}
 		);
-		$('#total').val(parseFloat(importe_total).toFixed(1));
+		$('#total').val(redondeo(parseFloat(importe_total)));
 		cambio();
 	}
 	
 	function cambio()
 	{
-		$('#cambio').val(resta($('#pagado').val(),$('#total').val()).toFixed(1));
+		$('#cambio').val(redondeo(resta($('#pagado').val(),$('#total').val())));
 	}
 		
 	function suma(a,b)
@@ -110,19 +120,23 @@ if(count($detalle)>=1)
 	{
 		return ((a*1) - (b*1));
 	}
-   
+		
+   	function redondeo(num)
+	{
+		return (Math.round(num*10)/10);
+	}
 ",CClientScript::POS_HEAD); ?>
 
 <?php Yii::app()->getClientScript()->registerScript("ajax_detalleventa","
 	$('#pagado').blur(function(e){
-		$('#cambio').val(resta($('#pagado').val(),$('#total').val()).toFixed(1));
+		$('#cambio').val(redondeo(resta($('#pagado').val(),$('#total').val())));
 		return true;
 	});
 		
 	$('#pagado').keydown(function(e){
 		if(e.keyCode==13 || e.keyCode==9) 
 	    { 
-			$('#cambio').val(resta($('#pagado').val(),$('#total').val()).toFixed(1));
+			$('#cambio').val(redondeo(resta($('#pagado').val(),$('#total').val())));
 			return true;
 		}
 	});

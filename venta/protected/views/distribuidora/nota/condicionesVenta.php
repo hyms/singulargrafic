@@ -83,8 +83,11 @@ function factura(tipo)
 					$('#costoPaquete_'+data[key]['index']).val(data[key]['precioP']);
 			    	$('#costoTotal_'+data[key]['index']).val(redondeo(suma(suma($('#stockUnidad_'+data[key]['index']).val()*$('#costoUnidad_'+data[key]['index']).val(),$('#stockPaquete_'+data[key]['index']).val()*$('#costoPaquete_'+data[key]['index']).val()),$('#adicional_'+data[key]['index']).val())));
 				}}
-			   calcular_total();
+			   	calcular_total();
+				$('#factura').prop('disabled', tipo);			
 			});
+			
+			
 }
 
 function formaPago(value)

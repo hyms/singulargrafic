@@ -313,12 +313,12 @@ class CajaController extends Controller
 			$venta="";
 			if($_GET['serv']=="nv")
 			{
-				$venta = $this->verifyModel(Venta::model()->with('idCliente0')
-														->with('idCajaMovimientoVenta0')
-														->with("detalleVentas")
-														->with("detalleVentas.idAlmacenProducto0")
-														->with("detalleVentas.idAlmacenProducto0.idProducto0")
-														->findByPk($_GET['id']));
+				$venta = $this->verifyModel(Venta::model()	->with('idCliente0')
+															->with('idCajaMovimientoVenta0')
+															->with("detalleVentas")
+															->with("detalleVentas.idAlmacenProducto0")
+															->with("detalleVentas.idAlmacenProducto0.idProducto0")
+															->findByPk($_GET['id']));
 				$recibo->categoria = "Nota de Venta";
 				$i=0; 
 				$recibo->concepto="";
@@ -332,12 +332,12 @@ class CajaController extends Controller
 			}
 			elseif($_GET['serv']=="ot")
 			{
-				$ctp = $this->verifyModel(CTP::model()->with('idCliente0')
-						->with('idCajaMovimientoVenta0')
-						->with("detalleCTPs")
-						->with("detalleCTPs.idAlmacenProducto0")
-						->with("detalleCTPs.idAlmacenProducto0.idProducto0")
-						->findByPk($_GET['id']));
+				$ctp = $this->verifyModel(CTP::model()	->with('idCliente0')
+														->with('idCajaMovimientoVenta0')
+														->with("detalleCTPs")
+														->with("detalleCTPs.idAlmacenProducto0")
+														->with("detalleCTPs.idAlmacenProducto0.idProducto0")
+														->findByPk($_GET['id']));
 				$recibo->categoria = "Orden de Trabajo";
 				$i=0;
 				$recibo->concepto="";
@@ -371,6 +371,12 @@ class CajaController extends Controller
 					if($recibo->categoria == "Nota de Venta")
 					{
 						$cajaVenta = Caja::model()->findByPk(2);
+						$cajaVenta->saldo = $cajaVenta->saldo + $caja->monto;
+						$cajaVenta->save();
+					}
+					if($recibo->categoria == "Orden de Trabajo")
+					{
+						$cajaVenta = Caja::model()->findByPk(3);
 						$cajaVenta->saldo = $cajaVenta->saldo + $caja->monto;
 						$cajaVenta->save();
 					}

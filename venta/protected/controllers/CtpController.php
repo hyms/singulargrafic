@@ -1,7 +1,7 @@
 <?php
 class CtpController extends Controller
 {
-
+	var $cajaCTP=3;
 	public function filters()
 	{
 		return array( 'accessControl' ); // perform access control for CRUD operations
@@ -58,17 +58,38 @@ class CtpController extends Controller
 			$ctp->attributes = $_POST['CTP'];
 			$ctp->idUserVenta = Yii::app()->user->id;
 			if(!empty($ctp->fechaPlazo))
-			$ctp->fechaPlazo= date("Y-m-d H:i:s",strtotime($ctp->fechaPlazo));
+				$ctp->fechaPlazo= date("Y-m-d H:i:s",strtotime($ctp->fechaPlazo));
 			$ctp->estado = 2;
 			$tmp = array();
+			$caja = $this->verifyModel(Caja::model()->findByPk($this->cajaCTP));
+			$cajaMovimiento = new CajaMovimientoVenta;
+			//Yii::app()->user->id;
+			$cajaMovimiento->idUser = Yii::app()->user->id;
+			$cajaMovimiento->motivo = "Nota de Venta";
+			$cajaMovimiento->idCaja = $caja->idCaja;
+			$cajaMovimiento->arqueo = 0;
+			$cajaMovimiento->tipo = 0;
+			
+			
+			if(isset($_POST['Cliente'])){
+				$cliente = Cliente::model()->find('nitCi="'.$_POST['Cliente']['nitCi'].'"');
+				if($cliente==null)
+					$cliente = new Cliente;
+			
+				$cliente->attributes = $_POST['Cliente'];
+				if(empty($cliente->fechaRegistro))
+					$cliente->fechaRegistro = date("Y-m-d");
+				if($cliente->save())
+					$swc=1;
+			}
+			
 			foreach ($_POST['DetalleCTP'] as $key => $item)
 			{
 				$tmp[$key] = $ctp->detalleCTPs[$key];
 				$tmp[$key]->attributes = $item;
 			}
 			$ctp->detalleCTPs=$tmp;
-			//print_r($tmp);
-			//return;
+			
 			if($ctp->save())
 			{
 				$almacen = array(); $i=0;
@@ -84,9 +105,17 @@ class CtpController extends Controller
 				}
 				if($ctp->estado == 2)
 				{
+					$cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
+					$cajaMovimiento->tipo = 0;
+					if($ctp->formaPago==0){
+						$cajaMovimiento->monto = $ctp->montoPagado-$ctp->montoCambio;
+					}
+					if($ctp->formaPago==1){
+						$cajaMovimiento->monto = $ctp->montoPagado;
+					}
 					foreach ($almacen as $item)
 						$item->save();
-					
+					$cajaMovimiento->save();
 					$this->redirect(array("ctp/buscar"));
 				}
 				else
@@ -121,7 +150,6 @@ class CtpController extends Controller
 					else
 						break;
 				}
-				//$condCantidad ='idCantidad0.Inicio<='.$item->nroPlacas.' and '.$item->nroPlacas.'<=idCantidad0.final';
 				$condHora ="";
 				foreach ($horas as $h)
 				{	if($h->inicio<date("H:0:s"))
@@ -131,8 +159,6 @@ class CtpController extends Controller
 						break;
 				}
 				$matriz = MatrizPreciosCTP::model()->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
-				//$matriz = MatrizPreciosCTP::model()->with('idCantidad0')->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
-				//$matriz = MatrizPreciosCTP::model()->with('idHorario0')->with('idCantidad0')->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
 				if($ctp->tipoOrden ==0)
 					$detalle[$key]->costo = $matriz->precioCF;
 				else
@@ -149,78 +175,6 @@ class CtpController extends Controller
 			throw new CHttpException(400,'Petición no válida.');	
 	}
 	
-	public function actionFactura()
-	{
-		if(isset($_GET['id']))
-		{
-			$ctp = $this->verifyModel(CTP::model()
-			->with('detalleCTPs')
-			->with('idCliente0')
-			->findByPk($_GET['id']));
-			
-			$ctp->attributes = $_POST['CTP'];
-			
-			$row = CTP::model()->find(array("condition"=>"tipoOrden=".$ctp->tipoOrden,'order'=>'fechaOrden Desc'));
-			if(empty($row))
-				$row=new CTP;
-			if(empty($row->serie))
-				$row->serie = 65;
-			$ctp->numero = $row->numero +1;
-			if($row->numero==1001)
-			{
-				$row->numero=1;
-				$row->serie++;
-				if($row->serie==91)
-					$row->serie = 65;
-			}
-			$ctp->serie = $row->serie;
-			
-			if($ctp->tipoOrden==1)
-				$ctp->codigo = chr($ctp->serie)."C-".$ctp->numero."-".date("y");
-			else
-				$ctp->codigo = $ctp->numero."-P";
-			
-			$detalle = array();
-			$total=0;
-			$horas = Horario::model()->findAll();
-			$cantidades = CantidadCTP::model()->findAll();
-			foreach ($ctp->detalleCTPs as $key => $item)
-			{
-				$detalle[$key] = $ctp->detalleCTPs[$key];
-				$hora = date('H:m:i');
-				//$hora = "19:30:00";
-				$condAlmacen = 'idAlmacenProducto='.$item->idAlmacenProducto;
-				$condCliente ='idTiposClientes='.$ctp->idCliente0->idTiposClientes;
-				foreach ($cantidades as $c)
-				{	if($c->Inicio<$item->nroPlacas)
-						$condCantidad ="idCantidad=".$c->idCantidadCTP;
-					else
-						break;
-				}
-				$condHora ="";
-				foreach ($horas as $h)
-				{	if($h->inicio<date("H:0:s"))
-					//if($h->inicio<"19:30:00")
-						$condHora ="idHorario=".$h->idHorario;
-				}
-				$matriz = MatrizPreciosCTP::model()->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
-				//print_r($matriz);return;
-				if($ctp->tipoOrden ==0)
-					$detalle[$key]->costo = $matriz->precioCF;
-				else
-					$detalle[$key]->costo = $matriz->precioSF;
-			
-				$detalle[$key]->costoTotal = ($detalle[$key]->costo*$detalle[$key]->nroPlacas)+$detalle[$key]->costoAdicional;
-				$total = $total +$detalle[$key]->costoTotal;
-			}
-			$ctp->detalleCTPs = $detalle;
-			$ctp->montoVenta = $total;
-			$this->render('orden',array('ctp'=>$ctp,'detalle'=>$ctp->detalleCTPs,'cliente'=>$ctp->idCliente0));
-		}
-		else
-			throw new CHttpException(400,'Petición no válida.');
-	}
-	
 	public function actionBuscar()
 	{
 		$t="";
@@ -232,7 +186,7 @@ class CtpController extends Controller
 		}
 		else 
 			$t='(`t`.estado=2 and `t`.tipoCTP=1) or (`t`.estado=1 and `t`.tipoCTP!=1)';
-		$ordenes=new CActiveDataProvider('CTP',array(
+			$ordenes=new CActiveDataProvider('CTP',array(
 				'criteria'=>array(
 						'condition'=>$t,
 						'with'=>array('idCliente0'),
@@ -241,14 +195,6 @@ class CtpController extends Controller
 				'pagination'=>array(
 						'pageSize'=>'20',
 				),));
-		/*$ordenes=new CActiveDataProvider('CTP',array(
-				'criteria'=>array(
-						'condition'=>'(`t`.estado=2) or (`t`.estado=1 and `t`.tipoCTP=3)',
-						'with'=>array('idCliente0'),
-				),
-				'pagination'=>array(
-						'pageSize'=>'20',
-				),));*/
 		$this->render('ordenes',array('ordenes'=>$ordenes,'estado'=>1));
 	}
 	
@@ -301,84 +247,85 @@ class CtpController extends Controller
 	public function actionDeudores()
 	{
 		$deudores = new CActiveDataProvider('CTP',
-				array('criteria'=>array(
-						'condition'=>'montoVenta>montoPagado',
-						'with'=>array('idCliente0'),
-						'order'=>'fechaPlazo ASC',
-				),
-						'pagination'=>array(
+						array('criteria'=>array(
+								'condition'=>'montoVenta>montoPagado',
+								'with'=>array('idCliente0'),
+								'order'=>'fechaPlazo ASC',
+						),
+							'pagination'=>array(
 								'pageSize'=>20,
 						),));
 		$this->render('deudores',array('deudores'=>$deudores));
+		
 	}
 	
 	public function actionMovimientos()
 	{
-		$ventas="";
-		$cond1="";
-		$cond2="";
 		$cond3="";
-		$factura="";
 		$f="";
+		$saldo="";
+		$cf=array("ctp/movimientos",'f'=>0);
+		$sf=array("ctp/movimientos",'f'=>1);
+		$ventas = new CTP('searchCTP');
+		
+		$ventas->unsetAttributes();
 		if(isset($_GET['f']))
-		{
-			$f=$_GET['f'];
-			if($_GET['f']==0)
-			{
-				$factura=" tipoOrden=0";
-			}
-			else
-			{
-				$factura=" tipoOrden=1";
-			}
-		}
+			$ventas->tipoOrden = $_GET['f'];
+		
 		if(isset($_GET['d']) || isset($_GET['m']))
 		{
-			if($factura!="")
-				$factura=" and ".$factura;
 			$d=date("d");
 			$m=date("m");
 			$y=date("Y");
-			$start=date("Y-m-d H:i:s"); $end=date("Y-m-d H:i:s");
-				
 			if(isset($_GET['d']))
 			{
-				$cond1=array("ctp/movimientos","f"=>0,"d"=>$_GET['d']);
-				$cond2=array("ctp/movimientos","f"=>1,"d"=>$_GET['d']);
-				$cond3=array("ctp/previewDay","f"=>$f,"d"=>$_GET['d']);
 				$d=$_GET['d'];
 				if($d==0)
 				{
-					$m--;
+					$m=$m-1;
+					if($m<10 && $m>0)
+						$m = "0".$m;
+					
 					$d=$this->getUltimoDiaMes($y, $m);
 				}
-				$start=$y."-".$m."-".$d." 00:00:00";
-				$end=$y."-".$m."-".$d." 23:59:59";
+				$ventas->fechaOrden = $y."-".$m."-".$d;
+				$cf=array("ctp/movimientos",'f'=>0,'d'=>$_GET['d']);
+				$sf=array("ctp/movimientos",'f'=>1,'d'=>$_GET['d']);
+				$cond3=array("ctp/previewDay","f"=>$ventas->tipoOrden,"d"=>$_GET['d']);
 			}
 			if(isset($_GET['m']))
 			{
-				$cond1=array("ctp/movimientos","f"=>0,"m"=>$_GET['m']);
-				$cond2=array("ctp/movimientos","f"=>1,"m"=>$_GET['m']);
-				$cond3=array("ctp/previewDay","f"=>$f,"m"=>$_GET['m']);
 				$m=$_GET['m'];
-				$d=$this->getUltimoDiaMes($y, $m);
-				$start=$y."-".$m."-1 00:00:00";
-				$end=$y."-".$m."-".$d." 23:59:59";
+				$ventas->fechaOrden = $y."-".$m;
+				$cf=array("ctp/movimientos",'f'=>0,'m'=>$_GET['m']);
+				$sf=array("ctp/movimientos",'f'=>1,'m'=>$_GET['m']);
+				$cond3=array("ctp/previewDay","f"=>$ventas->tipoOrden,"m"=>$_GET['m']);
 			}
-			$condition="'".$start."'<=idCajaMovimientoVenta0.fechaMovimiento AND idCajaMovimientoVenta0.fechaMovimiento<='".$end."'";
-			$ventas = new CActiveDataProvider('CTP',
-					array('criteria'=>array(
-							'condition'=>$condition.$factura,
-							'with'=>array('idCliente0','idCajaMovimientoVenta0'),
-							'order'=>'fechaMovimiento ASC',
-					),
-							'pagination'=>array(
-									'pageSize'=>20,
-							),));
+		
+		}
+		
+		
+		//print_r($ventas);
+		if(isset($_GET['CTP']))
+		{
+			$ventas->attributes = $_GET['CTP'];
+				
+			if(isset($_GET['CTP']['apellido']))
+				$ventas->apellido = $_GET['CTP']['apellido'];
+			if(isset($_GET['CTP']['nit']))
+				$ventas->nit = $_GET['CTP']['nit'];
 				
 		}
-	
-		$this->render('movimientos',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'cond3'=>$cond3));
+		
+		if(isset($_GET['d']))
+		{
+			$saldo = CajaArqueo::model()->find(array('condition'=>"idCaja=".$this->cajaCTP." and fechaVentas<'".$ventas->fechaOrden."'",'order'=>'idCajaArqueo Desc'));
+			//print_r($saldo);
+			if(!empty($saldo))
+				$saldo = $saldo->saldo;
+		}
+		
+		$this->render('movimientos',array('ventas'=>$ventas,'saldo'=>$saldo,'cond3'=>$cond3,'cf'=>$cf,'sf'=>$sf));
 	}
 	
 	public function actionPreviewDay()
@@ -431,44 +378,45 @@ class CtpController extends Controller
 				->with('detalleCTPs.idAlmacenProducto0')
 				->with('detalleCTPs.idAlmacenProducto0.idProducto0')
 				->with('idCajaMovimientoVenta0')
-				->findAll(array('condition'=>'idCajaMovimientoVenta0.idCaja=3 and idCajaMovimientoVenta0.arqueo=0'.$fact.$cond)));
+				->findAll(array('condition'=>'idCajaMovimientoVenta0.idCaja='.$this->cajaCTP.' and idCajaMovimientoVenta0.arqueo=0'.$fact.$cond)));
 		//$tabla = $caja->ventas;
 		$this->render("movimientos/previewVentas",array('tabla'=>$caja,));
 	}
 	
 	public function actionArqueo()
 	{
-		$arqueo = new CajaArqueo;
-		$caja = Caja::model()->findByPk('3');
+	$arqueo = new CajaArqueo;
+		$caja = Caja::model()->findByPk($this->cajaCTP);
 		if(isset($_POST['CajaArqueo']))
 		{
 			$arqueo->attributes = $_POST['CajaArqueo'];
 			$arqueo->fechaArqueo = date("Y-m-d H:i:s");
 			$arqueo->idUser = Yii::app()->user->id;
-			$arqueo->idCaja = $caja->idCaja;
-				
+			$arqueo->idCaja = $this->cajaCTP;
+			$end=$arqueo->fechaVentas." 23:59:59";
+			
 			$movimiento = new CajaMovimientoVenta;
 			$movimiento->motivo = "Traspaso de efectivo a Administracion";
-			$comprovante = CajaArqueo::model()->find(array('select'=>'max(comprobante) as max'));
+			$comprovante = CajaArqueo::model()->find(array('select'=>'max(comprobante) as max','condition'=>'idCaja='.$this->cajaCTP));
 			$arqueo->comprobante = $comprovante->max +1;
 			$movimiento->fechaMovimiento = $arqueo->fechaVentas." 23:59:59";
-				
+			
 			$movimiento->tipo = 0;
 			$movimiento->idCaja = $arqueo->idCaja;
 			$movimiento->idUser = $arqueo->idUser;
 			$movimiento->monto = $arqueo->monto;
-			$movimiento->arqueo = 0;
+			$movimiento->arqueo =0;
 			if($movimiento->validate() && $arqueo->validate())
 			{
 				$caja->saldo = $caja->saldo-$movimiento->monto;
-				$ventas=0;$recibos=0;
-				$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and fechaMovimiento<='".$end."'"));
+				$$ctps=0;$recibos=0;
+				$cajaMovimiento = CajaMovimientoVenta::model()->with('ventas')->with('reciboses')->findAll(array('condition'=>"`t`.idCaja=".$this->cajaCTP." and tipo=0 and arqueo=0 and fechaMovimiento<='".$end."'"));
 				foreach ($cajaMovimiento as $item)
 				{
 					foreach ($item->ventas as $venta)
 					{
-						$tmp = Venta::model()->with('idCajaMovimientoVenta0')->findByPk($venta->idVenta);
-						$ventas = $ventas + $tmp->idCajaMovimientoVenta0->monto;
+						$tmp = CTP::model()->with('idCajaMovimientoVenta0')->findByPk($venta->idVenta);
+						$ctps = $ventas + $tmp->idCajaMovimientoVenta0->monto;
 					}
 					foreach ($item->reciboses as $venta)
 					{
@@ -476,69 +424,53 @@ class CtpController extends Controller
 						$recibos = $recibos + $tmp->idCajaMovimientoVenta0->monto;
 					}
 				}
-				$saldo = CajaArqueo::model()->find(array('condition'=>'idCaja=2','order'=>'idCajaArqueo Desc'));
-				$arqueo->saldo = $saldo->saldo+$ventas+$recibos-$movimiento->monto;
-				if($caja->saldo >=0){
-					if($movimiento->monto==0)
+				
+				$saldo = CajaArqueo::model()->find(array('condition'=>"idCaja=".$this->cajaCTP,'order'=>'idCajaArqueo Desc'));
+				if(empty($saldo))
+					$saldo = 0;
+				else
+					$saldo = $saldo->saldo;
+				
+				$arqueo->saldo = round($saldo+$ctps+$recibos-$movimiento->monto,1, PHP_ROUND_HALF_UP);
+				if($caja->saldo >=0 && $arqueo->saldo>=0 ){
+					if($movimiento->monto >= 0)
 					{
-						$arqueo->comprobante="";
-							
-						if($arqueo->save())
+						if($movimiento->monto==0){
+							$movimiento->motivo = "Arqueo de Caja";
+							$arqueo->comprobante="";
+						}
+						if($arqueo->save() && $caja->save())
 						{
-							$start=$arqueo->fechaVentas." 00:00:00";
+							//$start=$arqueo->fechaVentas." 00:00:00";
 							$end=$arqueo->fechaVentas." 23:59:59";
-							$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
+							$movimiento->save();
+							$arqueo->idCajaMovimientoVenta =$movimiento->idCajaMovimientoVenta;
+							$arqueo->save(); 
+							$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=".$this->cajaCTP." and tipo=0 and arqueo=0 and fechaMovimiento<='".$end."'"));
 							foreach ($cajaMovimiento as $item)
 							{
 								$item->arqueo = $arqueo->idCajaArqueo;
 								$item->save();
 							}
-							$arqueos=new CActiveDataProvider('CajaArqueo',
-									array(
-											'criteria'=>array(
-													'condition'=>'idCaja=3',
-													'order'=>'fechaArqueo Desc',
-													'with'=>array('idUser0','idUser0.idEmpleado0'),
-											),
-											'pagination'=>array(
-													'pageSize'=>'20',
-											),
-									));
-							$this->render('arqueos',array('arqueos'=>$arqueos,));
-						}
-					}
-					else
-					{
-						if($movimiento->monto > 0)
-						{
-							if($arqueo->save() && $caja->save())
+							if($movimiento->monto>0)
 							{
-								$start=$arqueo->fechaVentas." 00:00:00";
-								$end=$arqueo->fechaVentas." 23:59:59";
-								$movimiento->save();
-								$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=3 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
-								foreach ($cajaMovimiento as $item)
-								{
-									$item->arqueo = $arqueo->idCajaArqueo;
-									$item->save();
-								}
 								$cajaAdmin= Caja::model()->findByPk(1);
 								$cajaAdmin->saldo = $cajaAdmin->saldo + $movimiento->monto;
 								$cajaAdmin->save();
-								$this->redirect(array('ctp/comprobante', 'id'=>$arqueo->idCajaArqueo));
 							}
-	
+							$this->redirect(array('distribuidora/comprobante', 'id'=>$arqueo->idCajaArqueo));
 						}
-						else
-						{
-							$movimiento->addError('monto',"El numero debe ser positivo");
-							$this->redirect(array('distribuidora/arqueo'));
-						}
+						
+					}
+					else
+					{
+						$movimiento->addError('monto',"El numero debe ser positivo");
+						$this->redirect(array('distribuidora/arqueo'));
 					}
 				}
 			}
 		}
-	
+		
 		if(isset($_GET['d']))
 		{
 			$d=$_GET['d']; $m=date("m");
@@ -547,9 +479,12 @@ class CtpController extends Controller
 				$m--;
 				$d=$this->getUltimoDiaMes(date("Y"), $m);
 			}
-			$start=date("Y")."-".$m."-".$d." 00:00:00";
+			//$start=date("Y")."-".$m."-".$d." 00:00:00";
 			$end=date("Y")."-".$m."-".$d." 23:59:59";
-			$cajaMovimiento = CajaMovimientoVenta::model()->with('reciboses')->with('ventas')->findAll(array('condition'=>"`t`.idCaja=3 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
+			//$cajaMovimiento = CajaMovimientoVenta::model()->with('reciboses')->with('ventas')->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
+			$cajaMovimiento = CajaMovimientoVenta::model()->with('reciboses')->with('cTPs')->findAll(array('condition'=>"`t`.idCaja=".$this->cajaCTP." and tipo=0 and arqueo=0 and fechaMovimiento<='".$end."'",'order'=>'fechaMovimiento Desc'));
+			if(!empty($cajaMovimiento))
+				$end = date('Y-m-d',strtotime($cajaMovimiento[0]->fechaMovimiento))." 23:59:59";
 			$ventas=0;$recibos=0;
 			foreach ($cajaMovimiento as $item)
 			{
@@ -564,15 +499,17 @@ class CtpController extends Controller
 					$recibos = $recibos + $tmp->idCajaMovimientoVenta0->monto;
 				}
 			}
-	
-			$saldo = CajaArqueo::model()->find(array('condition'=>'idCaja=3	','order'=>'idCajaArqueo Desc'));
-				
+			$saldo = CajaArqueo::model()->find(array('condition'=>"idCaja=".$this->cajaCTP,'order'=>'idCajaArqueo Desc'));
+			if(empty($saldo))
+				$saldo = 0;
+			else
+				$saldo = $saldo->saldo;
 			$this->render("arqueo",
 					array(
 							'saldo'=>$saldo,
 							'arqueo'=>$arqueo,
 							'caja'=>$caja,
-							'fecha'=>date('Y-m-d',strtotime($start)),
+							'fecha'=>date('Y-m-d',strtotime($end)),
 							'ventas'=>$ventas,
 							'recibos'=>$recibos,
 					));
@@ -582,7 +519,7 @@ class CtpController extends Controller
 			$arqueos=new CActiveDataProvider('CajaArqueo',
 					array(
 							'criteria'=>array(
-									'condition'=>'idCaja=3',
+									'condition'=>'idCaja='.$this->cajaCTP,
 									'order'=>'fechaArqueo Desc',
 									'with'=>array('idUser0','idUser0.idEmpleado0'),
 							),
@@ -599,35 +536,45 @@ class CtpController extends Controller
 		if(isset($_GET['id']))
 		{
 			$arqueo = CajaArqueo::model()
-			->with('cajaMovimientoVenta')
-			->find(array('condition'=>'idCajaArqueo='.$_GET['id'],'order'=>'cajaMovimientoVenta.fechaMovimiento Desc'));
-			$venta = Venta::model()
-			->with('idCajaMovimientoVenta0')
-			->findAll(array('condition'=>"fechaVenta>='".$arqueo->fechaVentas."' and fechaVenta<='".date("Y-m-d",strtotime($arqueo->fechaVentas))." 23:59:59'"));
+						->with('cajaMovimientoVenta')
+						->find(array('condition'=>'idCajaArqueo='.$_GET['id'].' and cajaMovimientoVenta.tipo=0 and `t`.idCaja='.$this->cajaCTP,'order'=>'cajaMovimientoVenta.fechaMovimiento Desc'));
+			$start =$arqueo->fechaVentas;
+			if(!empty($arqueo))
+			{
+				$arqueoA = CajaArqueo::model()->findByPk($arqueo->idCajaArqueo-1);
+				if(!empty($arqueoA))
+				{
+					$d=date("d",strtotime($arqueoA->fechaVentas))+1;
+					$start = date("Y-m",strtotime($arqueoA->fechaVentas))."-".$d." 00:00:00";
+				}
+			}
+			$venta = CTP::model()
+						->with('idCajaMovimientoVenta0')
+						->findAll(array('condition'=>"fechaOrden>='".$start."' and fechaOrden<='".date("Y-m-d",strtotime($arqueo->fechaVentas))." 23:59:59' and idCajaMovimientoVenta0.tipo=0"));
 			$ventas = 0;
-				
+			
 			foreach ($venta as $item)
 			{
 				$ventas=$ventas+$item->idCajaMovimientoVenta0->monto;
 			}
-				
+			
 			$recibo = Recibos::model()
 			->with('idCajaMovimientoVenta0')
-			->findAll(array('condition'=>"fechaRegistro	>='".$arqueo->fechaVentas."' and fechaRegistro<='".date("Y-m-d",strtotime($arqueo->fechaVentas))." 23:59:59'"));
+			->findAll(array('condition'=>"fechaRegistro	>='".$arqueo->fechaVentas."' and fechaRegistro<='".date("Y-m-d",strtotime($arqueo->fechaVentas))." 23:59:59' and idCajaMovimientoVenta0.tipo=0 and idCajaMovimientoVenta0.idcaja=".$this->cajaCTP));
 			$recibos = 0;
-	
+				
 			foreach ($recibo as $item)
 			{
 				$recibos=$recibos+$item->idCajaMovimientoVenta0->monto;
 			}
-				
+			
 			$this->render('arqueo/registroRealizado',
-					array(
-							'fecha'=>date("Y-m-d",strtotime($arqueo->fechaVentas)),
-							'arqueo'=>$arqueo,
-							'ventas'=>$ventas,
-							'recibos'=>$recibos,
-					)
+							array(
+									'fecha'=>date("Y-m-d",strtotime($arqueo->fechaVentas)),
+									'arqueo'=>$arqueo,
+									'ventas'=>$ventas,
+									'recibos'=>$recibos,
+							)
 			);
 		}
 		else
@@ -639,13 +586,99 @@ class CtpController extends Controller
 		if(isset($_GET['id']))
 		{
 			$arqueo = CajaArqueo::model()	->with('idUser0')
-			->with('cajaMovimientoVenta')
-			->with('idUser0.idEmpleado0')
-			->find(array('condition'=>'idCajaArqueo='.$_GET['id'],'order'=>'fechaMovimiento Desc'));
+				->with('cajaMovimientoVenta')
+				->with('idUser0.idEmpleado0')
+				->find(array('condition'=>'idCajaArqueo='.$_GET['id'],'order'=>'fechaMovimiento Desc'));
 			$this->render('arqueo/comprobante',array('arqueo'=>$arqueo));
 		}
 		else
 			throw new CHttpException(400,'Petición no válida.');
+	}
+	
+	public function actionAjaxFactura()
+	{
+		//Yii::app()->user->id;
+		$detalle=array();
+		$tipo =0;
+		if(isset($_POST['tipo']))
+		{
+			$tipo=$_POST['tipo'];
+		}
+	
+		if(isset($_POST['detalle']) and isset($_POST['id']) and isset($_POST['cliente']))
+		{
+			$resultado = array();
+			
+			$ctp = $this->verifyModel(CTP::model()
+					->with('detalleCTPs')
+					->with('idCliente0')
+					->findByPk($_POST['id']));
+			
+			$row = CTP::model()->find(array("condition"=>"tipoOrden=".$tipo,'order'=>'fechaOrden Desc'));
+			if(empty($row))
+				$row=new CTP;
+			if(empty($row->serie))
+				$row->serie = 65;
+			$ctp->numero = $row->numero +1;
+			if($row->numero==1001)
+			{
+				$row->numero=1;
+				$row->serie++;
+				if($row->serie==91)
+					$row->serie = 65;
+			}
+			$ctp->serie = $row->serie;
+			
+			if($ctp->tipoOrden!=$tipo){
+				if($tipo==1)
+					$ctp->codigo = chr($ctp->serie)."C-".$ctp->numero."-".date("y");
+				else
+					$ctp->codigo = $ctp->numero."-P";
+			}
+			
+			$horas = Horario::model()->findAll();
+			$cantidades = CantidadCTP::model()->findAll();
+			//$resultado['detalle']=array();
+			
+			$cliente=Cliente::model()->find("nitCi=".$_POST['cliente']);
+			if(empty($cliente))
+			{
+				$cliente= new Cliente;
+				$cliente->nitCi=$_POST['cliente'];
+				$cliente->save();
+			}
+			
+			foreach ($ctp->detalleCTPs as $key => $item)
+			{
+				$condAlmacen = 'idAlmacenProducto='.$item->idAlmacenProducto;
+				$condCliente ='idTiposClientes='.$ctp->idCliente0->idTiposClientes;
+				if($cliente->idCliente!=$ctp->idCliente0->idCliente)
+					$condCliente ='idTiposClientes='.$cliente->idTiposClientes;
+				foreach ($cantidades as $c)
+				{	if($c->Inicio<$item->nroPlacas)
+					$condCantidad ="idCantidad=".$c->idCantidadCTP;
+				else
+					break;
+				}
+				$condHora ="";
+				foreach ($horas as $h)
+				{	if($h->inicio<date("H:0:s"))
+						$condHora ="idHorario=".$h->idHorario;
+					else
+						break;
+				}
+				$matriz = MatrizPreciosCTP::model()->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
+				if($tipo ==0)
+					$resultado[$key]['costo'] = $matriz->precioCF;
+				else
+					$resultado[$key]['costo'] = $matriz->precioSF;
+				
+			}
+			//*/
+			$resultado['codigo']=$ctp->codigo;
+			
+			echo CJSON::encode($resultado);
+		}
 	}
 	
 	private function verifyModel($model)

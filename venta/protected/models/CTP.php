@@ -29,13 +29,13 @@
  * @property integer $idCTPParent
  * @property integer $tipoCTP
  * @property string $fechaEntega
+ * @property string $obsCaja
  *
  * The followings are the available model relations:
  * @property CTP $idCTPParent0
  * @property CTP[] $cTPs
- * @property Imprenta $idImprenta0
- * @property Users $idUserOT0
- * @property Users $idUserVenta0
+ * @property User $idUserOT0
+ * @property User $idUserVenta0
  * @property CajaMovimientoVenta $idCajaMovimientoVenta0
  * @property Cliente $idCliente0
  * @property DetalleCTP[] $detalleCTPs
@@ -43,6 +43,7 @@
  */
 class CTP extends CActiveRecord
 {
+	public $max;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -65,10 +66,11 @@ class CTP extends CActiveRecord
 			array('codigo', 'length', 'max'=>45),
 			array('factura, autorizado, responsable', 'length', 'max'=>50),
 			array('obs', 'length', 'max'=>200),
+			array('obsCaja', 'length', 'max'=>500),
 			array('fechaOrden, fechaPlazo, fechaEntega', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCTP, fechaOrden, tipoOrden, formaPago, idCliente, fechaPlazo, codigo, serie, numero, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP, fechaEntega', 'safe', 'on'=>'search'),
+			array('idCTP, fechaOrden, tipoOrden, formaPago, idCliente, fechaPlazo, codigo, serie, numero, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP, fechaEntega, obsCaja', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -82,7 +84,6 @@ class CTP extends CActiveRecord
 		return array(
 			'idCTPParent0' => array(self::BELONGS_TO, 'CTP', 'idCTPParent'),
 			'cTPs' => array(self::HAS_MANY, 'CTP', 'idCTPParent'),
-			'idImprenta0' => array(self::BELONGS_TO, 'Imprenta', 'idImprenta'),
 			'idUserOT0' => array(self::BELONGS_TO, 'Users', 'idUserOT'),
 			'idUserVenta0' => array(self::BELONGS_TO, 'Users', 'idUserVenta'),
 			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
@@ -123,6 +124,7 @@ class CTP extends CActiveRecord
 			'idCTPParent' => 'Id Ctpparent',
 			'tipoCTP' => 'Tipo Ctp',
 			'fechaEntega' => 'Fecha Entega',
+			'obsCaja' => 'Obs Caja',
 		);
 	}
 
@@ -169,12 +171,43 @@ class CTP extends CActiveRecord
 		$criteria->compare('idCTPParent',$this->idCTPParent);
 		$criteria->compare('tipoCTP',$this->tipoCTP);
 		$criteria->compare('fechaEntega',$this->fechaEntega,true);
+		$criteria->compare('obsCaja',$this->obsCaja,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
-
+	
+	public $apellido;
+	public $nit; 
+	public function searchCTP()
+	{
+		$criteria=new CDbCriteria;
+	
+		$criteria->with= array(
+				'idCliente0',
+		);
+		$criteria->order='fechaOrden DESC';
+		$criteria->limit = 50;
+		//$criteria->condition = 'idAlmacen=2';
+	
+		$criteria->compare('idCTP',$this->idCTP);
+		$criteria->compare('fechaOrden',$this->fechaOrden,true);
+		$criteria->compare('idCliente',$this->idCliente);
+		$criteria->compare('codigo',$this->codigo,true);
+		$criteria->compare('montoVenta',$this->montoVenta);
+		$criteria->compare('montoPagado',$this->montoPagado);
+		$criteria->compare('montoCambio',$this->montoCambio);
+		$criteria->compare('montoDescuento',$this->montoDescuento);
+		$criteria->compare('tipoOrden',$this->tipoOrden);
+		$criteria->compare('idCliente0.apellido',$this->apellido,true);
+		$criteria->compare('idCliente0.nitCi',$this->nit);
+	
+		return new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
+				'pagination'=>false,
+		));
+	}
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

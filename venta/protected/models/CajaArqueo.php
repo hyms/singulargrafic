@@ -11,15 +11,16 @@
  * @property string $fechaArqueo
  * @property string $fechaVentas
  * @property string $comprobante
+ * @property double $saldo
+ * @property integer $idCajaMovimientoVenta
  *
  * The followings are the available model relations:
+ * @property CajaMovimientoVenta $idCajaMovimientoVenta0
  * @property Caja $idCaja0
- * @property Users $idUser0
- * @property Users $idUser0
+ * @property User $idUser0
  */
 class CajaArqueo extends CActiveRecord
 {
-	public $max;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -27,7 +28,7 @@ class CajaArqueo extends CActiveRecord
 	{
 		return 'cajaArqueo';
 	}
-
+	public $max; 
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -36,14 +37,14 @@ class CajaArqueo extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('monto', 'required'),
-			array('idCaja, idUser', 'numerical', 'integerOnly'=>true),
-			array('monto', 'numerical'),
+			//array('monto, saldo', 'required'),
+			array('idCaja, idUser, idCajaMovimientoVenta', 'numerical', 'integerOnly'=>true),
+			array('monto, saldo', 'numerical'),
 			array('comprobante', 'length', 'max'=>20),
 			array('fechaArqueo, fechaVentas', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCajaArqueo, idCaja, idUser, monto, fechaArqueo, fechaVentas, comprobante', 'safe', 'on'=>'search'),
+			array('idCajaArqueo, idCaja, idUser, monto, fechaArqueo, fechaVentas, comprobante, saldo, idCajaMovimientoVenta', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,6 +56,7 @@ class CajaArqueo extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
 			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
 			'idUser0' => array(self::BELONGS_TO, 'Users', 'idUser'),
 			'cajaMovimientoVenta' => array(self::HAS_ONE, 'CajaMovimientoVenta', 'arqueo'),
@@ -74,6 +76,8 @@ class CajaArqueo extends CActiveRecord
 			'fechaArqueo' => 'Fecha Arqueo',
 			'fechaVentas' => 'Fecha Ventas',
 			'comprobante' => 'Comprobante',
+			'saldo' => 'Saldo',
+			'idCajaMovimientoVenta' => 'Id Caja Movimiento Venta',
 		);
 	}
 
@@ -102,6 +106,8 @@ class CajaArqueo extends CActiveRecord
 		$criteria->compare('fechaArqueo',$this->fechaArqueo,true);
 		$criteria->compare('fechaVentas',$this->fechaVentas,true);
 		$criteria->compare('comprobante',$this->comprobante,true);
+		$criteria->compare('saldo',$this->saldo);
+		$criteria->compare('idCajaMovimientoVenta',$this->idCajaMovimientoVenta);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

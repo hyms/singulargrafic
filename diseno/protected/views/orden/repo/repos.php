@@ -88,7 +88,7 @@ if($repos->responsable!="")
 	<div class="form-group">
 		<div class="text-center">
 		<?php echo CHtml::resetButton('Cancelar', array('class' => 'btn btn-default hidden-print')); ?>
-		<?php echo CHtml::submitButton('Guardar', array('class' => 'btn btn-default hidden-print')); ?>
+		<?php echo CHtml::button('Guardar', array('class' => 'btn btn-default hidden-print','id'=>'save')); ?>
 		</div>
 	</div>
 <?php $this->endWidget(); ?>	
@@ -112,17 +112,21 @@ if($repos->responsable!="")
 		return (Math.round(num*10)/10);
 	}
 		
-$('#resp').change(function() {
-  	if($('#resp').val()=='Otro')
-	{
-		$('#respOtro').prop( 'disabled', false );
-		//total();
-	}
-	else
-	{
-		$('#respOtro').prop( 'disabled', true );
-		$('#total').val('');
-	}
-});
-
+	$('#resp').change(function() {
+	  	if($('#resp').val()=='Otro')
+		{
+			$('#respOtro').prop( 'disabled', false );
+			//total();
+		}
+		else
+		{
+			$('#respOtro').prop( 'disabled', true );
+			$('#total').val('');
+		}
+	});
+	
+	 $('#save').click(function(){
+			//alert('se guardaran los datos');
+			$('form').submit();
+	});
 ",CClientScript::POS_READY); ?>

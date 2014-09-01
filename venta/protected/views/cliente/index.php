@@ -11,5 +11,5 @@ $this->breadcrumbs=array(
 
 
 <div class="col-sm-10">
-<?php $this->renderPartial('listaCliente',array('cliente'=>$cliente,'datos'=>$datos,'pages' => $pages));?>
+<?php //$this->renderPartial('listaCliente',array('cliente'=>$cliente,'datos'=>$datos,'pages' => $pages));?>
 </div>

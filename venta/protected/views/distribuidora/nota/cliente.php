@@ -8,7 +8,7 @@
 <div class="form-group col-sm-6">
 	<?php echo CHtml::activeLabelEx($cliente,'apellido',array('class'=>'control-label col-sm-4')); ?>
 	<div class="col-sm-8">
-		<?php echo CHtml::activeTextField($cliente,'apellido',array('class'=>'form-control input-sm',"id"=>"apellido")); ?>
+		<?php echo CHtml::activeTextField($cliente,'apellido',array('class'=>'form-control input-sm',"id"=>"apellido",'readonly'=>true)); ?>
 	</div>
 	<?php echo CHtml::error($cliente,'apellido',array('class'=>'label label-danger')); ?>
 </div>
@@ -30,10 +30,20 @@ Yii::app()->getClientScript()->registerScript("ajax_cliente",
 							data[\"cliente\"] = JSON.parse(data[\"cliente\"]);
 							if(data[\"deuda\"]==true)
 							{	alert(\"El Cliente \"+data[\"cliente\"][\"apellido\"]+\" tiene una deuda\");	}
-	            			$('#apellido').val(data[\"cliente\"][\"apellido\"]); 
+	            			if(data[\"cliente\"][\"apellido\"]!=\"\")
+							{
+								$('#apellido').prop('readonly', true);
+							}
+							else
+							{
+								$('#apellido').prop('readonly', false);
+							}			
+							$('#apellido').val(data[\"cliente\"][\"apellido\"]); 
 	            			$('#clienteNit').val(data[\"cliente\"][\"nitCi\"]);
+							
 						 },
-				error:	$('#clienteNit').val(nitCi),
+				error:	
+					$('#apellido').prop('readonly', false),
 	        });
 		}
 	}
