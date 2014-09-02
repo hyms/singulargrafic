@@ -65,7 +65,7 @@ if(count($detalle)>=1)
 								'model'=>$ctp,
 								'options'=>array(
 										'showAnim'=>'fold',
-										'dateFormat'=>'yy-mm-d',
+										'dateFormat'=>'yy-mm-dd',
 								),
 								'htmlOptions'=>array(
 										'class'=>'form-control input-sm',

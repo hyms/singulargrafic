@@ -1,6 +1,7 @@
 <h2>Distribuidora Inventario</h2>
 <?php 
 	echo CHtml::link('Añadir',array('stock/distribuidoraAdd'), array('class' => 'btn btn-default') );
+	echo CHtml::link('Dercargar Excel',array('stock/distribuidora','excel'=>true), array('class' => 'btn btn-link') );
 	
 	$this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$productos,

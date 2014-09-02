@@ -174,7 +174,7 @@ class CajaController extends Controller
 	{
 		$cliente = new Cliente;
 		$recibo = new Recibos;
-		
+		$cajaMovimiento = new CajaMovimientoVenta;
 		if(isset($_GET['id']))
 		{
 			$recibo = $this->verifyModel(Recibos::model()->findByPk($_GET['id']));
@@ -182,13 +182,13 @@ class CajaController extends Controller
 		}
 		else
 		{
-			$cajaMovimiento = CajaMovimientoVenta::model()->find('idUser='.Yii::app()->user->id.' and arqueo=0');
+			//$cajaMovimiento = $this->verifyModel(CajaMovimientoVenta::model()->find('idUser='.Yii::app()->user->id.''));
 			$row = Recibos::model()->find(array("select"=>"count(*) as `max`",'condition'=>'tipoRecivo=1'));
 		
 			$recibo->fechaRegistro = date("Y-m-d h:m:s");
 			$recibo->codigo = "I-".($row['max']+1);
 			$recibo->tipoRecivo = 1;
-			$recibo->idCajaMovimientoVenta = $cajaMovimiento->idCajaMovimientoVenta;
+			
 		}
 		if(isset($_POST['Recibos']))
 		{
@@ -205,21 +205,20 @@ class CajaController extends Controller
 			{
 				$cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
 				$cajaMovimiento->monto = $recibo->monto;
-				if($recibo->save())
+				if($recibo->categoria=="Nota de Venta")
+					$cajaMovimiento->idCaja=2;
+				if($recibo->categoria=="Orden de Trabajo")
+					$cajaMovimiento->idCaja=3;
+				if($cajaMovimiento->save())
 				{
-					if($recibo->categoria=="Nota de Venta")
-						$cajaMovimiento->idCaja=2;
-					if($recibo->categoria=="Orden de Trabajo")
-						$cajaMovimiento->idCaja=3;
-					if($cajaMovimiento->save())
-					{
-						$caja=Caja::model()->findByPk($cajaMovimiento->idCaja);
-						if($saldobkp!="")
-							$caja->saldo = $caja->saldo - $saldobkp;
-						$caja->saldo = $caja->saldo - $cajaMovimiento->monto;
-						if($caja->save())
-							$this->redirect(array('preview','id'=>$recibo->idRecibos));
-					}
+					$recibo->idCajaMovimientoVenta = $cajaMovimiento->idCajaMovimientoVenta;
+					$caja=Caja::model()->findByPk($cajaMovimiento->idCaja);
+					if($saldobkp!="")
+						$caja->saldo = $caja->saldo - $saldobkp;
+					$caja->saldo = $caja->saldo - $cajaMovimiento->monto;
+					$recibo->save();
+					if($caja->save())
+						$this->redirect(array('preview','id'=>$recibo->idRecibos));
 				}
 			}
 				

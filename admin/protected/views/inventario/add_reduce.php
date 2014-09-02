@@ -3,7 +3,7 @@
 /* @var $model MovimientoAlmacen */
 /* @var $form CActiveForm */
 ?>
-<h2>Producto <?php echo $almacen->idProducto0->codigo; ?></h2>
+<h2>Producto <?php echo $almacen->idProducto0->codigo; ?><br><small><?php echo $almacen->idProducto0->material." - ".$almacen->idProducto0->detalle;?></small></h2>
 <div class = "col-sm-4">
 <h3>En existencia</h3>
 <div class="row form-group">

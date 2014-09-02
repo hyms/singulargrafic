@@ -22,8 +22,13 @@
 				'filter'=>CHtml::activeDropDownList($movimientos,'material',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'material','select'=>'material','condition'=>'idAlmacen=1')),'material','material'),array("class"=>"form-control ",'empty'=>'')),
 		),
 		array(
+				'header'=>'color',
+				'value'=>'$data->idProducto0->color',
+				'filter'=>CHtml::activeTextField($movimientos, 'color',array("class"=>"form-control")),
+		),
+		array(
 				'header'=>'Detalle Producto',
-				'value'=>'$data->idProducto0->color." ".$data->idProducto0->detalle',
+				'value'=>'$data->idProducto0->detalle',
 				'filter'=>CHtml::activeTextField($movimientos, 'detalle',array("class"=>"form-control")),
 		),
 		array(
@@ -58,7 +63,7 @@
 						'model'=>$movimientos,
 						'options'=>array(
 								'showAnim'=>'fold',
-								'dateFormat'=>'yy-mm-d',
+								'dateFormat'=>'yy-mm-dd',
 						),
 						'htmlOptions'=>array(
 								'class'=>'form-control input-sm',

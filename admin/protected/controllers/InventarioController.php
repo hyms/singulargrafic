@@ -224,6 +224,7 @@ class InventarioController extends Controller
 			$movimientos->attributes = $_GET['MovimientoAlmacen'];
 			$movimientos->codigo = $_GET['MovimientoAlmacen']['codigo'];
 			$movimientos->material = $_GET['MovimientoAlmacen']['material'];
+			$movimientos->color = $_GET['MovimientoAlmacen']['color'];
 			$movimientos->detalle = $_GET['MovimientoAlmacen']['detalle'];
 			$movimientos->origen = $_GET['MovimientoAlmacen']['origen'];
 			$movimientos->destino = $_GET['MovimientoAlmacen']['destino'];

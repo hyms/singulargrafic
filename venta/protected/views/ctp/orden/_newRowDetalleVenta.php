@@ -5,7 +5,7 @@
 </td>
 
 <td>
-	<p class="form-control-static"><?php echo CHtml::encode($almacen->idProducto0->detalle) ?></p>
+	<p class="form-control-static"><?php echo CHtml::encode($almacen->idProducto0->color) ?></p>
 </td>
 
 <td>

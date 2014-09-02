@@ -62,7 +62,33 @@ class StockController extends Controller
 	
 	public function actionDistribuidora()
 	{
-		//$productos=AlmacenProducto::model()->findAll('idAlmacen=2');
+		if(isset($_GET['excel']))
+		{
+			if($_GET['excel'])
+			{
+				$almacenProducto= AlmacenProducto::model()->with('idProducto0')->findAll(array('condition'=>'idAlmacen=2','order'=>'idProducto0.Material, idProducto0.codigo, idProducto0.detalle'));
+		
+				$columnsTitle=array('Nro','Codigo','Material','Detalle Producto','Precio S/F','Precio C/F','Industria','Cant.xPaqt.','Stock Unidad','Stock Paquete');
+				$content=array();
+				$index=1;
+				foreach ($almacenProducto as $item)
+				{
+					array_push($content,array($index,
+					$item->idProducto0->codigo,
+					$item->idProducto0->material,
+					$item->idProducto0->color." ".$item->idProducto0->detalle." ".$item->idProducto0->marca,
+					$item->idProducto0->precioSFU."/".$item->idProducto0->precioSFP,
+					$item->idProducto0->precioCFU."/".$item->idProducto0->precioCFP,
+					$item->idProducto0->industria,
+					$item->idProducto0->cantXPaquete,
+					$item->stockU,
+					$item->stockP));
+					$index++;
+				}
+				$this->createExcel($columnsTitle, $content);
+			}
+		}
+		
 		$productos=new CActiveDataProvider('AlmacenProducto',
 				array(
 						'criteria'=>array(
@@ -310,6 +336,67 @@ class StockController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+	private function createExcel($columnsTitle,$content,$sum=array(),$title="")
+	{
+		if($title=="")
+		{
+			$title="Reports";
+		}
+		Yii::import('ext.phpexcel.XPHPExcel');
+		$objPHPExcel= XPHPExcel::createPHPExcel();
+		$objPHPExcel->getProperties()
+		->setCreator("Grafica Singular")
+		->setLastModifiedBy("Grafica Singular")
+		->setTitle($title)
+		->setSubject($title)
+		->setDescription($title.".xlsx");
+	
+		$column=65;
+		//assign titles
+		foreach ($columnsTitle as $item)
+		{
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).'1', $item);
+			$objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
+			$column++;
+		}
+	
+		//create content
+		$index=2;
+		foreach ($content as $items)
+		{
+			$column=65;
+			foreach ($items as $item)
+			{
+	
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).($index), $item);
+				$objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
+				$column++;
+			}
+			$index++;
+		}
+		// Rename worksheet
+		$objPHPExcel->getActiveSheet()->setTitle('Report');
+			
+			
+		// Set active sheet index to the first sheet, so Excel opens this as the first sheet
+		$objPHPExcel->setActiveSheetIndex(0);
+		// Redirect output to a clientâ€™s web browser (Excel5)
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="Report.xls"');
+		header('Cache-Control: max-age=0');
+		// If you're serving to IE 9, then the following may be needed
+		header('Cache-Control: max-age=1');
+			
+		// If you're serving to IE over SSL, then the following may be needed
+		header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+		header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+		header ('Pragma: public'); // HTTP/1.0
+			
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+		$objWriter->save('php://output');
+		Yii::app()->end();
 	}
 }
 ?>

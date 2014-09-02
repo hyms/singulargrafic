@@ -145,15 +145,14 @@ class CtpController extends Controller
 				$condCliente ='idTiposClientes='.$ctp->idCliente0->idTiposClientes;
 				$condCantidad="";
 				foreach ($cantidades as $c)
-				{	if($c->Inicio<$item->nroPlacas)
+				{	if($c->Inicio<=$item->nroPlacas)
 						$condCantidad ="idCantidad=".$c->idCantidadCTP;
 					else
 						break;
 				}
 				$condHora ="";
 				foreach ($horas as $h)
-				{	if($h->inicio<date("H:0:s"))
-					//if($h->inicio<"19:30:00")
+				{	if($h->inicio<=date("H:0:s"))
 						$condHora ="idHorario=".$h->idHorario;
 					else 
 						break;
@@ -655,14 +654,14 @@ class CtpController extends Controller
 				if($cliente->idCliente!=$ctp->idCliente0->idCliente)
 					$condCliente ='idTiposClientes='.$cliente->idTiposClientes;
 				foreach ($cantidades as $c)
-				{	if($c->Inicio<$item->nroPlacas)
+				{	if($c->Inicio<=$item->nroPlacas)
 					$condCantidad ="idCantidad=".$c->idCantidadCTP;
 				else
 					break;
 				}
 				$condHora ="";
 				foreach ($horas as $h)
-				{	if($h->inicio<date("H:0:s"))
+				{	if($h->inicio<=date("H:0:s"))
 						$condHora ="idHorario=".$h->idHorario;
 					else
 						break;

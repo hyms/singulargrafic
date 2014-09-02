@@ -592,7 +592,7 @@ class DistribuidoraController extends Controller
 	
 			if(isset($_GET['d']))
 			{
-				$d=$_GET['d'];
+				$d= sprintf("%02s", $_GET['d']);
 				if($d==0)
 				{
 					$m--;
@@ -605,7 +605,7 @@ class DistribuidoraController extends Controller
 			{
 				$m=$_GET['m'];
 				$d=$this->getUltimoDiaMes($y, $m);
-				$start=$y."-".$m."-1 00:00:00";
+				$start=$y."-".$m."-01 00:00:00";
 				$end=$y."-".$m."-".$d." 23:59:59";
 			}
 			$cond=" and '".$start."'<=fechaVenta AND fechaVenta<='".$end."'";

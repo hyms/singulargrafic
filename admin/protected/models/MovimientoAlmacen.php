@@ -111,6 +111,7 @@ class MovimientoAlmacen extends CActiveRecord
 	
 	public $codigo;
 	public $material;
+	public $color;
 	public $detalle;
 	public $origen;
 	public $destino;
@@ -133,6 +134,7 @@ class MovimientoAlmacen extends CActiveRecord
 		
 		$criteria->compare('idProducto0.codigo',$this->codigo,true);
 		$criteria->compare('idProducto0.material',$this->material,true);
+		$criteria->compare('idProducto0.color',$this->color,true);
 		$criteria->compare('idProducto0.detalle',$this->detalle,true);
 		
 		$criteria->compare('idAlmacenOrigen0.nombre',$this->origen,true);
