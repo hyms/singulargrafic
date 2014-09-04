@@ -743,6 +743,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`movimientoAlmacen` (
   `cantidadP` INT(11) NULL DEFAULT NULL ,
   `idUser` INT(11) NULL DEFAULT NULL ,
   `fechaMovimiento` DATETIME NULL DEFAULT NULL ,
+  `obs` VARCHAR(100) NULL ,
   PRIMARY KEY (`idMovimientoAlmacen`) ,
   INDEX `fk_movimientoAlmacen_producto1` (`idProducto` ASC) ,
   INDEX `fk_movimientoAlmacen_almacen1` (`idAlmacenOrigen` ASC) ,
@@ -904,6 +905,28 @@ CREATE  TABLE IF NOT EXISTS `singular`.`detalleEnvio` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `singular`.`saldoProducto`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `singular`.`saldoProducto` ;
+
+CREATE  TABLE IF NOT EXISTS `singular`.`saldoProducto` (
+  `idsaldoProducto` INT NOT NULL AUTO_INCREMENT ,
+  `idAlmacen` INT NULL ,
+  `saldoU` INT NULL ,
+  `saldoP` INT NULL ,
+  `fechaSaldo` DATETIME NULL ,
+  `fechaRealizado` DATETIME NULL ,
+  PRIMARY KEY (`idsaldoProducto`) ,
+  INDEX `fk_saldoProducto_almacen1` (`idAlmacen` ASC) ,
+  CONSTRAINT `fk_saldoProducto_almacen1`
+    FOREIGN KEY (`idAlmacen` )
+    REFERENCES `singular`.`almacen` (`idAlmacen` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 
 

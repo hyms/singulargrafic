@@ -15,7 +15,7 @@
 	<span class="col-sm-4"><?php echo $almacen->stockP ?></span>
 </div>
 </div>
-<div class="form col-sm-6">
+
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'movimiento-almacen-add_reduce-form',
@@ -29,7 +29,7 @@
 	// you need to use the performAjaxValidation()-method described there.
 	'enableAjaxValidation'=>false,
 )); ?>
-
+<div class="form col-sm-6">
 	<?php echo $form->errorSummary($model); ?>
 	<h3>Añadir a stock</h3>
 	<div class="form-group">
@@ -47,17 +47,21 @@
 		</div>
 		<?php echo $form->error($model,'cantidadP'); ?>
 	</div>
-
-	<div class="form-group">
-		<?php echo CHtml::button('Atras', array(
-	            'name' => 'btnBack',
-	            'class' => 'btn btn-default',
-	            'onclick' => "history.go(-1)",
-	                )
-	        ); ?>
-		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-1')); ?>
+</div><!-- form -->
+	
+	<div class="form-group col-sm-8">
+		<?php echo $form->labelEx($model,'obs',array('class'=>'col-sm-3 control-label')); ?>
+		<div class="col-sm-9">
+		<?php echo $form->textArea($model,'obs',array('class'=>'form-control')); ?>
+		</div>
+		<?php echo $form->error($model,'obs',array('class'=>'label label-danger')); ?>
+	</div>
+	
+	<div class="form-group col-sm-4">
+		<?php // echo CHtml::link("Atras",array("stock/distribuidora"),array("class"=>"btn btn-default")); ?>
+		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
 
-</div><!-- form -->
+

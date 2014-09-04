@@ -10,6 +10,6 @@ if($index==0)
 }
 if($index==2)
 {
-	$this->renderPartial('distribuidora/add_reduce',array('model'=>$model,'almacen'=>$almacen,'deposito'=>$deposito));
+	$this->renderPartial('add_reduce',array('model'=>$model,'almacen'=>$almacen,'deposito'=>$deposito));
 }
 ?>

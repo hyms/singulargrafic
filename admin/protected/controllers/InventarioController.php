@@ -71,18 +71,6 @@ class InventarioController extends Controller
 				$this->createExcel($columnsTitle, $content);
 			}
 		}
-		/*
-		$dataProvider=new CActiveDataProvider('AlmacenProducto',
-				array(	
-						'criteria'=>array(
-							'condition'=>'idAlmacen=1',
-							'with'=>array('idProducto0'),
-							'order'=>'idProducto0.Material, idProducto0.codigo, idProducto0.detalle',
-						),
-						'pagination'=>array(
-						'pageSize'=>'20',
-				),));*/
-		
 		$dataProvider = new AlmacenProducto('searchInventarioGral');
 		
 		$dataProvider->unsetAttributes();
@@ -187,36 +175,6 @@ class InventarioController extends Controller
 	
 	public function actionMovimientos()
 	{
-		if(isset($_GET['excel']))
-		{
-			if($_GET['excel'])
-			{
-				$movimientos=MovimientoAlmacen::model()
-													->with('idAlmacenOrigen0')
-													->with('idAlmacenDestino0')
-													->with('idProducto0')
-													->findAll(array('order'=>'fechaMovimiento DESC'));
-				$columnsTitle=array('Nro','Codigo','Material','Detalle Producto','Industria','De','A','Cant. Unidad','Cant. Paquete','Fecha');
-				$content=array();
-				$index=1;
-				foreach ($movimientos as $item)
-				{
-					array_push($content,array($index,
-					$item->idProducto0->codigo,
-					$item->idProducto0->material,
-					$item->idProducto0->color." ".$item->idProducto0->detalle." ".$item->idProducto0->marca,
-					$item->idProducto0->industria,
-					(!empty($item->idAlmacenOrigen0))?$item->idAlmacenOrigen0->nombre:"",
-					$item->idAlmacenDestino0->nombre,
-					$item->cantidadU,
-					$item->cantidadP,
-					$item->fechaMovimiento));
-					$index++;
-				}
-				$this->createExcel($columnsTitle, $content);
-			}
-		}
-		
 		$movimientos=new MovimientoAlmacen('searchReporte');
 		$movimientos->unsetAttributes();
 		if(isset($_GET['MovimientoAlmacen']))
@@ -229,20 +187,70 @@ class InventarioController extends Controller
 			$movimientos->origen = $_GET['MovimientoAlmacen']['origen'];
 			$movimientos->destino = $_GET['MovimientoAlmacen']['destino'];
 		}
-		/*$movimientos=new CActiveDataProvider('MovimientoAlmacen',
-				array(
-						'criteria'=>array(
-								'with'=>array('idAlmacenOrigen0','idAlmacenDestino0','idProducto0'),
-								'order'=>'fechaMovimiento DESC',
-						),
-						'pagination'=>array(
-								'pageSize'=>'20',
-						),));
-		*/
+		if(isset($_GET['excel']) && isset(Yii::app()->session['excel']))
+		{
+			$movimientos= Yii::app()->session['excel'];
+			$dataProvider= $movimientos->searchReporte();
+			$dataProvider->pagination= false; // for retrive all modules
+			$data = $dataProvider->data;
+			//print_r($movimientos);
+			$columnsTitle=array('Nro','Codigo','Material','Detalle Producto','Industria','De','A','Cant. Unidad','Cant. Paquete','Fecha');
+			$content=array();
+			$index=1;
+			foreach ($data as $item)
+			{
+				array_push($content,array($index,
+				$item->idProducto0->codigo,
+				$item->idProducto0->material,
+				$item->idProducto0->color." ".$item->idProducto0->detalle." ".$item->idProducto0->marca,
+				$item->idProducto0->industria,
+				(!empty($item->idAlmacenOrigen0))?$item->idAlmacenOrigen0->nombre:"",
+				$item->idAlmacenDestino0->nombre,
+				$item->cantidadU,
+				$item->cantidadP,
+				$item->fechaMovimiento));
+				$index++;
+			}
+			$this->createExcel($columnsTitle, $content);
+		}
 		$this->render('movimientos',array(
 				'movimientos'=>$movimientos
 		));		
 	}
+	public function actionExportMovimientos()
+	{
+		$movimientos=new MovimientoAlmacen('searchReporte');
+		$movimientos->unsetAttributes();
+		
+		if(isset(Yii::app()->session['excel']))
+		{
+			$movimientos= Yii::app()->session['excel'];
+			$dataProvider= $movimientos->searchReporte();
+			$dataProvider->pagination= false; // for retrive all modules
+			$data = $dataProvider->data;
+			//print_r($movimientos);
+			$columnsTitle=array('Nro','Codigo','Material','Detalle Producto','Industria','De','A','Cant. Unidad','Cant. Paquete','Fecha');
+			$content=array();
+			$index=1;
+			foreach ($data as $item)
+			{
+				array_push($content,array($index,
+				$item->idProducto0->codigo,
+				$item->idProducto0->material,
+				$item->idProducto0->color." ".$item->idProducto0->detalle." ".$item->idProducto0->marca,
+				$item->idProducto0->industria,
+				(!empty($item->idAlmacenOrigen0))?$item->idAlmacenOrigen0->nombre:"",
+				$item->idAlmacenDestino0->nombre,
+				$item->cantidadU,
+				$item->cantidadP,
+				$item->fechaMovimiento));
+				$index++;
+			}
+			$this->createExcel($columnsTitle, $content);
+		}
+		else
+			throw new CHttpException(404,'La Respuesta de la pagina no Existe.');
+	} 
 	
 	public function actionMatrizCTP()
 	{

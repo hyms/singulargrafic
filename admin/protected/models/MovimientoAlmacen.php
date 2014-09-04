@@ -12,11 +12,12 @@
  * @property integer $cantidadP
  * @property integer $idUser
  * @property string $fechaMovimiento
+ * @property string $obs
  *
  * The followings are the available model relations:
- * @property Producto $idProducto0
  * @property Almacen $idAlmacenOrigen0
  * @property Almacen $idAlmacenDestino0
+ * @property Producto $idProducto0
  * @property User $idUser0
  */
 class MovimientoAlmacen extends CActiveRecord
@@ -38,10 +39,11 @@ class MovimientoAlmacen extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('idProducto, idAlmacenOrigen, idAlmacenDestino, cantidadU, cantidadP, idUser', 'numerical', 'integerOnly'=>true),
+			array('obs', 'length', 'max'=>100),
 			array('fechaMovimiento', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idMovimientoAlmacen, idProducto, idAlmacenOrigen, idAlmacenDestino, cantidadU, cantidadP, idUser, fechaMovimiento', 'safe', 'on'=>'search'),
+			array('idMovimientoAlmacen, idProducto, idAlmacenOrigen, idAlmacenDestino, cantidadU, cantidadP, idUser, fechaMovimiento, obs', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,9 +55,9 @@ class MovimientoAlmacen extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idProducto0' => array(self::BELONGS_TO, 'Producto', 'idProducto'),
 			'idAlmacenOrigen0' => array(self::BELONGS_TO, 'Almacen', 'idAlmacenOrigen'),
 			'idAlmacenDestino0' => array(self::BELONGS_TO, 'Almacen', 'idAlmacenDestino'),
+			'idProducto0' => array(self::BELONGS_TO, 'Producto', 'idProducto'),
 			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
 		);
 	}
@@ -70,10 +72,11 @@ class MovimientoAlmacen extends CActiveRecord
 			'idProducto' => 'Id Producto',
 			'idAlmacenOrigen' => 'Id Almacen Origen',
 			'idAlmacenDestino' => 'Id Almacen Destino',
-			'cantidadU' => 'Cantidad Unidad',
-			'cantidadP' => 'Cantidad Paquete',
+			'cantidadU' => 'Cantidad U',
+			'cantidadP' => 'Cantidad P',
 			'idUser' => 'Id User',
 			'fechaMovimiento' => 'Fecha Movimiento',
+			'obs' => 'Obs',
 		);
 	}
 
@@ -103,12 +106,14 @@ class MovimientoAlmacen extends CActiveRecord
 		$criteria->compare('cantidadP',$this->cantidadP);
 		$criteria->compare('idUser',$this->idUser);
 		$criteria->compare('fechaMovimiento',$this->fechaMovimiento,true);
+		$criteria->compare('obs',$this->obs,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
-	
+
+
 	public $codigo;
 	public $material;
 	public $color;
@@ -122,7 +127,7 @@ class MovimientoAlmacen extends CActiveRecord
 		$criteria=new CDbCriteria;
 		$criteria->with=array('idAlmacenOrigen0','idAlmacenDestino0','idProducto0');
 		$criteria->order='fechaMovimiento DESC';
-		
+	
 		$criteria->compare('idMovimientoAlmacen',$this->idMovimientoAlmacen);
 		$criteria->compare('idProducto',$this->idProducto);
 		$criteria->compare('idAlmacenOrigen',$this->idAlmacenOrigen);
@@ -131,23 +136,27 @@ class MovimientoAlmacen extends CActiveRecord
 		$criteria->compare('cantidadP',$this->cantidadP);
 		$criteria->compare('idUser',$this->idUser);
 		$criteria->compare('fechaMovimiento',$this->fechaMovimiento,true);
-		
+	
 		$criteria->compare('idProducto0.codigo',$this->codigo,true);
 		$criteria->compare('idProducto0.material',$this->material,true);
 		$criteria->compare('idProducto0.color',$this->color,true);
 		$criteria->compare('idProducto0.detalle',$this->detalle,true);
-		
+	
 		$criteria->compare('idAlmacenOrigen0.nombre',$this->origen,true);
 		$criteria->compare('idAlmacenDestino0.nombre',$this->destino,true);
-		
-		return new CActiveDataProvider($this, array(
+	
+		$data = new CActiveDataProvider($this, array(
 				'criteria'=>$criteria,
 				'pagination'=>array(
 						'pageSize'=>'20',
 				),
 		));
-	}
+		//$dataExp = $data->getArrayCopy();
+		//$data->Pagination = false;
+		Yii::app()->session['excel']= $this;
 	
+		return $data;
+	}
 	
 	/**
 	 * Returns the static model of the specified AR class.
