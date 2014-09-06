@@ -223,6 +223,7 @@ class Venta extends CActiveRecord
 	public $material;
 	public $detalle;
 	
+	
 	public function searchVentaProducto()
 	{
 		$criteria=new CDbCriteria;

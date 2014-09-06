@@ -28,10 +28,22 @@
 					'filter'=>CHtml::activeTextField($ventas, 'apellido',array("class"=>"form-control")),
 			),
 			array(
+					'header'=>'Codigo',
+					'type'=>'raw',
+					'value'=>'$data->idAlmacenProducto0->idProducto0->codigo',
+					'filter'=>CHtml::activeTextField($ventas, 'codigoProducto',array("class"=>"form-control")),
+			),
+			array(
 					'header'=>'material',
 					'type'=>'raw',
 					'value'=>'$data->idAlmacenProducto0->idProducto0->material',
 					'filter'=>CHtml::activeDropDownList($ventas,'material',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'material','select'=>'material','condition'=>'idAlmacen=2')),'material','material'),array("class"=>"form-control ",'empty'=>'')),
+			),
+			array(
+					'header'=>'color',
+					'type'=>'raw',
+					'value'=>'$data->idAlmacenProducto0->idProducto0->color',
+					'filter'=>CHtml::activeDropDownList($ventas,'color',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'color','select'=>'color','condition'=>'idAlmacen=2')),'color','color'),array("class"=>"form-control ",'empty'=>'')),
 			),
 			array(
 					'header'=>'detalle',
@@ -74,4 +86,23 @@
 		)
 	));
 ?>
+</div>
+<?php 
+	$datagrid = $ventas->searchventa();
+	$datagrid->Pagination = false;
+	$data = $datagrid->data;
+	$unidad = 0; $paquete = 0;
+	foreach($data as $item)
+	{
+		$unidad = $unidad+$item->cantidadU;
+		$paquete = $paquete+$item->cantidadP;
+	}
+?>
+<div class="well well-sm col-xs-offset-8 col-xs-4">
+<div class="col-sm-6">
+<strong>Unidades:</strong><?php echo $unidad;?>
+</div>
+<div class="col-sm-6">
+<strong>Paquetes:</strong><?php echo $paquete;?>
+</div>
 </div>

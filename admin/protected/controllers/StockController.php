@@ -62,33 +62,45 @@ class StockController extends Controller
 	
 	public function actionDistribuidora()
 	{
-		if(isset($_GET['excel']))
+		if(isset($_GET['excel']) && isset(Yii::app()->session['excel']))
 		{
-			if($_GET['excel'])
+			$model= Yii::app()->session['excel'];
+			$dataProvider= $model->searchInventarioGral();
+			$dataProvider->pagination= false; // for retrive all modules
+			$data = $dataProvider->data;
+			//$almacenProducto= AlmacenProducto::model()->with('idProducto0')->findAll(array('condition'=>'idAlmacen=2','order'=>'idProducto0.Material, idProducto0.codigo, idProducto0.detalle'));
+			$columnsTitle=array('Nro','Codigo','Material','Detalle Producto','Precio S/F','Precio C/F','Industria','Cant.xPaqt.','Stock Unidad','Stock Paquete');
+			$content=array();
+			$index=1;
+			foreach ($data as $item)
 			{
-				$almacenProducto= AlmacenProducto::model()->with('idProducto0')->findAll(array('condition'=>'idAlmacen=2','order'=>'idProducto0.Material, idProducto0.codigo, idProducto0.detalle'));
-		
-				$columnsTitle=array('Nro','Codigo','Material','Detalle Producto','Precio S/F','Precio C/F','Industria','Cant.xPaqt.','Stock Unidad','Stock Paquete');
-				$content=array();
-				$index=1;
-				foreach ($almacenProducto as $item)
-				{
-					array_push($content,array($index,
-					$item->idProducto0->codigo,
-					$item->idProducto0->material,
-					$item->idProducto0->color." ".$item->idProducto0->detalle." ".$item->idProducto0->marca,
-					$item->idProducto0->precioSFU."/".$item->idProducto0->precioSFP,
-					$item->idProducto0->precioCFU."/".$item->idProducto0->precioCFP,
-					$item->idProducto0->industria,
-					$item->idProducto0->cantXPaquete,
-					$item->stockU,
-					$item->stockP));
-					$index++;
-				}
-				$this->createExcel($columnsTitle, $content);
+				array_push($content,array($index,
+				$item->idProducto0->codigo,
+				$item->idProducto0->material,
+				$item->idProducto0->color." ".$item->idProducto0->detalle." ".$item->idProducto0->marca,
+				$item->idProducto0->precioSFU."/".$item->idProducto0->precioSFP,
+				$item->idProducto0->precioCFU."/".$item->idProducto0->precioCFP,
+				$item->idProducto0->industria,
+				$item->idProducto0->cantXPaquete,
+				$item->stockU,
+				$item->stockP));
+				$index++;
 			}
+			$this->createExcel($columnsTitle, $content);
 		}
 		
+		$dataProvider = new AlmacenProducto('searchStockDist');
+		
+		$dataProvider->unsetAttributes();
+		if(isset($_GET['AlmacenProducto']))
+		{
+			$dataProvider->attributes = $_GET['AlmacenProducto'];
+			$dataProvider->codigo = $_GET['AlmacenProducto']['codigo'];
+			//$dataProvider->industria = $_GET['AlmacenProducto']['industria'];
+			$dataProvider->material = $_GET['AlmacenProducto']['material'];
+			$dataProvider->detalle = $_GET['AlmacenProducto']['detalle'];
+		}
+		/*
 		$productos=new CActiveDataProvider('AlmacenProducto',
 				array(
 						'criteria'=>array(
@@ -99,9 +111,9 @@ class StockController extends Controller
 						'pagination'=>array(
 								'pageSize'=>'20',
 						),
-				));
+				));*/
 		$index=1;
-		$this->render('distribuidora',array('productos'=>$productos,'index'=>$index));		
+		$this->render('distribuidora',array('productos'=>$dataProvider,'index'=>$index));		
 	}
 	
 	public function actionDistribuidoraAdd()

@@ -165,10 +165,12 @@ class DistribuidoraController extends Controller
 			if($venta->save()){
 				$det=count($detalle);
 				$almacenes=array();	$i=0;
+				//$movimiento=array();
 				foreach($detalle as $item){
 					$item->idVenta = $venta->idVenta;
 					if($item->validate()){
 						array_push($almacenes,AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto));
+						//array_push($movimiento,new MovimientoAlmacen);
 						$almacenes[$i]->stockU = $almacenes[$i]->stockU - $item->cantidadU;
 						while($almacenes[$i]->stockU<0){
 							$almacenes[$i]->stockP = $almacenes[$i]->stockP - 1;
@@ -183,6 +185,16 @@ class DistribuidoraController extends Controller
 						else{
 							$det--; $i++;
 						}
+						/*
+						$movimiento[$i]->idProducto = $item->idProducto;
+						//$movimiento[$i]->idAlmacenDestino = 2;
+						$movimiento[$i]->idAlmacenOrigen = 2;
+						//$idUser->idUser = Yii::app()->user->id;
+						$movimiento[$i]->fechaMovimiento = date("Y-m-d H:i:s");
+						$movimiento[$i]->cantidadU = $item->cantidadU;
+						$movimiento[$i]->cantidadP = $item->cantidadP;
+						$movimineto[$i]->obs = "Venta de Distribuidora";
+						*/
 					}
 					else{
 						$venta->delete();
@@ -199,6 +211,7 @@ class DistribuidoraController extends Controller
 						}
 						if($item->save()){
 							$almacenes[$i]->save();
+							//$movimiento[$i]->save();
 						}
 						$i++;
 					}
@@ -376,6 +389,18 @@ class DistribuidoraController extends Controller
 					$almacenes->stockP = $almacenes->stockP + $item->cantidadP;
 					if($item->delete())
 					{
+						/*
+						$movimiento=new MovimientoAlmacen;
+						 $movimiento[$i]->idProducto = $item->idProducto;
+						$movimiento[$i]->idAlmacenDestino = 2;
+						//$movimiento[$i]->idAlmacenOrigen = 2;
+						//$idUser->idUser = Yii::app()->user->id;
+						$movimiento[$i]->fechaMovimiento = date("Y-m-d H:i:s");
+						$movimiento[$i]->cantidadU = $item->cantidadU;
+						$movimiento[$i]->cantidadP = $item->cantidadP;
+						$movimineto[$i]->obs = "Venta de Distribuidora";
+						$movimineto[$i]->save();
+						*/
 						$almacenes->save();
 					}
 				}
@@ -396,6 +421,18 @@ class DistribuidoraController extends Controller
 					}
 					if($item->save())
 					{
+						/*
+						 $movimiento=new MovimientoAlmacen;
+						$movimiento[$i]->idProducto = $item->idProducto;
+						//$movimiento[$i]->idAlmacenDestino = 2;
+						$movimiento[$i]->idAlmacenOrigen = 2;
+						//$idUser->idUser = Yii::app()->user->id;
+						$movimiento[$i]->fechaMovimiento = date("Y-m-d H:i:s");
+						$movimiento[$i]->cantidadU = $item->cantidadU;
+						$movimiento[$i]->cantidadP = $item->cantidadP;
+						$movimineto[$i]->obs = "Venta de Distribuidora";
+						$movimineto[$i]->save();
+						*/
 						$almacenes->save();
 					}
 				}
@@ -558,6 +595,8 @@ class DistribuidoraController extends Controller
 			$movimentoProducto->codigo=$_GET['DetalleVenta']['codigo'];
 			$movimentoProducto->fecha=$_GET['DetalleVenta']['fecha'];
 			//$movimentoProducto->apellido=$_GET['DetalleVenta'];
+			$movimentoProducto->codigoProducto=$_GET['DetalleVenta']['codigoProducto'];
+			$movimentoProducto->color=$_GET['DetalleVenta']['color'];
 			$movimentoProducto->material=$_GET['DetalleVenta']['material'];
 			$movimentoProducto->detalle=$_GET['DetalleVenta']['detalle'];
 		}

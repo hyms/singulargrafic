@@ -4,7 +4,8 @@
 	echo CHtml::link('Dercargar Excel',array('stock/distribuidora','excel'=>true), array('class' => 'btn btn-link') );
 	
 	$this->widget('zii.widgets.grid.CGridView', array(
-	'dataProvider'=>$productos,
+	'dataProvider'=>$productos->searchStockDist(),
+	'filter'=>$productos,
 	'itemsCssClass' => 'table table-hover table-condensed',
 	'htmlOptions' => array('class' => 'table-responsive'),
 	'columns'=>array(
@@ -15,16 +16,19 @@
 		
 		array(
 				'header'=>'Codigo',
-				'value'=>'$data->idProducto0->codigo'
+				'value'=>'$data->idProducto0->codigo',
+				'filter'=>CHtml::activeTextField($productos, 'codigo',array("class"=>"form-control")),
 		),
 		array(
 				'header'=>'Material',
-				'value'=>'$data->idProducto0->material'
+				'value'=>'$data->idProducto0->material',
+				'filter'=>CHtml::activeDropDownList($productos,'material',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'material','select'=>'material','condition'=>'idAlmacen=2')),'material','material'),array("class"=>"form-control ",'empty'=>'')),
 		),
 		array(
 				'header'=>'Detalle Producto',
 				//'value'=>'$data->idProducto0->color." ".$data->idProducto0->detalle'
-				'value'=>'$data->idProducto0->color." ".$data->idProducto0->detalle." ".$data->idProducto0->marca'
+				'value'=>'$data->idProducto0->color." ".$data->idProducto0->detalle." ".$data->idProducto0->marca',
+				'filter'=>CHtml::activeTextField($productos, 'detalle',array("class"=>"form-control")),
 		),
 		array(
 				'header'=>'Precio S/F',

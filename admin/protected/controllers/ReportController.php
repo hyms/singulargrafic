@@ -210,6 +210,83 @@ class ReportController extends Controller
 		$this->render('producto');
 	}
 	
+	public function actionProductoSaldo()
+	{
+		if(isset($_GET['almacen']))
+		{
+			$startDate=date("Y")."-".date("m")."-1 00:00:00";
+			$endDate=date("Y")."-".date("m")."-".date("d")." 23:59:59";
+			
+			$startDateS=date("Y")."-".(date("m")-1)."-1 00:00:00";
+			$endDateS=date("Y")."-".date("m")."-1 00:00:00";
+			$saldos = SaldoProducto::model()->with('idAlmacen0')->with('idAlmacen0.idProducto0')->findAll(array('condition'=>'`idAlmacen0`.idAlmacen='.$_GET['almacen'].' and `t`.fechaSaldo Between "'.$startDateS.'" and "'.$endDateS.'"','order'=>'idProducto0.Material,idProducto0.codigo, idProducto0.detalle'));
+			
+			if(empty($saldos) || count($saldos)==0)
+			{
+				$almacenes = AlmacenProducto::model()->findAll('idAlmacen='.$_GET['almacen']);
+				foreach ($almacenes as $key => $almacen)
+				{
+					$saldos = new SaldoProducto;
+					$entradaTU=0;$entradaTP=0;
+					$salidasTU=0;$salidasTP=0;
+					$entradas = MovimientoAlmacen::model()->findAll('idAlmacenDestino='.$almacen->idAlmacen.'  and idProducto='.$almacen->idProducto.' and fechaMovimiento Between "'.$startDateS.'" and "'.$endDateS.'"');
+					foreach ($entradas as $entrada)
+					{
+						$entradaTU=$entradaTU+$entrada->cantidadU;
+						$entradaTP=$entradaTP+$entrada->cantidadP;
+					}
+					$salidas = MovimientoAlmacen::model()->findAll('idAlmacenOrigen='.$almacen->idAlmacen.'  and idProducto='.$almacen->idProducto.' and fechaMovimiento Between "'.$startDateS.'" and "'.$endDateS.'"');
+					foreach ($salidas as $salida)
+					{
+						$salidasTU=$salidasTU+$salida->cantidadU;
+						$salidasTP=$salidasTP+$salida->cantidadP;					
+					}
+					$saldos->saldoU=$entradaTU-$salidasTU;
+					$saldos->saldoP=$entradaTP-$salidasTP;
+					$saldos->idAlmacen=$almacen->idAlmacenProducto;
+					$saldos->fechaRealizado=date("Y-m-d H:i:s");
+					$saldos->fechaSaldo=date("Y")."-".(date("m")-1)."-".$this->getUltimoDiaMes(date("Y"), (date("m")-1));
+					$saldos->save();
+					//print_r($saldos->attributes);
+					//echo '<br>';
+				}
+				$saldos = SaldoProducto::model()->with('idAlmacen0')->with('idAlmacen0.idProducto0')->findAll(array('condition'=>'`idAlmacen0`.idAlmacen='.$_GET['almacen'].' and `t`.fechaSaldo Between "'.$startDateS.'" and "'.$endDateS.'"','order'=>'idProducto0.Material,idProducto0.codigo, idProducto0.detalle'));
+			}
+		
+			/*$almacenes = AlmacenProducto::model()->findAll('idAlmacen='.$_GET['almacen']);
+			$saldo = array();
+			$entradaTU=array();$entradaTP=array();
+			$salidasTU=array();$salidasTP=array();
+			foreach ($almacenes as $key => $almacen)
+			{
+				$saldoA[$key] = new SaldoProducto;
+				$entradaTU[$key]=0;$entradaTP[$key]=0;
+				$salidasTU[$key]=0;$salidasTP[$key]=0;
+				$entradas = MovimientoAlmacen::model()->findAll('idAlmacenDestino='.$almacen->idAlmacen.' and idProducto='.$almacen->idProducto.' and fechaMovimiento Between "'.$startDate.'" and "'.$endDate.'"');
+				foreach ($entradas as $entrada)
+				{
+					$entradaTU[$key]=$entradaTU[$key]+$entrada->cantidadU;
+					$entradaTP[$key]=$entradaTP[$key]+$entrada->cantidadP;
+				}
+				$salidas = MovimientoAlmacen::model()->findAll('idAlmacenOrigen='.$almacen->idAlmacen.' and idProducto='.$almacen->idProducto.' and fechaMovimiento Between "'.$startDate.'" and "'.$endDate.'"');
+				foreach ($salidas as $salida)
+				{
+					$salidasTU[$key]=$salidasTU[$key]+$salida->cantidadU;
+					$salidasTP[$key]=$salidasTP[$key]+$salida->cantidadP;					
+				}
+				$saldoA[$key]->saldoU=$entradaTU[$key]-$salidasTU[$key];
+				$saldoA[$key]->saldoP=$entradaTP[$key]-$salidasTP[$key];
+				$saldoA[$key]->idAlmacen=$almacen->idAlmacenProducto;
+			}
+			$entradas=array('unidad'=>$entradaTU,'paquete'=>$entradaTP);
+			$salidas=array('unidad'=>$salidasTU,'paquete'=>$salidasTP);
+			$this->render('productoSaldo',array('saldoA'=>$saldos,'entradas'=>$entradas,'salidas'=>$salidas,'saldoB'=>$saldoA));*/
+			$this->render('productoSaldo',array('saldoA'=>$saldos,'entradas'=>'','salidas'=>'','saldoB'=>''));
+		}
+		else
+			$this->render('productoSaldo',array('saldoA'=>'','entradas'=>'','salidas'=>'','saldoB'=>''));
+	}
+	
 	public function actionCliente()
 	{
 		$this->render('cliente');

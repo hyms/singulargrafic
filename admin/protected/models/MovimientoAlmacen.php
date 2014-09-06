@@ -120,6 +120,8 @@ class MovimientoAlmacen extends CActiveRecord
 	public $detalle;
 	public $origen;
 	public $destino;
+	public $start_date;
+	public $end_date;
 	public function searchReporte()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
@@ -136,6 +138,8 @@ class MovimientoAlmacen extends CActiveRecord
 		$criteria->compare('cantidadP',$this->cantidadP);
 		$criteria->compare('idUser',$this->idUser);
 		$criteria->compare('fechaMovimiento',$this->fechaMovimiento,true);
+		
+		//$criteria->compare('fechaMovimiento',$this->end_date,true);
 	
 		$criteria->compare('idProducto0.codigo',$this->codigo,true);
 		$criteria->compare('idProducto0.material',$this->material,true);
@@ -144,7 +148,10 @@ class MovimientoAlmacen extends CActiveRecord
 	
 		$criteria->compare('idAlmacenOrigen0.nombre',$this->origen,true);
 		$criteria->compare('idAlmacenDestino0.nombre',$this->destino,true);
-	
+		if(!empty($this->start_date) && !empty($this->end_date))
+		{
+			$criteria->addBetweenCondition('fechaMovimiento',$this->start_date." 00:00:00",$this->end_date." 23:59:59");
+		}
 		$data = new CActiveDataProvider($this, array(
 				'criteria'=>$criteria,
 				'pagination'=>array(

@@ -8,6 +8,7 @@ $this->widget('zii.widgets.CMenu',array(
 							array('label'=>'Mas Vendidos', 'url'=>array('#')),
 							array('label'=>'Ultimos Vendidos', 'url'=>array('#')),
 							array('label'=>'Por Agotarse', 'url'=>array('#')),
+							array('label'=>'Saldos', 'url'=>array('report/productoSaldo')),
 							
 						),
 				)); 
