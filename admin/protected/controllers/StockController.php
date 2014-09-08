@@ -65,7 +65,7 @@ class StockController extends Controller
 		if(isset($_GET['excel']) && isset(Yii::app()->session['excel']))
 		{
 			$model= Yii::app()->session['excel'];
-			$dataProvider= $model->searchInventarioGral();
+			$dataProvider= $model->searchStockDist();
 			$dataProvider->pagination= false; // for retrive all modules
 			$data = $dataProvider->data;
 			//$almacenProducto= AlmacenProducto::model()->with('idProducto0')->findAll(array('condition'=>'idAlmacen=2','order'=>'idProducto0.Material, idProducto0.codigo, idProducto0.detalle'));

@@ -116,7 +116,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		),
 		array(
 				'header'=>'A',
-				'value'=>'$data->idAlmacenDestino0->nombre',
+				'value'=>'(!empty($data->idAlmacenDestino0->nombre))?$data->idAlmacenDestino0->nombre:""',
 				'filter'=>CHtml::activeDropDownList($movimientos,'destino',CHtml::listData(Almacen::model()->findAll(),'nombre','nombre'),array("class"=>"form-control ",'empty'=>'')),
 		),
 		array(

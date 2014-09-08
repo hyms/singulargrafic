@@ -165,18 +165,27 @@ class DistribuidoraController extends Controller
 			if($venta->save()){
 				$det=count($detalle);
 				$almacenes=array();	$i=0;
-				//$movimiento=array();
+				$movimiento=array();
 				foreach($detalle as $item){
 					$item->idVenta = $venta->idVenta;
 					if($item->validate()){
-						array_push($almacenes,AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto));
-						//array_push($movimiento,new MovimientoAlmacen);
+						array_push($almacenes, AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto));
+						array_push($movimiento, new MovimientoAlmacen);
 						$almacenes[$i]->stockU = $almacenes[$i]->stockU - $item->cantidadU;
 						while($almacenes[$i]->stockU<0){
 							$almacenes[$i]->stockP = $almacenes[$i]->stockP - 1;
 							$almacenes[$i]->stockU = $almacenes[$i]->stockU + $almacenes[$i]->idProducto0->cantXPaquete;
 						}
 						$almacenes[$i]->stockP = $almacenes[$i]->stockP - $item->cantidadP;
+						$movimiento[$i]->idProducto = $almacenes[$i]->idProducto0->idProducto;
+						//$movimiento[$i]->idAlmacenDestino = 2;
+						$movimiento[$i]->idAlmacenOrigen = 2;
+						//$idUser->idUser = Yii::app()->user->id;
+						$movimiento[$i]->fechaMovimiento = date("Y-m-d H:i:s");
+						$movimiento[$i]->cantidadU = $item->cantidadU;
+						$movimiento[$i]->cantidadP = $item->cantidadP;
+						$movimiento[$i]->obs = 'Venta de Distribuidora';
+						
 						if($almacenes[$i]->stockP<0){
 							$venta->addError('obs', 'No existen suficientes Insumos');
 							$venta->delete();
@@ -185,16 +194,6 @@ class DistribuidoraController extends Controller
 						else{
 							$det--; $i++;
 						}
-						/*
-						$movimiento[$i]->idProducto = $item->idProducto;
-						//$movimiento[$i]->idAlmacenDestino = 2;
-						$movimiento[$i]->idAlmacenOrigen = 2;
-						//$idUser->idUser = Yii::app()->user->id;
-						$movimiento[$i]->fechaMovimiento = date("Y-m-d H:i:s");
-						$movimiento[$i]->cantidadU = $item->cantidadU;
-						$movimiento[$i]->cantidadP = $item->cantidadP;
-						$movimineto[$i]->obs = "Venta de Distribuidora";
-						*/
 					}
 					else{
 						$venta->delete();
@@ -211,7 +210,7 @@ class DistribuidoraController extends Controller
 						}
 						if($item->save()){
 							$almacenes[$i]->save();
-							//$movimiento[$i]->save();
+							$movimiento[$i]->save();
 						}
 						$i++;
 					}
@@ -275,6 +274,7 @@ class DistribuidoraController extends Controller
 	
 	public function actionModificar()
 	{
+		
 		if(isset($_POST['Venta']['idVenta']))
 			$_GET['id']=$_POST['Venta']['idVenta'];
 		
@@ -374,7 +374,7 @@ class DistribuidoraController extends Controller
 					$i++;
 				}
 			}
-			
+			//print_r($detalle2);
 			if($swv==1 && $det==0)
 			{
 				foreach ($detalle as $item)
@@ -389,18 +389,17 @@ class DistribuidoraController extends Controller
 					$almacenes->stockP = $almacenes->stockP + $item->cantidadP;
 					if($item->delete())
 					{
-						/*
 						$movimiento=new MovimientoAlmacen;
-						 $movimiento[$i]->idProducto = $item->idProducto;
-						$movimiento[$i]->idAlmacenDestino = 2;
+						$movimiento->idProducto = $almacenes->idProducto0->idProducto;
+						$movimiento->idAlmacenDestino = 2;
 						//$movimiento[$i]->idAlmacenOrigen = 2;
 						//$idUser->idUser = Yii::app()->user->id;
-						$movimiento[$i]->fechaMovimiento = date("Y-m-d H:i:s");
-						$movimiento[$i]->cantidadU = $item->cantidadU;
-						$movimiento[$i]->cantidadP = $item->cantidadP;
-						$movimineto[$i]->obs = "Venta de Distribuidora";
-						$movimineto[$i]->save();
-						*/
+						$movimiento->fechaMovimiento = date("Y-m-d H:i:s");
+						$movimiento->cantidadU = $item->cantidadU;
+						$movimiento->cantidadP = $item->cantidadP;
+						$movimiento->obs = "Devolucion de Material";
+						$movimiento->save();
+						
 						$almacenes->save();
 					}
 				}
@@ -421,18 +420,18 @@ class DistribuidoraController extends Controller
 					}
 					if($item->save())
 					{
-						/*
-						 $movimiento=new MovimientoAlmacen;
-						$movimiento[$i]->idProducto = $item->idProducto;
+						
+						$movimiento=new MovimientoAlmacen;
+						$movimiento->idProducto = $almacenes->idProducto0->idProducto;
 						//$movimiento[$i]->idAlmacenDestino = 2;
-						$movimiento[$i]->idAlmacenOrigen = 2;
+						$movimiento->idAlmacenOrigen = 2;
 						//$idUser->idUser = Yii::app()->user->id;
-						$movimiento[$i]->fechaMovimiento = date("Y-m-d H:i:s");
-						$movimiento[$i]->cantidadU = $item->cantidadU;
-						$movimiento[$i]->cantidadP = $item->cantidadP;
-						$movimineto[$i]->obs = "Venta de Distribuidora";
-						$movimineto[$i]->save();
-						*/
+						$movimiento->fechaMovimiento = date("Y-m-d H:i:s");
+						$movimiento->cantidadU = $item->cantidadU;
+						$movimiento->cantidadP = $item->cantidadP;
+						$movimiento->obs = "Venta de Distribuidora";
+						$movimiento->save();
+						
 						$almacenes->save();
 					}
 				}
