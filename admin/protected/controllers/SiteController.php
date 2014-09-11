@@ -2,22 +2,23 @@
 
 class SiteController extends Controller
 {
-	/**
-	 * Declares class-based actions.
-	 */
-	public function actions()
+	public function filters()
 	{
+		return array( 'accessControl' ); // perform access control for CRUD operations
+	}
+	
+	public function accessRules() {
 		return array(
-			// captcha action renders the CAPTCHA image displayed on the contact page
-			'captcha'=>array(
-				'class'=>'CCaptchaAction',
-				'backColor'=>0xFFFFFF,
-			),
-			// page action renders "static" pages stored under 'protected/views/site/pages'
-			// They can be accessed via: index.php?r=site/page&view=FileName
-			'page'=>array(
-				'class'=>'CViewAction',
-			),
+				array('allow',
+						'actions'=>array('login','error'),
+						'users'=>array('*')
+				),
+				array('allow', // allow authenticated user to perform 'create' and 'update' actions
+						'expression'=>'isset($user->role) && ($user->role==="1")',
+				),
+				array('deny',
+						'users'=>array('*'),
+				),
 		);
 	}
 
@@ -77,6 +78,7 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
+		$this->layout = 'loginLayout';
 		$model=new LoginForm;
 
 		// if it is ajax validation request
@@ -92,7 +94,7 @@ class SiteController extends Controller
 			$model->attributes=$_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
-				$this->redirect(Yii::app()->user->returnUrl);
+				$this->redirect(Yii::app()->homeUrl);
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));
@@ -118,7 +120,7 @@ class SiteController extends Controller
 	
 		foreach ($tables as $table) {
 			$result = Yii::app()->db->createCommand('SELECT * FROM ' . $table)->query();
-			$return.= 'DROP TABLE IF EXISTS ' . $table . ';';
+			//$return.= 'DROP TABLE IF EXISTS ' . $table . ';';
 			$row2 = Yii::app()->db->createCommand('SHOW CREATE TABLE ' . $table)->queryRow();
 			$return.= "\n\n" . $row2['Create Table'] . ";\n\n";
 			foreach ($result as $row) {

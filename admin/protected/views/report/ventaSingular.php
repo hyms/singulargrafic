@@ -40,7 +40,7 @@ $this->widget('zii.widgets.CMenu',array(
 		'columns'=>array(
 			array(
 					'header'=>'Nro',
-					'value'=>'($row+1)',
+					'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
 			),
 			array(
 					'header'=>'Nº de Venta',
@@ -92,7 +92,9 @@ $this->widget('zii.widgets.CMenu',array(
 </div>
 <?php 
 //$datos=$ventas->getData();
-$datos=$ventas->searchDistribuidora()->getData();
+$datos=$ventas->searchDistribuidora();
+$datos->Pagination=false;
+$datos=$datos->getData();
 $total=0;
 foreach ($datos as $item)
 {

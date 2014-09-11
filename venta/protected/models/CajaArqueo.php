@@ -28,6 +28,7 @@ class CajaArqueo extends CActiveRecord
 	{
 		return 'cajaArqueo';
 	}
+	
 	public $max; 
 	/**
 	 * @return array validation rules for model attributes.

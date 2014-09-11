@@ -594,6 +594,70 @@ class CtpController extends Controller
 			throw new CHttpException(400,'Petición no válida.');
 	}
 	
+	public function actionMaterial()
+	{
+		$material = AlmacenProducto::model()->with('idProducto0')->findAll(array('condition'=>'idAlmacen=3','order'=>'idProducto0.codigo asc, idProducto0.material asc'));
+		
+		$this->render('material',array('material'=>$material));		
+	}
+	
+	public function actionProductos()
+	{
+		if(isset($_GET['id']))
+		{
+			$almacen=$this->verifyModel(AlmacenProducto::model()->with('idProducto0')->findByPk($_GET['id']));
+			$deposito=AlmacenProducto::model()->find('idAlmacen=1 and idProducto='.$almacen->idProducto);
+			$model=new MovimientoAlmacen;
+	
+			$model->idProducto = $almacen->idProducto;
+			$model->idAlmacenDestino = $almacen->idAlmacen;
+			$model->idAlmacenOrigen = $deposito->idAlmacen;
+			//$idUser->idUser = Yii::app()->user->id;
+			$model->fechaMovimiento = date("Y-m-d H:i:s");
+	
+			if(isset($_POST['MovimientoAlmacen']))
+			{
+				$model->attributes=$_POST['MovimientoAlmacen'];
+	
+				$deposito->stockU = $deposito->stockU - $model->cantidadU;
+				while($deposito->stockU<0)
+				{
+					$deposito->stockU=$deposito->stockU+$almacen->idProducto0->cantXPaquete;
+					$deposito->stockP = $deposito->stockP - 1;
+				}
+				$deposito->stockP = $deposito->stockP - $model->cantidadP;
+	
+				if($deposito->stockP < 0)
+					$model->addError('cantidadP','No existen suficientes insumos');
+				else{
+					if($model->save())
+					{
+						// form inputs are valid, do something here
+						$almacen->stockU = $almacen->stockU + $model->cantidadU;
+						$almacen->stockP = $almacen->stockP + $model->cantidadP;
+	
+						if($almacen->save() && $deposito->save()){
+							//$this->redirect(array('distribuidora/productos'));
+							$this->redirect(array('ctp/material'));
+						}
+					}
+				}
+			}
+			$index=2;
+			$this->renderPartial('add_reduce',array('model'=>$model,'almacen'=>$almacen,'deposito'=>$deposito,'index'=>$index));
+	
+		}
+		else
+		{
+			$this->redirect(array('ctp/material'));
+			/*$productos = new CActiveDataProvider('AlmacenProducto',array('criteria'=>$criteria,
+				'pagination'=>array(
+						'pageSize'=>15,
+				),));
+			//init filter
+			$this->renderPartial('add_reduce',array('productos'=>$productos,'index'=>$index));*/
+		}
+	}
 	public function actionAjaxFactura()
 	{
 		//Yii::app()->user->id;

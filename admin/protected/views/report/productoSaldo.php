@@ -2,6 +2,7 @@
 	<?php $this->renderPartial('menu')?>
 </div>
 <div class="col-sm-10">
+<div>
 	<?php $this->renderPartial('producto/menu')?>
 	<?php
 	$this->widget('zii.widgets.CMenu',array(
@@ -19,13 +20,34 @@
 	
 	if(!empty($saldoA))// && !empty($entradas) && !empty($salidas) && !empty($saldoB))
 	{
-		$dataProvider =  new CArrayDataProvider($saldoA,
-												array(
-														'id'=>'idSaldoProducto',
-														'keyField' => 'id',
-														'keys'=>array('id'),
-														'pagination'=>array('pageSize'=>'20',),
-												));//*/
+		$resultado=array();
+		
+		foreach ($saldoA as $key=>$item)
+		{
+			$resultado[$key]=array(
+					'id'=>$item->idAlmacen,
+					'codigo'=>$item->idAlmacen0->idProducto0->codigo,
+					'detalle'=>$item->idAlmacen0->idProducto0->material.", ".$item->idAlmacen0->idProducto0->color." ".$item->idAlmacen0->idProducto0->detalle.", ".$item->idAlmacen0->idProducto0->marca,
+					'saldoAnterior'=>array('saldoU'=>$item->saldoU,'saldoP'=>$item->saldoP),
+					'entradas'=>array('saldoU'=>$entradas[$key]['unidad'],'saldoP'=>$entradas[$key]['paquete']),
+					'salidas'=>array('saldoU'=>$salidas[$key]['unidad'],'saldoP'=>$salidas[$key]['paquete']),
+					'saldoActual'=>array('saldoU'=>$saldoB[$key]->saldoU,'saldoP'=>$saldoB[$key]->saldoP),
+					'costo'=>$costos[$key],
+			);
+		}
+		//print_r($resultado);
+		$dataProvider =  new CArrayDataProvider($resultado,
+				array(
+						'id'=>'idAlmacen',
+						'keyField' => 'id',
+						'keys'=>array('id','codigo','detalle'),
+						'pagination'=>array('pageSize'=>'20',),
+						'sort'=>array(
+								'attributes'=>array(
+										'id', 'codigo', 'detalle','costo',
+								),
+						),
+				));//
 		echo "<br>Fecha: <b>".date("Y-m-d",strtotime($saldoA[0]->fechaSaldo))."</b>";
 		$this->widget('zii.widgets.grid.CGridView', array(
 				'dataProvider'=>$dataProvider,
@@ -33,23 +55,63 @@
 				'htmlOptions' => array('class' => 'table-responsive'),
 				'columns'=>array(
 						array(
-								'header'=>'Codigo',
-								'value'=>'$data->idAlmacen0->idProducto0->codigo'
+								'name'=>'codigo',
+								'value'=>'$data["codigo"]',
 						),
 						array(
-								'header'=>'Detalle',
-								'value'=>'$data->idAlmacen0->idProducto0->material.", ".$data->idAlmacen0->idProducto0->color." ".$data->idAlmacen0->idProducto0->detalle.", ".$data->idAlmacen0->idProducto0->marca'
+								'name'=>'detalle',
+								'value'=>'$data["detalle"]'
 						),
 						array(
-								'header'=>'Cant. Unidad',
-								'value'=>'$data->saldoU'
+								'header'=>'Saldo Anterior',
+								'type'=>'raw',
+								'value'=>'$data["saldoAnterior"]["saldoU"]."</td><td>".$data["saldoAnterior"]["saldoP"]',
+								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-sm-1'),
+								'htmlOptions'=>array('class'=>'text-right'),
 						),
 						array(
-								'header'=>'Cant. Paquete',
-								'value'=>'$data->saldoP'
+								'header'=>'Entradas',
+								'type'=>'raw',
+								'value'=>'$data["entradas"]["saldoU"]."</td><td>".$data["entradas"]["saldoP"]',
+								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-sm-1'),
+								'htmlOptions'=>array('class'=>'text-right'),
 						),
+						array(
+								'header'=>'Salidas',
+								'type'=>'raw',
+								'value'=>'$data["salidas"]["saldoU"]."</td><td>".$data["salidas"]["saldoP"]',
+								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-sm-1'),
+								'htmlOptions'=>array('class'=>'text-right'),
+						),
+						array(
+								'header'=>'Saldo Actual',
+								'type'=>'raw',
+								'value'=>'$data["saldoActual"]["saldoU"]."</td><td>".$data["saldoActual"]["saldoP"]',
+								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-sm-1'),
+								'htmlOptions'=>array('class'=>'text-right'),
+						),
+						array(
+								'name'=>'costo',
+								'type'=>'raw',
+								'value'=>'$data["costo"]',
+						),
+						
 				)
-		));
-	} 
+		));//*/
+	}
 	?>
+	</div>
+	<div class="col-sm-offset-9">
+	<div class="well well-sm">
+	<?php 
+	$total = 0;
+	foreach ($costos as $costo)
+	{
+		$total=$total+$costo;
+	}
+	echo "<b>Total:</b>".$total;
+	?>
+	</div>
+	</div>
 </div>
+

@@ -53,6 +53,7 @@
 </div>
 
 <?php 
+$id=(!empty($venta->idVenta))?(',id:'.$venta->idVenta):"";
 Yii::app()->getClientScript()->registerScript("check","
 function factura(tipo)
 {
@@ -66,10 +67,11 @@ function factura(tipo)
 		item ['index'] = index;
 		jsonObj.push(item);
 	});
+		
 		$.ajax({
 			type 		: 'POST', // define the type of HTTP verb we want to use (POST for our form)
 			url 		: '".CHtml::normalizeUrl(array('/distribuidora/ajaxFactura'))."', // the url where we want to POST
-			data 		: {detalle:jsonObj,tipo:tipo}, // our data object
+			data 		: {detalle:jsonObj,tipo:tipo".$id."}, // our data object
 			dataType 	: 'json', // what type of data do we expect back from the server
             encode  	: true
 		})

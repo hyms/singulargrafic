@@ -3,13 +3,22 @@
 class CajaController extends Controller
 {
 	
+	public function filters()
+	{
+		return array( 'accessControl' ); // perform access control for CRUD operations
+	}
 	
-	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
-	 */
+	public function accessRules() {
+		return array(
+				array('allow', // allow authenticated user to perform 'create' and 'update' actions
+						'expression'=>'isset($user->role) && ($user->role==="1")',
+				),
+				array('deny',
+						'users'=>array('*'),
+				),
+		);
+	}
 	
-
 	/**
 	 * Lists all models.
 	 */

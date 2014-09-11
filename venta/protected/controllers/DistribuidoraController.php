@@ -3,6 +3,8 @@
 class DistribuidoraController extends Controller
 {
 	var $cajaDistribuidora=2;
+	var $alamcenDistribuidora=2;
+	
 	public function filters()
 	{
 		return array( 'accessControl' ); // perform access control for CRUD operations
@@ -65,24 +67,10 @@ class DistribuidoraController extends Controller
 		$cajaMovimiento->tipo = 0;
 		
 		//init default values
-		$row = Venta::model()->find(array("condition"=>"tipoVenta=1",'order'=>'fechaVenta Desc'));
-		if(empty($row))
-			$row=new Venta;
-		if(empty($row->serie))
-			$row->serie = 65;
-		$venta->numero = $row->numero +1;
-		if($row->numero==1001){
-			$row->numero=1;
-			$row->serie++;
-			if($row->serie==91)
-				$row->serie = 65;
-		}
-		
-		$venta->serie = $row->serie;
-		$venta->codigo = chr($venta->serie)."P-".$venta->numero."-".date("y");
 		$venta->fechaVenta = date("Y-m-d H:i:s");
 		$venta->formaPago = 0;
 		$venta->tipoVenta = 1;
+		$venta=$this->getCodigo($venta);
 		//end default values
 		
 		//init filter
@@ -114,25 +102,7 @@ class DistribuidoraController extends Controller
 		if(isset($_POST['Venta']))
 		{
 			$venta->attributes = $_POST['Venta'];
-			$row = Venta::model()->find(array("condition"=>"tipoVenta=".$venta->tipoVenta,'order'=>'fechaVenta Desc'));
-			if(empty($row))
-				$row=new Venta;
-			
-			if(empty($row->serie) && $venta->tipoVenta==1)
-				$row->serie = 65;
-			$venta->numero = $row->numero +1;
-			if($row->numero==1001 && $venta->tipoVenta==1){
-				$row->numero=1;
-				$row->serie++;
-				if($row->serie==91)
-					$row->serie = 65;
-			}
-			$venta->serie = $row->serie;
-			if($venta->tipoVenta==1)
-				$venta->codigo = chr($venta->serie)."P-".$venta->numero."-".date("y");
-			else
-				$venta->codigo = $venta->numero."-P";
-			
+			$venta = $this->getCodigo($venta);
 			$venta->estado = 1;
 			if($venta->formaPago==1){
 				$venta->estado = 2;
@@ -423,7 +393,7 @@ class DistribuidoraController extends Controller
 						
 						$movimiento=new MovimientoAlmacen;
 						$movimiento->idProducto = $almacenes->idProducto0->idProducto;
-						//$movimiento[$i]->idAlmacenDestino = 2;
+						//$movimiento->idAlmacenDestino = 2;
 						$movimiento->idAlmacenOrigen = 2;
 						//$idUser->idUser = Yii::app()->user->id;
 						$movimiento->fechaMovimiento = date("Y-m-d H:i:s");
@@ -455,14 +425,14 @@ class DistribuidoraController extends Controller
 		if(isset($_GET['id']))
 		{
 			$ventas = Venta::model()
-			->with("idCliente0")
-			->with("detalleVentas")
-			->with("detalleVentas.idAlmacenProducto0")
-			->with("detalleVentas.idAlmacenProducto0.idProducto0")
-			->with("idCajaMovimientoVenta0")
-			->with("idCajaMovimientoVenta0.idUser0")
-			->with("idCajaMovimientoVenta0.idUser0.idEmpleado0")
-			->findByPk($_GET['id']);
+						->with("idCliente0")
+						->with("detalleVentas")
+						->with("detalleVentas.idAlmacenProducto0")
+						->with("detalleVentas.idAlmacenProducto0.idProducto0")
+						->with("idCajaMovimientoVenta0")
+						->with("idCajaMovimientoVenta0.idUser0")
+						->with("idCajaMovimientoVenta0.idUser0.idEmpleado0")
+						->findByPk($_GET['id']);
 			if($ventas!=null)
 				$this->render('preview',array('venta'=>$ventas));
 			else
@@ -650,12 +620,12 @@ class DistribuidoraController extends Controller
 		}
 		
 		$caja = $this->verifyModel(Venta::model()
-		->with('idCliente0')
-		->with('detalleVentas')
-		->with('detalleVentas.idAlmacenProducto0')
-		->with('detalleVentas.idAlmacenProducto0.idProducto0')
-		->with('idCajaMovimientoVenta0')
-		->findAll(array('condition'=>'idCajaMovimientoVenta0.idCaja='.$this->cajaDistribuidora.' '.$fact.$cond)));
+				->with('idCliente0')
+				->with('detalleVentas')
+				->with('detalleVentas.idAlmacenProducto0')
+				->with('detalleVentas.idAlmacenProducto0.idProducto0')
+				->with('idCajaMovimientoVenta0')
+				->findAll(array('condition'=>'idCajaMovimientoVenta0.idCaja='.$this->cajaDistribuidora.' '.$fact.$cond)));
 		//$tabla = $caja->ventas;
 		$this->render("previewVentas",array('tabla'=>$caja,));
 	}
@@ -762,7 +732,7 @@ class DistribuidoraController extends Controller
 			
 			$movimiento = new CajaMovimientoVenta;
 			$movimiento->motivo = "Traspaso de efectivo a Administracion";
-			$comprovante = CajaArqueo::model()->find(array('select'=>'max(comprobante) as max','condition'=>'idCaja='.$this->cajaDistribuidora));
+			$comprovante = CajaArqueo::model()->find(array('select'=>'MAX(comprobante) as max','condition'=>'idCaja='.$this->cajaDistribuidora));
 			$arqueo->comprobante = $comprovante->max +1;
 			$movimiento->fechaMovimiento = $arqueo->fechaVentas." 23:59:59";
 			
@@ -1072,27 +1042,22 @@ class DistribuidoraController extends Controller
 					$resultado[$key]['precioP']=$almacen->idProducto0->precioSFP;
 				}
 			}
+			$venta = new Venta;
+			$venta->tipoVenta = $tipo;			
+			$venta = $this->getCodigo($venta);
 			
-			$row = Venta::model()->find(array("condition"=>"tipoVenta=".$tipo,'order'=>'fechaVenta Desc'));
-			if(empty($row))
-				$row=new Venta;
-			if(empty($row->serie) && $tipo==1)
-				$row->serie = 65;
-			$numero = $row->numero +1;
-			if($row->numero==1001 && $tipo==1){
-				$row->numero;
-				$row->serie++;
-				if($row->serie==91)
-					$row->serie = 65;
+			if(isset($_POST['id']))
+			{
+				if(!empty($_POST['id']))
+				{
+					$ventaBkp=Venta::model()->findByPk($_POST['id']);
+					if($venta->tipoVenta==$ventaBkp->tipoVenta)
+					{
+						$venta->codigo=$ventaBkp->codigo;
+					}
+				}
 			}
-			$serie = $row->serie;
-			$codigo="";
-			if($tipo==1)
-				$codigo = chr($serie)."P-".$numero."-".date("y");
-			else
-				$codigo = $numero."-P";
-			
-			$resultado['codigo']=$codigo;
+			$resultado['codigo']=$venta->codigo;
 			echo CJSON::encode($resultado);
 		}
 		
@@ -1167,5 +1132,29 @@ class DistribuidoraController extends Controller
 	
 	protected function getUltimoDiaMes($elAnio,$elMes) {
 		return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
+	}
+	
+	protected function getCodigo($venta)
+	{
+		$row = Venta::model()->find(array("condition"=>"tipoVenta=".$venta->tipoVenta,'order'=>'fechaVenta Desc'));
+		if(empty($row))
+			$row=new Venta;
+			
+		if(empty($row->serie) && $venta->tipoVenta==1)
+			$row->serie = 65;
+		$venta->numero = $row->numero +1;
+		if($row->numero==1001 && $venta->tipoVenta==1){
+			$row->numero=1;
+			$row->serie++;
+			if($row->serie==91)
+				$row->serie = 65;
+		}
+		$venta->serie = $row->serie;
+		if($venta->tipoVenta==1)
+			$venta->codigo = chr($venta->serie)."P-".$venta->numero."-".date("y");
+		else
+			$venta->codigo = $venta->numero."-P";
+		
+		return $venta;
 	}
 }

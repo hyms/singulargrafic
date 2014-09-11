@@ -6,7 +6,7 @@
 <?php //echo CHtml::link('Imprimir', array("#"), array("class"=>"btn btn-default hidden-print")); ?>
 </div>
 </div>
-<div  style="height:500px; overflow:auto;">
+<div >
 <?php 
 	$this->widget('zii.widgets.grid.CGridView', array(
 		//'dataProvider'=>$ventas,
@@ -18,7 +18,7 @@
 		'columns'=>array(
 			array(
 					'header'=>'Nro',
-					'value'=>'($row+1)',
+					'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
 			),
 			array(
 					'header'=>'Nº de Venta',
@@ -82,7 +82,10 @@
 </div>
 <?php 
 //$datos=$ventas->getData();
-$datos=$ventas->searchDistribuidora()->getData();
+//$ventas->Pagination=false;
+$datos=$ventas->searchDistribuidora();
+$datos->Pagination=false;
+$datos=$datos->getData();
 $total=0;
 foreach ($datos as $item)
 {

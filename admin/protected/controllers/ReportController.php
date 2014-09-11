@@ -12,35 +12,18 @@ class ReportController extends Controller
 	 */
 	public function filters()
 	{
-		/*return array(
-			'accessControl', // perform access control for CRUD operations
-		);*/
+		return array( 'accessControl' ); // perform access control for CRUD operations
 	}
-
-	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
-	 */
-	public function accessRules()
-	{
-		/*return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
-		);*/
+	
+	public function accessRules() {
+		return array(
+				array('allow', // allow authenticated user to perform 'create' and 'update' actions
+						'expression'=>'isset($user->role) && ($user->role==="1")',
+				),
+				array('deny',
+						'users'=>array('*'),
+				),
+		);
 	}
 	
 	public function actionIndex()
@@ -215,118 +198,52 @@ class ReportController extends Controller
 		if(isset($_GET['almacen']))
 		{
 			$startDate=date("Y")."-".date("m")."-1 00:00:00";
-			$endDate=date("Y")."-".date("m")."-".date("d")." 23:59:59";
-			
+			$endDate=date("Y-m-d H:i:s");
+				
 			$startDateS=date("Y")."-".(date("m")-1)."-1 00:00:00";
 			$endDateS=date("Y")."-".date("m")."-1 00:00:00";
-			$saldos = SaldoProducto::model()->with('idAlmacen0')->with('idAlmacen0.idProducto0')->findAll(array('condition'=>'`idAlmacen0`.idAlmacen='.$_GET['almacen'].' and `t`.fechaSaldo Between "'.$startDateS.'" and "'.$endDateS.'"','order'=>'idProducto0.Material,idProducto0.codigo, idProducto0.detalle'));
 			
-			if(empty($saldos) || count($saldos)==0)
-			{
-				$almacenes = AlmacenProducto::model()->findAll('idAlmacen='.$_GET['almacen']);
-				foreach ($almacenes as $key => $almacen)
-				{
-					$saldos = new SaldoProducto;
-					$entradaTU=0;$entradaTP=0;
-					$salidasTU=0;$salidasTP=0;
-					$entradas = MovimientoAlmacen::model()->findAll('idAlmacenDestino='.$almacen->idAlmacen.'  and idProducto='.$almacen->idProducto.' and fechaMovimiento Between "'.$startDateS.'" and "'.$endDateS.'"');
-					foreach ($entradas as $entrada)
-					{
-						$entradaTU=$entradaTU+$entrada->cantidadU;
-						$entradaTP=$entradaTP+$entrada->cantidadP;
-					}
-					$salidas = MovimientoAlmacen::model()->findAll('idAlmacenOrigen='.$almacen->idAlmacen.'  and idProducto='.$almacen->idProducto.' and fechaMovimiento Between "'.$startDateS.'" and "'.$endDateS.'"');
-					foreach ($salidas as $salida)
-					{
-						$salidasTU=$salidasTU+$salida->cantidadU;
-						$salidasTP=$salidasTP+$salida->cantidadP;					
-					}
-					$saldos->saldoU=$entradaTU-$salidasTU;
-					$saldos->saldoP=$entradaTP-$salidasTP;
-					$saldos->idAlmacen=$almacen->idAlmacenProducto;
-					$saldos->fechaRealizado=date("Y-m-d H:i:s");
-					$saldos->fechaSaldo=date("Y")."-".(date("m")-1)."-".$this->getUltimoDiaMes(date("Y"), (date("m")-1));
-					$saldos->save();
-					//print_r($saldos->attributes);
-					//echo '<br>';
-				}
-				$saldos = SaldoProducto::model()->with('idAlmacen0')->with('idAlmacen0.idProducto0')->findAll(array('condition'=>'`idAlmacen0`.idAlmacen='.$_GET['almacen'].' and `t`.fechaSaldo Between "'.$startDateS.'" and "'.$endDateS.'"','order'=>'idProducto0.Material,idProducto0.codigo, idProducto0.detalle'));
-			}
-		
-			/*$almacenes = AlmacenProducto::model()->findAll('idAlmacen='.$_GET['almacen']);
-			$saldo = array();
-			$entradaTU=array();$entradaTP=array();
-			$salidasTU=array();$salidasTP=array();
+			$this->getSaldoAnterior($_GET['almacen']);
+			$almacenes = AlmacenProducto::model()->with('idProducto0')->findAll('idAlmacen='.$_GET['almacen']);
+			
+			$saldos = array();
+			$entradaU=array();$entradaP=array();
+			$salidasU=array();$salidasP=array();
+			$entradasF=array();
+			$salidasF=array();
+			$costoF=array();
 			foreach ($almacenes as $key => $almacen)
 			{
 				$saldoA[$key] = new SaldoProducto;
-				$entradaTU[$key]=0;$entradaTP[$key]=0;
-				$salidasTU[$key]=0;$salidasTP[$key]=0;
+				$entradaU[$key]=0;$entradaP[$key]=0;
+				$salidasU[$key]=0;$salidasP[$key]=0;
+				$saldo = SaldoProducto::model()->with('idAlmacen0')->with('idAlmacen0.idProducto0')->find('`t`.idAlmacen='.$almacen->idAlmacenProducto);
 				$entradas = MovimientoAlmacen::model()->findAll('idAlmacenDestino='.$almacen->idAlmacen.' and idProducto='.$almacen->idProducto.' and fechaMovimiento Between "'.$startDate.'" and "'.$endDate.'"');
 				foreach ($entradas as $entrada)
 				{
-					$entradaTU[$key]=$entradaTU[$key]+$entrada->cantidadU;
-					$entradaTP[$key]=$entradaTP[$key]+$entrada->cantidadP;
+					$entradaU[$key]=$entradaU[$key]+$entrada->cantidadU;
+					$entradaP[$key]=$entradaP[$key]+$entrada->cantidadP;
 				}
 				$salidas = MovimientoAlmacen::model()->findAll('idAlmacenOrigen='.$almacen->idAlmacen.' and idProducto='.$almacen->idProducto.' and fechaMovimiento Between "'.$startDate.'" and "'.$endDate.'"');
 				foreach ($salidas as $salida)
 				{
-					$salidasTU[$key]=$salidasTU[$key]+$salida->cantidadU;
-					$salidasTP[$key]=$salidasTP[$key]+$salida->cantidadP;					
+					$salidasU[$key]=$salidasU[$key]+$salida->cantidadU;
+					$salidasP[$key]=$salidasP[$key]+$salida->cantidadP;
 				}
-				$saldoA[$key]->saldoU=$entradaTU[$key]-$salidasTU[$key];
-				$saldoA[$key]->saldoP=$entradaTP[$key]-$salidasTP[$key];
+				$saldos[$key]=$saldo;
+				$saldoA[$key]->saldoU=$entradaU[$key]-$salidasU[$key];
+				$saldoA[$key]->saldoP=$entradaP[$key]-$salidasP[$key];
 				$saldoA[$key]->idAlmacen=$almacen->idAlmacenProducto;
+				$entradasF[$key]=array('unidad'=>$entradaU[$key],'paquete'=>$entradaP[$key]);
+				$salidasF[$key]=array('unidad'=>$salidasU[$key],'paquete'=>$salidasP[$key]);
+				$costoF[$key]=($saldoA[$key]->saldoU*$almacen->idProducto0->precioSFU)+($saldoA[$key]->saldoP*$almacen->idProducto0->precioSFP);
 			}
-			$entradas=array('unidad'=>$entradaTU,'paquete'=>$entradaTP);
-			$salidas=array('unidad'=>$salidasTU,'paquete'=>$salidasTP);
-			$this->render('productoSaldo',array('saldoA'=>$saldos,'entradas'=>$entradas,'salidas'=>$salidas,'saldoB'=>$saldoA));*/
-			$this->render('productoSaldo',array('saldoA'=>$saldos,'entradas'=>'','salidas'=>'','saldoB'=>''));
+			$this->render('productoSaldo',array('saldoA'=>$saldos,'entradas'=>$entradasF,'salidas'=>$salidasF,'saldoB'=>$saldoA,'costos'=>$costoF));
 		}
 		else
 			$this->render('productoSaldo',array('saldoA'=>'','entradas'=>'','salidas'=>'','saldoB'=>''));
 	}
 	
-	public function actionProductoSaldoActual()
-	{
-		$startDate=date("Y")."-".date("m")."-1 00:00:00";
-		$endDate=date("Y-m-d H:i:s");
-			
-		$startDateS=date("Y")."-".(date("m")-1)."-1 00:00:00";
-		$endDateS=date("Y")."-".date("m")."-1 00:00:00";
-		
-		$saldos = $this->verifyModel(SaldoProducto::model()->with('idAlmacen0')->with('idAlmacen0.idProducto0')->findAll(array('condition'=>'`idAlmacen0`.idAlmacen='.$_GET['almacen'].' and `t`.fechaSaldo Between "'.$startDateS.'" and "'.$endDateS.'"','order'=>'idProducto0.Material,idProducto0.codigo, idProducto0.detalle')));
-		$almacenes = AlmacenProducto::model()->findAll('idAlmacen='.$_GET['almacen']);
-		
-		$saldo = array();
-		$entradaTU=array();$entradaTP=array();
-		$salidasTU=array();$salidasTP=array();
-		foreach ($almacenes as $key => $almacen)
-		{
-			$saldoA[$key] = new SaldoProducto;
-			$entradaTU[$key]=0;$entradaTP[$key]=0;
-			$salidasTU[$key]=0;$salidasTP[$key]=0;
-			$entradas = MovimientoAlmacen::model()->findAll('idAlmacenDestino='.$almacen->idAlmacen.' and idProducto='.$almacen->idProducto.' and fechaMovimiento Between "'.$startDate.'" and "'.$endDate.'"');
-			foreach ($entradas as $entrada)
-			{
-				$entradaTU[$key]=$entradaTU[$key]+$entrada->cantidadU;
-				$entradaTP[$key]=$entradaTP[$key]+$entrada->cantidadP;
-			}
-			$salidas = MovimientoAlmacen::model()->findAll('idAlmacenOrigen='.$almacen->idAlmacen.' and idProducto='.$almacen->idProducto.' and fechaMovimiento Between "'.$startDate.'" and "'.$endDate.'"');
-			foreach ($salidas as $salida)
-			{
-				$salidasTU[$key]=$salidasTU[$key]+$salida->cantidadU;
-				$salidasTP[$key]=$salidasTP[$key]+$salida->cantidadP;
-			}
-			$saldoA[$key]->saldoU=$entradaTU[$key]-$salidasTU[$key];
-			$saldoA[$key]->saldoP=$entradaTP[$key]-$salidasTP[$key];
-			$saldoA[$key]->idAlmacen=$almacen->idAlmacenProducto;
-		}
-		$entradas=array('unidad'=>$entradaTU,'paquete'=>$entradaTP);
-		$salidas=array('unidad'=>$salidasTU,'paquete'=>$salidasTP);
-		$this->render('productoSaldo',array('saldoA'=>$saldos,'entradas'=>$entradas,'salidas'=>$salidas,'saldoB'=>$saldoA));
-		//$this->render('productoSaldo',array('saldoA'=>$saldos,'entradas'=>'','salidas'=>'','saldoB'=>''));
-	} 
 	
 	public function actionCliente()
 	{
@@ -357,5 +274,101 @@ class ReportController extends Controller
 	protected function getUltimoDiaMes($elAnio,$elMes) {
 		return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
 	}
+	
+	protected function getSaldoAnterior($almacen)
+	{
+		$startDateS=date("Y")."-".(date("m")-1)."-1 00:00:00";
+		$endDateS=date("Y")."-".date("m")."-1 00:00:00";
+		$saldos = SaldoProducto::model()->with('idAlmacen0')->with('idAlmacen0.idProducto0')->findAll(array('condition'=>'`idAlmacen0`.idAlmacen='.$almacen.' and `t`.fechaSaldo Between "'.$startDateS.'" and "'.$endDateS.'"','order'=>'idProducto0.Material,idProducto0.codigo, idProducto0.detalle'));
+			
+		if(empty($saldos) || count($saldos)==0)
+		{
+			$almacenes = AlmacenProducto::model()->findAll('idAlmacen='.$almacen);
+			foreach ($almacenes as $key => $almacen)
+			{
+				$saldos = new SaldoProducto;
+				$entradaTU=0;$entradaTP=0;
+				$salidasTU=0;$salidasTP=0;
+				$entradas = MovimientoAlmacen::model()->findAll('idAlmacenDestino='.$almacen->idAlmacen.'  and idProducto='.$almacen->idProducto.' and fechaMovimiento Between "'.$startDateS.'" and "'.$endDateS.'"');
+				foreach ($entradas as $entrada)
+				{
+					$entradaTU=$entradaTU+$entrada->cantidadU;
+					$entradaTP=$entradaTP+$entrada->cantidadP;
+				}
+				$salidas = MovimientoAlmacen::model()->findAll('idAlmacenOrigen='.$almacen->idAlmacen.'  and idProducto='.$almacen->idProducto.' and fechaMovimiento Between "'.$startDateS.'" and "'.$endDateS.'"');
+				foreach ($salidas as $salida)
+				{
+					$salidasTU=$salidasTU+$salida->cantidadU;
+					$salidasTP=$salidasTP+$salida->cantidadP;
+				}
+				$saldos->saldoU=$entradaTU-$salidasTU;
+				$saldos->saldoP=$entradaTP-$salidasTP;
+				$saldos->idAlmacen=$almacen->idAlmacenProducto;
+				$saldos->fechaRealizado=date("Y-m-d H:i:s");
+				$saldos->fechaSaldo=date("Y")."-".(date("m")-1)."-".$this->getUltimoDiaMes(date("Y"), (date("m")-1));
+				$saldos->save();
+				//print_r($saldos->attributes);
+				//echo '<br>';
+			}
+			$saldos = SaldoProducto::model()->with('idAlmacen0')->with('idAlmacen0.idProducto0')->findAll(array('condition'=>'`idAlmacen0`.idAlmacen='.$almacen.' and `t`.fechaSaldo Between "'.$startDateS.'" and "'.$endDateS.'"','order'=>'idProducto0.Material,idProducto0.codigo, idProducto0.detalle'));
+		}
+		return $saldos;
+	}
+	
+	/*public function actionBalance()
+	{
+		$startDate=date("Y")."-".date("m")."-1 00:00:00";
+		$endDate=date("Y-m-d H:i:s");
+			
+		$startDateS=date("Y")."-".(date("m")-1)."-1 00:00:00";
+		$endDateS=date("Y")."-".date("m")."-1 00:00:00";
+		
+		$saldos = $this->getSaldoAnterior($_GET['almacen']);
+		$almacenes = AlmacenProducto::model()->findAll('idAlmacen='.$_GET['almacen']);
+		
+		$saldo = array();
+		$entradaTU=array();$entradaTP=array();
+		$salidasTU=array();$salidasTP=array();
+		foreach ($almacenes as $key => $almacen)
+		{
+			$saldoA[$key] = new SaldoProducto;
+			$entradaTU[$key]=0;$entradaTP[$key]=0;
+			$salidasTU[$key]=0;$salidasTP[$key]=0;
+			$entradas = MovimientoAlmacen::model()->findAll('idAlmacenDestino='.$almacen->idAlmacen.' and idProducto='.$almacen->idProducto.' and fechaMovimiento Between "'.$startDate.'" and "'.$endDate.'"');
+			foreach ($entradas as $entrada)
+			{
+				$entradaTU[$key]=$entradaTU[$key]+$entrada->cantidadU;
+				$entradaTP[$key]=$entradaTP[$key]+$entrada->cantidadP;
+			}
+			$salidas = MovimientoAlmacen::model()->findAll('idAlmacenOrigen='.$almacen->idAlmacen.' and idProducto='.$almacen->idProducto.' and fechaMovimiento Between "'.$startDate.'" and "'.$endDate.'"');
+			foreach ($salidas as $salida)
+			{
+				$salidasTU[$key]=$salidasTU[$key]+$salida->cantidadU;
+				$salidasTP[$key]=$salidasTP[$key]+$salida->cantidadP;
+			}
+			$saldoA[$key]->saldoU=$entradaTU[$key]-$salidasTU[$key];
+			$saldoA[$key]->saldoP=$entradaTP[$key]-$salidasTP[$key];
+			$saldoA[$key]->idAlmacen=$almacen->idAlmacenProducto;
+			if($saldoA[$key]->saldoU !=$almacen->stockU || $saldoA[$key]->saldoP !=$almacen->stockP)
+			{
+				$movimiento=new MovimientoAlmacen;
+				$movimiento->idProducto = $almacen->idProducto0->idProducto;
+				$movimiento->idAlmacenDestino = $almacen->idAlmacen;
+				//$movimiento->idAlmacenOrigen = $almacen->idAlmacen;
+				//$idUser->idUser = Yii::app()->user->id;
+				$movimiento->fechaMovimiento = date("Y-m-d H:i:s");
+				if($saldoA[$key]->saldoU !=$almacen->stockU)
+					$movimiento->cantidadU = $almacen->stockU+$salidasTU[$key];
+				if($saldoA[$key]->saldoP !=$almacen->stockP)
+					$movimiento->cantidadP = $almacen->stockP+$salidasTP[$key];
+				
+				$movimiento->obs = "Balance de Sistema";
+				$movimiento->save();
+			}
+		}
+		$entradas=array('unidad'=>$entradaTU,'paquete'=>$entradaTP);
+		$salidas=array('unidad'=>$salidasTU,'paquete'=>$salidasTP);
+		$this->render('productoSaldo',array('saldoA'=>$saldos,'entradas'=>$entradas,'salidas'=>$salidas,'saldoB'=>$saldoA));
+	}*/
 }
 ?>
