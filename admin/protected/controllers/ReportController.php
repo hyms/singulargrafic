@@ -233,23 +233,43 @@ class ReportController extends Controller
 				$saldos[$key]=$saldo;
 				$saldoA[$key]->saldoU=$entradaU[$key]-$salidasU[$key];
 				$saldoA[$key]->saldoP=$entradaP[$key]-$salidasP[$key];
+				while($saldoA[$key]->saldoU<0)
+				{
+					$saldoA[$key]->saldoP=$saldoA[$key]->saldoP-1;
+					$saldoA[$key]->saldoU=$saldoA[$key]->saldoU+$saldo->idAlmacen0->idProducto0->cantXPaquete;
+				}
+				
 				$saldoA[$key]->idAlmacen=$almacen->idAlmacenProducto;
 				$entradasF[$key]=array('unidad'=>$entradaU[$key],'paquete'=>$entradaP[$key]);
 				$salidasF[$key]=array('unidad'=>$salidasU[$key],'paquete'=>$salidasP[$key]);
 				$costoF[$key]=($saldoA[$key]->saldoU*$almacen->idProducto0->precioSFU)+($saldoA[$key]->saldoP*$almacen->idProducto0->precioSFP);
 			}
-			$this->render('productoSaldo',array('saldoA'=>$saldos,'entradas'=>$entradasF,'salidas'=>$salidasF,'saldoB'=>$saldoA,'costos'=>$costoF));
+			if(isset($_GET['excel']))
+			{
+				$this->exportExcel($saldos, $entradasF, $salidasF, $saldoA, $costoF);
+			}
+			$this->render('producto/productoSaldo',array('saldoA'=>$saldos,'entradas'=>$entradasF,'salidas'=>$salidasF,'saldoB'=>$saldoA,'costos'=>$costoF,'almacen'=>$_GET['almacen']));
 		}
 		else
-			$this->render('productoSaldo',array('saldoA'=>'','entradas'=>'','salidas'=>'','saldoB'=>''));
+			$this->render('producto/productoSaldo',array('saldoA'=>'','entradas'=>'','salidas'=>'','saldoB'=>''));
 	}
 	
+	public function actionProductoAgotarse()
+	{
+		if(isset($_GET['almacen']))
+		{
+			$almacenes = AlmacenProducto::model()->with('idProducto0')->findAll('idAlmacen='.$_GET['almacen'].' and (stockP+(stockU/idProducto0.cantXPaquete))<=5');
+			//print_r($almacenes);return true;
+			$this->render('producto/productoAgotado',array('resultado'=>$almacenes));
+		}
+		else 
+			$this->render('producto/productoAgotado',array('resultado'));
+	}
 	
 	public function actionCliente()
 	{
 		$this->render('cliente');
 	}
-	
 	
 	public function verifyModel($model)
 	{
@@ -315,6 +335,47 @@ class ReportController extends Controller
 		return $saldos;
 	}
 	
+	private function exportExcel($saldoA,$entradas,$salidas,$saldoB,$costos)
+	{
+		foreach ($saldoA as $key=>$item)
+		{
+			$resultado[$key]=array(
+					'id'=>$item->idAlmacen,
+					'codigo'=>$item->idAlmacen0->idProducto0->codigo,
+					'detalle'=>$item->idAlmacen0->idProducto0->material.", ".$item->idAlmacen0->idProducto0->color." ".$item->idAlmacen0->idProducto0->detalle.", ".$item->idAlmacen0->idProducto0->marca,
+					'saldoAnterior'=>array('saldoU'=>$item->saldoU,'saldoP'=>$item->saldoP),
+					'entradas'=>array('saldoU'=>$entradas[$key]['unidad'],'saldoP'=>$entradas[$key]['paquete']),
+					'salidas'=>array('saldoU'=>$salidas[$key]['unidad'],'saldoP'=>$salidas[$key]['paquete']),
+					'saldoActual'=>array('saldoU'=>$saldoB[$key]->saldoU,'saldoP'=>$saldoB[$key]->saldoP),
+					'costo'=>$costos[$key],
+			);
+		}
+		//print_r($resultado);
+		$resultado = $this->array_orderby($resultado, 'detalle', SORT_ASC);
+		//array_multisort($resultado['detalle'], SORT_ASC);
+		$columnsTitle=array('No','codigo','Detalle Producto','Saldo Anterior','','Entradas','','Salidas','','Saldo Actual','','Costo');
+		$content=array();
+		$index=1;
+		foreach ($resultado as $item)
+		{
+			array_push($content,array($index,
+			$item['codigo'],
+			$item['detalle'],
+			$item['saldoAnterior']['saldoU'],$item['saldoAnterior']['saldoP'],
+			$item['entradas']['saldoU'],$item['entradas']['saldoP'],
+			$item['salidas']['saldoU'],$item['salidas']['saldoP'],
+			$item['saldoActual']['saldoU'],$item['saldoActual']['saldoP'],
+			$item['costo']));
+			$index++;
+		}
+		
+		$total = 0;
+		foreach ($costos as $costo)
+			$total=$total+$costo;
+		array_push($content,array('','','','','','','','','','','Total',$total));
+		//print_r($content);
+		$this->createExcel($columnsTitle, $content);
+	}
 	/*public function actionBalance()
 	{
 		$startDate=date("Y")."-".date("m")."-1 00:00:00";
@@ -370,5 +431,84 @@ class ReportController extends Controller
 		$salidas=array('unidad'=>$salidasTU,'paquete'=>$salidasTP);
 		$this->render('productoSaldo',array('saldoA'=>$saldos,'entradas'=>$entradas,'salidas'=>$salidas,'saldoB'=>$saldoA));
 	}*/
+	
+	private function createExcel($columnsTitle,$content,$sum=array(),$title="")
+	{
+		if($title=="")
+		{
+			$title="Reports";
+		}
+		Yii::import('ext.phpexcel.XPHPExcel');
+		$objPHPExcel= XPHPExcel::createPHPExcel();
+		$objPHPExcel->getProperties()
+		->setCreator("Grafica Singular")
+		->setLastModifiedBy("Grafica Singular")
+		->setTitle($title)
+		->setSubject($title)
+		->setDescription($title.".xlsx");
+	
+		$column=65;
+		//assign titles
+		foreach ($columnsTitle as $item)
+		{
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).'1', $item);
+			$objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
+			$column++;
+		}
+	
+		//create content
+		$index=2;
+		
+		foreach ($content as $items)
+		{
+			$column=65;
+			foreach ($items as $item)
+			{
+	
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).($index), $item);
+				$objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
+				$column++;
+			}
+			$index++;
+		}
+		// Rename worksheet
+		$objPHPExcel->getActiveSheet()->setTitle('Report');
+			
+			
+		// Set active sheet index to the first sheet, so Excel opens this as the first sheet
+		$objPHPExcel->setActiveSheetIndex(0);
+		// Redirect output to a clientâ€™s web browser (Excel5)
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="Report.xls"');
+		header('Cache-Control: max-age=0');
+		// If you're serving to IE 9, then the following may be needed
+		header('Cache-Control: max-age=1');
+			
+		// If you're serving to IE over SSL, then the following may be needed
+		header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+		header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+		header ('Pragma: public'); // HTTP/1.0
+			
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+		$objWriter->save('php://output');
+		Yii::app()->end();
+	}
+	
+	private function array_orderby()
+	{
+		$args = func_get_args();
+		$data = array_shift($args);
+		foreach ($args as $n => $field) {
+			if (is_string($field)) {
+				$tmp = array();
+				foreach ($data as $key => $row)
+					$tmp[$key] = $row[$field];
+				$args[$n] = $tmp;
+			}
+		}
+		$args[] = &$data;
+		call_user_func_array('array_multisort', $args);
+		return array_pop($args);
+	}
 }
 ?>

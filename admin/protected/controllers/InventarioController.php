@@ -194,7 +194,7 @@ class InventarioController extends Controller
 				$item->idProducto0->color." ".$item->idProducto0->detalle." ".$item->idProducto0->marca,
 				$item->idProducto0->industria,
 				(!empty($item->idAlmacenOrigen0))?$item->idAlmacenOrigen0->nombre:"",
-				$item->idAlmacenDestino0->nombre,
+				(!empty($item->idAlmacenDestino0))?$item->idAlmacenDestino0->nombre:"",
 				$item->cantidadU,
 				$item->cantidadP,
 				$item->fechaMovimiento));
@@ -229,7 +229,7 @@ class InventarioController extends Controller
 				$item->idProducto0->color." ".$item->idProducto0->detalle." ".$item->idProducto0->marca,
 				$item->idProducto0->industria,
 				(!empty($item->idAlmacenOrigen0))?$item->idAlmacenOrigen0->nombre:"",
-				$item->idAlmacenDestino0->nombre,
+				(!empty($item->idAlmacenDestino0))?$item->idAlmacenDestino0->nombre:"",
 				$item->cantidadU,
 				$item->cantidadP,
 				$item->fechaMovimiento));

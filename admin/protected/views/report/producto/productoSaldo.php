@@ -1,5 +1,5 @@
 <div class="col-sm-2">
-	<?php $this->renderPartial('menu')?>
+	<?php $this->renderPartial('./menu')?>
 </div>
 <div class="col-sm-10">
 <div>
@@ -40,15 +40,16 @@
 				array(
 						'id'=>'idAlmacen',
 						'keyField' => 'id',
-						'keys'=>array('id','codigo','detalle'),
+						'keys'=>array('id','codigo','detalle','saldoAnterior','entradas','salidas','saldoActual'),
 						'pagination'=>array('pageSize'=>'20',),
 						'sort'=>array(
 								'attributes'=>array(
-										'id', 'codigo', 'detalle','costo',
+										'id', 'codigo', 'detalle','saldoAnterior','entradas','salidas','saldoActual','costo',
 								),
 						),
 				));//
-		echo "<br>Fecha: <b>".date("Y-m-d",strtotime($saldoA[0]->fechaSaldo))."</b>";
+		echo CHtml::link('Exportar a Excel',array('report/productoSaldo','almacen'=>$almacen,'excel'=>true),array('class'=>'btn btn-default'));
+		
 		$this->widget('zii.widgets.grid.CGridView', array(
 				'dataProvider'=>$dataProvider,
 				'itemsCssClass' => 'table table-hover table-condensed',
@@ -64,6 +65,7 @@
 						),
 						array(
 								'header'=>'Saldo Anterior',
+								'name'=>'saldoAnterior',
 								'type'=>'raw',
 								'value'=>'$data["saldoAnterior"]["saldoU"]."</td><td>".$data["saldoAnterior"]["saldoP"]',
 								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-sm-1'),
@@ -71,6 +73,7 @@
 						),
 						array(
 								'header'=>'Entradas',
+								'name'=>'entradas',
 								'type'=>'raw',
 								'value'=>'$data["entradas"]["saldoU"]."</td><td>".$data["entradas"]["saldoP"]',
 								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-sm-1'),
@@ -78,6 +81,7 @@
 						),
 						array(
 								'header'=>'Salidas',
+								'name'=>'salidas',
 								'type'=>'raw',
 								'value'=>'$data["salidas"]["saldoU"]."</td><td>".$data["salidas"]["saldoP"]',
 								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-sm-1'),
@@ -85,6 +89,7 @@
 						),
 						array(
 								'header'=>'Saldo Actual',
+								'name'=>'saldoActual',
 								'type'=>'raw',
 								'value'=>'$data["saldoActual"]["saldoU"]."</td><td>".$data["saldoActual"]["saldoP"]',
 								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-sm-1'),
@@ -98,20 +103,22 @@
 						
 				)
 		));//*/
-	}
 	?>
 	</div>
 	<div class="col-sm-offset-9">
-	<div class="well well-sm">
+		<div class="well well-sm">
+		<?php 
+		$total = 0;
+		foreach ($costos as $costo)
+		{
+			$total=$total+$costo;
+		}
+		echo "<b>Total:</b>".$total;
+		?>
+		</div>
+	</div>
 	<?php 
-	$total = 0;
-	foreach ($costos as $costo)
-	{
-		$total=$total+$costo;
 	}
-	echo "<b>Total:</b>".$total;
 	?>
-	</div>
-	</div>
 </div>
 
