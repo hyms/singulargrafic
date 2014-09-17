@@ -67,7 +67,7 @@
 	<div class="form-group">
 		<div class="text-center">
 		<?php echo CHtml::resetButton('Cancelar', array('class' => 'btn btn-default hidden-print')); ?>
-		<?php echo CHtml::button('Guardar', array('class' => 'btn btn-default hidden-print','id'=>'save')); ?>
+		<?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar',array("#"), array('class' => 'btn btn-default hidden-print','id'=>'save')); ?>
 		</div>
 	</div>
 	<?php $this->endWidget(); ?>

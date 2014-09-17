@@ -1,3 +1,4 @@
+<div class="well well-sm">
 <?php 
 $this->widget('zii.widgets.CMenu',array(
 				'htmlOptions' => array('class' => 'nav nav-pills nav-stacked hidden-print'),
@@ -13,3 +14,4 @@ $this->widget('zii.widgets.CMenu',array(
 							array('label'=>'Arqueo', 'url'=>array('distribuidora/arqueo')),
 				)));
 ?>
+</div>

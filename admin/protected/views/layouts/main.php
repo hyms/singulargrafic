@@ -7,8 +7,10 @@
 	);
 		// use it when you need it!
 	$cs
-		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.css' )
+		//->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.css' )
+		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.min.slate.css')
 		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap-responsive.css' )
+		
 		
 		->registerCoreScript('jquery')
 		->registerCoreScript('jquery.ui')
@@ -27,7 +29,7 @@
 </head>
 
 <body>
-	<div class="navbar navbar-inverse ">
+	<div class="navbar navbar-default">
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">

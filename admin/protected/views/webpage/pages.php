@@ -13,12 +13,14 @@ Yii::app()->clientscript->registerScriptFile( Yii::app()->baseUrl.'/js/ckeditor/
 	{
 		array_push($items,array('label'=>$pag->nombre, 'url'=>array('/webpage/pages', 'id'=>$pag->id)));
 	}
+	echo "<div class = 'well well-sm'>";
 	$this->widget('zii.widgets.CMenu',array(
 					'htmlOptions' => array('class' => 'nav nav-pills nav-stacked'),
 					'activeCssClass'	=> 'active',
 					'encodeLabel' => false,
 					'items'=>$items,
 					)); 
+	echo "</div>";
 	?>
 </div>
 <div class="form col-sm-10">

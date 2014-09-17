@@ -59,12 +59,12 @@
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("Añadir","#",array("onclick"=>\'newRow("\'.$data->idAlmacenProducto.\'");\',"class"=>"btn btn-success btn-sm"))',
+					'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-ok\"></span>","#",array("onclick"=>\'newRow("\'.$data->idAlmacenProducto.\'");\',"class"=>"btn btn-success btn-sm","title"=>"Añadir a lista"))',
 			),
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("Stock",array("distribuidora/productos","id"=>$data->idAlmacenProducto), array("class" => "openDlg divDialog"))',
+					'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-shopping-cart\"></span>",array("distribuidora/productos","id"=>$data->idAlmacenProducto), array("class" => "openDlg divDialog","title"=>"Añadir material al Stock"))',
 			),
 		)
 	));

@@ -4,8 +4,8 @@
 
 <div class="col-sm-10" >
 
-<div class="col-sm-offset-3 col-sm-7">
-<?php echo CHtml::link('Imprimir', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"printView()")); ?>
+<div >
+<?php echo CHtml::link('<span class="glyphicon glyphicon-print"></span>', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"printView()")); ?>
 </div>
 <div class="form-group" style="width:793px; height:529px;">
 

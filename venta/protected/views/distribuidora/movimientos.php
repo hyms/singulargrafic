@@ -4,15 +4,16 @@
 
 <div class="col-sm-10">
 <?php $this->renderPartial('menuMovimientos');?>
-<div class="row">
-<div class="text-center">
-<?php if($cf!="" && $sf!=""){?>
-<?php echo CHtml::link('Con Factura', $cf, array("class"=>"btn btn-default hidden-print")); ?>
-<?php echo CHtml::link('Sin Factura', $sf, array("class"=>"btn btn-default hidden-print")); ?>
-<?php echo CHtml::link('Imprimir', $cond3, array("class"=>"btn btn-default hidden-print")); ?>
-<?php }?>
-</div>
-</div>
+<?php if(!empty($cond3)){?>
+<div class="panel panel-default">
+		<div class="panel-body" style="overflow: auto;">
+		<div class="form-group">
+			<?php if($cf!="" && $sf!=""){?>
+			<?php echo CHtml::link('Con Factura', $cf, array("class"=>"btn btn-default hidden-print")); ?>
+			<?php echo CHtml::link('Sin Factura', $sf, array("class"=>"btn btn-default hidden-print")); ?>
+			<?php echo CHtml::link('<span class="glyphicon glyphicon-print"></span>', $cond3, array("class"=>"btn btn-default hidden-print")); ?>
+			<?php }?>
+		</div>
 
 
 <?php 
@@ -102,12 +103,12 @@ foreach ($datos as $item)
 }
 //print_r(count($datos));
 ?>
-<div class="col-xs-offset-8 col-xs-4">
-<div class="well well-sm">
+</div>
+<div class="well well-sm col-xs-offset-8 col-xs-4">
 	<span><strong>Total:</strong> <?php echo $total; ?> Bs.</span>
 </div>
 <?php if(!empty($saldo)){?>
-<div class="well well-sm">
+<div class="well well-sm col-xs-offset-8 col-xs-4">
 	<span><strong>Saldo:</strong> <?php echo $saldo; ?> Bs.</span>
 </div>
 <?php }?>
@@ -141,4 +142,4 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array('id'=>'divDialog',
 <?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>
 
 </div>
-
+<?php }?>

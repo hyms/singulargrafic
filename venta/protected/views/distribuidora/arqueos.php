@@ -4,6 +4,8 @@
 
 <div class="col-sm-10">
 <?php $this->renderPartial('arqueo/menuArqueo');?>
+<div class="panel panel-default">
+		<div class="panel-body" style="overflow: auto;">
 <?php 
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$arqueos,
@@ -34,7 +36,7 @@
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("Imprimir", array("distribuidora/comprobante","id"=>$data->idCajaArqueo))',
+					'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-print\"></span>", array("distribuidora/comprobante","id"=>$data->idCajaArqueo))',
 			),
 			array(
 					'header'=>'',
@@ -43,5 +45,5 @@
 			),
 		)
 	));
-?>
+?></div></div>
 </div>

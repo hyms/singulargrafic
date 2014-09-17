@@ -35,8 +35,8 @@
 	<?php echo CHtml::activeTextField($model,"[$index]costoTotal",array('class'=>'costo form-control input-sm','readonly'=>true,'id'=>'costoTotal_'.$index)); ?>
 </td>
 
-<td class="col-sm-1">
-	<?php echo CHtml::link('Quitar', '#', array("class"=>"btn btn-danger btn-sm tabular-input-remove")).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />'; ?>
+<td>
+	<?php echo CHtml::link('<span class="glyphicon glyphicon-remove"></span>', '#', array("class"=>"btn btn-danger btn-sm tabular-input-remove",'title'=>'Quitar de la lista')).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />'; ?>
 </td>
 </tr>
 <?php  

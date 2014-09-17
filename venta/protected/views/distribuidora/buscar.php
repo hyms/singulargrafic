@@ -2,6 +2,11 @@
 <?php $this->renderPartial('menu'); ?>
 </div>
 <div class="col-sm-10">
+
+
+<div class="panel panel-default">
+<div class="panel-heading"><strong class="panel-title">Ventas Realizadas</strong></div>
+  <div class="panel-body">
 <?php 
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$ventas->searchVenta(),
@@ -59,9 +64,11 @@
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("Imprimir",array("distribuidora/preview","id"=>$data->idVenta),array("class"=>"hidden-print"))',
+					'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-print\"></span>",array("distribuidora/preview","id"=>$data->idVenta),array("class"=>"hidden-print"))',
 			),
 		)
 	));
 ?>
+</div>
+</div>
 </div>

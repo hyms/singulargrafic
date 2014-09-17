@@ -5,7 +5,8 @@
 <div class="col-sm-10">
 <?php $this->renderPartial('menuMovimientos');?>
 
-<div  >
+<div class="panel panel-default">
+		<div class="panel-body" style="overflow: auto;">
 <?php 
 	$this->widget('zii.widgets.grid.CGridView', array(
 		//'dataProvider'=>$ventas,
@@ -105,4 +106,4 @@
 <div class="col-sm-6">
 <strong>Paquetes:</strong><?php echo $paquete;?>
 </div>
-</div>
+</div></div>
