@@ -11,6 +11,7 @@
  * @property integer $idEnvioMaterial
  *
  * The followings are the available model relations:
+ * @property AlmacenProducto $idAlmacenProducto0
  * @property EnvioMaterial $idEnvioMaterial0
  */
 class DetalleEnvio extends CActiveRecord
@@ -31,7 +32,7 @@ class DetalleEnvio extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idDetalleEnvio, idAlmacenProducto, cantidadP, cantidadU, idEnvioMaterial', 'required'),
+			array('idAlmacenProducto', 'required'),
 			array('idDetalleEnvio, idAlmacenProducto, cantidadP, cantidadU, idEnvioMaterial', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -47,6 +48,7 @@ class DetalleEnvio extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'idAlmacenProducto0' => array(self::BELONGS_TO, 'AlmacenProducto', 'idAlmacenProducto'),
 			'idEnvioMaterial0' => array(self::BELONGS_TO, 'EnvioMaterial', 'idEnvioMaterial'),
 		);
 	}

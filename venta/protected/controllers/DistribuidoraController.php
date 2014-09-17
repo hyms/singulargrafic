@@ -334,29 +334,31 @@ class DistribuidoraController extends Controller
 			$det=1;
 			if(isset($_POST['DetalleVenta'])){
 				$detalle2 = array();
-				$i=0;
 				$det=count($_POST['DetalleVenta']);
-				foreach ($_POST['DetalleVenta'] as $item){	
-					array_push($detalle2,new DetalleVenta);
-					$detalle2[$i]->attributes = $item;
-					if($detalle2[$i]->validate())
+				foreach ($_POST['DetalleVenta'] as $key => $item){	
+					$detalle2[$key]=new DetalleVenta;
+					$detalle2[$key]->attributes = $item;
+					if($detalle2[$key]->validate())
 						$det--;
-					$i++;
 				}
 			}
-			//print_r($detalle2);
+			//print_r($detalle2);print_r($detalle);
 			if($swv==1 && $det==0)
 			{
+				
 				foreach ($detalle as $item)
 				{
+					//print_r($item);
 					$almacenes = AlmacenProducto::model()->with('idProducto0')->findByPk($item->idAlmacenProducto);
 					$almacenes->stockU = $almacenes->stockU + $item->cantidadU;
-					while($almacenes->stockU>$almacenes->idProducto0->cantXPaquete)
+					while($almacenes->stockU > $almacenes->idProducto0->cantXPaquete && $almacenes->idProducto0->cantXPaquete>0)
 					{
 						$almacenes->stockP = $almacenes->stockP + 1;
 						$almacenes->stockU = $almacenes->stockU - $almacenes->idProducto0->cantXPaquete;
 					}
 					$almacenes->stockP = $almacenes->stockP + $item->cantidadP;
+					//print_r($almacenes);echo "<br>";
+					
 					if($item->delete())
 					{
 						$movimiento=new MovimientoAlmacen;
@@ -1064,56 +1066,6 @@ class DistribuidoraController extends Controller
 	}
 
 	//end
-	
-	public function actionEnvio()
-	{
-		$productos = new AlmacenProducto('searchDistribuidora');
-		$envio = new EnvioMaterial;
-		$envio = new DetalleEnvio;
-		
-		//init filter
-		$productos->unsetAttributes();
-		if (isset($_GET['AlmacenProducto'])){
-			$productos->attributes = $_GET['AlmacenProducto'];
-			$productos->color = $_GET['AlmacenProducto']['color'];
-			$productos->material = $_GET['AlmacenProducto']['material'];
-			$productos->marca = $_GET['AlmacenProducto']['marca'];
-			$productos->paquete = $_GET['AlmacenProducto']['paquete'];
-			$productos->detalle = $_GET['AlmacenProducto']['detalle'];
-			$productos->codigo = $_GET['AlmacenProducto']['codigo'];
-		}
-		//end filter
-		if(isset($_POST['EnvioMaterial']))
-		{
-			
-			if(isset($_POST['EnvioMaterial']))
-			{
-				
-			}	
-			
-			if(isset($_POST['EnvioMaterial']))
-			{
-					
-			}
-		}
-		
-		$this->render();
-	}
-	
-	public function actionEnvios()
-	{
-		/*$envios=new CActiveDataProvider('EnvioMaterial',
-				array(
-						'criteria'=>array(
-								'order'=>'fechaEnvio Desc',
-						),
-						'pagination'=>array(
-								'pageSize'=>'20',
-						),
-				));*/
-		$envios = new EnvioMaterial('search');
-		$this->render("envios",array("envios"=>$envios));
-	}
 	
 	private function verifyModel($model)
 	{

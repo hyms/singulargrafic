@@ -10,6 +10,7 @@ $this->widget('zii.widgets.CMenu',array(
 							array('label'=>'Recibo Ingreso', 'url'=>array('caja/reciboIngreso')),
 							array('label'=>'Recibo Egreso', 'url'=>array('caja/reciboEgreso')),
 							array('label'=>'Buscar Recibos', 'url'=>array('caja/buscar')),
+							array('label'=>'Envios', 'url'=>array('caja/envios')),
 						),
 				)); 
 ?>

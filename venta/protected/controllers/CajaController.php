@@ -428,6 +428,124 @@ class CajaController extends Controller
 			throw new CHttpException(400,'Petición no válida.');
 	} 
 	
+	public function actionEnvio()
+	{
+		$productos = new AlmacenProducto('searchDistribuidora');
+		$envio = new EnvioMaterial;
+		$detalle = array();
+		
+		if(isset($_GET['id']))
+		{
+			$envio = EnvioMaterial::model()->with('detalleEnvios')->findByPk($_GET['id']);
+			$detalle = $envio->detalleEnvios;
+		}	
+	
+		//init filter
+		$productos->unsetAttributes();
+		if (isset($_GET['AlmacenProducto'])){
+			$productos->attributes = $_GET['AlmacenProducto'];
+			$productos->color = $_GET['AlmacenProducto']['color'];
+			$productos->material = $_GET['AlmacenProducto']['material'];
+			$productos->marca = $_GET['AlmacenProducto']['marca'];
+			$productos->paquete = $_GET['AlmacenProducto']['paquete'];
+			$productos->detalle = $_GET['AlmacenProducto']['detalle'];
+			$productos->codigo = $_GET['AlmacenProducto']['codigo'];
+		}
+		//end filter
+		$se=false;
+		if(isset($_POST['EnvioMaterial']))
+		{
+			$envio->attributes = $_POST['EnvioMaterial'];
+			$envio->fechaEnvio = date('Y-m-d H:i:s');
+			$envio->idUser = Yii::app()->user->id;
+			$se=$envio->validate();
+		}
+		$sd=1;
+		if(isset($_POST['DetalleEnvio']))
+		{
+			$sd = count($_POST['DetalleEnvio']);
+			
+			foreach ($_POST['DetalleEnvio'] as $key => $item)
+			{
+				$detalle[$key] = new DetalleEnvio;
+				$detalle[$key]->attributes=$item;
+				if($detalle[$key]->validate() && ($detalle[$key]->cantidadP>0 || $detalle[$key]->cantidadU>0))
+					$sd--;			
+			}
+		}
+		if($se && $sd==0)
+		{
+			$envio->save();
+			foreach ($detalle as $key => $item)
+			{
+				$item->idEnvioMaterial=$envio->idEnvioMaterial;
+				if($item->save())
+				{
+					$movimiento=new MovimientoAlmacen;
+					/*$movimiento->idProducto = $almacenes->idProducto0->idProducto;
+					$movimiento->idAlmacenDestino = 2;
+					//$movimiento[$i]->idAlmacenOrigen = 2;
+					//$idUser->idUser = Yii::app()->user->id;
+					$movimiento->fechaMovimiento = date("Y-m-d H:i:s");
+					$movimiento->cantidadU = $item->cantidadU;
+					$movimiento->cantidadP = $item->cantidadP;
+					$movimiento->obs = "Devolucion de Material";
+					$movimiento->save();*/
+				}
+			}//*/
+			$this->redirect(array('caja/envios','envios'=>true));		
+		}
+		else
+			echo "Error";
+			
+		$this->render("envios",array("productos"=>$productos,'envio'=>$envio,'detalle'=>$detalle,'nuevo'=>true));
+	}
+	
+	public function actionEnvios()
+	{
+		if(isset($_GET['nuevo']))
+		{
+			$this->actionEnvio();
+		}
+		elseif(isset($_GET['envios']))
+		{
+			$envios = new EnvioMaterial('search');
+			$envios->unsetAttributes();
+			if (isset($_GET['EnvioMaterial'])){
+				$envios->attributes=$_GET['EnvioMaterial'];
+			}
+			$this->render("envios",array("envios"=>$envios,'realizado'=>true));
+		}
+		else
+			$this->render("envios",array("envios"=>''));
+	}
+	
+	public function actionAddDetalle()
+	{
+		//if(Yii::app()->request->isAjaxRequest && isset($_GET['index']))
+		if(isset($_GET['index']))
+		{
+			$detalle = new DetalleEnvio;
+			$almacen = new AlmacenProducto;
+			if(isset($_GET['al']))
+			{
+				$almacen = AlmacenProducto::model()
+				->with("idProducto0")
+				->findByPk($_GET['al']);
+	
+			}
+				
+			$detalle->idAlmacenProducto = $almacen->idAlmacenProducto;
+			$this->renderPartial('envios/_newRowDetalleEnvio', array(
+					'model'=>$detalle,
+					'index'=>$_GET['index'],
+					'almacen'=>$almacen,
+			));
+		}
+		else
+			throw new CHttpException(400,'Petición no válida.');
+	}
+	
 	private function initCaja($saldo)
 	{
 		$caja = new CajaVenta;

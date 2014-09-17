@@ -11,9 +11,13 @@
  * @property integer $idAlmacen
  *
  * The followings are the available model relations:
- * @property Producto $idProducto0
+ * @property MatrizPreciosCTP[] $matrizPreciosCTPs
  * @property Almacen $idAlmacen0
+ * @property Producto $idProducto0
+ * @property DetalleCTP[] $detalleCTPs
+ * @property DetalleEnvio[] $detalleEnvios
  * @property DetalleVenta[] $detalleVentas
+ * @property SaldoProducto[] $saldoProductos
  */
 class AlmacenProducto extends CActiveRecord
 {
@@ -48,9 +52,13 @@ class AlmacenProducto extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idProducto0' => array(self::BELONGS_TO, 'Producto', 'idProducto'),
+			'matrizPreciosCTPs' => array(self::HAS_MANY, 'MatrizPreciosCTP', 'idAlmacenProducto'),
 			'idAlmacen0' => array(self::BELONGS_TO, 'Almacen', 'idAlmacen'),
+			'idProducto0' => array(self::BELONGS_TO, 'Producto', 'idProducto'),
+			'detalleCTPs' => array(self::HAS_MANY, 'DetalleCTP', 'idAlmacenProducto'),
+			'detalleEnvios' => array(self::HAS_MANY, 'DetalleEnvio', 'idAlmacenProducto'),
 			'detalleVentas' => array(self::HAS_MANY, 'DetalleVenta', 'idAlmacenProducto'),
+			'saldoProductos' => array(self::HAS_MANY, 'SaldoProducto', 'idAlmacen'),
 		);
 	}
 
@@ -96,7 +104,7 @@ class AlmacenProducto extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
+
 	public $codigo;
 	public $detalle;
 	public $material;
@@ -108,17 +116,19 @@ class AlmacenProducto extends CActiveRecord
 		$criteria=new CDbCriteria;
 	
 		$criteria->with= array(
-				'idProducto0',
+				'idProducto0','idAlmacen0'
 		);
-		$criteria->condition = 'idAlmacen=2';
+		if(empty($this->idAlmacen))
+			$this->idAlmacen=2;
+		//$criteria->condition = 'idAlmacen=2';
 		$criteria->order = 'idProducto0.codigo asc, idProducto0.material asc';
-		
+	
 		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
 		$criteria->compare('idProducto',$this->idProducto);
 		$criteria->compare('stockU',$this->stockU);
 		$criteria->compare('stockP',$this->stockP);
-		$criteria->compare('idAlmacen',$this->idAlmacen);
-		
+		$criteria->compare('`t`.idAlmacen',$this->idAlmacen);
+	
 		$criteria->compare('idProducto0.codigo',$this->codigo,true);
 		$criteria->compare('idProducto0.detalle',$this->detalle,true);
 		$criteria->compare('idProducto0.material',$this->material,true);
@@ -129,7 +139,7 @@ class AlmacenProducto extends CActiveRecord
 		//$criteria->compare('stockU',$this->stockU);
 		//$criteria->compare('stockP',$this->stockP);
 		//$criteria->compare('idAlmacen',$this->idAlmacen);
-		
+	
 		return new CActiveDataProvider($this, array(
 				'criteria'=>$criteria,
 				'pagination'=>array(
@@ -181,6 +191,4 @@ class AlmacenProducto extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-	
-	
 }

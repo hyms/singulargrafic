@@ -33,8 +33,7 @@ class EnvioMaterial extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idEnvioMaterial', 'required'),
-			array('idEnvioMaterial, idUser', 'numerical', 'integerOnly'=>true),
+			array('origen, destino, responsable','required'),
 			array('origen, destino, responsable', 'length', 'max'=>45),
 			array('fechaEnvio', 'safe'),
 			// The following rule is used by search().

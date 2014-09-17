@@ -487,7 +487,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`cajaArqueo` (
   `monto` DOUBLE(11) NOT NULL ,
   `fechaArqueo` DATETIME NULL DEFAULT NULL ,
   `fechaVentas` DATETIME NULL DEFAULT NULL ,
-  `comprobante` VARCHAR(20) NULL DEFAULT NULL ,
+  `comprobante` INT NULL DEFAULT NULL ,
   `saldo` DOUBLE(11) NOT NULL ,
   `idCajaMovimientoVenta` INT(11) NULL DEFAULT NULL ,
   PRIMARY KEY (`idCajaArqueo`) ,
@@ -897,9 +897,15 @@ CREATE  TABLE IF NOT EXISTS `singular`.`detalleEnvio` (
   `idEnvioMaterial` INT(11) NOT NULL ,
   PRIMARY KEY (`idDetalleEnvio`) ,
   INDEX `fk_detalleEnvio_envioMaterial1` (`idEnvioMaterial` ASC) ,
+  INDEX `fk_detalleEnvio_almacenProducto1` (`idAlmacenProducto` ASC) ,
   CONSTRAINT `fk_detalleEnvio_envioMaterial1`
     FOREIGN KEY (`idEnvioMaterial` )
     REFERENCES `singular`.`envioMaterial` (`idEnvioMaterial` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_detalleEnvio_almacenProducto1`
+    FOREIGN KEY (`idAlmacenProducto` )
+    REFERENCES `singular`.`almacenProducto` (`idAlmacenProducto` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -920,10 +926,10 @@ CREATE  TABLE IF NOT EXISTS `singular`.`saldoProducto` (
   `fechaSaldo` DATETIME NULL ,
   `fechaRealizado` DATETIME NULL ,
   PRIMARY KEY (`idsaldoProducto`) ,
-  INDEX `fk_saldoProducto_almacen1` (`idAlmacen` ASC) ,
-  CONSTRAINT `fk_saldoProducto_almacen1`
+  INDEX `fk_saldoProducto_almacenProducto1` (`idAlmacen` ASC) ,
+  CONSTRAINT `fk_saldoProducto_almacenProducto1`
     FOREIGN KEY (`idAlmacen` )
-    REFERENCES `singular`.`almacen` (`idAlmacen` )
+    REFERENCES `singular`.`almacenProducto` (`idAlmacenProducto` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

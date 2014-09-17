@@ -3,8 +3,24 @@
 </div>
 
 <div class="col-sm-10">
+<?php 
+	$this->widget('zii.widgets.CMenu',array(
+				'htmlOptions' => array('class' => 'nav nav-tabs hidden-print'),
+				'activeCssClass'	=> 'active',
+				'submenuHtmlOptions' => array('class' => 'dropdown-menu'),
+				'encodeLabel' => false,
+				'items'=>array(
+							array('label'=>'Envios Realizados', 'url'=>array('caja/envios','envios'=>true)),
+							array('label'=>'Nuevo Envio', 'url'=>array('caja/envios','nuevo'=>true)),
+						),
+				)); 
+?>	
+
+<?php if(isset($realizado)){?>
 <h3>Envios de Materiales</h3>
 <?php 
+
+
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$envios->search(),
 		'filter'=>$envios,
@@ -56,7 +72,7 @@
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("ver","#")',
+					'value'=>'CHtml::link("ver",array("caja/envio","id"=>$data->idEnvioMaterial))',
 			),
 			array(
 					'header'=>'',
@@ -65,5 +81,15 @@
 			),
 		)
 	));
+	
+}
+?>
+
+<?php
+if(isset($nuevo))
+{
+	$this->renderPartial('envio',array('productos'=>$productos,'model'=>$envio,'detalle'=>$detalle));	
+}
+
 ?>
 </div>
