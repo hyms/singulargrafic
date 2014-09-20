@@ -70,9 +70,3 @@
 	
 	<?php $this->endWidget(); ?>
 </div>	
-
-<?php
-	$this->renderPartial("scripts/operaciones");	
-	$this->renderPartial("scripts/save");
-	$this->renderPartial("scripts/reset");
-?>

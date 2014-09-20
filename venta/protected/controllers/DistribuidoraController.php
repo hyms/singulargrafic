@@ -47,7 +47,7 @@ class DistribuidoraController extends Controller
 							'pagination'=>false,
 					));
 		
-		$this->render('index',array("ventas"=>$ventas,"productos"=>$productos));
+		$this->render('base',array("render"=>"","ventas"=>$ventas,"productos"=>$productos));
 	}
 	
 	public function actionNotas()
@@ -646,7 +646,7 @@ class DistribuidoraController extends Controller
 			->with("idCajaMovimientoVenta0.idUser0.idEmpleado0")
 			->findByPk($_GET['id']);
 			if($ventas!=null)
-				$this->renderPartial('detalle',array('venta'=>$ventas));
+				$this->renderPartial('tables/detalle',array('venta'=>$ventas));
 			else
 				$this->redirect(array('venta/venta'));
 		}

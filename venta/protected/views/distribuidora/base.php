@@ -13,6 +13,9 @@ if(isset($render))
 					'cliente'=>$cliente,
 					'detalle'=>$detalle,
 					'venta'=>$venta,));
+			$this->renderPartial("scripts/operaciones");
+			$this->renderPartial("scripts/save");
+			$this->renderPartial("scripts/reset");
 			break;
 			
 		case "buscar":
@@ -66,6 +69,7 @@ if(isset($render))
 							'arqueo'=>$arqueo,
 					));
 			$this->renderPartial("scripts/print");
+			$this->renderPartial("scripts/save");
 			break;
 		case "arqueos":
 			$this->renderPartial('menus/arqueo');
@@ -85,8 +89,10 @@ if(isset($render))
 			$this->renderPartial('prints/comprobante',array('arqueo'=>$arqueo));
 			$this->renderPartial("scripts/print");
 			break;
+		default:
+			$this->renderPartial('index',array("ventas"=>$ventas,"productos"=>$productos));
+			break;
 	}
-		
 }
 ?>
 </div>

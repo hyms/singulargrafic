@@ -24,7 +24,7 @@ class CtpController extends Controller
 	
 	public function actionIndex()
 	{
-		$this->render('index');
+		$this->render('base',array('render'=>''));
 	}
 	
 	public function actionOrdenes()
@@ -43,7 +43,7 @@ class CtpController extends Controller
 				'pagination'=>array(
 						'pageSize'=>'20',
 				),));
-		$this->render('ordenes',array('ordenes'=>$ordenes));
+		$this->render('base',array('render'=>'ordenes','ordenes'=>$ordenes));
 	}
 	
 	public function actionOrden()
@@ -168,7 +168,7 @@ class CtpController extends Controller
 			}
 			$ctp->detalleCTPs = $detalle;
 			$ctp->montoVenta = $total;
-			$this->render('orden',array('ctp'=>$ctp,'detalle'=>$ctp->detalleCTPs,'cliente'=>$ctp->idCliente0));
+			$this->render('base',array('render'=>'orden','ctp'=>$ctp,'detalle'=>$ctp->detalleCTPs,'cliente'=>$ctp->idCliente0));
 		}
 		else
 			throw new CHttpException(400,'Petición no válida.');	

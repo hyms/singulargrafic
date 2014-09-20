@@ -67,10 +67,7 @@
 	</div>
 	
 	<div class="form-group col-sm-4">
-		<?php // echo CHtml::link("Atras",array("stock/distribuidora"),array("class"=>"btn btn-default")); ?>
 		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
-
-<!-- form -->

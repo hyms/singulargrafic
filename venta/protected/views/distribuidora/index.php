@@ -1,9 +1,3 @@
-
-<div class="col-sm-2">
-<?php $this->renderPartial('menus/principal'); ?>
-</div>
-
-<div class="col-sm-10">
 <div class="panel panel-default">
 		<div class="panel-heading">
 			<strong class="panel-title">Top 5 Clientes</strong>
@@ -74,6 +68,5 @@
 	));
  ?>
  	</div>
-	</div>
-	
 </div>
+	

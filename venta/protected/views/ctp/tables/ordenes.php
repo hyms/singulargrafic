@@ -1,19 +1,13 @@
-<div class="col-sm-2">
-<?php $this->renderPartial('menu'); ?>
-</div>
-
-<div class="col-sm-10">
-
 <h3><?php echo "Ordenes de trabajo";?></h3>
 <?php 
 $sw=0;
 
-
 if(!empty($estado))
 	$sw=$estado;
+
 if($sw==1)
 {
-$this->widget('zii.widgets.CMenu',array(
+	$this->widget('zii.widgets.CMenu',array(
 				'htmlOptions' => array('class' => 'nav nav-tabs hidden-print'),
 				'activeCssClass'	=> 'active',
 				'submenuHtmlOptions' => array('class' => 'dropdown-menu'),
@@ -61,5 +55,3 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		)
 	));
 ?>
-
-</div>
