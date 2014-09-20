@@ -15,10 +15,7 @@ Yii::app()->clientscript
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	
 	<meta name="language" content="es" />
-	<style type="text/css">
-		.center {	text-align:center;	}
-		.center form {	display:inline-block;	}
-	</style>
+	
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 

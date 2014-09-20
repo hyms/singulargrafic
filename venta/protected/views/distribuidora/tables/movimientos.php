@@ -1,17 +1,11 @@
-<div class="col-sm-2">
-<?php $this->renderPartial('menu'); ?>
-</div>
-
-<div class="col-sm-10">
-<?php $this->renderPartial('menuMovimientos');?>
 <?php if(!empty($cond3)){?>
 <div class="panel panel-default">
-		<div class="panel-body" style="overflow: auto;">
-		<div class="form-group">
+	<div class="panel-body" style="overflow: auto;">
+		<div class="form-group hidden-print">
 			<?php if($cf!="" && $sf!=""){?>
-			<?php echo CHtml::link('Con Factura', $cf, array("class"=>"btn btn-default hidden-print")); ?>
-			<?php echo CHtml::link('Sin Factura', $sf, array("class"=>"btn btn-default hidden-print")); ?>
-			<?php echo CHtml::link('<span class="glyphicon glyphicon-print"></span>', $cond3, array("class"=>"btn btn-default hidden-print")); ?>
+			<?php echo CHtml::link('Con Factura', $cf, array("class"=>"btn btn-default")); ?>
+			<?php echo CHtml::link('Sin Factura', $sf, array("class"=>"btn btn-default")); ?>
+			<?php echo CHtml::link('<span class="glyphicon glyphicon-print"></span>', $cond3, array("class"=>"btn btn-default",'id'=>"print","title"=>"Imprimir")); ?>
 			<?php }?>
 		</div>
 
@@ -83,63 +77,42 @@
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("Detalle", array("distribuidora/ventaDetalle","id"=>$data->idVenta), array("class" => "openDlg divDialog"))',
+					'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-list-alt\"></span>", array("distribuidora/ventaDetalle","id"=>$data->idVenta), array("class" => "openDlg divDialog","title"=>"Nota de Venta"))',
 			),
 		)
 	));
 ?>
 
 <?php 
-//$datos=$ventas->getData();
-$datos=$ventas->searchDistribuidora();
-$datos->Pagination=false;
-$datos=$datos->getData();
-$total=0;
-foreach ($datos as $item)
-{
-	$dato=$item->montoPagado-$item->montoCambio;
-	if($dato>0)
-		$total = $total+$dato;
-}
-//print_r(count($datos));
+	$datos=$ventas->searchDistribuidora();
+	$datos->Pagination=false;
+	$datos=$datos->getData();
+	$total=0;
+	foreach ($datos as $item)
+	{
+		$dato=$item->montoPagado-$item->montoCambio;
+		if($dato>0)
+			$total = $total+$dato;
+	}
 ?>
-</div>
-<div class="well well-sm col-xs-offset-8 col-xs-4">
-	<span><strong>Total:</strong> <?php echo $total; ?> Bs.</span>
-</div>
-<?php if(!empty($saldo)){?>
-<div class="well well-sm col-xs-offset-8 col-xs-4">
-	<span><strong>Saldo:</strong> <?php echo $saldo; ?> Bs.</span>
-</div>
-<?php }?>
+	</div>
+	
+	<div class="well well-sm col-xs-offset-8 col-xs-4">
+		<span><strong>Total:</strong> <?php echo $total; ?> Bs.</span>
+	</div>
+	<?php if(!empty($saldo)){?>
+	<div class="well well-sm col-xs-offset-8 col-xs-4">
+		<span><strong>Saldo:</strong> <?php echo $saldo; ?> Bs.</span>
+	</div>
+	<?php }?>
 </div>
 
 <?php
-Yii::app()->clientScript->registerScript('row',"
-$('#document').ready(function(){
-	$('.openDlg').click(function(){
-		var dialogId = $(this).attr('class').replace('openDlg ', '');
-		$.ajax({
-			'type': 'GET',
-			'url' : $(this).attr('href'),
-			success: function (data) {
-				 
-				$('#'+dialogId+' div.divForForm').html(data);
-				$( '#'+dialogId ).dialog( 'open' );
-			},
-			dataType: 'html',
-		});
-		return false; // prevent normal submit
-	})
-}); 
-",CClientScript::POS_READY);?>
-<?php
+$this->renderPartial("scripts/modal");
+
 $this->beginWidget('zii.widgets.jui.CJuiDialog', array('id'=>'divDialog',
     'options'=>array( 'title'=>'Detalle de Venta', 'autoOpen'=>false, 'modal'=>true, 'width'=>800)));
 ?>
     <div class="divForForm"></div>
-
 <?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>
-
-</div>
 <?php }?>

@@ -1,9 +1,3 @@
-<div class="col-sm-2">
-<?php $this->renderPartial('menu'); ?>
-</div>
-
-<div class="col-sm-10">
-<?php $this->renderPartial('arqueo/menuArqueo');?>
 <div class="panel panel-default">
 		<div class="panel-body" style="overflow: auto;">
 <?php 
@@ -46,4 +40,3 @@
 		)
 	));
 ?></div></div>
-</div>

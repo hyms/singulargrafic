@@ -1,16 +1,10 @@
-<div class="col-sm-2">
-<?php $this->renderPartial('menu'); ?>
-</div>
-
-<div class="col-sm-10">
-<?php $this->renderPartial('arqueo/menuArqueo');?>
 <?php $arqueo->fechaVentas=$fecha;?>
-	<div class="panel panel-default hidden-print">
-		<div class="panel-heading">
-			<span class="panel-title"><strong>Arqueo</strong></span>
-			
-		</div>
-	  	<div class="panel-body" style="overflow: auto;">
+<div class="panel panel-default hidden-print">
+	<div class="panel-heading">
+		<span class="panel-title"><strong>Arqueo</strong></span>
+	</div>
+	
+	<div class="panel-body" style="overflow: auto;">
 	  	<?php
 			$form=$this->beginWidget('CActiveForm', array(
 					'id'=>'detalle-venta-detalleVenta-form',
@@ -38,23 +32,8 @@
 			<?php echo CHtml::error($arqueo,'monto',array('class'=>'label label-danger')); ?>
 		
 		</div>
-		<?php echo CHtml::submitButton('Continuar',array('class'=>'btn btn-default col-sm-offset-1')); ?>
+		<?php echo CHtml::link('Continuar',"#",array('class'=>'btn btn-default col-sm-offset-1','id'=>'save')); ?>
 		<?php $this->endWidget(); ?>	
-		</div>
 	</div>
-	
-	<?php
-	$comprobante='';
-	$detalle='';
-	$arqueo='';
-	$this->renderPartial('arqueo/registroDiario',
-						array(	'fecha'=>$fecha,
-								'saldo'=>$saldo,
-								'ventas'=>$ventas,
-								'recibos'=>$recibos,
-								'comprobante'=>$comprobante,
-								'detalle'=>$detalle,
-								'arqueo'=>$arqueo,
-	));
-	?>
 </div>
+

@@ -1,9 +1,7 @@
-<div class="col-sm-2">
-<?php $this->renderPartial('menu'); ?>
+<div class="hidden-print">
+	<?php echo CHtml::link('<span class="glyphicon glyphicon-print"></span>', '#', array("class"=>"btn btn-default","id"=>"print")); ?>
 </div>
 
-<div class="col-sm-10">
-<?php $this->renderPartial('menuMovimientos');?>
 <div class="form-group" style="width:793px; height:529px;">
 <?php 
 if(!empty($tabla))
@@ -92,10 +90,8 @@ if(!empty($tabla))
 	</div>
 <?php 
 }
-else{
+else
 	echo "No existen registros";
-} 
-?>
 
-</div>
+?>
 </div>

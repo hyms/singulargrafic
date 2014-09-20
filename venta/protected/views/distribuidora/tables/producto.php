@@ -64,59 +64,16 @@
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-shopping-cart\"></span>",array("distribuidora/productos","id"=>$data->idAlmacenProducto), array("class" => "openDlg divDialog","title"=>"Añadir material al Stock"))',
+					'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-shopping-cart\"></span>",array("distribuidora/productos","id"=>$data->idAlmacenProducto), array("class" => "openDlg divDialog","title"=>"Añadir a Stock"))',
 			),
 		)
 	));
 ?>
-<?php Yii::app()->clientScript->registerScript('row',"
-
-function newRow(almacen)
-{
-	
-	var input = $(\"#yw3 tbody\");
-	var index = 0;
-	var factura = $('#Venta_tipoVenta_0').attr('checked')?0:1;
-	if(input.find(\".tabular-input-index\").length>0)
-	{
-		$(\".tabular-input-index\").each(function() {
-		    index = Math.max(index, parseInt(this.value)) + 1;
-		});
-	}		
-	$.ajax({
-		type: 'GET',
-		url: '".CHtml::normalizeUrl(array('/distribuidora/addDetalle'))."',
-		data: 'index='+index+'&al='+almacen+'&factura='+factura,
-		dataType: 'html',
-		success: function(html){
-			input.append(html);
-			input.siblings('.tabular-header').show();
-		},
-		
-	});
-	event.preventDefault();
-}
-
-$('#document').ready(function(){
-    $('.openDlg').live('click', function(){
-        var dialogId = $(this).attr('class').replace('openDlg ', '');
-        $.ajax({
-            'type': 'GET',
-            'url' : $(this).attr('href'),
-            success: function (data) {
-            	
-                $('#'+dialogId+' div.divForForm').html(data);
-               $( '#'+dialogId ).dialog( 'open' );
-            },
-            dataType: 'html',
-        });
-        return false; // prevent normal submit
-    })
-});
-
-",CClientScript::POS_HEAD); ?>
-
 <?php
+$url=CHtml::normalizeUrl(array('/distribuidora/addDetalle')); 
+$this->renderPartial("scripts/addList",array('url'=>$url));
+$this->renderPartial("scripts/modal");
+
 $this->beginWidget('zii.widgets.jui.CJuiDialog', array('id'=>'divDialog',
     'options'=>array( 'title'=>'Añadir a Stock', 'autoOpen'=>false, 'modal'=>true, 'width'=>800)));
 ?>

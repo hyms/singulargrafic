@@ -1,12 +1,5 @@
-<div class="col-sm-2">
-<?php $this->renderPartial('menu'); ?>
-</div>
-
-<div class="col-sm-10">
-<?php $this->renderPartial('menuMovimientos');?>
-
 <div class="panel panel-default">
-		<div class="panel-body" style="overflow: auto;">
+	<div class="panel-body" style="overflow: auto;">
 <?php 
 	$this->widget('zii.widgets.grid.CGridView', array(
 		//'dataProvider'=>$ventas,
@@ -99,11 +92,11 @@
 		$paquete = $paquete+$item->cantidadP;
 	}
 ?>
-<div class="well well-sm col-xs-offset-8 col-xs-4">
-<div class="col-sm-6">
-<strong>Unidades:</strong><?php echo $unidad;?>
+	<div class="well well-sm col-xs-offset-8 col-xs-4">
+		<div class="col-sm-6">
+		<strong>Unidades:</strong><?php echo $unidad;?>
+		</div>
+		<div class="col-sm-6">
+		<strong>Paquetes:</strong><?php echo $paquete;?>
+	</div>
 </div>
-<div class="col-sm-6">
-<strong>Paquetes:</strong><?php echo $paquete;?>
-</div>
-</div></div>

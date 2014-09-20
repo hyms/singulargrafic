@@ -221,8 +221,8 @@ class DistribuidoraController extends Controller
 			}
 		}
 		
-		
-		$this->render('notas',array(
+		$this->render('base',array('render'=>'nota',
+		//$this->render('notas',array(
 				'productos'=>$productos,
 				'cliente'=>$cliente,
 				'detalle'=>$detalle,
@@ -239,7 +239,7 @@ class DistribuidoraController extends Controller
 			$ventas->nit = $_GET['Venta']['nit'];
 			$ventas->apellido = $_GET['Venta']['apellido'];
 		}
-		$this->render('buscar',array('ventas'=>$ventas));
+		$this->render('base',array('render'=>"buscar",'ventas'=>$ventas));
 	}
 	
 	public function actionModificar()
@@ -411,7 +411,7 @@ class DistribuidoraController extends Controller
 				$this->redirect(array('preview',"id"=>$venta->idVenta));		
 			}
 			
-			$this->render('notas',array(
+			$this->render('base',array('render'=>'nota',
 				'productos'=>$productos,
 				'cliente'=>$cliente,
 				'detalle'=>$detalle,
@@ -436,7 +436,7 @@ class DistribuidoraController extends Controller
 						->with("idCajaMovimientoVenta0.idUser0.idEmpleado0")
 						->findByPk($_GET['id']);
 			if($ventas!=null)
-				$this->render('preview',array('venta'=>$ventas));
+				$this->render('base',array('render'=>'preview','ventas'=>$ventas));
 			else
 				$this->redirect('index');
 		}
@@ -483,7 +483,7 @@ class DistribuidoraController extends Controller
 											'pagination'=>array(
 													'pageSize'=>20,
 										),));
-		$this->render('deudores',array('deudores'=>$deudores));
+		$this->render('base',array('render'=>'deudores','deudores'=>$deudores));
 	}
 	
 	public function actionMovimientos()
@@ -553,7 +553,7 @@ class DistribuidoraController extends Controller
 		}
 		
 		//$this->render('movimientos',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'cond3'=>$cond3));
-		$this->render('movimientos',array('ventas'=>$ventas,'saldo'=>$saldo,'cond3'=>$cond3,'cf'=>$cf,'sf'=>$sf));
+		$this->render('base',array('render'=>'movimientos','ventas'=>$ventas,'saldo'=>$saldo,'cond3'=>$cond3,'cf'=>$cf,'sf'=>$sf));
 	}
 	
 	public function actionMovimientosProducto()
@@ -572,7 +572,7 @@ class DistribuidoraController extends Controller
 			$movimentoProducto->detalle=$_GET['DetalleVenta']['detalle'];
 		}
 		//end filter
-		$this->render('movimientosProducto',array('ventas'=>$movimentoProducto));
+		$this->render('base',array('render'=>'movProducto','ventas'=>$movimentoProducto));
 	}
 	
 	public function actionPreviewDay()
@@ -629,7 +629,7 @@ class DistribuidoraController extends Controller
 				->with('idCajaMovimientoVenta0')
 				->findAll(array('condition'=>'idCajaMovimientoVenta0.idCaja='.$this->cajaDistribuidora.' '.$fact.$cond)));
 		//$tabla = $caja->ventas;
-		$this->render("previewVentas",array('tabla'=>$caja,));
+		$this->render("base",array('render'=>"previewVentas",'tabla'=>$caja,));
 	}
 	
 	public function actionVentaDetalle()
@@ -697,26 +697,8 @@ class DistribuidoraController extends Controller
 				}
 			}
 			$index=2;
-			$this->renderPartial('distribuidora2',array('model'=>$model,'almacen'=>$almacen,'deposito'=>$deposito,'index'=>$index));
+			$this->renderPartial('forms/add_reduce',array('model'=>$model,'almacen'=>$almacen,'deposito'=>$deposito));
 	
-		}
-		else
-		{
-			$productos = new AlmacenProducto('searchDistribuidoraP');
-			//init filter
-			$productos->unsetAttributes();
-			if (isset($_GET['AlmacenProducto']))
-			{
-				$productos->attributes = $_GET['AlmacenProducto'];
-				//$productos->color = $_GET['AlmacenProducto']['color'];
-				$productos->material = $_GET['AlmacenProducto']['material'];
-				$productos->marca = $_GET['AlmacenProducto']['marca'];
-				$productos->detalle = $_GET['AlmacenProducto']['detalle'];
-				$productos->codigo = $_GET['AlmacenProducto']['codigo'];
-			}
-			//end filter
-			$index=1;
-			$this->renderPartial('distribuidora2',array('productos'=>$productos,'index'=>$index));
 		}
 	}
 	
@@ -807,10 +789,6 @@ class DistribuidoraController extends Controller
 					}
 				}
 			}
-			//if(!$movimiento->validate())
-				//print_r($movimiento);
-			//if(!$arqueo->validate())
-				//print_r($arqueo->attributes);
 		}
 		
 		if(isset($_GET['d']))
@@ -846,8 +824,9 @@ class DistribuidoraController extends Controller
 				$saldo = 0;
 			else
 				$saldo = $saldo->saldo;
-			$this->render("arqueo",
+			$this->render("base",
 					array(
+							'render'=>'arqueo',
 							'saldo'=>$saldo,
 							'arqueo'=>$arqueo,
 							'caja'=>$caja,
@@ -869,7 +848,7 @@ class DistribuidoraController extends Controller
 									'pageSize'=>'20',
 							),
 					));
-			$this->render('arqueos',array('arqueos'=>$arqueos,));
+			$this->render('base',array('render'=>'arqueos','arqueos'=>$arqueos,));
 		}
 	}
 	
@@ -910,8 +889,9 @@ class DistribuidoraController extends Controller
 				$recibos=$recibos+$item->idCajaMovimientoVenta0->monto;
 			}
 			
-			$this->render('arqueo/registroRealizado',
+			$this->render('base',
 							array(
+									'render'=>'registroRealizado',
 									'fecha'=>date("Y-m-d",strtotime($arqueo->fechaVentas)),
 									'arqueo'=>$arqueo,
 									'ventas'=>$ventas,
@@ -931,7 +911,7 @@ class DistribuidoraController extends Controller
 											->with('cajaMovimientoVenta')
 											->with('idUser0.idEmpleado0')
 											->find(array('condition'=>'idCajaArqueo='.$_GET['id'],'order'=>'fechaMovimiento Desc'));
-			$this->render('arqueo/comprobante',array('arqueo'=>$arqueo));
+			$this->render('base',array('render'=>'comprobante','arqueo'=>$arqueo));
 		}
 		else
 			throw new CHttpException(400,'Petición no válida.');
@@ -971,8 +951,8 @@ class DistribuidoraController extends Controller
 	
 	public function actionAddDetalle()
 	{
-		//if(Yii::app()->request->isAjaxRequest && isset($_GET['index']))
-		if(isset($_GET['index']))
+		if(Yii::app()->request->isAjaxRequest && isset($_GET['index']))
+		//if(isset($_GET['index']))
 		{
 			$detalle = new DetalleVenta;
 			$almacen = new AlmacenProducto;
@@ -981,7 +961,6 @@ class DistribuidoraController extends Controller
 				$almacen = AlmacenProducto::model()
 							->with("idProducto0")
 							->findByPk($_GET['al']);	
-	
 			}
 			
 			$detalle->idAlmacenProducto = $almacen->idAlmacenProducto;
@@ -999,7 +978,7 @@ class DistribuidoraController extends Controller
 				}
 			}
 				
-			$this->renderPartial('_newRowDetalleVenta', array(
+			$this->renderPartial('forms/_newRowDetalleVenta', array(
 					'model'=>$detalle,
 					'index'=>$_GET['index'],
 					'almacen'=>$almacen,
