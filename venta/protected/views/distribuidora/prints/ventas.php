@@ -1,5 +1,6 @@
 <div class="hidden-print">
 	<?php echo CHtml::link('<span class="glyphicon glyphicon-print"></span>', '#', array("class"=>"btn btn-default","id"=>"print")); ?>
+    <?php echo CHtml::link('<span class="glyphicon glyphicon-save"></span>', array("distribuidora/previewDay","excel"=>true), array("class"=>"btn btn-default",'id'=>"print","title"=>"Descargar Excel")); ?>
 </div>
 
 <div class="form-group" style="width:793px; height:529px;">

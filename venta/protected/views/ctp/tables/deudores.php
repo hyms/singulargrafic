@@ -1,9 +1,4 @@
-<div class="col-sm-2">
-<?php $this->renderPartial('menu'); ?>
-</div>
-
-<div class="col-sm-10">
-<?php 
+<?php
 $this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$deudores,
 		'ajaxUpdate'=>true,
@@ -34,4 +29,3 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		)
 )); 
 ?>
-</div>

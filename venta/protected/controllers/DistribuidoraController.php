@@ -222,7 +222,6 @@ class DistribuidoraController extends Controller
 		}
 		
 		$this->render('base',array('render'=>'nota',
-		//$this->render('notas',array(
 				'productos'=>$productos,
 				'cliente'=>$cliente,
 				'detalle'=>$detalle,
@@ -342,8 +341,8 @@ class DistribuidoraController extends Controller
 						$det--;
 				}
 			}
-			//print_r($detalle2);print_r($detalle);
-			if($swv==1 && $det==0)
+
+            if($swv==1 && $det==0)
 			{
 				
 				foreach ($detalle as $item)
@@ -488,6 +487,38 @@ class DistribuidoraController extends Controller
 	
 	public function actionMovimientos()
 	{
+        if(isset($_GET['excel']) && isset(Yii::app()->session['excel']))
+        {
+            $model = Yii::app()->session['excel'];
+            $dataProvider= $model->searchDistribuidora();
+            $dataProvider->pagination= false; // for retrive all modules
+            $data = $dataProvider->data;
+
+            $columnsTitle=array('Nro','Nº de Venta','Apellido','NitCI','Monto de la Venta','Monto Pagado','Fecha');
+            $content=array();
+            $index=1;
+            foreach ($data as $item)
+            {
+                array_push($content,array($index,
+                    $item->codigo,
+                    $item->idCliente0->apellido,
+                    $item->idCliente0->nitCi,
+                    $item->montoVenta,
+                    $item->montoPagado,
+                    $item->fechaVenta,
+                    ));
+                $index++;
+            }
+            $total=0;
+            foreach ($data as $item)
+            {
+                $dato=$item->montoPagado-$item->montoCambio;
+                if($dato>0)
+                    $total = $total+$dato;
+            }
+            array_push($content,array('','','','','','total',$total));
+            $this->createExcel($columnsTitle, $content);
+        }
 		$cond3="";
 		$f="";
 		$saldo="";
@@ -558,8 +589,36 @@ class DistribuidoraController extends Controller
 	
 	public function actionMovimientosProducto()
 	{
-		$movimentoProducto=new DetalleVenta('searchVenta');
-		//init filter
+		if(isset($_GET['excel']) && isset(Yii::app()->session['excel']))
+        {
+            $model = Yii::app()->session['excel'];
+            $dataProvider= $model->searchVenta();
+            $dataProvider->pagination= false; // for retrive all modules
+            $datas = $dataProvider->data;
+
+            $columnsTitle=array('Nro','Nº de Venta','Apellido','Codigo','material','color','detalle','cantidad Unidad','cantidad paquete','Fecha');
+            $content=array();
+            $index=1;
+            foreach ($datas as $data)
+            {
+                array_push($content,array($index,
+                    $data->idVenta0->codigo,
+                    $data->idVenta0->idCliente0->apellido,
+                    $data->idAlmacenProducto0->idProducto0->codigo,
+                    $data->idAlmacenProducto0->idProducto0->material,
+                    $data->idAlmacenProducto0->idProducto0->color,
+                    $data->idAlmacenProducto0->idProducto0->detalle,
+                    $data->cantidadU,
+                    $data->cantidadP,
+                    $data->idVenta0->fechaVenta
+                ));
+                $index++;
+            }
+
+            $this->createExcel($columnsTitle, $content);
+        }
+        $movimentoProducto=new DetalleVenta('searchVenta');
+        //init filter
 		$movimentoProducto->unsetAttributes();
 		if (isset($_GET['DetalleVenta'])){
 			//$movimentoProducto->attributes = $_GET['DetalleVenta'];
@@ -577,6 +636,45 @@ class DistribuidoraController extends Controller
 	
 	public function actionPreviewDay()
 	{
+        if(isset($_GET['excel']) && isset(Yii::app()->session['excel']))
+        {
+            $columnsTitle=array('Nº','Codigo Venta','Cliente','Cod. Prod.','Detalle del Producto','Cant','Precio','T/A','Total','Importe','Creditos','Fact');
+            $content=array();
+            $i=0;
+            $total=0;$importe=0;$creditos=0;$adicional=0;
+
+            foreach (Yii::app()->session['excel'] as $item)
+            {
+                $temp=count($item->detalleVentas);
+                foreach ($item->detalleVentas as $producto)
+                {
+                    $i++;$temp--;
+                    array_push($content,array($i,
+                        $item->codigo,
+                        $item->idCliente0->apellido." ".$item->idCliente0->nombre,
+                        $producto->idAlmacenProducto0->idProducto0->codigo,
+                        $producto->idAlmacenProducto0->idProducto0->material
+                        ." ".$producto->idAlmacenProducto0->idProducto0->color
+                        ." ".$producto->idAlmacenProducto0->idProducto0->detalle
+                        ." ".$producto->idAlmacenProducto0->idProducto0->marca,
+                        $producto->cantidadU."/".$producto->cantidadP,
+                        ($producto->cantidadU*$producto->costoU).
+                        "/".($producto->cantidadP*$producto->costoP),
+                        $producto->costoAdicional,
+                        $producto->costoTotal,
+                        ($item->estado==1)?(($temp==0)?($item->montoPagado-$item->montoCambio):0):(($item->estado==2)?(($temp==0)?$item->montoPagado:0):0),
+                        ($item->estado==2)?(($temp==0)?($item->montoCambio*(-1)):0):0,
+                        $item->factura
+                    ));
+                    $total=$total+$producto->costoTotal;
+                    $adicional=$adicional+$producto->costoAdicional;
+                    ($item->estado==1)?(($temp==0)?($importe=$importe+($item->montoPagado-$item->montoCambio)):0):(($item->estado==2)?(($temp==0)?($importe=$importe+$item->montoPagado):0):0);
+                    ($item->estado==2)?(($temp==0)?($creditos=$creditos+($item->montoCambio*(-1))):0):0;
+                }
+            }
+            array_push($content,array('','','','','','','Totales',$adicional,$total,$importe,$creditos));
+            $this->createExcel($columnsTitle, $content);
+        }
 		$fact="";$cond="";
 		if(isset($_GET['f']))
 		{
@@ -629,6 +727,7 @@ class DistribuidoraController extends Controller
 				->with('idCajaMovimientoVenta0')
 				->findAll(array('condition'=>'idCajaMovimientoVenta0.idCaja='.$this->cajaDistribuidora.' '.$fact.$cond)));
 		//$tabla = $caja->ventas;
+        Yii::app()->session['excel']= $caja;
 		$this->render("base",array('render'=>"previewVentas",'tabla'=>$caja,));
 	}
 	
@@ -1088,4 +1187,65 @@ class DistribuidoraController extends Controller
 		
 		return $venta;
 	}
+
+    private function createExcel($columnsTitle,$content,$sum=array(),$title="")
+    {
+        if($title=="")
+        {
+            $title="Reports";
+        }
+        Yii::import('ext.phpexcel.XPHPExcel');
+        $objPHPExcel= XPHPExcel::createPHPExcel();
+        $objPHPExcel->getProperties()
+            ->setCreator("Grafica Singular")
+            ->setLastModifiedBy("Grafica Singular")
+            ->setTitle($title)
+            ->setSubject($title)
+            ->setDescription($title.".xlsx");
+
+        $column=65;
+        //assign titles
+        foreach ($columnsTitle as $item)
+        {
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).'1', $item);
+            $objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
+            $column++;
+        }
+
+        //create content
+        $index=2;
+        foreach ($content as $items)
+        {
+            $column=65;
+            foreach ($items as $item)
+            {
+
+                $objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).($index), $item);
+                $objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
+                $column++;
+            }
+            $index++;
+        }
+        // Rename worksheet
+        $objPHPExcel->getActiveSheet()->setTitle('Report');
+
+
+        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+        $objPHPExcel->setActiveSheetIndex(0);
+        // Redirect output to a clientâ€™s web browser (Excel5)
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="Report.xls"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+
+        // If you're serving to IE over SSL, then the following may be needed
+        header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+        header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header ('Pragma: public'); // HTTP/1.0
+
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output');
+        Yii::app()->end();
+    }
 }

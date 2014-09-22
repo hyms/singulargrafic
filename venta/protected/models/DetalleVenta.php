@@ -136,13 +136,15 @@ class DetalleVenta extends CActiveRecord
 		$criteria->compare('idProducto0.color',$this->color);
 		$criteria->compare('idProducto0.material',$this->material);
 		$criteria->compare('idProducto0.detalle',$this->detalle,true);
-		
-		return new CActiveDataProvider($this, array(
+
+        $data = new CActiveDataProvider($this, array(
 				'criteria'=>$criteria,
 				'pagination'=>array(
 						'pageSize'=>'10',
 				),
 		));
+        Yii::app()->session['excel'] = $this;
+        return $data;
 	}
 	/**
 	 * Returns the static model of the specified AR class.

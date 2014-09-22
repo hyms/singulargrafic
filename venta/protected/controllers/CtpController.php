@@ -211,7 +211,7 @@ class CtpController extends Controller
 					->findByPk($_GET['id']);
 			if($ctp->tipoCTP==1)
 			{
-				$this->render('preview',array('ctp'=>$ctp,'tipo'=>''));
+				$this->render('base',array('render'=>'preview','ctp'=>$ctp,'tipo'=>''));
 			}
 			if($ctp->tipoCTP==2)
 			{
@@ -220,8 +220,7 @@ class CtpController extends Controller
 				->with('idUserOT0')
 				->with('idUserOT0.idEmpleado0')
 				->findByPk($ctp->idCTPParent);
-				//throw new CHttpException(203 ,'Non-Authoritative Information');
-				$this->render('previewTI',array('ctp'=>$ctp,'tipo'=>'','titulo'=>'Interna'));
+				$this->render('base',array('render'=>'previewTI','ctp'=>$ctp,'tipo'=>'','titulo'=>'Interna'));
 			}
 			if($ctp->tipoCTP==3)
 			{
@@ -232,11 +231,11 @@ class CtpController extends Controller
 							->findByPk($ctp->idCTPParent);
 				$ctp->idCliente0 = $ctpP->idCliente0;
 				$ctp->idUserVenta0 = $ctpP->idUserVenta0;
-				//$ctp->idUserVenta0->idEmpleado0 = $ctpP->idUserVenta0->idEmpleado0;
-				if($ctp->montoVenta>0)
-					$this->render('preview',array('ctp'=>$ctp,'tipo'=>'Reposición'));
+
+                if($ctp->montoVenta>0)
+                    $this->render('base',array('render'=>'preview','ctp'=>$ctp,'tipo'=>'Reposición'));
 				else
-					$this->render('previewSC',array('ctp'=>$ctp,'tipo'=>'1','titulo'=>'Reposición'));
+                    $this->render('base',array('render'=>'previewSC','ctp'=>$ctp,'tipo'=>'1','titulo'=>'Reposición'));
 			}
 		}
 		else
@@ -254,7 +253,7 @@ class CtpController extends Controller
 							'pagination'=>array(
 								'pageSize'=>20,
 						),));
-		$this->render('deudores',array('deudores'=>$deudores));
+		$this->render('base',array('render'=>'deudores','deudores'=>$deudores));
 		
 	}
 	
@@ -302,9 +301,7 @@ class CtpController extends Controller
 			}
 		
 		}
-		
-		
-		//print_r($ventas);
+
 		if(isset($_GET['CTP']))
 		{
 			$ventas->attributes = $_GET['CTP'];
@@ -324,7 +321,7 @@ class CtpController extends Controller
 				$saldo = $saldo->saldo;
 		}
 		
-		$this->render('movimientos',array('ventas'=>$ventas,'saldo'=>$saldo,'cond3'=>$cond3,'cf'=>$cf,'sf'=>$sf));
+		$this->render('base',array('render'=>'movimientos','ventas'=>$ventas,'saldo'=>$saldo,'cond3'=>$cond3,'cf'=>$cf,'sf'=>$sf));
 	}
 	
 	public function actionPreviewDay()
@@ -346,10 +343,9 @@ class CtpController extends Controller
 		}
 		if(isset($_GET['d']) || isset($_GET['m']))
 		{
-			$d=date("d");
 			$m=date("m");
 			$y=date("Y");
-			$start=date("Y-m-d H:i:s"); $end=date("Y-m-d H:i:s");
+			$start=date("Y-m-d")." 00:00:00"; $end=date("Y-m-d")." 23:59:59";
 	
 			if(isset($_GET['d']))
 			{
@@ -379,7 +375,7 @@ class CtpController extends Controller
 				->with('idCajaMovimientoVenta0')
 				->findAll(array('condition'=>'idCajaMovimientoVenta0.idCaja='.$this->cajaCTP.' and idCajaMovimientoVenta0.arqueo=0'.$fact.$cond)));
 		//$tabla = $caja->ventas;
-		$this->render("movimientos/previewVentas",array('tabla'=>$caja,));
+		$this->render("base",array('render'=>'previewDay','tabla'=>$caja,));
 	}
 	
 	public function actionArqueo()

@@ -188,7 +188,6 @@ class CTP extends CActiveRecord
 				'idCliente0',
 		);
 		$criteria->order='fechaOrden DESC';
-		$criteria->limit = 50;
 		//$criteria->condition = 'idAlmacen=2';
 	
 		$criteria->compare('idCTP',$this->idCTP);
@@ -205,7 +204,6 @@ class CTP extends CActiveRecord
 	
 		return new CActiveDataProvider($this, array(
 				'criteria'=>$criteria,
-				'pagination'=>false,
 		));
 	}
 	/**

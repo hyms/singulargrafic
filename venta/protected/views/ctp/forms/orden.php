@@ -1,38 +1,32 @@
-	<div class="col-sm-2">
-<?php $this->renderPartial('menu'); ?>
+<div class = "row">
+	<h3 class="col-sm-4">Orden de Trabajo</h3>
+	<h3 class="col-sm-4 text-center" id="codigo"><?php echo $ctp->codigo;?></h3>
+	<h3 class="col-sm-4 text-right"><?php echo date("d/m/Y",strtotime($ctp->fechaOrden));?></h3>
 </div>
-
-<div class="col-sm-10">
-
-	<div class = "row">
-		<h3 class="col-sm-4">Orden de Trabajo</h3> 
-		<h3 class="col-sm-4 text-center" id="codigo"><?php echo $ctp->codigo;?></h3> 
-		<h3 class="col-sm-4 text-right"><?php echo date("d/m/Y",strtotime($ctp->fechaOrden));?></h3>
-		
-	</div>
 	
-	<?php
-		$form=$this->beginWidget('CActiveForm', array(
-				'id'=>'detalle-venta-detalleVenta-form',
-				'action'=>CHtml::normalizeUrl(array('/ctp/orden')),
-				'htmlOptions'=>array(
-						'class'=>'form-horizontal',
-						'role'=>'form'
-				),
-		));
-	
-		echo CHtml::activeHiddenField($ctp,'idCTP');
-	?>
-	<?php if($ctp->tipoCTP !=3){?>
-	<div class="panel panel-default">
-		<div class="panel-heading">
+<?php
+	$form=$this->beginWidget('CActiveForm', array(
+			'id'=>'detalle-venta-detalleVenta-form',
+			'action'=>CHtml::normalizeUrl(array('/ctp/orden')),
+			'htmlOptions'=>array(
+					'class'=>'form-horizontal',
+					'role'=>'form'
+			),
+	));
+
+	echo CHtml::activeHiddenField($ctp,'idCTP');
+?>
+
+<?php if($ctp->tipoCTP !=3){?>
+    <div class="panel panel-default">
+	    <div class="panel-heading">
 			<strong class="panel-title">Datos Cliente</strong>
 		</div>
 	  	<div class="panel-body" style="overflow: auto;">
 	  	<?php $this->renderPartial('orden/cliente',array('cliente'=>$cliente,'ctp'=>$ctp))?>
 	  	</div>
 	</div>
-	<?php }?>
+<?php }?>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<strong class="panel-title">Datos de Orden</strong>
@@ -58,13 +52,5 @@
 		<?php //echo CHtml::submitButton('Guardar', array('class' => 'btn btn-default hidden-print')); ?>
 		</div>
 	</div>
-	<?php $this->endWidget(); ?>	
+	<?php $this->endWidget(); ?>
 </div>
-
-<?php Yii::app()->getClientScript()->registerScript("ajax_send",
-"
- $('#save').click(function(){
-		//alert('se guardaran los datos');
-		$('form').submit();
-});
-",CClientScript::POS_READY); ?>

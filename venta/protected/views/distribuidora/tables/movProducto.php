@@ -1,9 +1,12 @@
 <div class="panel panel-default">
 	<div class="panel-body" style="overflow: auto;">
+        <div class="hidden-print">
+            <?php echo CHtml::link('<span class="glyphicon glyphicon-save"></span>', array("distribuidora/movimientosProducto","excel"=>true), array("class"=>"btn btn-default",'id'=>"print","title"=>"Descargar Excel")); ?>
+        </div>
 <?php 
 	$this->widget('zii.widgets.grid.CGridView', array(
 		//'dataProvider'=>$ventas,
-		'dataProvider'=>$ventas->searchventa(),
+		'dataProvider'=>$ventas->searchVenta(),
 		'filter'=>$ventas,
 		'ajaxUpdate'=>false,
 		'itemsCssClass' => 'table table-hover table-condensed',

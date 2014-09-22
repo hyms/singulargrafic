@@ -199,7 +199,6 @@ class Venta extends CActiveRecord
 				'idCliente0',
 		);
 		$criteria->order='fechaVenta DESC';
-		//$criteria->limit = 50;
 		//$criteria->condition = 'idAlmacen=2';
 	
 		$criteria->compare('idVenta',$this->idVenta);
@@ -213,11 +212,14 @@ class Venta extends CActiveRecord
 		$criteria->compare('tipoVenta',$this->tipoVenta);
 		$criteria->compare('idCliente0.apellido',$this->apellido,true);
 		$criteria->compare('idCliente0.nitCi',$this->nit);
-	
-		return new CActiveDataProvider($this, array(
+
+        $data = new CActiveDataProvider($this, array(
 				'criteria'=>$criteria,
 				//'pagination'=>false,
 		));
+        Yii::app()->session['excel']= $this;
+
+        return $data;
 	}
 	
 	public $material;

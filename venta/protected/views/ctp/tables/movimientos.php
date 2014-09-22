@@ -1,23 +1,15 @@
-<div class="col-sm-2">
-<?php $this->renderPartial('menu'); ?>
-</div>
-
-<div class="col-sm-10">
-<?php $this->renderPartial('movimientos/menu');?>
-<div class="row">
-<div class="text-center">
-<?php if($cf!="" && $sf!=""){?>
-<?php echo CHtml::link('Con Factura', $cf, array("class"=>"btn btn-default hidden-print")); ?>
-<?php echo CHtml::link('Sin Factura', $sf, array("class"=>"btn btn-default hidden-print")); ?>
-<?php echo CHtml::link('Imprimir', $cond3, array("class"=>"btn btn-default hidden-print")); ?>
-<?php }?>
-</div>
+<?php if(!empty($cond3)){?>
+<div class="form-group hidden-print">
+    <?php if($cf!="" && $sf!=""){?>
+        <?php echo CHtml::link('Con Factura', $cf, array("class"=>"btn btn-default hidden-print")); ?>
+        <?php echo CHtml::link('Sin Factura', $sf, array("class"=>"btn btn-default hidden-print")); ?>
+        <?php echo CHtml::link('Imprimir', $cond3, array("class"=>"btn btn-default hidden-print")); ?>
+    <?php }?>
 </div>
 
 <div  style="height:500px; overflow:auto;">
 <?php 
 	$this->widget('zii.widgets.grid.CGridView', array(
-		//'dataProvider'=>$ventas,
 		'dataProvider'=>$ventas->searchCTP(),
 		'filter'=>$ventas,
 		'ajaxUpdate'=>false,
@@ -89,8 +81,9 @@
 ?>
 </div>
 <?php 
-//$datos=$ventas->getData();
-$datos=$ventas->searchCTP()->getData();
+$datos=$ventas->searchCTP();
+$datos->Pagination=false;
+$datos=$datos->getData();
 $total=0;
 foreach ($datos as $item)
 {
@@ -100,44 +93,24 @@ foreach ($datos as $item)
 }
 //print_r(count($datos));
 ?>
-<div class="col-xs-offset-8 col-xs-4">
-<div class="well well-sm">
-	<span><strong>Total:</strong> <?php echo $total; ?> Bs.</span>
-</div>
-<?php if(!empty($saldo)){?>
-<div class="well well-sm">
-	<span><strong>Saldo:</strong> <?php echo $saldo; ?> Bs.</span>
-</div>
-<?php }?>
-</div>
+
+    <div class="well well-sm col-xs-offset-8 col-xs-4">
+        <span><strong>Total:</strong> <?php echo $total; ?> Bs.</span>
+    </div>
+    <?php if(!empty($saldo)){?>
+    <div class="well well-sm col-xs-offset-8 col-xs-4">
+        <span><strong>Saldo:</strong> <?php echo $saldo; ?> Bs.</span>
+    </div>
+    <?php }?>
 
 <?php
-Yii::app()->clientScript->registerScript('row',"
-$('#document').ready(function(){
-	$('.openDlg').click(function(){
-		var dialogId = $(this).attr('class').replace('openDlg ', '');
-		$.ajax({
-			'type': 'GET',
-			'url' : $(this).attr('href'),
-			success: function (data) {
-				 
-				$('#'+dialogId+' div.divForForm').html(data);
-				$( '#'+dialogId ).dialog( 'open' );
-			},
-			dataType: 'html',
-		});
-		return false; // prevent normal submit
-	})
-}); 
-",CClientScript::POS_READY);?>
-<?php
-$this->beginWidget('zii.widgets.jui.CJuiDialog', array('id'=>'divDialog',
-    'options'=>array( 'title'=>'Detalle de Venta', 'autoOpen'=>false, 'modal'=>true, 'width'=>800)));
+    $this->renderPartial("scripts/modal");
+    $this->beginWidget('zii.widgets.jui.CJuiDialog', array('id'=>'divDialog',
+    'options'=>array( 'title'=>'Detalle de Orden', 'autoOpen'=>false, 'modal'=>true, 'width'=>800)));
 ?>
     <div class="divForForm"></div>
 
 <?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>
 
 </div>
-
-
+<?php }?>

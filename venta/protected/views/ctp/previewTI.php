@@ -1,11 +1,5 @@
-<div class="col-xs-2 hidden-print">
-<?php $this->renderPartial('menu'); ?>
-</div>
-
-<div class="col-xs-10" >
-
-<div class="col-xs-offset-3 col-xs-7">
-	<?php echo CHtml::link('Imprimir', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"printView()")); ?>
+<div class="hidden-print">
+    <?php echo CHtml::link('<span class="glyphicon glyphicon-print"></span>', '#', array("class"=>"btn btn-default","id"=>"print")); ?>
 </div>
 
 <div class="col-xs-12" style="width:816px; height:528px;">
@@ -90,15 +84,3 @@
 	</div>
 	
 </div>
-</div>
-<?php /*?>
-<?php 
-
-$script = "
-		function printView()
-		{
-			window.print();
-		}";
-
-Yii::app()->clientScript->registerScript("print",$script,CClientScript::POS_HEAD); 
-//*/?>

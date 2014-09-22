@@ -3,9 +3,10 @@
 	<div class="panel-body" style="overflow: auto;">
 		<div class="form-group hidden-print">
 			<?php if($cf!="" && $sf!=""){?>
-			<?php echo CHtml::link('Con Factura', $cf, array("class"=>"btn btn-default")); ?>
-			<?php echo CHtml::link('Sin Factura', $sf, array("class"=>"btn btn-default")); ?>
-			<?php echo CHtml::link('<span class="glyphicon glyphicon-print"></span>', $cond3, array("class"=>"btn btn-default",'id'=>"print","title"=>"Imprimir")); ?>
+			    <?php echo CHtml::link('Con Factura', $cf, array("class"=>"btn btn-default")); ?>
+			    <?php echo CHtml::link('Sin Factura', $sf, array("class"=>"btn btn-default")); ?>
+			    <?php echo CHtml::link('<span class="glyphicon glyphicon-print"></span>', $cond3, array("class"=>"btn btn-default",'id'=>"print","title"=>"Imprimir")); ?>
+                <?php echo CHtml::link('<span class="glyphicon glyphicon-save"></span>', array("distribuidora/movimientos","excel"=>true), array("class"=>"btn btn-default",'id'=>"print","title"=>"Descargar Excel")); ?>
 			<?php }?>
 		</div>
 
@@ -108,9 +109,9 @@
 </div>
 
 <?php
-$this->renderPartial("scripts/modal");
+    $this->renderPartial("scripts/modal");
 
-$this->beginWidget('zii.widgets.jui.CJuiDialog', array('id'=>'divDialog',
+    $this->beginWidget('zii.widgets.jui.CJuiDialog', array('id'=>'divDialog',
     'options'=>array( 'title'=>'Detalle de Venta', 'autoOpen'=>false, 'modal'=>true, 'width'=>800)));
 ?>
     <div class="divForForm"></div>
