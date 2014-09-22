@@ -43,7 +43,7 @@ class CtpController extends Controller
 				'pagination'=>array(
 						'pageSize'=>'20',
 				),));
-		$this->render('base',array('render'=>'ordenes','ordenes'=>$ordenes));
+		$this->render('base',array('render'=>'ordenes','ordenes'=>$ordenes,'estado'=>''));
 	}
 	
 	public function actionOrden()
@@ -194,7 +194,7 @@ class CtpController extends Controller
 				'pagination'=>array(
 						'pageSize'=>'20',
 				),));
-		$this->render('ordenes',array('ordenes'=>$ordenes,'estado'=>1));
+        $this->render('base',array('render'=>'ordenes','ordenes'=>$ordenes,'estado'=>1));
 	}
 	
 	public function actionPreview()
@@ -408,7 +408,7 @@ class CtpController extends Controller
 			if($movimiento->validate() && $arqueo->validate())
 			{
 				$caja->saldo = $caja->saldo-$movimiento->monto;
-				$$ctps=0;$recibos=0;
+				$ctps=0;$recibos=0;
 				$cajaMovimiento = CajaMovimientoVenta::model()->with('ventas')->with('reciboses')->findAll(array('condition'=>"`t`.idCaja=".$this->cajaCTP." and tipo=0 and arqueo=0 and fechaMovimiento<='".$end."'"));
 				foreach ($cajaMovimiento as $item)
 				{

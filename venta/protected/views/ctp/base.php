@@ -5,7 +5,7 @@
 <?php
 switch ($render){
 	case "ordenes":
-		$this->renderPartial('tables/ordenes',array('ordenes'=>$ordenes));
+        $this->renderPartial('tables/ordenes',array('ordenes'=>$ordenes,'estado'=>$estado));
 		break;
 	case "orden":
 		$this->renderPartial('orden',array('ctp'=>$ctp,'detalle'=>$detalle,'cliente'=>$cliente));
