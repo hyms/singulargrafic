@@ -656,6 +656,46 @@ class CtpController extends Controller
 			$this->renderPartial('add_reduce',array('productos'=>$productos,'index'=>$index));*/
 		}
 	}
+
+    public function actionPrecios()
+    {
+        $model ="";//  new MatrizPreciosCTP;
+        $placas = AlmacenProducto::model()->with('idProducto0')->findAll(array('condition'=>'idAlmacen=3', 'order'=>'idProducto0.detalle'));
+        $tiposClientes = TiposClientes::model()->findAll('servicio=1');
+        $cantidades = CantidadCTP::model()->findAll();
+        $horarios = Horario::model()->findAll();
+
+        $matriz = MatrizPreciosCTP::model()->findAll();
+        if(!empty($matriz))
+        {
+            $model = array();
+            $i=0; $j=0; $k=0;
+            foreach ($placas as $placa)
+                foreach ($tiposClientes as $tipoCliente)
+                    foreach ($cantidades as $cantidad)
+                        foreach ($horarios as $horario)
+                        {
+                            $model[$placa->idAlmacenProducto][$tipoCliente->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario] = new MatrizPreciosCTP;
+                        }
+
+            foreach ($matriz as $item)
+            {
+                $model[$item->idAlmacenProducto][$item->idTiposClientes][$item->idCantidad][$item->idHorario] = $item;
+                if($i<$item->idCantidad)
+                    $i=$item->idCantidad;
+                if($j<$item->idTiposClientes)
+                    $j=$item->idTiposClientes;
+                if($k<$item->idAlmacenProducto)
+                    $k=$item->idAlmacenProducto;
+            }
+        }
+        else
+        {
+            $model = new MatrizPreciosCTP;
+        }
+        $this->render('base',array('render'=>'matriz','model'=>$model,'placas'=>$placas,'tiposClientes'=>$tiposClientes,'cantidades'=>$cantidades,'horarios'=>$horarios));
+    }
+
 	public function actionAjaxFactura()
 	{
 		//Yii::app()->user->id;

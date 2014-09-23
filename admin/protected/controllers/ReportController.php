@@ -248,7 +248,12 @@ class ReportController extends Controller
 			{
 				$this->exportExcel($saldos, $entradasF, $salidasF, $saldoA, $costoF);
 			}
-			$this->render('producto/productoSaldo',array('saldoA'=>$saldos,'entradas'=>$entradasF,'salidas'=>$salidasF,'saldoB'=>$saldoA,'costos'=>$costoF,'almacen'=>$_GET['almacen']));
+            if($_GET['almacen']==2)
+            {
+                $this->render('../distribuidora/reports',array('render'=>'saldos','saldoA'=>$saldos,'entradas'=>$entradasF,'salidas'=>$salidasF,'saldoB'=>$saldoA,'costos'=>$costoF,'almacen'=>$_GET['almacen']));
+            }
+            else
+			    $this->render('producto/productoSaldo',array('saldoA'=>$saldos,'entradas'=>$entradasF,'salidas'=>$salidasF,'saldoB'=>$saldoA,'costos'=>$costoF,'almacen'=>$_GET['almacen']));
 		}
 		else
 			$this->render('producto/productoSaldo',array('saldoA'=>'','entradas'=>'','salidas'=>'','saldoB'=>''));

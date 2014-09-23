@@ -36,7 +36,7 @@
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("registro Diario", array("distribuidora/registroDiario","id"=>$data->idCajaArqueo))',
+					'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-list-alt\"></span> Registro Diario", array("distribuidora/registroDiario","id"=>$data->idCajaArqueo))',
 			),
 		)
 	));

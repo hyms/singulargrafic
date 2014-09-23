@@ -64,7 +64,7 @@
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-shopping-cart\"></span>",array("distribuidora/productos","id"=>$data->idAlmacenProducto), array("class" => "openDlg divDialog","title"=>"Añadir a Stock"))',
+					'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-transfer\"></span>",array("distribuidora/productos","id"=>$data->idAlmacenProducto), array("class" => "openDlg divDialog","title"=>"Añadir a Stock"))',
 			),
 		)
 	));

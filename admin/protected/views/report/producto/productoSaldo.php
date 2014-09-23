@@ -1,11 +1,7 @@
-<div class="col-sm-2">
-	<?php $this->renderPartial('./menu')?>
-</div>
-<div class="col-sm-10">
 <div>
-	<?php $this->renderPartial('producto/menu')?>
+	<?php //$this->renderPartial('producto/menu')?>
 	<?php
-	$this->widget('zii.widgets.CMenu',array(
+	/*$this->widget('zii.widgets.CMenu',array(
 			'htmlOptions' => array('class' => 'nav nav-tabs hidden-print'),
 			'activeCssClass'	=> 'active',
 			'submenuHtmlOptions' => array('class' => 'dropdown-menu'),
@@ -16,7 +12,7 @@
 					array('label'=>'CTP', 'url'=>array('report/productoSaldo','almacen'=>3)),
 						
 			),
-	));
+	));*/
 	
 	if(!empty($saldoA))// && !empty($entradas) && !empty($salidas) && !empty($saldoB))
 	{
@@ -48,8 +44,9 @@
 								),
 						),
 				));//
-		echo CHtml::link('Exportar a Excel',array('report/productoSaldo','almacen'=>$almacen,'excel'=>true),array('class'=>'btn btn-default'));
-		
+
+		echo CHtml::link('<span class="glyphicon glyphicon-save"></span>',array('report/productoSaldo','almacen'=>$almacen,'excel'=>true),array('class'=>'btn btn-default',"title"=>"Descargar Excel"));
+
 		$this->widget('zii.widgets.grid.CGridView', array(
 				'dataProvider'=>$dataProvider,
 				'itemsCssClass' => 'table table-hover table-condensed',

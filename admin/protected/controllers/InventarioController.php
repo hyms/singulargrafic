@@ -158,6 +158,32 @@ class InventarioController extends Controller
 	
 	public function actionMovimientos()
 	{
+        if(isset($_GET['excel']) && isset(Yii::app()->session['excel']))
+        {
+            $movimientos= Yii::app()->session['excel'];
+            $dataProvider= $movimientos->searchReporte();
+            $dataProvider->pagination= false; // for retrive all modules
+            $data = $dataProvider->data;
+            //print_r($movimientos);
+            $columnsTitle=array('Nro','Codigo','Material','Detalle Producto','Industria','De','A','Cant. Unidad','Cant. Paquete','Fecha');
+            $content=array();
+            $index=1;
+            foreach ($data as $item)
+            {
+                array_push($content,array($index,
+                    $item->idProducto0->codigo,
+                    $item->idProducto0->material,
+                    $item->idProducto0->color." ".$item->idProducto0->detalle." ".$item->idProducto0->marca,
+                    $item->idProducto0->industria,
+                    (!empty($item->idAlmacenOrigen0))?$item->idAlmacenOrigen0->nombre:"",
+                    (!empty($item->idAlmacenDestino0))?$item->idAlmacenDestino0->nombre:"",
+                    $item->cantidadU,
+                    $item->cantidadP,
+                    $item->fechaMovimiento));
+                $index++;
+            }
+            $this->createExcel($columnsTitle, $content);
+        }
 		$movimientos=new MovimientoAlmacen('searchReporte');
 		$movimientos->unsetAttributes();
 		if(isset($_GET['MovimientoAlmacen']))
@@ -175,32 +201,7 @@ class InventarioController extends Controller
 				$movimientos->end_date = $_GET['MovimientoAlmacen']['end_date'];
 			}
 		}
-		if(isset($_GET['excel']) && isset(Yii::app()->session['excel']))
-		{
-			$movimientos= Yii::app()->session['excel'];
-			$dataProvider= $movimientos->searchReporte();
-			$dataProvider->pagination= false; // for retrive all modules
-			$data = $dataProvider->data;
-			//print_r($movimientos);
-			$columnsTitle=array('Nro','Codigo','Material','Detalle Producto','Industria','De','A','Cant. Unidad','Cant. Paquete','Fecha');
-			$content=array();
-			$index=1;
-			foreach ($data as $item)
-			{
-				array_push($content,array($index,
-				$item->idProducto0->codigo,
-				$item->idProducto0->material,
-				$item->idProducto0->color." ".$item->idProducto0->detalle." ".$item->idProducto0->marca,
-				$item->idProducto0->industria,
-				(!empty($item->idAlmacenOrigen0))?$item->idAlmacenOrigen0->nombre:"",
-				(!empty($item->idAlmacenDestino0))?$item->idAlmacenDestino0->nombre:"",
-				$item->cantidadU,
-				$item->cantidadP,
-				$item->fechaMovimiento));
-				$index++;
-			}
-			$this->createExcel($columnsTitle, $content);
-		}
+
 		$this->render('movimientos',array(
 				'movimientos'=>$movimientos
 		));		

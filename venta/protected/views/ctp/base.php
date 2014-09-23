@@ -81,6 +81,9 @@ switch ($render){
         $this->renderPartial('prints/comprobante',array('arqueo'=>$arqueo));
         $this->renderPartial('scripts/print');
         break;
+    case "matriz":
+        $this->renderPartial('tables/precios',array('model'=>$model,'placas'=>$placas,'clienteTipos'=>$tiposClientes,'cantidades'=>$cantidades,'horarios'=>$horarios));
+        break;
 	default:
 		$this->renderPartial('index');
 		break;

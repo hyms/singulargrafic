@@ -517,7 +517,7 @@ class DistribuidoraController extends Controller
                     $total = $total+$dato;
             }
             array_push($content,array('','','','','','total',$total));
-            $this->createExcel($columnsTitle, $content);
+            $this->createExcel($columnsTitle, $content,'Reporte de Ventas '.date('Ymd'));
         }
 		$cond3="";
 		$f="";
@@ -615,7 +615,7 @@ class DistribuidoraController extends Controller
                 $index++;
             }
 
-            $this->createExcel($columnsTitle, $content);
+            $this->createExcel($columnsTitle, $content, 'Ventas por Productos '.date('Ymd'));
         }
         $movimentoProducto=new DetalleVenta('searchVenta');
         //init filter
@@ -673,7 +673,7 @@ class DistribuidoraController extends Controller
                 }
             }
             array_push($content,array('','','','','','','Totales',$adicional,$total,$importe,$creditos));
-            $this->createExcel($columnsTitle, $content);
+            $this->createExcel($columnsTitle, $content,'Reporte de Ventas '.date('Ymd'));
         }
 		$fact="";$cond="";
 		if(isset($_GET['f']))
@@ -1191,7 +1191,7 @@ class DistribuidoraController extends Controller
 		return $venta;
 	}
 
-    private function createExcel($columnsTitle,$content,$sum=array(),$title="")
+    private function createExcel($columnsTitle,$content,$title="")
     {
         if($title=="")
         {
@@ -1230,14 +1230,14 @@ class DistribuidoraController extends Controller
             $index++;
         }
         // Rename worksheet
-        $objPHPExcel->getActiveSheet()->setTitle('Report');
+        $objPHPExcel->getActiveSheet()->setTitle($title);
 
 
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $objPHPExcel->setActiveSheetIndex(0);
         // Redirect output to a clientâ€™s web browser (Excel5)
         header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="Report.xls"');
+        header('Content-Disposition: attachment;filename="'.$title.'.xls"');
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');

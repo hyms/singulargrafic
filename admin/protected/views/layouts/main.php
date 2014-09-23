@@ -10,8 +10,7 @@
 		//->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.css' )
 		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.min.slate.css')
 		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap-responsive.css' )
-		
-		
+
 		->registerCoreScript('jquery')
 		->registerCoreScript('jquery.ui')
 		
@@ -23,8 +22,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="language" content="es" />
-	
-	
+
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
@@ -47,8 +45,40 @@
 					'encodeLabel' => false,
 					'items'=>array(
 						array('label'=>'Home', 'url'=>array('/site/index')),
-						
-						array('label'=>'Pagina Web <b class="caret"></b>', 'url'=>array('#'),
+                        array('label'=>'Reportes <b class="caret"></b>', 'url'=>array('#'),
+                            'linkOptions'=> array(
+                            'class' => 'dropdown-toggle',
+                            'data-toggle' => 'dropdown',
+                            ),
+                            'itemOptions' => array('class'=>'dropdown'),
+                            'items'=>array(
+                                array('label'=>'Distribuidora', 'url'=>array('distribuidora/report')),
+                                array('label'=>'Pre Prensa CTP', 'url'=>array('#')),
+                                array('label'=>'Imprenta', 'url'=>array('#')),
+                            )),
+                        array('label'=>'Personas <b class="caret"></b>', 'url'=>array('#'),
+                            'linkOptions'=> array(
+                                'class' => 'dropdown-toggle',
+                                'data-toggle' => 'dropdown',
+                            ),
+                            'itemOptions' => array('class'=>'dropdown'),
+                            'items'=>array(
+                                array('label'=>'Clientes', 'url'=>array('#')),
+                                array('label'=>'Empleados', 'url'=>array('#')),
+                            )),
+                        array('label'=>'Productos <b class="caret"></b>', 'url'=>array('#'),
+                            'linkOptions'=> array(
+                                'class' => 'dropdown-toggle',
+                                'data-toggle' => 'dropdown',
+                            ),
+                            'itemOptions' => array('class'=>'dropdown'),
+                            'items'=>array(
+                                array('label'=>'Productos', 'url'=>array('#')),
+                                array('label'=>'Stocks', 'url'=>array('#')),
+                            )),
+                        array('label'=>'Contabilidad', 'url'=>array('#')),
+                        array('label'=>'Configuracion', 'url'=>array('#')),
+						/*array('label'=>'Pagina Web <b class="caret"></b>', 'url'=>array('#'),
 							'linkOptions'=> array(
 								'class' => 'dropdown-toggle',
 								'data-toggle' => 'dropdown',
@@ -58,35 +88,6 @@
 								array('label'=>'Banner', 'url'=>array('webpage/banner')),
 								array('label'=>'Paginas', 'url'=>array('webpage/pages')),
 						)),
-						/*
-						array('label'=>'Empleados', 'url'=>array('empleado/index')),
-						array('label'=>'Clientes', 'url'=>array('cliente/index')),
-						array('label'=>'Administracion <b class="caret"></b>', 'url'=>array('#'),
-							'linkOptions'=> array(
-								'class' => 'dropdown-toggle',
-								'data-toggle' => 'dropdown',
-							),
-							'itemOptions' => array('class'=>'dropdown'),
-							'items'=>array(
-								array('label'=>'Inventario Gral', 'url'=>array('inventario/index')),
-								array('label'=>'Movimientos Almacenes', 'url'=>array('inventario/movimientos')),
-								array('label'=>'Cajas y Libro Mayor', 'url'=>array('caja/')),
-								array('label'=>'Recibos', 'url'=>array('#')),
-						)),
-						array('label'=>'Stocks <b class="caret"></b>', 'url'=>array('#'),
-							'linkOptions'=> array(
-								'class' => 'dropdown-toggle',
-								'data-toggle' => 'dropdown',
-							),
-							'itemOptions' => array('class'=>'dropdown'),
-							'items'=>array(
-								array('label'=>'Pre-Prensa CTP', 'url'=>array('stock/ctp')),
-								array('label'=>'Distribuidora', 'url'=>array('stock/distribuidora')),
-								array('label'=>'Imprenta', 'url'=>array('#')),
-								array('label'=>'Editorial', 'url'=>array('#')),
-						)),
-						array('label'=>'Reportes', 'url'=>array('report/')),
-						*/
 						array('label'=>'Administracion <b class="caret"></b>', 'url'=>array('#'),
 								'linkOptions'=> array(
 								'class' => 'dropdown-toggle',
@@ -125,6 +126,7 @@
 						)),
 						//array('label'=>'Imprenta', 'url'=>array('#')),
 						array('label'=>'Reportes', 'url'=>array('report/')),
+						*/
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 					),

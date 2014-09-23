@@ -12,6 +12,7 @@ $this->widget('zii.widgets.CMenu',array(
 							array('label'=>'Movimientos', 'url'=>array('ctp/movimientos')),
 							array('label'=>'Arqueo', 'url'=>array('ctp/arqueo')),
 							array('label'=>'Material', 'url'=>array('ctp/material')),
+                            array('label'=>'Precios', 'url'=>array('ctp/precios')),
 						),
 				)); 
 ?>
