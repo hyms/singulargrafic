@@ -18,21 +18,67 @@ switch ($render){
         $this->renderPartial('menus/movimientos');
         $this->renderPartial('tables/movimientos',array('ventas'=>$ventas,'saldo'=>$saldo,'cond3'=>$cond3,'cf'=>$cf,'sf'=>$sf));
         break;
+    case "arqueo":
+        $this->renderPartial('menus/arqueo');
+        $this->renderPartial("tables/arqueo",
+            array(
+                'saldo'=>$saldo,
+                'arqueo'=>$arqueo,
+                'caja'=>$caja,
+                'fecha'=>$fecha,
+                'ventas'=>$ventas,
+                'recibos'=>$recibos,
+            ));
+        $comprobante='';
+        $detalle='';
+        $arqueo='';
+        $this->renderPartial('tables/registroDiario',
+            array(	'fecha'=>$fecha,
+                'saldo'=>$saldo,
+                'ventas'=>$ventas,
+                'recibos'=>$recibos,
+                'comprobante'=>$comprobante,
+                'detalle'=>$detalle,
+                'arqueo'=>$arqueo,
+            ));
+        $this->renderPartial('scripts/print');
+        break;
+    case "arqueos":
+        $this->renderPartial('menus/arqueo');
+        $this->renderPartial('tables/arqueos',array('arqueos'=>$arqueos,));
+        break;
+    case "registroRealizado":
+        $saldo = 0;
+        $saldo = CajaArqueo::model()->findByPk($arqueo->idCajaArqueo-1);
+        if(!isset($saldo))
+            $saldo = 0;
+        else
+            $saldo = $saldo->saldo;
+        $this->renderPartial('tables/registroDiario',array('fecha'=>$fecha,'saldo'=>$saldo,'ventas'=>$ventas,'recibos'=>$recibos,'arqueo'=>$arqueo));
+        break;
+    case "material":
+        $this->renderPartial('tables/material',array('material'=>$material));
+        break;
     case "preview":
         $this->renderPartial('prints/preview',array('ctp'=>$ctp,'tipo'=>$tipo));
         $this->renderPartial('scripts/print');
         break;
     case "previewTI":
-        $this->renderPartial('previewTI',array('ctp'=>$ctp,'tipo'=>$tipo,'titulo'=>$titulo));
+        $this->renderPartial('prints/previewTI',array('ctp'=>$ctp,'tipo'=>$tipo,'titulo'=>$titulo));
         $this->renderPartial('scripts/print');
         break;
     case "previewSC":
-        $this->renderPartial('previewSC',array('ctp'=>$ctp,'tipo'=>$tipo,'titulo'=>$titulo));
+        $this->renderPartial('prints/previewSC',array('ctp'=>$ctp,'tipo'=>$tipo,'titulo'=>$titulo));
         $this->renderPartial('scripts/print');
         break;
     case "previewDay":
         $this->renderPartial('menus/movimientos');
         $this->renderPartial("movimientos/previewVentas",array('tabla'=>$tabla,));
+        $this->renderPartial('scripts/print');
+        break;
+    case "comprobante":
+        $this->renderPartial('menus/arqueo');
+        $this->renderPartial('prints/comprobante',array('arqueo'=>$arqueo));
         $this->renderPartial('scripts/print');
         break;
 	default:

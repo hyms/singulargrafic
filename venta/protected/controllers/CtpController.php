@@ -411,7 +411,7 @@ class CtpController extends Controller
 					foreach ($item->ventas as $venta)
 					{
 						$tmp = CTP::model()->with('idCajaMovimientoVenta0')->findByPk($venta->idVenta);
-						$ctps = $ventas + $tmp->idCajaMovimientoVenta0->monto;
+						$ctps = $ctps + $tmp->idCajaMovimientoVenta0->monto;
 					}
 					foreach ($item->reciboses as $venta)
 					{
@@ -499,14 +499,15 @@ class CtpController extends Controller
 				$saldo = 0;
 			else
 				$saldo = $saldo->saldo;
-			$this->render("arqueo",
+			$this->render("base",
 					array(
-							'saldo'=>$saldo,
-							'arqueo'=>$arqueo,
-							'caja'=>$caja,
-							'fecha'=>date('Y-m-d',strtotime($end)),
-							'ventas'=>$ventas,
-							'recibos'=>$recibos,
+                        'render'=>'arqueo',
+						'saldo'=>$saldo,
+						'arqueo'=>$arqueo,
+						'caja'=>$caja,
+						'fecha'=>date('Y-m-d',strtotime($end)),
+						'ventas'=>$ventas,
+						'recibos'=>$recibos,
 					));
 		}
 		else
@@ -522,7 +523,7 @@ class CtpController extends Controller
 									'pageSize'=>'20',
 							),
 					));
-			$this->render('arqueos',array('arqueos'=>$arqueos,));
+			$this->render('base',array('render'=>'arqueos','arqueos'=>$arqueos,));
 		}
 	}
 	
@@ -563,12 +564,13 @@ class CtpController extends Controller
 				$recibos=$recibos+$item->idCajaMovimientoVenta0->monto;
 			}
 			
-			$this->render('arqueo/registroRealizado',
+			$this->render('base',
 							array(
-									'fecha'=>date("Y-m-d",strtotime($arqueo->fechaVentas)),
-									'arqueo'=>$arqueo,
-									'ventas'=>$ventas,
-									'recibos'=>$recibos,
+                                'render'=>'registroRealizado',
+								'fecha'=>date("Y-m-d",strtotime($arqueo->fechaVentas)),
+								'arqueo'=>$arqueo,
+								'ventas'=>$ventas,
+								'recibos'=>$recibos,
 							)
 			);
 		}
@@ -584,7 +586,7 @@ class CtpController extends Controller
 				->with('cajaMovimientoVenta')
 				->with('idUser0.idEmpleado0')
 				->find(array('condition'=>'idCajaArqueo='.$_GET['id'],'order'=>'fechaMovimiento Desc'));
-			$this->render('arqueo/comprobante',array('arqueo'=>$arqueo));
+			$this->render('base',array('render'=>'comprobante','arqueo'=>$arqueo));
 		}
 		else
 			throw new CHttpException(400,'Petición no válida.');
@@ -594,7 +596,7 @@ class CtpController extends Controller
 	{
 		$material = AlmacenProducto::model()->with('idProducto0')->findAll(array('condition'=>'idAlmacen=3','order'=>'idProducto0.codigo asc, idProducto0.material asc'));
 		
-		$this->render('material',array('material'=>$material));		
+		$this->render('base',array('render'=>'material','material'=>$material));
 	}
 	
 	public function actionProductos()
@@ -640,7 +642,7 @@ class CtpController extends Controller
 				}
 			}
 			$index=2;
-			$this->renderPartial('add_reduce',array('model'=>$model,'almacen'=>$almacen,'deposito'=>$deposito,'index'=>$index));
+			$this->renderPartial('forms/add_reduce',array('model'=>$model,'almacen'=>$almacen,'deposito'=>$deposito,'index'=>$index));
 	
 		}
 		else

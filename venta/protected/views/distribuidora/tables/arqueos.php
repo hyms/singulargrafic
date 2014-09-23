@@ -1,3 +1,4 @@
+<?php if(!empty($arqueos)){?>
 <div class="panel panel-default">
 		<div class="panel-body" style="overflow: auto;">
 <?php 
@@ -40,3 +41,4 @@
 		)
 	));
 ?></div></div>
+<?php } ?>

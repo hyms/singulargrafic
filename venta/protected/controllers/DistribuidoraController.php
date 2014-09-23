@@ -934,7 +934,7 @@ class DistribuidoraController extends Controller
 							'recibos'=>$recibos,
 					));
 		}
-		else
+		elseif(isset($_GET['list']))
 		{
 			$arqueos=new CActiveDataProvider('CajaArqueo',
 					array(
@@ -949,6 +949,9 @@ class DistribuidoraController extends Controller
 					));
 			$this->render('base',array('render'=>'arqueos','arqueos'=>$arqueos,));
 		}
+        else
+            $this->render('base',array('render'=>'arqueos','arqueos'=>''));
+
 	}
 	
 	public function actionRegistroDiario()
