@@ -18,4 +18,3 @@ $('#document').ready(function(){
 });
 
 ",CClientScript::POS_HEAD);
- ?>

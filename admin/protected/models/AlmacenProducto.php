@@ -80,29 +80,44 @@ class AlmacenProducto extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
+    public $codigo;
+    public $detalle;
+    public $material;
+    public $color;
+    public $marca;
+    public $paquete;
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria=new CDbCriteria;
+        $criteria=new CDbCriteria;
 
-		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
-		$criteria->compare('idProducto',$this->idProducto);
-		$criteria->compare('stockU',$this->stockU);
-		$criteria->compare('stockP',$this->stockP);
-		$criteria->compare('idAlmacen',$this->idAlmacen);
+        $criteria->with= array(
+            'idProducto0',
+        );
+        $criteria->order = 'idProducto0.Material,idProducto0.codigo, idProducto0.detalle';
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-	
-	public $codigo;
-	public $detalle;
-	public $material;
-	public $color;
-	public $marca;
-	public $paquete;
+        $criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
+        $criteria->compare('idProducto',$this->idProducto);
+        $criteria->compare('stockU',$this->stockU);
+        $criteria->compare('stockP',$this->stockP);
+        $criteria->compare('`t`.idAlmacen',$this->idAlmacen);
+
+        $criteria->compare('idProducto0.codigo',$this->codigo,true);
+        $criteria->compare('idProducto0.detalle',$this->detalle,true);
+        $criteria->compare('idProducto0.material',$this->material,true);
+        $criteria->compare('idProducto0.color',$this->color,true);
+        $criteria->compare('idProducto0.marca',$this->marca,true);
+        $criteria->compare('idProducto0.cantXPaquete',$this->paquete,true);
+
+        $data = new CActiveDataProvider($this, array(
+            'criteria'=>$criteria,
+
+        ));
+        Yii::app()->session['excel']= $this;
+        return $data;
+    }
+
 	public function searchDistribuidora()
 	{
 		$criteria=new CDbCriteria;
@@ -111,8 +126,9 @@ class AlmacenProducto extends CActiveRecord
 				'idProducto0',
 		);
 		$criteria->condition = 'idAlmacen=1';
-	
-		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
+
+
+        $criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
 		$criteria->compare('idProducto',$this->idProducto);
 		$criteria->compare('stockU',$this->stockU);
 		$criteria->compare('stockP',$this->stockP);

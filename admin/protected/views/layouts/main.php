@@ -73,8 +73,8 @@
                             ),
                             'itemOptions' => array('class'=>'dropdown'),
                             'items'=>array(
-                                array('label'=>'Productos', 'url'=>array('#')),
-                                array('label'=>'Stocks', 'url'=>array('#')),
+                                array('label'=>'Productos', 'url'=>array('productos/index')),
+                                array('label'=>'Stocks', 'url'=>array('stock/index')),
                             )),
                         array('label'=>'Contabilidad', 'url'=>array('#')),
                         array('label'=>'Configuracion', 'url'=>array('#')),

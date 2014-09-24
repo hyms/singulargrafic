@@ -764,7 +764,7 @@ class DistribuidoraController extends Controller
 			$model->idProducto = $almacen->idProducto;
 			$model->idAlmacenDestino = $almacen->idAlmacen;
 			$model->idAlmacenOrigen = $deposito->idAlmacen;
-			//$idUser->idUser = Yii::app()->user->id;
+            $model->idUser = Yii::app()->user->id;
 			$model->fechaMovimiento = date("Y-m-d H:i:s");
 	
 			if(isset($_POST['MovimientoAlmacen']))

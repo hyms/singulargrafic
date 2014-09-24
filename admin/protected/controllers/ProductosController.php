@@ -17,6 +17,12 @@ class ProductosController extends Controller
         );
     }
 
+    public function actionIndex()
+    {
+        $this->render('index',array(
+            'render'=>'index',));
+    }
+
     public function actionProductos()
     {
         if(isset($_GET['excel']) && isset(Yii::app()->session['excel']))
@@ -43,7 +49,7 @@ class ProductosController extends Controller
                     $item->stockP));
                 $index++;
             }
-            $this->createExcel($columnsTitle, $content);
+            $this->createExcel($columnsTitle, $content,'Lista de Productos');
         }
         $dataProvider = new AlmacenProducto('searchInventarioGral');
 
@@ -58,8 +64,117 @@ class ProductosController extends Controller
         }
 
         $this->render('index',array(
-            'dataProvider'=>$dataProvider
+            'render'=>'productos',
+            'dataProvider'=>$dataProvider,
         ));
+    }
+
+    public function actionNew()
+    {
+        $model=new Producto;
+
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+
+        if(isset($_POST['Producto']))
+        {
+            $model->attributes=$_POST['Producto'];
+            if($model->save())
+                if($this->initStock($model->idProducto))
+                    $this->redirect(array('productos'));
+        }
+
+        $this->render('index',array(
+            'render'=>'new',
+            'model'=>$model,
+        ));
+    }
+
+    public function actionEdit()
+    {
+        if($_GET['id'])
+        {
+            $model=$this->verifyModel(Producto::model()->findByPk($_GET['id']));
+
+            // Uncomment the following line if AJAX validation is needed
+            // $this->performAjaxValidation($model);
+
+            if(isset($_POST['Producto']))
+            {
+                $model->attributes=$_POST['Producto'];
+                if($model->save())
+                    $this->redirect(array('productos'));
+            }
+
+            $this->render('index',array(
+                'render'=>'edit',
+                'model'=>$model,
+            ));
+        }
+        else
+            throw new CHttpException(400,'La Respuesta de la pagina no Existe.');
+    }
+
+
+    private function createExcel($columnsTitle,$content,$title="")
+    {
+        if($title=="")
+        {
+            $title="Reports";
+        }
+        Yii::import('ext.phpexcel.XPHPExcel');
+        $objPHPExcel= XPHPExcel::createPHPExcel();
+        $objPHPExcel->getProperties()
+            ->setCreator("Grafica Singular")
+            ->setLastModifiedBy("Grafica Singular")
+            ->setTitle($title)
+            ->setSubject($title)
+            ->setDescription($title.".xlsx");
+
+        $column=65;
+        //assign titles
+        foreach ($columnsTitle as $item)
+        {
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).'1', $item);
+            $objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
+            $column++;
+        }
+
+        //create content
+        $index=2;
+        foreach ($content as $items)
+        {
+            $column=65;
+            foreach ($items as $item)
+            {
+
+                $objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).($index), $item);
+                $objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
+                $column++;
+            }
+            $index++;
+        }
+        // Rename worksheet
+        $objPHPExcel->getActiveSheet()->setTitle($title);
+
+
+        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+        $objPHPExcel->setActiveSheetIndex(0);
+        // Redirect output to a clientâ€™s web browser (Excel5)
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="'.$title.'.xls"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+
+        // If you're serving to IE over SSL, then the following may be needed
+        header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+        header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header ('Pragma: public'); // HTTP/1.0
+
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output');
+        Yii::app()->end();
     }
 
     public function verifyModel($model)

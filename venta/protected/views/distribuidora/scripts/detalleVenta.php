@@ -7,7 +7,7 @@
 	$('#pagado').keydown(function(e){
 		if(e.keyCode==13 || e.keyCode==9) 
 	    { 
-			$('#cambio').val(redodeo(resta($('#pagado').val(),$('#total').val())));
+			$('#cambio').val(redondeo(resta($('#pagado').val(),$('#total').val())));
 			$('#cambio').focus();
 			return true;
 		}
