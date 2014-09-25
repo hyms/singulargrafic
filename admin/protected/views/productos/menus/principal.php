@@ -7,7 +7,8 @@
         'encodeLabel' => false,
         'items'=>array(
             array('label'=>'Listar Productos', 'url'=>array('productos/productos')),
-            array('label'=>'Añadir Producto', 'url'=>array('productos/new')),
+            array('label'=>'Nuevo Producto', 'url'=>array('productos/new')),
+            array('label'=>'Añadir a Almacen', 'url'=>array('productos/#')),
         )));
     ?>
 </div>

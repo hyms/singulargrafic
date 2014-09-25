@@ -49,7 +49,6 @@ class StockController extends Controller
             }
             $this->createExcel($columnsTitle, $content,'almacen '.date('Ymd'));
         }
-
         $dataProvider = new AlmacenProducto('search');
 
         $dataProvider->unsetAttributes();
@@ -64,6 +63,8 @@ class StockController extends Controller
                 $dataProvider->industria = $_GET['AlmacenProducto']['industria'];
                 $dataProvider->material = $_GET['AlmacenProducto']['material'];
                 $dataProvider->detalle = $_GET['AlmacenProducto']['detalle'];
+                $dataProvider->color = $_GET['AlmacenProducto']['color'];
+                $dataProvider->marca = $_GET['AlmacenProducto']['marca'];
             }
             $this->render('index',array('render'=>'almacen','productos'=>$dataProvider,'almacen'=>$_GET['almacen'],'title'=>$title));
         }
@@ -73,7 +74,7 @@ class StockController extends Controller
 
     public function actionStockAdd()
     {
-        if(isset($_GET['id']))
+        if(isset($_GET['id']) && isset($_GET['almacen']))
         {
             $almacen=$this->verifyModel(AlmacenProducto::model()->with('idProducto0')->findByPk($_GET['id']));
             $deposito=new AlmacenProducto;
@@ -131,6 +132,57 @@ class StockController extends Controller
         }
         else
             throw new CHttpException(400,'La Respuesta de la pagina no Existe.');
+    }
+
+    public function actionMovimientos()
+    {
+        if(isset($_GET['excel']) && isset(Yii::app()->session['excel']))
+        {
+            $movimientos= Yii::app()->session['excel'];
+            $dataProvider= $movimientos->searchReporte();
+            $dataProvider->pagination= false; // for retrive all modules
+            $data = $dataProvider->data;
+            $columnsTitle=array('Nro','Codigo','Material','Detalle Producto','Industria','De','A','Cant. Unidad','Cant. Paquete','Fecha');
+            $content=array();
+            $index=1;
+            foreach ($data as $item)
+            {
+                array_push($content,array($index,
+                    $item->idProducto0->codigo,
+                    $item->idProducto0->material,
+                    $item->idProducto0->color." ".$item->idProducto0->detalle." ".$item->idProducto0->marca,
+                    $item->idProducto0->industria,
+                    (!empty($item->idAlmacenOrigen0))?$item->idAlmacenOrigen0->nombre:"",
+                    (!empty($item->idAlmacenDestino0))?$item->idAlmacenDestino0->nombre:"",
+                    $item->cantidadU,
+                    $item->cantidadP,
+                    $item->fechaMovimiento));
+                $index++;
+            }
+            $this->createExcel($columnsTitle, $content);
+        }
+        $movimientos=new MovimientoAlmacen('searchReporte');
+        $movimientos->unsetAttributes();
+        if(isset($_GET['MovimientoAlmacen']))
+        {
+            $movimientos->attributes = $_GET['MovimientoAlmacen'];
+            $movimientos->codigo = $_GET['MovimientoAlmacen']['codigo'];
+            $movimientos->material = $_GET['MovimientoAlmacen']['material'];
+            $movimientos->color = $_GET['MovimientoAlmacen']['color'];
+            $movimientos->detalle = $_GET['MovimientoAlmacen']['detalle'];
+            $movimientos->origen = $_GET['MovimientoAlmacen']['origen'];
+            $movimientos->destino = $_GET['MovimientoAlmacen']['destino'];
+            if(isset($_GET['MovimientoAlmacen']['start_date'])&& isset($_GET['MovimientoAlmacen']['end_date']))
+            {
+                $movimientos->start_date = $_GET['MovimientoAlmacen']['start_date'];
+                $movimientos->end_date = $_GET['MovimientoAlmacen']['end_date'];
+            }
+        }
+
+        $this->render('index',array(
+            'render'=>'movimientos',
+            'movimientos'=>$movimientos,
+        ));
     }
 
 	public function actionDistribuidora()
@@ -422,8 +474,8 @@ class StockController extends Controller
 			Yii::app()->end();
 		}
 	}
-	
-	private function createExcel($columnsTitle,$content,$title="")
+
+    private function createExcel($columnsTitle,$content,$title="")
 	{
         if($title=="")
         {
@@ -483,5 +535,9 @@ class StockController extends Controller
         $objWriter->save('php://output');
         Yii::app()->end();
 	}
+
+    protected function getUltimoDiaMes($elAnio,$elMes) {
+        return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
+    }
 }
 ?>

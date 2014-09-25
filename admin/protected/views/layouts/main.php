@@ -1,10 +1,10 @@
 <?php
 	$cs =Yii::app()->clientscript;
 	
-	$cs->scriptMap = array(
+	/*$cs->scriptMap = array(
 			'jquery.js' => Yii::app()->request->baseUrl.'/js/jquery-1.11.0.js',
 			'jquery.yii.js' => Yii::app()->request->baseUrl.'/js/jquery-1.11.0.min.js',
-	);
+	);*/
 		// use it when you need it!
 	$cs
 		//->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.css' )
@@ -12,7 +12,7 @@
 		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap-responsive.css' )
 
 		->registerCoreScript('jquery')
-		->registerCoreScript('jquery.ui')
+		//->registerCoreScript('jquery.ui')
 		
 		->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END )
 		;
@@ -52,9 +52,11 @@
                             ),
                             'itemOptions' => array('class'=>'dropdown'),
                             'items'=>array(
-                                array('label'=>'Distribuidora', 'url'=>array('distribuidora/report')),
-                                array('label'=>'Pre Prensa CTP', 'url'=>array('#')),
+                                array('label'=>'Ventas de Dsitribuidora', 'url'=>array('distribuidora/report')),
+                                array('label'=>'Ordenes CTP', 'url'=>array('#')),
                                 array('label'=>'Imprenta', 'url'=>array('#')),
+                                array('label'=>'Reporte de Productos', 'url'=>array('report/producto')),
+                                //array('label'=>'Productos por Agotarse', 'url'=>array('report/productoAgotarse')),
                             )),
                         array('label'=>'Personas <b class="caret"></b>', 'url'=>array('#'),
                             'linkOptions'=> array(

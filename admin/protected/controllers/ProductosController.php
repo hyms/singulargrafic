@@ -183,4 +183,13 @@ class ProductosController extends Controller
             throw new CHttpException(404,'La Respuesta de la pagina no Existe.');
         return $model;
     }
+    private function initStock($id)
+    {
+        $almacen = new AlmacenProducto;
+        $almacen->idAlmacen=1;
+        $almacen->idProducto=$id;
+        $almacen->stockU=0;
+        $almacen->stockP=0;
+        return $almacen->save();
+    }
 }

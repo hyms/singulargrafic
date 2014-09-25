@@ -9,6 +9,7 @@
             array('label'=>'Deposito', 'url'=>array('stock/almacen','almacen'=>1)),
             array('label'=>'Distribuidora', 'url'=>array('stock/almacen','almacen'=>2)),
             array('label'=>'Pre Prensa CTP', 'url'=>array('stock/almacen','almacen'=>3)),
+            array('label'=>'Movimientos', 'url'=>array('stock/movimientos')),
         )));
     ?>
 </div>

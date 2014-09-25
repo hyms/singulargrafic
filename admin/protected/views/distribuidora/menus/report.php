@@ -8,7 +8,6 @@
         'items'=>array(
             array('label'=>'Notas de Venta', 'url'=>array('distribuidora/reportDate')),
             array('label'=>'Productos', 'url'=>array('distribuidora/reportProducto')),
-            array('label'=>'Saldos', 'url'=>array('report/productoSaldo','almacen'=>2)),
         )));
     ?>
 </div>

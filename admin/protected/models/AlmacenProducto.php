@@ -109,6 +109,7 @@ class AlmacenProducto extends CActiveRecord
         $criteria->compare('idProducto0.color',$this->color,true);
         $criteria->compare('idProducto0.marca',$this->marca,true);
         $criteria->compare('idProducto0.cantXPaquete',$this->paquete,true);
+        $criteria->compare('idProducto0.industria',$this->industria,true);
 
         $data = new CActiveDataProvider($this, array(
             'criteria'=>$criteria,

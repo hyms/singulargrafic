@@ -1,7 +1,7 @@
 <?php
 Yii::app()->clientScript->registerScript('row',"
 $('#document').ready(function(){
-	$('.openDlg').click(function(){
+	$('.openDlg').live('click', function(){
 		var dialogId = $(this).attr('class').replace('openDlg ', '');
 		$.ajax({
 			'type': 'GET',

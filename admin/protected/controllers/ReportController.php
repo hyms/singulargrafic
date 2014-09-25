@@ -1,15 +1,6 @@
 <?php 
 class ReportController extends Controller
 {
-	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
-	 */
-	//public $layout='//layouts/column2';
-
-	/**
-	 * @return array action filters
-	 */
 	public function filters()
 	{
 		return array( 'accessControl' ); // perform access control for CRUD operations
@@ -39,158 +30,10 @@ class ReportController extends Controller
 				),));*/
 		$this->render('index');
 	}
-	 
-	public function actionVenta()
-	{
-		$ventas="";
-		$cond1="";
-		$cond2="";
-		$factura="";
-		$f="";
-		$saldo="";
-		$cf=array("report/venta",'f'=>0);
-		$sf=array("report/venta",'f'=>1);
-		$ventas = new Venta('searchDistribuidora');
-		
-		$ventas->unsetAttributes();
-		if(isset($_GET['d']) || isset($_GET['m']))
-		{
-			$d=date("d");
-			$m=date("m");
-			$y=date("Y");
-			if(isset($_GET['d']))
-			{
-				$d=$_GET['d'];
-				if($d==0)
-				{
-					$m--;
-					if($m<10 && $m>0)
-						$m = "0".$m;
-					$d=$this->getUltimoDiaMes($y, $m);
-				}
-				$ventas->fechaVenta = $y."-".$m."-".$d;
-				$cf=array("report/venta",'f'=>0,'d'=>$_GET['d']);
-				$sf=array("report/venta",'f'=>1,'d'=>$_GET['d']);
-			}
-			if(isset($_GET['m']))
-			{
-				$m=$_GET['m'];
-				$ventas->fechaVenta = $y."-".$m;
-				$cf=array("report/venta",'f'=>0,'m'=>$_GET['m']);
-				$sf=array("report/venta",'f'=>1,'m'=>$_GET['m']);
-			}
-		
-		}
-		if(isset($_GET['f']))
-			$_GET['Venta']['tipoVenta']= $_GET['f'];
-		
-		//print_r($ventas);
-		if(isset($_GET['Venta']))
-		{
-			$ventas->attributes = $_GET['Venta'];
-			
-			if(isset($_GET['Venta']['apellido']))
-			$ventas->apellido = $_GET['Venta']['apellido'];
-			if(isset($_GET['Venta']['nit']))
-			$ventas->nit = $_GET['Venta']['nit'];
-			
-		}
-		
-		if(isset($_GET['d']))
-		{
-			$saldo = CajaArqueo::model()->find(array('condition'=>"idCaja=2 and fechaVentas<'".$ventas->fechaVenta."'",'order'=>'idCajaArqueo Desc'));
-			//print_r($saldo);
-			if(!empty($saldo))
-				$saldo = $saldo->saldo;
-		}
-		$this->render('venta',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'saldo'=>$saldo,'cf'=>$cf,'sf'=>$sf));
-	}
-	
-	public function actionVentaSingular()
-	{
-		$ventas="";
-		$cond1="";
-		$cond2="";
-		$factura="";
-		$f="";
-		$saldo="";
-		$cf=array("report/venta",'f'=>0);
-		$sf=array("report/venta",'f'=>1);
-		$ventas = new Venta('searchDistribuidora');
-	
-		$ventas->unsetAttributes();
-		$ventas->nit="000";
-		if(isset($_GET['d']) || isset($_GET['m']))
-		{
-			$d=date("d");
-			$m=date("m");
-			$y=date("Y");
-			if(isset($_GET['d']))
-			{
-				$d=$_GET['d'];
-				if($d==0)
-				{
-					$m--;
-					if($m<10 && $m>0)
-						$m = "0".$m;
-					$d=$this->getUltimoDiaMes($y, $m);
-				}
-				$ventas->fechaVenta = $y."-".$m."-".$d;
-				$cf=array("report/venta",'f'=>0,'d'=>$_GET['d']);
-				$sf=array("report/venta",'f'=>1,'d'=>$_GET['d']);
-			}
-			if(isset($_GET['m']))
-			{
-				$m=$_GET['m'];
-				$ventas->fechaVenta = $y."-".$m;
-				$cf=array("report/venta",'f'=>0,'m'=>$_GET['m']);
-				$sf=array("report/venta",'f'=>1,'m'=>$_GET['m']);
-			}
-	
-		}
-		if(isset($_GET['f']))
-			$_GET['Venta']['tipoVenta']= $_GET['f'];
-	
-		//print_r($ventas);
-		if(isset($_GET['Venta']))
-		{
-			$ventas->attributes = $_GET['Venta'];
-				
-			if(isset($_GET['Venta']['apellido']))
-				$ventas->apellido = $_GET['Venta']['apellido'];
-			if(isset($_GET['Venta']['nit']))
-				$ventas->nit = $_GET['Venta']['nit'];
-				
-		}
-	
-		$this->render('ventaSingular',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'cf'=>$cf,'sf'=>$sf));
-	}
-	
-	public function actionVentaDetalle()
-	{
-		if(isset($_GET['id']))
-		{
-			$ventas = Venta::model()
-			->with("idCliente0")
-			->with("detalleVentas")
-			->with("detalleVentas.idAlmacenProducto0")
-			->with("detalleVentas.idAlmacenProducto0.idProducto0")
-			->with("idCajaMovimientoVenta0")
-			->with("idCajaMovimientoVenta0.idUser0")
-			->with("idCajaMovimientoVenta0.idUser0.idEmpleado0")
-			->findByPk($_GET['id']);
-			if($ventas!=null)
-				$this->renderPartial('venta/detalle',array('venta'=>$ventas));
-			else
-				$this->redirect(array('report/venta'));
-		}
-		else
-			throw new CHttpException(400,'Petición no válida.');
-	}
-	
+
 	public function actionProducto()
 	{
-		$this->render('producto');
+		$this->render('index',array('render'=>'producto'));
 	}
 	
 	public function actionProductoSaldo()
@@ -248,15 +91,10 @@ class ReportController extends Controller
 			{
 				$this->exportExcel($saldos, $entradasF, $salidasF, $saldoA, $costoF);
 			}
-            if($_GET['almacen']==2)
-            {
-                $this->render('../distribuidora/reports',array('render'=>'saldos','saldoA'=>$saldos,'entradas'=>$entradasF,'salidas'=>$salidasF,'saldoB'=>$saldoA,'costos'=>$costoF,'almacen'=>$_GET['almacen']));
-            }
-            else
-			    $this->render('producto/productoSaldo',array('saldoA'=>$saldos,'entradas'=>$entradasF,'salidas'=>$salidasF,'saldoB'=>$saldoA,'costos'=>$costoF,'almacen'=>$_GET['almacen']));
+            $this->render('index',array('render'=>'saldos','saldoA'=>$saldos,'entradas'=>$entradasF,'salidas'=>$salidasF,'saldoB'=>$saldoA,'costos'=>$costoF,'almacen'=>$_GET['almacen']));
 		}
 		else
-			$this->render('producto/productoSaldo',array('saldoA'=>'','entradas'=>'','salidas'=>'','saldoB'=>''));
+			$this->render('index',array('render'=>'saldos','saldoA'=>'','entradas'=>'','salidas'=>'','saldoB'=>'','costos'=>'','almacen'=>''));
 	}
 	
 	public function actionProductoAgotarse()
@@ -265,10 +103,10 @@ class ReportController extends Controller
 		{
 			$almacenes = AlmacenProducto::model()->with('idProducto0')->findAll('idAlmacen='.$_GET['almacen'].' and (stockP+(stockU/idProducto0.cantXPaquete))<=5');
 			//print_r($almacenes);return true;
-			$this->render('producto/productoAgotado',array('resultado'=>$almacenes));
+			$this->render('index',array('render'=>'agotarse','resultado'=>$almacenes));
 		}
 		else 
-			$this->render('producto/productoAgotado',array('resultado'));
+			$this->render('index',array('render'=>'agotarse','resultado'=>''));
 	}
 	
 	public function actionCliente()
@@ -282,20 +120,7 @@ class ReportController extends Controller
 			throw new CHttpException(404,'La Respuesta de la pagina no Existe.');
 		return $model;
 	}
-	
-	/**
-	 * Performs the AJAX validation.
-	 * @param Cliente $model the model to be validated
-	 */
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='producto-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
-	
+
 	protected function getUltimoDiaMes($elAnio,$elMes) {
 		return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
 	}
@@ -342,19 +167,20 @@ class ReportController extends Controller
 	
 	private function exportExcel($saldoA,$entradas,$salidas,$saldoB,$costos)
 	{
-		foreach ($saldoA as $key=>$item)
-		{
-			$resultado[$key]=array(
-					'id'=>$item->idAlmacen,
-					'codigo'=>$item->idAlmacen0->idProducto0->codigo,
-					'detalle'=>$item->idAlmacen0->idProducto0->material.", ".$item->idAlmacen0->idProducto0->color." ".$item->idAlmacen0->idProducto0->detalle.", ".$item->idAlmacen0->idProducto0->marca,
-					'saldoAnterior'=>array('saldoU'=>$item->saldoU,'saldoP'=>$item->saldoP),
-					'entradas'=>array('saldoU'=>$entradas[$key]['unidad'],'saldoP'=>$entradas[$key]['paquete']),
-					'salidas'=>array('saldoU'=>$salidas[$key]['unidad'],'saldoP'=>$salidas[$key]['paquete']),
-					'saldoActual'=>array('saldoU'=>$saldoB[$key]->saldoU,'saldoP'=>$saldoB[$key]->saldoP),
-					'costo'=>$costos[$key],
-			);
-		}
+        foreach ($saldoA as $key=>$item)
+        {
+            //print_r($item['idAlmacen']); return true;
+            $resultado[$key]=array(
+                'id'=>$item['idAlmacen'],
+                'codigo'=>$item['idAlmacen0']['idProducto0']['codigo'],
+                'detalle'=>$item['idAlmacen0']['idProducto0']['material'].", ".$item['idAlmacen0']['idProducto0']['color']." ".$item['idAlmacen0']['idProducto0']['detalle'].", ".$item['idAlmacen0']['idProducto0']['marca'],
+                'saldoAnterior'=>array('saldoU'=>$item['saldoU'],'saldoP'=>$item['saldoP']),
+                'entradas'=>array('saldoU'=>$entradas[$key]['unidad'],'saldoP'=>$entradas[$key]['paquete']),
+                'salidas'=>array('saldoU'=>$salidas[$key]['unidad'],'saldoP'=>$salidas[$key]['paquete']),
+                'saldoActual'=>array('saldoU'=>$saldoB[$key]->saldoU,'saldoP'=>$saldoB[$key]->saldoP),
+                'costo'=>$costos[$key],
+            );
+        }
 		//print_r($resultado);
 		$resultado = $this->array_orderby($resultado, 'detalle', SORT_ASC);
 		//array_multisort($resultado['detalle'], SORT_ASC);
@@ -379,7 +205,7 @@ class ReportController extends Controller
 			$total=$total+$costo;
 		array_push($content,array('','','','','','','','','','','Total',$total));
 		//print_r($content);
-		$this->createExcel($columnsTitle, $content);
+		$this->createExcel($columnsTitle, $content,'Saldos de Productos '.date('Ymd'));
 	}
 	/*public function actionBalance()
 	{
@@ -436,68 +262,67 @@ class ReportController extends Controller
 		$salidas=array('unidad'=>$salidasTU,'paquete'=>$salidasTP);
 		$this->render('productoSaldo',array('saldoA'=>$saldos,'entradas'=>$entradas,'salidas'=>$salidas,'saldoB'=>$saldoA));
 	}*/
-	
-	private function createExcel($columnsTitle,$content,$sum=array(),$title="")
-	{
-		if($title=="")
-		{
-			$title="Reports";
-		}
-		Yii::import('ext.phpexcel.XPHPExcel');
-		$objPHPExcel= XPHPExcel::createPHPExcel();
-		$objPHPExcel->getProperties()
-		->setCreator("Grafica Singular")
-		->setLastModifiedBy("Grafica Singular")
-		->setTitle($title)
-		->setSubject($title)
-		->setDescription($title.".xlsx");
-	
-		$column=65;
-		//assign titles
-		foreach ($columnsTitle as $item)
-		{
-			$objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).'1', $item);
-			$objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
-			$column++;
-		}
-	
-		//create content
-		$index=2;
-		
-		foreach ($content as $items)
-		{
-			$column=65;
-			foreach ($items as $item)
-			{
-	
-				$objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).($index), $item);
-				$objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
-				$column++;
-			}
-			$index++;
-		}
-		// Rename worksheet
-		$objPHPExcel->getActiveSheet()->setTitle('Report');
-			
-			
-		// Set active sheet index to the first sheet, so Excel opens this as the first sheet
-		$objPHPExcel->setActiveSheetIndex(0);
-		// Redirect output to a clientâ€™s web browser (Excel5)
-		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename="Report.xls"');
-		header('Cache-Control: max-age=0');
-		// If you're serving to IE 9, then the following may be needed
-		header('Cache-Control: max-age=1');
-			
-		// If you're serving to IE over SSL, then the following may be needed
-		header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
-		header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-		header ('Pragma: public'); // HTTP/1.0
-			
-		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-		$objWriter->save('php://output');
-		Yii::app()->end();
-	}
+
+    private function createExcel($columnsTitle,$content,$title="")
+    {
+        if($title=="")
+        {
+            $title="Reports";
+        }
+        Yii::import('ext.phpexcel.XPHPExcel');
+        $objPHPExcel= XPHPExcel::createPHPExcel();
+        $objPHPExcel->getProperties()
+            ->setCreator("Grafica Singular")
+            ->setLastModifiedBy("Grafica Singular")
+            ->setTitle($title)
+            ->setSubject($title)
+            ->setDescription($title.".xlsx");
+
+        $column=65;
+        //assign titles
+        foreach ($columnsTitle as $item)
+        {
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).'1', $item);
+            $objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
+            $column++;
+        }
+
+        //create content
+        $index=2;
+        foreach ($content as $items)
+        {
+            $column=65;
+            foreach ($items as $item)
+            {
+
+                $objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).($index), $item);
+                $objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
+                $column++;
+            }
+            $index++;
+        }
+        // Rename worksheet
+        $objPHPExcel->getActiveSheet()->setTitle($title);
+
+
+        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+        $objPHPExcel->setActiveSheetIndex(0);
+        // Redirect output to a clientâ€™s web browser (Excel5)
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="'.$title.'.xls"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+
+        // If you're serving to IE over SSL, then the following may be needed
+        header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+        header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header ('Pragma: public'); // HTTP/1.0
+
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output');
+        Yii::app()->end();
+    }
 	
 	private function array_orderby()
 	{
@@ -516,4 +341,3 @@ class ReportController extends Controller
 		return array_pop($args);
 	}
 }
-?>

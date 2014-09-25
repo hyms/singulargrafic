@@ -30,9 +30,19 @@
                     'filter'=>CHtml::activeDropDownList($productos,'material',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'material','select'=>'material','condition'=>'idAlmacen='.$almacen)),'material','material'),array("class"=>"form-control ",'empty'=>'')),
             ),
             array(
-                    'header'=>'Detalle Producto',
-                    'value'=>'$data->idProducto0->color." ".$data->idProducto0->detalle." ".$data->idProducto0->marca',
+                'header'=>'Color',
+                'value'=>'$data->idProducto0->color',
+                'filter'=>CHtml::activeDropDownList($productos,'color',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'color','select'=>'color','condition'=>'idAlmacen='.$almacen)),'color','color'),array("class"=>"form-control ",'empty'=>'')),
+            ),
+            array(
+                    'header'=>'Detalle',
+                    'value'=>'$data->idProducto0->detalle',
                     'filter'=>CHtml::activeTextField($productos, 'detalle',array("class"=>"form-control")),
+            ),
+            array(
+                'header'=>'Marca',
+                'value'=>'$data->idProducto0->marca',
+                'filter'=>CHtml::activeDropDownList($productos,'marca',CHtml::listData(Producto::model()->with('almacenProductos')->findAll(array('group'=>'marca','select'=>'marca','condition'=>'idAlmacen='.$almacen)),'marca','marca'),array("class"=>"form-control ",'empty'=>'')),
             ),
             array(
                     'header'=>'Precio S/F',
@@ -62,7 +72,7 @@
             array(
                     'header'=>'',
                     'type'=>'raw',
-                'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-import\"></span>",array("stock/stockAdd","id"=>$data->idAlmacenProducto,"almacen"=>$data->idAlmacen), array("class" => "openDlg divDialog","title"=>"Añadir a Stock"))',
+                    'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-import\"></span>",array("stock/stockAdd","id"=>$data->idAlmacenProducto,"almacen"=>$data->idAlmacen), array("class" => "openDlg divDialog","title"=>"Añadir a Stock"))',
             ),
         )
         ));
@@ -71,8 +81,6 @@
 </div>
 
 <?php
-$this->renderPartial("scripts/modal");
-
 $this->beginWidget('zii.widgets.jui.CJuiDialog', array('id'=>'divDialog',
     'options'=>array( 'title'=>'Añadir a Stock', 'autoOpen'=>false, 'modal'=>true, 'width'=>800)));
 ?>
