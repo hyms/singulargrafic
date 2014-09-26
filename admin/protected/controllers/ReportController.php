@@ -76,10 +76,10 @@ class ReportController extends Controller
 				$saldos[$key]=$saldo;
 				$saldoA[$key]->saldoU=$entradaU[$key]-$salidasU[$key];
 				$saldoA[$key]->saldoP=$entradaP[$key]-$salidasP[$key];
-				while($saldoA[$key]->saldoU<0)
+				while($saldoA[$key]->saldoU<0 && $saldo['idAlmacen0']['idProducto0']['cantXPaquete']!=0)
 				{
 					$saldoA[$key]->saldoP=$saldoA[$key]->saldoP-1;
-					$saldoA[$key]->saldoU=$saldoA[$key]->saldoU+$saldo->idAlmacen0->idProducto0->cantXPaquete;
+					$saldoA[$key]->saldoU=$saldoA[$key]->saldoU+$saldo['idAlmacen0']['idProducto0']['cantXPaquete'];
 				}
 				
 				$saldoA[$key]->idAlmacen=$almacen->idAlmacenProducto;

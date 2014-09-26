@@ -1,10 +1,11 @@
+<?php
+if(!empty($dataProvider)){
+?>
 <div class="panel panel-default">
     <div class="panel-heading">
         <strong class="panel-title">Lista de Productos</strong>
     </div>
     <div class="panel-body" style="overflow: auto;">
-
-    <?php echo CHtml::link('Dercargar Excel <span class="glyphicon glyphicon-save"></span>',array('productos/productos','excel'=>true), array('class' => 'btn btn-default') ); ?>
 
     <?php
         $this->widget('zii.widgets.grid.CGridView', array(
@@ -53,10 +54,12 @@
                 array(
                         'header'=>'',
                         'type'=>'raw',
-                        'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-edit\"></span>",$data->distribuidoraLink($data->idProducto0->idProducto),array("title"=>"añadir Producto"))'
+                        'value'=>'$data->getLink($data->idProducto0->idProducto,'.$almacen.')',
                 ),
             )
         ));
     ?>
     </div>
 </div>
+<?php
+}

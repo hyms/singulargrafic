@@ -65,8 +65,8 @@
                             ),
                             'itemOptions' => array('class'=>'dropdown'),
                             'items'=>array(
-                                array('label'=>'Clientes', 'url'=>array('#')),
-                                array('label'=>'Empleados', 'url'=>array('#')),
+                                array('label'=>'Clientes', 'url'=>array('cliente/index')),
+                                array('label'=>'Empleados', 'url'=>array('empleado/index')),
                             )),
                         array('label'=>'Productos <b class="caret"></b>', 'url'=>array('#'),
                             'linkOptions'=> array(

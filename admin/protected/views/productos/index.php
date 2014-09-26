@@ -29,6 +29,10 @@
                 $this->renderPartial('scripts/save');
                 $this->renderPartial('scripts/reset');
                 break;
+            case "addRemove":
+                $this->renderpartial('menus/addRemove');
+                $this->renderPartial('tables/productosAdd',array('dataProvider'=>$dataProvider,'almacen'=>$almacen));
+                break;
             default:
                 echo "";
                 break;

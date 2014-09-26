@@ -1,8 +1,5 @@
 <?php
-/* @var $this TiposClientesController */
-/* @var $model TiposClientes */
-/* @var $form CActiveForm */
-$servicios = array('Distribuidora','CTP','Imprenta');
+    $servicios = array('Distribuidora','CTP','Imprenta');
 ?>
 <h2>Añadir Tipo Cliente</h2>
 <div class="form">

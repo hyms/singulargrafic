@@ -115,6 +115,43 @@ class ProductosController extends Controller
             throw new CHttpException(400,'La Respuesta de la pagina no Existe.');
     }
 
+    public function actionProductoAdd()
+    {
+        if(isset($_GET['almacen']))
+        {
+            $dataProvider = new AlmacenProducto('searchInventarioGral');
+            $dataProvider->unsetAttributes();
+            if(isset($_GET['AlmacenProducto']))
+            {
+                $dataProvider->attributes = $_GET['AlmacenProducto'];
+                $dataProvider->codigo = $_GET['AlmacenProducto']['codigo'];
+                $dataProvider->industria = $_GET['AlmacenProducto']['industria'];
+                $dataProvider->material = $_GET['AlmacenProducto']['material'];
+                $dataProvider->detalle = $_GET['AlmacenProducto']['detalle'];
+            }
+            if(isset($_GET['id']))
+            {
+                $this->initStock($_GET['id'],$_GET['almacen']);
+            }
+            $this->render('index',array('render'=>'addRemove','dataProvider'=>$dataProvider,'almacen'=>$_GET['almacen']));
+        }
+        else
+            $this->render('index',array('render'=>'addRemove','dataProvider'=>'','almacen'=>''));
+    }
+
+    public function actionProductoDel()
+    {
+        if(isset($_GET['almacen']))
+        {
+            if(isset($_GET['id']))
+            {
+               //$this->initStock($_GET['id'],$_GET['almacen']);
+            }
+            $this->redirect(array('productoAdd','almacen'=>$_GET['almacen']));
+        }
+        else
+            $this->redirect(array('productoAdd'));
+    }
 
     private function createExcel($columnsTitle,$content,$title="")
     {
@@ -183,13 +220,14 @@ class ProductosController extends Controller
             throw new CHttpException(404,'La Respuesta de la pagina no Existe.');
         return $model;
     }
-    private function initStock($id)
+    private function initStock($id,$alm=1)
     {
         $almacen = new AlmacenProducto;
-        $almacen->idAlmacen=1;
+        $almacen->idAlmacen=$alm;
         $almacen->idProducto=$id;
         $almacen->stockU=0;
         $almacen->stockP=0;
+        //print_r($almacen);
         return $almacen->save();
     }
 }

@@ -1,52 +1,45 @@
-<?php
-/* @var $this EmpleadoController */
-/* @var $dataProvider CActiveDataProvider */
-
-$this->breadcrumbs=array(
-	'Empleados',
-);
-
-?>
- 
-<h1>Empleados</h1>
-
-<?php echo CHtml::link('Añadir',array('empleado/Create'), array('class' => 'btn btn-default') ); ?>
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'dataProvider'=>$dataProvider,
-	'itemsCssClass' => 'table table-hover table-condensed',
-	'htmlOptions' => array('class' => 'table-responsive'),
-	'columns'=>array(
-		array(
-				'header'=>'Nro',
-				'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
-		),
-		array(
-				'header'=>'Nombre',
-				'value'=>'$data->nombre',
-		),
-		array(
-				'header'=>'Apellido',
-				'value'=>'$data->apellido',
-		),
-		array(
-				'header'=>'CI',
-				'value'=>'$data->ci',
-		),
-		array(
-				'header'=>'Telefono',
-				'value'=>'$data->telefono',
-		),
-		array(
-				'header'=>'',
-				'type'=>'raw',
-				'value'=>'CHtml::link("Editar",array("empleado/update","id"=>$data->idEmpleado))'
-		),
-		array(
-				'header'=>'',
-				'type'=>'raw',
-				'value'=>'CHtml::link("Datos de Acceso",array("empleado/dates","id"=>$data->idEmpleado))'
-		),
-	)
-	));
-?>
+<div class="col-sm-2">
+    <?php
+    $this->renderpartial('menus/principal');
+    ?>
+</div>
+<div class="col-sm-10">
+    <?php
+    switch ($render){
+        case "list":
+            $this->renderPartial('tables/empleados',array('dataProvider'=>$dataProvider));
+            break;
+        case "new":
+            echo '<div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong class="panel-title">Nuevo Empleado</strong>
+                        </div>
+                        <div class="panel-body" style="overflow: auto;">';
+            $this->renderPartial('forms/_form',array(
+                'model'=>$model,
+            ));
+            echo '</div></div>';
+            $this->renderPartial('scripts/save');
+            $this->renderPartial('scripts/reset');
+            break;
+        case "update":
+            echo '<div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong class="panel-title">Empleado: '.$model->apellido.' </strong>
+                        </div>
+                        <div class="panel-body" style="overflow: auto;">';
+            $this->renderPartial('forms/_form',array(
+                'model'=>$model,
+            ));
+            echo '</div></div>';
+            $this->renderPartial('scripts/save');
+            $this->renderPartial('scripts/reset');
+            break;
+        case "dates":
+            $this->renderPartial('forms/formDate',array('model'=>$model,'empleado'=>$empleado));
+            break;
+        default;
+            break;
+    }
+    ?>
+</div>

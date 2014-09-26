@@ -86,6 +86,7 @@ class AlmacenProducto extends CActiveRecord
     public $color;
     public $marca;
     public $paquete;
+    public $industria;
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
@@ -119,7 +120,7 @@ class AlmacenProducto extends CActiveRecord
         return $data;
     }
 
-	public function searchDistribuidora()
+	/*public function searchDistribuidora()
 	{
 		$criteria=new CDbCriteria;
 	
@@ -153,8 +154,8 @@ class AlmacenProducto extends CActiveRecord
 		Yii::app()->session['excel']= $this;
 		return $data; 
 	}
-	
-	public $industria;
+	*/
+
 	public function searchInventarioGral()
 	{
 		$criteria=new CDbCriteria;
@@ -184,6 +185,7 @@ class AlmacenProducto extends CActiveRecord
 		Yii::app()->session['excel']= $this;
 		return $data;
 	}
+
 	public function searchStockDist()
 	{
 		$criteria=new CDbCriteria;
@@ -222,7 +224,18 @@ class AlmacenProducto extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-	
+
+    public function getLink($id,$almacen)
+    {
+        $producto=AlmacenProducto::model()->find('idProducto='.$id." and idAlmacen=".$almacen);
+        $return="";
+        $detalle=$this->idProducto0->material." ".$this->idProducto0->color." ".$this->idProducto0->detalle." ".$this->idProducto0->marca;
+        if(empty($producto))
+            $return = CHtml::link("<span class=\"glyphicon glyphicon-ok\"></span>Añadir", array("productos/productoAdd", "id"=>$id, "almacen"=>$almacen), array('class'=>'btn btn-success btn-sm','title'=>'Añadir Producto','onclick'=>"return confirm('Desea añadir el producto ".$detalle."?')"));
+        else
+            $return = CHtml::link("<span class=\"glyphicon glyphicon-remove\"></span>Eliminar", array("productos/productoDel", "id"=>$id, "almacen"=>$almacen), array('class'=>'btn btn-danger btn-sm','title'=>'Eliminar Producto','onclick'=>"return confirm('Desea eliminar el producto ".$detalle."?')"));
+        return $return;
+    }
 	public function distribuidoraLink($id)
 	{
 		$producto=AlmacenProducto::model()->find('idProducto='.$id." and idAlmacen=2");
