@@ -1,7 +1,7 @@
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'empleado-form',
+	'id'=>'form',
 	'htmlOptions'=>array(
 		'class'=>'form-horizontal',
 		'role'=>'form',
@@ -62,17 +62,12 @@
         </div>
 	</div>
 
-	<div class="form-group">
-		<p class="text-center">
-		<?php echo CHtml::button('Atras', array(
-            'name' => 'btnBack',
-            'class' => 'btn btn-default',
-            'onclick' => "history.go(-1)",
-                )
-        ); ?>
-		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default')); ?>
-		</p>
-	</div>
+    <div class="form-group">
+        <p class="text-center">
+            <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-remove"></span> Cancelar', "#", array('class' => 'btn btn-default hidden-print','id'=>'reset')); ?>
+            <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar', "#", array('class' => 'btn btn-default hidden-print','id'=>'save')); ?>
+        </p>
+    </div>
 
 <?php $this->endWidget(); ?>
 

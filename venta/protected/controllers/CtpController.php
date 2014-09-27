@@ -660,7 +660,7 @@ class CtpController extends Controller
     public function actionPrecios()
     {
         $model ="";//  new MatrizPreciosCTP;
-        $placas = AlmacenProducto::model()->with('idProducto0')->findAll(array('condition'=>'idAlmacen=3', 'order'=>'idProducto0.detalle'));
+        $placas = AlmacenProducto::model()->with('idProducto0')->findAll(array('condition'=>'idAlmacen=3 and material LIKE "Placas%"', 'order'=>'idProducto0.detalle'));
         $tiposClientes = TiposClientes::model()->findAll('servicio=1');
         $cantidades = CantidadCTP::model()->findAll();
         $horarios = Horario::model()->findAll();

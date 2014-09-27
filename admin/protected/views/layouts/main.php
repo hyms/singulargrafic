@@ -78,7 +78,7 @@
                                 array('label'=>'Productos', 'url'=>array('productos/index')),
                                 array('label'=>'Stocks', 'url'=>array('stock/index')),
                             )),
-                        array('label'=>'Contabilidad', 'url'=>array('#')),
+                        array('label'=>'Contabilidad', 'url'=>array('contabilidad/index')),
                         array('label'=>'Configuracion', 'url'=>array('#')),
 						/*array('label'=>'Pagina Web <b class="caret"></b>', 'url'=>array('#'),
 							'linkOptions'=> array(

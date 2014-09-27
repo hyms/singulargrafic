@@ -6,9 +6,7 @@
         'submenuHtmlOptions' => array('class' => 'dropdown-menu'),
         'encodeLabel' => false,
         'items'=>array(
-            array('label'=>'Listar Clientes', 'url'=>array('cliente/clientes')),
-            array('label'=>'Nuevo Cliente', 'url'=>array('cliente/create')),
-            array('label'=>'Cambiar Preferencia','url'=>array('cliente/preferencia')),
+            array('label'=>'Costos de CTP', 'url'=>array('contabilidad/matrizPrecios')),
         )));
     ?>
 </div>

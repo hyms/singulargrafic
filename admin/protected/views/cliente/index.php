@@ -34,6 +34,10 @@
             $this->renderPartial('scripts/save');
             $this->renderPartial('scripts/reset');
             break;
+        case "preferencia":
+            $this->renderPartial('forms/preferencia',array('clientes'=>$clientes));
+            $this->renderPartial('scripts/save');
+            break;
         default:
             break;
     }

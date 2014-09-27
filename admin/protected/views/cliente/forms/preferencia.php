@@ -1,6 +1,11 @@
-<h2>Clientes CTP</h2>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong class="panel-title">Preferencias de Clientes CTP</strong>
+    </div>
+    <div class="panel-body" style="overflow: auto;">
+
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'cliente-form',
+	'id'=>'form',
 	'htmlOptions'=>array(
 		'class'=>'form-horizontal',
 		'role'=>'form'),
@@ -61,6 +66,8 @@ $i++;
 	));*/
 ?>
 </div>
-<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default')); ?>
+        <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar', "#", array('class' => 'btn btn-default hidden-print','id'=>'save')); ?>
 
 <?php $this->endWidget(); ?>
+    </div>
+</div>

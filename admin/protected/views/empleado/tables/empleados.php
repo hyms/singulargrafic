@@ -36,7 +36,7 @@
 		array(
 				'header'=>'',
 				'type'=>'raw',
-				'value'=>'CHtml::link("Datos de Acceso",array("empleado/dates","id"=>$data->idEmpleado))'
+				'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-log-in\"></span> Datos de Acceso",array("empleado/dates","id"=>$data->idEmpleado))'
 		),
 	)
 	));

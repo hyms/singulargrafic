@@ -5,7 +5,7 @@
     <div class="panel-body" style="overflow: auto;">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'users-formDate-form',
+	'id'=>'form',
 	'htmlOptions'=>array(
 		'class'=>'form-horizontal',
 		'role'=>'form'
@@ -57,9 +57,12 @@
     </div>
 
 
-    <div class="form-group">
-		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
-	</div>
+        <div class="form-group">
+            <p class="text-center">
+                <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-remove"></span> Cancelar', "#", array('class' => 'btn btn-default hidden-print','id'=>'reset')); ?>
+                <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar', "#", array('class' => 'btn btn-default hidden-print','id'=>'save')); ?>
+            </p>
+        </div>
 
 <?php $this->endWidget(); ?>
     </div>

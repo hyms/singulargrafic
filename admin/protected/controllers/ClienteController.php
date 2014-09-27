@@ -134,15 +134,9 @@ class ClienteController extends Controller
 					$cliente->save();
 				}
 			}
-			print_r($_POST['Cliente']);
 		}
-		
-		/*$clientes = new CActiveDataProvider('Cliente',
-						array(
-								'pagination'=>array(
-		                'pageSize'=>'20',
-		            	),));*/
-		$this->render('preferencia',array('clientes'=>$clientes));
+
+		$this->render('index',array('render'=>'preferencia','clientes'=>$clientes));
 	}
 
     public function verifyModel($model)
