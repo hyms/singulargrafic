@@ -36,23 +36,23 @@
 
 	
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'unidad',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
+		<?php echo $form->labelEx($model,'unidad',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-4">
 		<?php echo $form->textField($model,'unidad',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'unidad',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'paquete',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
+		<?php echo $form->labelEx($model,'paquete',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-4">
 		<?php echo $form->textField($model,'paquete',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'paquete',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
+		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-xs-offset-2')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

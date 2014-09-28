@@ -3,7 +3,7 @@
 /* @var $model Cliente */
 /* @var $form CActiveForm */
 ?>
-<div class="col-sm-2">
+<div class="col-xs-2">
 	<h2>Clientes</h2>
 	<?php 
 	$items = array();
@@ -38,13 +38,13 @@
 		<?php echo CHtml::hiddenField('new','true'); ?>
 	</div>
 	<div class="form-group">
-		<?php echo CHtml::submitButton('Añadir',array('class'=>'btn btn-default col-sm-offset-2')); ?>
+		<?php echo CHtml::submitButton('Añadir',array('class'=>'btn btn-default col-xs-offset-2')); ?>
 	</div>
 
 	<?php $this->endWidget(); ?>
 	
 </div>
-<div class="form col-sm-10">
+<div class="form col-xs-10">
 	<h1><?php echo $model->nombre.' '.$model->apellido; ?></h1>
 <?php if($new==true || $model->id != null){?>
 
@@ -68,48 +68,48 @@
 	<?php echo $form->errorSummary($model,'', '', array('class' => 'alert alert-danger')); ?>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'nitCi',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-2">
+		<?php echo $form->labelEx($model,'nitCi',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-2">
 		<?php echo $form->textField($model,'nitCi',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'nitCi',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'apellido',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-2">
+		<?php echo $form->labelEx($model,'apellido',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-2">
 		<?php echo $form->textField($model,'apellido',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'apellido',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'nombre',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-2">
+		<?php echo $form->labelEx($model,'nombre',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-2">
 		<?php echo $form->textField($model,'nombre',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'nombre',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'correo',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
+		<?php echo $form->labelEx($model,'correo',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-4">
 		<?php echo $form->textField($model,'correo',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'correo',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'telefono',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-2">
+		<?php echo $form->labelEx($model,'telefono',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-2">
 		<?php echo $form->textField($model,'telefono',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'telefono',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'fechaRegistro',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-2">
+		<?php echo $form->labelEx($model,'fechaRegistro',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-2">
 		<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
     	    'name'=>'fechaRegistro',
 			'attribute'=>'fechaRegistro',
@@ -132,7 +132,7 @@
 
 
 	<div class="form-group">
-		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-3')); ?>
+		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-xs-offset-3')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

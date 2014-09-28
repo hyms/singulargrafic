@@ -1,8 +1,8 @@
-<div class="col-sm-2 hidden-print">
+<div class="col-xs-2 hidden-print">
 <?php $this->renderPartial('menu'); ?>
 </div>
 
-<div class="col-sm-10">
+<div class="col-xs-10">
 	<div>
 	<ul class="nav nav-tabs">
 	  <li><?php echo CHtml::link("Recibos Ingreso",array("recibos/buscar","t"=>1),array("class"=>"hidden-print")) ?></li>

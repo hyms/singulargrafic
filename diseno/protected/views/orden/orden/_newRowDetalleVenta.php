@@ -41,15 +41,15 @@
 	<?php echo CHtml::activeTextField($model,"[$index]resolucion",array('class'=>'form-control input-sm','id'=>'resolucion_'.$index)); ?>
 </td>
 
-<td class="col-sm-1">
+<td class="col-xs-1">
 	<?php echo CHtml::activeTextField($model,"[$index]costoAdicional",array('class'=>'form-control input-sm','id'=>'adicional_'.$index)); ?>
 </td>
 <?php /*?>
-<td class="col-sm-1">
+<td class="col-xs-1">
 	<?php echo CHtml::activeTextField($model,"[$index]costoTotal",array('class'=>'costo form-control input-sm','readonly'=>true,'id'=>'costoTotal_'.$index)); ?>
 </td>glyphicon glyphicon-remove-circle
 <?php */?>
-<td class="col-sm-1">
+<td class="col-xs-1">
 	<?php echo CHtml::link('Quitar', '#', array("class"=>"btn btn-danger btn-sm tabular-input-remove")).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />'; ?>
 </td>
 </tr>

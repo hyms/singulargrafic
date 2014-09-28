@@ -5,11 +5,11 @@ $this->breadcrumbs=array(
 	'Recibos',
 );
 ?>
-<div class="col-sm-2">
+<div class="col-xs-2">
 <?php $this->renderPartial('menu'); ?>
 </div>
 
-<div class="col-sm-10">
+<div class="col-xs-10">
 <?php $this->renderPartial("menuCaja");?>
 <?php if(count($tabla)>0 && is_array($tabla)){?>
 <table class="table table-hover table-condensed">

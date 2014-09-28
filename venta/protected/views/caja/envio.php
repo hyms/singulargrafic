@@ -13,9 +13,9 @@
 		</div>
 		
 	<div class = "row">
-		<h3 class="col-sm-4">Datos de Envio</h3> 
-		<h3 class="col-sm-4 text-center"><?php // echo $venta->codigo;?></h3> 
-		<h3 class="col-sm-4 text-right"><?php //echo date("d/m/Y",strtotime($venta->fechaVenta));?></h3>
+		<h3 class="col-xs-4">Datos de Envio</h3>
+		<h3 class="col-xs-4 text-center"><?php // echo $venta->codigo;?></h3>
+		<h3 class="col-xs-4 text-right"><?php //echo date("d/m/Y",strtotime($venta->fechaVenta));?></h3>
 		
 	</div>
 	<?php ?>
@@ -31,25 +31,25 @@
 		
 	?>
 	<div class="form-group">
-	<div class="col-sm-4">
-        <?php echo $form->labelEx($model,'origen',array('class'=>'col-sm-4 control-label')); ?>
-        <div class="col-sm-8">
+	<div class="col-xs-4">
+        <?php echo $form->labelEx($model,'origen',array('class'=>'col-xs-4 control-label')); ?>
+        <div class="col-xs-8">
         <?php echo $form->textField($model,'origen',array('class'=>'form-control')); ?>
         </div>
         <?php echo $form->error($model,'origen',array('class'=>'label label-danger')); ?>
     </div>
 	
-    <div class="col-sm-4">
-        <?php echo $form->labelEx($model,'destino',array('class'=>'col-sm-4 control-label')); ?>
-        <div class="col-sm-8">
+    <div class="col-xs-4">
+        <?php echo $form->labelEx($model,'destino',array('class'=>'col-xs-4 control-label')); ?>
+        <div class="col-xs-8">
         <?php echo $form->textField($model,'destino',array('class'=>'form-control')); ?>
         </div>
         <?php echo $form->error($model,'destino',array('class'=>'label label-danger')); ?>
     </div>
     
-	<div class="col-sm-4">
-        <?php echo $form->labelEx($model,'responsable',array('class'=>'col-sm-4 control-label')); ?>
-        <div class="col-sm-8">
+	<div class="col-xs-4">
+        <?php echo $form->labelEx($model,'responsable',array('class'=>'col-xs-4 control-label')); ?>
+        <div class="col-xs-8">
         <?php echo $form->textField($model,'responsable',array('class'=>'form-control')); ?>
         </div>
         <?php echo $form->error($model,'responsable',array('class'=>'label label-danger')); ?>

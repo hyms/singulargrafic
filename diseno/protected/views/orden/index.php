@@ -1,6 +1,6 @@
-<div class="col-sm-2">
+<div class="col-xs-2">
 <?php $this->renderPartial('menu'); ?>
 </div>
 
-<div class="col-sm-10">
+<div class="col-xs-10">
 </div>

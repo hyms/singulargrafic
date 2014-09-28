@@ -15,8 +15,8 @@ $this->pageTitle=Yii::app()->name;
       	{
       ?>
 	      <li>
-	        <div class="col-sm-8"><?php echo CHtml::image(Yii::app()->request->baseUrl.'/images/'.$banner->imagen)?> </div>
-	        <div class="col-sm-4">
+	        <div class="col-xs-8"><?php echo CHtml::image(Yii::app()->request->baseUrl.'/images/'.$banner->imagen)?> </div>
+	        <div class="col-xs-4">
 	        <?php echo $banner->texto ?>
 	  		</div>
 	      </li>

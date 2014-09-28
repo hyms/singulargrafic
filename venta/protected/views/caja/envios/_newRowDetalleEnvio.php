@@ -13,15 +13,15 @@
 	<p class="form-control-static"><?php echo CHtml::encode($almacen->idProducto0->material." ".$almacen->idProducto0->color." ".$almacen->idProducto0->detalle.", ".$almacen->idProducto0->marca) ?></p>
 </td>
 
-<td class="col-sm-1">
+<td class="col-xs-1">
 	<?php echo CHtml::activeTextField($model,"[$index]cantidadU",array('class'=>'form-control input-sm','id'=>'stockUnidad_'.$index)); ?>
 </td>
 
-<td class="col-sm-1">
+<td class="col-xs-1">
 	<?php echo CHtml::activeTextField($model,"[$index]cantidadP",array('class'=>'form-control input-sm','id'=>'stockPaquete_'.$index)); ?>
 </td>
 
-<td class="col-sm-1">
+<td class="col-xs-1">
 	<?php echo CHtml::link('Quitar', '#', array("class"=>"btn btn-danger btn-sm tabular-input-remove")).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />'; ?>
 </td>
 </tr>

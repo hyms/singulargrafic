@@ -23,7 +23,7 @@
 	</div>
 	
 	<div class="form-group">
-			<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
+			<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-xs-offset-2')); ?>
 	</div>
 
 

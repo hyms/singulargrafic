@@ -57,7 +57,7 @@ if(!empty($saldoA))// && !empty($entradas) && !empty($salidas) && !empty($saldoB
 								'name'=>'saldoAnterior',
 								'type'=>'raw',
 								'value'=>'$data["saldoAnterior"]["saldoU"]."</td><td>".$data["saldoAnterior"]["saldoP"]',
-								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-sm-1'),
+								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-xs-1'),
 								'htmlOptions'=>array('class'=>'text-right'),
 						),
 						array(
@@ -65,7 +65,7 @@ if(!empty($saldoA))// && !empty($entradas) && !empty($salidas) && !empty($saldoB
 								'name'=>'entradas',
 								'type'=>'raw',
 								'value'=>'$data["entradas"]["saldoU"]."</td><td>".$data["entradas"]["saldoP"]',
-								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-sm-1'),
+								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-xs-1'),
 								'htmlOptions'=>array('class'=>'text-right'),
 						),
 						array(
@@ -73,7 +73,7 @@ if(!empty($saldoA))// && !empty($entradas) && !empty($salidas) && !empty($saldoB
 								'name'=>'salidas',
 								'type'=>'raw',
 								'value'=>'$data["salidas"]["saldoU"]."</td><td>".$data["salidas"]["saldoP"]',
-								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-sm-1'),
+								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-xs-1'),
 								'htmlOptions'=>array('class'=>'text-right'),
 						),
 						array(
@@ -81,7 +81,7 @@ if(!empty($saldoA))// && !empty($entradas) && !empty($salidas) && !empty($saldoB
 								'name'=>'saldoActual',
 								'type'=>'raw',
 								'value'=>'$data["saldoActual"]["saldoU"]."</td><td>".$data["saldoActual"]["saldoP"]',
-								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-sm-1'),
+								'headerHtmlOptions'=>array('colspan'=>'2','class'=>'col-xs-1'),
 								'htmlOptions'=>array('class'=>'text-right'),
 						),
 						array(

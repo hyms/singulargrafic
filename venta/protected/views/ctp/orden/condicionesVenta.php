@@ -1,13 +1,13 @@
-<div class="col-sm-2">
+<div class="col-xs-2">
 	<?php echo CHtml::activeRadioButtonList($ctp,'formaPago',array('Contado','Credito'))?>
 </div>
-<div class="col-sm-2">
+<div class="col-xs-2">
 	<?php echo CHtml::activeRadioButtonList($ctp,'tipoOrden',array('Con Factura','Sin Factura'))?>
 </div>
-<div class="col-sm-4">
+<div class="col-xs-4">
 	<div class="form-group">
-		<?php echo CHtml::activeLabelEx($ctp,'fechaPlazo',array('class'=>'col-sm-5 control-label')); ?>
-		<div class="col-sm-7">
+		<?php echo CHtml::activeLabelEx($ctp,'fechaPlazo',array('class'=>'col-xs-5 control-label')); ?>
+		<div class="col-xs-7">
 		<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 	    		'name'=>'fechaPlazo',
 				'attribute'=>'fechaPlazo',
@@ -27,26 +27,26 @@
 		<?php echo CHtml::error($ctp,"fechaPlazo",array('class'=>'label label-danger')); ?>
 	</div>
 	<div class="form-group">
-		<?php echo CHtml::activeLabelEx($ctp,'autorizado',array('class'=>'col-sm-5 control-label')); ?>
-		<div class="col-sm-7">
+		<?php echo CHtml::activeLabelEx($ctp,'autorizado',array('class'=>'col-xs-5 control-label')); ?>
+		<div class="col-xs-7">
 		<?php echo CHtml::activeDropDownList($ctp, 'autorizado',array('Erick Paredes','Miriam Martinez'),array('class'=>'form-control input-sm','disabled'=>(($ctp->formaPago==0)?true:false),'id'=>"autorizado",'empty' => 'Selecciona Responsable')); ?>
 	   	</div>
 	</div>
 </div>
-<div class="col-sm-4">
+<div class="col-xs-4">
 	<div class="form-group ">
-		<div class="col-sm-7">
+		<div class="col-xs-7">
 		<?php echo CHtml::checkBoxList('Descuento',false,array('Descuento')); ?>
 		</div>
-		<div class="col-sm-5">
+		<div class="col-xs-5">
 		<?php echo CHtml::activeTextField($ctp,'montoDescuento',array('class'=>'form-control input-sm','disabled'=>(empty($ctp->montoDescuento)?true:false),'id'=>'descuento')); ?>
 		</div>
 	</div>
 	<div class="form-group ">
-		<div class="col-sm-5">
-		<?php echo CHtml::activeLabelEx($ctp,'factura',array('class'=>'col-sm-5 control-label')); ?>
+		<div class="col-xs-5">
+		<?php echo CHtml::activeLabelEx($ctp,'factura',array('class'=>'col-xs-5 control-label')); ?>
 		</div>
-		<div class="col-sm-7">
+		<div class="col-xs-7">
 		<?php echo CHtml::activeTextField($ctp,'factura',array('class'=>'form-control input-sm','disabled'=>(($ctp->tipoOrden==0)?false:(empty($ctp->factura)?true:false)),'id'=>'factura')); ?>
 		</div>
 	</div>

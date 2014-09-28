@@ -18,17 +18,17 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="form-group">
-        <div class="col-sm-6">
-            <?php echo $form->labelEx($model,'nombre',array('class'=>'col-sm-4 control-label')); ?>
-            <div class="col-sm-8">
+        <div class="col-xs-6">
+            <?php echo $form->labelEx($model,'nombre',array('class'=>'col-xs-4 control-label')); ?>
+            <div class="col-xs-8">
             <?php echo $form->textField($model,'nombre',array('size'=>40,'maxlength'=>40,'class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'nombre'); ?>
         </div>
 
-        <div class="col-sm-6">
-            <?php echo $form->labelEx($model,'apellido',array('class'=>'col-sm-4 control-label')); ?>
-            <div class="col-sm-8">
+        <div class="col-xs-6">
+            <?php echo $form->labelEx($model,'apellido',array('class'=>'col-xs-4 control-label')); ?>
+            <div class="col-xs-8">
             <?php echo $form->textField($model,'apellido',array('size'=>40,'maxlength'=>40,'class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'apellido'); ?>
@@ -36,17 +36,17 @@
     </div>
 
 	<div class="form-group">
-        <div class="col-sm-6">
-            <?php echo $form->labelEx($model,'nitCi',array('class'=>'col-sm-4 control-label')); ?>
-            <div class="col-sm-8">
+        <div class="col-xs-6">
+            <?php echo $form->labelEx($model,'nitCi',array('class'=>'col-xs-4 control-label')); ?>
+            <div class="col-xs-8">
             <?php echo $form->textField($model,'nitCi',array('size'=>20,'maxlength'=>20,'class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'nitCi'); ?>
         </div>
 
-        <div class="col-sm-6">
-            <?php echo $form->labelEx($model,'correo',array('class'=>'col-sm-4 control-label')); ?>
-            <div class="col-sm-8">
+        <div class="col-xs-6">
+            <?php echo $form->labelEx($model,'correo',array('class'=>'col-xs-4 control-label')); ?>
+            <div class="col-xs-8">
             <?php echo $form->textField($model,'correo',array('size'=>50,'maxlength'=>50,'class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'correo'); ?>
@@ -54,17 +54,17 @@
 	</div>
 
 	<div class="form-group">
-        <div class="col-sm-6">
-            <?php echo $form->labelEx($model,'telefono',array('class'=>'col-sm-4 control-label')); ?>
-            <div class="col-sm-8">
+        <div class="col-xs-6">
+            <?php echo $form->labelEx($model,'telefono',array('class'=>'col-xs-4 control-label')); ?>
+            <div class="col-xs-8">
             <?php echo $form->textField($model,'telefono',array('size'=>20,'maxlength'=>20,'class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'telefono'); ?>
         </div>
 
-        <div class="col-sm-6">
-            <?php echo $form->labelEx($model,'direccion',array('class'=>'col-sm-4 control-label')); ?>
-            <div class="col-sm-8">
+        <div class="col-xs-6">
+            <?php echo $form->labelEx($model,'direccion',array('class'=>'col-xs-4 control-label')); ?>
+            <div class="col-xs-8">
             <?php echo $form->textField($model,'direccion',array('size'=>20,'maxlength'=>20,'class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'direccion'); ?>
@@ -72,17 +72,17 @@
 	</div>
 	
 	<div class="form-group">
-        <div class="col-sm-6">
-            <?php echo $form->labelEx($model,'idTiposClientes',array('class'=>'col-sm-4 control-label')); ?>
-            <div class="col-sm-6">
+        <div class="col-xs-6">
+            <?php echo $form->labelEx($model,'idTiposClientes',array('class'=>'col-xs-4 control-label')); ?>
+            <div class="col-xs-6">
             <?php echo $form->dropDownList($model,'idTiposClientes',CHtml::listData(TiposClientes::model()->findAll(),'idTiposClientes','nombre'),array('maxlength'=>20,'class'=>'form-control','empty'=>'')); ?>
             </div>
             <?php echo $form->error($model,'idTiposClientes'); ?>
 	    </div>
 	
-	    <div class="col-sm-6">
-            <?php echo $form->labelEx($model,'idParent',array('class'=>'col-sm-4 control-label')); ?>
-            <div class="col-sm-6">
+	    <div class="col-xs-6">
+            <?php echo $form->labelEx($model,'idParent',array('class'=>'col-xs-4 control-label')); ?>
+            <div class="col-xs-6">
             <?php echo $form->dropDownList($model,'idParent',$model->getClientes(),array('maxlength'=>20,'class'=>'form-control','empty'=>'')); ?>
             </div>
             <?php echo $form->error($model,'idParent'); ?>

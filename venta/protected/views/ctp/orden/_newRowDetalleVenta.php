@@ -36,15 +36,15 @@
 	<?php echo CHtml::activeTextField($model,"[$index]resolucion",array('class'=>'form-control input-sm','readonly'=>true,'id'=>'resolucion_'.$index)); ?>
 </td>
 
-<td class="col-sm-1">
+<td class="col-xs-1">
 	<?php echo CHtml::activeTextField($model,"[$index]costo",array('class'=>'form-control input-sm','readonly'=>true,'id'=>'costo_'.$index)); ?>
 </td>
 
-<td class="col-sm-1">
+<td class="col-xs-1">
 	<?php echo CHtml::activeTextField($model,"[$index]costoAdicional",array('class'=>'form-control input-sm','readonly'=>true,'id'=>'adicional_'.$index)); ?>
 </td>
 
-<td class="col-sm-1">
+<td class="col-xs-1">
 	<?php echo CHtml::activeTextField($model,"[$index]costoTotal",array('class'=>'costo form-control input-sm','readonly'=>true,'id'=>'costoTotal_'.$index)); ?>
 </td>
 

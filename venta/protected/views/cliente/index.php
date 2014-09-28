@@ -5,11 +5,11 @@ $this->breadcrumbs=array(
 	'Recibos',
 );
 ?>
-<div class="col-sm-2 hidden-print">
+<div class="col-xs-2 hidden-print">
 <?php $this->renderPartial('menu'); ?>
 </div>
 
 
-<div class="col-sm-10">
+<div class="col-xs-10">
 <?php //$this->renderPartial('listaCliente',array('cliente'=>$cliente,'datos'=>$datos,'pages' => $pages));?>
 </div>

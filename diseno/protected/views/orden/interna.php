@@ -1,8 +1,8 @@
-<div class="col-sm-2">
+<div class="col-xs-2">
 <?php $this->renderPartial('menu'); ?>
 </div>
 
-<div class="col-sm-10">
+<div class="col-xs-10">
 
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -14,9 +14,9 @@
 </div>
 
 	<div class = "row">
-		<h3 class="col-sm-5 text-left"><?php echo "Ordenes de trabajo Internas";?></h3>
-		<h3 class="col-sm-3 text-center"><?php //echo $ctp->codigo;?></h3> 
-		<h3 class="col-sm-4 text-right"><?php echo date("d/m/Y",strtotime($ctp->fechaOrden));?></h3>
+		<h3 class="col-xs-5 text-left"><?php echo "Ordenes de trabajo Internas";?></h3>
+		<h3 class="col-xs-3 text-center"><?php //echo $ctp->codigo;?></h3>
+		<h3 class="col-xs-4 text-right"><?php echo date("d/m/Y",strtotime($ctp->fechaOrden));?></h3>
 		
 	</div>
 	

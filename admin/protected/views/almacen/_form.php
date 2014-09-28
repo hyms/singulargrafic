@@ -24,8 +24,8 @@
 	<?php echo $form->errorSummary($model,'', '', array('class' => 'alert alert-danger')); ?>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'idProducto',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-3">
+		<?php echo $form->labelEx($model,'idProducto',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-3">
 		<?php echo $form->dropDownList($model,'idProducto', 
 				CHtml::listData(Producto::model()->with('Material')->findAll(), 'id', 'codigo'), array('empty'=>'Seleccione Producto','class'=>'form-control'));?>
 		</div>
@@ -33,31 +33,31 @@
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'idTipoAlmacen',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-3">
+		<?php echo $form->labelEx($model,'idTipoAlmacen',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-3">
 		<?php echo $form->dropDownList($model,'idTipoAlmacen', CHtml::listData(TipoAlmacen::model()->findAll(), 'id', 'nombre'), array('empty'=>'Seleccione Tipo','class'=>'form-control'));?>
 		</div>
 		<?php echo $form->error($model,'idTipoAlmacen',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'stockUnidad',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-2">
+		<?php echo $form->labelEx($model,'stockUnidad',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-2">
 		<?php echo $form->textField($model,'stockUnidad',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'stockUnidad',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'stockPaquete',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-2">
+		<?php echo $form->labelEx($model,'stockPaquete',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-2">
 		<?php echo $form->textField($model,'stockPaquete',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'stockPaquete',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
+		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-xs-offset-2')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

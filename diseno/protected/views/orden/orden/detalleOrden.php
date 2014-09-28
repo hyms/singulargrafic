@@ -46,17 +46,17 @@ if(count($detalle)>=1)
 </tbody></table>
 </div>
 <div class="form-group">
-<div class="col-sm-7">
-    <?php echo CHtml::activeLabelEx($ctp,"obs",array('class'=>'control-label col-sm-4'))?>
-    <div class="col-sm-8">
+<div class="col-xs-7">
+    <?php echo CHtml::activeLabelEx($ctp,"obs",array('class'=>'control-label col-xs-4'))?>
+    <div class="col-xs-8">
 	<?php echo CHtml::activeTextArea($ctp,"obs",array('class'=>'form-control'))?>
 	</div>
 	 <?php echo CHtml::error($ctp,"obs",array('class'=>'label label-danger')); ?>
 </div>
-<div class="col-sm-5" >
+<div class="col-xs-5" >
 	<div class="form-group">
-		<?php echo CHtml::activeLabelEx($ctp,"fechaEntega",array('class'=>'control-label col-sm-5'))?>
-	    <div class="col-sm-7">
+		<?php echo CHtml::activeLabelEx($ctp,"fechaEntega",array('class'=>'control-label col-xs-5'))?>
+	    <div class="col-xs-7">
 	    	<?php //echo CHtml::activeTextField($ctp,"fechaEntega",array('class'=>'form-control input-sm','readonly'=>true,"id"=>"total")); ?>
 	    	<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 								'name'=>'fechaEntega',
@@ -76,10 +76,10 @@ if(count($detalle)>=1)
 	</div>
 </div>
 <?php /*?>
-<div class="col-sm-5" >
+<div class="col-xs-5" >
 	<div class="form-group">
-		<?php echo CHtml::activeLabelEx($ctp,"montoVenta",array('class'=>'control-label col-sm-4'))?>
-	    <div class="col-sm-8">
+		<?php echo CHtml::activeLabelEx($ctp,"montoVenta",array('class'=>'control-label col-xs-4'))?>
+	    <div class="col-xs-8">
 	    	<?php echo CHtml::activeTextField($ctp,"montoVenta",array('class'=>'form-control input-sm','readonly'=>true,"id"=>"total")); ?>
 	    </div>
 	    <?php echo CHtml::error($ctp,"montoVenta",array('class'=>'label label-danger')); ?>

@@ -1,7 +1,7 @@
-<div class="col-sm-2 hidden-print">
+<div class="col-xs-2 hidden-print">
 <?php $this->renderPartial('menu'); ?>
 </div>
-<div class="col-sm-10">
+<div class="col-xs-10">
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<span class="panel-title"><strong>NitCi: </strong><?php echo $cliente->nitCi?> </span>

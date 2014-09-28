@@ -5,11 +5,11 @@ $this->breadcrumbs=array(
 	'Recibos',
 );
 ?>
-<div class="col-sm-2">
+<div class="col-xs-2">
 <?php $this->renderPartial('menu'); ?>
 </div>
 
-<div class="col-sm-10">
+<div class="col-xs-10">
 <?php $this->renderPartial("menuCaja");?>
 
 <div class="panel panel-default">
@@ -28,23 +28,23 @@ $this->breadcrumbs=array(
 				),
 		));
 	?>
-	<div class="form-group col-sm-6" >
-		<?php echo CHtml::label('Monto en Caja','saldo',array('class'=>'control-label col-sm-5')); ?>
-		<div class="col-sm-4">
+	<div class="form-group col-xs-6" >
+		<?php echo CHtml::label('Monto en Caja','saldo',array('class'=>'control-label col-xs-5')); ?>
+		<div class="col-xs-4">
 			<?php echo CHtml::activeTextField($caja,'saldo',array('class'=>'form-control ',"id"=>"concepto",'readonly'=>true)); ?>
 		</div>
 		<?php echo CHtml::error($caja,'saldo',array('class'=>'label label-danger')); ?>
 		
 	</div>
-	<div class="form-group col-sm-6" >
-		<?php echo CHtml::label('Monto a Entregar','monto',array('class'=>'control-label col-sm-5')); ?>
-		<div class="col-sm-4">
+	<div class="form-group col-xs-6" >
+		<?php echo CHtml::label('Monto a Entregar','monto',array('class'=>'control-label col-xs-5')); ?>
+		<div class="col-xs-4">
 			<?php echo CHtml::activeTextField($movimiento,'monto',array('class'=>'form-control ',"id"=>"concepto")); ?>
 		</div>
 		<?php echo CHtml::error($movimiento,'monto',array('class'=>'label label-danger')); ?>
 	
 	</div>
-	<?php echo CHtml::submitButton('Continuar',array('class'=>'btn btn-default col-sm-offset-1')); ?>
+	<?php echo CHtml::submitButton('Continuar',array('class'=>'btn btn-default col-xs-offset-1')); ?>
 	<?php $this->endWidget(); ?>	
 	</div>
 </div>

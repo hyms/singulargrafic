@@ -18,17 +18,17 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="form-group">
-        <div class="col-sm-6">
-            <?php echo $form->labelEx($model,'nombre',array('class'=>'col-sm-4 control-label')); ?>
-            <div class="col-sm-8">
+        <div class="col-xs-6">
+            <?php echo $form->labelEx($model,'nombre',array('class'=>'col-xs-4 control-label')); ?>
+            <div class="col-xs-8">
             <?php echo $form->textField($model,'nombre',array('size'=>40,'maxlength'=>40,'class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'nombre'); ?>
         </div>
 
-        <div class="col-sm-6">
-            <?php echo $form->labelEx($model,'apellido',array('class'=>'col-sm-4 control-label')); ?>
-            <div class="col-sm-8">
+        <div class="col-xs-6">
+            <?php echo $form->labelEx($model,'apellido',array('class'=>'col-xs-4 control-label')); ?>
+            <div class="col-xs-8">
             <?php echo $form->textField($model,'apellido',array('size'=>40,'maxlength'=>40,'class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'apellido'); ?>
@@ -36,26 +36,26 @@
     </div>
 
 	<div class="form-group">
-        <div class="col-sm-6">
-            <?php echo $form->labelEx($model,'email',array('class'=>'col-sm-4 control-label')); ?>
-            <div class="col-sm-8">
+        <div class="col-xs-6">
+            <?php echo $form->labelEx($model,'email',array('class'=>'col-xs-4 control-label')); ?>
+            <div class="col-xs-8">
             <?php echo $form->textField($model,'email',array('size'=>50,'maxlength'=>50,'class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'email'); ?>
         </div>
 
-        <div class="col-sm-6">
-            <?php echo $form->labelEx($model,'telefono',array('class'=>'col-sm-4 control-label')); ?>
-            <div class="col-sm-6">
+        <div class="col-xs-6">
+            <?php echo $form->labelEx($model,'telefono',array('class'=>'col-xs-4 control-label')); ?>
+            <div class="col-xs-6">
             <?php echo $form->textField($model,'telefono',array('size'=>20,'maxlength'=>20,'class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'telefono'); ?>
         </div>
     </div>
 	<div class="form-group">
-        <div class="col-sm-6">
-            <?php echo $form->labelEx($model,'ci',array('class'=>'col-sm-4 control-label')); ?>
-            <div class="col-sm-6">
+        <div class="col-xs-6">
+            <?php echo $form->labelEx($model,'ci',array('class'=>'col-xs-4 control-label')); ?>
+            <div class="col-xs-6">
             <?php echo $form->textField($model,'ci',array('size'=>20,'maxlength'=>20,'class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'ci'); ?>

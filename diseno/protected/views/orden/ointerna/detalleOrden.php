@@ -44,9 +44,9 @@ if(count($detalle)>=1)
 </tbody></table>
 </div>
 <div class="form-group">
-	<div class="col-sm-7">
-	    <?php echo CHtml::activeLabelEx($ctp,"obs",array('class'=>'control-label col-sm-4'))?>
-	    <div class="col-sm-8">
+	<div class="col-xs-7">
+	    <?php echo CHtml::activeLabelEx($ctp,"obs",array('class'=>'control-label col-xs-4'))?>
+	    <div class="col-xs-8">
 		<?php echo CHtml::activeTextArea($ctp,"obs",array('class'=>'form-control'))?>
 		</div>
 		 <?php echo CHtml::error($ctp,"obs",array('class'=>'label label-danger')); ?>

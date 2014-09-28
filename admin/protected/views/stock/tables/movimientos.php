@@ -3,7 +3,7 @@
         <strong class="panel-title">Registro de Movimientos de Alamacenes</strong>
     </div>
     <div class="panel-body" style="overflow: auto;">
-        <div class="col-sm-3">
+        <div class="col-xs-3">
         <?php echo CHtml::link('Dercargar Excel <span class="glyphicon glyphicon-save"></span>',array('stock/movimientos','excel'=>true), array('class' => 'btn btn-default') ); ?>
         </div>
 
@@ -20,12 +20,12 @@
             // you need to use the performAjaxValidation()-method described there.
             'enableAjaxValidation'=>false,
     )); ?>
-        <div class="form-group well well-sm col-sm-9">
-            <b class="col-sm-2">Fechas :</b>
-            <div class="col-sm-10">
-                <div class="col-sm-5">
-                    <b class="col-sm-3">De:</b>
-                    <div class="col-sm-9">
+        <div class="form-group well well-sm col-xs-9">
+            <b class="col-xs-2">Fechas :</b>
+            <div class="col-xs-10">
+                <div class="col-xs-5">
+                    <b class="col-xs-3">De:</b>
+                    <div class="col-xs-9">
                         <?php
                             $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                                     'name'=>'start_date',
@@ -43,9 +43,9 @@
                         ?>
                     </div>
                 </div>
-                <div class="col-sm-5">
-                    <b class="col-sm-3">A:</b>
-                    <div class="col-sm-9">
+                <div class="col-xs-5">
+                    <b class="col-xs-3">A:</b>
+                    <div class="col-xs-9">
                     <?php
                         $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                                     'name'=>'end_date',

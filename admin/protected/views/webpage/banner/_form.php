@@ -19,8 +19,8 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'imagen',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
+		<?php echo $form->labelEx($model,'imagen',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-4">
 		<?php /*$this->widget('ext.uploadify.MUploadify',array(
 			  'model'=>$model,
 			  'attribute'=>'imagen',
@@ -34,24 +34,24 @@
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'texto',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-10">
+		<?php echo $form->labelEx($model,'texto',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-10">
 		<?php echo $form->textArea($model,'texto',array('id'=>'texto','name'=>'texto')); ?>
 		</div>
 		<?php echo $form->error($model,'texto'); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'fecha',array('class'=>'col-sm-2 control-label')); ?>
-		<p class="col-sm-2">
+		<?php echo $form->labelEx($model,'fecha',array('class'=>'col-xs-2 control-label')); ?>
+		<p class="col-xs-2">
 		<?php echo $model->fecha = date("Y-m-d"); ?>
 		</p>
 		<?php echo $form->error($model,'fecha'); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'order',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-1">
+		<?php echo $form->labelEx($model,'order',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-1">
 		<?php echo $form->textField($model,'order',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'order'); ?>
@@ -60,11 +60,11 @@
 	<?php 
 		echo CHtml::button('Atras', array(
             'name' => 'btnBack',
-            'class' => 'btn btn-default col-sm-pull-2',
+            'class' => 'btn btn-default col-xs-pull-2',
             'onclick' => "history.go(-1)",
                 )
         );
-		 echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-1')); 
+		 echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-xs-offset-1'));
 	?>
 	</div>
 

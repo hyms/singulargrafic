@@ -1,7 +1,7 @@
 <div class = "row">
-	<h3 class="col-sm-4">Orden de Trabajo</h3>
-	<h3 class="col-sm-4 text-center" id="codigo"><?php echo $ctp->codigo;?></h3>
-	<h3 class="col-sm-4 text-right"><?php echo date("d/m/Y",strtotime($ctp->fechaOrden));?></h3>
+	<h3 class="col-xs-4">Orden de Trabajo</h3>
+	<h3 class="col-xs-4 text-center" id="codigo"><?php echo $ctp->codigo;?></h3>
+	<h3 class="col-xs-4 text-right"><?php echo date("d/m/Y",strtotime($ctp->fechaOrden));?></h3>
 </div>
 	
 <?php

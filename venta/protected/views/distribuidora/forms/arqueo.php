@@ -15,24 +15,24 @@
 					),
 			));
 		?>
-		<div class="form-group col-sm-5" >
-			<?php echo CHtml::label('Monto en Caja','saldo',array('class'=>'control-label col-sm-6')); ?>
-			<div class="col-sm-6">
+		<div class="form-group col-xs-5" >
+			<?php echo CHtml::label('Monto en Caja','saldo',array('class'=>'control-label col-xs-6')); ?>
+			<div class="col-xs-6">
 				<?php echo CHtml::activeTextField($caja,'saldo',array('class'=>'form-control ','readonly'=>true)); ?>
 			</div>
 			<?php echo CHtml::error($caja,'saldo',array('class'=>'label label-danger')); ?>
 			
 		</div>
-		<div class="form-group col-sm-5" >
-			<?php echo CHtml::label('Monto a Entregar','monto',array('class'=>'control-label col-sm-6')); ?>
-			<div class="col-sm-6">
+		<div class="form-group col-xs-5" >
+			<?php echo CHtml::label('Monto a Entregar','monto',array('class'=>'control-label col-xs-6')); ?>
+			<div class="col-xs-6">
 				<?php echo CHtml::activeTextField($arqueo,'monto',array('class'=>'form-control')); ?>
 				<?php echo CHtml::activeHiddenField($arqueo,'fechaVentas',array('class'=>'form-control')); ?>
 			</div>
 			<?php echo CHtml::error($arqueo,'monto',array('class'=>'label label-danger')); ?>
 		
 		</div>
-		<?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Continuar',"#",array('class'=>'btn btn-default col-sm-offset-1','id'=>'save')); ?>
+		<?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Continuar',"#",array('class'=>'btn btn-default col-xs-offset-1','id'=>'save')); ?>
 		<?php $this->endWidget(); ?>	
 	</div>
 </div>

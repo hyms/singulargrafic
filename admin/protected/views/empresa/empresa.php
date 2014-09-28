@@ -3,7 +3,7 @@
 /* @var $model Empresa */
 /* @var $form CActiveForm */
 ?>
-<div class="col-sm-2">
+<div class="col-xs-2">
 	<h2>Empresa</h2>
 	<?php 
 	$items = array();
@@ -38,12 +38,12 @@
 		<?php echo CHtml::hiddenField('new','true'); ?>
 	</div>
 	<div class="form-group">
-		<?php echo CHtml::submitButton('Añadir',array('class'=>'btn btn-default col-sm-offset-2')); ?>
+		<?php echo CHtml::submitButton('Añadir',array('class'=>'btn btn-default col-xs-offset-2')); ?>
 	</div>
 
 	<?php $this->endWidget(); ?>
 </div>
-<div class="form col-sm-10">
+<div class="form col-xs-10">
 	<h1><?php echo $model->nombre; ?></h1>
 <?php if($new==true || $model->id != null){?>
 <div class="form">
@@ -65,16 +65,16 @@
 	<?php echo $form->errorSummary($model,'', '', array('class' => 'alert alert-danger')); ?>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'nombre',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
+		<?php echo $form->labelEx($model,'nombre',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-4">
 		<?php echo $form->textField($model,'nombre',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'nombre',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'ciudad',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-3">
+		<?php echo $form->labelEx($model,'ciudad',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-3">
 		<?php echo CHtml::dropDownList('ciudad', $model->ciudad, 
               $model->ciudades,
               array('empty' => 'Seleccione la Ciudad',
@@ -85,72 +85,72 @@
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'calle',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-5">
+		<?php echo $form->labelEx($model,'calle',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-5">
 		<?php echo $form->textField($model,'calle',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'calle',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'maps',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-5">
+		<?php echo $form->labelEx($model,'maps',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-5">
 		<?php echo $form->textField($model,'maps',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'maps',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'fax',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-2">
+		<?php echo $form->labelEx($model,'fax',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-2">
 		<?php echo $form->textField($model,'fax',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'fax',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'telefono',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-2">
+		<?php echo $form->labelEx($model,'telefono',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-2">
 		<?php echo $form->textField($model,'telefono',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'telefono',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'correo',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
+		<?php echo $form->labelEx($model,'correo',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-4">
 		<?php echo $form->textField($model,'correo',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'correo',array('class'=>'label label-danger')); ?>
 	</div>
 	
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'horarios',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-3">
+		<?php echo $form->labelEx($model,'horarios',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-3">
 		<?php echo $form->textField($model,'horarios',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'horarios',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'skype',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
+		<?php echo $form->labelEx($model,'skype',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-4">
 		<?php echo $form->textField($model,'skype',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'skype',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'facebook',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
+		<?php echo $form->labelEx($model,'facebook',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-4">
 		<?php echo $form->textField($model,'facebook',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'facebook',array('class'=>'label label-danger')); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'patern',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-3">
+		<?php echo $form->labelEx($model,'patern',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-3">
 		<?php echo CHtml::dropDownList('Superior', $model->patern, 
               $model->superiores,
               array('empty' => 'Seleccione su Superior',
@@ -160,8 +160,8 @@
 		<?php echo $form->error($model,'patern',array('class'=>'label label-danger')); ?>
 	</div>
 	<div class="form-group">
-	<?php echo Chtml::label('Servicios','servicio',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-3" id="Serv">
+	<?php echo Chtml::label('Servicios','servicio',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-3" id="Serv">
 		<?php
 		if($model->id==null){
 			echo CHtml::dropDownList('Servicios0', $servicios->id, 
@@ -200,7 +200,7 @@
 	</div>
 	
 	<div class="form-group">
-		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-3')); ?>
+		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-xs-offset-3')); ?>
 	
 	<?php
 		if($model->id != null)

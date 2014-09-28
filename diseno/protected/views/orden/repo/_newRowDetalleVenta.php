@@ -38,7 +38,7 @@
 <td>
 	<?php echo CHtml::activeTextField($model,"[$index]resolucion",array('class'=>'form-control input-sm')); ?>
 </td>
-<td class="col-sm-1">
+<td class="col-xs-1">
 	<?php echo CHtml::link('Reponer', '#', array("class"=>"btn btn-warning btn-sm","onclick"=>'newRow('.$model->idDetalleCTP.')')) ?>
 </td>
 </tr>

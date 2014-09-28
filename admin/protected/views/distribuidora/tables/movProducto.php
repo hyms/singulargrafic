@@ -99,10 +99,10 @@
 	}
 ?>
 	<div class="well well-sm col-xs-offset-8 col-xs-4">
-		<div class="col-sm-6">
+		<div class="col-xs-6">
 		<strong>Unidades:</strong><?php echo $unidad;?>
 		</div>
-		<div class="col-sm-6">
+		<div class="col-xs-6">
 		<strong>Paquetes:</strong><?php echo $paquete;?>
 	</div>
 </div>

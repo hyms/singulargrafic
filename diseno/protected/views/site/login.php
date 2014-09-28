@@ -25,23 +25,23 @@ $this->breadcrumbs=array(
 )); ?>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'username',array('class'=>'col-sm-4 control-label')); ?>
-		<div class="col-sm-5">
+		<?php echo $form->labelEx($model,'username',array('class'=>'col-xs-4 control-label')); ?>
+		<div class="col-xs-5">
 		<?php echo $form->textField($model,'username',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'username'); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'password',array('class'=>'col-sm-4 control-label')); ?>
-		<div class="col-sm-5">
+		<?php echo $form->labelEx($model,'password',array('class'=>'col-xs-4 control-label')); ?>
+		<div class="col-xs-5">
 		<?php echo $form->passwordField($model,'password',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'password'); ?>
 	</div>
 
 	<div class="form-group">
-	    <div class="col-sm-offset-4 col-sm-8">
+	    <div class="col-xs-offset-4 col-xs-8">
 		<div class="checkbox">
 			<?php echo $form->checkBox($model,'rememberMe'); ?>
 			<?php echo $form->label($model,'rememberMe',array('class'=>'control-label')); ?>

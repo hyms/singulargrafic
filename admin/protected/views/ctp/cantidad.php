@@ -24,16 +24,16 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'Inicio',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
+		<?php echo $form->labelEx($model,'Inicio',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-4">
 		<?php echo $form->textField($model,'Inicio',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'Inicio'); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'final',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
+		<?php echo $form->labelEx($model,'final',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-4">
 		<?php echo $form->textField($model,'final',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'final'); ?>
@@ -41,7 +41,7 @@
 
 
 	<div class="form-group">
-		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
+		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-xs-offset-2')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

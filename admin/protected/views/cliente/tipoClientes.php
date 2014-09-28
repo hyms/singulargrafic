@@ -22,16 +22,16 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'nombre',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
+		<?php echo $form->labelEx($model,'nombre',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-4">
 		<?php echo $form->textField($model,'nombre',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'nombre'); ?>
 	</div>
 	
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'servicio',array('class'=>'col-sm-2 control-label')); ?>
-		<div class="col-sm-4">
+		<?php echo $form->labelEx($model,'servicio',array('class'=>'col-xs-2 control-label')); ?>
+		<div class="col-xs-4">
 		<?php // echo $form->textField($model,'servicio',array('class'=>'form-control')); ?>
 		<?php echo $form->dropDownList($model,'servicio', $servicios, array('empty'=>'Seleccione Servicio','class'=>'form-control'));?>
 		</div>
@@ -40,7 +40,7 @@
 
 
 	<div class="form-group">
-		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
+		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-xs-offset-2')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

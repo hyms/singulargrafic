@@ -13,9 +13,9 @@
 	</div>
 	
 	<div class = "row">
-		<h3 class="col-sm-4">Notas de Venta</h3> 
-		<h3 class="col-sm-4 text-center" id="codigo"><?php echo $venta->codigo;?></h3> 
-		<h3 class="col-sm-4 text-right"><?php echo date("d/m/Y",strtotime($venta->fechaVenta));?></h3>
+		<h3 class="col-xs-4">Notas de Venta</h3>
+		<h3 class="col-xs-4 text-center" id="codigo"><?php echo $venta->codigo;?></h3>
+		<h3 class="col-xs-4 text-right"><?php echo date("d/m/Y",strtotime($venta->fechaVenta));?></h3>
 		
 	</div>
 	

@@ -5,15 +5,15 @@ $this->breadcrumbs=array(
 	'Recibos',
 );
 ?>
-<div class="col-sm-2">
+<div class="col-xs-2">
 <?php $this->renderPartial('menu'); ?>
 </div>
 
-<div class="col-sm-10">
+<div class="col-xs-10">
 	<div class = "row">
-		<h3 class="col-sm-4">Recibo Ingreso</h3> 
-		<h3 class="col-sm-4 text-center"><?php echo $recibo->codigo;?></h3> 
-		<h3 class="col-sm-4 text-right"><?php echo date("d/m/Y",strtotime($recibo->fechaRegistro));?></h3>
+		<h3 class="col-xs-4">Recibo Ingreso</h3>
+		<h3 class="col-xs-4 text-center"><?php echo $recibo->codigo;?></h3>
+		<h3 class="col-xs-4 text-right"><?php echo date("d/m/Y",strtotime($recibo->fechaRegistro));?></h3>
 		
 	</div>
 	<?php
@@ -32,12 +32,12 @@ $this->breadcrumbs=array(
 	</div>
   	<div class="panel-body" style="overflow: auto;">
   		<div class="form-group" >
-			<div class="col-sm-4">
-			<?php echo CHtml::label('GRAFICA SINGULAR','name',array('class'=>'control-label col-sm-offset-5')); ?>
+			<div class="col-xs-4">
+			<?php echo CHtml::label('GRAFICA SINGULAR','name',array('class'=>'control-label col-xs-offset-5')); ?>
 			</div>
-			<div class="col-sm-6">
-				<?php echo CHtml::activeLabelEx($recibo,'responsable',array('class'=>'control-label col-sm-4')); ?>
-				<div class="col-sm-8">
+			<div class="col-xs-6">
+				<?php echo CHtml::activeLabelEx($recibo,'responsable',array('class'=>'control-label col-xs-4')); ?>
+				<div class="col-xs-8">
 					<?php echo CHtml::activeTextField($recibo,'responsable',array('class'=>'form-control')); ?>
 				</div>
 				<?php echo CHtml::error($recibo,'responsable',array('class'=>'label label-danger')); ?>
@@ -52,25 +52,25 @@ $this->breadcrumbs=array(
 	</div>
   	<div class="panel-body" style="overflow: auto;">
 	  	<div class="form-group" >
-		<div class="col-sm-8">
-			<?php echo CHtml::activeLabelEx($recibo,'concepto',array('class'=>'control-label col-sm-3')); ?>
-			<div class="col-sm-9">
+		<div class="col-xs-8">
+			<?php echo CHtml::activeLabelEx($recibo,'concepto',array('class'=>'control-label col-xs-3')); ?>
+			<div class="col-xs-9">
 				<?php echo CHtml::activeTextArea($recibo,'concepto',array('class'=>'form-control ',"id"=>"concepto")); ?>
 			</div>
 			<?php echo CHtml::error($recibo,'concepto',array('class'=>'label label-danger')); ?>
 		</div>
 		</div>
 		<div class="form-group" >
-		<div class="col-sm-4">
-			<?php echo CHtml::activeLabelEx($recibo,'categoria',array('class'=>'control-label col-sm-3')); ?>
-			<div class="col-sm-9">
+		<div class="col-xs-4">
+			<?php echo CHtml::activeLabelEx($recibo,'categoria',array('class'=>'control-label col-xs-3')); ?>
+			<div class="col-xs-9">
 				<?php echo CHtml::activeTextField($recibo,'categoria',array('class'=>'form-control ',"id"=>"categoria")); ?>
 			</div>
 			<?php echo CHtml::error($recibo,'categoria',array('class'=>'label label-danger')); ?>
 		</div>
-		<div class="col-sm-4">
-			<?php echo CHtml::activeLabelEx($recibo,'codigoNumero',array('class'=>'control-label col-sm-3')); ?>
-			<div class="col-sm-9">
+		<div class="col-xs-4">
+			<?php echo CHtml::activeLabelEx($recibo,'codigoNumero',array('class'=>'control-label col-xs-3')); ?>
+			<div class="col-xs-9">
 				<?php echo CHtml::activeTextField($recibo,'codigoNumero',array('class'=>'form-control ',"id"=>"codigo")); ?>
 			</div>
 			<?php echo CHtml::error($recibo,'codigoNumero',array('class'=>'label label-danger')); ?>
@@ -78,32 +78,32 @@ $this->breadcrumbs=array(
 		</div>
 		
 		<div class="form-group" >
-		<div class="col-sm-4">
-			<?php echo CHtml::activeLabelEx($recibo,'monto',array('class'=>'control-label col-sm-3')); ?>
-			<div class="col-sm-9">
+		<div class="col-xs-4">
+			<?php echo CHtml::activeLabelEx($recibo,'monto',array('class'=>'control-label col-xs-3')); ?>
+			<div class="col-xs-9">
 				<?php echo CHtml::activeTextField($recibo,'monto',array('class'=>'form-control ',"id"=>"monto")); ?>
 			</div>
 			<?php echo CHtml::error($recibo,'monto',array('class'=>'label label-danger')); ?>
 		</div>
-		<div class="col-sm-4">
-			<?php echo CHtml::activeLabelEx($recibo,'acuenta',array('class'=>'control-label col-sm-3')); ?>
-			<div class="col-sm-9">
+		<div class="col-xs-4">
+			<?php echo CHtml::activeLabelEx($recibo,'acuenta',array('class'=>'control-label col-xs-3')); ?>
+			<div class="col-xs-9">
 				<?php echo CHtml::activeTextField($recibo,'acuenta',array('class'=>'form-control ',"id"=>"acuenta")); ?>
 			</div>
 			<?php echo CHtml::error($recibo,'acuenta',array('class'=>'label label-danger')); ?>
 		</div>
-		<div class="col-sm-4">
-			<?php echo CHtml::activeLabelEx($recibo,'saldo',array('class'=>'control-label col-sm-3')); ?>
-			<div class="col-sm-9">
+		<div class="col-xs-4">
+			<?php echo CHtml::activeLabelEx($recibo,'saldo',array('class'=>'control-label col-xs-3')); ?>
+			<div class="col-xs-9">
 				<?php echo CHtml::activeTextField($recibo,'saldo',array('class'=>'form-control ',"id"=>"saldo","readonly"=>true)); ?>
 			</div>
 			<?php echo CHtml::error($recibo,'saldo',array('class'=>'label label-danger')); ?>
 		</div>
 		</div>
 		<div class="form-group" >
-		<div class="col-sm-8">
-			<?php echo CHtml::activeLabelEx($recibo,'obs',array('class'=>'control-label col-sm-3')); ?>
-			<div class="col-sm-9">
+		<div class="col-xs-8">
+			<?php echo CHtml::activeLabelEx($recibo,'obs',array('class'=>'control-label col-xs-3')); ?>
+			<div class="col-xs-9">
 				<?php echo CHtml::activeTextArea($recibo,'obs',array('class'=>'form-control ')); ?>
 			</div>
 			<?php echo CHtml::error($recibo,'obs',array('class'=>'label label-danger')); ?>
