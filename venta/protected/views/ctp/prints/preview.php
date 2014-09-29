@@ -7,7 +7,7 @@
     <div class="row">
         <h3 class="col-xs-offset-2 col-xs-7 text-center"><strong><?php echo "Orden de Trabajo";?></strong></h3>
 
-        <h4 class="col-xs-3 text-right"><strong><?php echo $ctp->codigo; ?></strong></h4>
+        <h4 class="text-right"><strong><?php echo $ctp->codigo; ?></strong></h4>
         <h5 class="col-xs-offset-8 text-right"><strong><?php echo "FECHA:";?></strong> <?php echo date("d-m-Y",strtotime($ctp->fechaOrden));?></h5>
         <small class="col-xs-offset-3 col-xs-5 text-center"><?php echo $tipo?></small>
         <div class="col-xs-4 well well-sm">Fecha de Entrega:<?php echo (!empty($ctp->fechaEntega))?date("d-m-Y",strtotime($ctp->fechaEntega))."/":"";?></div>
@@ -19,7 +19,7 @@
 		<div class="col-xs-4"><strong><?php echo "RESPONSABLE:";?></strong> <?php echo $ctp->responsable;?></div>
 		<div class="col-xs-3"><strong><?php echo "TELEFONO:";?></strong> <?php echo $ctp->idCliente0->telefono;;?></div>
 	</div>
-	<div class="row well well-sm" style="min-height:200px;">
+	<div class="row well well-sm" style="min-height:200px; font-size: 11px">
 	    <table class="table table-hover table-condensed">
             <thead><tr>
                 <th><?php echo "Nº"; ?></th>

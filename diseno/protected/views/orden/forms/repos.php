@@ -41,7 +41,7 @@ if($repos->responsable!="")
 
 <?php
 		$form=$this->beginWidget('CActiveForm', array(
-				'id'=>'detalle-venta-detalleVenta-form',
+				'id'=>'form',
 				//'action'=>CHtml::normalizeUrl(array((empty($ctp->idCtp))?'/orden/cliente':"/ctp/modificar")),
 				'htmlOptions'=>array(
 						'class'=>'form-horizontal',
@@ -87,8 +87,8 @@ if($repos->responsable!="")
 
 	<div class="form-group">
 		<div class="text-center">
-		<?php echo CHtml::resetButton('Cancelar', array('class' => 'btn btn-default hidden-print')); ?>
-		<?php echo CHtml::button('Guardar', array('class' => 'btn btn-default hidden-print','id'=>'save')); ?>
+            <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-remove"></span> Cancelar', "#", array('class' => 'btn btn-default hidden-print','id'=>'reset')); ?>
+            <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar', "#", array('class' => 'btn btn-default hidden-print','id'=>'save')); ?>
 		</div>
 	</div>
 <?php $this->endWidget(); ?>	
@@ -106,12 +106,7 @@ if($repos->responsable!="")
 		);
 		$('#total').val(redondeo(importe_total));
 	}*/
-		
-	function redondeo(num)
-	{
-		return (Math.round(num*10)/10);
-	}
-		
+
 	$('#resp').change(function() {
 	  	if($('#resp').val()=='Otro')
 		{
@@ -123,10 +118,5 @@ if($repos->responsable!="")
 			$('#respOtro').prop( 'disabled', true );
 			$('#total').val('');
 		}
-	});
-	
-	 $('#save').click(function(){
-			//alert('se guardaran los datos');
-			$('form').submit();
 	});
 ",CClientScript::POS_READY); ?>

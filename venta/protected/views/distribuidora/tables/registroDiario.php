@@ -6,6 +6,7 @@
 	$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 	$fecha=$dias[date('w',strtotime($fecha))]." ".date('d',strtotime($fecha))." de ".$meses[date('n',strtotime($fecha))-1]. " del ".date('Y',strtotime($fecha));
 ?>
+<div style="width:793px; height:529px;">
 <p class="text-center"><strong><?php echo "REGISTRO DIARIO"?></strong></p>
 <p class="text-right"><?php echo "La Paz, ".$fecha;?></p>
 <?php $total=0;?>
@@ -72,3 +73,5 @@
 			<p class="text-center"><?php echo "Recibi conforme";?></p>
 		</div>
 	</div>
+
+</div>

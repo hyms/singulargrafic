@@ -3,8 +3,9 @@
     <?php echo CHtml::link('<span class="glyphicon glyphicon-save"></span>', array("distribuidora/previewDay","excel"=>true), array("class"=>"btn btn-default",'id'=>"print","title"=>"Descargar Excel")); ?>
 </div>
 
-<div class="form-group" style="width:793px; height:529px;">
-<?php 
+<div style="width:793px; height:529px;">
+<?php
+
 if(!empty($tabla))
 {
 	$dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
@@ -13,10 +14,9 @@ if(!empty($tabla))
 <p class="text-center"><strong><?php echo "REPORTE DE VENTAS DEL DIA"?></strong></p>
 <p class="text-right"><?php echo "La Paz, ".$dias[date('w',strtotime($tabla[0]->fechaVenta))]." ".date('d',strtotime($tabla[0]->fechaVenta))." de ".$meses[date('n',strtotime($tabla[0]->fechaVenta))-1]. " del ".date('Y',strtotime($tabla[0]->fechaVenta));?></p>
 
-<div class="panel panel-default">
-	  <div class="panel-body">
 
-<table class="table table-hover table-condensed">
+
+<table class="table table-hover table-condensed" style="font-size: 9px">
 	<thead>
 	<tr>
 		<th>Nº</th>
@@ -31,6 +31,7 @@ if(!empty($tabla))
 		<th>Importe</th>
 		<th>Creditos</th>
 		<th>Fact.</th>
+        <th>Obs.</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -68,6 +69,7 @@ if(!empty($tabla))
 			<td><?php echo ($item->estado==2)?(($temp==0)?($item->montoCambio*(-1)):0):0;
 				($item->estado==2)?(($temp==0)?($creditos=$creditos+($item->montoCambio*(-1))):0):0; ?></td>
 			<td><?php echo $item->factura;?></td>
+            <td><?php echo $item->obs;?></td>
 		</tr>
 	<?php }
 			
@@ -83,12 +85,11 @@ if(!empty($tabla))
 		<td><strong><?php echo $importe; ?></strong></td>
 		<td><strong><?php echo $creditos; ?></strong></td>
 		<td></td>
+        <td></td>
 	</tr>
 	</tbody>
 </table>
 
-		</div>
-	</div>
 <?php 
 }
 else

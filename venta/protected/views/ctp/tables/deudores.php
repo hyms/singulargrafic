@@ -1,3 +1,8 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong class="panel-title">Deudores CTP</strong>
+    </div>
+    <div class="panel-body">
 <?php
 $this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$deudores,
@@ -29,3 +34,5 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		)
 )); 
 ?>
+    </div>
+</div>

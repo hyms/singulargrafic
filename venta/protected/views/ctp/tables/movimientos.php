@@ -1,4 +1,6 @@
 <?php if(!empty($cond3)){?>
+<div class="panel panel-default">
+    <div class="panel-body">
 <div class="form-group hidden-print">
     <?php if($cf!="" && $sf!=""){?>
         <?php echo CHtml::link('Con Factura', $cf, array("class"=>"btn btn-default hidden-print")); ?>
@@ -7,7 +9,7 @@
     <?php }?>
 </div>
 
-<div  style="height:500px; overflow:auto;">
+<div>
 <?php 
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$ventas->searchCTP(),
@@ -21,7 +23,7 @@
 					'value'=>'($row+1)',
 			),
 			array(
-					'header'=>'Nº de Venta',
+					'header'=>'Nº de Orden',
 					'type'=>'raw',
 					'value'=>'$data->codigo',
 			),
@@ -93,7 +95,7 @@ foreach ($datos as $item)
 }
 //print_r(count($datos));
 ?>
-
+    </div>
     <div class="well well-sm col-xs-offset-8 col-xs-4">
         <span><strong>Total:</strong> <?php echo $total; ?> Bs.</span>
     </div>
@@ -111,6 +113,5 @@ foreach ($datos as $item)
     <div class="divForForm"></div>
 
 <?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>
-
 </div>
 <?php }?>

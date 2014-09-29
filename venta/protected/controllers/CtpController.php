@@ -60,6 +60,10 @@ class CtpController extends Controller
 			if(!empty($ctp->fechaPlazo))
 				$ctp->fechaPlazo= date("Y-m-d H:i:s",strtotime($ctp->fechaPlazo));
 			$ctp->estado = 2;
+            $ctp->formaPago = 1;
+            $ctp->tipoOrden = 1;
+
+            $ctp=$this->getCodigo($ctp);
 			$tmp = array();
 			$caja = $this->verifyModel(Caja::model()->findByPk($this->cajaCTP));
 			$cajaMovimiento = new CajaMovimientoVenta;
@@ -134,6 +138,9 @@ class CtpController extends Controller
 				->with('detalleCTPs')
 				->with('idCliente0')
 				->find('`t`.idCTP='.$id));
+            $ctp->formaPago = 1;
+            $ctp->tipoOrden = 1;
+            $ctp=$this->getCodigo($ctp);
 			$detalle = array();
 			$total=0;
 			$horas = Horario::model()->findAll();
@@ -259,59 +266,66 @@ class CtpController extends Controller
 	
 	public function actionMovimientos()
 	{
-		$cond3="";
-		$f="";
-		$saldo="";
-		$cf=array("ctp/movimientos",'f'=>0);
-		$sf=array("ctp/movimientos",'f'=>1);
-		$ventas = new CTP('searchCTP');
-		
-		$ventas->unsetAttributes();
-		if(isset($_GET['f']))
-			$ventas->tipoOrden = $_GET['f'];
-		
-		if(isset($_GET['d']) || isset($_GET['m']))
-		{
-			$d=date("d");
-			$m=date("m");
-			$y=date("Y");
-			if(isset($_GET['d']))
-			{
-				$d=$_GET['d'];
-				if($d==0)
-				{
-					$m=$m-1;
-					if($m<10 && $m>0)
-						$m = "0".$m;
-					
-					$d=$this->getUltimoDiaMes($y, $m);
-				}
-				$ventas->fechaOrden = $y."-".$m."-".$d;
-				$cf=array("ctp/movimientos",'f'=>0,'d'=>$_GET['d']);
-				$sf=array("ctp/movimientos",'f'=>1,'d'=>$_GET['d']);
-				$cond3=array("ctp/previewDay","f"=>$ventas->tipoOrden,"d"=>$_GET['d']);
-			}
-			if(isset($_GET['m']))
-			{
-				$m=$_GET['m'];
-				$ventas->fechaOrden = $y."-".$m;
-				$cf=array("ctp/movimientos",'f'=>0,'m'=>$_GET['m']);
-				$sf=array("ctp/movimientos",'f'=>1,'m'=>$_GET['m']);
-				$cond3=array("ctp/previewDay","f"=>$ventas->tipoOrden,"m"=>$_GET['m']);
-			}
-		
-		}
+        $cond3="";
+        $f="";
+        $saldo="";
+        $cf=array("ctp/movimientos",'f'=>0);
+        $sf=array("ctp/movimientos",'f'=>1);
+        $ventas = new CTP('searchCTP');
 
-		if(isset($_GET['CTP']))
-		{
-			$ventas->attributes = $_GET['CTP'];
-				
-			if(isset($_GET['CTP']['apellido']))
-				$ventas->apellido = $_GET['CTP']['apellido'];
-			if(isset($_GET['CTP']['nit']))
-				$ventas->nit = $_GET['CTP']['nit'];
-				
-		}
+        $ventas->unsetAttributes();
+        if(isset($_GET['f']))
+            $ventas->tipoOrden = $_GET['f'];
+
+        if(isset($_GET['d']) || isset($_GET['m']))
+        {
+            $d=date("d");
+            $m=date("m");
+            $y=date("Y");
+
+            if(isset($_GET['d']) )
+            {
+                $d=$_GET['d'];
+                if($d==0)
+                {
+                    $m=$m-1;
+                    if($m<10 && $m>0)
+                        $m = "0".$m;
+
+                    $d=$this->getUltimoDiaMes($y, $m);
+                }
+                $ventas->fechaOrden = $y."-".$m."-".$d;
+                $cf=array("ctp/movimientos",'f'=>0,'d'=>$_GET['d']);
+                $sf=array("ctp/movimientos",'f'=>1,'d'=>$_GET['d']);
+                //$cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"d"=>date("d",strtotime($ventas->fechaVenta)));
+            }
+            if(isset($_GET['m']))
+            {
+                $m=$_GET['m'];
+                $ventas->fechaOrden = $y."-".$m;
+                $cf=array("ctp/movimientos",'f'=>0,'m'=>$_GET['m']);
+                $sf=array("ctp/movimientos",'f'=>1,'m'=>$_GET['m']);
+                //$cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"m"=>date("m",strtotime($ventas->fechaVenta)));
+            }
+
+            if(isset($_GET['CTP']))
+            {
+                $ventas->attributes = $_GET['CTP'];
+
+                if(isset($_GET['CTP']['apellido']))
+                    $ventas->apellido = $_GET['CTP']['apellido'];
+                if(isset($_GET['CTP']['nit']))
+                    $ventas->nit = $_GET['CTP']['nit'];
+
+            }
+
+            if(isset($_GET['d']) )
+                $cond3=array("ctp/previewDay","f"=>$ventas->tipoOrden,"d"=>date("d",strtotime($ventas->fechaOrden)));
+            if(isset($_GET['m']))
+                $cond3=array("ctp/previewDay","f"=>$ventas->tipoOrden,"m"=>date("m",strtotime($ventas->fechaOrden)));
+        }
+
+
 		
 		if(isset($_GET['d']))
 		{
@@ -373,7 +387,7 @@ class CtpController extends Controller
 				->with('detalleCTPs.idAlmacenProducto0')
 				->with('detalleCTPs.idAlmacenProducto0.idProducto0')
 				->with('idCajaMovimientoVenta0')
-				->findAll(array('condition'=>'idCajaMovimientoVenta0.idCaja='.$this->cajaCTP.' and idCajaMovimientoVenta0.arqueo=0'.$fact.$cond)));
+				->findAll(array('condition'=>'idCajaMovimientoVenta0.idCaja='.$this->cajaCTP.' '.$fact.$cond)));
 		//$tabla = $caja->ventas;
 		$this->render("base",array('render'=>'previewDay','tabla'=>$caja,));
 	}
@@ -714,28 +728,8 @@ class CtpController extends Controller
 					->with('detalleCTPs')
 					->with('idCliente0')
 					->findByPk($_POST['id']));
-			
-			$row = CTP::model()->find(array("condition"=>"tipoOrden=".$tipo,'order'=>'fechaOrden Desc'));
-			if(empty($row))
-				$row=new CTP;
-			if(empty($row->serie))
-				$row->serie = 65;
-			$ctp->numero = $row->numero +1;
-			if($row->numero==1001)
-			{
-				$row->numero=1;
-				$row->serie++;
-				if($row->serie==91)
-					$row->serie = 65;
-			}
-			$ctp->serie = $row->serie;
-			
-			if($ctp->tipoOrden!=$tipo){
-				if($tipo==1)
-					$ctp->codigo = chr($ctp->serie)."C-".$ctp->numero."-".date("y");
-				else
-					$ctp->codigo = $ctp->numero."-P";
-			}
+			$ctp->tipoOrden=$tipo;
+			$ctp=$this->getCodigo($ctp);
 			
 			$horas = Horario::model()->findAll();
 			$cantidades = CantidadCTP::model()->findAll();
@@ -793,4 +787,28 @@ class CtpController extends Controller
 	protected function getUltimoDiaMes($elAnio,$elMes) {
 		return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
 	}
+
+    protected function getCodigo($ctp)
+    {
+        $row = CTP::model()->find(array("condition"=>"tipoOrden=".$ctp->tipoOrden,'order'=>'fechaOrden Desc'));
+        if(empty($row))
+            $row=new CTP;
+
+        if(empty($row->serie) && $ctp->tipoOrden==1)
+            $row->serie = 65;
+        $ctp->numero = $row->numero +1;
+        if($row->numero==1001 && $ctp->tipoOrden==1){
+            $row->numero=1;
+            $row->serie++;
+            if($row->serie==91)
+                $row->serie = 65;
+        }
+        $ctp->serie = $row->serie;
+        if($ctp->tipoOrden==1)
+            $ctp->codigo = chr($ctp->serie)."C-".$ctp->numero."-".date("y");
+        else
+            $ctp->codigo = $ctp->numero."-C";
+
+        return $ctp;
+    }
 }

@@ -45,7 +45,6 @@ if(count($detalle)>=1)
 
 
 <?php Yii::app()->clientScript->registerScript('row',"
-
 function newRow(detalle)
 {
 	
@@ -70,5 +69,4 @@ function newRow(detalle)
 	});
 	event.preventDefault();
 }
-
 ",CClientScript::POS_HEAD); ?>

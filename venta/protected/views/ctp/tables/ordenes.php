@@ -1,4 +1,8 @@
-<h3><?php echo "Ordenes de trabajo";?></h3>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong class="panel-title">Ordenes de trabajo</strong>
+    </div>
+    <div class="panel-body">
 <?php 
 $sw=0;
 
@@ -55,3 +59,5 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		)
 	));
 ?>
+    </div>
+</div>

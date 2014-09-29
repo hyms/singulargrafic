@@ -25,7 +25,7 @@ class OrdenController extends Controller
 	
 	public function actionIndex()
 	{
-		$this->render('index');
+		$this->render('index',array('render'=>''));
 	}
 	
 	public function actionCliente()
@@ -35,23 +35,7 @@ class OrdenController extends Controller
 		$ctp = new CTP;
 		$productos = new AlmacenProducto('searchCTP');
 		
-		$row = CTP::model()->find(array("condition"=>"tipoCTP=1",'order'=>'fechaOrden Desc'));
-		if(empty($row))
-			$row=new CTP;
-		if(empty($row->serie))
-			$row->serie = 65;
-		$ctp->numero = $row->numero +1;
-		if($row->numero==1001)
-		{
-			$row->numero=1;
-			$row->serie++;
-			if($row->serie==91)
-				$row->serie = 65;
-		}
-		$ctp->serie = $row->serie;
-		$ctp->codigo = chr($ctp->serie)."C-".$ctp->numero."-".date("y");
-		$ctp->formaPago = 1;
-		$ctp->tipoOrden = 1;
+		$ctp->codigo = $this->getCodigo(1);
 		$ctp->fechaOrden = date("Y-m-d H:i:s");
 		$ctp->idUserOT= Yii::app()->user->id;
 		$ctp->tipoCTP = 1;
@@ -64,38 +48,22 @@ class OrdenController extends Controller
 		
 			$cliente->attributes = $_POST['Cliente'];
 			
-			if(empty($cliente->id))
+			if($cliente->isNewRecord)
 			{
-				$tmp = TiposClientes::model()->find('`nombre`="nuevo"');
-				$cliente->idTiposClientes = $tmp->idTiposClientes;
 				$cliente->fechaRegistro = date("Y-m-d");
 			}
-			if($cliente->save())
+            if(empty($cliente->idTiposClientes))
+            {
+                    $tmp = TiposClientes::model()->find('`nombre`="nuevo"');
+                    $cliente->idTiposClientes = $tmp->idTiposClientes;
+            }
+			if($cliente->validate())
 				$swc=1;
 		}
 		
 		if(isset($_POST['CTP']))
 		{
 			$ctp->attributes = $_POST['CTP'];
-			$row = CTP::model()->find(array("condition"=>"tipoOrden=".$ctp->tipoOrden,'order'=>'fechaOrden Desc'));
-			if(empty($row))
-				$row=new Venta;
-			if($ctp->tipoOrden==1)
-				$ctp->codigo = chr($ctp->serie)."C-".$ctp->numero."-".date("y");
-			else
-				$ctp->codigo = $ctp->numero."-C";
-				
-			if(empty($row->serie) && $ctp->tipoOrden==1)
-				$row->serie = 65;
-			$ctp->numero = $row->numero +1;
-			if($row->numero==1001 && $ctp->tipoOrden==1)
-			{
-				$row->numero=1;
-				$row->serie++;
-				if($row->serie==91)
-					$row->serie = 65;
-			}
-			$ctp->serie = $row->serie;
 			$ctp->estado = 1;
 			
 			if($ctp->validate())
@@ -105,25 +73,24 @@ class OrdenController extends Controller
 		if(isset($_POST['DetalleCTP']))
 		{
 			$detalle = array();
-			$i=0;
 			$det=count($_POST['DetalleCTP']);
-			foreach ($_POST['DetalleCTP'] as $item)
+			foreach ($_POST['DetalleCTP'] as $key=>$item)
 			{
 				array_push($detalle,new DetalleCTP);
-				$detalle[$i]->attributes = $item;
-				$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($detalle[$i]->idAlmacenProducto);
-				$detalle[$i]->formato = $almacen->idProducto0->color;
+				$detalle[$key]->attributes = $item;
+				$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($detalle[$key]->idAlmacenProducto);
+				$detalle[$key]->formato = $almacen->idProducto0->color;
 					
-				if($detalle[$i]->validate())
+				if($detalle[$key]->validate())
 				{
 					$det--;
 				}
-				$i++;
 			}
 		}
 		
 		if($swc==1 && $swv==1 && $det==0)
 		{
+            $cliente->save();
 			$ctp->idCliente = $cliente->idCliente;
 		
 			if($ctp->save())
@@ -137,7 +104,7 @@ class OrdenController extends Controller
 			}
 		}
 		
-		$this->render('cliente',array('cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos));
+		$this->render('index',array('render'=>'new','cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos));
 	}
 	
 	public function actionInterna()
@@ -168,7 +135,7 @@ class OrdenController extends Controller
 				$cliente = new Cliente;
 		
 			$cliente->attributes = $_POST['Cliente'];
-			if(empty($cliente->fechaRegistro))
+            if($cliente->isNewRecord)
 				$cliente->fechaRegistro = date("Y-m-d");
 			if($cliente->save())
 				$swc=1;
@@ -217,7 +184,7 @@ class OrdenController extends Controller
 			}
 		}
 		
-		$this->render('interna',array('cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos));
+		$this->render('index',array('render'=>'interna','cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos));
 	}
 	
 	public function actionRep()
@@ -229,7 +196,7 @@ class OrdenController extends Controller
 				'pagination'=>array(
 						'pageSize'=>'20',
 				),));
-		$this->render('rep',array('ordenes'=>$ordenes));
+		$this->render('index',array('render'=>'rep','ordenes'=>$ordenes));
 	}
 	
 	public function actionRepOrden()
@@ -299,7 +266,7 @@ class OrdenController extends Controller
 				}
 					
 			}
-			$this->render('repo/repos',array('ctp'=>$ctp,'repos'=>$repos,'detalle'=>$detalle,'otro'=>$otro));
+			$this->render('index',array('render'=>'repos','ctp'=>$ctp,'repos'=>$repos,'detalle'=>$detalle,'otro'=>$otro));
 		}
 		else
 			throw new CHttpException(400,'Petición no válida.');
@@ -316,7 +283,7 @@ class OrdenController extends Controller
 				'pagination'=>array(
 						'pageSize'=>'20',
 				),));
-		$this->render('buscar',array('ordenes'=>$ordenes));
+		$this->render('index',array('render'=>'buscar','ordenes'=>$ordenes));
 	}
 	
 	public function actionBuscarR()
@@ -330,7 +297,7 @@ class OrdenController extends Controller
 				'pagination'=>array(
 						'pageSize'=>'20',
 				),));
-		$this->render('buscar',array('ordenes'=>$ordenes));
+		$this->render('index',array('render'=>'buscarR','ordenes'=>$ordenes));
 	}
 	
 	public function actionModificar()
@@ -346,8 +313,12 @@ class OrdenController extends Controller
 					$cliente = new Cliente;
 			
 				$cliente->attributes = $_POST['Cliente'];
-				if(empty($cliente->fechaRegistro))
-					$cliente->fechaRegistro = date("Y-m-d");
+                if($cliente->isNewRecord)
+                {
+                    $tmp = TiposClientes::model()->find('`nombre`="nuevo"');
+                    $cliente->idTiposClientes = $tmp->idTiposClientes;
+                    $cliente->fechaRegistro = date("Y-m-d");
+                }
 				if($cliente->save())
 					$swc=1;
 			}
@@ -629,5 +600,11 @@ class OrdenController extends Controller
 		return $model;
 	}
 	
-	
+	private function getCodigo($tipo)
+    {
+        $row = CTP::model()->find(array('condition'=>"tipoCTP=".$tipo." and fechaOrden like '%".date('Y-m-d')."%'",'select'=>'count(*) as max'));
+        $codigoTMP =($row->max+1)."-".date('md');
+        return $codigoTMP;
+    }
+
 }

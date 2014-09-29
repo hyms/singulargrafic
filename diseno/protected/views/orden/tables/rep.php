@@ -1,10 +1,8 @@
-<div class="col-xs-2">
-<?php $this->renderPartial('menu'); ?>
-</div>
-
-<div class="col-xs-10">
-
-<h3><?php echo "Ordenes de trabajo";?></h3>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong class="panel-title">Ordenes de trabajo</strong>
+    </div>
+    <div class="panel-body" style="overflow: auto;">
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$ordenes,
@@ -19,6 +17,10 @@ $this->widget('zii.widgets.grid.CGridView', array(
 					'header'=>'codigo',
 					'value'=>'$data->codigo',
 			),
+            array(
+                'header'=>'Fecha',
+                'value'=>'$data->fechaOrden',
+            ),
 			array(
 					'header'=>'',
 					'type'=>'raw',
@@ -28,4 +30,5 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	));
 ?>
 
+    </div>
 </div>

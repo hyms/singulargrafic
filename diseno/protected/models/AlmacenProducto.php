@@ -110,8 +110,9 @@ class AlmacenProducto extends CActiveRecord
 		$criteria->with= array(
 				'idProducto0',
 		);
-		$criteria->condition = 'idAlmacen=3';
-	
+		$this->idAlmacen = 3;
+        $this->material = "Placas CTP";
+
 		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
 		$criteria->compare('idProducto',$this->idProducto);
 		$criteria->compare('stockU',$this->stockU);
@@ -120,7 +121,7 @@ class AlmacenProducto extends CActiveRecord
 		
 		$criteria->compare('idProducto0.codigo',$this->codigo,true);
 		$criteria->compare('idProducto0.detalle',$this->detalle,true);
-		$criteria->compare('idProducto0.material',$this->material,true);
+		$criteria->compare('idProducto0.material',$this->material);
 		$criteria->compare('idProducto0.color',$this->color,true);
 		$criteria->compare('idProducto0.marca',$this->marca,true);
 		$criteria->compare('idProducto0.cantXPaquete',$this->paquete,true);

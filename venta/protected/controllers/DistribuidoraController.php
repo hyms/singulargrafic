@@ -535,7 +535,8 @@ class DistribuidoraController extends Controller
 			$d=date("d");
 			$m=date("m");
 			$y=date("Y");
-			if(isset($_GET['d']))
+
+			if(isset($_GET['d']) )
 			{
 				$d=$_GET['d'];
 				if($d==0)
@@ -549,7 +550,7 @@ class DistribuidoraController extends Controller
 				$ventas->fechaVenta = $y."-".$m."-".$d;
 				$cf=array("distribuidora/movimientos",'f'=>0,'d'=>$_GET['d']);
 				$sf=array("distribuidora/movimientos",'f'=>1,'d'=>$_GET['d']);
-				$cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"d"=>$_GET['d']);
+				//$cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"d"=>date("d",strtotime($ventas->fechaVenta)));
 			}
 			if(isset($_GET['m']))
 			{
@@ -557,23 +558,25 @@ class DistribuidoraController extends Controller
 				$ventas->fechaVenta = $y."-".$m;
 				$cf=array("distribuidora/movimientos",'f'=>0,'m'=>$_GET['m']);
 				$sf=array("distribuidora/movimientos",'f'=>1,'m'=>$_GET['m']);
-				$cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"m"=>$_GET['m']);
+				//$cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"m"=>date("m",strtotime($ventas->fechaVenta)));
 			}
-		
+
+            if(isset($_GET['Venta']))
+            {
+                $ventas->attributes = $_GET['Venta'];
+
+                if(isset($_GET['Venta']['apellido']))
+                    $ventas->apellido = $_GET['Venta']['apellido'];
+                if(isset($_GET['Venta']['nit']))
+                    $ventas->nit = $_GET['Venta']['nit'];
+
+            }
+            if(isset($_GET['d']) )
+                $cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"d"=>date("d",strtotime($ventas->fechaVenta)));
+            if(isset($_GET['m']))
+                $cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"m"=>date("m",strtotime($ventas->fechaVenta)));
 		}
-		
-		
-		//print_r($ventas);
-		if(isset($_GET['Venta']))
-		{
-			$ventas->attributes = $_GET['Venta'];
-				
-			if(isset($_GET['Venta']['apellido']))
-				$ventas->apellido = $_GET['Venta']['apellido'];
-			if(isset($_GET['Venta']['nit']))
-				$ventas->nit = $_GET['Venta']['nit'];
-				
-		}
+
 		
 		if(isset($_GET['d']))
 		{

@@ -1,9 +1,3 @@
-<div class="col-xs-2">
-<?php $this->renderPartial('menu'); ?>
-</div>
-
-<div class="col-xs-10">
-
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<strong class="panel-title">Placas</strong>
@@ -22,7 +16,7 @@
 	
 <?php
 		$form=$this->beginWidget('CActiveForm', array(
-				'id'=>'detalle-venta-detalleVenta-form',
+				'id'=>'form',
 				//'action'=>CHtml::normalizeUrl(array('/orden/interna')),
 				'htmlOptions'=>array(
 						'class'=>'form-horizontal',
@@ -59,12 +53,3 @@
 		</div>
 	</div>
 <?php $this->endWidget(); ?>	
-	
-</div>
-<?php Yii::app()->getClientScript()->registerScript("ajax_send",
-"
- $('#save').click(function(){
-		//alert('se guardaran los datos');
-		$('form').submit();
-});
-",CClientScript::POS_READY); ?>

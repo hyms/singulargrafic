@@ -1,9 +1,3 @@
-<div class="col-xs-2">
-<?php $this->renderPartial('menu'); ?>
-</div>
-
-<div class="col-xs-10">
-
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<strong class="panel-title">Placas</strong>
@@ -15,14 +9,14 @@
 
 	<div class = "row">
 		<h3 class="col-xs-4">Orden de Trabajo</h3>
-		<h3 class="col-xs-4 text-center"><?php //echo $ctp->codigo;?></h3>
+		<h3 class="col-xs-4 text-center"><?php echo $ctp->codigo;?></h3>
 		<h3 class="col-xs-4 text-right"><?php echo date("d/m/Y",strtotime($ctp->fechaOrden));?></h3>
 		
 	</div>
 	
 <?php
 		$form=$this->beginWidget('CActiveForm', array(
-				'id'=>'detalle-venta-detalleVenta-form',
+				'id'=>'form',
 				//'action'=>CHtml::normalizeUrl(array((empty($ctp->idCtp))?'/orden/cliente':"/ctp/modificar")),
 				'htmlOptions'=>array(
 						'class'=>'form-horizontal',
@@ -54,18 +48,8 @@
 
 	<div class="form-group">
 		<div class="text-center">
-		<?php echo CHtml::resetButton('Cancelar', array('class' => 'btn btn-default hidden-print')); ?>
-		<?php echo CHtml::button('Guardar', array('class' => 'btn btn-default hidden-print','id'=>'save')); ?>
-		</div>
+            <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-remove"></span> Cancelar', "#", array('class' => 'btn btn-default hidden-print','id'=>'reset')); ?>
+            <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar', "#", array('class' => 'btn btn-default hidden-print','id'=>'save')); ?>
+        </div>
 	</div>
-<?php $this->endWidget(); ?>	
-	
-</div>
-
-<?php Yii::app()->getClientScript()->registerScript("ajax_send",
-"
- $('#save').click(function(){
-		//alert('se guardaran los datos');
-		$('form').submit();
-});
-",CClientScript::POS_READY); ?>
+<?php $this->endWidget(); ?>

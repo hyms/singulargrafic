@@ -6,14 +6,14 @@
 
 	<h4 class="col-xs-offset-10 text-right"><strong><?php echo $venta->codigo; ?></strong></h4>
 	<h3 class="col-xs-offset-8 text-right"><strong><?php echo "NOTA DE VENTA";?></strong></h3>
-	<div class="row">
+	<div class="row" style="font-size: 13px">
 		<div class="col-xs-3"><strong><?php echo "CLIENTE:";?></strong> <?php echo $venta->idCliente0->apellido;?></div>
 		<div class="col-xs-2"><strong><?php echo "NIT:";?></strong> <?php echo $venta->idCliente0->nitCi;?></div>
 		<div class="col-xs-4"><strong><?php echo "RESPONSABLE:";?></strong> <?php echo $venta->idCajaMovimientoVenta0->idUser0->idEmpleado0->apellido." ".$venta->idCajaMovimientoVenta0->idUser0->idEmpleado0->nombre;?></div>
 		<div class="col-xs-3"><strong><?php echo "FECHA:";?></strong> <?php echo date("d-m-Y",strtotime($venta->fechaVenta));?></div>
 	</div>
 	 
-	<div class="row well well-sm" style="min-height:230px;">
+	<div class="row well well-sm" style="min-height:230px; font-size: 12px">
 		<table class="table table-hover table-condensed">
 			<thead><tr>
 				<th><?php echo "Nº"; ?></th>

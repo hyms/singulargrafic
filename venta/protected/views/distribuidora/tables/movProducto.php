@@ -74,7 +74,7 @@
 												'dateFormat'=>'yy-mm-dd',
 										),
 										'htmlOptions'=>array(
-												'class'=>'form-control input-sm',
+												'class'=>'form-control',
 										),
 								),
 										true),
