@@ -2,11 +2,11 @@
 <?php foreach ($placas as $key => $placa){?>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4 class="panel-title">
+            <div class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $key?>">
                     <strong><?php echo $placa->idProducto0->color; ?></strong> <small><?php echo $placa->idProducto0->detalle; ?></small>
                 </a>
-            </h4>
+            </div>
         </div>
         <div id="collapse<?php echo $key?>" class="panel-collapse collapse in">
             <div class="panel-body">

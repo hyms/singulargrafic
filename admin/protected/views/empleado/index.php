@@ -37,6 +37,8 @@
             break;
         case "dates":
             $this->renderPartial('forms/formDate',array('model'=>$model,'empleado'=>$empleado));
+            $this->renderPartial('scripts/save');
+            $this->renderPartial('scripts/reset');
             break;
         default;
             break;

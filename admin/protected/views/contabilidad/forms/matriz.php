@@ -1,3 +1,9 @@
+<div class="col-xs-2">
+    <?php
+        $this->renderPartial('menus/principal');
+    ?>
+</div>
+<div class="col-xs-10">
 <div class="form-group">
 <?php echo "  ".CHtml::link('Añadir Cantidades',array('ctp/cantidad'),array('class' => 'openDlg divDialog')); ?>
 
@@ -23,14 +29,14 @@
 	</div>
 	
 	<div class="form-group">
-			<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-xs-offset-2')); ?>
+			<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default')); ?>
 	</div>
 
 
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
-
+</div>
 <?php
 Yii::app()->clientScript->registerScript('row2',"
 $('#document').ready(function(){

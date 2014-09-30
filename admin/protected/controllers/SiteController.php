@@ -10,7 +10,7 @@ class SiteController extends Controller
 	public function accessRules() {
 		return array(
 				array('allow',
-						'actions'=>array('login','error'),
+						'actions'=>array('login','error','logout'),
 						'users'=>array('*')
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions

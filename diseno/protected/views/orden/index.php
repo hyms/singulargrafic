@@ -25,7 +25,7 @@
            $this->renderPartial('tables/buscar',array('ordenes'=>$ordenes));
            break;
        case "repos":
-           $this->render('forms/repos',array('ctp'=>$ctp,'repos'=>$repos,'detalle'=>$detalle,'otro'=>$otro));
+           $this->renderPartial('forms/repos',array('ctp'=>$ctp,'repos'=>$repos,'detalle'=>$detalle,'otro'=>$otro));
            $this->renderPartial('scripts/save');
            $this->renderPartial('scripts/reset');
            $this->renderPartial('scripts/operaciones');

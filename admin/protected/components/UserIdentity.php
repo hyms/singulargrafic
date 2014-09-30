@@ -23,8 +23,10 @@ class UserIdentity extends CUserIdentity
 		
 		if($user===null)
 		{$this->errorCode=self::ERROR_USERNAME_INVALID; }
-		else if(!$user->validatePassword($this->password))
+		elseif(!$user->validatePassword($this->password))
 		{$this->errorCode=self::ERROR_PASSWORD_INVALID;}
+        elseif($user->tipo!=1 && $user->tipo!=2)
+        {$this->errorCode=self::ERROR_USERNAME_INVALID;}
 		else{
 			$this->_id=$user->idUser;
 			$this->username=$user->username;
@@ -32,18 +34,16 @@ class UserIdentity extends CUserIdentity
 			$this->errorCode=self::ERROR_NONE;
 			
 			/*Consultamos los datos del usuario por el username ($user->username) */
-			$info_usuario = Users::model()->findByPk($user->idUser);
+			//$info_usuario = Users::model()->findByPk($user->idUser);
 			//Yii::app()->user->setState('user_type',$user->tipo);
-			$this->setState('name', $user->username);
+            $this->setState('name', $user->username);
 			$this->setState('role',$user->tipo);
-			
+			if($user->tipo)
 			//$info_usuario->fechaLogin=date("Y-m-d H:i:s");
 			$sql = "update user set fechaLogin=now() where idUser='$user->idUser'";
 			$connection = Yii::app()->db;
 			$command = $connection->createCommand($sql);
 			$command->execute();
-			
-	
 		}
 		return $this->errorCode==self::ERROR_NONE;
 	}

@@ -175,7 +175,81 @@ class CtpController extends Controller
 			}
 		}
 	}
-	
+
+    public function actionMovimientos()
+    {
+        $cond3="";
+        $f="";
+        $saldo="";
+        $cf=array("ctp/movimientos",'f'=>0);
+        $sf=array("ctp/movimientos",'f'=>1);
+        $ventas = new CTP('searchCTP');
+
+        $ventas->unsetAttributes();
+        if(isset($_GET['f']))
+            $ventas->tipoOrden = $_GET['f'];
+
+        if(isset($_GET['d']) || isset($_GET['m']))
+        {
+            $d=date("d");
+            $m=date("m");
+            $y=date("Y");
+
+            if(isset($_GET['d']) )
+            {
+                $d=$_GET['d'];
+                if($d==0)
+                {
+                    $m=$m-1;
+                    if($m<10 && $m>0)
+                        $m = "0".$m;
+
+                    $d=$this->getUltimoDiaMes($y, $m);
+                }
+                $ventas->fechaOrden = $y."-".$m."-".$d;
+                $cf=array("ctp/movimientos",'f'=>0,'d'=>$_GET['d']);
+                $sf=array("ctp/movimientos",'f'=>1,'d'=>$_GET['d']);
+                //$cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"d"=>date("d",strtotime($ventas->fechaVenta)));
+            }
+            if(isset($_GET['m']))
+            {
+                $m=$_GET['m'];
+                $ventas->fechaOrden = $y."-".$m;
+                $cf=array("ctp/movimientos",'f'=>0,'m'=>$_GET['m']);
+                $sf=array("ctp/movimientos",'f'=>1,'m'=>$_GET['m']);
+                //$cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"m"=>date("m",strtotime($ventas->fechaVenta)));
+            }
+
+            if(isset($_GET['CTP']))
+            {
+                $ventas->attributes = $_GET['CTP'];
+
+                if(isset($_GET['CTP']['apellido']))
+                    $ventas->apellido = $_GET['CTP']['apellido'];
+                if(isset($_GET['CTP']['nit']))
+                    $ventas->nit = $_GET['CTP']['nit'];
+
+            }
+
+            if(isset($_GET['d']) )
+                $cond3=array("ctp/previewDay","f"=>$ventas->tipoOrden,"d"=>date("d",strtotime($ventas->fechaOrden)));
+            if(isset($_GET['m']))
+                $cond3=array("ctp/previewDay","f"=>$ventas->tipoOrden,"m"=>date("m",strtotime($ventas->fechaOrden)));
+        }
+
+
+
+        if(isset($_GET['d']))
+        {
+            $saldo = CajaArqueo::model()->find(array('condition'=>"idCaja=".$this->cajaCTP." and fechaVentas<'".$ventas->fechaOrden."'",'order'=>'idCajaArqueo Desc'));
+            //print_r($saldo);
+            if(!empty($saldo))
+                $saldo = $saldo->saldo;
+        }
+
+        $this->render('base',array('render'=>'movimientos','ventas'=>$ventas,'saldo'=>$saldo,'cond3'=>$cond3,'cf'=>$cf,'sf'=>$sf));
+    }
+
 	public function verifyModel($model)
 	{
 		if($model===null)

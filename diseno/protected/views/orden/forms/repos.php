@@ -16,11 +16,6 @@ if($repos->responsable!="")
 }
 ?>
 
-<div class="col-xs-2">
-<?php $this->renderPartial('menu'); ?>
-</div>
-
-<div class="col-xs-10">
 <h3><?php echo "Reposiciones";?></h3>
 
 	<div class = "row">
@@ -93,7 +88,6 @@ if($repos->responsable!="")
 	</div>
 <?php $this->endWidget(); ?>	
 	
-</div>
 
 <?php Yii::app()->clientScript->registerScript('otro',"
 	/*function total()

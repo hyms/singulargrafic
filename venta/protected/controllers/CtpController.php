@@ -65,16 +65,17 @@ class CtpController extends Controller
 
             $ctp=$this->getCodigo($ctp);
 			$tmp = array();
+
 			$caja = $this->verifyModel(Caja::model()->findByPk($this->cajaCTP));
-			$cajaMovimiento = new CajaMovimientoVenta;
+            $cajaMovimiento = new CajaMovimientoVenta;
 			//Yii::app()->user->id;
 			$cajaMovimiento->idUser = Yii::app()->user->id;
 			$cajaMovimiento->motivo = "Nota de Venta";
 			$cajaMovimiento->idCaja = $caja->idCaja;
 			$cajaMovimiento->arqueo = 0;
 			$cajaMovimiento->tipo = 0;
-			
-			
+
+            $swc=0;
 			if(isset($_POST['Cliente'])){
 				$cliente = Cliente::model()->find('nitCi="'.$_POST['Cliente']['nitCi'].'"');
 				if($cliente==null)
@@ -94,18 +95,17 @@ class CtpController extends Controller
 			}
 			$ctp->detalleCTPs=$tmp;
 			
-			if($ctp->save())
+			if($swc==1 && $ctp->save())
 			{
-				$almacen = array(); $i=0;
-				foreach ($ctp->detalleCTPs as $item)
+				$almacen = array();
+				foreach ($ctp->detalleCTPs as $key =>$item)
 				{
 					$item->save();
 					array_push($almacen, AlmacenProducto::model()->findByPk($item->idAlmacenProducto));
-					$almacen[$i]->stockU = $almacen[$i]->stockU - $item->nroPlacas;
-					if($almacen[$i]->stockU < 0)
+					$almacen[$key]->stockU = $almacen[$key]->stockU - $item->nroPlacas;
+					if($almacen[$key]->stockU < 0)
 						$ctp->estado = 1;
-					 
-					$i++;
+
 				}
 				if($ctp->estado == 2)
 				{
@@ -118,7 +118,18 @@ class CtpController extends Controller
 						$cajaMovimiento->monto = $ctp->montoPagado;
 					}
 					foreach ($almacen as $item)
-						$item->save();
+						if($item->save()){
+                            /*$movimiento=new MovimientoAlmacen;
+                            $movimiento->idProducto = $almacenes->idProducto0->idProducto;
+                            //$movimiento->idAlmacenDestino = 2;
+                            $movimiento[$i]->idAlmacenOrigen = 3;
+                            //$idUser->idUser = Yii::app()->user->id;
+                            $movimiento->fechaMovimiento = date("Y-m-d H:i:s");
+                            $movimiento->cantidadU = $item->cantidadU;
+                            $movimiento->cantidadP = $item->cantidadP;
+                            $movimiento->obs = "Devolucion de Material";
+                            $movimiento->save();*/
+                        }
 					$cajaMovimiento->save();
 					$this->redirect(array("ctp/buscar"));
 				}

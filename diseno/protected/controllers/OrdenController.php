@@ -386,7 +386,7 @@ class OrdenController extends Controller
 			if($ctp->tipoCTP==3)
 			{
 				$ctpB = CTP::model()->with('idCliente0')->with('detalleCTPs')->findByPk($ctp->idCTPParent);
-				$this->render('repo/repos',array('ctp'=>$ctpB,'repos'=>$ctp,'detalle'=>$ctp->detalleCTPs,'otro'=>""));
+				$this->render('index',array('render'=>'repos','ctp'=>$ctpB,'repos'=>$ctp,'detalle'=>$ctp->detalleCTPs,'otro'=>""));
 			}
 			//print_r($ctp);
 		}
@@ -453,7 +453,7 @@ class OrdenController extends Controller
 			if($ctp->tipoCTP==3)
 			{
 				$ctpB = CTP::model()->with('idCliente0')->with('detalleCTPs')->findByPk($ctp->idCTPParent);
-				$this->render('repo/repos',array('ctp'=>$ctpB,'repos'=>$ctp,'detalle'=>$ctp->detalleCTPs,'otro'=>""));
+				$this->render('index',array('render'=>'repos','ctp'=>$ctpB,'repos'=>$ctp,'detalle'=>$ctp->detalleCTPs,'otro'=>""));
 			}
 			//print_r($ctp);
 		}
