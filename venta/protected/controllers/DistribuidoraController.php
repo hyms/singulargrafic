@@ -571,8 +571,13 @@ class DistribuidoraController extends Controller
                     $ventas->nit = $_GET['Venta']['nit'];
 
             }
-            if(isset($_GET['d']) )
-                $cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"d"=>date("d",strtotime($ventas->fechaVenta)));
+            if(isset($_GET['d']))
+            {
+                if($_GET['d']=!"00")
+                    $cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"d"=>date("d",strtotime($ventas->fechaVenta)));
+                else
+                    $cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"d"=>$_GET['d']);
+            }
             if(isset($_GET['m']))
                 $cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"m"=>date("m",strtotime($ventas->fechaVenta)));
 		}

@@ -30,6 +30,21 @@
            $this->renderPartial('scripts/reset');
            $this->renderPartial('scripts/operaciones');
            break;
+       case "modificarC":
+           $this->renderPartial('cliente',array('cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos));
+           $this->renderPartial('scripts/save');
+           $this->renderPartial('scripts/reset');
+           break;
+       case "modificarI":
+           $this->renderPartial('interna',array('cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos));
+           $this->renderPartial('scripts/save');
+           $this->renderPartial('scripts/reset');
+           break;
+       case "modificarR":
+           $this->renderPartial('cliente',array('cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos));
+           $this->renderPartial('scripts/save');
+           $this->renderPartial('scripts/reset');
+           break;
        default:
            echo "";
            break;

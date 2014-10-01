@@ -376,12 +376,12 @@ class OrdenController extends Controller
 			if($ctp->tipoCTP==1)
 			{
 				$productos = new AlmacenProducto('searchCTP');  
-				$this->render('cliente',array('cliente'=>$ctp->idCliente0,'detalle'=>$ctp->detalleCTPs,'ctp'=>$ctp,'productos'=>$productos));
+				$this->render('index',array('render'=>'modificarC','cliente'=>$ctp->idCliente0,'detalle'=>$ctp->detalleCTPs,'ctp'=>$ctp,'productos'=>$productos));
 			}
 			if($ctp->tipoCTP==2)
 			{
 				$productos = new AlmacenProducto('searchCTP');
-				$this->render('interna',array('cliente'=>$ctp->idCliente0,'detalle'=>$ctp->detalleCTPs,'ctp'=>$ctp,'productos'=>$productos));
+				$this->render('index',array('render'=>'modificarI','cliente'=>$ctp->idCliente0,'detalle'=>$ctp->detalleCTPs,'ctp'=>$ctp,'productos'=>$productos));
 			}
 			if($ctp->tipoCTP==3)
 			{

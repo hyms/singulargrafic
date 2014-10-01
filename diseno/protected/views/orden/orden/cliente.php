@@ -29,7 +29,8 @@
 	<?php echo CHtml::error($cliente,'telefono',array('class'=>'label label-danger')); ?>
 </div>
 <?php
-
+$this->renderPartial('scripts/cliente');
+/*
 Yii::app()->getClientScript()->registerScript("ajax_cliente",
 "
 	function cliente (nitCi)
@@ -37,7 +38,7 @@ Yii::app()->getClientScript()->registerScript("ajax_cliente",
 		nitCi = jQuery.trim(nitCi);
 		if(nitCi.length>0){
 	        $.ajax({
-	            url: '".CHtml::normalizeUrl(array('/orden/ajaxCliente'))."', 
+	            url: '".CHtml::normalizeUrl(array('orden/ajaxCliente'))."',
 	            type: 'GET', 
 	            data: { nitCi: nitCi},
 	            success: function (data){ 
@@ -89,4 +90,4 @@ Yii::app()->getClientScript()->registerScript("ajax_cliente",
         $('#clienteApellido').val($('#apellido').val());
 	      	return true;
     });
- ",CClientScript::POS_READY); ?>
+ ",CClientScript::POS_READY); */?>
