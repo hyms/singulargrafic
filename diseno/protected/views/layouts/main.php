@@ -44,6 +44,7 @@
 					'items'=>array(
 						array('label'=>'Home', 'url'=>array('/site/index')),
 						array('label'=>'Orden de Trabajo', 'url'=>array('orden/index')),
+                        array('label'=>'Reposiciones', 'url'=>array('repos/index')),
 						array('label'=>'Reportes', 'url'=>array('#')),					
 						/*array('label'=>'Empresa <b class="caret"></b>', 'url'=>array('#'),
 							'linkOptions'=> array(
