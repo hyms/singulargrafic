@@ -573,10 +573,7 @@ class DistribuidoraController extends Controller
             }
             if(isset($_GET['d']))
             {
-                if($_GET['d']=!"00")
-                    $cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"d"=>date("d",strtotime($ventas->fechaVenta)));
-                else
-                    $cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"d"=>$_GET['d']);
+                $cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"date"=>date("Y-m-d",strtotime($ventas->fechaVenta)));
             }
             if(isset($_GET['m']))
                 $cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"m"=>date("m",strtotime($ventas->fechaVenta)));
@@ -699,23 +696,17 @@ class DistribuidoraController extends Controller
 			}
 		}
 		
-		if(isset($_GET['d']) || isset($_GET['m']))
+		if(isset($_GET['date']) || isset($_GET['m']))
 		{
 			$d=date("d");
 			$m=date("m");
 			$y=date("Y");
 			$start=date("Y-m-d H:i:s"); $end=date("Y-m-d H:i:s");
 	
-			if(isset($_GET['d']))
+			if(isset($_GET['date']))
 			{
-				$d= sprintf("%02s", $_GET['d']);
-				if($d==0)
-				{
-					$m--;
-					$d=$this->getUltimoDiaMes($y, $m);
-				}
-				$start=$y."-".$m."-".$d." 00:00:00";
-				$end=$y."-".$m."-".$d." 23:59:59";
+				$start=$_GET['date']." 00:00:00";
+				$end=$_GET['date']." 23:59:59";
 			}
 			if(isset($_GET['m']))
 			{
@@ -803,9 +794,7 @@ class DistribuidoraController extends Controller
 					}
 				}
 			}
-			$index=2;
 			$this->renderPartial('forms/add_reduce',array('model'=>$model,'almacen'=>$almacen,'deposito'=>$deposito));
-	
 		}
 	}
 	
@@ -1154,7 +1143,51 @@ class DistribuidoraController extends Controller
 		
 	}
 
-	//end
+    public function actionAddReduce()
+    {
+        if(isset($_GET['id']))
+        {
+            $almacen=$this->verifyModel(AlmacenProducto::model()->with('idProducto0')->findByPk($_GET['id']));
+            $deposito=AlmacenProducto::model()->find('idAlmacen=1 and idProducto='.$almacen->idProducto);
+            $model=new MovimientoAlmacen;
+
+            $model->idProducto = $almacen->idProducto;
+            $model->idAlmacenDestino = $almacen->idAlmacen;
+            $model->idAlmacenOrigen = $deposito->idAlmacen;
+            $model->idUser = Yii::app()->user->id;
+            $model->fechaMovimiento = date("Y-m-d H:i:s");
+
+            if(isset($_POST['MovimientoAlmacen']))
+            {
+                $model->attributes=$_POST['MovimientoAlmacen'];
+
+                $deposito->stockU = $deposito->stockU - $model->cantidadU;
+                while($deposito->stockU<0)
+                {
+                    $deposito->stockU=$deposito->stockU+$almacen->idProducto0->cantXPaquete;
+                    $deposito->stockP = $deposito->stockP - 1;
+                }
+                $deposito->stockP = $deposito->stockP - $model->cantidadP;
+
+                if($deposito->stockP < 0)
+                    $model->addError('cantidadP','No existen suficientes insumos');
+                else{
+                    if($model->save())
+                    {
+                        // form inputs are valid, do something here
+                        $almacen->stockU = $almacen->stockU + $model->cantidadU;
+                        $almacen->stockP = $almacen->stockP + $model->cantidadP;
+
+                        if($almacen->save() && $deposito->save()){
+                            echo CJSON::encode(array('status'=>'ok'));
+                        }
+                    }
+                }
+            }
+            //$this->renderPartial('forms/add_reduce',array('model'=>$model,'almacen'=>$almacen,'deposito'=>$deposito));
+        }
+        return true;
+    }
 	
 	private function verifyModel($model)
 	{

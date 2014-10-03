@@ -27,11 +27,10 @@
  * @property integer $idUserVenta
  *
  * The followings are the available model relations:
- * @property CTP[] $cTPs
- * @property Cliente $idCliente0
- * @property CajaMovimientoVenta $idCajaMovimientoVenta0
  * @property User $idUserOT0
  * @property User $idUserVenta0
+ * @property CajaMovimientoVenta $idCajaMovimientoVenta0
+ * @property Cliente $idCliente0
  */
 class Imprenta extends CActiveRecord
 {
@@ -72,11 +71,10 @@ class Imprenta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'cTPs' => array(self::HAS_MANY, 'CTP', 'idImprenta'),
-			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
-			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
 			'idUserOT0' => array(self::BELONGS_TO, 'User', 'idUserOT'),
 			'idUserVenta0' => array(self::BELONGS_TO, 'User', 'idUserVenta'),
+			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
+			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
 		);
 	}
 

@@ -1,4 +1,4 @@
-<h3>Stock</h3>
+<h3 id="titleStock">Stock</h3>
  
 <div class="panel-group" id="accordion">
 	<div class="panel panel-default" >
@@ -69,4 +69,4 @@
 	</div>
 	
 	<?php $this->endWidget(); ?>
-</div>	
+</div>

@@ -5,16 +5,18 @@
  *
  * The followings are the available columns in table 'cajaMovimientoVenta':
  * @property integer $idCajaMovimientoVenta
+ * @property integer $idUser
  * @property double $monto
  * @property string $motivo
  * @property string $fechaMovimiento
- * @property integer $idUser
  * @property integer $tipo
  * @property integer $arqueo
  * @property integer $idCaja
  *
  * The followings are the available model relations:
  * @property CTP[] $cTPs
+ * @property Imprenta[] $imprentas
+ * @property CajaArqueo[] $cajaArqueos
  * @property Caja $idCaja0
  * @property User $idUser0
  * @property Recibos[] $reciboses
@@ -29,8 +31,7 @@ class CajaMovimientoVenta extends CActiveRecord
 	{
 		return 'cajaMovimientoVenta';
 	}
-	
-	public $max;
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -46,7 +47,7 @@ class CajaMovimientoVenta extends CActiveRecord
 			array('fechaMovimiento', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCajaMovimientoVenta, monto, motivo, fechaMovimiento, idUser, tipo, arqueo, idCaja', 'safe', 'on'=>'search'),
+			array('idCajaMovimientoVenta, idUser, monto, motivo, fechaMovimiento, tipo, arqueo, idCaja', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,6 +60,8 @@ class CajaMovimientoVenta extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'cTPs' => array(self::HAS_MANY, 'CTP', 'idCajaMovimientoVenta'),
+			'imprentas' => array(self::HAS_MANY, 'Imprenta', 'idCajaMovimientoVenta'),
+			'cajaArqueos' => array(self::HAS_MANY, 'CajaArqueo', 'idCajaMovimientoVenta'),
 			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
 			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
 			'reciboses' => array(self::HAS_MANY, 'Recibos', 'idCajaMovimientoVenta'),
@@ -73,10 +76,10 @@ class CajaMovimientoVenta extends CActiveRecord
 	{
 		return array(
 			'idCajaMovimientoVenta' => 'Id Caja Movimiento Venta',
+			'idUser' => 'Id User',
 			'monto' => 'Monto',
 			'motivo' => 'Motivo',
 			'fechaMovimiento' => 'Fecha Movimiento',
-			'idUser' => 'Id User',
 			'tipo' => 'Tipo',
 			'arqueo' => 'Arqueo',
 			'idCaja' => 'Id Caja',
@@ -95,6 +98,9 @@ class CajaMovimientoVenta extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
+
+    public $max;
+
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
@@ -102,10 +108,10 @@ class CajaMovimientoVenta extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('idCajaMovimientoVenta',$this->idCajaMovimientoVenta);
+		$criteria->compare('idUser',$this->idUser);
 		$criteria->compare('monto',$this->monto);
 		$criteria->compare('motivo',$this->motivo,true);
 		$criteria->compare('fechaMovimiento',$this->fechaMovimiento,true);
-		$criteria->compare('idUser',$this->idUser);
 		$criteria->compare('tipo',$this->tipo);
 		$criteria->compare('arqueo',$this->arqueo);
 		$criteria->compare('idCaja',$this->idCaja);

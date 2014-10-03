@@ -29,11 +29,13 @@
  * @property integer $idCTPParent
  * @property integer $tipoCTP
  * @property string $fechaEntega
+ * @property string $obsCaja
+ * @property integer $idSucursal
  *
  * The followings are the available model relations:
  * @property CTP $idCTPParent0
  * @property CTP[] $cTPs
- * @property Imprenta $idImprenta0
+ * @property Sucursal $idSucursal0
  * @property User $idUserOT0
  * @property User $idUserVenta0
  * @property CajaMovimientoVenta $idCajaMovimientoVenta0
@@ -60,15 +62,16 @@ class CTP extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			//array('montoVenta, montoPagado, montoCambio, montoDescuento, estado', 'required'),
-			array('tipoOrden, formaPago, idCliente, serie, numero, estado, idCajaMovimientoVenta, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP', 'numerical', 'integerOnly'=>true),
+			array('tipoOrden, formaPago, idCliente, serie, numero, estado, idCajaMovimientoVenta, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP, idSucursal', 'numerical', 'integerOnly'=>true),
 			array('montoVenta, montoPagado, montoCambio, montoDescuento', 'numerical'),
 			array('codigo', 'length', 'max'=>45),
 			array('factura, autorizado, responsable', 'length', 'max'=>50),
 			array('obs', 'length', 'max'=>200),
+			array('obsCaja', 'length', 'max'=>500),
 			array('fechaOrden, fechaPlazo, fechaEntega', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCTP, fechaOrden, tipoOrden, formaPago, idCliente, fechaPlazo, codigo, serie, numero, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP, fechaEntega', 'safe', 'on'=>'search'),
+			array('idCTP, fechaOrden, tipoOrden, formaPago, idCliente, fechaPlazo, codigo, serie, numero, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP, fechaEntega, obsCaja, idSucursal', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -82,7 +85,7 @@ class CTP extends CActiveRecord
 		return array(
 			'idCTPParent0' => array(self::BELONGS_TO, 'CTP', 'idCTPParent'),
 			'cTPs' => array(self::HAS_MANY, 'CTP', 'idCTPParent'),
-			'idImprenta0' => array(self::BELONGS_TO, 'Imprenta', 'idImprenta'),
+			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
 			'idUserOT0' => array(self::BELONGS_TO, 'User', 'idUserOT'),
 			'idUserVenta0' => array(self::BELONGS_TO, 'User', 'idUserVenta'),
 			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
@@ -123,6 +126,8 @@ class CTP extends CActiveRecord
 			'idCTPParent' => 'Id Ctpparent',
 			'tipoCTP' => 'Tipo Ctp',
 			'fechaEntega' => 'Fecha Entrega',
+			'obsCaja' => 'Obs Caja',
+			'idSucursal' => 'Id Sucursal',
 		);
 	}
 
@@ -170,6 +175,8 @@ class CTP extends CActiveRecord
 		$criteria->compare('idCTPParent',$this->idCTPParent);
 		$criteria->compare('tipoCTP',$this->tipoCTP);
 		$criteria->compare('fechaEntega',$this->fechaEntega,true);
+		$criteria->compare('obsCaja',$this->obsCaja,true);
+		$criteria->compare('idSucursal',$this->idSucursal);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

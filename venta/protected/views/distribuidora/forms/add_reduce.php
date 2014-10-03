@@ -24,7 +24,7 @@
 
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'movimiento-almacen-add_reduce-form',
+	'id'=>'form_Modal',
 	'htmlOptions'=>array(
 		'class'=>'form-horizontal',
 		'role'=>'form'
@@ -62,7 +62,24 @@
 	</div>
 	
 	<div class="form-group col-xs-4">
-		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default')); ?>
+		<?php //echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default')); ?>
+        <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar','#',array('class'=>'btn btn-primary','id'=>'saveModal')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
+<script>
+    $('#saveModal').click(function(){
+        $.ajax({
+            'type': 'POST',
+            'url' : '<?php echo CHtml::normalizeUrl(array('distribuidora/addReduce','id'=>$almacen->idAlmacenProducto)); ?>',
+            'data': $( '#form_Modal').serialize(),
+            success: function (data) {
+                data = JSON.parse(data);
+                //alert(data);
+                if(data['status']=='ok')
+                   $('#divDialog').dialog('close');
+            }
+        });
+        return false; // prevent normal submit
+    });
+</script>

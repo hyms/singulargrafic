@@ -21,14 +21,15 @@
  * @property integer $tipoRecivo
  * @property double $descuento
  * @property integer $idCajaMovimientoVenta
+ * @property integer $idSucursal
  *
  * The followings are the available model relations:
  * @property CajaMovimientoVenta $idCajaMovimientoVenta0
  * @property Cliente $idCliente0
+ * @property Sucursal $idSucursal0
  */
 class Recibos extends CActiveRecord
 {
-	public $max;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -46,7 +47,7 @@ class Recibos extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('idCajaMovimientoVenta', 'required'),
-			array('idCliente, tipoRecivo, idCajaMovimientoVenta', 'numerical', 'integerOnly'=>true),
+			array('idCliente, tipoRecivo, idCajaMovimientoVenta, idSucursal', 'numerical', 'integerOnly'=>true),
 			array('monto, acuenta, saldo, descuento', 'numerical'),
 			array('categoria, responsable', 'length', 'max'=>40),
 			array('codigo, celular, codigoNumero, servicio', 'length', 'max'=>20),
@@ -55,7 +56,7 @@ class Recibos extends CActiveRecord
 			array('fechaRegistro', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idRecibos, categoria, codigo, idCliente, responsable, celular, fechaRegistro, concepto, codigoNumero, servicio, monto, acuenta, saldo, obs, tipoRecivo, descuento, idCajaMovimientoVenta', 'safe', 'on'=>'search'),
+			array('idRecibos, categoria, codigo, idCliente, responsable, celular, fechaRegistro, concepto, codigoNumero, servicio, monto, acuenta, saldo, obs, tipoRecivo, descuento, idCajaMovimientoVenta, idSucursal', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,6 +70,7 @@ class Recibos extends CActiveRecord
 		return array(
 			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
 			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
+			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
 		);
 	}
 
@@ -95,6 +97,7 @@ class Recibos extends CActiveRecord
 			'tipoRecivo' => 'Tipo Recivo',
 			'descuento' => 'Descuento',
 			'idCajaMovimientoVenta' => 'Id Caja Movimiento Venta',
+			'idSucursal' => 'Id Sucursal',
 		);
 	}
 
@@ -110,14 +113,13 @@ class Recibos extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	
+    public $max;
+
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-		
-		$criteria->order='fechaRegistro Desc';
 
 		$criteria->compare('idRecibos',$this->idRecibos);
 		$criteria->compare('categoria',$this->categoria,true);
@@ -136,12 +138,10 @@ class Recibos extends CActiveRecord
 		$criteria->compare('tipoRecivo',$this->tipoRecivo);
 		$criteria->compare('descuento',$this->descuento);
 		$criteria->compare('idCajaMovimientoVenta',$this->idCajaMovimientoVenta);
+		$criteria->compare('idSucursal',$this->idSucursal);
 
 		return new CActiveDataProvider($this, array(
-				'criteria'=>$criteria,
-				'pagination'=>array(
-						'pageSize'=>20,
-				),
+			'criteria'=>$criteria,
 		));
 	}
 

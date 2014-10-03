@@ -7,10 +7,12 @@
  * @property integer $idAlmacen
  * @property string $nombre
  * @property integer $idParent
+ * @property integer $idSucursal
  *
  * The followings are the available model relations:
  * @property Almacen $idParent0
  * @property Almacen[] $almacens
+ * @property Sucursal $idSucursal0
  * @property AlmacenProducto[] $almacenProductos
  * @property MovimientoAlmacen[] $movimientoAlmacens
  * @property MovimientoAlmacen[] $movimientoAlmacens1
@@ -33,11 +35,11 @@ class Almacen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idParent', 'numerical', 'integerOnly'=>true),
+			array('idParent, idSucursal', 'numerical', 'integerOnly'=>true),
 			array('nombre', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idAlmacen, nombre, idParent', 'safe', 'on'=>'search'),
+			array('idAlmacen, nombre, idParent, idSucursal', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,6 +53,7 @@ class Almacen extends CActiveRecord
 		return array(
 			'idParent0' => array(self::BELONGS_TO, 'Almacen', 'idParent'),
 			'almacens' => array(self::HAS_MANY, 'Almacen', 'idParent'),
+			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
 			'almacenProductos' => array(self::HAS_MANY, 'AlmacenProducto', 'idAlmacen'),
 			'movimientoAlmacens' => array(self::HAS_MANY, 'MovimientoAlmacen', 'idAlmacenOrigen'),
 			'movimientoAlmacens1' => array(self::HAS_MANY, 'MovimientoAlmacen', 'idAlmacenDestino'),
@@ -66,6 +69,7 @@ class Almacen extends CActiveRecord
 			'idAlmacen' => 'Id Almacen',
 			'nombre' => 'Nombre',
 			'idParent' => 'Id Parent',
+			'idSucursal' => 'Id Sucursal',
 		);
 	}
 
@@ -90,6 +94,7 @@ class Almacen extends CActiveRecord
 		$criteria->compare('idAlmacen',$this->idAlmacen);
 		$criteria->compare('nombre',$this->nombre,true);
 		$criteria->compare('idParent',$this->idParent);
+		$criteria->compare('idSucursal',$this->idSucursal);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

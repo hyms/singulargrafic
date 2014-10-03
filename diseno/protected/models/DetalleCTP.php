@@ -12,6 +12,7 @@
  * @property string $trabajo
  * @property integer $pinza
  * @property double $resolucion
+ * @property double $costo
  * @property double $costoAdicional
  * @property double $costoTotal
  * @property integer $estado
@@ -42,15 +43,14 @@ class DetalleCTP extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			//array('costoAdicional, costoTotal', 'required'),
-			array('formato, nroPlacas, trabajo, pinza', 'required'),
+			//array('costo, costoAdicional, costoTotal', 'required'),
 			array('idCTP, idAlmacenProducto, nroPlacas, pinza, estado, C, M, Y, K', 'numerical', 'integerOnly'=>true),
-			array('resolucion, costoAdicional, costoTotal', 'numerical'),
+			array('resolucion, costo, costoAdicional, costoTotal', 'numerical'),
 			array('formato', 'length', 'max'=>50),
 			array('trabajo', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idDetalleCTP, idCTP, idAlmacenProducto, nroPlacas, formato, trabajo, pinza, resolucion, costoAdicional, costoTotal, estado, C, M, Y, K', 'safe', 'on'=>'search'),
+			array('idDetalleCTP, idCTP, idAlmacenProducto, nroPlacas, formato, trabajo, pinza, resolucion, costo, costoAdicional, costoTotal, estado, C, M, Y, K', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -81,6 +81,7 @@ class DetalleCTP extends CActiveRecord
 			'trabajo' => 'Trabajo',
 			'pinza' => 'Pinza',
 			'resolucion' => 'Resolucion',
+			'costo' => 'Costo',
 			'costoAdicional' => 'Costo Adicional',
 			'costoTotal' => 'Costo Total',
 			'estado' => 'Estado',
@@ -117,6 +118,7 @@ class DetalleCTP extends CActiveRecord
 		$criteria->compare('trabajo',$this->trabajo,true);
 		$criteria->compare('pinza',$this->pinza);
 		$criteria->compare('resolucion',$this->resolucion);
+		$criteria->compare('costo',$this->costo);
 		$criteria->compare('costoAdicional',$this->costoAdicional);
 		$criteria->compare('costoTotal',$this->costoTotal);
 		$criteria->compare('estado',$this->estado);

@@ -12,11 +12,12 @@
  * @property integer $cantidadP
  * @property integer $idUser
  * @property string $fechaMovimiento
+ * @property string $obs
  *
  * The followings are the available model relations:
- * @property Producto $idProducto0
  * @property Almacen $idAlmacenOrigen0
  * @property Almacen $idAlmacenDestino0
+ * @property Producto $idProducto0
  * @property User $idUser0
  */
 class MovimientoAlmacen extends CActiveRecord
@@ -38,10 +39,11 @@ class MovimientoAlmacen extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('idProducto, idAlmacenOrigen, idAlmacenDestino, cantidadU, cantidadP, idUser', 'numerical', 'integerOnly'=>true),
+			array('obs', 'length', 'max'=>100),
 			array('fechaMovimiento', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idMovimientoAlmacen, idProducto, idAlmacenOrigen, idAlmacenDestino, cantidadU, cantidadP, idUser, fechaMovimiento', 'safe', 'on'=>'search'),
+			array('idMovimientoAlmacen, idProducto, idAlmacenOrigen, idAlmacenDestino, cantidadU, cantidadP, idUser, fechaMovimiento, obs', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,10 +55,10 @@ class MovimientoAlmacen extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idProducto0' => array(self::BELONGS_TO, 'Producto', 'idProducto'),
 			'idAlmacenOrigen0' => array(self::BELONGS_TO, 'Almacen', 'idAlmacenOrigen'),
 			'idAlmacenDestino0' => array(self::BELONGS_TO, 'Almacen', 'idAlmacenDestino'),
-			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
+			'idProducto0' => array(self::BELONGS_TO, 'Producto', 'idProducto'),
+			'idUser0' => array(self::BELONGS_TO, 'Users', 'idUser'),
 		);
 	}
 
@@ -74,6 +76,7 @@ class MovimientoAlmacen extends CActiveRecord
 			'cantidadP' => 'Cantidad Paquete',
 			'idUser' => 'Id User',
 			'fechaMovimiento' => 'Fecha Movimiento',
+			'obs' => 'Obs',
 		);
 	}
 
@@ -103,6 +106,7 @@ class MovimientoAlmacen extends CActiveRecord
 		$criteria->compare('cantidadP',$this->cantidadP);
 		$criteria->compare('idUser',$this->idUser);
 		$criteria->compare('fechaMovimiento',$this->fechaMovimiento,true);
+		$criteria->compare('obs',$this->obs,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -1,21 +1,12 @@
 <?php
-	$cs =Yii::app()->clientscript;
-	
-	/*$cs->scriptMap = array(
-			'jquery.js' => Yii::app()->request->baseUrl.'/js/jquery-1.11.0.js',
-			'jquery.yii.js' => Yii::app()->request->baseUrl.'/js/jquery-1.11.0.min.js',
-	);*/
-		// use it when you need it!
-	$cs
-		//->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.css' )
-		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.min.slate.css')
-		->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap-responsive.css' )
+Yii::app()->clientscript
 
-		->registerCoreScript('jquery')
-		//->registerCoreScript('jquery.ui')
-		
-		->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END )
-		;
+    ->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.min.slate.css' )
+    ->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap-responsive.css' )
+
+    ->registerCoreScript( 'jquery' )
+    //->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.js', CClientScript::POS_END )
+    ->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END )
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
