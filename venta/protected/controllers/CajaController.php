@@ -10,12 +10,12 @@ class CajaController extends Controller
 
 	public function accessRules() {
 		return array(
-				array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				/*array('allow', // allow authenticated user to perform 'create' and 'update' actions
 						//'actions'=>array('index'),
 						'expression'=>'isset($user->role) && ($user->role==="3")',
-				),
+				),*/
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'expression'=>'isset($user->role) && ($user->role==="1")',
+						'expression'=>'isset($user->role) && ($user->role<=3)',
 				),
 				array('deny',
 						'users'=>array('*'),

@@ -44,10 +44,9 @@ Yii::app()->clientscript
                             'itemOptions' => array('class'=>'dropdown'),
                             'items'=>array(
                                 array('label'=>'Ventas de Dsitribuidora', 'url'=>array('distribuidora/report')),
-                                array('label'=>'Ordenes CTP', 'url'=>array('#')),
-                                array('label'=>'Imprenta', 'url'=>array('#')),
+                                //array('label'=>'Ordenes CTP', 'url'=>array('#')),
+                                //array('label'=>'Imprenta', 'url'=>array('#')),
                                 array('label'=>'Reporte de Productos', 'url'=>array('report/producto')),
-                                //array('label'=>'Productos por Agotarse', 'url'=>array('report/productoAgotarse')),
                             )),
                         array('label'=>'Personas <b class="caret"></b>', 'url'=>array('#'),
                             'linkOptions'=> array(
@@ -69,7 +68,15 @@ Yii::app()->clientscript
                                 array('label'=>'Productos', 'url'=>array('productos/index')),
                                 array('label'=>'Stocks', 'url'=>array('stock/index')),
                             )),
-                        array('label'=>'Contabilidad', 'url'=>array('contabilidad/index')),
+                        array('label'=>'Contabilidad <b class="caret"></b>', 'url'=>array('#'),
+                            'linkOptions'=> array(
+                                'class' => 'dropdown-toggle',
+                                'data-toggle' => 'dropdown',
+                            ),
+                            'itemOptions' => array('class'=>'dropdown'),
+                            'items'=>array(
+                                array('label'=>'Costos', 'url'=>array('contabilidad/index')),
+                            )),
                         array('label'=>'Configuracion', 'url'=>array('#')),
 						/*array('label'=>'Pagina Web <b class="caret"></b>', 'url'=>array('#'),
 							'linkOptions'=> array(
@@ -81,44 +88,6 @@ Yii::app()->clientscript
 								array('label'=>'Banner', 'url'=>array('webpage/banner')),
 								array('label'=>'Paginas', 'url'=>array('webpage/pages')),
 						)),
-						array('label'=>'Administracion <b class="caret"></b>', 'url'=>array('#'),
-								'linkOptions'=> array(
-								'class' => 'dropdown-toggle',
-								'data-toggle' => 'dropdown',
-							),
-							'itemOptions' => array('class'=>'dropdown'),
-							'items'=>array(
-									array('label'=>'Inventario Gral', 'url'=>array('inventario/index')),
-									array('label'=>'Movimientos Almacenes', 'url'=>array('inventario/movimientos')),
-									array('label'=>'Cajas y Libro Mayor', 'url'=>array('caja/')),
-									array('label'=>'Recibos', 'url'=>array('#')),
-									array('label'=>'Empleados', 'url'=>array('empleado/index')),
-									array('label'=>'Clientes', 'url'=>array('cliente/index')),
-						)),
-							
-						array('label'=>'Distribuidora<b class="caret"></b>', 'url'=>array('#'),
-								'linkOptions'=> array(
-								'class' => 'dropdown-toggle',
-								'data-toggle' => 'dropdown',
-							),
-							'itemOptions' => array('class'=>'dropdown'),
-							'items'=>array(
-									array('label'=>'Inventario', 'url'=>array('stock/distribuidora')),
-						)),
-
-						array('label'=>'Pre-Prensa CTP<b class="caret"></b>', 'url'=>array('#'),
-								'linkOptions'=> array(
-								'class' => 'dropdown-toggle',
-								'data-toggle' => 'dropdown',
-							),
-							'itemOptions' => array('class'=>'dropdown'),
-							'items'=>array(
-									array('label'=>'Inventario', 'url'=>array('stock/ctp')),
-									array('label'=>'Precios', 'url'=>array('ctp/matrizPrecios')),
-									array('label'=>'Clientes', 'url'=>array('cliente/preferencia')),
-						)),
-						//array('label'=>'Imprenta', 'url'=>array('#')),
-						array('label'=>'Reportes', 'url'=>array('report/')),
 						*/
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)

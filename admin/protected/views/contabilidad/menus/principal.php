@@ -6,7 +6,8 @@
         'submenuHtmlOptions' => array('class' => 'dropdown-menu'),
         'encodeLabel' => false,
         'items'=>array(
-            array('label'=>'Costos de CTP', 'url'=>array('contabilidad/matrizPrecios')),
+            array('label'=>'CTP', 'url'=>array('contabilidad/matrizPrecios')),
+            array('label'=>'Distribuidora', 'url'=>array('contabilidad/precios')),
         )));
     ?>
 </div>

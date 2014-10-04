@@ -169,42 +169,14 @@ class Venta extends CActiveRecord
 		$criteria->compare('tipoVenta',$this->tipoVenta);
 		$criteria->compare('idCliente0.apellido',$this->apellido,true);
 		$criteria->compare('idCliente0.nitCi',$this->nit);
-		
-		return new CActiveDataProvider($this, array(
-				'criteria'=>$criteria,
-				
-				//'pagination'=>false,
-		));
+
+        $data=new CActiveDataProvider($this, array(
+            'criteria'=>$criteria,
+        ));
+        Yii::app()->session['excel']=$this;
+		return $data;
 	}
-	public function searchSingular()
-	{
-		$criteria=new CDbCriteria;
-	
-		$criteria->with= array(
-				'idCliente0',
-		);
-		$criteria->order='fechaVenta ASC';
-		$criteria->limit = 50;
-		//$criteria->condition = 'idAlmacen=2';
-	
-		$criteria->compare('idVenta',$this->idVenta);
-		$criteria->compare('fechaVenta',$this->fechaVenta,true);
-		$criteria->compare('idCliente',$this->idCliente);
-		$criteria->compare('codigo',$this->codigo,true);
-		$criteria->compare('montoVenta',$this->montoVenta);
-		$criteria->compare('montoPagado',$this->montoPagado);
-		$criteria->compare('montoCambio',$this->montoCambio);
-		$criteria->compare('montoDescuento',$this->montoDescuento);
-		$criteria->compare('tipoVenta',$this->tipoVenta);
-		$criteria->compare('idCliente0.apellido',$this->apellido,true);
-		$criteria->compare('idCliente0.nitCi',$this->nit);
-	
-		return new CActiveDataProvider($this, array(
-				'criteria'=>$criteria,
-	
-				'pagination'=>false,
-		));
-	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

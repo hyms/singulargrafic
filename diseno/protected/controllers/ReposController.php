@@ -12,10 +12,10 @@ class ReposController extends Controller
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 //'actions'=>array('index'),
-                'expression'=>'isset($user->role) && ($user->role==="4")',
+                'expression'=>'isset($user->role) && ($user->role===4)',
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'expression'=>'isset($user->role) && ($user->role==="1")',
+                'expression'=>'isset($user->role) && ($user->role<=2)',
             ),
             array('deny',
                 'users'=>array('*'),
@@ -105,7 +105,6 @@ class ReposController extends Controller
                     //print_r($detalle);
                     $this->redirect(array('orden/rep'));
                 }
-
             }
             $this->render('index',array('render'=>'repos','ctp'=>$ctp,'repos'=>$repos,'detalle'=>$detalle,'otro'=>$otro));
         }

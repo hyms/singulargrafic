@@ -98,6 +98,11 @@ class ContabilidadController extends Controller
         $this->render('forms/matriz',array('model'=>$model,'placas'=>$placas,'tiposClientes'=>$tiposClientes,'cantidades'=>$cantidades,'horarios'=>$horarios));
     }
 
+    public function actionPrecios()
+    {
+        $this->render('index',array('render'=>''));
+    }
+
     public function actionHorario()
     {
         $model=new Horario;
@@ -169,13 +174,13 @@ class ContabilidadController extends Controller
                 }
                 if($i==0){
                     if($model->delete())
-                        $this->redirect(array('ctp/matrizPrecios'));
+                        $this->redirect(array('contabilidad/matrizPrecios'));
                 }
             }
             else
             {
                 if($model->delete())
-                    $this->redirect(array('ctp/matrizPrecios'));
+                    $this->redirect(array('contabilidad/matrizPrecios'));
             }
         }
     }

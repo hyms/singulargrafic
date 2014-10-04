@@ -14,7 +14,7 @@ class SiteController extends Controller
 						'users'=>array('*')
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'expression'=>'isset($user->role) && ($user->role==="1")',
+						'expression'=>'isset($user->role) && ($user->role<=2)',
 				),
 				array('deny',
 						'users'=>array('*'),
