@@ -1193,12 +1193,12 @@ class DistribuidoraController extends Controller
 		return $model;
 	}
 	
-	protected function getRemoveLinkAndIndexInput($index)
+	/*protected function getRemoveLinkAndIndexInput($index)
 	{
 		$removeLink=CHtml::link('Quitar', '#', array('class'=>'btn btn-danger tabular-input-remove')).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />';
 		$removeLink=strtr("<td>{link}</td>", array('{link}'=>$removeLink));
 		return $removeLink;
-	}
+	}*/
 	
 	protected function getUltimoDiaMes($elAnio,$elMes) {
 		return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));

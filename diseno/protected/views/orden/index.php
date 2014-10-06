@@ -18,7 +18,7 @@
        case "buscar":
            $this->renderPartial('tables/buscar',array('ordenes'=>$ordenes));
            break;
-       case "rep":
+      /* case "rep":
            $this->renderPartial('tables/rep',array('ordenes'=>$ordenes));
            break;
        case "buscarR":
@@ -29,7 +29,7 @@
            $this->renderPartial('scripts/save');
            $this->renderPartial('scripts/reset');
            $this->renderPartial('scripts/operaciones');
-           break;
+           break;*/
        case "modificarC":
            $this->renderPartial('cliente',array('cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos));
            $this->renderPartial('scripts/save');
@@ -40,11 +40,11 @@
            $this->renderPartial('scripts/save');
            $this->renderPartial('scripts/reset');
            break;
-       case "modificarR":
+       /*case "modificarR":
            $this->renderPartial('cliente',array('cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos));
            $this->renderPartial('scripts/save');
            $this->renderPartial('scripts/reset');
-           break;
+           break;*/
        default:
            echo "";
            break;

@@ -26,7 +26,7 @@
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("Añadir","#",array("onclick"=>\'newRow("\'.$data->idAlmacenProducto.\'");\',"class"=>"btn btn-success btn-sm"))',
+					'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-ok\"></span> Añadir","#",array("onclick"=>\'newRow("\'.$data->idAlmacenProducto.\'");\',"class"=>"btn btn-success btn-sm"))',
 			),
 		),
 		
@@ -36,7 +36,6 @@
 
 function newRow(almacen)
 {
-	
 	var input = $(\"#yw3 tbody\");
 	var index = 0;
 	//var factura = $('#Ctp_tipoVenta_0').attr('checked')?0:1;
@@ -49,8 +48,8 @@ function newRow(almacen)
 	}		
 	$.ajax({
 		type: 'GET',
-		url: '".(($index=='cliente')?CHtml::normalizeUrl(array('/orden/addDetalle')):CHtml::normalizeUrl(array('/orden/addDetalleI')))."',
-		data: 'index='+index+'&al='+almacen+'&factura='+factura,
+		url: '".CHtml::normalizeUrl(array('/orden/addDetalle'))."',
+		data: 'index='+index+'&al='+almacen+'&costo=".$index."',
 		dataType: 'html',
 		success: function(html){
 			input.append(html);

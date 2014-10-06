@@ -10,22 +10,23 @@ Yii::app()->getClientScript()->registerScript("ajax_cliente",
 	            type: 'GET', 
 	            data: { nitCi: nitCi},
 	            success: function (data){ 
-				 			data = JSON.parse(data);
-							data[\"cliente\"] = JSON.parse(data[\"cliente\"]);
-							if(data[\"deuda\"]==true)
-							{	alert(\"El Cliente \"+data[\"cliente\"][\"apellido\"]+\" tiene una deuda\");	}
-	            			if(data[\"cliente\"][\"apellido\"]!=\"\")
-							{
-								$('#apellido').prop('readonly', true);
-							}
-							else
-							{
-								$('#apellido').prop('readonly', false);
-							}			
-							$('#apellido').val(data[\"cliente\"][\"apellido\"]); 
-	            			$('#clienteNit').val(data[\"cliente\"][\"nitCi\"]);
+				    data = JSON.parse(data);
+					data[\"cliente\"] = JSON.parse(data[\"cliente\"]);
+					if(data[\"deuda\"]==true)
+					{
+					    alert(\"El Cliente \"+data[\"cliente\"][\"apellido\"]+\" tiene una deuda\");	}
+	            		if(data[\"cliente\"][\"apellido\"]!=\"\")
+						{
+							$('#apellido').prop('readonly', true);
+						}
+						else
+						{
+							$('#apellido').prop('readonly', false);
+						}
+						$('#apellido').val(data[\"cliente\"][\"apellido\"]);
+	            		$('#clienteNit').val(data[\"cliente\"][\"nitCi\"]);
 							
-						 },
+					},
 				error:	
 					$('#apellido').prop('readonly', false),
 	        });
@@ -65,5 +66,4 @@ Yii::app()->getClientScript()->registerScript("ajax_cliente",
 	    } 
            
     });
- ",CClientScript::POS_READY); 
-?>
+ ",CClientScript::POS_READY);

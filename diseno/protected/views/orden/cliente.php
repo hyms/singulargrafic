@@ -3,7 +3,7 @@
 		<strong class="panel-title">Placas</strong>
 	</div>
 	<div class="panel-body" style="overflow: auto;">
-	<?php $this->renderPartial('producto',array('productos'=>$productos,'index'=>'cliente'));?>
+	<?php $this->renderPartial('tables/producto',array('productos'=>$productos,'index'=>'cliente'));?>
  	</div>
 </div>
 
@@ -32,7 +32,7 @@
 		<strong class="panel-title">Datos de Cliente</strong>
 	</div>
 	<div class="panel-body" style="overflow: auto;">
-		<?php $this->renderPartial('orden/cliente',array('cliente'=>$cliente,'ctp'=>$ctp));?>
+		<?php $this->renderPartial('forms/orden/cliente',array('cliente'=>$cliente,'ctp'=>$ctp));?>
  	</div>
 </div>
 
@@ -42,14 +42,14 @@
 		<strong class="panel-title">Datos de Orden</strong>
 	</div>
 	<div class="panel-body" style="overflow: auto;">
-	<?php $this->renderPartial('orden/detalleOrden',array('detalle'=>$detalle,'ctp'=>$ctp));?>
+	<?php $this->renderPartial('forms/orden/detalleOrden',array('detalle'=>$detalle,'ctp'=>$ctp));?>
  	</div>
 </div>
 
-	<div class="form-group">
-		<div class="text-center">
-            <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-remove"></span> Cancelar', "#", array('class' => 'btn btn-default hidden-print','id'=>'reset')); ?>
-            <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar', "#", array('class' => 'btn btn-default hidden-print','id'=>'save')); ?>
-        </div>
-	</div>
+<div class="form-group">
+    <div class="text-center">
+        <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-remove"></span> Cancelar', "#", array('class' => 'btn btn-default hidden-print','id'=>'reset')); ?>
+        <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar', "#", array('class' => 'btn btn-default hidden-print','id'=>'save')); ?>
+    </div>
+</div>
 <?php $this->endWidget(); ?>

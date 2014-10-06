@@ -43,7 +43,7 @@ class DetalleCTP extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			//array('costo, costoAdicional, costoTotal', 'required'),
+			array('nroPlacas, trabajo, pinza, resolucion', 'required'),
 			array('idCTP, idAlmacenProducto, nroPlacas, pinza, estado, C, M, Y, K', 'numerical', 'integerOnly'=>true),
 			array('resolucion, costo, costoAdicional, costoTotal', 'numerical'),
 			array('formato', 'length', 'max'=>50),

@@ -27,10 +27,9 @@ if(count($detalle)>=1)
 		{
 			if($item->idAlmacenProducto!=null)
 			{
-				$this->renderPartial('./ointerna/_newRowDetalleVenta', array(
+				$this->renderPartial('forms/_newRowDetalleVenta', array(
 						'model'=>$item,
 						'index'=>$i,
-						'costo'=>0,
 						'almacen'=>AlmacenProducto::model()
 									->with("idProducto0")
 									->findByPk($item->idAlmacenProducto),
