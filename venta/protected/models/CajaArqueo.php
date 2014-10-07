@@ -10,7 +10,7 @@
  * @property double $monto
  * @property string $fechaArqueo
  * @property string $fechaVentas
- * @property string $comprobante
+ * @property integer $comprobante
  * @property double $saldo
  * @property integer $idCajaMovimientoVenta
  *
@@ -28,8 +28,7 @@ class CajaArqueo extends CActiveRecord
 	{
 		return 'cajaArqueo';
 	}
-	
-	public $max; 
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -39,9 +38,8 @@ class CajaArqueo extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			//array('monto, saldo', 'required'),
-			array('idCaja, idUser, idCajaMovimientoVenta', 'numerical', 'integerOnly'=>true),
+			array('idCaja, idUser, comprobante, idCajaMovimientoVenta', 'numerical', 'integerOnly'=>true),
 			array('monto, saldo', 'numerical'),
-			array('comprobante', 'length', 'max'=>20),
 			array('fechaArqueo, fechaVentas', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -59,8 +57,8 @@ class CajaArqueo extends CActiveRecord
 		return array(
 			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
 			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
-			'idUser0' => array(self::BELONGS_TO, 'Users', 'idUser'),
-			'cajaMovimientoVenta' => array(self::HAS_ONE, 'CajaMovimientoVenta', 'arqueo'),
+            'idUser0' => array(self::BELONGS_TO, 'Users', 'idUser'),
+            'cajaMovimientoVenta' => array(self::HAS_ONE, 'CajaMovimientoVenta', 'arqueo'),
 		);
 	}
 
@@ -106,7 +104,7 @@ class CajaArqueo extends CActiveRecord
 		$criteria->compare('monto',$this->monto);
 		$criteria->compare('fechaArqueo',$this->fechaArqueo,true);
 		$criteria->compare('fechaVentas',$this->fechaVentas,true);
-		$criteria->compare('comprobante',$this->comprobante,true);
+		$criteria->compare('comprobante',$this->comprobante);
 		$criteria->compare('saldo',$this->saldo);
 		$criteria->compare('idCajaMovimientoVenta',$this->idCajaMovimientoVenta);
 
@@ -115,6 +113,7 @@ class CajaArqueo extends CActiveRecord
 		));
 	}
 
+    public $max;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

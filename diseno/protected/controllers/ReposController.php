@@ -2,6 +2,22 @@
 
 class ReposController extends Controller
 {
+    protected $sucursal;
+    protected $almacen;
+
+    public function init()
+    {
+        $this->sucursal =  Yii::app()->user->getState('idSucursal');
+        if(!empty($this->sucursal))
+        {
+            $this->almacen = Almacen::model()->find('idSucursal='.$this->sucursal.' and nombre like "CTP%"');
+            if(!empty($this->almacen))
+                $this->almacen = $this->almacen->idAlmacen;
+            else
+                throw new CHttpException(500,'Page not found.');
+        }
+        parent::init();
+    }
 
     public function filters()
     {
@@ -116,14 +132,14 @@ class ReposController extends Controller
     {
         $ordenes=new CActiveDataProvider('CTP',array(
             'criteria'=>array(
-                'condition'=>'estado=1 and tipoCTP=3',
-                'with'=>array('idCliente0'),
-                'order'=>'fechaOrden Desc',
+                'condition'=>'`t`.estado=1 and `t`.tipoCTP=3',
+                'with'=>array('idCliente0','idCTPParent0','idCTPParent0.idCliente0'),
+                'order'=>'`t`.fechaOrden Desc',
             ),
             'pagination'=>array(
                 'pageSize'=>'20',
             ),));
-        $this->render('index',array('render'=>'buscarR','ordenes'=>$ordenes));
+        $this->render('index',array('render'=>'buscar','ordenes'=>$ordenes));
     }
 
     public function actionModificarR()

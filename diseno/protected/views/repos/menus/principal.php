@@ -6,8 +6,8 @@ $this->widget('zii.widgets.CMenu',array(
 				'submenuHtmlOptions' => array('class' => 'dropdown-menu'),
 				'encodeLabel' => false,
 				'items'=>array(
-							array('label'=>'Repeticion', 'url'=>array('orden/rep')),
-							array('label'=>'Buscar Repeticion', 'url'=>array('orden/buscarR')),
+							array('label'=>'Repeticion', 'url'=>array('repos/rep')),
+							array('label'=>'Buscar Repeticion', 'url'=>array('repos/buscar')),
 							
 				)));
 ?>

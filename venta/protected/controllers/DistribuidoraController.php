@@ -471,7 +471,8 @@ class DistribuidoraController extends Controller
 	{
 		$deudores = new CActiveDataProvider('Venta',
 										array('criteria'=>array(
-											'condition'=>'montoVenta>montoPagado',
+											//'condition'=>'montoVenta>montoPagado',
+                                            'condition'=>'estado=2',
 											'with'=>array('idCliente0'),
 											'order'=>'fechaPlazo ASC',
 										),

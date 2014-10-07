@@ -8,11 +8,14 @@
  * @property string $nombre
  * @property double $saldo
  * @property integer $idParent
+ * @property integer $idSucursal
  *
  * The followings are the available model relations:
  * @property Caja $idParent0
  * @property Caja[] $cajas
+ * @property Sucursal $idSucursal0
  * @property CajaArqueo[] $cajaArqueos
+ * @property CajaChica[] $cajaChicas
  * @property CajaMovimientoVenta[] $cajaMovimientoVentas
  */
 class Caja extends CActiveRecord
@@ -34,12 +37,12 @@ class Caja extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('nombre, saldo', 'required'),
-			array('idParent', 'numerical', 'integerOnly'=>true),
+			array('idParent, idSucursal', 'numerical', 'integerOnly'=>true),
 			array('saldo', 'numerical'),
 			array('nombre', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCaja, nombre, saldo, idParent', 'safe', 'on'=>'search'),
+			array('idCaja, nombre, saldo, idParent, idSucursal', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,7 +56,9 @@ class Caja extends CActiveRecord
 		return array(
 			'idParent0' => array(self::BELONGS_TO, 'Caja', 'idParent'),
 			'cajas' => array(self::HAS_MANY, 'Caja', 'idParent'),
+			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
 			'cajaArqueos' => array(self::HAS_MANY, 'CajaArqueo', 'idCaja'),
+			'cajaChicas' => array(self::HAS_MANY, 'CajaChica', 'idCaja'),
 			'cajaMovimientoVentas' => array(self::HAS_MANY, 'CajaMovimientoVenta', 'idCaja'),
 		);
 	}
@@ -68,6 +73,7 @@ class Caja extends CActiveRecord
 			'nombre' => 'Nombre',
 			'saldo' => 'Saldo',
 			'idParent' => 'Id Parent',
+			'idSucursal' => 'Id Sucursal',
 		);
 	}
 
@@ -93,6 +99,7 @@ class Caja extends CActiveRecord
 		$criteria->compare('nombre',$this->nombre,true);
 		$criteria->compare('saldo',$this->saldo);
 		$criteria->compare('idParent',$this->idParent);
+		$criteria->compare('idSucursal',$this->idSucursal);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

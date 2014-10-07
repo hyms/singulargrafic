@@ -19,8 +19,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			),
 			array(
 					'header'=>'Cliente',
-					'value'=>'$data->idCliente0->apellido',
+					'value'=>'$data->idCTPParent0->idCliente0->apelido',
 			),
+            array(
+                'header'=>'Cod. de Orden',
+                'value'=>'$data->idCTPParent0->codigo',
+            ),
             array(
 					'header'=>'Fecha',
 					'value'=>'$data->fechaOrden',
@@ -28,7 +32,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			array(
 					'header'=>'',
 					'type'=>'raw',
-					'value'=>'CHtml::link("Modificar",array("orden/modificar","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm"))',
+					'value'=>'CHtml::link("Modificar",array("orden/modificarR","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm"))',
 			),
 		)
 	));

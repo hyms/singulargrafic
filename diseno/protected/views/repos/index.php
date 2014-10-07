@@ -8,7 +8,7 @@
        case "rep":
            $this->renderPartial('tables/rep',array('ordenes'=>$ordenes));
            break;
-       case "buscarR":
+       case "buscar":
            $this->renderPartial('tables/buscar',array('ordenes'=>$ordenes));
            break;
        case "repos":

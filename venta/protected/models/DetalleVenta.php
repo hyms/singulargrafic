@@ -15,15 +15,15 @@
  * @property integer $idAlmacenProducto
  *
  * The followings are the available model relations:
- * @property Venta $idVenta0
  * @property AlmacenProducto $idAlmacenProducto0
+ * @property Venta $idVenta0
  */
 class DetalleVenta extends CActiveRecord
 {
-	public $cantidad;
 	/**
 	 * @return string the associated database table name
 	 */
+
 	public function tableName()
 	{
 		return 'detalleVenta';
@@ -37,6 +37,7 @@ class DetalleVenta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			//array('cantidadU, costoU, cantidadP, costoP', 'required'),
 			array('idVenta, cantidadU, cantidadP, idAlmacenProducto', 'numerical', 'integerOnly'=>true),
 			array('costoU, costoP, costoAdicional, costoTotal', 'numerical'),
 			// The following rule is used by search().
@@ -53,8 +54,8 @@ class DetalleVenta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idVenta0' => array(self::BELONGS_TO, 'Venta', 'idVenta'),
 			'idAlmacenProducto0' => array(self::BELONGS_TO, 'AlmacenProducto', 'idAlmacenProducto'),
+			'idVenta0' => array(self::BELONGS_TO, 'Venta', 'idVenta'),
 		);
 	}
 
@@ -108,44 +109,45 @@ class DetalleVenta extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
-	public $apellido;
-	public $codigo;
-	public $fecha;
-	public $material;
-	public $detalle;
-	public $codigoProducto;
-	public $color;
-	public function searchVenta()
-	{
-		$criteria=new CDbCriteria;
-		
-		$criteria->order='fechaVenta DESC';
-		
-		$criteria->with= array(
-				'idVenta0',
-				'idVenta0.idCliente0',
-				'idAlmacenProducto0',
-				'idAlmacenProducto0.idProducto0',
-		);
-		
-		$criteria->compare('idVenta0.codigo',$this->codigo);
-		$criteria->compare('idVenta0.fechaVenta',$this->fecha,true);
-		$criteria->compare('idCliente0.apellido',$this->apellido,true);
-		$criteria->compare('idProducto0.codigo',$this->codigoProducto,true);
-		$criteria->compare('idProducto0.color',$this->color);
-		$criteria->compare('idProducto0.material',$this->material);
-		$criteria->compare('idProducto0.detalle',$this->detalle,true);
+
+    public $cantidad;
+    public $apellido;
+    public $codigo;
+    public $fecha;
+    public $material;
+    public $detalle;
+    public $codigoProducto;
+    public $color;
+    public function searchVenta()
+    {
+        $criteria=new CDbCriteria;
+
+        $criteria->order='fechaVenta DESC';
+
+        $criteria->with= array(
+            'idVenta0',
+            'idVenta0.idCliente0',
+            'idAlmacenProducto0',
+            'idAlmacenProducto0.idProducto0',
+        );
+
+        $criteria->compare('idVenta0.codigo',$this->codigo);
+        $criteria->compare('idVenta0.fechaVenta',$this->fecha,true);
+        $criteria->compare('idCliente0.apellido',$this->apellido,true);
+        $criteria->compare('idProducto0.codigo',$this->codigoProducto,true);
+        $criteria->compare('idProducto0.color',$this->color);
+        $criteria->compare('idProducto0.material',$this->material);
+        $criteria->compare('idProducto0.detalle',$this->detalle,true);
 
         $data = new CActiveDataProvider($this, array(
-				'criteria'=>$criteria,
-				'pagination'=>array(
-						'pageSize'=>'10',
-				),
-		));
+            'criteria'=>$criteria,
+            'pagination'=>array(
+                'pageSize'=>'10',
+            ),
+        ));
         Yii::app()->session['excel'] = $this;
         return $data;
-	}
+    }
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

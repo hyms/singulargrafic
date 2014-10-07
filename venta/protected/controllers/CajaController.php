@@ -331,7 +331,7 @@ class CajaController extends Controller
 			}
 			elseif($_GET['serv']=="ot")
 			{
-				$ctp = $this->verifyModel(CTP::model()	->with('idCliente0')
+                $venta = $this->verifyModel(CTP::model()	->with('idCliente0')
 														->with('idCajaMovimientoVenta0')
 														->with("detalleCTPs")
 														->with("detalleCTPs.idAlmacenProducto0")
@@ -340,11 +340,11 @@ class CajaController extends Controller
 				$recibo->categoria = "Orden de Trabajo";
 				$i=0;
 				$recibo->concepto="";
-				foreach ($ctp->detalleCTPs as $producto)
+				foreach ($venta->detalleCTPs as $producto)
 				{
 					if($i>0)
-					{$recibo->concepto=$recibo->concepto.", ";}
-					$recibo->concepto=$recibo->concepto.$producto->formato."/".$ctp->nroPlacas."-".$producto->trabajo;
+					{   $recibo->concepto=$recibo->concepto.", ";   }
+					$recibo->concepto=$recibo->concepto.$producto->formato."/".$venta->nroPlacas."-".$venta->trabajo;
 					$i++;
 				}
 			} 
@@ -356,7 +356,7 @@ class CajaController extends Controller
 			$recibo->fechaRegistro = date("Y-m-d h:m:s");
 			$recibo->codigo = "I-".($row['max']+1);
 			$recibo->tipoRecivo = 1;
-			$recibo->idCajaMovimientoVenta = $caja->idCajaMovimientoVenta;
+
 			$recibo->saldo = $venta->montoVenta - $venta->montoPagado;
 			$recibo->idCliente = $cliente->idCliente;
 			
@@ -366,22 +366,31 @@ class CajaController extends Controller
 				$cliente->attributes = $_POST['Cliente'];
 				if($recibo->validate())
 				{
-					$caja->monto = $recibo->saldo;
-					if($recibo->categoria == "Nota de Venta")
-					{
-						$cajaVenta = Caja::model()->findByPk(2);
-						$cajaVenta->saldo = $cajaVenta->saldo + $caja->monto;
-						$cajaVenta->save();
-					}
-					if($recibo->categoria == "Orden de Trabajo")
-					{
-						$cajaVenta = Caja::model()->findByPk(3);
-						$cajaVenta->saldo = $cajaVenta->saldo + $caja->monto;
-						$cajaVenta->save();
-					}
-					if($recibo->save()) 
-						if($caja->save())
-							$this->redirect(array('preview','id'=>$recibo->idRecibos));
+                    $cajaMovimiento = new CajaMovimientoVenta;
+                    //Yii::app()->user->id;
+                    $cajaMovimiento->idUser = Yii::app()->user->id;
+                    $cajaMovimiento->motivo = "Nota de Venta";
+                    $cajaMovimiento->idCaja = $caja->idCaja;
+                    $cajaMovimiento->arqueo = 0;
+                    $cajaMovimiento->tipo = 0;
+                    $cajaMovimiento->monto = $recibo->monto;
+                    $cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
+                    $cajaMovimiento->arqueo = 0;
+
+                    $cajaVenta = Caja::model()->findByPk($caja->idCaja);
+					$cajaVenta->saldo = $cajaVenta->saldo + $caja->monto;
+                    $cajaVenta->save();
+
+                    if($cajaMovimiento->save())
+                    {
+                        $recibo->idCajaMovimientoVenta = $caja->idCajaMovimientoVenta;
+					    if($recibo->save())
+                        {
+                            $venta->estado = 1;
+                            $venta->save();
+                            $this->redirect(array('preview','id'=>$recibo->idRecibos));
+                        }
+                    }
 				}
 		
 			}

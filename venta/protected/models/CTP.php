@@ -30,10 +30,12 @@
  * @property integer $tipoCTP
  * @property string $fechaEntega
  * @property string $obsCaja
+ * @property integer $idSucursal
  *
  * The followings are the available model relations:
  * @property CTP $idCTPParent0
  * @property CTP[] $cTPs
+ * @property Sucursal $idSucursal0
  * @property User $idUserOT0
  * @property User $idUserVenta0
  * @property CajaMovimientoVenta $idCajaMovimientoVenta0
@@ -43,7 +45,6 @@
  */
 class CTP extends CActiveRecord
 {
-	public $max;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -60,8 +61,8 @@ class CTP extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			//array('montoVenta, montoPagado, montoCambio, montoDescuento, estado', 'required'),
-			array('tipoOrden, formaPago, idCliente, serie, numero, estado, idCajaMovimientoVenta, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP', 'numerical', 'integerOnly'=>true),
+			array('montoVenta, montoPagado, montoCambio, montoDescuento, estado', 'required'),
+			array('tipoOrden, formaPago, idCliente, serie, numero, estado, idCajaMovimientoVenta, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP, idSucursal', 'numerical', 'integerOnly'=>true),
 			array('montoVenta, montoPagado, montoCambio, montoDescuento', 'numerical'),
 			array('codigo', 'length', 'max'=>45),
 			array('factura, autorizado, responsable', 'length', 'max'=>50),
@@ -70,7 +71,7 @@ class CTP extends CActiveRecord
 			array('fechaOrden, fechaPlazo, fechaEntega', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idCTP, fechaOrden, tipoOrden, formaPago, idCliente, fechaPlazo, codigo, serie, numero, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP, fechaEntega, obsCaja', 'safe', 'on'=>'search'),
+			array('idCTP, fechaOrden, tipoOrden, formaPago, idCliente, fechaPlazo, codigo, serie, numero, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP, fechaEntega, obsCaja, idSucursal', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -84,8 +85,9 @@ class CTP extends CActiveRecord
 		return array(
 			'idCTPParent0' => array(self::BELONGS_TO, 'CTP', 'idCTPParent'),
 			'cTPs' => array(self::HAS_MANY, 'CTP', 'idCTPParent'),
-			'idUserOT0' => array(self::BELONGS_TO, 'Users', 'idUserOT'),
-			'idUserVenta0' => array(self::BELONGS_TO, 'Users', 'idUserVenta'),
+			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
+			'idUserOT0' => array(self::BELONGS_TO, 'User', 'idUserOT'),
+			'idUserVenta0' => array(self::BELONGS_TO, 'User', 'idUserVenta'),
 			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
 			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
 			'detalleCTPs' => array(self::HAS_MANY, 'DetalleCTP', 'idCTP'),
@@ -108,9 +110,9 @@ class CTP extends CActiveRecord
 			'codigo' => 'Codigo',
 			'serie' => 'Serie',
 			'numero' => 'Numero',
-			'montoVenta' => 'Total',
-			'montoPagado' => 'Cancelado',
-			'montoCambio' => 'Saldo',
+			'montoVenta' => 'Monto Venta',
+			'montoPagado' => 'Monto Pagado',
+			'montoCambio' => 'Monto Cambio',
 			'montoDescuento' => 'Monto Descuento',
 			'estado' => 'Estado',
 			'factura' => 'Factura',
@@ -125,6 +127,7 @@ class CTP extends CActiveRecord
 			'tipoCTP' => 'Tipo Ctp',
 			'fechaEntega' => 'Fecha Entega',
 			'obsCaja' => 'Obs Caja',
+			'idSucursal' => 'Id Sucursal',
 		);
 	}
 
@@ -172,40 +175,42 @@ class CTP extends CActiveRecord
 		$criteria->compare('tipoCTP',$this->tipoCTP);
 		$criteria->compare('fechaEntega',$this->fechaEntega,true);
 		$criteria->compare('obsCaja',$this->obsCaja,true);
+		$criteria->compare('idSucursal',$this->idSucursal);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
-	
-	public $apellido;
-	public $nit; 
-	public function searchCTP()
-	{
-		$criteria=new CDbCriteria;
-	
-		$criteria->with= array(
-				'idCliente0',
-		);
-		$criteria->order='fechaOrden DESC';
-		//$criteria->condition = 'idAlmacen=2';
-	
-		$criteria->compare('idCTP',$this->idCTP);
-		$criteria->compare('fechaOrden',$this->fechaOrden,true);
-		$criteria->compare('idCliente',$this->idCliente);
-		$criteria->compare('codigo',$this->codigo,true);
-		$criteria->compare('montoVenta',$this->montoVenta);
-		$criteria->compare('montoPagado',$this->montoPagado);
-		$criteria->compare('montoCambio',$this->montoCambio);
-		$criteria->compare('montoDescuento',$this->montoDescuento);
-		$criteria->compare('tipoOrden',$this->tipoOrden);
-		$criteria->compare('idCliente0.apellido',$this->apellido,true);
-		$criteria->compare('idCliente0.nitCi',$this->nit);
-	
-		return new CActiveDataProvider($this, array(
-				'criteria'=>$criteria,
-		));
-	}
+
+    public $apellido;
+    public $nit;
+    public function searchCTP()
+    {
+        $criteria=new CDbCriteria;
+
+        $criteria->with= array(
+            'idCliente0',
+        );
+        $criteria->order='fechaOrden DESC';
+        //$criteria->condition = 'idAlmacen=2';
+
+        $criteria->compare('idCTP',$this->idCTP);
+        $criteria->compare('fechaOrden',$this->fechaOrden,true);
+        $criteria->compare('idCliente',$this->idCliente);
+        $criteria->compare('codigo',$this->codigo,true);
+        $criteria->compare('montoVenta',$this->montoVenta);
+        $criteria->compare('montoPagado',$this->montoPagado);
+        $criteria->compare('montoCambio',$this->montoCambio);
+        $criteria->compare('montoDescuento',$this->montoDescuento);
+        $criteria->compare('tipoOrden',$this->tipoOrden);
+        $criteria->compare('idCliente0.apellido',$this->apellido,true);
+        $criteria->compare('idCliente0.nitCi',$this->nit);
+
+        return new CActiveDataProvider($this, array(
+            'criteria'=>$criteria,
+        ));
+    }
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

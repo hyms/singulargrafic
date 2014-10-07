@@ -11,8 +11,10 @@
  * @property string $email
  * @property string $telefono
  * @property string $ci
+ * @property integer $idSucursal
  *
  * The followings are the available model relations:
+ * @property Sucursal $idSucursal0
  * @property User[] $users
  */
 class Empleado extends CActiveRecord
@@ -33,13 +35,14 @@ class Empleado extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('idSucursal', 'numerical', 'integerOnly'=>true),
 			array('nombre, apellido', 'length', 'max'=>40),
 			array('email', 'length', 'max'=>50),
 			array('telefono, ci', 'length', 'max'=>20),
 			array('fechaRegistro', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idEmpleado, nombre, apellido, fechaRegistro, email, telefono, ci', 'safe', 'on'=>'search'),
+			array('idEmpleado, nombre, apellido, fechaRegistro, email, telefono, ci, idSucursal', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,6 +54,7 @@ class Empleado extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
 			'users' => array(self::HAS_MANY, 'User', 'idEmpleado'),
 		);
 	}
@@ -68,6 +72,7 @@ class Empleado extends CActiveRecord
 			'email' => 'Email',
 			'telefono' => 'Telefono',
 			'ci' => 'Ci',
+			'idSucursal' => 'Id Sucursal',
 		);
 	}
 
@@ -96,6 +101,7 @@ class Empleado extends CActiveRecord
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('telefono',$this->telefono,true);
 		$criteria->compare('ci',$this->ci,true);
+		$criteria->compare('idSucursal',$this->idSucursal);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

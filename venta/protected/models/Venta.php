@@ -23,11 +23,13 @@
  * @property string $responsable
  * @property string $obs
  * @property integer $idCajaMovimientoVenta
+ * @property integer $idSucursal
  *
  * The followings are the available model relations:
  * @property DetalleVenta[] $detalleVentas
  * @property CajaMovimientoVenta $idCajaMovimientoVenta0
  * @property Cliente $idCliente0
+ * @property Sucursal $idSucursal0
  */
 class Venta extends CActiveRecord
 {
@@ -48,7 +50,7 @@ class Venta extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('numero', 'required'),
-			array('tipoVenta, formaPago, idCliente, numero, serie, estado, idCajaMovimientoVenta', 'numerical', 'integerOnly'=>true),
+			array('tipoVenta, formaPago, idCliente, numero, serie, estado, idCajaMovimientoVenta, idSucursal', 'numerical', 'integerOnly'=>true),
 			array('montoVenta, montoPagado, montoCambio, montoDescuento', 'numerical'),
 			array('codigo', 'length', 'max'=>45),
 			array('factura, autorizado, responsable', 'length', 'max'=>50),
@@ -56,7 +58,7 @@ class Venta extends CActiveRecord
 			array('fechaVenta, fechaPlazo', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idVenta, fechaVenta, tipoVenta, formaPago, idCliente, fechaPlazo, codigo, numero, serie, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta', 'safe', 'on'=>'search'),
+			array('idVenta, fechaVenta, tipoVenta, formaPago, idCliente, fechaPlazo, codigo, numero, serie, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, idSucursal', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,6 +73,7 @@ class Venta extends CActiveRecord
 			'detalleVentas' => array(self::HAS_MANY, 'DetalleVenta', 'idVenta'),
 			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
 			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
+			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
 		);
 	}
 
@@ -90,8 +93,8 @@ class Venta extends CActiveRecord
 			'numero' => 'Numero',
 			'serie' => 'Serie',
 			'montoVenta' => 'Total',
-			'montoPagado' => 'Cancelado',
-			'montoCambio' => 'Saldo',
+			'montoPagado' => 'Pagado',
+			'montoCambio' => 'Cambio',
 			'montoDescuento' => 'Monto Descuento',
 			'estado' => 'Estado',
 			'factura' => 'Factura',
@@ -99,6 +102,7 @@ class Venta extends CActiveRecord
 			'responsable' => 'Responsable',
 			'obs' => 'Obs',
 			'idCajaMovimientoVenta' => 'Id Caja Movimiento Venta',
+			'idSucursal' => 'Id Sucursal',
 		);
 	}
 
@@ -139,120 +143,125 @@ class Venta extends CActiveRecord
 		$criteria->compare('responsable',$this->responsable,true);
 		$criteria->compare('obs',$this->obs,true);
 		$criteria->compare('idCajaMovimientoVenta',$this->idCajaMovimientoVenta);
+		$criteria->compare('idSucursal',$this->idSucursal);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
-	
-	public $cantidad;
-	public $nit;
-	public $apellido;
-	public $codigos;
-	public function searchVenta()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-	
-		$criteria=new CDbCriteria;
-		$criteria->with=array('idCliente0');
-		$d=date("d")-1; $m=date("m");
-		if($d==0)
-		{
-			$m--;
-			$d=$this->getUltimoDiaMes(date("Y"), $m);
-		}
-		$start=date("Y")."-".$m."-".$d." 00:00:00";
-		
-		$criteria->condition="(estado=1 or estado=2) and fechaVenta>='".$start."'";
-		$criteria->order = "fechaVenta DESC";
-		
-		$criteria->compare('idVenta',$this->idVenta);
-		$criteria->compare('fechaVenta',$this->fechaVenta,true);
-		$criteria->compare('tipoVenta',$this->tipoVenta);
-		$criteria->compare('formaPago',$this->formaPago,true);
-		$criteria->compare('idCliente',$this->idCliente);
-		$criteria->compare('fechaPlazo',$this->fechaPlazo,true);
-		$criteria->compare('codigo',$this->codigo,true);
-		$criteria->compare('serie',$this->serie);
-		$criteria->compare('montoVenta',$this->montoVenta);
-		$criteria->compare('montoPagado',$this->montoPagado);
-		$criteria->compare('montoCambio',$this->montoCambio);
-		$criteria->compare('montoDescuento',$this->montoDescuento);
-		$criteria->compare('idCliente0.nitCi',$this->nit);
-		$criteria->compare('idCliente0.apellido',$this->apellido);
-		$criteria->compare('codigo',$this->codigos);
-		$criteria->compare('serie',$this->codigos);
-	
-		//$criteria->mergeWith($this->dateRangeSearchCriteria('fechaVenta', $this->fechaVenta));
-		//$criteria->mergeWith($this->dateRangeSearchCriteria('fechaPlazo', $this->fechaPlazo));
-	
-		return new CActiveDataProvider($this, array(
-				'criteria'=>$criteria,
-		));
-	}
 
-	public function searchDistribuidora()
-	{
-		$criteria=new CDbCriteria;
-	
-		$criteria->with= array(
-				'idCliente0',
-		);
-		$criteria->order='fechaVenta DESC';
-		//$criteria->condition = 'idAlmacen=2';
-	
-		$criteria->compare('idVenta',$this->idVenta);
-		$criteria->compare('fechaVenta',$this->fechaVenta,true);
-		$criteria->compare('idCliente',$this->idCliente);
-		$criteria->compare('codigo',$this->codigo,true);
-		$criteria->compare('montoVenta',$this->montoVenta);
-		$criteria->compare('montoPagado',$this->montoPagado);
-		$criteria->compare('montoCambio',$this->montoCambio);
-		$criteria->compare('montoDescuento',$this->montoDescuento);
-		$criteria->compare('tipoVenta',$this->tipoVenta);
-		$criteria->compare('idCliente0.apellido',$this->apellido,true);
-		$criteria->compare('idCliente0.nitCi',$this->nit);
+    public $cantidad;
+    public $nit;
+    public $apellido;
+    public $codigos;
+    public function searchVenta()
+    {
+        // @todo Please modify the following code to remove attributes that should not be searched.
+
+        $criteria=new CDbCriteria;
+        $criteria->with=array('idCliente0');
+        $d=date("d")-1; $m=date("m");
+        if($d==0)
+        {
+            $m--;
+            $d=$this->getUltimoDiaMes(date("Y"), $m);
+        }
+        $start=date("Y")."-".$m."-".$d." 00:00:00";
+
+        $criteria->condition="(estado=1 or estado=2) and fechaVenta>='".$start."'";
+        $criteria->order = "fechaVenta DESC";
+
+        $criteria->compare('idVenta',$this->idVenta);
+        $criteria->compare('fechaVenta',$this->fechaVenta,true);
+        $criteria->compare('tipoVenta',$this->tipoVenta);
+        $criteria->compare('formaPago',$this->formaPago,true);
+        $criteria->compare('idCliente',$this->idCliente);
+        $criteria->compare('fechaPlazo',$this->fechaPlazo,true);
+        $criteria->compare('codigo',$this->codigo,true);
+        $criteria->compare('serie',$this->serie);
+        $criteria->compare('montoVenta',$this->montoVenta);
+        $criteria->compare('montoPagado',$this->montoPagado);
+        $criteria->compare('montoCambio',$this->montoCambio);
+        $criteria->compare('montoDescuento',$this->montoDescuento);
+        $criteria->compare('idCliente0.nitCi',$this->nit);
+        $criteria->compare('idCliente0.apellido',$this->apellido);
+        $criteria->compare('codigo',$this->codigos);
+        $criteria->compare('serie',$this->codigos);
+
+        //$criteria->mergeWith($this->dateRangeSearchCriteria('fechaVenta', $this->fechaVenta));
+        //$criteria->mergeWith($this->dateRangeSearchCriteria('fechaPlazo', $this->fechaPlazo));
+
+        return new CActiveDataProvider($this, array(
+            'criteria'=>$criteria,
+        ));
+    }
+
+    public function searchDistribuidora()
+    {
+        $criteria=new CDbCriteria;
+
+        $criteria->with= array(
+            'idCliente0',
+        );
+        $criteria->order='fechaVenta DESC';
+        //$criteria->condition = 'idAlmacen=2';
+
+        $criteria->compare('idVenta',$this->idVenta);
+        $criteria->compare('fechaVenta',$this->fechaVenta,true);
+        $criteria->compare('idCliente',$this->idCliente);
+        $criteria->compare('codigo',$this->codigo,true);
+        $criteria->compare('montoVenta',$this->montoVenta);
+        $criteria->compare('montoPagado',$this->montoPagado);
+        $criteria->compare('montoCambio',$this->montoCambio);
+        $criteria->compare('montoDescuento',$this->montoDescuento);
+        $criteria->compare('tipoVenta',$this->tipoVenta);
+        $criteria->compare('idCliente0.apellido',$this->apellido,true);
+        $criteria->compare('idCliente0.nitCi',$this->nit);
 
         $data = new CActiveDataProvider($this, array(
-				'criteria'=>$criteria,
-				//'pagination'=>false,
-		));
+            'criteria'=>$criteria,
+            //'pagination'=>false,
+        ));
         Yii::app()->session['excel']= $this;
 
         return $data;
-	}
-	
-	public $material;
-	public $detalle;
-	
-	
-	public function searchVentaProducto()
-	{
-		$criteria=new CDbCriteria;
-	
-		$criteria->with= array(
-				'idCliente0',
-				'detalleVentas',
-				'detalleVentas.idAlmacenProducto0',
-				'detalleVentas.idAlmacenProducto0.idProducto0',
-		);
-		$criteria->order='fechaVenta DESC';
-		$criteria->limit = 50;
-		//$criteria->condition = 'idAlmacen=2';
-		
-		$criteria->compare('idVenta',$this->idVenta);
-		$criteria->compare('fechaVenta',$this->fechaVenta,true);
-		$criteria->compare('idCliente',$this->idCliente);
-		$criteria->compare('codigo',$this->codigo,true);
-		
-		$criteria->compare('idCliente0.apellido',$this->apellido,true);
-		$criteria->compare('idCliente0.nitCi',$this->nit);
-	
-		return new CActiveDataProvider($this, array(
-				'criteria'=>$criteria,
-				'pagination'=>false,
-		));
-	}
+    }
+
+    public $material;
+    public $detalle;
+
+
+    public function searchVentaProducto()
+    {
+        $criteria=new CDbCriteria;
+
+        $criteria->with= array(
+            'idCliente0',
+            'detalleVentas',
+            'detalleVentas.idAlmacenProducto0',
+            'detalleVentas.idAlmacenProducto0.idProducto0',
+        );
+        $criteria->order='fechaVenta DESC';
+        $criteria->limit = 50;
+        //$criteria->condition = 'idAlmacen=2';
+
+        $criteria->compare('idVenta',$this->idVenta);
+        $criteria->compare('fechaVenta',$this->fechaVenta,true);
+        $criteria->compare('idCliente',$this->idCliente);
+        $criteria->compare('codigo',$this->codigo,true);
+
+        $criteria->compare('idCliente0.apellido',$this->apellido,true);
+        $criteria->compare('idCliente0.nitCi',$this->nit);
+
+        return new CActiveDataProvider($this, array(
+            'criteria'=>$criteria,
+            'pagination'=>false,
+        ));
+    }
+
+    protected function getUltimoDiaMes($elAnio,$elMes) {
+        return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
+    }
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
@@ -262,9 +271,5 @@ class Venta extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
-	}
-	
-	protected function getUltimoDiaMes($elAnio,$elMes) {
-		return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
 	}
 }
