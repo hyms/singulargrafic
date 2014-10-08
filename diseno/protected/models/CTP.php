@@ -144,39 +144,54 @@ class CTP extends CActiveRecord
 	 * based on the search/filter conditions.
 	 */
     public $max;
-	public function search()
+    public $apellido;
+    public $nitCi;
+    public $codigoP;
+	public function search($cond=null)
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idCTP',$this->idCTP);
-		$criteria->compare('fechaOrden',$this->fechaOrden,true);
-		$criteria->compare('tipoOrden',$this->tipoOrden);
-		$criteria->compare('formaPago',$this->formaPago);
-		$criteria->compare('idCliente',$this->idCliente);
-		$criteria->compare('fechaPlazo',$this->fechaPlazo,true);
-		$criteria->compare('codigo',$this->codigo,true);
-		$criteria->compare('serie',$this->serie);
-		$criteria->compare('numero',$this->numero);
-		$criteria->compare('montoVenta',$this->montoVenta);
-		$criteria->compare('montoPagado',$this->montoPagado);
-		$criteria->compare('montoCambio',$this->montoCambio);
-		$criteria->compare('montoDescuento',$this->montoDescuento);
-		$criteria->compare('estado',$this->estado);
-		$criteria->compare('factura',$this->factura,true);
-		$criteria->compare('autorizado',$this->autorizado,true);
-		$criteria->compare('responsable',$this->responsable,true);
-		$criteria->compare('obs',$this->obs,true);
-		$criteria->compare('idCajaMovimientoVenta',$this->idCajaMovimientoVenta);
-		$criteria->compare('idUserOT',$this->idUserOT);
-		$criteria->compare('idUserVenta',$this->idUserVenta);
-		$criteria->compare('idImprenta',$this->idImprenta);
-		$criteria->compare('idCTPParent',$this->idCTPParent);
-		$criteria->compare('tipoCTP',$this->tipoCTP);
-		$criteria->compare('fechaEntega',$this->fechaEntega,true);
-		$criteria->compare('obsCaja',$this->obsCaja,true);
-		$criteria->compare('idSucursal',$this->idSucursal);
+        $criteria->with = array('idCliente0','idCTPParent0');
+        $criteria->order='`t`.fechaOrden Desc';
+        if($cond!=null)
+        {
+            $criteria->condition = $cond;
+        }
+
+		$criteria->compare('`t`.idCTP',$this->idCTP);
+		$criteria->compare('`t`.fechaOrden',$this->fechaOrden,true);
+		$criteria->compare('`t`.tipoOrden',$this->tipoOrden);
+		$criteria->compare('`t`.formaPago',$this->formaPago);
+		$criteria->compare('`t`.idCliente',$this->idCliente);
+		$criteria->compare('`t`.fechaPlazo',$this->fechaPlazo,true);
+		$criteria->compare('`t`.codigo',$this->codigo,true);
+		$criteria->compare('`t`.serie',$this->serie);
+		$criteria->compare('`t`.numero',$this->numero);
+		$criteria->compare('`t`.montoVenta',$this->montoVenta);
+		$criteria->compare('`t`.montoPagado',$this->montoPagado);
+		$criteria->compare('`t`.montoCambio',$this->montoCambio);
+		$criteria->compare('`t`.montoDescuento',$this->montoDescuento);
+		$criteria->compare('`t`.estado',$this->estado);
+		$criteria->compare('`t`.factura',$this->factura,true);
+		$criteria->compare('`t`.autorizado',$this->autorizado,true);
+		$criteria->compare('`t`.responsable',$this->responsable,true);
+		$criteria->compare('`t`.obs',$this->obs,true);
+		$criteria->compare('`t`.idCajaMovimientoVenta',$this->idCajaMovimientoVenta);
+		$criteria->compare('`t`.idUserOT',$this->idUserOT);
+		$criteria->compare('`t`.idUserVenta',$this->idUserVenta);
+		$criteria->compare('`t`.idImprenta',$this->idImprenta);
+		$criteria->compare('`t`.idCTPParent',$this->idCTPParent);
+		$criteria->compare('`t`.tipoCTP',$this->tipoCTP);
+		$criteria->compare('`t`.fechaEntega',$this->fechaEntega,true);
+		$criteria->compare('`t`.obsCaja',$this->obsCaja,true);
+		$criteria->compare('`t`.idSucursal',$this->idSucursal);
+
+        $criteria->compare('idCliente0.apellido',$this->apellido,true);
+        $criteria->compare('idCliente0.nitCi',$this->nitCi);
+
+        $criteria->compare('idCTPParent0.codigo',$this->codigoP,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

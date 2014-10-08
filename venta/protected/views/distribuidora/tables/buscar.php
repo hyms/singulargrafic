@@ -7,7 +7,7 @@
 		$this->widget('zii.widgets.grid.CGridView', array(
 			'dataProvider'=>$ventas->searchVenta(),
 			'filter'=>$ventas,
-			'ajaxUpdate'=>true,
+			'ajaxUpdate'=>false,
 			'itemsCssClass' => 'table table-hover table-condensed',
 			'htmlOptions' => array('class' => 'table-responsive'),
 			'columns'=>array(

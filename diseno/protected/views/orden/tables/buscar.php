@@ -5,7 +5,9 @@
     <div class="panel-body" style="overflow: auto;">
 <?php
 $this->widget('zii.widgets.grid.CGridView', array(
-		'dataProvider'=>$ordenes,
+		'dataProvider'=>$ordenes->search('`t`.tipoCTP!=3'),
+        'filter'=>$ordenes,
+        'ajaxUpdate'=>false,
 		'itemsCssClass' => 'table table-hover table-condensed',
 		'htmlOptions' => array('class' => 'table-responsive'),
 		'columns'=>array(
@@ -16,14 +18,31 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			array(
 					'header'=>'Codigo',
 					'value'=>'$data->codigo',
+                    'filter'=>CHtml::activeTextField($ordenes,'codigo',array('class'=>'form-control input-sm')),
 			),
 			array(
 					'header'=>'Cliente',
 					'value'=>'$data->idCliente0->apellido',
+                    'filter'=>CHtml::activeTextField($ordenes,'apellido',array('class'=>'form-control input-sm')),
 			),
             array(
 					'header'=>'Fecha',
+                    'type'=>'raw',
 					'value'=>'$data->fechaOrden',
+                    'filter'=>$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                                'name'=>'fechaOrden',
+                                'attribute'=>'fechaOrden',
+                                'language'=>'es',
+                                'model'=>$ordenes,
+                                'options'=>array(
+                                    'showAnim'=>'fold',
+                                    'dateFormat'=>'yy-mm-dd',
+                                ),
+                                'htmlOptions'=>array(
+                                    'class'=>'form-control input-sm',
+                                ),
+                            ),
+                            true),
 			),
 			array(
 					'header'=>'',

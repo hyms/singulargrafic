@@ -27,7 +27,7 @@ if(count($detalle)>=1)
 		{
 			if($item->idAlmacenProducto!=null)
 			{
-				$this->renderPartial('./repo/_newRowDetalleRepos', array(
+				$this->renderPartial('forms/_newRowDetalleRepos', array(
 						'model'=>$item,
 						'index'=>$i,
 						'almacen'=>AlmacenProducto::model()
@@ -57,24 +57,9 @@ if(count($detalle)>=1)
 		$('#total').val(parseFloat(importe_total).toFixed(1));
 		cambio();
 	}
-	
-	function suma(a,b)
-	{
-		return ((a*1) + (b*1));
-	}
-	
-	function resta(a,b)
-	{
-		return ((a*1) - (b*1));
-	}
-   
 ",CClientScript::POS_HEAD); ?>
 
-<?php Yii::app()->getClientScript()->registerScript("ajax_detalleventa","
-	
-	$(\"#yw3 .tabular-input-remove\").live(\"click\", function(event) {
-		event.preventDefault();
-		$(this).parents(\".tabular-input:first\").remove();
-		$('.tabular-input-container').filter(function(){return $.trim($(this).text())==='' && $(this).children().length == 0}).siblings('.tabular-header').hide();
-	});
-",CClientScript::POS_READY); ?>
+<?php
+$this->renderPartial('scripts/operaciones');
+$this->renderPartial('scripts/removeList');
+?>

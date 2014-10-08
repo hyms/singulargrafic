@@ -4,7 +4,6 @@
 		<td><?php echo CHtml::label('Nº','number')?></td>
 		<td><?php echo CHtml::label('Formato','formato')?></td>
 		<td><?php echo CHtml::label('Nº de placas','nro placas')?></td>
-		<td><?php echo CHtml::label('Full','f')?></td>
 		<td><?php echo CHtml::label('C','c')?></td>
 		<td><?php echo CHtml::label('M','m')?></td>
 		<td><?php echo CHtml::label('Y','y')?></td>
@@ -21,20 +20,17 @@ if(count($detalle)>=1)
 {
 	if(!isset($detalle->isNewRecord))
 	{
-		$i=0;
-		
-		foreach ($detalle as $item)
+		foreach ($detalle as $key => $item)
 		{
 			if($item->idAlmacenProducto!=null)
 			{
-				$this->renderPartial('./repo/_newRowDetalleVenta', array(
+				$this->renderPartial('forms/_newRowDetalleVenta', array(
 						'model'=>$item,
-						'index'=>$i,
+						'index'=>$key,
 						'almacen'=>AlmacenProducto::model()
 									->with("idProducto0")
 									->findByPk($item->idAlmacenProducto),
 				));
-				$i++;
 			}
 		}
 	}
@@ -58,14 +54,13 @@ function newRow(detalle)
 	}		
 	$.ajax({
 		type: 'GET',
-		url: '".CHtml::normalizeUrl(array('/orden/addDetalleR'))."',
+		url: '".CHtml::normalizeUrl(array('repos/addDetalle'))."',
 		data: 'index='+index+'&id='+detalle,
 		dataType: 'html',
 		success: function(html){
 			input.append(html);
 			input.siblings('.tabular-header').show();
 		},
-		
 	});
 	event.preventDefault();
 }

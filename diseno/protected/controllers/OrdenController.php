@@ -63,6 +63,8 @@ class OrdenController extends Controller
 		if(isset($_POST['Cliente']))
 		{
 			$cliente = $this->saveCliente($_POST['Cliente']);
+            if($cliente->validate())
+                $swc=1;
 		}
 		
 		if(isset($_POST['CTP']))
@@ -189,12 +191,23 @@ class OrdenController extends Controller
 
 	public function actionBuscar()
 	{
-		$ordenes=new CActiveDataProvider('CTP',array(
+		/*$ordenes = new CActiveDataProvider('CTP',array(
 				'criteria'=>array(
 						'condition'=>'estado=1 and tipoCTP!=3 and idSucursal='.$this->sucursal,
 						'with'=>array('idCliente0'),
 						'order'=>'fechaOrden Desc',
-				),));
+				),));*/
+        $ordenes = new CTP('search');
+        $ordenes->unsetAttributes();
+        $ordenes->estado=1;
+        $ordenes->idSucursal=$this->sucursal;
+
+        if(isset($_GET['CTP']))
+        {
+            $ordenes->attributes = $_GET['CTP'];
+            $ordenes->apellido = $_GET['CTP']['apellido'];
+        }
+
 		$this->render('index',array('render'=>'buscar','ordenes'=>$ordenes));
 	}
 
@@ -245,7 +258,7 @@ class OrdenController extends Controller
                         foreach ($detalles as $item)
                             $item->delete();
                     }
-                    if($ctp->estado==2)
+                    if($ctp->estado==0)
                     {
                         foreach ($detalles as $item)
                         {
