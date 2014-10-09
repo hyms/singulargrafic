@@ -86,8 +86,8 @@ class CTP extends CActiveRecord
 			'idCTPParent0' => array(self::BELONGS_TO, 'CTP', 'idCTPParent'),
 			'cTPs' => array(self::HAS_MANY, 'CTP', 'idCTPParent'),
 			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
-			'idUserOT0' => array(self::BELONGS_TO, 'User', 'idUserOT'),
-			'idUserVenta0' => array(self::BELONGS_TO, 'User', 'idUserVenta'),
+			'idUserOT0' => array(self::BELONGS_TO, 'Users', 'idUserOT'),
+			'idUserVenta0' => array(self::BELONGS_TO, 'Users', 'idUserVenta'),
 			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
 			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
 			'detalleCTPs' => array(self::HAS_MANY, 'DetalleCTP', 'idCTP'),
@@ -197,6 +197,53 @@ class CTP extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    public function searchReport()
+    {
+        $criteria=new CDbCriteria;
+
+        $criteria->with = array('idCliente0','idCTPParent0','idUserOT0','idUserOT0.idEmpleado0');
+        $criteria->order='`t`.fechaOrden Desc';
+
+        //$criteria->condition = "";
+
+        $criteria->compare('`t`.idCTP',$this->idCTP);
+        $criteria->compare('`t`.fechaOrden',$this->fechaOrden,true);
+        $criteria->compare('`t`.tipoOrden',$this->tipoOrden);
+        $criteria->compare('`t`.formaPago',$this->formaPago);
+        $criteria->compare('`t`.idCliente',$this->idCliente);
+        $criteria->compare('`t`.fechaPlazo',$this->fechaPlazo,true);
+        $criteria->compare('`t`.codigo',$this->codigo,true);
+        $criteria->compare('`t`.serie',$this->serie);
+        $criteria->compare('`t`.numero',$this->numero);
+        $criteria->compare('`t`.montoVenta',$this->montoVenta);
+        $criteria->compare('`t`.montoPagado',$this->montoPagado);
+        $criteria->compare('`t`.montoCambio',$this->montoCambio);
+        $criteria->compare('`t`.montoDescuento',$this->montoDescuento);
+        $criteria->compare('`t`.estado',$this->estado);
+        $criteria->compare('`t`.factura',$this->factura,true);
+        $criteria->compare('`t`.autorizado',$this->autorizado,true);
+        $criteria->compare('`t`.responsable',$this->responsable,true);
+        $criteria->compare('`t`.obs',$this->obs,true);
+        $criteria->compare('`t`.idCajaMovimientoVenta',$this->idCajaMovimientoVenta);
+        $criteria->compare('`t`.idUserOT',$this->idUserOT);
+        $criteria->compare('`t`.idUserVenta',$this->idUserVenta);
+        $criteria->compare('`t`.idImprenta',$this->idImprenta);
+        $criteria->compare('`t`.idCTPParent',$this->idCTPParent);
+        $criteria->compare('`t`.tipoCTP',$this->tipoCTP);
+        $criteria->compare('`t`.fechaEntega',$this->fechaEntega,true);
+        $criteria->compare('`t`.obsCaja',$this->obsCaja,true);
+        $criteria->compare('`t`.idSucursal',$this->idSucursal);
+
+        $criteria->compare('idCliente0.apellido',$this->apellido,true);
+        $criteria->compare('idCliente0.nitCi',$this->nitCi);
+
+        $criteria->compare('idCTPParent0.codigo',$this->codigoP,true);
+
+        return new CActiveDataProvider($this, array(
+            'criteria'=>$criteria,
+        ));
+    }
 
 	/**
 	 * Returns the static model of the specified AR class.
