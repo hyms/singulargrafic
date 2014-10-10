@@ -28,7 +28,8 @@ class UserIdentity extends CUserIdentity
 		else{
 			$this->_id=$user->idUser;
 			$this->username=$user->username;
-			$this->errorCode=self::ERROR_NONE;
+
+            $this->errorCode=self::ERROR_NONE;
 			
 			/*Consultamos los datos del usuario por el username ($user->username) */
 			//$info_usuario = Users::model()->findByPk($user->idUser);
@@ -41,8 +42,6 @@ class UserIdentity extends CUserIdentity
 			$connection = Yii::app()->db;
 			$command = $connection->createCommand($sql);
 			$command->execute();
-			
-	
 		}
 		return $this->errorCode==self::ERROR_NONE;
 	}

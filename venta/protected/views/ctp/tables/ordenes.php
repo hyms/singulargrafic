@@ -26,7 +26,9 @@ if($sw==1)
 ?>
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
-		'dataProvider'=>$ordenes,
+		'dataProvider'=>$ordenes->searchOrder(),
+        'filter'=>$ordenes,
+        'ajaxUpdate'=>false,
 		'itemsCssClass' => 'table table-hover table-condensed',
 		'htmlOptions' => array('class' => 'table-responsive'),
 		'columns'=>array(

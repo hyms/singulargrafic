@@ -59,12 +59,12 @@ class ReportController extends CController
 
     public function actionPlacas()
     {
-        $placas = new CTP('searchReport');
+        $placas = new DetalleCTP('searchPlacas');
         $placas->unsetAttributes();
-        $placas->idSucursal = $this->sucursal;
-        if(isset($_GET['CTP']))
+        $placas->sucursal = $this->sucursal;
+        if(isset($_GET['DetalleCTP']))
         {
-            $placas->attributes = $_GET['CTP'];
+            $placas->attributes = $_GET['DetalleCTP'];
         }
         $this->render('index',array('render'=>'placas','placas'=>$placas));
     }

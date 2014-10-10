@@ -1,7 +1,29 @@
 <?php
 class CtpController extends Controller
 {
-	var $cajaCTP=3;
+    //protected $cajaCTP=3;
+    protected $cajaCTP;
+    protected $sucursal;
+    protected $almacen;
+
+    public function init()
+    {
+        $this->sucursal =  Yii::app()->user->getState('idSucursal');
+        if(!empty($this->sucursal))
+        {
+            $this->almacen = Almacen::model()->find('idSucursal='.$this->sucursal.' and nombre like "CTP%"');
+            $this->cajaCTP = Caja::model()->find('idSucursal='.$this->sucursal.' and nombre like "CTP%"');
+            if(!empty($this->almacen) && !empty($this->cajaCTP))
+            {
+                $this->almacen = $this->almacen->idAlmacen;
+                $this->cajaCTP = $this->cajaCTP->idCaja;
+            }
+            else
+                throw new CHttpException(500,'Page not found.');
+        }
+        parent::init();
+    }
+
 	public function filters()
 	{
 		return array( 'accessControl' ); // perform access control for CRUD operations
@@ -20,25 +42,36 @@ class CtpController extends Controller
 	
 	public function actionIndex()
 	{
+        //print_r($this->cajaCTP);
 		$this->render('base',array('render'=>''));
 	}
 	
 	public function actionOrdenes()
 	{
-		$t="";
+		/*$t="";
 		if(isset($_GET['t']))
 		{
 			$t="and tipoCTP=".$_GET['t'];
 		}
 		$ordenes=new CActiveDataProvider('CTP',array(
 				'criteria'=>array(
-					'condition'=>'`t`.estado=1 '.$t.' and `t`.tipoCTP=1',
+					'condition'=>'`t`.estado=1 '.$t.' and `t`.tipoCTP=1 and `t`.idSucursal='.$this->sucursal,
 					'with'=>array('idCliente0'),
 					'order'=>'fechaOrden Desc',
 				),
 				'pagination'=>array(
 						'pageSize'=>'20',
-				),));
+				),));*/
+        $ordenes = new CTP('searchOrder');
+        $ordenes->unsetAttributes();
+        $ordenes->idSucursal = $this->sucursal;
+        $ordenes->estado = 1;
+        $ordenes->tipoCTP = 1;
+
+        if(isset($_GET['CTP']))
+        {
+            $ordenes->attributes = $_GET['CTP'];
+        }
 		$this->render('base',array('render'=>'ordenes','ordenes'=>$ordenes,'estado'=>''));
 	}
 	

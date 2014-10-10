@@ -184,13 +184,11 @@ class CTP extends CActiveRecord
 
     public $apellido;
     public $nit;
-    public function searchCTP()
+    public function searchOrder()
     {
         $criteria=new CDbCriteria;
 
-        $criteria->with= array(
-            'idCliente0',
-        );
+        $criteria->with= array('idCliente0',);
         $criteria->order='fechaOrden DESC';
         //$criteria->condition = 'idAlmacen=2';
 
@@ -210,6 +208,7 @@ class CTP extends CActiveRecord
             'criteria'=>$criteria,
         ));
     }
+
 
 	/**
 	 * Returns the static model of the specified AR class.

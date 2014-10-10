@@ -54,6 +54,11 @@
                             ),
                             true),
                 ),
+                array(
+                    'header'=>'',
+                    'type'=>'raw',
+                    'value'=>'CHtml::link("Ver",array("#","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm"))',
+                ),
             )
         ));
         ?>
