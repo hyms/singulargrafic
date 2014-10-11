@@ -6,25 +6,6 @@
 <?php 
 $sw=0;
 
-if(!empty($estado))
-	$sw=$estado;
-
-if($sw==1)
-{
-    $this->widget('zii.widgets.CMenu',array(
-        'htmlOptions' => array('class' => 'nav nav-tabs hidden-print'),
-        'activeCssClass'	=> 'active',
-        'submenuHtmlOptions' => array('class' => 'dropdown-menu'),
-        'encodeLabel' => false,
-        'items'=>array(
-            array('label'=>'Cliente', 'url'=>array('ctp/buscar','t'=>1)),
-            array('label'=>'Interna', 'url'=>array('ctp/buscar','t'=>2)),
-            array('label'=>'Repeticion', 'url'=>array('ctp/buscar','t'=>3)),
-        ),
-    ));
-} 
-?>
-<?php 
 $this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$ordenes->searchOrder(),
         'filter'=>$ordenes,
@@ -33,30 +14,41 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		'htmlOptions' => array('class' => 'table-responsive'),
 		'columns'=>array(
 			array(
-					'header'=>'Nro',
-					'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+				'header'=>'Nro',
+				'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
 			),
 			array(
-					'header'=>'codigo',
-					'value'=>'$data->codigo',
+				'header'=>'codigo',
+				'value'=>'$data->codigo',
+                'filter'=>CHtml::activeTextField($ordenes,'codigo',array('class'=>'form-control input-sm')),
 			),
 			array(
-					'header'=>'Apellido Cliente',
-					'value'=>'(isset($data->idCliente0->apellido))?$data->idCliente0->apellido:""',
+				'header'=>'Cliente',
+				'value'=>'(isset($data->idCliente0->apellido))?$data->idCliente0->apellido:""',
+                'filter'=>CHtml::activeTextField($ordenes,'apellido',array('class'=>'form-control input-sm')),
 			),
 			array(
-					'header'=>'Costo',
-					'value'=>'$data->montoVenta',	
+				'header'=>'Fecha Orden',
+				'value'=>'$data->fechaOrden',
+                'filter'=>$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                            'name'=>'fechaOrden',
+                            'attribute'=>'fechaOrden',
+                            'language'=>'es',
+                            'model'=>$ordenes,
+                            'options'=>array(
+                                'showAnim'=>'fold',
+                                'dateFormat'=>'yy-mm-dd',
+                            ),
+                            'htmlOptions'=>array(
+                                'class'=>'form-control input-sm',
+                            ),
+                        ),
+                        true),
 			),
 			array(
-					'header'=>'',
-					'type'=>'raw',
-					'value'=>'($data->tipoCTP==1)?CHtml::link("Ver",array("ctp/orden","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm")):""',
-			),
-			array(
-					'header'=>'',
-					'type'=>'raw',
-					'value'=>'($data->estado==2 || $data->tipoCTP!=1)?CHtml::link("imprimir",array("ctp/preview","id"=>$data->idCTP)):""',	
+				'header'=>'',
+				'type'=>'raw',
+				'value'=>'CHtml::link("Ver",array("ctp/orden","id"=>$data->idCTP),array("class"=>"glyphicon glyphicon-shopping-cart btn btn-success btn-sm"))',
 			),
 		)
 	));

@@ -15,4 +15,4 @@
 	{
 		$('#cambio').val(redondeo(resta($('#pagado').val(),$('#total').val())));
 	}
-",CClientScript::POS_HEAD); ?>
+",CClientScript::POS_HEAD);

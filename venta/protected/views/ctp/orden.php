@@ -6,8 +6,7 @@
 	
 <?php
 	$form=$this->beginWidget('CActiveForm', array(
-			'id'=>'detalle-venta-detalleVenta-form',
-			'action'=>CHtml::normalizeUrl(array('/ctp/orden')),
+			'id'=>'form',
 			'htmlOptions'=>array(
 					'class'=>'form-horizontal',
 					'role'=>'form'
@@ -23,7 +22,7 @@
 			<strong class="panel-title">Datos Cliente</strong>
 		</div>
 	  	<div class="panel-body" style="overflow: auto;">
-	  	<?php $this->renderPartial('orden/cliente',array('cliente'=>$cliente,'ctp'=>$ctp))?>
+	  	<?php $this->renderPartial('forms/cliente',array('cliente'=>$cliente,'ctp'=>$ctp))?>
 	  	</div>
 	</div>
 <?php }?>
@@ -32,7 +31,7 @@
 			<strong class="panel-title">Datos de Orden</strong>
 		</div>
 		<div class="panel-body" style="overflow: auto;">
-		<?php $this->renderPartial('orden/detalleOrden',array('detalle'=>$detalle,'ctp'=>$ctp));?>
+		<?php $this->renderPartial('forms/detalleOrden',array('detalle'=>$detalle,'ctp'=>$ctp));?>
 	 	</div>
 	</div>
 	<?php if($ctp->tipoCTP ==1){?>
@@ -41,14 +40,14 @@
 			<strong class="panel-title">Condiciones de Venta</strong>
 		</div>
 	  	<div class="panel-body" style="overflow: auto;">
-	  	<?php $this->renderPartial("orden/condicionesVenta",array('ctp'=>$ctp));?>
+	  	<?php $this->renderPartial("forms/condicionesVenta",array('ctp'=>$ctp));?>
 	  	</div>
 	</div>
 	<?php }?>
 	<div class="form-group">
 		<div class="text-center">
-		<?php echo CHtml::resetButton('Cancelar', array('class' => 'btn btn-default hidden-print')); ?>
-		<?php echo CHtml::button('Guardar', array('class' => 'btn btn-default hidden-print','id'=>'save')); ?>
+            <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-remove"></span> Cancelar', "#", array('class' => 'btn btn-default hidden-print','id'=>'reset')); ?>
+            <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar', "#", array('class' => 'btn btn-default hidden-print','id'=>'save')); ?>
 		<?php //echo CHtml::submitButton('Guardar', array('class' => 'btn btn-default hidden-print')); ?>
 		</div>
 	</div>

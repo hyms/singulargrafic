@@ -6,7 +6,7 @@ Yii::app()->getClientScript()->registerScript("ajax_cliente",
 		nitCi = jQuery.trim(nitCi);
 		if(nitCi.length>0){
 	        $.ajax({
-	            url: '".CHtml::normalizeUrl(array('/distribuidora/ajaxCliente'))."', 
+	            url: '".CHtml::normalizeUrl(array('ctp/ajaxCliente'))."',
 	            type: 'GET', 
 	            data: { nitCi: nitCi},
 	            success: function (data){ 
@@ -24,7 +24,6 @@ Yii::app()->getClientScript()->registerScript("ajax_cliente",
 							}			
 							$('#apellido').val(data[\"cliente\"][\"apellido\"]); 
 	            			$('#clienteNit').val(data[\"cliente\"][\"nitCi\"]);
-							
 						 },
 				error:	
 					$('#apellido').prop('readonly', false),
@@ -65,5 +64,4 @@ Yii::app()->getClientScript()->registerScript("ajax_cliente",
 	    } 
            
     });
- ",CClientScript::POS_READY); 
-?>
+ ",CClientScript::POS_READY);

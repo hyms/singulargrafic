@@ -37,4 +37,4 @@ function factura(tipo)
 	}	
 			
 }
-",CClientScript::POS_READY);?>
+",CClientScript::POS_READY);

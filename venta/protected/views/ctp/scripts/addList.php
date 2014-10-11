@@ -12,7 +12,7 @@ function newRow(almacen)
 	}		
 	$.ajax({
 		type: 'GET',
-		url: '".CHtml::normalizeUrl(array('/distribuidora/addDetalle'))."',
+		url: '".CHtml::normalizeUrl(array('ctp/addDetalle'))."',
 		data: 'index='+index+'&al='+almacen+'&factura='+factura,
 		dataType: 'html',
 		success: function(html){
@@ -23,4 +23,4 @@ function newRow(almacen)
 	});
 	event.preventDefault();
 }
-",CClientScript::POS_HEAD); ?>
+",CClientScript::POS_HEAD);

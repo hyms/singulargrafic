@@ -194,13 +194,32 @@ class CTP extends CActiveRecord
 
         $criteria->compare('idCTP',$this->idCTP);
         $criteria->compare('fechaOrden',$this->fechaOrden,true);
+        $criteria->compare('tipoOrden',$this->tipoOrden);
+        $criteria->compare('formaPago',$this->formaPago);
         $criteria->compare('idCliente',$this->idCliente);
+        $criteria->compare('fechaPlazo',$this->fechaPlazo,true);
         $criteria->compare('codigo',$this->codigo,true);
+        $criteria->compare('serie',$this->serie);
+        $criteria->compare('numero',$this->numero);
         $criteria->compare('montoVenta',$this->montoVenta);
         $criteria->compare('montoPagado',$this->montoPagado);
         $criteria->compare('montoCambio',$this->montoCambio);
         $criteria->compare('montoDescuento',$this->montoDescuento);
-        $criteria->compare('tipoOrden',$this->tipoOrden);
+        $criteria->compare('estado',$this->estado);
+        $criteria->compare('factura',$this->factura,true);
+        $criteria->compare('autorizado',$this->autorizado,true);
+        $criteria->compare('responsable',$this->responsable,true);
+        $criteria->compare('obs',$this->obs,true);
+        $criteria->compare('idCajaMovimientoVenta',$this->idCajaMovimientoVenta);
+        $criteria->compare('idUserOT',$this->idUserOT);
+        $criteria->compare('idUserVenta',$this->idUserVenta);
+        $criteria->compare('idImprenta',$this->idImprenta);
+        $criteria->compare('idCTPParent',$this->idCTPParent);
+        $criteria->compare('tipoCTP',$this->tipoCTP);
+        $criteria->compare('fechaEntega',$this->fechaEntega,true);
+        $criteria->compare('obsCaja',$this->obsCaja,true);
+        $criteria->compare('idSucursal',$this->idSucursal);
+
         $criteria->compare('idCliente0.apellido',$this->apellido,true);
         $criteria->compare('idCliente0.nitCi',$this->nit);
 

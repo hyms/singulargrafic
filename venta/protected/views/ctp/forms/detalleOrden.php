@@ -22,21 +22,18 @@ if(count($detalle)>=1)
 {
 	if(!isset($detalle->isNewRecord))
 	{
-		$i=0;
-		
-		foreach ($detalle as $item)
+		foreach ($detalle as $key => $item)
 		{
 			if($item->idAlmacenProducto!=null)
 			{
-				$this->renderPartial('./orden/_newRowDetalleVenta', array(
+				$this->renderPartial('forms/orden/_newRowDetalleVenta', array(
 						'model'=>$item,
-						'index'=>$i,
+						'index'=>$key,
 						'costo'=>0,
 						'almacen'=>AlmacenProducto::model()
 									->with("idProducto0")
 									->findByPk($item->idAlmacenProducto),
 				));
-				$i++;
 			}
 		}
 	}
@@ -93,57 +90,9 @@ if(count($detalle)>=1)
 	
 </div>
 
-<?php Yii::app()->getClientScript()->registerScript("ajax_total",
-"
-   	function calcular_total() {
-		importe_total = 0
-		$('.costo*').each(
-			function(index, value) {
-				importe_total = importe_total + parseFloat($(this).val()*1);
-			}
-		);
-		$('#total').val(redondeo(parseFloat(importe_total)));
-		cambio();
-	}
-	
-	function cambio()
-	{
-		$('#cambio').val(redondeo(resta($('#pagado').val(),$('#total').val())));
-	}
-		
-	function suma(a,b)
-	{
-		return ((a*1) + (b*1));
-	}
-	
-	function resta(a,b)
-	{
-		return ((a*1) - (b*1));
-	}
-		
-   	function redondeo(num)
-	{
-		return (Math.round(num*10)/10);
-	}
-",CClientScript::POS_HEAD); ?>
-
-<?php Yii::app()->getClientScript()->registerScript("ajax_detalleventa","
-	$('#pagado').blur(function(e){
-		$('#cambio').val(redondeo(resta($('#pagado').val(),$('#total').val())));
-		return true;
-	});
-		
-	$('#pagado').keydown(function(e){
-		if(e.keyCode==13 || e.keyCode==9) 
-	    { 
-			$('#cambio').val(redondeo(resta($('#pagado').val(),$('#total').val())));
-			return true;
-		}
-	});
-		
-	$(\"#yw3 .tabular-input-remove\").live(\"click\", function(event) {
-		event.preventDefault();
-		$(this).parents(\".tabular-input:first\").remove();
-		$('.tabular-input-container').filter(function(){return $.trim($(this).text())==='' && $(this).children().length == 0}).siblings('.tabular-header').hide();
-	});
-",CClientScript::POS_READY); ?>
+<?php
+$this->renderPartial('scripts/operaciones');
+$this->renderpartial('scripts/totalVenta');
+$this->renderPartial('scripts/detalleVenta');
+$this->renderPartial('scripts/removeList');
+?>

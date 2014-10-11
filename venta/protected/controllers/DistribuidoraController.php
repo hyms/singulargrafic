@@ -1026,7 +1026,6 @@ class DistribuidoraController extends Controller
 			if($cliente===null)
 			{
 				$cliente = CJSON::encode(array("nitCi"=>"","apellido"=>""));
-				$cliente = array('cliente'=>$cliente,'deuda'=>$deuda);
 			}
 			else
 			{

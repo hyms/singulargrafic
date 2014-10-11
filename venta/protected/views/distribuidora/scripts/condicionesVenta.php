@@ -47,6 +47,7 @@ $('#Descuento_0').change(function(){
 		calcular_total()
 	}
 	$('#descuento').prop('disabled', value);
+	$('#autorizado').prop('disabled', value);
 });
 
 $('#descuento').keydown(function(e){
@@ -57,4 +58,4 @@ $('#descuento').keydown(function(e){
 	}
 });
 		
-",CClientScript::POS_READY);?>
+",CClientScript::POS_READY);

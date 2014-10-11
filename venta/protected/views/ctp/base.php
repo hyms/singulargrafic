@@ -8,8 +8,9 @@ switch ($render){
         $this->renderPartial('tables/ordenes',array('ordenes'=>$ordenes,'estado'=>$estado));
 		break;
 	case "orden":
-		$this->renderPartial('forms/orden',array('ctp'=>$ctp,'detalle'=>$detalle,'cliente'=>$cliente));
+		$this->renderPartial('orden',array('ctp'=>$ctp,'detalle'=>$detalle,'cliente'=>$cliente));
         $this->renderPartial('scripts/save');
+
 		break;
     case "deudores":
         $this->renderPartial('tables/deudores',array('deudores'=>$deudores));

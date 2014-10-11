@@ -48,21 +48,7 @@ class CtpController extends Controller
 	
 	public function actionOrdenes()
 	{
-		/*$t="";
-		if(isset($_GET['t']))
-		{
-			$t="and tipoCTP=".$_GET['t'];
-		}
-		$ordenes=new CActiveDataProvider('CTP',array(
-				'criteria'=>array(
-					'condition'=>'`t`.estado=1 '.$t.' and `t`.tipoCTP=1 and `t`.idSucursal='.$this->sucursal,
-					'with'=>array('idCliente0'),
-					'order'=>'fechaOrden Desc',
-				),
-				'pagination'=>array(
-						'pageSize'=>'20',
-				),));*/
-        $ordenes = new CTP('searchOrder');
+		$ordenes = new CTP('searchOrder');
         $ordenes->unsetAttributes();
         $ordenes->idSucursal = $this->sucursal;
         $ordenes->estado = 1;
@@ -71,13 +57,16 @@ class CtpController extends Controller
         if(isset($_GET['CTP']))
         {
             $ordenes->attributes = $_GET['CTP'];
+            $ordenes->apellido = $_GET['CTP']['apellido'];
         }
 		$this->render('base',array('render'=>'ordenes','ordenes'=>$ordenes,'estado'=>''));
 	}
 	
 	public function actionOrden()
 	{
-		if(isset($_POST['CTP']))
+        if(isset($_GET['id']))
+        {
+		/*if(isset($_POST['CTP']))
 		{
 			$ctp = CTP::model()
 			->with('detalleCTPs')
@@ -157,7 +146,7 @@ class CtpController extends Controller
                             $movimiento->cantidadU = $item->cantidadU;
                             $movimiento->cantidadP = $item->cantidadP;
                             $movimiento->obs = "Devolucion de Material";
-                            $movimiento->save();*/
+                            $movimiento->save();
                         }
 					$cajaMovimiento->save();
 					$this->redirect(array("ctp/buscar"));
@@ -166,9 +155,8 @@ class CtpController extends Controller
 					$ctp->save();				
 				
 			}
-		}
-		if(isset($_GET['id']) || isset($_POST['CTP']['idCTP']))
-		{
+		}*/
+
 			$id=0;
 			if(isset($_GET['id']))
 				$id=$_GET['id'];
@@ -187,13 +175,13 @@ class CtpController extends Controller
 			$cantidades = CantidadCTP::model()->findAll();
 			foreach ($ctp->detalleCTPs as $key => $item)
 			{
-				$detalle[$key] = $ctp->detalleCTPs[$key];
+				$detalle[$key] = $item;
 				$condAlmacen = 'idAlmacenProducto='.$item->idAlmacenProducto;
-				$condCliente ='idTiposClientes='.$ctp->idCliente0->idTiposClientes;
+				$condCliente = 'idTiposClientes='.$ctp->idCliente0->idTiposClientes;
 				$condCantidad="";
 				foreach ($cantidades as $c)
 				{	if($c->Inicio<=$item->nroPlacas)
-						$condCantidad ="idCantidad=".$c->idCantidadCTP;
+						$condCantidad = "idCantidad=".$c->idCantidadCTP;
 					else
 						break;
 				}
@@ -213,6 +201,7 @@ class CtpController extends Controller
 				$detalle[$key]->costoTotal = ($detalle[$key]->costo*$detalle[$key]->nroPlacas)+$detalle[$key]->costoAdicional;
 				$total = $total +$detalle[$key]->costoTotal;
 			}
+
 			$ctp->detalleCTPs = $detalle;
 			$ctp->montoVenta = $total;
 			$this->render('base',array('render'=>'orden','ctp'=>$ctp,'detalle'=>$ctp->detalleCTPs,'cliente'=>$ctp->idCliente0));
@@ -748,6 +737,34 @@ class CtpController extends Controller
             $model = new MatrizPreciosCTP;
         }
         $this->render('base',array('render'=>'matriz','model'=>$model,'placas'=>$placas,'tiposClientes'=>$tiposClientes,'cantidades'=>$cantidades,'horarios'=>$horarios));
+    }
+
+    public function actionAjaxCliente()
+    {
+        if(Yii::app()->request->isAjaxRequest && isset($_GET['nitCi']))
+            //if(isset($_GET['nitCi']))
+        {
+            $cliente = Cliente::model()->with('cTPs')->find('nitCi='.$_GET['nitCi']);
+            $deuda=false;
+            if($cliente===null)
+            {
+                $cliente = CJSON::encode(array("nitCi"=>"","apellido"=>""));
+            }
+            else
+            {
+                foreach ($cliente->cTPs as $item)
+                {
+                    if($item->estado==2)
+                    {
+                        $deuda=true;
+                        break;
+                    }
+                }
+                $cliente = CJSON::encode($cliente);
+                $cliente = array('cliente'=>$cliente,'deuda'=>$deuda);
+            }
+            echo CJSON::encode($cliente);
+        }
     }
 
 	public function actionAjaxFactura()

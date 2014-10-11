@@ -4,4 +4,4 @@
 		$(this).parents(\".tabular-input:first\").remove();
 		$('.tabular-input-container').filter(function(){return $.trim($(this).text())==='' && $(this).children().length == 0}).siblings('.tabular-header').hide();
 	});
-",CClientScript::POS_READY); ?>
+",CClientScript::POS_READY);

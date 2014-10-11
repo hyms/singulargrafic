@@ -12,4 +12,4 @@
 			return true;
 		}
 	});	
-",CClientScript::POS_READY); ?>
+",CClientScript::POS_READY);
