@@ -21,7 +21,7 @@
             if(!isset($detalle->isNewRecord)){
                 foreach ($detalle as $key=>$item){
                     if($item->idAlmacenProducto!=null){
-                        $this->renderPartial('orden/_newRowDetalleVenta', array(
+                        $this->renderPartial('forms/_newRowDetalleVenta', array(
                                 'model'=>$item,
                                 'index'=>$key,
                                 'costo'=>"cliente",

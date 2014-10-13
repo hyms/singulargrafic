@@ -10,7 +10,7 @@ switch ($render){
 	case "orden":
 		$this->renderPartial('orden',array('ctp'=>$ctp,'detalle'=>$detalle,'cliente'=>$cliente));
         $this->renderPartial('scripts/save');
-
+        $this->renderPartial('scripts/reset');
 		break;
     case "deudores":
         $this->renderPartial('tables/deudores',array('deudores'=>$deudores));

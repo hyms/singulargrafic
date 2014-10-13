@@ -86,9 +86,11 @@ class OrdenController extends Controller
 				$detalle[$key]->attributes = $item;
 				$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($detalle[$key]->idAlmacenProducto);
 				$detalle[$key]->formato = $almacen->idProducto0->color;
-					
-				if($detalle[$key]->validate())
+                $almacen->stockU = $almacen->stockU - $detalle[$key]->nroPlacas;
+                if($detalle[$key]->validate() && $almacen->stockU >= 0)
 					$det--;
+                else
+                    $ctp->addError('obs','placas insuficientes');
 			}
 		}
 		

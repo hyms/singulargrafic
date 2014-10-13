@@ -68,7 +68,7 @@ function factura(tipo)
 	});
 		$.ajax({
 			type 		: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-			url 		: '".CHtml::normalizeUrl(array('/ctp/ajaxFactura'))."', // the url where we want to POST
+			url 		: '".CHtml::normalizeUrl(array('ctp/ajaxFactura'))."', // the url where we want to POST
 			data 		: {detalle:jsonObj,tipo:tipo,id:".$ctp->idCTP.",cliente:nitCi}, // our data object
 			dataType 	: 'json', // what type of data do we expect back from the server
             encode  	: true

@@ -66,106 +66,10 @@ class CtpController extends Controller
 	{
         if(isset($_GET['id']))
         {
-		/*if(isset($_POST['CTP']))
-		{
-			$ctp = CTP::model()
-			->with('detalleCTPs')
-			->with('idCliente0')
-			->findByPk($_POST['CTP']['idCTP']);
-			
-			$ctp->attributes = $_POST['CTP'];
-			$ctp->idUserVenta = Yii::app()->user->id;
-			if(!empty($ctp->fechaPlazo))
-				$ctp->fechaPlazo= date("Y-m-d H:i:s",strtotime($ctp->fechaPlazo));
-			$ctp->estado = 2;
-            $ctp->formaPago = 1;
-            $ctp->tipoOrden = 1;
-
-            $ctp=$this->getCodigo($ctp);
-			$tmp = array();
-
-			$caja = $this->verifyModel(Caja::model()->findByPk($this->cajaCTP));
-            $cajaMovimiento = new CajaMovimientoVenta;
-			//Yii::app()->user->id;
-			$cajaMovimiento->idUser = Yii::app()->user->id;
-			$cajaMovimiento->motivo = "Nota de Venta";
-			$cajaMovimiento->idCaja = $caja->idCaja;
-			$cajaMovimiento->arqueo = 0;
-			$cajaMovimiento->tipo = 0;
-
-            $swc=0;
-			if(isset($_POST['Cliente'])){
-				$cliente = Cliente::model()->find('nitCi="'.$_POST['Cliente']['nitCi'].'"');
-				if($cliente==null)
-					$cliente = new Cliente;
-			
-				$cliente->attributes = $_POST['Cliente'];
-				if(empty($cliente->fechaRegistro))
-					$cliente->fechaRegistro = date("Y-m-d");
-				if($cliente->save())
-					$swc=1;
-			}
-			
-			foreach ($_POST['DetalleCTP'] as $key => $item)
-			{
-				$tmp[$key] = $ctp->detalleCTPs[$key];
-				$tmp[$key]->attributes = $item;
-			}
-			$ctp->detalleCTPs=$tmp;
-			
-			if($swc==1 && $ctp->save())
-			{
-				$almacen = array();
-				foreach ($ctp->detalleCTPs as $key =>$item)
-				{
-					$item->save();
-					array_push($almacen, AlmacenProducto::model()->findByPk($item->idAlmacenProducto));
-					$almacen[$key]->stockU = $almacen[$key]->stockU - $item->nroPlacas;
-					if($almacen[$key]->stockU < 0)
-						$ctp->estado = 1;
-
-				}
-				if($ctp->estado == 2)
-				{
-					$cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
-					$cajaMovimiento->tipo = 0;
-					if($ctp->formaPago==0){
-						$cajaMovimiento->monto = $ctp->montoPagado-$ctp->montoCambio;
-					}
-					if($ctp->formaPago==1){
-						$cajaMovimiento->monto = $ctp->montoPagado;
-					}
-					foreach ($almacen as $item)
-						if($item->save()){
-                            /*$movimiento=new MovimientoAlmacen;
-                            $movimiento->idProducto = $almacenes->idProducto0->idProducto;
-                            //$movimiento->idAlmacenDestino = 2;
-                            $movimiento[$i]->idAlmacenOrigen = 3;
-                            //$idUser->idUser = Yii::app()->user->id;
-                            $movimiento->fechaMovimiento = date("Y-m-d H:i:s");
-                            $movimiento->cantidadU = $item->cantidadU;
-                            $movimiento->cantidadP = $item->cantidadP;
-                            $movimiento->obs = "Devolucion de Material";
-                            $movimiento->save();
-                        }
-					$cajaMovimiento->save();
-					$this->redirect(array("ctp/buscar"));
-				}
-				else
-					$ctp->save();				
-				
-			}
-		}*/
-
-			$id=0;
-			if(isset($_GET['id']))
-				$id=$_GET['id'];
-			if(isset($_POST['CTP']['idCTP']))
-				$id=$_POST['CTP']['idCTP'];
 			$ctp = $this->verifyModel(CTP::model()
 				->with('detalleCTPs')
 				->with('idCliente0')
-				->find('`t`.idCTP='.$id));
+				->find('`t`.idCTP='.$_GET['id']));
             $ctp->formaPago = 1;
             $ctp->tipoOrden = 1;
             $ctp=$this->getCodigo($ctp);
@@ -201,9 +105,85 @@ class CtpController extends Controller
 				$detalle[$key]->costoTotal = ($detalle[$key]->costo*$detalle[$key]->nroPlacas)+$detalle[$key]->costoAdicional;
 				$total = $total +$detalle[$key]->costoTotal;
 			}
-
-			$ctp->detalleCTPs = $detalle;
+            $ctp->detalleCTPs = $detalle;
 			$ctp->montoVenta = $total;
+
+            if(isset($_POST['CTP']))
+            {
+                $ctp->attributes = $_POST['CTP'];
+                $ctp->idUserVenta = Yii::app()->user->id;
+                if(!empty($ctp->fechaPlazo))
+                    $ctp->fechaPlazo= date("Y-m-d H:i:s",strtotime($ctp->fechaPlazo));
+                $ctp->estado = 2;
+
+                $ctp=$this->getCodigo($ctp);
+                $tmp = array();
+
+                $caja = $this->verifyModel(Caja::model()->findByPk($this->cajaCTP));
+                $cajaMovimiento = new CajaMovimientoVenta;
+                $cajaMovimiento->idUser = Yii::app()->user->id;
+                $cajaMovimiento->motivo = "Orden CTP";
+                $cajaMovimiento->idCaja = $caja->idCaja;
+                $cajaMovimiento->arqueo = 0;
+                $cajaMovimiento->tipo = 0;
+
+                if(isset($_POST['Cliente'])){
+                    $cliente = $this->saveCliente($_POST['Cliente']);
+                    $cliente->validate();
+                }
+
+                foreach ($_POST['DetalleCTP'] as $key => $item)
+                {
+                    $tmp[$key] = $ctp->detalleCTPs[$key];
+                    $tmp[$key]->attributes = $item;
+                }
+                $ctp->detalleCTPs=$tmp;
+
+                $cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
+                $cajaMovimiento->tipo = 0;
+                if($ctp->formaPago==0){
+                    $cajaMovimiento->monto = $ctp->montoPagado-$ctp->montoCambio;
+                }
+                if($ctp->formaPago==1){
+                    $cajaMovimiento->monto = $ctp->montoPagado;
+                }
+                if($cajaMovimiento->monto == $ctp->montoVenta)
+                    $ctp->estado = 0;
+                elseif($cajaMovimiento->monto > $ctp->montoVenta)
+                {
+                    $ctp->estado = 0;
+                    $cajaMovimiento->monto = $ctp->montoVenta;
+                }
+                else
+                    $ctp->estado = 2;
+
+
+                if($cliente->save() && $ctp->save())
+                {
+                    $almacen = array();
+                    foreach ($ctp->detalleCTPs as $key => $item){
+                        //$item->save();
+                        $almacen[$key] = AlmacenProducto::model()->findByPk($item->idAlmacenProducto);
+                    }
+                   foreach ($almacen as $item)
+                   {
+                       if($item->save()){
+                           $movimiento=new MovimientoAlmacen;
+                           $movimiento->idProducto = $almacen->idProducto0->idProducto;
+                           //$movimiento->idAlmacenDestino = 2;
+                           $movimiento->idAlmacenOrigen = $this->almacen;
+                           //$idUser->idUser = Yii::app()->user->id;
+                           $movimiento->fechaMovimiento = date("Y-m-d H:i:s");
+                           $movimiento->cantidadU = $item->cantidadU;
+                           $movimiento->cantidadP = $item->cantidadP;
+                           $movimiento->obs = "orden de trabajo";
+                           $movimiento->save();
+                       }
+                   }
+                   $cajaMovimiento->save();
+                   $this->redirect(array("ctp/buscar"));
+                }
+            }
 			$this->render('base',array('render'=>'orden','ctp'=>$ctp,'detalle'=>$ctp->detalleCTPs,'cliente'=>$ctp->idCliente0));
 		}
 		else
@@ -221,7 +201,8 @@ class CtpController extends Controller
 		}
 		else 
 			$t='(`t`.estado=2 and `t`.tipoCTP=1) or (`t`.estado=1 and `t`.tipoCTP!=1)';
-			$ordenes=new CActiveDataProvider('CTP',array(
+
+        $ordenes=new CActiveDataProvider('CTP',array(
 				'criteria'=>array(
 						'condition'=>$t,
 						'with'=>array('idCliente0'),
@@ -867,5 +848,25 @@ class CtpController extends Controller
             $ctp->codigo = $ctp->numero."-C";
 
         return $ctp;
+    }
+
+    private function saveCliente($post)
+    {
+        $cliente = Cliente::model()->find('nitCi="'.$post['nitCi'].'"');
+        if(empty($cliente))
+            $cliente = new Cliente;
+
+        $cliente->attributes = $post;
+
+        if($cliente->isNewRecord)
+        {
+            $cliente->fechaRegistro = date("Y-m-d");
+        }
+        if(empty($cliente->idTiposClientes))
+        {
+            $tmp = TiposClientes::model()->find('`nombre`="nuevo"');
+            $cliente->idTiposClientes = $tmp->idTiposClientes;
+        }
+        return $cliente;
     }
 }
