@@ -3,10 +3,11 @@
         <strong class="panel-title">Ordenes de trabajo</strong>
     </div>
     <div class="panel-body">
-<?php
+<?php 
+$sw=0;
 
 $this->widget('zii.widgets.grid.CGridView', array(
-		'dataProvider'=>$ordenes->searchOrder(),
+		'dataProvider'=>$ordenes->searchOrder('`t`.estado!=1'),
         'filter'=>$ordenes,
         'ajaxUpdate'=>false,
 		'itemsCssClass' => 'table table-hover table-condensed',
@@ -49,10 +50,15 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 'value'=>'($data->tipoCTP==1)?"Cliente":(($data->tipoCTP==2)?"Interna":"Reposicion")',
                 'filter'=>CHtml::activeDropDownList($ordenes,'tipoCTP',array('1'=>'Cliente','2'=>'Interna','3'=>'Reposicion'),array('class'=>'form-control input-sm','empty'=>'')),
             ),
+			 array(
+                'header'=>'',
+                 'type'=>'raw',
+                 'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-edit\"></span> Modificar",array("ctp/orden","id"=>$data->idCTP),array("class"=>"hidden-print ","title"=>"Modificar Orden de Trabajo"))',
+            ),
 			array(
 				'header'=>'',
 				'type'=>'raw',
-				'value'=>'($data->tipoCTP==1)?CHtml::link("<span class=\"glyphicon glyphicon-shopping-cart\"></span> Ver",array("ctp/orden","id"=>$data->idCTP),array("class"=>"hidden-print","title"=>"Ver Orden de Trabajo")):CHtml::link("<span class=\"glyphicon glyphicon-print\"></span> Imprimir",array("ctp/preview","id"=>$data->idCTP),array("class"=>"hidden-print","title"=>"Imprimir"))',
+				'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-print\"></span>",array("ctp/preview","id"=>$data->idCTP),array("class"=>"hidden-print","title"=>"Imprimir"))',
 			),
 		)
 	));

@@ -12,6 +12,9 @@ switch ($render){
         $this->renderPartial('scripts/save');
         $this->renderPartial('scripts/reset');
 		break;
+    case "search":
+        $this->renderPartial('tables/search',array('ordenes'=>$ordenes,));
+        break;
     case "deudores":
         $this->renderPartial('tables/deudores',array('deudores'=>$deudores));
         break;

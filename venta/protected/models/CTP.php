@@ -86,8 +86,8 @@ class CTP extends CActiveRecord
 			'idCTPParent0' => array(self::BELONGS_TO, 'CTP', 'idCTPParent'),
 			'cTPs' => array(self::HAS_MANY, 'CTP', 'idCTPParent'),
 			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
-			'idUserOT0' => array(self::BELONGS_TO, 'User', 'idUserOT'),
-			'idUserVenta0' => array(self::BELONGS_TO, 'User', 'idUserVenta'),
+			'idUserOT0' => array(self::BELONGS_TO, 'Users', 'idUserOT'),
+			'idUserVenta0' => array(self::BELONGS_TO, 'Users', 'idUserVenta'),
 			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
 			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
 			'detalleCTPs' => array(self::HAS_MANY, 'DetalleCTP', 'idCTP'),
@@ -184,12 +184,16 @@ class CTP extends CActiveRecord
 
     public $apellido;
     public $nit;
-    public function searchOrder()
+    public function searchOrder($cond=null)
     {
         $criteria=new CDbCriteria;
 
         $criteria->with= array('idCliente0',);
         $criteria->order='fechaOrden DESC';
+        if($cond!=null)
+        {
+            $criteria->condition = $cond;
+        }
         //$criteria->condition = 'idAlmacen=2';
 
         $criteria->compare('idCTP',$this->idCTP);

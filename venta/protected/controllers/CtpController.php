@@ -52,8 +52,6 @@ class CtpController extends Controller
         $ordenes->unsetAttributes();
         $ordenes->idSucursal = $this->sucursal;
         $ordenes->estado = 1;
-        $ordenes->tipoCTP = 1;
-
         if(isset($_GET['CTP']))
         {
             $ordenes->attributes = $_GET['CTP'];
@@ -164,12 +162,9 @@ class CtpController extends Controller
                     foreach ($ctp->detalleCTPs as $key => $item){
                         //$item->save();
                         $almacen[$key] = AlmacenProducto::model()->findByPk($item->idAlmacenProducto);
-                    }
-                   foreach ($almacen as $item)
-                   {
-                       if($item->save()){
+                        if($item->save()){
                            $movimiento=new MovimientoAlmacen;
-                           $movimiento->idProducto = $almacen->idProducto0->idProducto;
+                           $movimiento->idProducto = $almacen[$key]->idProducto0->idProducto;
                            //$movimiento->idAlmacenDestino = 2;
                            $movimiento->idAlmacenOrigen = $this->almacen;
                            //$idUser->idUser = Yii::app()->user->id;
@@ -189,10 +184,53 @@ class CtpController extends Controller
 		else
 			throw new CHttpException(400,'Petición no válida.');	
 	}
+
+    public function actionValidar()
+    {
+        if(isset($_GET['id']))
+        {
+            $ctp = $this->verifyModel(CTP::model()
+                ->with('detalleCTPs')
+                ->with('idCliente0')
+                ->find('`t`.idCTP='.$_GET['id']));
+            $total=0;
+            $horas = Horario::model()->findAll();
+            $cantidades = CantidadCTP::model()->findAll();
+            foreach ($ctp->detalleCTPs as $key => $item)
+            {
+                $detalle[$key] = $item;
+                $condAlmacen = 'idAlmacenProducto='.$item->idAlmacenProducto;
+                $condCliente = 'idTiposClientes='.$ctp->idCliente0->idTiposClientes;
+                $condCantidad="";
+                foreach ($cantidades as $c)
+                {	if($c->Inicio<=$item->nroPlacas)
+                    $condCantidad = "idCantidad=".$c->idCantidadCTP;
+                else
+                    break;
+                }
+                $condHora ="";
+                foreach ($horas as $h)
+                {	if($h->inicio<=date("H:0:s"))
+                    $condHora ="idHorario=".$h->idHorario;
+                else
+                    break;
+                }
+                $matriz = MatrizPreciosCTP::model()->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
+                if($ctp->tipoOrden ==0)
+                    $detalle[$key]->costo = $matriz->precioCF;
+                else
+                    $detalle[$key]->costo = $matriz->precioSF;
+
+                $detalle[$key]->costoTotal = ($detalle[$key]->costo*$detalle[$key]->nroPlacas)+$detalle[$key]->costoAdicional;
+                $total = $total +$detalle[$key]->costoTotal;
+            }
+            $ctp->detalleCTPs = $detalle;
+        }
+    }
 	
 	public function actionBuscar()
 	{
-		$t="";
+		/*$t="";
 		if(isset($_GET['t']))
 		{
 			$t='(`t`.estado=1 and `t`.tipoCTP='.$_GET['t'].')';
@@ -202,7 +240,7 @@ class CtpController extends Controller
 		else 
 			$t='(`t`.estado=2 and `t`.tipoCTP=1) or (`t`.estado=1 and `t`.tipoCTP!=1)';
 
-        $ordenes=new CActiveDataProvider('CTP',array(
+        /*$ordenes=new CActiveDataProvider('CTP',array(
 				'criteria'=>array(
 						'condition'=>$t,
 						'with'=>array('idCliente0'),
@@ -210,8 +248,17 @@ class CtpController extends Controller
 				),
 				'pagination'=>array(
 						'pageSize'=>'20',
-				),));
-        $this->render('base',array('render'=>'ordenes','ordenes'=>$ordenes,'estado'=>1));
+				),));*/
+        $ordenes = new CTP('searchOrder');
+        $ordenes->unsetAttributes();
+        $ordenes->idSucursal = $this->sucursal;
+        //$ordenes->estado = 1;
+        if(isset($_GET['CTP']))
+        {
+            $ordenes->attributes = $_GET['CTP'];
+            $ordenes->apellido = $_GET['CTP']['apellido'];
+        }
+        $this->render('base',array('render'=>'search','ordenes'=>$ordenes,'estado'=>1));
 	}
 	
 	public function actionPreview()
