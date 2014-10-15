@@ -155,28 +155,49 @@ class CtpController extends Controller
                 else
                     $ctp->estado = 2;
 
-
                 if($cliente->save() && $ctp->save())
                 {
                     $almacen = array();
                     foreach ($ctp->detalleCTPs as $key => $item){
                         //$item->save();
                         $almacen[$key] = AlmacenProducto::model()->findByPk($item->idAlmacenProducto);
-                        if($item->save()){
-                           $movimiento=new MovimientoAlmacen;
-                           $movimiento->idProducto = $almacen[$key]->idProducto0->idProducto;
-                           //$movimiento->idAlmacenDestino = 2;
-                           $movimiento->idAlmacenOrigen = $this->almacen;
-                           //$idUser->idUser = Yii::app()->user->id;
-                           $movimiento->fechaMovimiento = date("Y-m-d H:i:s");
-                           $movimiento->cantidadU = $item->cantidadU;
-                           $movimiento->cantidadP = $item->cantidadP;
-                           $movimiento->obs = "orden de trabajo";
-                           $movimiento->save();
-                       }
-                   }
-                   $cajaMovimiento->save();
-                   $this->redirect(array("ctp/buscar"));
+                        $almacen[$key]->stockU = $almacen[$key]->stockU - $item->cantidadU;
+                        if($almacen[$key]->stockU>=0)
+                        {
+                            if(!$almacen[$key]->validate()){
+                               $ctp->estado = 1;
+                               break;
+                            }
+                        }
+                        else{
+                            $ctp->estado = 1;
+                            break;
+                        }
+                    }
+                    if($ctp->estado!=1)
+                    {
+                        $cajaMovimiento->save();
+                        foreach($almacen as $item)
+                        {
+                            if($item->save())
+                            {
+                                $movimiento=new MovimientoAlmacen;
+                                $movimiento->idProducto = $almacen[$key]->idProducto0->idProducto;
+                                //$movimiento->idAlmacenDestino = 2;
+                                $movimiento->idAlmacenOrigen = $this->almacen;
+                                //$idUser->idUser = Yii::app()->user->id;
+                                $movimiento->fechaMovimiento = date("Y-m-d H:i:s");
+                                $movimiento->cantidadU = $ctp->detalleCTPs[$key]->cantidadU;
+                                //$movimiento->cantidadP = $item->cantidadP;
+                                $movimiento->obs = "orden de trabajo";
+                                $movimiento->save();
+                            }
+                        }
+                        $this->redirect(array("ctp/buscar"));
+                    }
+                    else
+                        $ctp->save();
+
                 }
             }
 			$this->render('base',array('render'=>'orden','ctp'=>$ctp,'detalle'=>$ctp->detalleCTPs,'cliente'=>$ctp->idCliente0));
@@ -193,38 +214,11 @@ class CtpController extends Controller
                 ->with('detalleCTPs')
                 ->with('idCliente0')
                 ->find('`t`.idCTP='.$_GET['id']));
-            $total=0;
-            $horas = Horario::model()->findAll();
-            $cantidades = CantidadCTP::model()->findAll();
-            foreach ($ctp->detalleCTPs as $key => $item)
-            {
-                $detalle[$key] = $item;
-                $condAlmacen = 'idAlmacenProducto='.$item->idAlmacenProducto;
-                $condCliente = 'idTiposClientes='.$ctp->idCliente0->idTiposClientes;
-                $condCantidad="";
-                foreach ($cantidades as $c)
-                {	if($c->Inicio<=$item->nroPlacas)
-                    $condCantidad = "idCantidad=".$c->idCantidadCTP;
-                else
-                    break;
-                }
-                $condHora ="";
-                foreach ($horas as $h)
-                {	if($h->inicio<=date("H:0:s"))
-                    $condHora ="idHorario=".$h->idHorario;
-                else
-                    break;
-                }
-                $matriz = MatrizPreciosCTP::model()->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
-                if($ctp->tipoOrden ==0)
-                    $detalle[$key]->costo = $matriz->precioCF;
-                else
-                    $detalle[$key]->costo = $matriz->precioSF;
 
-                $detalle[$key]->costoTotal = ($detalle[$key]->costo*$detalle[$key]->nroPlacas)+$detalle[$key]->costoAdicional;
-                $total = $total +$detalle[$key]->costoTotal;
+            foreach($ctp->detalleCTPs as $item)
+            {
+
             }
-            $ctp->detalleCTPs = $detalle;
         }
     }
 	

@@ -1,5 +1,17 @@
 <div class="hidden-print">
-    <?php echo CHtml::link('<span class="glyphicon glyphicon-print"></span>', '#', array("class"=>"btn btn-default","id"=>"print")); ?>
+    <?php
+        echo CHtml::link('<span class="glyphicon glyphicon-print"></span>', '#', array("class"=>"btn btn-default","id"=>"print",'title'=>'Imprimir'));
+        if(!empty($tipo))
+        {
+            if($ctp->estado==1)
+                echo " ".CHtml::link('<span class="glyphicon glyphicon-ok-circle"></span>','#', array("class"=>"btn btn-success","id"=>"validar",'title'=>'Validar Orden'));
+        }
+
+        if($ctp->estado!=1)
+        {
+            echo " ".CHtml::link('<span class="glyphicon glyphicon-remove-circle"></span>','#', array("class"=>"btn btn-danger","id"=>"validar",'title'=>'Cancelar Orden'));
+        }
+    ?>
 </div>
 
 <div class="col-xs-12" style="width:816px; height:528px;">
@@ -19,7 +31,8 @@
 		<div class="col-xs-4"><strong><?php echo "RESPONSABLE:";?></strong> <?php echo $ctp->responsable;?></div>
 		<div class="col-xs-3"><strong><?php echo "TELEFONO:";?></strong> <?php echo $ctp->idCliente0->telefono;;?></div>
 	</div>
-	<div class="row well well-sm" style="min-height:200px; font-size: 11px">
+
+	<div class="row well well-sm" style="min-height:200px; font-size: 11px;">
 	    <table class="table table-hover table-condensed">
             <thead><tr>
                 <th><?php echo "Nº"; ?></th>
@@ -67,7 +80,6 @@
                 <?php }?>
             </tbody>
 	    </table>
-	  
 	<!--   </div> -->
 	 </div> 
 	
