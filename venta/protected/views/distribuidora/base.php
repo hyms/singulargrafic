@@ -83,6 +83,7 @@ if(isset($render))
 			else
 				$saldo = $saldo->saldo;
 			$this->renderPartial('tables/registroDiario',array('fecha'=>$fecha,'saldo'=>$saldo,'ventas'=>$ventas,'recibos'=>$recibos,'arqueo'=>$arqueo));
+            $this->renderPartial("scripts/print");
 			break;
 		case "comprobante":
 			$this->renderPartial('menus/arqueo');

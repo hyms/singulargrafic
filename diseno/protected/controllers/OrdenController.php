@@ -425,7 +425,7 @@ class OrdenController extends Controller
 	
 	private function getCodigo($tipo)
     {
-        $row = CTP::model()->find(array('condition'=>"tipoCTP=".$tipo." and fechaOrden like '%".date('Y-m-d')."%'",'select'=>'count(*) as max'));
+        $row = CTP::model()->find(array('condition'=>"tipoCTP=".$tipo." and idSucursal=".$this->sucursal." and fechaOrden like '%".date('Y-m-d')."%'",'select'=>'count(*) as max'));
         $codigoTMP =($row->max+1)."-".date('md');
         return $codigoTMP;
     }

@@ -64,14 +64,17 @@ switch ($render){
         $this->renderPartial('tables/material',array('material'=>$material));
         break;
     case "preview":
+        $this->renderPartial('menus/previews',array('ctp'=>$ctp,'tipo'=>$tipo));
         $this->renderPartial('prints/preview',array('ctp'=>$ctp,'tipo'=>$tipo));
         $this->renderPartial('scripts/print');
         break;
     case "previewTI":
+        $this->renderPartial('menus/previews',array('ctp'=>$ctp,'tipo'=>$tipo));
         $this->renderPartial('prints/previewTI',array('ctp'=>$ctp,'tipo'=>$tipo,'titulo'=>$titulo));
         $this->renderPartial('scripts/print');
         break;
     case "previewSC":
+        $this->renderPartial('menus/previews',array('ctp'=>$ctp,'tipo'=>$tipo));
         $this->renderPartial('prints/previewSC',array('ctp'=>$ctp,'tipo'=>$tipo,'titulo'=>$titulo));
         $this->renderPartial('scripts/print');
         break;

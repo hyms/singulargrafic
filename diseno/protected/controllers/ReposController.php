@@ -103,9 +103,9 @@ class ReposController extends Controller
                 {
                     $detalle[$key] = new DetalleCTP;
                     $detalle[$key]->attributes = $item;
-                    $almacen = AlmacenProducto::model()->with("idProducto0")->find('idProducto0.detalle="'.$detalle[$key]->formato.'"');
+                    $almacen = AlmacenProducto::model()->with("idProducto0")->find('idProducto0.detalle="'.$detalle[$key]->formato.'" and `t`.idAlmacen='.$this->almacen);
                     $detalle[$key]->idAlmacenProducto = $almacen->idAlmacenProducto;
-                    $costo = MatrizPreciosCTP::model()->find('idTiposClientes=1 and idHorario=1 and idCantidad=1 and idAlmacenProducto='.$detalle[$key]->idAlmacenProducto);
+                    $costo = MatrizPreciosCTP::model()->find('idTiposClientes=1 and idHorario=1 and idCantidad=1 and idAlmacenProducto='.$detalle[$key]->idAlmacenProducto);//print_r($costo);return true;
                     $detalle[$key]->costo = $costo->precioSF;
                     if(!empty($falla))
                         $falla->costoT = $falla->costoT+($detalle[$key]->nroPlacas*$detalle[$key]->costo);
@@ -127,7 +127,7 @@ class ReposController extends Controller
                     }
                     if(!empty($falla))
                         $falla->save();
-                    $this->redirect(array('repos/rep'));
+                    $this->redirect(array('repos/buscar'));
                 }
             }
             $this->render('index',array('render'=>'repos','ctp'=>$ctp,'repos'=>$repos,'detalle'=>$detalle,'otro'=>$otro));

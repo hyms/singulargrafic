@@ -1,6 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <strong class="panel-title">Ordenes de trabajo</strong>
+        <strong class="panel-title">Repociciones de Ordenes</strong>
     </div>
     <div class="panel-body" style="overflow: auto;">
 <?php

@@ -887,8 +887,7 @@ class DistribuidoraController extends Controller
 		if(isset($_GET['d']))
 		{
 			$d=$_GET['d']; $m=date("m");
-			if($d==0)
-			{
+			if($d==0){
 				$m--;
 				$d=$this->getUltimoDiaMes(date("Y"), $m);
 			}

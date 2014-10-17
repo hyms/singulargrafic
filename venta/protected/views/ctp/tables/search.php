@@ -50,11 +50,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 'value'=>'($data->tipoCTP==1)?"Cliente":(($data->tipoCTP==2)?"Interna":"Reposicion")',
                 'filter'=>CHtml::activeDropDownList($ordenes,'tipoCTP',array('1'=>'Cliente','2'=>'Interna','3'=>'Reposicion'),array('class'=>'form-control input-sm','empty'=>'')),
             ),
-			 array(
+			/*array(
                 'header'=>'',
                  'type'=>'raw',
-                 'value'=>'($data->tipo)CHtml::link("<span class=\"glyphicon glyphicon-edit\"></span> Modificar",array("ctp/orden","id"=>$data->idCTP),array("class"=>"hidden-print ","title"=>"Modificar Orden de Trabajo"))',
-            ),
+                 'value'=>'($data->tipoCTP==1)?CHtml::link("<span class=\"glyphicon glyphicon-edit\"></span> Modificar",array("ctp/orden","id"=>$data->idCTP),array("class"=>"hidden-print ","title"=>"Modificar Orden de Trabajo")):""',
+            ),*/
 			array(
 				'header'=>'',
 				'type'=>'raw',
