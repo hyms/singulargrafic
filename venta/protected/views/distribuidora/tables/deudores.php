@@ -30,7 +30,7 @@
 					array(
 							'header'=>'',
 							'type'=>'raw',
-							'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-usd\"></span> cancelar",array("caja/deuda","id"=>$data->idVenta,"serv"=>"nv"))',
+							'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-usd\"></span> Cancelar",array("caja/deuda","id"=>$data->idVenta,"serv"=>"nv"))',
 					),
 			)
 	)); 

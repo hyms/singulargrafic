@@ -28,9 +28,9 @@ class ReportController extends CController
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 //'actions'=>array('index'),
-                'expression'=>'isset($user->role) && ($user->role===4)',
+                'expression'=>'isset($user->role) && ($user->role==4)',
             ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
+           array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'expression'=>'isset($user->role) && ($user->role<=2)',
             ),
             array('deny',

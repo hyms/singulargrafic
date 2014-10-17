@@ -157,7 +157,7 @@ class CtpController extends Controller
 
                 if($cliente->save() && $ctp->save())
                 {
-                    $almacen = array();
+                    /*$almacen = array();
                     foreach ($ctp->detalleCTPs as $key => $item){
                         //$item->save();
                         $almacen[$key] = AlmacenProducto::model()->findByPk($item->idAlmacenProducto);
@@ -196,8 +196,14 @@ class CtpController extends Controller
                         $this->redirect(array("ctp/buscar"));
                     }
                     else
+                        $ctp->save();-*/
+                    if($this->saveMovimientoAlmacen($ctp->detalleCTPs)){
+                        $cajaMovimiento->save();
+                    }
+                    else{
+                        $ctp->estado = 1;
                         $ctp->save();
-
+                    }
                 }
             }
 			$this->render('base',array('render'=>'orden','ctp'=>$ctp,'detalle'=>$ctp->detalleCTPs,'cliente'=>$ctp->idCliente0));
@@ -215,11 +221,17 @@ class CtpController extends Controller
                 ->with('idCliente0')
                 ->find('`t`.idCTP='.$_GET['id']));
 
-            foreach($ctp->detalleCTPs as $item)
+            if($this->saveMovimientoAlmacen($ctp->detalleCTPs))
             {
-
+                $ctp->estado = 0;
+                $ctp->save();
+                $this->redirect(array('ctp/buscar'));
             }
+            else
+                $this->redirect(array('ctp/orden','id'=>$_GET['id']));
         }
+        else
+            throw new CHttpException(400,'Petición no válida.');
     }
 	
 	public function actionBuscar()
@@ -304,9 +316,9 @@ class CtpController extends Controller
 	{
 		$deudores = new CActiveDataProvider('CTP',
 						array('criteria'=>array(
-								'condition'=>'montoVenta>montoPagado',
-								'with'=>array('idCliente0'),
-								'order'=>'fechaPlazo ASC',
+                            'condition'=>'estado=2 and idSucursal='.$this->sucursal,
+                            'with'=>array('idCliente0'),
+                            'order'=>'fechaPlazo ASC',
 						),
 							'pagination'=>array(
 								'pageSize'=>20,
@@ -325,6 +337,8 @@ class CtpController extends Controller
         $ventas = new CTP('searchCTP');
 
         $ventas->unsetAttributes();
+        $ventas->idSucursal=$this->sucursal;
+
         if(isset($_GET['f']))
             $ventas->tipoOrden = $_GET['f'];
 
@@ -909,5 +923,41 @@ class CtpController extends Controller
             $cliente->idTiposClientes = $tmp->idTiposClientes;
         }
         return $cliente;
+    }
+
+    private function saveMovimientoAlmacen($detalles)
+    {
+        $almacen = array();
+        foreach ($detalles as $key => $item){
+            //$item->save();
+            $almacen[$key] = AlmacenProducto::model()->findByPk($item->idAlmacenProducto);
+            $almacen[$key]->stockU = $almacen[$key]->stockU - $item->nroPlacas;
+            if($almacen[$key]->stockU>=0)
+            {
+                if(!$almacen[$key]->validate()){
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
+        }
+        foreach($almacen as $item)
+        {
+            if($item->save())
+            {
+                $movimiento=new MovimientoAlmacen;
+                $movimiento->idProducto = $almacen[$key]->idProducto0->idProducto;
+                //$movimiento->idAlmacenDestino = 2;
+                $movimiento->idAlmacenOrigen = $this->almacen;
+                //$idUser->idUser = Yii::app()->user->id;
+                $movimiento->fechaMovimiento = date("Y-m-d H:i:s");
+                $movimiento->cantidadU = $detalles[$key]->nroPlacas;
+                //$movimiento->cantidadP = $item->cantidadP;
+                $movimiento->obs = "orden de trabajo";
+                $movimiento->save();
+            }
+        }
+        return true;
     }
 }

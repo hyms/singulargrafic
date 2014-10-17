@@ -28,7 +28,7 @@ class ReposController extends Controller
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 //'actions'=>array('index'),
-                'expression'=>'isset($user->role) && ($user->role===4)',
+                'expression'=>'isset($user->role) && ($user->role==4)',
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'expression'=>'isset($user->role) && ($user->role<=2)',

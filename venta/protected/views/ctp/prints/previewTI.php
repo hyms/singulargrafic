@@ -1,11 +1,17 @@
-<div class="col-xs-2 hidden-print">
-<?php $this->renderPartial('menu'); ?>
-</div>
+<div class="hidden-print">
+    <?php
+    echo CHtml::link('<span class="glyphicon glyphicon-print"></span>', '#', array("class"=>"btn btn-default","id"=>"print",'title'=>'Imprimir'));
+    if(!empty($tipo))
+    {
+        if($ctp->estado==1)
+            echo " ".CHtml::link('<span class="glyphicon glyphicon-ok-circle"></span>','#', array("class"=>"btn btn-success","id"=>"validar",'title'=>'Validar Orden'));
+    }
 
-<div class="col-xs-10" >
-
-<div class="col-xs-offset-3 col-xs-7">
-	<?php echo CHtml::link('Imprimir', '#', array("class"=>"btn btn-default hidden-print","onClick"=>"printView()")); ?>
+    if($ctp->estado!=1)
+    {
+        //echo " ".CHtml::link('<span class="glyphicon glyphicon-remove-circle"></span>','#', array("class"=>"btn btn-danger","id"=>"validar",'title'=>'Cancelar Orden'));
+    }
+    ?>
 </div>
 
 <div class="col-xs-12" style="width:816px; height:528px;">
@@ -90,15 +96,3 @@
 	</div>
 	
 </div>
-</div>
-<?php /*?>
-<?php 
-
-$script = "
-		function printView()
-		{
-			window.print();
-		}";
-
-Yii::app()->clientScript->registerScript("print",$script,CClientScript::POS_HEAD); 
-//*/?>

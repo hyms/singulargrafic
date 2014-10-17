@@ -344,14 +344,14 @@ class CajaController extends Controller
 				{
 					if($i>0)
 					{   $recibo->concepto=$recibo->concepto.", ";   }
-					$recibo->concepto=$recibo->concepto.$producto->formato."/".$venta->nroPlacas."-".$venta->trabajo;
+					$recibo->concepto=$recibo->concepto.$producto->formato."/".$producto->nroPlacas."-".$producto->trabajo;
 					$i++;
 				}
 			} 
 				///$venta = Venta::model()->findByPk($_GET['id']);
 			
 			$cliente = $venta->idCliente0;
-			$caja = CajaMovimientoVenta::model()->findByPk($venta->idCajaMovimientoVenta0->idCajaMovimientoVenta);
+			$caja = $this->verifyModel(CajaMovimientoVenta::model()->findByPk($venta->idCajaMovimientoVenta0->idCajaMovimientoVenta));
 			$row = Recibos::model()->find(array("select"=>"count(*) as `max`",'condition'=>'tipoRecivo=1'));
 			$recibo->fechaRegistro = date("Y-m-d h:m:s");
 			$recibo->codigo = "I-".($row['max']+1);

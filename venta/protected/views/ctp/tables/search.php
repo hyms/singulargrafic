@@ -53,7 +53,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			 array(
                 'header'=>'',
                  'type'=>'raw',
-                 'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-edit\"></span> Modificar",array("ctp/orden","id"=>$data->idCTP),array("class"=>"hidden-print ","title"=>"Modificar Orden de Trabajo"))',
+                 'value'=>'($data->tipo)CHtml::link("<span class=\"glyphicon glyphicon-edit\"></span> Modificar",array("ctp/orden","id"=>$data->idCTP),array("class"=>"hidden-print ","title"=>"Modificar Orden de Trabajo"))',
             ),
 			array(
 				'header'=>'',

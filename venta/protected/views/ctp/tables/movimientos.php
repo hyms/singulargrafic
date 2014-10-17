@@ -12,7 +12,7 @@
 <div>
 <?php 
 	$this->widget('zii.widgets.grid.CGridView', array(
-		'dataProvider'=>$ventas->searchCTP(),
+		'dataProvider'=>$ventas->searchOrder('`t`.estado!=1'),
 		'filter'=>$ventas,
 		'ajaxUpdate'=>false,
 		'itemsCssClass' => 'table table-hover table-condensed',
@@ -30,13 +30,13 @@
 			array(
 					'header'=>'Apellido',
 					'type'=>'raw',
-					'value'=>'$data->idCliente0->apellido',
+					'value'=>'$data["idCliente0"]["apellido"]',
 					'filter'=>CHtml::activeTextField($ventas, 'apellido',array("class"=>"form-control input-sm")),
 			),
 			array(
 					'header'=>'NitCI',
 					'type'=>'raw',
-					'value'=>'$data->idCliente0->nitCi',
+					'value'=>'$data["idCliente0"]["nitCi"]',
 					'filter'=>CHtml::activeTextField($ventas, 'nit',array("class"=>"form-control input-sm")),
 			),
 			array(
@@ -83,7 +83,7 @@
 ?>
 </div>
 <?php 
-$datos=$ventas->searchCTP();
+$datos=$ventas->searchOrder('`t`.estado!=1');
 $datos->Pagination=false;
 $datos=$datos->getData();
 $total=0;

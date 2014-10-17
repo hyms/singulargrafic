@@ -18,6 +18,10 @@ $this->widget('zii.widgets.grid.CGridView', array(
 						'header'=>'Nombre y Apellido',
 						'value'=>'$data->idCliente0->nombre." ".$data->idCliente0->apellido',
 				),
+                array(
+                    'header'=>'Orden de trabajo',
+                    'value'=>'$data->codigo',
+                ),
 				array(
 						'header'=>'Saldo',
 						'value'=>'$data->montoVenta - $data->montoPagado',
@@ -29,7 +33,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 				array(
 						'header'=>'',
 						'type'=>'raw',
-						'value'=>'CHtml::link("cancelar",array("caja/deuda","id"=>$data->idCTP,"serv"=>"ot"))',
+						'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-usd\"></span> Cancelar",array("caja/deuda","id"=>$data->idCTP,"serv"=>"ot"))',
 				),
 		)
 )); 
