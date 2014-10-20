@@ -68,4 +68,18 @@ class ReportController extends CController
         }
         $this->render('index',array('render'=>'placas','placas'=>$placas));
     }
+
+    public function actionDeuda()
+    {
+        $deudas = new FallasCTP('search');
+        $deudas->unsetAttributes();
+        $idEmpleado=Users::model()->findByPk(Yii::app()->user->id);
+        $deudas->idEmpleado = $idEmpleado->idEmpleado;
+        if(isset($_GET['FallasCTP']))
+        {
+            $deudas->attributes = $_GET['FallasCTP'];
+            $deudas->codigo = $_GET['FallasCTP']['codigo'];
+        }
+        $this->render('index',array('render'=>'deudas','deudas'=>$deudas));
+    }
 }

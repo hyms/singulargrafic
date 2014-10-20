@@ -54,7 +54,7 @@ class ReposController extends Controller
                     ));*/
         $ordenes = new CTP('search');
         $ordenes->unsetAttributes();
-        $ordenes->estado=1;
+        //$ordenes->estado=1;
         $ordenes->idSucursal=$this->sucursal;
 
         if(isset($_GET['CTP']))
@@ -92,9 +92,14 @@ class ReposController extends Controller
                 if($repos->responsable == "Otro")
                 {
                     $otro = $_POST['respOtro'];
-                    $repos->responsable = $otro;
+                    if(is_numeric($otro))
+                    {
+                        $name = Users::model()->with('idEmpleado0')->findByPk(Yii::app()->user->id);
+                        $otro = $name->idEmpleado0->apellido;
+                    }
+                    //$repos->responsable = $otro;
                     $falla = new FallasCTP;
-                    $falla->nombre = $otro;
+                    $falla->idEmpleado = $otro;
                     $falla->fecha = date("Y-m-d H:i:s");
                     $falla->costoT = 0;
                 }
@@ -138,15 +143,6 @@ class ReposController extends Controller
 
     public function actionBuscar()
     {
-        /*$ordenes=new CActiveDataProvider('CTP',array(
-            'criteria'=>array(
-                'condition'=>'`t`.estado=1 and `t`.tipoCTP=3',
-                'with'=>array('idCliente0','idCTPParent0'),
-                'order'=>'`t`.fechaOrden Desc',
-            ),
-            'pagination'=>array(
-                'pageSize'=>'20',
-            ),));*/
         $ordenes = new CTP('search');
         $ordenes->unsetAttributes();
         $ordenes->estado=1;

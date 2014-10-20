@@ -11,6 +11,9 @@
         case "placas":
             $this->renderPartial('tables/productos',array('placas'=>$placas));
             break;
+        case "deudas":
+            $this->renderPartial('tables/deudas',array('deudas'=>$deudas));
+            break;
         default:
             echo "";
             break;

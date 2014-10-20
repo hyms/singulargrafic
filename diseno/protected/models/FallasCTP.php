@@ -10,8 +10,10 @@
  * @property string $fecha
  * @property string $nombre
  * @property double $costoT
+ * @property integer $idEmpleado
  *
  * The followings are the available model relations:
+ * @property Empleado $idEmpleado0
  * @property CTP $idCtpRep0
  */
 class FallasCTP extends CActiveRecord
@@ -32,14 +34,14 @@ class FallasCTP extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idCtpRep', 'numerical', 'integerOnly'=>true),
+			array('idCtpRep, idEmpleado', 'numerical', 'integerOnly'=>true),
 			array('costoT', 'numerical'),
 			array('obs', 'length', 'max'=>60),
 			array('nombre', 'length', 'max'=>45),
 			array('fecha', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idfallasCTP, idCtpRep, obs, fecha, nombre, costoT', 'safe', 'on'=>'search'),
+			array('idfallasCTP, idCtpRep, obs, fecha, nombre, costoT, idEmpleado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,6 +53,7 @@ class FallasCTP extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'idEmpleado0' => array(self::BELONGS_TO, 'Empleado', 'idEmpleado'),
 			'idCtpRep0' => array(self::BELONGS_TO, 'CTP', 'idCtpRep'),
 		);
 	}
@@ -67,6 +70,7 @@ class FallasCTP extends CActiveRecord
 			'fecha' => 'Fecha',
 			'nombre' => 'Nombre',
 			'costoT' => 'Costo T',
+			'idEmpleado' => 'Id Empleado',
 		);
 	}
 
@@ -82,11 +86,14 @@ class FallasCTP extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
+
+    public $idUser;
+    public $codigo;
 	public function search()
 	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
 		$criteria=new CDbCriteria;
+
+        $criteria->with = array('idCtpRep0');
 
 		$criteria->compare('idfallasCTP',$this->idfallasCTP);
 		$criteria->compare('idCtpRep',$this->idCtpRep);
@@ -94,6 +101,9 @@ class FallasCTP extends CActiveRecord
 		$criteria->compare('fecha',$this->fecha,true);
 		$criteria->compare('nombre',$this->nombre,true);
 		$criteria->compare('costoT',$this->costoT);
+		$criteria->compare('idEmpleado',$this->idEmpleado);
+
+        $criteria->compare('idCtpRep0.codigo',$this->codigo,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -32,8 +32,9 @@
                 ),
                 array(
                     'header'=>'Estado',
-                    'value'=>'$data->estado',
-                    'filter'=>CHtml::activeTextField($ordenes,'estado',array('class'=>'form-control input-sm')),
+                    'value'=>'($data->estado==1)?"Sin Cobrar":(($data->estado==0)?"Cancelado":"Deuda")',
+                    'filter'=>CHtml::activeDropDownList($ordenes,'estado',array('1'=>"Sin Cobrar",'2'=>"Deuda",'0'=>"Cancelado"),array('class'=>'form-control input-sm','empty'=>"")),
+                    //'filter'=>CHtml::activeTextField($ordenes,'estado',array('class'=>'form-control input-sm')),
                 ),
                 array(
                     'header'=>'Fecha',

@@ -42,15 +42,5 @@
 	<?php echo CHtml::link('Quitar', '#', array("class"=>"btn btn-danger btn-sm tabular-input-remove")).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />'; ?>
 </td>
 </tr>
-<?php  
-echo "
-<script>		
-	$('#f_". $index ."').change(function(e){ 
-	    $('#c_". $index ."').prop('checked',$('#f_". $index ."').is(':checked'));
-		$('#m_". $index ."').prop('checked',$('#f_". $index ."').is(':checked'));
-		$('#y_". $index ."').prop('checked',$('#f_". $index ."').is(':checked'));
-		$('#k_". $index ."').prop('checked',$('#f_". $index ."').is(':checked'));
-		return true;
-	})	
-</script>
-";?>
+<?php
+$this->renderpartial('scripts/checkbox',array('index'=>$index));

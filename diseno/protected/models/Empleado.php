@@ -15,6 +15,7 @@
  *
  * The followings are the available model relations:
  * @property Sucursal $idSucursal0
+ * @property FallasCTP[] $fallasCTPs
  * @property User[] $users
  */
 class Empleado extends CActiveRecord
@@ -55,7 +56,8 @@ class Empleado extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
-			'users' => array(self::HAS_MANY, 'User', 'idEmpleado'),
+			'fallasCTPs' => array(self::HAS_MANY, 'FallasCTP', 'idEmpleado'),
+			'users' => array(self::HAS_MANY, 'Users', 'idEmpleado'),
 		);
 	}
 

@@ -55,7 +55,7 @@ class Empleado extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
-			'users' => array(self::HAS_MANY, 'User', 'idEmpleado'),
+			'users' => array(self::HAS_MANY, 'Users', 'idEmpleado'),
 		);
 	}
 

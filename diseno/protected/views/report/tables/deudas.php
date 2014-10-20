@@ -5,8 +5,8 @@
     <div class="panel-body" style="overflow: auto;">
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
-            'dataProvider'=>$ordenes->search('`t`.tipoCTP!=3'),
-            'filter'=>$ordenes,
+            'dataProvider'=>$deudas->search(),
+            'filter'=>$deudas,
             'ajaxUpdate'=>false,
             'itemsCssClass' => 'table table-hover table-condensed',
             'htmlOptions' => array('class' => 'table-responsive'),
@@ -17,23 +17,23 @@
                 ),
                 array(
                     'header'=>'Codigo',
-                    'value'=>'$data->codigo',
-                    'filter'=>CHtml::activeTextField($ordenes,'codigo',array('class'=>'form-control input-sm')),
+                    'value'=>'$data->idCtpRep0->codigo',
+                    'filter'=>CHtml::activeTextField($deudas,'codigo',array('class'=>'form-control input-sm')),
                 ),
                 array(
-                    'header'=>'Cliente',
-                    'value'=>'$data->idCliente0->apellido',
-                    'filter'=>CHtml::activeTextField($ordenes,'apellido',array('class'=>'form-control input-sm')),
+                    'header'=>'Monto',
+                    'value'=>'$data->costoT',
+                    'filter'=>CHtml::activeTextField($deudas,'costoT',array('class'=>'form-control input-sm')),
                 ),
                 array(
                     'header'=>'Fecha',
                     'type'=>'raw',
-                    'value'=>'$data->fechaOrden',
+                    'value'=>'$data->fecha',
                     'filter'=>$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                'name'=>'fechaOrden',
-                                'attribute'=>'fechaOrden',
+                                'name'=>'fecha',
+                                'attribute'=>'fecha',
                                 'language'=>'es',
-                                'model'=>$ordenes,
+                                'model'=>$deudas,
                                 'options'=>array(
                                     'showAnim'=>'fold',
                                     'dateFormat'=>'yy-mm-dd',
@@ -43,11 +43,6 @@
                                 ),
                             ),
                             true),
-                ),
-                array(
-                    'header'=>'',
-                    'type'=>'raw',
-                    'value'=>'CHtml::link("Reponer",array("repos/repOrden","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm"))',
                 ),
             )
         ));
