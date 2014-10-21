@@ -14,4 +14,4 @@
 	{
 		return (Math.round(num*10)/10);
 	}
-",CClientScript::POS_HEAD); ?>
+",CClientScript::POS_HEAD);

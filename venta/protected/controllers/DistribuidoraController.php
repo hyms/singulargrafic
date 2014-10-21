@@ -2,27 +2,27 @@
 
 class DistribuidoraController extends Controller
 {
-	var $cajaDistribuidora=2;
-	var $alamcenDistribuidora=2;
-	
-	public function filters()
-	{
-		return array( 'accessControl' ); // perform access control for CRUD operations
-	}
-	
-	public function accessRules() {
-		return array(
+    var $cajaDistribuidora=2;
+    var $alamcenDistribuidora=2;
+
+    public function filters()
+    {
+        return array( 'accessControl' ); // perform access control for CRUD operations
+    }
+
+    public function accessRules() {
+        return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'expression'=>'isset($user->role) && ($user->role<=3)',
             ),
-			array('deny',
-				'users'=>array('*'),
-			),
-		);
-	}
-	
-	public function actionIndex()
-	{
+            array('deny',
+                'users'=>array('*'),
+            ),
+        );
+    }
+
+    public function actionIndex()
+    {
         $ventas = new CActiveDataProvider('Venta',
             array('criteria'=>array(
                 'group'=>'`t`.idCliente',
@@ -42,12 +42,12 @@ class DistribuidoraController extends Controller
             ),
                 'pagination'=>false,
             ));
-		
-		$this->render('base',array("render"=>"","ventas"=>$ventas,"productos"=>$productos));
-	}
-	
-	public function actionNotas()
-	{
+
+        $this->render('base',array("render"=>"","ventas"=>$ventas,"productos"=>$productos));
+    }
+
+    public function actionNotas()
+    {
         $productos = new AlmacenProducto('searchDistribuidora');
         $cliente = new Cliente;
         $detalle = new DetalleVenta;
@@ -223,22 +223,22 @@ class DistribuidoraController extends Controller
             'detalle'=>$detalle,
             'venta'=>$venta,
         ));
-	}
-	
-	public function actionBuscar()
-	{
-		$ventas = new Venta('searchVenta');
-		$ventas->unsetAttributes();
-		if (isset($_GET['Venta'])){
-			$ventas->attributes = $_GET['Venta'];
-			$ventas->nit = $_GET['Venta']['nit'];
-			$ventas->apellido = $_GET['Venta']['apellido'];
-		}
-		$this->render('base',array('render'=>"buscar",'ventas'=>$ventas));
-	}
-	
-	public function actionModificar()
-	{
+    }
+
+    public function actionBuscar()
+    {
+        $ventas = new Venta('searchVenta');
+        $ventas->unsetAttributes();
+        if (isset($_GET['Venta'])){
+            $ventas->attributes = $_GET['Venta'];
+            $ventas->nit = $_GET['Venta']['nit'];
+            $ventas->apellido = $_GET['Venta']['apellido'];
+        }
+        $this->render('base',array('render'=>"buscar",'ventas'=>$ventas));
+    }
+
+    public function actionModificar()
+    {
         if(isset($_POST['Venta']['idVenta']))
             $_GET['id']=$_POST['Venta']['idVenta'];
 
@@ -414,60 +414,60 @@ class DistribuidoraController extends Controller
         }
         else
             throw new CHttpException(400,'Petición no válida.');
-	}
-	
-	public function actionPreview()
-	{
-		if(isset($_GET['id']))
-		{
-			$ventas = Venta::model()
-						->with("idCliente0")
-						->with("detalleVentas")
-						->with("detalleVentas.idAlmacenProducto0")
-						->with("detalleVentas.idAlmacenProducto0.idProducto0")
-						->with("idCajaMovimientoVenta0")
-						->with("idCajaMovimientoVenta0.idUser0")
-						->with("idCajaMovimientoVenta0.idUser0.idEmpleado0")
-						->findByPk($_GET['id']);
-			if($ventas!=null)
-				$this->render('base',array('render'=>'preview','ventas'=>$ventas));
-			else
-				$this->redirect('index');
-		}
-		else
-			throw new CHttpException(400,'Petición no válida.');
-	}
-	
-	/*public function actionPreviewTest()
-	{
-		if(isset($_GET['id']))
-		{
-			$this->layout = 'print';
-			//$mPDF1 = Yii::app()->ePdf->mpdf();
- 			# You can easily override default constructor's params
-	        //$mPDF1 = Yii::app()->ePdf->mpdf('', array('215.9','279.4')); //letter
-			$mPDF1 = Yii::app()->ePdf->mpdf('', array('215.9','139.7'));
-	       
-	       $ventas = $this->verifyModel(Venta::model()
-			->with("idCliente0")
-			->with("detalleVentas")
-			->with("detalleVentas.idAlmacenProducto0")
-			->with("detalleVentas.idAlmacenProducto0.idProducto0")
-			->with("idCajaMovimientoVenta0")
-			->with("idCajaMovimientoVenta0.idUser0")
-			->with("idCajaMovimientoVenta0.idUser0.idEmpleado0")
-			->findByPk($_GET['id']));
-	       	# render (full page)
-			$mPDF1->WriteHTML($this->render('previewTest',array('venta'=>$ventas),true));
-			# Outputs ready PDF
-			$mPDF1->Output(date('d-m-Y H:i:s'), EYiiPdf::OUTPUT_TO_BROWSER);
-		}
-		else
-			throw new CHttpException(400,'Petición no válida.');
-	}*/
-	
-	public function actionDeudores()
-	{
+    }
+
+    public function actionPreview()
+    {
+        if(isset($_GET['id']))
+        {
+            $ventas = Venta::model()
+                ->with("idCliente0")
+                ->with("detalleVentas")
+                ->with("detalleVentas.idAlmacenProducto0")
+                ->with("detalleVentas.idAlmacenProducto0.idProducto0")
+                ->with("idCajaMovimientoVenta0")
+                ->with("idCajaMovimientoVenta0.idUser0")
+                ->with("idCajaMovimientoVenta0.idUser0.idEmpleado0")
+                ->findByPk($_GET['id']);
+            if($ventas!=null)
+                $this->render('base',array('render'=>'preview','ventas'=>$ventas));
+            else
+                $this->redirect('index');
+        }
+        else
+            throw new CHttpException(400,'Petición no válida.');
+    }
+
+    /*public function actionPreviewTest()
+    {
+        if(isset($_GET['id']))
+        {
+            $this->layout = 'print';
+            //$mPDF1 = Yii::app()->ePdf->mpdf();
+             # You can easily override default constructor's params
+            //$mPDF1 = Yii::app()->ePdf->mpdf('', array('215.9','279.4')); //letter
+            $mPDF1 = Yii::app()->ePdf->mpdf('', array('215.9','139.7'));
+
+           $ventas = $this->verifyModel(Venta::model()
+            ->with("idCliente0")
+            ->with("detalleVentas")
+            ->with("detalleVentas.idAlmacenProducto0")
+            ->with("detalleVentas.idAlmacenProducto0.idProducto0")
+            ->with("idCajaMovimientoVenta0")
+            ->with("idCajaMovimientoVenta0.idUser0")
+            ->with("idCajaMovimientoVenta0.idUser0.idEmpleado0")
+            ->findByPk($_GET['id']));
+               # render (full page)
+            $mPDF1->WriteHTML($this->render('previewTest',array('venta'=>$ventas),true));
+            # Outputs ready PDF
+            $mPDF1->Output(date('d-m-Y H:i:s'), EYiiPdf::OUTPUT_TO_BROWSER);
+        }
+        else
+            throw new CHttpException(400,'Petición no válida.');
+    }*/
+
+    public function actionDeudores()
+    {
         $deudores = new CActiveDataProvider('Venta',
             array('criteria'=>array(
                 //'condition'=>'montoVenta>montoPagado',
@@ -479,10 +479,10 @@ class DistribuidoraController extends Controller
                     'pageSize'=>20,
                 ),));
         $this->render('base',array('render'=>'deudores','deudores'=>$deudores));
-	}
-	
-	public function actionMovimientos()
-	{
+    }
+
+    public function actionMovimientos()
+    {
         if(isset($_GET['excel']) && isset(Yii::app()->session['excel']))
         {
             $model = Yii::app()->session['excel'];
@@ -586,10 +586,10 @@ class DistribuidoraController extends Controller
 
         //$this->render('movimientos',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'cond3'=>$cond3));
         $this->render('base',array('render'=>'movimientos','ventas'=>$ventas,'saldo'=>$saldo,'cond3'=>$cond3,'cf'=>$cf,'sf'=>$sf));
-	}
-	
-	public function actionMovimientosProducto()
-	{
+    }
+
+    public function actionMovimientosProducto()
+    {
         if(isset($_GET['excel']) && isset(Yii::app()->session['excel']))
         {
             $model = Yii::app()->session['excel'];
@@ -633,10 +633,10 @@ class DistribuidoraController extends Controller
         }
         //end filter
         $this->render('base',array('render'=>'movProducto','ventas'=>$movimentoProducto));
-	}
-	
-	public function actionPreviewDay()
-	{
+    }
+
+    public function actionPreviewDay()
+    {
         if(isset($_GET['excel']) && isset(Yii::app()->session['excel']))
         {
             $columnsTitle=array('Nº','Codigo Venta','Cliente','Cod. Prod.','Detalle del Producto','Cant','Precio','T/A','Total','Importe','Creditos','Fact');
@@ -724,10 +724,10 @@ class DistribuidoraController extends Controller
         //$tabla = $caja->ventas;
         Yii::app()->session['excel']= $caja;
         $this->render("base",array('render'=>"previewVentas",'tabla'=>$caja,));
-	}
-	
-	public function actionVentaDetalle()
-	{
+    }
+
+    public function actionVentaDetalle()
+    {
         if(isset($_GET['id']))
         {
             $ventas = Venta::model()
@@ -746,10 +746,10 @@ class DistribuidoraController extends Controller
         }
         else
             throw new CHttpException(400,'Petición no válida.');
-	}
-	
-	public function actionProductos()
-	{
+    }
+
+    public function actionProductos()
+    {
         if(isset($_GET['id']))
         {
             $almacen=$this->verifyModel(AlmacenProducto::model()->with('idProducto0')->findByPk($_GET['id']));
@@ -792,10 +792,10 @@ class DistribuidoraController extends Controller
             }
             $this->renderPartial('forms/add_reduce',array('model'=>$model,'almacen'=>$almacen,'deposito'=>$deposito));
         }
-	}
-	
-	public function actionArqueo()
-	{
+    }
+
+    public function actionArqueo()
+    {
         $arqueo = new CajaArqueo;
         $caja = Caja::model()->findByPk($this->cajaDistribuidora);
         if(isset($_POST['CajaArqueo']))
@@ -943,10 +943,10 @@ class DistribuidoraController extends Controller
         }
         else
             $this->render('base',array('render'=>'arqueos','arqueos'=>''));
-	}
-	
-	public function actionRegistroDiario()
-	{
+    }
+
+    public function actionRegistroDiario()
+    {
         if(isset($_GET['id']))
         {
             $arqueo = CajaArqueo::model()
@@ -995,9 +995,9 @@ class DistribuidoraController extends Controller
         else
             throw new CHttpException(400,'Petición no válida.');
     }
-	
-	public function actionComprobante()
-	{
+
+    public function actionComprobante()
+    {
         if(isset($_GET['id']))
         {
             $arqueo = CajaArqueo::model()	->with('idUser0')
@@ -1008,13 +1008,13 @@ class DistribuidoraController extends Controller
         }
         else
             throw new CHttpException(400,'Petición no válida.');
-	}
-	
-	
-	//acciones con ajax
-	//init
-	public function actionAjaxCliente()
-	{
+    }
+
+
+    //acciones con ajax
+    //init
+    public function actionAjaxCliente()
+    {
         if(Yii::app()->request->isAjaxRequest && isset($_GET['nitCi']))
             //if(isset($_GET['nitCi']))
         {
@@ -1028,7 +1028,7 @@ class DistribuidoraController extends Controller
             {
                 foreach ($cliente->ventas as $item)
                 {
-                    if($item->montoVenta > $item->montoPagado)
+                    if($item->estado==2)
                     {
                         $deuda=true;
                         break;
@@ -1039,10 +1039,10 @@ class DistribuidoraController extends Controller
             }
             echo CJSON::encode($cliente);
         }
-	}
-	
-	public function actionAddDetalle()
-	{
+    }
+
+    public function actionAddDetalle()
+    {
         if(Yii::app()->request->isAjaxRequest && isset($_GET['index']))
             //if(isset($_GET['index']))
         {
@@ -1078,10 +1078,10 @@ class DistribuidoraController extends Controller
         }
         else
             throw new CHttpException(400,'Petición no válida.');
-	}
-	
-	public function actionAjaxFactura()
-	{
+    }
+
+    public function actionAjaxFactura()
+    {
         //Yii::app()->user->id;
         $detalle=array();
         $tipo =0;
@@ -1133,7 +1133,7 @@ class DistribuidoraController extends Controller
             $resultado['codigo']=$venta->codigo;
             echo CJSON::encode($resultado);
         }
-	}
+    }
 
     public function actionAddReduce()
     {
@@ -1180,27 +1180,27 @@ class DistribuidoraController extends Controller
         }
         return true;
     }
-	
-	private function verifyModel($model)
-	{
+
+    private function verifyModel($model)
+    {
         if($model===null)
             throw new CHttpException(404,'La Respuesta de la pagina no Existe.');
         return $model;
-	}
-	
-	/*protected function getRemoveLinkAndIndexInput($index)
-	{
-		$removeLink=CHtml::link('Quitar', '#', array('class'=>'btn btn-danger tabular-input-remove')).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />';
-		$removeLink=strtr("<td>{link}</td>", array('{link}'=>$removeLink));
-		return $removeLink;
-	}*/
-	
-	protected function getUltimoDiaMes($elAnio,$elMes) {
-		return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
-	}
-	
-	protected function getCodigo($venta)
-	{
+    }
+
+    /*protected function getRemoveLinkAndIndexInput($index)
+    {
+        $removeLink=CHtml::link('Quitar', '#', array('class'=>'btn btn-danger tabular-input-remove')).'<input type="hidden" class="tabular-input-index" value="'.$index.'" />';
+        $removeLink=strtr("<td>{link}</td>", array('{link}'=>$removeLink));
+        return $removeLink;
+    }*/
+
+    protected function getUltimoDiaMes($elAnio,$elMes) {
+        return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
+    }
+
+    protected function getCodigo($venta)
+    {
         $row = Venta::model()->find(array("condition"=>"tipoVenta=".$venta->tipoVenta,'order'=>'fechaVenta Desc'));
         if(empty($row))
             $row=new Venta;
@@ -1221,14 +1221,13 @@ class DistribuidoraController extends Controller
             $venta->codigo = $venta->numero."-P";
 
         return $venta;
-	}
+    }
 
     private function createExcel($columnsTitle,$content,$title="")
     {
         if($title=="")
-        {
             $title="Reports";
-        }
+
         Yii::import('ext.phpexcel.XPHPExcel');
         $objPHPExcel= XPHPExcel::createPHPExcel();
         $objPHPExcel->getProperties()

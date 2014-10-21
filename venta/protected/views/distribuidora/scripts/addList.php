@@ -9,7 +9,7 @@ function newRow(almacen)
 		$(\".tabular-input-index\").each(function() {
 		    index = Math.max(index, parseInt(this.value)) + 1;
 		});
-	}		
+	}
 	$.ajax({
 		type: 'GET',
 		url: '".CHtml::normalizeUrl(array('/distribuidora/addDetalle'))."',
@@ -19,8 +19,8 @@ function newRow(almacen)
 			input.append(html);
 			input.siblings('.tabular-header').show();
 		},
-		
+
 	});
 	event.preventDefault();
 }
-",CClientScript::POS_HEAD); ?>
+",CClientScript::POS_HEAD);

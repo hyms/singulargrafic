@@ -3,7 +3,7 @@ Yii::app()->getClientScript()->registerScript("ajax_factura","
 function factura(tipo)
 {
 	jsonObj = [];
-		        
+
 	$('#yw3 > tbody  > tr').each(function(index, value) {
 		id = $(this).find('#idAlmacen').val();
 		index = $(this).find('#indexs').val();
@@ -12,7 +12,7 @@ function factura(tipo)
 		item ['index'] = index;
 		jsonObj.push(item);
 	});
-	
+
 	if(jsonObj.length>0){
 		$.ajax({
 			type 		: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -26,15 +26,15 @@ function factura(tipo)
 			var key;
 			for(key in data) {
 				if(data.hasOwnProperty(key)) {
-		    		
+
 				$('#costoUnidad_'+data[key]['index']).val(data[key]['precioU']);
 				$('#costoPaquete_'+data[key]['index']).val(data[key]['precioP']);
 		    	$('#costoTotal_'+data[key]['index']).val(redondeo(suma(suma($('#stockUnidad_'+data[key]['index']).val()*$('#costoUnidad_'+data[key]['index']).val(),$('#stockPaquete_'+data[key]['index']).val()*$('#costoPaquete_'+data[key]['index']).val()),$('#adicional_'+data[key]['index']).val())));
 			}}
 		   	calcular_total();
-			$('#factura').prop('disabled', tipo);			
+			$('#factura').prop('disabled', tipo);
 		});
-	}	
-			
+	}
+
 }
-",CClientScript::POS_READY);?>
+",CClientScript::POS_READY);

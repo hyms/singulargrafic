@@ -4,4 +4,4 @@
 		//alert('se guardaran los datos');
 		document.getElementById('form').reset();
 });
-",CClientScript::POS_READY); ?>
+",CClientScript::POS_READY);

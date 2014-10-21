@@ -184,6 +184,7 @@ class CTP extends CActiveRecord
 
     public $apellido;
     public $nit;
+    public $cantidad;
     public function searchOrder($cond=null)
     {
         $criteria=new CDbCriteria;

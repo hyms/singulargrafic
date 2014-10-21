@@ -3,7 +3,7 @@
     <div class="hidden-print">
         <?php echo CHtml::link('<span class="glyphicon glyphicon-print"></span>', '#', array("class"=>"btn btn-default","id"=>"print")); ?>
     </div>
-	
+
     <h3 class="text-right">COMPROBANTE DE ENTREGA <?php echo $arqueo->comprobante;?></h3>
     <div class="text-right"><strong><?php echo date("d/m/Y",strtotime($arqueo->fechaVentas));?></strong></div>
     <span class="col-xs-12"><strong>Recivo de:</strong><?php echo " ".$arqueo->idUser0->idEmpleado0->nombre." ".$arqueo->idUser0->idEmpleado0->apellido;?></span>

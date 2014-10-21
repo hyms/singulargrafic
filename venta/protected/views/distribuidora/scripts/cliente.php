@@ -1,15 +1,15 @@
 <?php
 Yii::app()->getClientScript()->registerScript("ajax_cliente",
-"
-	function cliente (nitCi)
-	{
-		nitCi = jQuery.trim(nitCi);
-		if(nitCi.length>0){
-	        $.ajax({
-	            url: '".CHtml::normalizeUrl(array('/distribuidora/ajaxCliente'))."', 
-	            type: 'GET', 
+    "
+        function cliente (nitCi)
+        {
+            nitCi = jQuery.trim(nitCi);
+            if(nitCi.length>0){
+                $.ajax({
+                    url: '".CHtml::normalizeUrl(array('/distribuidora/ajaxCliente'))."',
+	            type: 'GET',
 	            data: { nitCi: nitCi},
-	            success: function (data){ 
+	            success: function (data){
 				 			data = JSON.parse(data);
 							data[\"cliente\"] = JSON.parse(data[\"cliente\"]);
 							if(data[\"deuda\"]==true)
@@ -21,38 +21,38 @@ Yii::app()->getClientScript()->registerScript("ajax_cliente",
 							else
 							{
 								$('#apellido').prop('readonly', false);
-							}			
-							$('#apellido').val(data[\"cliente\"][\"apellido\"]); 
+							}
+							$('#apellido').val(data[\"cliente\"][\"apellido\"]);
 	            			$('#clienteNit').val(data[\"cliente\"][\"nitCi\"]);
-							
+
 						 },
-				error:	
+				error:
 					$('#apellido').prop('readonly', false),
 	        });
 		}
 	}
-		
-    $('#NitCi').keydown(function(e){ 
-        if(e.keyCode==13 || e.keyCode==9) 
-	    { 
+
+    $('#NitCi').keydown(function(e){
+        if(e.keyCode==13 || e.keyCode==9)
+	    {
 	    	if($('#NitCi').val()!=\"\")
-	     	{	
+	     	{
 	           	cliente($('#NitCi').val());
 				$('#apellido').focus();
 	        }
-	      	return true; 
-	    } 
-           
+	      	return true;
+	    }
+
     });
-    
-    $('#NitCi').blur(function(e){ 
+
+    $('#NitCi').blur(function(e){
         if($('#NitCi').val()!=\"\")
 	     	cliente($('#NitCi').val())
     });
-    
-    $('#apellido').keydown(function(e){ 
-        if(e.keyCode==13 || e.keyCode==9) 
-	    { 
+
+    $('#apellido').keydown(function(e){
+        if(e.keyCode==13 || e.keyCode==9)
+	    {
 	    	if($('#stockUnidad_0').length>0)
 			{
 	    		$('#stockUnidad_0').focus();
@@ -61,9 +61,8 @@ Yii::app()->getClientScript()->registerScript("ajax_cliente",
 	    	{
 	    		$('#apellido').focus();
 	    	}
-	      	return true; 
-	    } 
-           
+	      	return true;
+	    }
+
     });
- ",CClientScript::POS_READY); 
-?>
+ ",CClientScript::POS_READY);

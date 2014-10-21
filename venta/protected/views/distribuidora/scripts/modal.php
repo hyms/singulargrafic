@@ -7,9 +7,8 @@ $('#document').ready(function(){
             'type': 'GET',
             'url' : $(this).attr('href'),
             success: function (data) {
-       
                 $('#'+dialogId+' div.divForForm').html(data);
-               $( '#'+dialogId ).dialog( 'open' );
+                $( '#'+dialogId ).dialog( 'open' );
             },
             dataType: 'html',
         });

@@ -3,4 +3,3 @@
 		window.print();
 	});
 ",CClientScript::POS_READY);
-?> 
