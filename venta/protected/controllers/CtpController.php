@@ -46,6 +46,7 @@ class CtpController extends Controller
             array('criteria'=>array(
                 'group'=>'`t`.idCliente',
                 'select'=>'count(*) as cantidad, `t`.`idCliente`',
+                'condition'=>'idSucursal='.$this->sucursal,
                 'order'=>'cantidad Desc',
                 'with'=>array('idCliente0'=>array('select'=>'nitCi, apellido')),
                 'limit'=>'5',
@@ -124,108 +125,123 @@ class CtpController extends Controller
 
             if(isset($_POST['CTP']))
             {
+                $sw=0;
                 $ctp->attributes = $_POST['CTP'];
                 $ctp->idUserVenta = Yii::app()->user->id;
-                if(!empty($ctp->fechaPlazo))
-                    $ctp->fechaPlazo= date("Y-m-d H:i:s",strtotime($ctp->fechaPlazo));
-                $ctp->estado = 2;
-
-                $ctp=$this->getCodigo($ctp);
-                $tmp = array();
-
-                $caja = $this->verifyModel(Caja::model()->findByPk($this->cajaCTP));
-                $cajaMovimiento = new CajaMovimientoVenta;
-                $cajaMovimiento->idUser = Yii::app()->user->id;
-                $cajaMovimiento->motivo = "Orden CTP";
-                $cajaMovimiento->idCaja = $caja->idCaja;
-                $cajaMovimiento->arqueo = 0;
-                $cajaMovimiento->tipo = 0;
-
-                if(isset($_POST['Cliente'])){
-                    $cliente = $this->saveCliente($_POST['Cliente']);
-                    $cliente->validate();
+                if($ctp->formaPago == 1){
+                    if(empty($ctp->fechaPlazo))
+                    {
+                        $sw=1;
+                        $ctp->addError('fechaPlazo','Fecha Plazo no puede estar Vacio');
+                    }
+                    if(empty($ctp->autorizado))
+                    {
+                        $sw=1;
+                        $ctp->addError('fechaPlazo','Debes seleccionar a un autorizado');
+                    }
                 }
-
-                foreach ($_POST['DetalleCTP'] as $key => $item)
-                {
-                    $tmp[$key] = $ctp->detalleCTPs[$key];
-                    $tmp[$key]->attributes = $item;
-                }
-                $ctp->detalleCTPs=$tmp;
-
-                $cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
-                $cajaMovimiento->tipo = 0;
-                if($ctp->formaPago==0){
-                    $cajaMovimiento->monto = $ctp->montoPagado-$ctp->montoCambio;
-                }
-                if($ctp->formaPago==1){
-                    $cajaMovimiento->monto = $ctp->montoPagado;
-                }
-                if($cajaMovimiento->monto == $ctp->montoVenta)
-                    $ctp->estado = 0;
-                elseif($cajaMovimiento->monto > $ctp->montoVenta)
-                {
-                    $ctp->estado = 0;
-                    $cajaMovimiento->monto = $ctp->montoVenta;
-                }
-                else
+                if($sw==0){
+                    if(!empty($ctp->fechaPlazo))
+                        $ctp->fechaPlazo= date("Y-m-d H:i:s",strtotime($ctp->fechaPlazo));
                     $ctp->estado = 2;
 
-                if($cliente->save() && $ctp->save())
-                {
-                    /*$almacen = array();
-                    foreach ($ctp->detalleCTPs as $key => $item){
-                        //$item->save();
-                        $almacen[$key] = AlmacenProducto::model()->findByPk($item->idAlmacenProducto);
-                        $almacen[$key]->stockU = $almacen[$key]->stockU - $item->cantidadU;
-                        if($almacen[$key]->stockU>=0)
-                        {
-                            if(!$almacen[$key]->validate()){
-                               $ctp->estado = 1;
-                               break;
+                    $ctp=$this->getCodigo($ctp);
+                    $tmp = array();
+
+                    $caja = $this->verifyModel(Caja::model()->findByPk($this->cajaCTP));
+                    $cajaMovimiento = new CajaMovimientoVenta;
+                    $cajaMovimiento->idUser = Yii::app()->user->id;
+                    $cajaMovimiento->motivo = "Orden CTP";
+                    $cajaMovimiento->idCaja = $caja->idCaja;
+                    $cajaMovimiento->arqueo = 0;
+                    $cajaMovimiento->tipo = 0;
+
+                    if(isset($_POST['Cliente'])){
+                        $cliente = $this->saveCliente($_POST['Cliente']);
+                        $cliente->validate();
+                    }
+
+                    foreach ($_POST['DetalleCTP'] as $key => $item)
+                    {
+                        $tmp[$key] = $ctp->detalleCTPs[$key];
+                        $tmp[$key]->attributes = $item;
+                    }
+                    $ctp->detalleCTPs=$tmp;
+
+                    $cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
+                    $cajaMovimiento->tipo = 0;
+                    if($ctp->formaPago==0){
+                        $cajaMovimiento->monto = $ctp->montoPagado-$ctp->montoCambio;
+                    }
+                    if($ctp->formaPago==1){
+                        $cajaMovimiento->monto = $ctp->montoPagado;
+                    }
+                    if($cajaMovimiento->monto == $ctp->montoVenta)
+                        $ctp->estado = 0;
+                    elseif($cajaMovimiento->monto > $ctp->montoVenta)
+                    {
+                        $ctp->estado = 0;
+                        $cajaMovimiento->monto = $ctp->montoVenta;
+                    }
+                    else
+                        $ctp->estado = 2;
+
+                    if($cliente->save() && $ctp->save())
+                    {
+                        /*$almacen = array();
+                        foreach ($ctp->detalleCTPs as $key => $item){
+                            //$item->save();
+                            $almacen[$key] = AlmacenProducto::model()->findByPk($item->idAlmacenProducto);
+                            $almacen[$key]->stockU = $almacen[$key]->stockU - $item->cantidadU;
+                            if($almacen[$key]->stockU>=0)
+                            {
+                                if(!$almacen[$key]->validate()){
+                                   $ctp->estado = 1;
+                                   break;
+                                }
                             }
+                            else{
+                                $ctp->estado = 1;
+                                break;
+                            }
+                        }
+                        if($ctp->estado!=1)
+                        {
+                            $cajaMovimiento->save();
+                            foreach($almacen as $item)
+                            {
+                                if($item->save())
+                                {
+                                    $movimiento=new MovimientoAlmacen;
+                                    $movimiento->idProducto = $almacen[$key]->idProducto0->idProducto;
+                                    //$movimiento->idAlmacenDestino = 2;
+                                    $movimiento->idAlmacenOrigen = $this->almacen;
+                                    //$idUser->idUser = Yii::app()->user->id;
+                                    $movimiento->fechaMovimiento = date("Y-m-d H:i:s");
+                                    $movimiento->cantidadU = $ctp->detalleCTPs[$key]->cantidadU;
+                                    //$movimiento->cantidadP = $item->cantidadP;
+                                    $movimiento->obs = "orden de trabajo";
+                                    $movimiento->save();
+                                }
+                            }
+                            $this->redirect(array("ctp/buscar"));
+                        }
+                        else
+                            $ctp->save();-*/
+                        if($this->saveMovimientoAlmacen($ctp->detalleCTPs)){
+                            if($cajaMovimiento->save()){
+                                $caja->saldo=$caja->saldo+$cajaMovimiento->monto;
+                                $caja->save();
+                            }
+
+                            $ctp->idCajaMovimientoVenta =$cajaMovimiento->idCajaMovimientoVenta;
+                            if($ctp->save())
+                                $this->redirect(array('ctp/preview','id'=>$ctp->idCTP));
                         }
                         else{
                             $ctp->estado = 1;
-                            break;
+                            $ctp->save();
                         }
-                    }
-                    if($ctp->estado!=1)
-                    {
-                        $cajaMovimiento->save();
-                        foreach($almacen as $item)
-                        {
-                            if($item->save())
-                            {
-                                $movimiento=new MovimientoAlmacen;
-                                $movimiento->idProducto = $almacen[$key]->idProducto0->idProducto;
-                                //$movimiento->idAlmacenDestino = 2;
-                                $movimiento->idAlmacenOrigen = $this->almacen;
-                                //$idUser->idUser = Yii::app()->user->id;
-                                $movimiento->fechaMovimiento = date("Y-m-d H:i:s");
-                                $movimiento->cantidadU = $ctp->detalleCTPs[$key]->cantidadU;
-                                //$movimiento->cantidadP = $item->cantidadP;
-                                $movimiento->obs = "orden de trabajo";
-                                $movimiento->save();
-                            }
-                        }
-                        $this->redirect(array("ctp/buscar"));
-                    }
-                    else
-                        $ctp->save();-*/
-                    if($this->saveMovimientoAlmacen($ctp->detalleCTPs)){
-                        if($cajaMovimiento->save()){
-                            $caja->saldo=$caja->saldo+$cajaMovimiento->monto;
-                            $caja->save();
-                        }
-
-                        $ctp->idCajaMovimientoVenta =$cajaMovimiento->idCajaMovimientoVenta;
-                        if($ctp->save())
-                            $this->redirect(array('ctp/buscar'));
-                    }
-                    else{
-                        $ctp->estado = 1;
-                        $ctp->save();
                     }
                 }
             }
@@ -288,7 +304,7 @@ class CtpController extends Controller
                     if($ctp->estado == 2)
                     {
                         $ctp->attributes = $_POST['CTP'];
-                        if($ctp->montoPagado > 0)
+                        if($ctp->montoPagado > 0 && $ctp->montoPagado>=$ctp->idCajaMovimientoVenta0->monto)
                         {
                             $caja->monto = $caja->monto - $ctp->idCajaMovimientoVenta0->monto;
                             if(($caja->monto + $ctp->montoPagado)>0)
@@ -308,6 +324,12 @@ class CtpController extends Controller
         else
             throw new CHttpException(400,'Petición no válida.');
     }
+
+    public function actionReturn()
+    {
+
+    }
+
     public function actionBuscar()
     {
         /*$t="";

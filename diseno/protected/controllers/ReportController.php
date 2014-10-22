@@ -30,7 +30,7 @@ class ReportController extends CController
                 //'actions'=>array('index'),
                 'expression'=>'isset($user->role) && ($user->role==4)',
             ),
-           array('allow', // allow authenticated user to perform 'create' and 'update' actions
+            array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'expression'=>'isset($user->role) && ($user->role<=2)',
             ),
             array('deny',
@@ -53,6 +53,7 @@ class ReportController extends CController
         if(isset($_GET['CTP']))
         {
             $ordenes->attributes = $_GET['CTP'];
+            $ordenes->apellido = $_GET['CTP']['apellido'];
         }
         $this->render('index',array('render'=>'ordenes','ordenes'=>$ordenes));
     }
@@ -65,6 +66,7 @@ class ReportController extends CController
         if(isset($_GET['DetalleCTP']))
         {
             $placas->attributes = $_GET['DetalleCTP'];
+            $placas->cliente = $_GET['DetalleCTP']['cliente'];
         }
         $this->render('index',array('render'=>'placas','placas'=>$placas));
     }
@@ -81,5 +83,50 @@ class ReportController extends CController
             $deudas->codigo = $_GET['FallasCTP']['codigo'];
         }
         $this->render('index',array('render'=>'deudas','deudas'=>$deudas));
+    }
+
+    public function actionOrden()
+    {
+        if(isset($_GET['id']))
+        {
+            $ctp = CTP::model()
+                ->with('idCliente0')
+                ->with('idUserOT0')
+                ->with('idUserOT0.idEmpleado0')
+                ->with('idUserVenta0')
+                //->with('idUserVenta0.idEmpleado0')
+                ->with('detalleCTPs')
+                ->findByPk($_GET['id']);
+            if($ctp->tipoCTP==1)
+            {
+                $this->renderPartial('prints/preview',array('render'=>'preview','ctp'=>$ctp,'tipo'=>''));
+            }
+            if($ctp->tipoCTP==2)
+            {
+                $ctpP= CTP::model()
+                    ->with('idCliente0')
+                    ->with('idUserOT0')
+                    ->with('idUserOT0.idEmpleado0')
+                    ->findByPk($ctp->idCTPParent);
+                $this->renderPartial('v',array('render'=>'previewTI','ctp'=>$ctp,'tipo'=>'','titulo'=>'Interna'));
+            }
+            if($ctp->tipoCTP==3)
+            {
+                $ctpP= CTP::model()
+                    ->with('idCliente0')
+                    ->with('idUserVenta0')
+                    ->with('idUserVenta0.idEmpleado0')
+                    ->findByPk($ctp->idCTPParent);
+                $ctp->idCliente0 = $ctpP->idCliente0;
+                $ctp->idUserVenta0 = $ctpP->idUserVenta0;
+
+                if($ctp->montoVenta>0)
+                    $this->renderPartial('prints/preview',array('render'=>'preview','ctp'=>$ctp,'tipo'=>'Reposición'));
+                else
+                    $this->renderPartial('prints/preview',array('render'=>'previewSC','ctp'=>$ctp,'tipo'=>'1','titulo'=>'Reposición'));
+            }
+        }
+        else
+            throw new CHttpException(400,'Petición no válida.');
     }
 }

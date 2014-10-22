@@ -4,17 +4,36 @@
 $this->pageTitle=Yii::app()->name;
 ?>
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
+<h1>Bienvenido a <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
 
-<p>Congratulations! You have successfully created your Yii application.</p>
+<div class="col-xs-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong class="panel-title">Record</strong>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>
+                    Ordenes Generadas
+                </li>
+                <li>
+                    Repos. Generadas
+                </li>
+                <li>
+                    Sancion Mes
+                </li>
 
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <code><?php echo __FILE__; ?></code></li>
-	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
-
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="col-xs-9">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong class="panel-title">Noticias</strong>
+        </div>
+        <div class="panel-body">
+            Noticias del dia
+        </div>
+    </div>
+</div>

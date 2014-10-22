@@ -23,11 +23,13 @@
  * @property string $responsable
  * @property string $obs
  * @property integer $idCajaMovimientoVenta
+ * @property integer $idSucursal
  *
  * The followings are the available model relations:
  * @property DetalleVenta[] $detalleVentas
  * @property CajaMovimientoVenta $idCajaMovimientoVenta0
  * @property Cliente $idCliente0
+ * @property Sucursal $idSucursal0
  */
 class Venta extends CActiveRecord
 {
@@ -48,7 +50,7 @@ class Venta extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('numero', 'required'),
-			array('tipoVenta, formaPago, idCliente, numero, serie, estado, idCajaMovimientoVenta', 'numerical', 'integerOnly'=>true),
+			array('tipoVenta, formaPago, idCliente, numero, serie, estado, idCajaMovimientoVenta, idSucursal', 'numerical', 'integerOnly'=>true),
 			array('montoVenta, montoPagado, montoCambio, montoDescuento', 'numerical'),
 			array('codigo', 'length', 'max'=>45),
 			array('factura, autorizado, responsable', 'length', 'max'=>50),
@@ -56,7 +58,7 @@ class Venta extends CActiveRecord
 			array('fechaVenta, fechaPlazo', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idVenta, fechaVenta, tipoVenta, formaPago, idCliente, fechaPlazo, codigo, numero, serie, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta', 'safe', 'on'=>'search'),
+			array('idVenta, fechaVenta, tipoVenta, formaPago, idCliente, fechaPlazo, codigo, numero, serie, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, idSucursal', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,6 +73,7 @@ class Venta extends CActiveRecord
 			'detalleVentas' => array(self::HAS_MANY, 'DetalleVenta', 'idVenta'),
 			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
 			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
+			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
 		);
 	}
 
@@ -99,6 +102,7 @@ class Venta extends CActiveRecord
 			'responsable' => 'Responsable',
 			'obs' => 'Obs',
 			'idCajaMovimientoVenta' => 'Id Caja Movimiento Venta',
+			'idSucursal' => 'Id Sucursal',
 		);
 	}
 
@@ -139,44 +143,43 @@ class Venta extends CActiveRecord
 		$criteria->compare('responsable',$this->responsable,true);
 		$criteria->compare('obs',$this->obs,true);
 		$criteria->compare('idCajaMovimientoVenta',$this->idCajaMovimientoVenta);
+		$criteria->compare('idSucursal',$this->idSucursal);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
+    public $apellido;
+    public $nit;
+    public function searchDistribuidora()
+    {
+        $criteria=new CDbCriteria;
 
-	public $apellido;
-	public $nit;
-	public function searchDistribuidora()
-	{
-		$criteria=new CDbCriteria;
-		
-		$criteria->with= array(
-				'idCliente0','idCajaMovimientoVenta0',
-		);
-		$criteria->order='fechaVenta ASC';
-		//$criteria->limit = 200;
-		//$criteria->condition = 'idAlmacen=2';
-		
-		$criteria->compare('idVenta',$this->idVenta);
-		$criteria->compare('fechaVenta',$this->fechaVenta,true);
-		$criteria->compare('idCliente',$this->idCliente);
-		$criteria->compare('codigo',$this->codigo,true);
-		$criteria->compare('montoVenta',$this->montoVenta);
-		$criteria->compare('montoPagado',$this->montoPagado);
-		$criteria->compare('montoCambio',$this->montoCambio);
-		$criteria->compare('montoDescuento',$this->montoDescuento);
-		$criteria->compare('tipoVenta',$this->tipoVenta);
-		$criteria->compare('idCliente0.apellido',$this->apellido,true);
-		$criteria->compare('idCliente0.nitCi',$this->nit);
+        $criteria->with= array(
+            'idCliente0','idCajaMovimientoVenta0',
+        );
+        $criteria->order='fechaVenta ASC';
+        //$criteria->limit = 200;
+        //$criteria->condition = 'idAlmacen=2';
+
+        $criteria->compare('idVenta',$this->idVenta);
+        $criteria->compare('fechaVenta',$this->fechaVenta,true);
+        $criteria->compare('idCliente',$this->idCliente);
+        $criteria->compare('codigo',$this->codigo,true);
+        $criteria->compare('montoVenta',$this->montoVenta);
+        $criteria->compare('montoPagado',$this->montoPagado);
+        $criteria->compare('montoCambio',$this->montoCambio);
+        $criteria->compare('montoDescuento',$this->montoDescuento);
+        $criteria->compare('tipoVenta',$this->tipoVenta);
+        $criteria->compare('idCliente0.apellido',$this->apellido,true);
+        $criteria->compare('idCliente0.nitCi',$this->nit);
 
         $data=new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
         ));
         Yii::app()->session['excel']=$this;
-		return $data;
-	}
-
+        return $data;
+    }
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

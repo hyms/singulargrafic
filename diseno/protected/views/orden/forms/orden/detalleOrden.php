@@ -22,12 +22,12 @@
                 foreach ($detalle as $key=>$item){
                     if($item->idAlmacenProducto!=null){
                         $this->renderPartial('forms/_newRowDetalleVenta', array(
-                                'model'=>$item,
-                                'index'=>$key,
-                                'costo'=>"cliente",
-                                'almacen'=>AlmacenProducto::model()
-                                            ->with("idProducto0")
-                                            ->findByPk($item->idAlmacenProducto),
+                            'model'=>$item,
+                            'index'=>$key,
+                            'costo'=>"cliente",
+                            'almacen'=>AlmacenProducto::model()
+                                    ->with("idProducto0")
+                                    ->findByPk($item->idAlmacenProducto),
                         ));
                     }
                 }
@@ -41,7 +41,7 @@
     <div class="col-xs-7">
         <?php echo CHtml::activeLabelEx($ctp,"obs",array('class'=>'control-label col-xs-4'))?>
         <div class="col-xs-8">
-        <?php echo CHtml::activeTextArea($ctp,"obs",array('class'=>'form-control'))?>
+            <?php echo CHtml::activeTextArea($ctp,"obs",array('class'=>'form-control'))?>
         </div>
         <?php echo CHtml::error($ctp,"obs",array('class'=>'label label-danger')); ?>
     </div>
@@ -50,18 +50,18 @@
             <?php echo CHtml::activeLabelEx($ctp,"fechaEntega",array('class'=>'control-label col-xs-5'))?>
             <div class="col-xs-7">
                 <?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                    'name'=>'fechaEntega',
-                                    'attribute'=>'fechaEntega',
-                                    'language'=>'es',
-                                    'model'=>$ctp,
-                                    'options'=>array(
-                                            'showAnim'=>'fold',
-                                            'dateFormat'=>'yy-mm-dd',
-                                    ),
-                                    'htmlOptions'=>array(
-                                            'class'=>'form-control input-sm',
-                                    ),
-                                )); ?>
+                    'name'=>'fechaEntega',
+                    'attribute'=>'fechaEntega',
+                    'language'=>'es',
+                    'model'=>$ctp,
+                    'options'=>array(
+                        'showAnim'=>'fold',
+                        'dateFormat'=>'yy-mm-dd',
+                    ),
+                    'htmlOptions'=>array(
+                        'class'=>'form-control input-sm',
+                    ),
+                )); ?>
             </div>
             <?php echo CHtml::error($ctp,"fechaEntega",array('class'=>'label label-danger')); ?>
         </div>

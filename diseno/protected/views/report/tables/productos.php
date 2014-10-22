@@ -34,7 +34,7 @@
                 array(
                     'header'=>'Cant.',
                     'value'=>'$data->nroPlacas',
-                    'filter'=>CHtml::activeTextField($placas,'cliente',array('class'=>'form-control input-sm')),
+                    'filter'=>CHtml::activeTextField($placas,'nroPlacas',array('class'=>'form-control input-sm')),
                 ),
                 array(
                     'header'=>'Fecha',
@@ -55,11 +55,11 @@
                             ),
                             true),
                 ),
-                array(
+                /*array(
                     'header'=>'',
                     'type'=>'raw',
                     'value'=>'CHtml::link("Ver",array("#","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm"))',
-                ),
+                ),*/
             )
         ));
         ?>

@@ -14,6 +14,8 @@
         case "deudas":
             $this->renderPartial('tables/deudas',array('deudas'=>$deudas));
             break;
+        case "preview":
+            break;
         default:
             echo "";
             break;

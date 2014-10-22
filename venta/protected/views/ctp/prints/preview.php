@@ -6,7 +6,7 @@
         <h4 class="text-right"><strong><?php echo $ctp->codigo; ?></strong></h4>
         <h5 class="col-xs-offset-8 text-right"><strong><?php echo "FECHA:";?></strong> <?php echo date("d-m-Y",strtotime($ctp->fechaOrden));?></h5>
         <small class="col-xs-offset-3 col-xs-5 text-center"><?php echo $tipo?></small>
-        <div class="col-xs-4 well well-sm">Fecha de Entrega:<?php echo (!empty($ctp->fechaEntega))?date("d-m-Y",strtotime($ctp->fechaEntega))."/":"";?></div>
+        <div class="col-xs-4 well well-sm"><strong>Fecha de Entrega:</strong> <?php echo (!empty($ctp->fechaEntega))?date("d-m-Y",strtotime($ctp->fechaEntega))."/":"";?></div>
     </div>
 
     <div class="row">

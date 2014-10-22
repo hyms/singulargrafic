@@ -189,7 +189,7 @@ class CTP extends CActiveRecord
     {
         $criteria=new CDbCriteria;
 
-        $criteria->with= array('idCliente0',);
+        $criteria->with= array('idCliente0','idCajaMovimientoVenta0');
         $criteria->order='fechaOrden DESC';
         if($cond!=null)
         {

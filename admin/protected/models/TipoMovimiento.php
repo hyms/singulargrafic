@@ -32,7 +32,7 @@ class TipoMovimiento extends CActiveRecord
 		return array(
 			array('nombre, estado', 'required'),
 			array('estado', 'numerical', 'integerOnly'=>true),
-			array('nombre', 'length', 'max'=>45),
+			array('nombre', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('idTipoMovimiento, nombre, estado', 'safe', 'on'=>'search'),

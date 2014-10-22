@@ -57,4 +57,4 @@ $('#descuento').keydown(function(e){
 	}
 });
 		
-",CClientScript::POS_READY);?>
+",CClientScript::POS_READY);

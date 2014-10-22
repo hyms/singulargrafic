@@ -58,10 +58,20 @@
                 array(
                     'header'=>'',
                     'type'=>'raw',
-                    'value'=>'CHtml::link("Ver",array("#","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm"))',
+                    //'value'=>'CHtml::link("Ver",array("#","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm"))',
+                    'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-list-alt\"></span> ver", array("report/orden","id"=>$data->idCTP), array("class" => "openDlg divDialog","title"=>"Orden de Trabajo"))',
                 ),
             )
         ));
         ?>
     </div>
 </div>
+
+<?php
+$this->renderPartial("scripts/modal");
+
+$this->beginWidget('zii.widgets.jui.CJuiDialog', array('id'=>'divDialog',
+    'options'=>array( 'title'=>'Detalle de Orden', 'autoOpen'=>false, 'modal'=>true, 'width'=>840)));
+?>
+<div class="divForForm"></div>
+<?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>

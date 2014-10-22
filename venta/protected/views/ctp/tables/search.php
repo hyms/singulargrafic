@@ -5,7 +5,7 @@
     <div class="panel-body">
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
-            'dataProvider'=>$ordenes->searchOrder('`t`.estado!=1'),
+            'dataProvider'=>$ordenes->searchOrder('`t`.estado!=1 and idCajaMovimientoVenta0.arqueo<1'),
             'filter'=>$ordenes,
             'ajaxUpdate'=>false,
             'itemsCssClass' => 'table table-hover table-condensed',

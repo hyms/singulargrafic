@@ -1,28 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "movimientoCaja".
+ * This is the model class for table "preciosDistribuidora".
  *
- * The followings are the available columns in table 'movimientoCaja':
- * @property integer $idMovimientoCaja
- * @property double $monto
- * @property string $motivo
- * @property string $fechaMovimiento
- * @property integer $idUser
- * @property integer $idCaja
+ * The followings are the available columns in table 'preciosDistribuidora':
+ * @property integer $idPreciosDistribuidora
+ * @property integer $idAlmacenProducto
+ * @property double $precioCFU
+ * @property double $precioCFP
+ * @property double $precioSFU
+ * @property double $precioSFP
  *
  * The followings are the available model relations:
- * @property User $idUser0
- * @property CajaVenta $idCaja0
+ * @property AlmacenProducto $idAlmacenProducto0
  */
-class MovimientoCaja extends CActiveRecord
+class PreciosDistribuidora extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'movimientoCaja';
+		return 'preciosDistribuidora';
 	}
 
 	/**
@@ -33,13 +32,12 @@ class MovimientoCaja extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idUser, idCaja', 'numerical', 'integerOnly'=>true),
-			array('monto', 'numerical'),
-			array('motivo', 'length', 'max'=>100),
-			array('fechaMovimiento', 'safe'),
+			array('idAlmacenProducto, precioCFU, precioCFP, precioSFU, precioSFP', 'required'),
+			array('idAlmacenProducto', 'numerical', 'integerOnly'=>true),
+			array('precioCFU, precioCFP, precioSFU, precioSFP', 'numerical'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idMovimientoCaja, monto, motivo, fechaMovimiento, idUser, idCaja', 'safe', 'on'=>'search'),
+			array('idPreciosDistribuidora, idAlmacenProducto, precioCFU, precioCFP, precioSFU, precioSFP', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,8 +49,7 @@ class MovimientoCaja extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
-			'idCaja0' => array(self::BELONGS_TO, 'CajaVenta', 'idCaja'),
+			'idAlmacenProducto0' => array(self::BELONGS_TO, 'AlmacenProducto', 'idAlmacenProducto'),
 		);
 	}
 
@@ -62,12 +59,12 @@ class MovimientoCaja extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idMovimientoCaja' => 'Id Movimiento Caja',
-			'monto' => 'Monto',
-			'motivo' => 'Motivo',
-			'fechaMovimiento' => 'Fecha Movimiento',
-			'idUser' => 'Id User',
-			'idCaja' => 'Id Caja',
+			'idPreciosDistribuidora' => 'Id Precios Distribuidora',
+			'idAlmacenProducto' => 'Id Almacen Producto',
+			'precioCFU' => 'Precio Cfu',
+			'precioCFP' => 'Precio Cfp',
+			'precioSFU' => 'Precio Sfu',
+			'precioSFP' => 'Precio Sfp',
 		);
 	}
 
@@ -89,12 +86,12 @@ class MovimientoCaja extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idMovimientoCaja',$this->idMovimientoCaja);
-		$criteria->compare('monto',$this->monto);
-		$criteria->compare('motivo',$this->motivo,true);
-		$criteria->compare('fechaMovimiento',$this->fechaMovimiento,true);
-		$criteria->compare('idUser',$this->idUser);
-		$criteria->compare('idCaja',$this->idCaja);
+		$criteria->compare('idPreciosDistribuidora',$this->idPreciosDistribuidora);
+		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
+		$criteria->compare('precioCFU',$this->precioCFU);
+		$criteria->compare('precioCFP',$this->precioCFP);
+		$criteria->compare('precioSFU',$this->precioSFU);
+		$criteria->compare('precioSFP',$this->precioSFP);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -105,7 +102,7 @@ class MovimientoCaja extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return MovimientoCaja the static model class
+	 * @return PreciosDistribuidora the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -1,36 +1,36 @@
-<?php 
-	$this->widget('zii.widgets.grid.CGridView', array(
-		'dataProvider'=>$productos->searchCTP(),
-		'ajaxUpdate'=>true,
-		'cssFile' => false,
-		'itemsCssClass' => 'table table-hover table-condensed',
-		//'pagerCssClass' => 'pagination', // override default css
-		'htmlOptions' => array('class' => 'table-responsive'),
-		'columns'=>array(
-			array(
-					'header'=>'Nro',
-					'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
-			),
-			array(
-					'header'=>'Material',
-					'value'=>'$data->idProducto0->material',
-			),
-			array(
-					'header'=>'Formato',
-					'value'=>'$data->idProducto0->color." - ".$data->idProducto0->detalle',
-			),
-			array(
-					'header'=>'Stock',
-					'value'=>'$data->stockU',
-			),
-			array(
-					'header'=>'',
-					'type'=>'raw',
-					'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-ok\"></span> Añadir","#",array("onclick"=>\'newRow("\'.$data->idAlmacenProducto.\'");\',"class"=>"btn btn-success btn-sm"))',
-			),
-		),
-		
-	));
+<?php
+$this->widget('zii.widgets.grid.CGridView', array(
+    'dataProvider'=>$productos->searchCTP(),
+    'ajaxUpdate'=>true,
+    'cssFile' => false,
+    'itemsCssClass' => 'table table-hover table-condensed',
+    //'pagerCssClass' => 'pagination', // override default css
+    'htmlOptions' => array('class' => 'table-responsive'),
+    'columns'=>array(
+        array(
+            'header'=>'Nro',
+            'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+        ),
+        array(
+            'header'=>'Material',
+            'value'=>'$data->idProducto0->material',
+        ),
+        array(
+            'header'=>'Formato',
+            'value'=>'$data->idProducto0->color." - ".$data->idProducto0->detalle',
+        ),
+        array(
+            'header'=>'Stock',
+            'value'=>'$data->stockU',
+        ),
+        array(
+            'header'=>'',
+            'type'=>'raw',
+            'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-ok\"></span> Añadir","#",array("onclick"=>\'newRow("\'.$data->idAlmacenProducto.\'");\',"class"=>"btn btn-success btn-sm"))',
+        ),
+    ),
+
+));
 ?>
 <?php Yii::app()->clientScript->registerScript('row',"
 
@@ -45,7 +45,7 @@ function newRow(almacen)
 		$(\".tabular-input-index\").each(function() {
 		    index = Math.max(index, parseInt(this.value)) + 1;
 		});
-	}		
+	}
 	$.ajax({
 		type: 'GET',
 		url: '".CHtml::normalizeUrl(array('/orden/addDetalle'))."',
@@ -55,7 +55,7 @@ function newRow(almacen)
 			input.append(html);
 			input.siblings('.tabular-header').show();
 		},
-		
+
 	});
 	event.preventDefault();
 }

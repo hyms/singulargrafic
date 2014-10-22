@@ -42,11 +42,11 @@
     if(isset($costo)){
         if($costo=="cliente")
         {
-    ?>
-    <td class="col-xs-1">
-        <?php echo CHtml::activeTextField($model,"[$index]costoAdicional",array('class'=>'form-control input-sm','id'=>'adicional_'.$index)); ?>
-    </td>
-    <?php
+            ?>
+            <td class="col-xs-1">
+                <?php echo CHtml::activeTextField($model,"[$index]costoAdicional",array('class'=>'form-control input-sm','id'=>'adicional_'.$index)); ?>
+            </td>
+        <?php
         }
     }
     ?>

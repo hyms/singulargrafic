@@ -60,6 +60,15 @@
             </div>
             <?php echo $form->error($model,'ci'); ?>
         </div>
+
+        <div class="col-xs-6">
+            <?php echo $form->labelEx($model,'idSucursal',array('class'=>'col-xs-4 control-label')); ?>
+            <div class="col-xs-6">
+                <?php echo $form->dropDownList($model,'idSucursal',CHtml::listData(Sucursal::model()->findAll(),'idSucursal','nombre'),array('class'=>'form-control','empty'=>'')); ?>
+            <?php //echo $form->textField($model,'idSucursal',array('size'=>20,'maxlength'=>20,'class'=>'form-control')); ?>
+            </div>
+            <?php echo $form->error($model,'idSucursal'); ?>
+        </div>
 	</div>
 
     <div class="form-group">
