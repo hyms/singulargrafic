@@ -117,6 +117,7 @@ class ProductosController extends Controller
 
     public function actionProductoAdd()
     {
+        $almacences = Almacen::model()->findAll('idSucursal IS NOT NULL and idSucursal<>""');
         if(isset($_GET['almacen']))
         {
             $dataProvider = new AlmacenProducto('searchInventarioGral');
@@ -133,10 +134,10 @@ class ProductosController extends Controller
             {
                 $this->initStock($_GET['id'],$_GET['almacen']);
             }
-            $this->render('index',array('render'=>'addRemove','dataProvider'=>$dataProvider,'almacen'=>$_GET['almacen']));
+            $this->render('index',array('render'=>'addRemove','dataProvider'=>$dataProvider,'almacen'=>$_GET['almacen'],'almacenes'=>$almacences));
         }
         else
-            $this->render('index',array('render'=>'addRemove','dataProvider'=>'','almacen'=>''));
+            $this->render('index',array('render'=>'addRemove','dataProvider'=>'','almacen'=>'','almacenes'=>$almacences));
     }
 
     public function actionProductoDel()
@@ -145,7 +146,16 @@ class ProductosController extends Controller
         {
             if(isset($_GET['id']))
             {
-               //$this->initStock($_GET['id'],$_GET['almacen']);
+                //$this->initStock($_GET['id'],$_GET['almacen']);
+                $almacen = AlmacenProducto::model()->findByPk($_GET['id']);
+                if($almacen->stockU >0 || $almacen->stockP)
+                {
+                    $almacen0 = AlmacenProducto::model()->findByPk('almacen=1 and idProducto='.$almacen->idProducto);
+                    $almacen0->stockU =$almacen0->stockU + $almacen->stockU;
+                    $almacen0->stockP =$almacen0->stockP + $almacen->stockP;
+                    $almacen0->save();
+                }
+                //$almacen->delete();
             }
             $this->redirect(array('productoAdd','almacen'=>$_GET['almacen']));
         }

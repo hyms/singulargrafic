@@ -327,7 +327,54 @@ class CtpController extends Controller
 
     public function actionReturn()
     {
+        if(isset($_GET['id']))
+        {
+            $ctp = $this->verifyModel(CTP::model()
+                ->with('detalleCTPs')
+                ->with('idCliente0')
+                ->with('idCajaMovimientoVenta0')
+                ->findByPk($_GET['id']));
+            if($ctp->estado!=1)
+            {
+                $ctp->estado=1;
+                $almacen=array();
+                foreach($ctp->detalleCTPs as $key => $item)
+                {
+                    $almacen[$key] = AlmacenProducto::model()->findByPk($item->idAlmacenProducto);
+                    $almacen[$key]->stockU = $almacen[$key]->stockU + $item->nroPlacas;
+                }
 
+                if(!empty($ctp->idCajaMovimientoVenta0))
+                {
+                    $caja = Caja::model()->findByPk($this->cajaCTP);
+                    $ctp->idCajaMovimientoVenta = null;
+                    $tmp = $ctp->idCajaMovimientoVenta0;
+                    if($ctp->idCajaMovimientoVenta0->arqueo <1)
+                    {
+                        $caja->saldo = $caja->saldo -  $tmp->monto;
+
+                    $ctp->montoPagado = 0;
+                    if($ctp->save())
+                    {
+                        $tmp->delete();
+                        foreach($almacen as $item)
+                        {   $item->save();  }
+                        $this->redirect(array('ctp/ordenes'));
+                    }
+                    }
+
+                }
+                if($ctp->save())
+                {
+                    foreach($almacen as $item)
+                    {   $item->save();  }
+                    $this->redirect(array('ctp/ordenes'));
+                }
+
+            }
+        }
+        else
+            throw new CHttpException(400,'Petición no válida.');
     }
 
     public function actionBuscar()
@@ -381,12 +428,13 @@ class CtpController extends Controller
             }
             if($ctp->tipoCTP==2)
             {
-                $ctpP= CTP::model()
+                /*$ctpP= CTP::model()
                     ->with('idCliente0')
                     ->with('idUserOT0')
                     ->with('idUserOT0.idEmpleado0')
-                    ->findByPk($ctp->idCTPParent);
-                $this->render('base',array('render'=>'previewTI','ctp'=>$ctp,'tipo'=>'','titulo'=>'Interna'));
+                    ->findByPk($ctp->idCTPParent);*/
+                //print_r($ctp);
+                $this->render('base',array('render'=>'previewTI','ctp'=>$ctp,'tipo'=>'1','titulo'=>'Interna'));
             }
             if($ctp->tipoCTP==3)
             {

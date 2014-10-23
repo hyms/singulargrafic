@@ -4,7 +4,7 @@
     </div>
 	<div class="panel-body" style="overflow: auto;">
         <div class="hidden-print">
-            <?php echo CHtml::link('<span class="glyphicon glyphicon-save"></span>', array("distribuidora/reportDate","productos"=>true,"excel"=>true), array("class"=>"btn btn-default",'id'=>"print","title"=>"Descargar Excel")); ?>
+            <?php echo CHtml::link('<span class="glyphicon glyphicon-save"></span>', array("distribuidora/reportProducto","productos"=>true,"excel"=>true), array("class"=>"btn btn-default",'id'=>"print","title"=>"Descargar Excel")); ?>
         </div>
 <?php 
 	$this->widget('zii.widgets.grid.CGridView', array(

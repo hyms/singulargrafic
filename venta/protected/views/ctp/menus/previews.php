@@ -9,7 +9,7 @@
 
     if($ctp->estado!=1)
     {
-        //echo " ".CHtml::link('<span class="glyphicon glyphicon-remove-circle"></span>','#', array("class"=>"btn btn-danger","id"=>"validar",'title'=>'Cancelar Orden'));
+        echo " ".CHtml::link('<span class="glyphicon glyphicon-remove-circle"></span>',array('ctp/return','id'=>$ctp->idCTP), array("class"=>"btn btn-danger","id"=>"cancelar",'title'=>'Retornar Orden','confirm'=>'Esta seguro de Cancelar la orden?'));
     }
     ?>
 </div>

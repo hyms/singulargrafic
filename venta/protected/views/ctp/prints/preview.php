@@ -40,7 +40,7 @@
                         <?php echo $producto->nroPlacas; ?>
                     </td>
                     <td>
-                        <?php echo (($producto->C)?"<strong>C </strong>":"").(($producto->M)?"<strong>M </strong>":"").(($producto->Y)?"<strong>Y </strong>":"").(($producto->K)?"<strong>B </strong>":"");?>
+                        <?php echo (($producto->C)?"<strong>C </strong>":"").(($producto->M)?"<strong>M </strong>":"").(($producto->Y)?"<strong>Y </strong>":"").(($producto->K)?"<strong>K </strong>":"");?>
                     </td>
                     <td>
                         <?php echo $producto->formato;?>

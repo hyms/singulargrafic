@@ -27,7 +27,7 @@
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'username',array('class'=>'col-xs-2 control-label')); ?>
 		<div class="col-xs-3">
-		<?php echo $form->textField($model,'username',array('class'=>'form-control')); ?>
+		<?php echo $form->textField($model,'username',array('class'=>'form-control','readonly'=>true)); ?>
 		</div>
 		<?php echo $form->error($model,'username'); ?>
 	</div>

@@ -152,8 +152,6 @@ class OrdenController extends Controller
 		if(isset($_POST['CTP']))
 		{
 			$ctp->attributes=$_POST['CTP'];
-			$ctp->estado = 1;
-				
 			if($ctp->validate())
 				$c=1;
 		}

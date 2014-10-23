@@ -132,6 +132,11 @@ class Users extends CActiveRecord
 		return parent::model($className);
 	}
 
+    public function getTipos()
+    {
+        return array('admin'=>'admin','ventas'=>'ventas');
+    }
+
     public function validatePassword($password){
         return $this->hashPassword($password)===$this->password;
     }
@@ -139,6 +144,7 @@ class Users extends CActiveRecord
     public function hashPassword($password){
         return md5($password);
     }
+
     public function tipos()
     {
         return array(

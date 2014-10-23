@@ -161,7 +161,7 @@ class DistribuidoraController extends Controller
             //$movimentoProducto->attributes = $_GET['DetalleVenta'];
             $movimentoProducto->codigo=$_GET['DetalleVenta']['codigo'];
             $movimentoProducto->fecha=$_GET['DetalleVenta']['fecha'];
-            //$movimentoProducto->apellido=$_GET['DetalleVenta'];
+            $movimentoProducto->apellido=$_GET['DetalleVenta']['apellido'];
             $movimentoProducto->codigoProducto=$_GET['DetalleVenta']['codigoProducto'];
             $movimentoProducto->color=$_GET['DetalleVenta']['color'];
             $movimentoProducto->material=$_GET['DetalleVenta']['material'];

@@ -137,6 +137,7 @@ class DetalleVenta extends CActiveRecord
         $criteria->compare('idProducto0.color',$this->color);
         $criteria->compare('idProducto0.material',$this->material);
         $criteria->compare('idProducto0.detalle',$this->detalle,true);
+        $criteria->compare('idCliente0.apellido',$this->apellido,true);
 
         $data = new CActiveDataProvider($this, array(
             'criteria'=>$criteria,

@@ -30,7 +30,7 @@
                 $this->renderPartial('scripts/reset');
                 break;
             case "addRemove":
-                $this->renderpartial('menus/addRemove');
+                $this->renderpartial('menus/addRemove',array('almacenes'=>$almacenes));
                 $this->renderPartial('tables/productosAdd',array('dataProvider'=>$dataProvider,'almacen'=>$almacen));
                 break;
             default:
