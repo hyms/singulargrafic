@@ -2,7 +2,7 @@
 Yii::app()->clientscript
 // use it when you need it!
     ->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap.min.slate.css')
-    ->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap-responsive.css')
+    //->registerCssFile( Yii::app()->request->baseUrl . '/css/bootstrap-responsive.css')
 
     ->registerCoreScript( 'jquery' )
     ->registerScriptFile( Yii::app()->request->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END )

@@ -32,8 +32,6 @@ class UserIdentity extends CUserIdentity
 			$this->errorCode=self::ERROR_NONE;
 			
 			/*Consultamos los datos del usuario por el username ($user->username) */
-			//$info_usuario = Users::model()->findByPk($user->idUser);
-			//Yii::app()->user->setState('user_type',$user->tipo);
 			$this->setState('name', $user->username);
 			$this->setState('role',$user->tipo);
             $this->setState('idSucursal',$user->idEmpleado0->idSucursal);

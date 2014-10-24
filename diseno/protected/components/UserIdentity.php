@@ -15,44 +15,42 @@ class UserIdentity extends CUserIdentity
 	 * against some persistent user identity storage (e.g. database).
 	 * @return boolean whether authentication succeeds.
 	 */
-	private $_id;
-	private $_tipo;
-	public function authenticate(){
-		$username=strtolower($this->username);
-		$user=Users::model()->with('idEmpleado0')->find('LOWER(username)=?',array($username),'estado=0');
-		
-		if($user===null)
-		{   $this->errorCode=self::ERROR_USERNAME_INVALID;  }
-		else if(!$user->validatePassword($this->password))
-		{   $this->errorCode=self::ERROR_PASSWORD_INVALID;  }
-		else{
-			$this->_id=$user->idUser;
-			$this->username=$user->username;
+    private $_id;
+    private $_tipo;
+    public function authenticate(){
+        $username=strtolower($this->username);
+        $user=Users::model()->with('idEmpleado0')->find('LOWER(username)=?',array($username),'estado=0');
+
+        if($user===null)
+        {   $this->errorCode=self::ERROR_USERNAME_INVALID;  }
+        else if(!$user->validatePassword($this->password))
+        {   $this->errorCode=self::ERROR_PASSWORD_INVALID;  }
+        else{
+            $this->_id=$user->idUser;
+            $this->username=$user->username;
 
             $this->errorCode=self::ERROR_NONE;
-			
-			/*Consultamos los datos del usuario por el username ($user->username) */
-			//$info_usuario = Users::model()->findByPk($user->idUser);
-			//Yii::app()->user->setState('user_type',$user->tipo);
-			$this->setState('name', $user->username);
-			$this->setState('role',$user->tipo);
+
+            /*Consultamos los datos del usuario por el username ($user->username) */
+            $this->setState('name', $user->username);
+            $this->setState('role',$user->tipo);
             $this->setState('idSucursal',$user->idEmpleado0->idSucursal);
-			//$info_usuario->fechaLogin=date("Y-m-d H:i:s");
-			$sql = "update user set fechaLogin=now() where idUser='$user->idUser'";
-			$connection = Yii::app()->db;
-			$command = $connection->createCommand($sql);
-			$command->execute();
-		}
-		return $this->errorCode==self::ERROR_NONE;
-	}
-	
-	public function getId(){
-		return $this->_id;
-	}
-	
-	public function getTipo(){
-		return $this->_tipo;
-	}
+            //$info_usuario->fechaLogin=date("Y-m-d H:i:s");
+            $sql = "update user set fechaLogin=now() where idUser='$user->idUser'";
+            $connection = Yii::app()->db;
+            $command = $connection->createCommand($sql);
+            $command->execute();
+        }
+        return $this->errorCode==self::ERROR_NONE;
+    }
+
+    public function getId(){
+        return $this->_id;
+    }
+
+    public function getTipo(){
+        return $this->_tipo;
+    }
 	/*public function authenticate()
 	{
 		$users=array(

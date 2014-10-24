@@ -111,4 +111,14 @@ class Almacen extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function getAlmacenes()
+    {
+        if(isset($this->idAlmacen))
+            $almacen = Almacen::model()->findAll(array('condition'=>'idAlmacen!='.$this->idAlmacen));
+        else
+            $almacen = Almacen::model()->findAll();
+
+        return CHtml::listData($almacen,'idAlmacen','nombre');
+    }
 }

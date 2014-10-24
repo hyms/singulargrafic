@@ -77,7 +77,7 @@ Yii::app()->clientscript
                             'items'=>array(
                                 array('label'=>'Costos', 'url'=>array('contabilidad/index')),
                             )),
-                        array('label'=>'Configuracion', 'url'=>array('#')),
+                        array('label'=>'Configuracion', 'url'=>array('configuration/index')),
 						/*array('label'=>'Pagina Web <b class="caret"></b>', 'url'=>array('#'),
 							'linkOptions'=> array(
 								'class' => 'dropdown-toggle',

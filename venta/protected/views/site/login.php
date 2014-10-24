@@ -4,9 +4,6 @@
 /* @var $form CActiveForm  */
 
 $this->pageTitle=Yii::app()->name . ' - Login';
-$this->breadcrumbs=array(
-    'Login',
-);
 ?>
 
 <h1 class="text-center">Sistema de Ventas</h1>
