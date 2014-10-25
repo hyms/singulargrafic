@@ -24,78 +24,83 @@ class ContabilidadController extends Controller
 
     public function actionMatrizPrecios()
     {
-        $model ="";//  new MatrizPreciosCTP;
-        $placas = AlmacenProducto::model()->with('idProducto0')->findAll(array('condition'=>'idAlmacen=3 and material LIKE "Placas%"', 'order'=>'idProducto0.detalle'));
-        $tiposClientes = TiposClientes::model()->findAll('servicio=1');
-        $cantidades = CantidadCTP::model()->findAll();
-        $horarios = Horario::model()->findAll();
-
-        $matriz = MatrizPreciosCTP::model()->findAll();
-        if(!empty($matriz))
+        if(isset($_GET['id']))
         {
-            $model = array();
-            $i=0; $j=0; $k=0;
-            foreach ($placas as $placa)
-                foreach ($tiposClientes as $tipoCliente)
-                    foreach ($cantidades as $cantidad)
-                        foreach ($horarios as $horario)
-                        {
-                            $model[$placa->idAlmacenProducto][$tipoCliente->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario] = new MatrizPreciosCTP;
-                        }
+            $model ="";//  new MatrizPreciosCTP;
+            $placas = AlmacenProducto::model()->with('idProducto0')->findAll(array('condition'=>'idAlmacen='.$_GET['id'].' and material LIKE "Placas%"', 'order'=>'idProducto0.detalle'));
+            $tiposClientes = TiposClientes::model()->findAll('servicio=1');
+            $cantidades = CantidadCTP::model()->findAll();
+            $horarios = Horario::model()->findAll();
 
-            foreach ($matriz as $item)
+            $matriz = MatrizPreciosCTP::model()->findAll();
+            if(!empty($matriz))
             {
-                $model[$item->idAlmacenProducto][$item->idTiposClientes][$item->idCantidad][$item->idHorario] = $item;
-                if($i<$item->idCantidad)
-                    $i=$item->idCantidad;
-                if($j<$item->idTiposClientes)
-                    $j=$item->idTiposClientes;
-                if($k<$item->idAlmacenProducto)
-                    $k=$item->idAlmacenProducto;
-            }
-        }
-        else
-        {
-            $model = new MatrizPreciosCTP;
-        }
+                $model = array();
+                $i=0; $j=0; $k=0;
+                foreach ($placas as $placa)
+                    foreach ($tiposClientes as $tipoCliente)
+                        foreach ($cantidades as $cantidad)
+                            foreach ($horarios as $horario)
+                            {
+                                $model[$placa->idAlmacenProducto][$tipoCliente->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario] = new MatrizPreciosCTP;
+                            }
 
-        if(isset($_POST['MatrizPreciosCTP']))
-        {
-            $model = array();
-            //$model->attributes = $_POST['MatrizPreciosCTP'];
-            $placas = array();
-            foreach ($_POST['MatrizPreciosCTP'] as $key => $placa)
-            {
-                array_push($placas, AlmacenProducto::model()->with('idProducto0')->findByPk($key));
-                $tiposClientes = array();
-                foreach ($_POST['MatrizPreciosCTP'][$key] as $keyTC => $tipoCliente)
+                foreach ($matriz as $item)
                 {
-                    array_push($tiposClientes, TiposClientes::model()->find('servicio=1 and idTiposClientes='.$keyTC));
-                    $cantidades = array();
-                    foreach ($_POST['MatrizPreciosCTP'][$key][$keyTC] as $keyC => $cantidad)
-                    {
-                        array_push($cantidades, CantidadCTP::model()->findByPk($keyC));
-                        $horarios = array();
-                        foreach ($_POST['MatrizPreciosCTP'][$key][$keyTC][$keyC] as $keyH => $horario)
-                        {
-                            array_push($horarios, Horario::model()->findByPk($keyH));
-                            $model[$key][$keyTC][$keyC][$keyH] = MatrizPreciosCTP::model()->find('idAlmacenProducto='.$key.' and idTiposClientes='.$keyTC.' and idCantidad='.$keyC.' and idHorario='.$keyH);
-                            if(empty($model[$key][$keyTC][$keyC][$keyH]))
-                                $model[$key][$keyTC][$keyC][$keyH] = new MatrizPreciosCTP;
+                    $model[$item->idAlmacenProducto][$item->idTiposClientes][$item->idCantidad][$item->idHorario] = $item;
+                    if($i<$item->idCantidad)
+                        $i=$item->idCantidad;
+                    if($j<$item->idTiposClientes)
+                        $j=$item->idTiposClientes;
+                    if($k<$item->idAlmacenProducto)
+                        $k=$item->idAlmacenProducto;
+                }
+            }
+            else
+            {
+                $model = new MatrizPreciosCTP;
+            }
 
-                            $model[$key][$keyTC][$keyC][$keyH]->attributes = $horario;
-                            $model[$key][$keyTC][$keyC][$keyH]->idAlmacenProducto = $key;
-                            $model[$key][$keyTC][$keyC][$keyH]->idTiposClientes = $keyTC;
-                            $model[$key][$keyTC][$keyC][$keyH]->idCantidad = $keyC;
-                            $model[$key][$keyTC][$keyC][$keyH]->idHorario = $keyH;
-                            if($model[$key][$keyTC][$keyC][$keyH]->validate())
-                                $model[$key][$keyTC][$keyC][$keyH]->save();
+            if(isset($_POST['MatrizPreciosCTP']))
+            {
+                $model = array();
+                //$model->attributes = $_POST['MatrizPreciosCTP'];
+                $placas = array();
+                foreach ($_POST['MatrizPreciosCTP'] as $key => $placa)
+                {
+                    array_push($placas, AlmacenProducto::model()->with('idProducto0')->findByPk($key));
+                    $tiposClientes = array();
+                    foreach ($_POST['MatrizPreciosCTP'][$key] as $keyTC => $tipoCliente)
+                    {
+                        array_push($tiposClientes, TiposClientes::model()->find('servicio=1 and idTiposClientes='.$keyTC));
+                        $cantidades = array();
+                        foreach ($_POST['MatrizPreciosCTP'][$key][$keyTC] as $keyC => $cantidad)
+                        {
+                            array_push($cantidades, CantidadCTP::model()->findByPk($keyC));
+                            $horarios = array();
+                            foreach ($_POST['MatrizPreciosCTP'][$key][$keyTC][$keyC] as $keyH => $horario)
+                            {
+                                array_push($horarios, Horario::model()->findByPk($keyH));
+                                $model[$key][$keyTC][$keyC][$keyH] = MatrizPreciosCTP::model()->find('idAlmacenProducto='.$key.' and idTiposClientes='.$keyTC.' and idCantidad='.$keyC.' and idHorario='.$keyH);
+                                if(empty($model[$key][$keyTC][$keyC][$keyH]))
+                                    $model[$key][$keyTC][$keyC][$keyH] = new MatrizPreciosCTP;
+
+                                $model[$key][$keyTC][$keyC][$keyH]->attributes = $horario;
+                                $model[$key][$keyTC][$keyC][$keyH]->idAlmacenProducto = $key;
+                                $model[$key][$keyTC][$keyC][$keyH]->idTiposClientes = $keyTC;
+                                $model[$key][$keyTC][$keyC][$keyH]->idCantidad = $keyC;
+                                $model[$key][$keyTC][$keyC][$keyH]->idHorario = $keyH;
+                                if($model[$key][$keyTC][$keyC][$keyH]->validate())
+                                    $model[$key][$keyTC][$keyC][$keyH]->save();
+                            }
                         }
                     }
                 }
             }
+            $this->render('index',array('render'=>'costosCTP','model'=>$model,'placas'=>$placas,'tiposClientes'=>$tiposClientes,'cantidades'=>$cantidades,'horarios'=>$horarios));
         }
-        $this->render('forms/matriz',array('model'=>$model,'placas'=>$placas,'tiposClientes'=>$tiposClientes,'cantidades'=>$cantidades,'horarios'=>$horarios));
+        else
+            $this->render('index',array('render'=>'menuCTP'));
     }
 
     public function actionPrecios()

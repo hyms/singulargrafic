@@ -10,4 +10,3 @@
             array('label'=>'CTP', 'url'=>array('report/productoSaldo','almacen'=>3)),
         ),
     ));
-    ?>

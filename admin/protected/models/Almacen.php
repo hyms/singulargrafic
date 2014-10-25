@@ -36,7 +36,7 @@ class Almacen extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('idParent, idSucursal', 'numerical', 'integerOnly'=>true),
-			array('nombre', 'length', 'max'=>20),
+			array('nombre', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('idAlmacen, nombre, idParent, idSucursal', 'safe', 'on'=>'search'),
@@ -68,8 +68,8 @@ class Almacen extends CActiveRecord
 		return array(
 			'idAlmacen' => 'Id Almacen',
 			'nombre' => 'Nombre',
-			'idParent' => 'Id Parent',
-			'idSucursal' => 'Id Sucursal',
+			'idParent' => 'Dependiente',
+			'idSucursal' => 'Sucursal',
 		);
 	}
 

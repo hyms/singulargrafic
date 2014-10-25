@@ -21,7 +21,7 @@
                     </tr>
                     <?php foreach ($cantidades as $cantidad){?>
                     <tr>
-                        <td class="text-left col-xs-2"><h4><strong><?php echo CHtml::link($cantidad->Inicio." - ".$cantidad->final,array('ctp/cantidad','id'=>$cantidad->idCantidadCTP), array('class' => 'openDlg divDialog','style'=>'color:#000'));?></strong></h4></td>
+                        <td class="text-left col-xs-2"><h4><strong class="label label-primary"><?php echo CHtml::link($cantidad->Inicio." - ".$cantidad->final,array('ctp/cantidad','id'=>$cantidad->idCantidadCTP), array('class' => 'openDlg divDialog'));?></strong></h4></td>
                         <?php foreach ($clienteTipos as $clienteTipo){?>
                         <td>
                             <div class="col-xs-6">
@@ -84,7 +84,7 @@
 
 	<h4><strong><?php echo $placa->idProducto0->color; ?></strong> <small><?php echo $placa->idProducto0->detalle; ?></small></h4>
 	<h4><strong><?php echo $clienteTipo->nombre; ?></strong></h4>
-	
+
 	<table class="table table-condensed table-hover">
 	<tr>
 		<td></td>
@@ -105,14 +105,14 @@
 				<?php echo CHtml::error($model,"[$placa->idAlmacenProducto][$clienteTipo->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario]precioSF"); ?>
 			</div>
 			</div>
-			<div class="col-xs-6"> 
+			<div class="col-xs-6">
 			<div class="form-group">
 				<?php echo CHtml::activeLabelEx($model,"[$placa->idAlmacenProducto][$clienteTipo->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario]precioCF",array('class'=>'control-label')); ?>
 				<?php echo CHtml::activeTextField($model,"[$placa->idAlmacenProducto][$clienteTipo->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario]precioCF",array('class'=>'form-control')); ?>
 				<?php echo CHtml::error($model,"[$placa->idAlmacenProducto][$clienteTipo->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario]precioCF"); ?>
 			</div>
 			</div>
-		
+
 		<?php }else{?>
 			<div class="col-xs-6">
 			<div class="form-group">
@@ -120,7 +120,7 @@
 				<?php echo CHtml::activeTextField($model[$placa->idAlmacenProducto][$clienteTipo->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario],"[$placa->idAlmacenProducto][$clienteTipo->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario]precioSF",array('class'=>'form-control')); ?>
 			</div>
 			</div>
-			<div class="col-xs-6"> 
+			<div class="col-xs-6">
 			<div class="form-group">
 				<?php echo CHtml::activeLabelEx($model[$placa->idAlmacenProducto][$clienteTipo->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario],"[$placa->idAlmacenProducto][$clienteTipo->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario]precioCF",array('class'=>'control-label')); ?>
 				<?php echo CHtml::activeTextField($model[$placa->idAlmacenProducto][$clienteTipo->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario],"[$placa->idAlmacenProducto][$clienteTipo->idTiposClientes][$cantidad->idCantidadCTP][$horario->idHorario]precioCF",array('class'=>'form-control')); ?>
@@ -132,8 +132,8 @@
 	</tr>
 	<?php }?>
 	</table>
-	
-	
+
+
 </div>
 
 <?php }*/?>
