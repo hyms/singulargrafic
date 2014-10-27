@@ -77,18 +77,17 @@ Yii::app()->clientscript
                             'items'=>array(
                                 array('label'=>'Costos', 'url'=>array('contabilidad/index')),
                             )),
-                        array('label'=>'Configuracion', 'url'=>array('configuration/index')),
-						/*array('label'=>'Pagina Web <b class="caret"></b>', 'url'=>array('#'),
+                        //array('label'=>'Configuracion', 'url'=>array('configuration/index')),
+						array('label'=>'Configuracion <b class="caret"></b>', 'url'=>array('#'),
 							'linkOptions'=> array(
 								'class' => 'dropdown-toggle',
 								'data-toggle' => 'dropdown',
 							),
 							'itemOptions' => array('class'=>'dropdown'),
 							'items'=>array(
-								array('label'=>'Banner', 'url'=>array('webpage/banner')),
-								array('label'=>'Paginas', 'url'=>array('webpage/pages')),
+								array('label'=>'Configuracion', 'url'=>array('configuration/index')),
+								array('label'=>'News', 'url'=>array('news/index')),
 						)),
-						*/
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 					),

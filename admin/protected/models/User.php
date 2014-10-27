@@ -22,6 +22,8 @@
  * @property CajaMovimientoVenta[] $cajaMovimientoVentas
  * @property EnvioMaterial[] $envioMaterials
  * @property MovimientoAlmacen[] $movimientoAlmacens
+ * @property News[] $news
+ * @property NewsRelation[] $newsRelations
  * @property Empleado $idEmpleado0
  */
 class User extends CActiveRecord
@@ -70,6 +72,8 @@ class User extends CActiveRecord
 			'cajaMovimientoVentas' => array(self::HAS_MANY, 'CajaMovimientoVenta', 'idUser'),
 			'envioMaterials' => array(self::HAS_MANY, 'EnvioMaterial', 'idUser'),
 			'movimientoAlmacens' => array(self::HAS_MANY, 'MovimientoAlmacen', 'idUser'),
+			'news' => array(self::HAS_MANY, 'News', 'idUsuarioVisto'),
+			'newsRelations' => array(self::HAS_MANY, 'NewsRelation', 'idUser'),
 			'idEmpleado0' => array(self::BELONGS_TO, 'Empleado', 'idEmpleado'),
 		);
 	}

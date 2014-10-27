@@ -2,7 +2,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-CREATE SCHEMA IF NOT EXISTS `singular` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE SCHEMA IF NOT EXISTS `singular` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
 USE `singular` ;
 
 -- -----------------------------------------------------
@@ -14,7 +14,12 @@ CREATE  TABLE IF NOT EXISTS `singular`.`sucursal` (
   `idSucursal` INT NOT NULL AUTO_INCREMENT ,
   `nombre` VARCHAR(50) NULL ,
   `detalle` VARCHAR(100) NULL ,
-  PRIMARY KEY (`idSucursal`) )
+  PRIMARY KEY (`idSucursal`) ,
+  CONSTRAINT `fk_sucursal_newsAsoc1`
+    FOREIGN KEY (`idSucursal` )
+    REFERENCES `singular`.`newsAsoc` (`idSucursal` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -31,7 +36,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`empleado` (
   `email` VARCHAR(50) NULL DEFAULT NULL ,
   `telefono` VARCHAR(20) NULL DEFAULT NULL ,
   `ci` VARCHAR(20) NULL DEFAULT NULL ,
-  `idSucursal` VARCHAR(45) NULL ,
+  `idSucursal` INT NULL ,
   PRIMARY KEY (`idEmpleado`) ,
   INDEX `fk_empleado_sucursal1` (`idSucursal` ASC) ,
   CONSTRAINT `fk_empleado_sucursal1`
@@ -64,6 +69,11 @@ CREATE  TABLE IF NOT EXISTS `singular`.`user` (
     FOREIGN KEY (`idEmpleado` )
     REFERENCES `singular`.`empleado` (`idEmpleado` )
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_newsAsoc1`
+    FOREIGN KEY (`idUser` )
+    REFERENCES `singular`.`newsAsoc` (`idUser` )
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 5
@@ -81,7 +91,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`caja` (
   `nombre` VARCHAR(50) NOT NULL ,
   `saldo` DOUBLE(11) NOT NULL ,
   `idParent` INT(11) NULL DEFAULT NULL ,
-  `idSucursal` VARCHAR(45) NULL ,
+  `idSucursal` INT NULL ,
   PRIMARY KEY (`idCaja`) ,
   INDEX `fk_caja_caja1` (`idParent` ASC) ,
   INDEX `fk_caja_sucursal1` (`idSucursal` ASC) ,
@@ -325,9 +335,9 @@ DROP TABLE IF EXISTS `singular`.`almacen` ;
 
 CREATE  TABLE IF NOT EXISTS `singular`.`almacen` (
   `idAlmacen` INT(11) NOT NULL AUTO_INCREMENT ,
-  `nombre` VARCHAR(20) NULL DEFAULT NULL ,
+  `nombre` VARCHAR(50) NULL DEFAULT NULL ,
   `idParent` INT(11) NULL DEFAULT NULL ,
-  `idSucursal` VARCHAR(45) NULL ,
+  `idSucursal` INT(11) NULL DEFAULT NULL ,
   PRIMARY KEY (`idAlmacen`) ,
   INDEX `fk_almacen_almacen1` (`idParent` ASC) ,
   INDEX `fk_almacen_sucursal1` (`idSucursal` ASC) ,
@@ -342,7 +352,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`almacen` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 5
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
@@ -385,6 +395,7 @@ CREATE  TABLE IF NOT EXISTS `singular`.`almacenProducto` (
   `stockU` INT(11) NULL DEFAULT NULL ,
   `stockP` INT(11) NULL DEFAULT NULL ,
   `idAlmacen` INT(11) NULL DEFAULT NULL ,
+  `estado` INT NULL ,
   PRIMARY KEY (`idAlmacenProducto`) ,
   INDEX `fk_almacenProducto_producto1` (`idProducto` ASC) ,
   INDEX `fk_almacenProducto_almacen1` (`idAlmacen` ASC) ,
@@ -663,8 +674,8 @@ CREATE  TABLE IF NOT EXISTS `singular`.`detalleCTP` (
   `nroPlacas` INT(11) NULL DEFAULT NULL ,
   `formato` VARCHAR(50) NULL DEFAULT NULL ,
   `trabajo` VARCHAR(100) NULL DEFAULT NULL ,
-  `pinza` INT(11) NULL DEFAULT NULL ,
-  `resolucion` DOUBLE(11) NULL DEFAULT NULL ,
+  `pinza` DOUBLE NULL ,
+  `resolucion` DOUBLE(11) NULL ,
   `costo` DOUBLE(11) NOT NULL ,
   `costoAdicional` DOUBLE(11) NOT NULL ,
   `costoTotal` DOUBLE(11) NOT NULL ,
@@ -902,11 +913,18 @@ CREATE  TABLE IF NOT EXISTS `singular`.`fallasCTP` (
   `fecha` DATETIME NULL DEFAULT NULL ,
   `nombre` VARCHAR(45) NULL DEFAULT NULL ,
   `costoT` DOUBLE(11) NULL DEFAULT NULL ,
+  `idEmpleado` INT NULL ,
   PRIMARY KEY (`idfallasCTP`) ,
   INDEX `fk_fallasCTP_idCTP1` (`idCtpRep` ASC) ,
+  INDEX `fk_fallasCTP_empleado1` (`idEmpleado` ASC) ,
   CONSTRAINT `fk_fallasCTP_idCTP1`
     FOREIGN KEY (`idCtpRep` )
     REFERENCES `singular`.`CTP` (`idCTP` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_fallasCTP_empleado1`
+    FOREIGN KEY (`idEmpleado` )
+    REFERENCES `singular`.`empleado` (`idEmpleado` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -997,16 +1015,39 @@ DROP TABLE IF EXISTS `singular`.`preciosDistribuidora` ;
 
 CREATE  TABLE IF NOT EXISTS `singular`.`preciosDistribuidora` (
   `idPreciosDistribuidora` INT NOT NULL AUTO_INCREMENT ,
-  `idAlmacenProducto` INT NULL ,
-  `precioCFU` DOUBLE NULL ,
-  `precioCFP` DOUBLE NULL ,
-  `precioSFU` DOUBLE NULL ,
-  `precioSFP` DOUBLE NULL ,
+  `idAlmacenProducto` INT NOT NULL ,
+  `precioCFU` DOUBLE NOT NULL ,
+  `precioCFP` DOUBLE NOT NULL ,
+  `precioSFU` DOUBLE NOT NULL ,
+  `precioSFP` DOUBLE NOT NULL ,
   PRIMARY KEY (`idPreciosDistribuidora`) ,
   INDEX `fk_preciosDistribuidora_almacenProducto1` (`idAlmacenProducto` ASC) ,
   CONSTRAINT `fk_preciosDistribuidora_almacenProducto1`
     FOREIGN KEY (`idAlmacenProducto` )
     REFERENCES `singular`.`almacenProducto` (`idAlmacenProducto` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `singular`.`news`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `singular`.`news` ;
+
+CREATE  TABLE IF NOT EXISTS `singular`.`news` (
+  `idNews` INT NOT NULL ,
+  `fechaNews` DATETIME NULL ,
+  `fechaLimite` DATETIME NULL ,
+  `prioridad` INT NULL ,
+  `estado` INT NULL ,
+  `titulo` VARCHAR(50) NULL ,
+  `detalle` VARCHAR(500) NULL ,
+  `idUsuarioVisto` INT NULL ,
+  PRIMARY KEY (`idNews`) ,
+  CONSTRAINT `fk_news_newsAsoc1`
+    FOREIGN KEY (`idNews` )
+    REFERENCES `singular`.`newsAsoc` (`idNews` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

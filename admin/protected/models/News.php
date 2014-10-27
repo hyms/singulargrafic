@@ -1,27 +1,30 @@
 <?php
 
 /**
- * This is the model class for table "preciosDistribuidora".
+ * This is the model class for table "news".
  *
- * The followings are the available columns in table 'preciosDistribuidora':
- * @property integer $idPreciosDistribuidora
- * @property integer $idAlmacenProducto
- * @property double $precioCFU
- * @property double $precioCFP
- * @property double $precioSFU
- * @property double $precioSFP
+ * The followings are the available columns in table 'news':
+ * @property integer $idNews
+ * @property string $fechaNews
+ * @property string $fechaLimite
+ * @property integer $prioridad
+ * @property integer $estado
+ * @property string $titulo
+ * @property string $detalle
+ * @property integer $idUsuarioVisto
  *
  * The followings are the available model relations:
- * @property AlmacenProducto $idAlmacenProducto0
+ * @property User $idUsuarioVisto0
+ * @property NewsRelation[] $newsRelations
  */
-class PreciosDistribuidora extends CActiveRecord
+class News extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'preciosDistribuidora';
+		return 'news';
 	}
 
 	/**
@@ -32,12 +35,13 @@ class PreciosDistribuidora extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idAlmacenProducto, precioCFU, precioCFP, precioSFU, precioSFP', 'required'),
-			array('idAlmacenProducto', 'numerical', 'integerOnly'=>true),
-			array('precioCFU, precioCFP, precioSFU, precioSFP', 'numerical'),
+			array('prioridad, estado, idUsuarioVisto', 'numerical', 'integerOnly'=>true),
+			array('titulo', 'length', 'max'=>50),
+			array('detalle', 'length', 'max'=>500),
+			array('fechaNews, fechaLimite', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idPreciosDistribuidora, idAlmacenProducto, precioCFU, precioCFP, precioSFU, precioSFP', 'safe', 'on'=>'search'),
+			array('idNews, fechaNews, fechaLimite, prioridad, estado, titulo, detalle, idUsuarioVisto', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,7 +53,8 @@ class PreciosDistribuidora extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idAlmacenProducto0' => array(self::BELONGS_TO, 'AlmacenProducto', 'idAlmacenProducto'),
+			'idUsuarioVisto0' => array(self::BELONGS_TO, 'User', 'idUsuarioVisto'),
+			'newsRelations' => array(self::HAS_MANY, 'NewsRelation', 'idNews'),
 		);
 	}
 
@@ -59,12 +64,14 @@ class PreciosDistribuidora extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idPreciosDistribuidora' => 'Id Precios Distribuidora',
-			'idAlmacenProducto' => 'Id Almacen Producto',
-			'precioCFU' => 'Precio Cfu',
-			'precioCFP' => 'Precio Cfp',
-			'precioSFU' => 'Precio Sfu',
-			'precioSFP' => 'Precio Sfp',
+			'idNews' => 'Id News',
+			'fechaNews' => 'Fecha News',
+			'fechaLimite' => 'Fecha Limite',
+			'prioridad' => 'Prioridad',
+			'estado' => 'Estado',
+			'titulo' => 'Titulo',
+			'detalle' => 'Detalle',
+			'idUsuarioVisto' => 'Id Usuario Visto',
 		);
 	}
 
@@ -86,12 +93,14 @@ class PreciosDistribuidora extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idPreciosDistribuidora',$this->idPreciosDistribuidora);
-		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
-		$criteria->compare('precioCFU',$this->precioCFU);
-		$criteria->compare('precioCFP',$this->precioCFP);
-		$criteria->compare('precioSFU',$this->precioSFU);
-		$criteria->compare('precioSFP',$this->precioSFP);
+		$criteria->compare('idNews',$this->idNews);
+		$criteria->compare('fechaNews',$this->fechaNews,true);
+		$criteria->compare('fechaLimite',$this->fechaLimite,true);
+		$criteria->compare('prioridad',$this->prioridad);
+		$criteria->compare('estado',$this->estado);
+		$criteria->compare('titulo',$this->titulo,true);
+		$criteria->compare('detalle',$this->detalle,true);
+		$criteria->compare('idUsuarioVisto',$this->idUsuarioVisto);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -102,7 +111,7 @@ class PreciosDistribuidora extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return PreciosDistribuidora the static model class
+	 * @return News the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

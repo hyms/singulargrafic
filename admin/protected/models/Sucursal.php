@@ -13,6 +13,7 @@
  * @property Almacen[] $almacens
  * @property Caja[] $cajas
  * @property Empleado[] $empleados
+ * @property NewsRelation[] $newsRelations
  * @property Recibos[] $reciboses
  * @property Venta[] $ventas
  */
@@ -54,6 +55,7 @@ class Sucursal extends CActiveRecord
 			'almacens' => array(self::HAS_MANY, 'Almacen', 'idSucursal'),
 			'cajas' => array(self::HAS_MANY, 'Caja', 'idSucursal'),
 			'empleados' => array(self::HAS_MANY, 'Empleado', 'idSucursal'),
+			'newsRelations' => array(self::HAS_MANY, 'NewsRelation', 'idSucursal'),
 			'reciboses' => array(self::HAS_MANY, 'Recibos', 'idSucursal'),
 			'ventas' => array(self::HAS_MANY, 'Venta', 'idSucursal'),
 		);

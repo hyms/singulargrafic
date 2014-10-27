@@ -1,27 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "preciosDistribuidora".
+ * This is the model class for table "newsRelation".
  *
- * The followings are the available columns in table 'preciosDistribuidora':
- * @property integer $idPreciosDistribuidora
- * @property integer $idAlmacenProducto
- * @property double $precioCFU
- * @property double $precioCFP
- * @property double $precioSFU
- * @property double $precioSFP
+ * The followings are the available columns in table 'newsRelation':
+ * @property integer $idnewsRelation
+ * @property integer $idNews
+ * @property integer $idSucursal
+ * @property integer $idUser
  *
  * The followings are the available model relations:
- * @property AlmacenProducto $idAlmacenProducto0
+ * @property News $idNews0
+ * @property Sucursal $idSucursal0
+ * @property User $idUser0
  */
-class PreciosDistribuidora extends CActiveRecord
+class NewsRelation extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'preciosDistribuidora';
+		return 'newsRelation';
 	}
 
 	/**
@@ -32,12 +32,10 @@ class PreciosDistribuidora extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idAlmacenProducto, precioCFU, precioCFP, precioSFU, precioSFP', 'required'),
-			array('idAlmacenProducto', 'numerical', 'integerOnly'=>true),
-			array('precioCFU, precioCFP, precioSFU, precioSFP', 'numerical'),
+			array('idNews, idSucursal, idUser', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idPreciosDistribuidora, idAlmacenProducto, precioCFU, precioCFP, precioSFU, precioSFP', 'safe', 'on'=>'search'),
+			array('idnewsRelation, idNews, idSucursal, idUser', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,7 +47,9 @@ class PreciosDistribuidora extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idAlmacenProducto0' => array(self::BELONGS_TO, 'AlmacenProducto', 'idAlmacenProducto'),
+			'idNews0' => array(self::BELONGS_TO, 'News', 'idNews'),
+			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
+			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
 		);
 	}
 
@@ -59,12 +59,10 @@ class PreciosDistribuidora extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idPreciosDistribuidora' => 'Id Precios Distribuidora',
-			'idAlmacenProducto' => 'Id Almacen Producto',
-			'precioCFU' => 'Precio Cfu',
-			'precioCFP' => 'Precio Cfp',
-			'precioSFU' => 'Precio Sfu',
-			'precioSFP' => 'Precio Sfp',
+			'idnewsRelation' => 'Idnews Relation',
+			'idNews' => 'Id News',
+			'idSucursal' => 'Id Sucursal',
+			'idUser' => 'Id User',
 		);
 	}
 
@@ -86,12 +84,10 @@ class PreciosDistribuidora extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idPreciosDistribuidora',$this->idPreciosDistribuidora);
-		$criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
-		$criteria->compare('precioCFU',$this->precioCFU);
-		$criteria->compare('precioCFP',$this->precioCFP);
-		$criteria->compare('precioSFU',$this->precioSFU);
-		$criteria->compare('precioSFP',$this->precioSFP);
+		$criteria->compare('idnewsRelation',$this->idnewsRelation);
+		$criteria->compare('idNews',$this->idNews);
+		$criteria->compare('idSucursal',$this->idSucursal);
+		$criteria->compare('idUser',$this->idUser);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -102,7 +98,7 @@ class PreciosDistribuidora extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return PreciosDistribuidora the static model class
+	 * @return NewsRelation the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

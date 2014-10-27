@@ -6,9 +6,8 @@
         'submenuHtmlOptions' => array('class' => 'dropdown-menu'),
         'encodeLabel' => false,
         'items'=>array(
-            array('label'=>'Reposicion', 'url'=>array('repos/rep')),
-            array('label'=>'Buscar Reposicion', 'url'=>array('repos/buscar')),
-
+            array('label'=>'Noticias', 'url'=>array('news/news')),
+            array('label'=>'Nueva Noticia', 'url'=>array('news/new')),
         )));
     ?>
 </div>
