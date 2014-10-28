@@ -44,7 +44,7 @@ Yii::app()->clientscript
                             'itemOptions' => array('class'=>'dropdown'),
                             'items'=>array(
                                 array('label'=>'Ventas de Dsitribuidora', 'url'=>array('distribuidora/report')),
-                                //array('label'=>'Ordenes CTP', 'url'=>array('#')),
+                                array('label'=>'Ordenes CTP', 'url'=>array('ctp/report')),
                                 //array('label'=>'Imprenta', 'url'=>array('#')),
                                 array('label'=>'Reporte de Productos', 'url'=>array('report/producto')),
                             )),

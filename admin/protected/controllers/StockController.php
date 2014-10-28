@@ -95,13 +95,15 @@ class StockController extends Controller
                     $deposito->stockU = $deposito->stockU - $model->cantidadU;
                     while($deposito->stockU<0)
                     {
-                        $deposito->stockU=$deposito->stockU+$almacen->idProducto0->cantXPaquete;
+                        $deposito->stockU = $deposito->stockU + $almacen->idProducto0->cantXPaquete;
                         $deposito->stockP = $deposito->stockP - 1;
                     }
                     $deposito->stockP = $deposito->stockP - $model->cantidadP;
 
-                    if($deposito->stockP < 0)
+                    if($deposito->stockP < 0){
                         $model->addError('cantidadP','No existen suficientes insumos');
+                        Yii::app()->end();
+                    }
                     else{
                         if($model->save())
                         {

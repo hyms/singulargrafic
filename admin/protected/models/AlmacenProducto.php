@@ -244,7 +244,7 @@ class AlmacenProducto extends CActiveRecord
         if(empty($producto))
             $return = CHtml::link("<span class=\"glyphicon glyphicon-ok\"></span>Añadir", array("productos/productoAdd", "id"=>$id, "almacen"=>$almacen), array('class'=>'btn btn-success btn-sm','title'=>'Añadir Producto','onclick'=>"return confirm('Desea añadir el producto ".$detalle."?')"));
         else
-            $return = CHtml::link("<span class=\"glyphicon glyphicon-remove\"></span>Eliminar", array("productos/productoDel", "id"=>$id, "almacen"=>$almacen), array('class'=>'btn btn-danger btn-sm','title'=>'Eliminar Producto','onclick'=>"return confirm('Desea eliminar el producto ".$detalle."?')"));
+            $return = CHtml::link("<span class=\"glyphicon glyphicon-remove\"></span>Eliminar", array("productos/productoDel", "id"=>$producto->idAlmacenProducto, "almacen"=>$almacen), array('class'=>'btn btn-danger btn-sm','title'=>'Eliminar Producto','onclick'=>"return confirm('Desea eliminar el producto ".$detalle."?')"));
         return $return;
     }
     public function distribuidoraLink($id)

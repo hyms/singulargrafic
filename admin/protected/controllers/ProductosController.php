@@ -150,12 +150,12 @@ class ProductosController extends Controller
                 $almacen = AlmacenProducto::model()->findByPk($_GET['id']);
                 if($almacen->stockU >0 || $almacen->stockP)
                 {
-                    $almacen0 = AlmacenProducto::model()->findByPk('almacen=1 and idProducto='.$almacen->idProducto);
+                    $almacen0 = AlmacenProducto::model()->find('idAlmacen=1 and idProducto='.$almacen->idProducto);
                     $almacen0->stockU =$almacen0->stockU + $almacen->stockU;
                     $almacen0->stockP =$almacen0->stockP + $almacen->stockP;
                     $almacen0->save();
                 }
-                //$almacen->delete();
+                $almacen->delete();
             }
             $this->redirect(array('productoAdd','almacen'=>$_GET['almacen']));
         }
