@@ -10,7 +10,7 @@
             $this->renderPartial('tables/ordenes',array('ordenes'=>$model));
             break;
         case "reportPlaca":
-            //$this->renderPartial('');
+            $this->renderPartial('tables/productos',array('placas'=>$model));
             break;
         default:
             break;

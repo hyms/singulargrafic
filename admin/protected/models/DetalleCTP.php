@@ -132,6 +132,48 @@ class DetalleCTP extends CActiveRecord
 		));
 	}
 
+    public $codigo;
+    public $cliente;
+    public $fecha;
+    public $estado;
+    public $sucursal;
+
+    public function searchPlacas()
+    {
+        $criteria=new CDbCriteria;
+
+        $criteria->with = array('idCTP0','idCTP0.idCliente0');
+        //$criteria->condition = "";
+        $criteria->order = "idCTP0.fechaOrden Desc";
+
+        $criteria->compare('idDetalleCTP',$this->idDetalleCTP);
+        $criteria->compare('idCTP',$this->idCTP);
+        $criteria->compare('idAlmacenProducto',$this->idAlmacenProducto);
+        $criteria->compare('nroPlacas',$this->nroPlacas);
+        $criteria->compare('formato',$this->formato,true);
+        $criteria->compare('trabajo',$this->trabajo,true);
+        $criteria->compare('pinza',$this->pinza);
+        $criteria->compare('resolucion',$this->resolucion);
+        $criteria->compare('costo',$this->costo);
+        $criteria->compare('costoAdicional',$this->costoAdicional);
+        $criteria->compare('costoTotal',$this->costoTotal);
+        $criteria->compare('estado',$this->estado);
+        $criteria->compare('C',$this->C);
+        $criteria->compare('M',$this->M);
+        $criteria->compare('Y',$this->Y);
+        $criteria->compare('K',$this->K);
+
+        $criteria->compare('idCTP0.codigo',$this->codigo);
+        $criteria->compare('idCTP0.idSucursal',$this->sucursal );
+        $criteria->compare('idCTP0.fechaOrden',$this->fecha);
+        $criteria->compare('idCTP0.estado',$this->estado);
+
+        $criteria->compare('idCliente0.apellido',$this->cliente);
+
+        return new CActiveDataProvider($this, array(
+            'criteria'=>$criteria,
+        ));
+    }
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

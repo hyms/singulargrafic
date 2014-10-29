@@ -17,18 +17,18 @@
                 ),
                 array(
                     'header'=>'Sucursal',
-                    'value'=>'Sucursal::model()->findByPk($data->idSucursal)->nombre',
+                    'value'=>'Sucursal::model()->findByPk($data["idSucursal"])["nombre"]',
                     'filter'=>CHtml::activeDropDownList($ordenes,'idSucursal',CHtml::listData(Sucursal::model()->findAll(),'idSucursal','nombre'),array('class'=>'form-control input-sm','empty'=>'')),
                 ),
                 array(
                     'header'=>'Codigo',
-                    'value'=>'$data->codigo',
+                    'value'=>'$data["codigo"]',
                     'filter'=>CHtml::activeTextField($ordenes,'codigo',array('class'=>'form-control input-sm')),
                 ),
                 array(
                     'header'=>'Diseñador',
-                    'value'=>'$data->idUserOT0->idEmpleado0->apellido',
-                    'filter'=>'',
+                    'value'=>'$data["idUserOT0"]["idEmpleado0"]["apellido"]',
+                    'filter'=>CHtml::activeDropDownList($ordenes,'user',CHtml::listData(Empleado::model()->findAll(),'idSucursal','nombre'),array('class'=>'form-control input-sm','empty'=>'')),
                 ),
                 array(
                     'header'=>'Cliente',
@@ -39,7 +39,6 @@
                     'header'=>'Estado',
                     'value'=>'($data->estado==1)?"Sin Cobrar":(($data->estado==0)?"Cancelado":"Deuda")',
                     'filter'=>CHtml::activeDropDownList($ordenes,'estado',array('1'=>"Sin Cobrar",'2'=>"Deuda",'0'=>"Cancelado"),array('class'=>'form-control input-sm','empty'=>"")),
-                    //'filter'=>CHtml::activeTextField($ordenes,'estado',array('class'=>'form-control input-sm')),
                 ),
                 array(
                     'header'=>'Fecha',
@@ -63,8 +62,7 @@
                 array(
                     'header'=>'',
                     'type'=>'raw',
-                    //'value'=>'CHtml::link("Ver",array("#","id"=>$data->idCTP),array("class"=>"btn btn-success btn-sm"))',
-                    'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-list-alt\"></span> ver", array("report/orden","id"=>$data->idCTP), array("class" => "openDlg divDialog","title"=>"Orden de Trabajo"))',
+                    'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-list-alt\"></span> ver", array("ctp/reportOrden","id"=>$data->idCTP), array("class" => "openDlg divDialog","title"=>"Orden de Trabajo"))',
                 ),
             )
         ));
@@ -72,3 +70,11 @@
     </div>
 </div>
 
+<?php
+$this->renderPartial("scripts/modal");
+
+$this->beginWidget('zii.widgets.jui.CJuiDialog', array('id'=>'divDialog',
+    'options'=>array( 'title'=>'Detalle de Orden', 'autoOpen'=>false, 'modal'=>true, 'width'=>840)));
+?>
+<div class="divForForm"></div>
+<?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>
