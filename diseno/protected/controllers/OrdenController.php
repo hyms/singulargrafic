@@ -72,8 +72,17 @@ class OrdenController extends Controller
 			$ctp->attributes = $_POST['CTP'];
 			$ctp->estado = 1;
 			
-			if($ctp->validate())
+			if($ctp->validate() && $ctp->fechaEntega!="")
+            {
 				$swv=1;
+            }
+            else
+            {
+                if($ctp->fechaEntega=="")
+                {
+                    $ctp->addError('fechaEntega','Fecha de entrega no debe estar vacio');
+                }
+            }
 		}
 		
 		if(isset($_POST['DetalleCTP']))
@@ -221,6 +230,7 @@ class OrdenController extends Controller
 			if(isset($_POST['Cliente']))
 			{
 				$cliente = $this->saveCliente($_POST['Cliente']);
+                $cliente->save();
 			}
 			
 			if(isset($_POST['CTP']))
@@ -228,9 +238,9 @@ class OrdenController extends Controller
 				$orden = CTP::model()->findByPk($ctp->idCTP);
 				$orden->attributes = $_POST['CTP'];
 				if(!empty($cliente->idCliente))
-					$ctp->idCliente = $cliente->idCliente;
-				
-				$user = Users::model()->with('idEmpleado0')->findByPk(Yii::app()->user->id);
+                    $orden->idCliente = $cliente->idCliente;
+
+                $user = Users::model()->with('idEmpleado0')->findByPk(Yii::app()->user->id);
 				$orden->obs = $orden->obs."(Modificado por el usuario ".$user->username." (".$user->idEmpleado0->nombre." ".$user->idEmpleado0->apellido."))";
 				
 				if($orden->validate())
@@ -440,7 +450,7 @@ class OrdenController extends Controller
         {
             $cliente->fechaRegistro = date("Y-m-d");
         }
-        if(empty($cliente->idTiposClientes))
+        if($cliente->idTiposClientes=="")
         {
             $tmp = TiposClientes::model()->find('`nombre`="nuevo"');
             $cliente->idTiposClientes = $tmp->idTiposClientes;

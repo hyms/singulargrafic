@@ -134,10 +134,11 @@ class CtpController extends Controller
                         $sw=1;
                         $ctp->addError('fechaPlazo','Fecha Plazo no puede estar Vacio');
                     }
-                    if(empty($ctp->autorizado))
+                    if($ctp->autorizado=="")
                     {
                         $sw=1;
                         $ctp->addError('fechaPlazo','Debes seleccionar a un autorizado');
+                        //print_r($ctp);
                     }
                 }
                 if($sw==0){
@@ -188,7 +189,7 @@ class CtpController extends Controller
 
                     if($cliente->save() && $ctp->save())
                     {
-                        /*$almacen = array();
+                        $almacen = array();
                         foreach ($ctp->detalleCTPs as $key => $item){
                             //$item->save();
                             $almacen[$key] = AlmacenProducto::model()->findByPk($item->idAlmacenProducto);
@@ -227,7 +228,7 @@ class CtpController extends Controller
                             $this->redirect(array("ctp/buscar"));
                         }
                         else
-                            $ctp->save();-*/
+                            $ctp->save();
                         if($this->saveMovimientoAlmacen($ctp->detalleCTPs)){
                             if($cajaMovimiento->save()){
                                 $caja->saldo=$caja->saldo+$cajaMovimiento->monto;
@@ -412,6 +413,7 @@ class CtpController extends Controller
 
     public function actionPreview()
     {
+        //$this->layout ='print';
         if(isset($_GET['id']))
         {
             $ctp = CTP::model()
@@ -546,6 +548,7 @@ class CtpController extends Controller
 
     public function actionPreviewDay()
     {
+
         $fact="";$cond="";
         if(isset($_GET['f'])){
             if($_GET['f']!=""){
@@ -589,6 +592,7 @@ class CtpController extends Controller
             ->with('idCajaMovimientoVenta0')
             ->findAll(array('condition'=>'idCajaMovimientoVenta0.idCaja='.$this->cajaCTP.' and idSucursal'.$this->sucursal.' '.$fact.$cond)));
         //$tabla = $caja->ventas;
+        ;
         $this->render("base",array('render'=>'previewDay','tabla'=>$caja,));
     }
 
@@ -1041,7 +1045,7 @@ class CtpController extends Controller
         if($cliente->isNewRecord){
             $cliente->fechaRegistro = date("Y-m-d");
         }
-        if(empty($cliente->idTiposClientes)){
+        if($cliente->idTiposClientes==""){
             $tmp = TiposClientes::model()->find('`nombre`="nuevo"');
             $cliente->idTiposClientes = $tmp->idTiposClientes;
         }

@@ -241,7 +241,8 @@ class CTP extends CActiveRecord
 
         $criteria->compare('idCTPParent0.codigo',$this->codigoP,true);
 
-        $criteria->compare('`idEmpleado0`.apellido',$this->user,true);
+        $criteria->compare('idUserOT0.idEmpleado',$this->user,true);
+        //$criteria->compare('`idEmpleado0`.apellido',$this->user,true);
 
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,

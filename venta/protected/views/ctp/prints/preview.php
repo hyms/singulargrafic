@@ -26,6 +26,7 @@
                 <th><?php echo "Trabajo"; ?></th>
                 <th><?php echo "Pinza"; ?></th>
                 <th><?php echo "Resol."; ?></th>
+                <th><?php echo "Costo"; ?></th>
                 <th><?php echo "Adicional"; ?></th>
                 <th><?php echo "Total"; ?></th>
             </tr></thead>
@@ -53,6 +54,9 @@
                     </td>
                     <td>
                         <?php echo $producto->resolucion;?>
+                    </td>
+                    <td>
+                        <?php echo $producto->costo;?>
                     </td>
                     <td>
                         <?php echo $producto->costoAdicional;?>

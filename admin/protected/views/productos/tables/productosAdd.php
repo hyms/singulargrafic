@@ -12,6 +12,7 @@ if(!empty($dataProvider)){
             //'dataProvider'=>$dataProvider,
             'dataProvider'=>$dataProvider->searchInventarioGral(),
             'filter'=>$dataProvider,
+            'ajaxUpdate'=>false,
             'itemsCssClass' => 'table table-hover table-condensed',
             'htmlOptions' => array('class' => 'table-responsive'),
             'columns'=>array(

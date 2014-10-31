@@ -127,7 +127,7 @@ class DistribuidoraController extends Controller
 
         if($swc==1 && $swv==1 && $det==0){
             $venta->idCliente = $cliente->idCliente;
-
+            //print_r($detalle);return true;
             if($venta->save()){
                 $det=count($detalle);
                 $almacenes=array();	$i=0;
@@ -205,10 +205,9 @@ class DistribuidoraController extends Controller
                             $caja->saldo = $caja->saldo + $cajaMovimiento->monto;
 
                         $venta->idCajaMovimientoVenta = $cajaMovimiento->idCajaMovimientoVenta;
+                        if($caja->save()&& $venta->save())
+                            $this->redirect(array('preview','id'=>$venta->idVenta));
                     }
-
-                    if($caja->save()&& $venta->save())
-                        $this->redirect(array('preview','id'=>$venta->idVenta));
                 }
                 else{
                     $venta->delete();

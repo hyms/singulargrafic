@@ -70,7 +70,7 @@ class CajaController extends Controller
 		if(isset($_GET['id']))
 		{
 			
-			$users = new CActiveDataProvider('Users',
+			$users = new CActiveDataProvider('User',
 					array(	
 							'pagination'=>array(
 								'pageSize'=>'20',

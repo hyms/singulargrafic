@@ -24,6 +24,12 @@
                     'value'=>'$data["idCliente0"]["apellido"]',
                 ),
                 array(
+                    'header'=>'Responsable',
+                    'type'=>'raw',
+                    'value'=>'$data["responsable"]',
+                ),
+
+                array(
                     'header'=>'cantidad',
                     'type'=>'raw',
                     'value'=>'$data["cantidad"]',

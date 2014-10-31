@@ -22,7 +22,7 @@
                 ),
                 array(
                     'header'=>'Diseñador',
-                    'value'=>'$data->idUserOT0->idEmpleado0->apellido',
+                    'value'=>'$data->idUserOT0->idEmpleado0->nombre',
                     'filter'=>'',
                 ),
                 array(
@@ -30,6 +30,11 @@
                     'value'=>'$data["idCliente0"]["apellido"]',
                     'filter'=>CHtml::activeTextField($ordenes,'apellido',array('class'=>'form-control input-sm')),
                 ),
+                array(
+                    'header'=>'Responsable',
+                    'value'=>'$data["responsable"]',
+                    'filter'=>CHtml::activeTextField($ordenes,'responsable',array('class'=>'form-control input-sm')),
+                ),//*/
                 array(
                     'header'=>'Estado',
                     'value'=>'($data->estado==1)?"Sin Cobrar":(($data->estado==0)?"Cancelado":"Deuda")',

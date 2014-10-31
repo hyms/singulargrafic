@@ -12,12 +12,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
         ),
         array(
-            'header'=>'Material',
-            'value'=>'$data->idProducto0->material',
+            'header'=>'Formato',
+            'value'=>'$data->idProducto0->color',
         ),
         array(
-            'header'=>'Formato',
-            'value'=>'$data->idProducto0->color." - ".$data->idProducto0->detalle',
+            'header'=>'Tamaño',
+            'value'=>'$data->idProducto0->detalle',
         ),
         array(
             'header'=>'Stock',

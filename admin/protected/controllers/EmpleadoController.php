@@ -102,10 +102,10 @@ class EmpleadoController extends Controller
     {
         if(isset($_GET['id']))
         {
-            $model = Users::model()->find('idEmpleado='.$_GET['id']);
+            $model = User::model()->find('idEmpleado='.$_GET['id']);
             if(empty($model))
             {
-                $model = new Users;
+                $model = new User;
                 $model->idEmpleado = $_GET['id'];
             }
 
@@ -120,13 +120,13 @@ class EmpleadoController extends Controller
             //print_r($model);
             $empleado = Empleado::model()->findByPk($model->idEmpleado);
 
-            if(isset($_POST['Users']))
+            if(isset($_POST['User']))
             {
-                $model->attributes = $_POST['Users'];
-                $model->password = $_POST['Users']['password'];
+                $model->attributes = $_POST['User'];
+                $model->password = $_POST['User']['password'];
                 if(!empty($model->idUser))
                 {
-                    $userBpk = Users::model()->findByPk($model->idUser);
+                    $userBpk = User::model()->findByPk($model->idUser);
                     //print_r($userBpk->password." ".$model->password);
                     if($userBpk->password !== $model->password)
                         $model->password = md5($model->password);

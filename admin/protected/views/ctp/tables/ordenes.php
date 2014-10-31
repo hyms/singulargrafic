@@ -28,7 +28,7 @@
                 array(
                     'header'=>'Diseñador',
                     'value'=>'$data["idUserOT0"]["idEmpleado0"]["apellido"]',
-                    'filter'=>CHtml::activeDropDownList($ordenes,'user',CHtml::listData(Empleado::model()->findAll(),'idSucursal','nombre'),array('class'=>'form-control input-sm','empty'=>'')),
+                    'filter'=>CHtml::activeDropDownList($ordenes,'user',CHtml::listData(Empleado::model()->findAll(),'idEmpleado','apellido'),array('class'=>'form-control input-sm','empty'=>'')),
                 ),
                 array(
                     'header'=>'Cliente',

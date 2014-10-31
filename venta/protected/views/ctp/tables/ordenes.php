@@ -26,6 +26,12 @@
                     'filter'=>CHtml::activeTextField($ordenes,'apellido',array('class'=>'form-control input-sm')),
                 ),
                 array(
+                    'header'=>'Responsable',
+                    'type'=>'raw',
+                    'value'=>'$data["responsable"]',
+                    'filter'=>CHtml::activeTextField($ordenes,'responsable',array('class'=>'form-control input-sm')),
+                ),
+                array(
                     'header'=>'Fecha Orden',
                     'value'=>'$data->fechaOrden',
                     'filter'=>$this->widget('zii.widgets.jui.CJuiDatePicker', array(

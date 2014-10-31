@@ -263,6 +263,7 @@ class CtpController extends Controller
         {
             $ordenes->attributes = $_GET['CTP'];
             $ordenes->apellido = $_GET['CTP']['apellido'];
+            $ordenes->user = $_GET['CTP']['user'];
         }
 
         $this->render('index',array('render'=>'reportDate','model'=>$ordenes,));

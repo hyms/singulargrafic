@@ -120,6 +120,8 @@ class AlmacenProducto extends CActiveRecord
         $criteria->with= array(
             'idProducto0',
         );
+
+        $criteria->order = "idProducto0.detalle ";
         //$this->idAlmacen = 3;
         //$this->material = "Placas CTP";
 
