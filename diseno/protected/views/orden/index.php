@@ -6,7 +6,7 @@
     <?php
     switch ($render){
         case "new":
-            $this->renderPartial('cliente',array('cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos));
+            $this->renderPartial('cliente',array('cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos,'clientes'=>$clientes));
             $this->renderPartial('scripts/save');
             $this->renderPartial('scripts/reset');
             break;

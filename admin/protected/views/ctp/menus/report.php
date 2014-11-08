@@ -8,6 +8,7 @@
         'items'=>array(
             array('label'=>'Orden Trabajo', 'url'=>array('ctp/reportDate')),
             array('label'=>'Placas Proc.', 'url'=>array('ctp/reportPlaca')),
+            array('label'=>'Generar Reportes','url'=>array('ctp/generar')),
         ),
     ));
     ?>

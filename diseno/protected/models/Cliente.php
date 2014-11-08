@@ -104,13 +104,16 @@ class Cliente extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($cond=null)
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idCliente',$this->idCliente);
+        if($cond!=null)
+            $criteria->condition = $cond;
+
+        $criteria->compare('idCliente',$this->idCliente);
 		$criteria->compare('nitCi',$this->nitCi,true);
 		$criteria->compare('apellido',$this->apellido,true);
 		$criteria->compare('nombre',$this->nombre,true);
@@ -123,6 +126,7 @@ class Cliente extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+            'pagination'=>array('pageSize'=>5),
 		));
 	}
 

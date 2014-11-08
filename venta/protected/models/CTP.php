@@ -68,7 +68,7 @@ class CTP extends CActiveRecord
 			array('factura, autorizado, responsable', 'length', 'max'=>50),
 			array('obs', 'length', 'max'=>200),
 			array('obsCaja', 'length', 'max'=>500),
-			array('fechaOrden, fechaPlazo, fechaEntega', 'safe'),
+			array('fechaOrden, fechaPlazo, fechaEntega, fechaGenerada', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('idCTP, fechaOrden, tipoOrden, formaPago, idCliente, fechaPlazo, codigo, serie, numero, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, idUserOT, idUserVenta, idImprenta, idCTPParent, tipoCTP, fechaEntega, obsCaja, idSucursal', 'safe', 'on'=>'search'),
@@ -128,7 +128,8 @@ class CTP extends CActiveRecord
 			'fechaEntega' => 'Fecha Entega',
 			'obsCaja' => 'Obs Caja',
 			'idSucursal' => 'Id Sucursal',
-		);
+            'fechaGenerada' => 'Fecha Generada',
+        );
 	}
 
 	/**
@@ -176,6 +177,7 @@ class CTP extends CActiveRecord
 		$criteria->compare('fechaEntega',$this->fechaEntega,true);
 		$criteria->compare('obsCaja',$this->obsCaja,true);
 		$criteria->compare('idSucursal',$this->idSucursal);
+        $criteria->compare('fechaGenerada',$this->fechaGenerada,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -185,16 +187,18 @@ class CTP extends CActiveRecord
     public $apellido;
     public $nit;
     public $cantidad;
-    public function searchOrder($cond=null)
+    public function searchOrder($order=null,$cond=null)
     {
         $criteria=new CDbCriteria;
 
         $criteria->with= array('idCliente0','idCajaMovimientoVenta0');
-        $criteria->order='fechaOrden DESC';
+        if($order)
+            $criteria->order=$order;
+        //$criteria->order='fechaOrden DESC';
+
         if($cond!=null)
-        {
             $criteria->condition = $cond;
-        }
+
         //$criteria->condition = 'idAlmacen=2';
 
         $criteria->compare('idCTP',$this->idCTP);
@@ -224,6 +228,7 @@ class CTP extends CActiveRecord
         $criteria->compare('fechaEntega',$this->fechaEntega,true);
         $criteria->compare('obsCaja',$this->obsCaja,true);
         $criteria->compare('idSucursal',$this->idSucursal);
+        $criteria->compare('fechaGenerada',$this->fechaGenerada,true);
 
         $criteria->compare('idCliente0.apellido',$this->apellido,true);
         $criteria->compare('idCliente0.nitCi',$this->nit);

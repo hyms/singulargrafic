@@ -94,7 +94,7 @@
             $totalVenta = $totalVenta+$dato;
         if($item->idCliente0->nitCi=="000")
         {
-            $dato=$item->idCajaMovimientoVenta0->monto;
+            $dato=$item->idCajaMovimientoVenta0["monto"];
             if($dato>0)
                 $totalSingular = $totalSingular+$dato;
         }

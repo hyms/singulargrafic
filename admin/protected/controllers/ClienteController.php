@@ -29,8 +29,18 @@ class ClienteController extends Controller
 		{
 			$model->attributes=$_POST['Cliente'];
 			$model->fechaRegistro=date("Y-m-d H:i:s");
-			if($model->save())
-				$this->redirect(array('index'));
+            if(!empty($model->nitCi) && !empty($model->apellido))
+            {
+                if ($model->save())
+                    $this->redirect(array('index'));
+            }
+            else
+            {
+                if(empty($model->nitCi))
+                    $model->addError('nitCi','Nit Ci no puede estar vacio');
+                if(empty($model->apellido))
+                    $model->addError('apellido','Apellido no puede estar vacio');
+            }
 		}
 
 		$this->render('index',array(
@@ -121,9 +131,8 @@ class ClienteController extends Controller
 	
 	public function actionPreferencia()
 	{
-		$clientes = Cliente::model()->with('cTPs',array('select'=>'idCliente'))->findAll(array('condition'=>'`cTPs`.tipoCTP=1','group'=>'`cTPs`.idCliente'));
-		//$clientes = Cliente::model()->with('cTPs',array('select'=>'idCliente'))->findAll();
-		
+		$clientes = Cliente::model()->findAll(array('condition'=>'`t`.idTiposClientes IS NOT NULL and `t`.idTiposClientes!=3','order'=>'apellido'));
+
 		if(isset($_POST['Cliente']))
 		{
 			foreach ($clientes as $key => &$cliente)

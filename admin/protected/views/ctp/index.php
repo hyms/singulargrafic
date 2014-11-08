@@ -12,6 +12,9 @@
         case "reportPlaca":
             $this->renderPartial('tables/productos',array('placas'=>$model));
             break;
+        case "generar":
+            $this->renderPartial('forms/generar');
+            break;
         default:
             break;
     }

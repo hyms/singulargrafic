@@ -46,6 +46,12 @@ class OrdenController extends Controller
 	
 	public function actionCliente()
 	{
+        $clientes =new Cliente('search');
+        if(isset($_GET['Cliente']))
+        {
+            $clientes->attributes=$_GET['Cliente'];
+        }
+
 		$cliente = new Cliente;
 		$detalle = new DetalleCTP;
 		$ctp = new CTP;
@@ -56,7 +62,7 @@ class OrdenController extends Controller
         $ctp->idSucursal = $this->sucursal;
         $ctp->tipoCTP = 1;
 		$ctp->codigo = $this->getCodigo($ctp->tipoCTP);
-		$ctp->fechaOrden = date("Y-m-d H:i:s");
+		$ctp->fechaGenerada = date("Y-m-d H:i:s");
 		$ctp->idUserOT = Yii::app()->user->id;
 
 		$swc=0; $swv=0;
@@ -119,7 +125,7 @@ class OrdenController extends Controller
 			}
 		}
 		
-		$this->render('index',array('render'=>'new','cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos));
+		$this->render('index',array('render'=>'new','cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos,'clientes'=>$clientes));
 	}
 	
 	public function actionInterna()

@@ -321,6 +321,18 @@ class CtpController extends Controller
             throw new CHttpException(400,'Petición no válida.');
     }
 
+    public function actionGenerar()
+    {
+        
+        $diaReporte = CTP::model()
+            ->with('cTPs')
+            ->with('detalleCTPs')
+            ->with('fallasCTPs')
+            ->findAll('`t`.fechaOrden>="'.' 00:00:00" and`t`.fechaOrden<="'.' 23:59:59"')
+            ;
+        $this->render('index',array('render'=>'generar'));
+    }
+
     public function verifyModel($model)
     {
         if($model===null)

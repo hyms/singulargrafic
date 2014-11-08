@@ -13,15 +13,13 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Los campos con <span class="required">*</span> son obligatorios.</p>
-
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="form-group">
         <div class="col-xs-6">
             <?php echo $form->labelEx($model,'nombre',array('class'=>'col-xs-4 control-label')); ?>
             <div class="col-xs-8">
-            <?php echo $form->textField($model,'nombre',array('size'=>40,'maxlength'=>40,'class'=>'form-control')); ?>
+            <?php echo $form->textField($model,'nombre',array('class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'nombre'); ?>
         </div>
@@ -29,7 +27,7 @@
         <div class="col-xs-6">
             <?php echo $form->labelEx($model,'apellido',array('class'=>'col-xs-4 control-label')); ?>
             <div class="col-xs-8">
-            <?php echo $form->textField($model,'apellido',array('size'=>40,'maxlength'=>40,'class'=>'form-control')); ?>
+            <?php echo $form->textField($model,'apellido',array('class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'apellido'); ?>
         </div>
@@ -39,7 +37,7 @@
         <div class="col-xs-6">
             <?php echo $form->labelEx($model,'nitCi',array('class'=>'col-xs-4 control-label')); ?>
             <div class="col-xs-8">
-            <?php echo $form->textField($model,'nitCi',array('size'=>20,'maxlength'=>20,'class'=>'form-control')); ?>
+            <?php echo $form->textField($model,'nitCi',array('class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'nitCi'); ?>
         </div>
@@ -47,7 +45,7 @@
         <div class="col-xs-6">
             <?php echo $form->labelEx($model,'correo',array('class'=>'col-xs-4 control-label')); ?>
             <div class="col-xs-8">
-            <?php echo $form->textField($model,'correo',array('size'=>50,'maxlength'=>50,'class'=>'form-control')); ?>
+            <?php echo $form->textField($model,'correo',array('class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'correo'); ?>
         </div>
@@ -57,7 +55,7 @@
         <div class="col-xs-6">
             <?php echo $form->labelEx($model,'telefono',array('class'=>'col-xs-4 control-label')); ?>
             <div class="col-xs-8">
-            <?php echo $form->textField($model,'telefono',array('size'=>20,'maxlength'=>20,'class'=>'form-control')); ?>
+            <?php echo $form->textField($model,'telefono',array('class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'telefono'); ?>
         </div>
@@ -65,7 +63,7 @@
         <div class="col-xs-6">
             <?php echo $form->labelEx($model,'direccion',array('class'=>'col-xs-4 control-label')); ?>
             <div class="col-xs-8">
-            <?php echo $form->textField($model,'direccion',array('size'=>20,'maxlength'=>20,'class'=>'form-control')); ?>
+            <?php echo $form->textField($model,'direccion',array('class'=>'form-control')); ?>
             </div>
             <?php echo $form->error($model,'direccion'); ?>
         </div>

@@ -5,7 +5,7 @@
     <div class="panel-body">
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
-            'dataProvider'=>$ordenes->searchOrder(),
+            'dataProvider'=>$ordenes->searchOrder('fechaGenerada Desc'),
             'filter'=>$ordenes,
             'ajaxUpdate'=>false,
             'itemsCssClass' => 'table table-hover table-condensed',

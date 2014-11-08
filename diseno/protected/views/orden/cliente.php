@@ -1,9 +1,6 @@
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <strong class="panel-title">Placas</strong>
-    </div>
     <div class="panel-body" style="overflow: auto;">
-        <?php $this->renderPartial('tables/producto',array('productos'=>$productos,'index'=>'cliente'));?>
+        <?php $this->renderPartial('tables/producto',array('productos'=>$productos,'index'=>'cliente','clientes'=>$clientes));?>
     </div>
 </div>
 

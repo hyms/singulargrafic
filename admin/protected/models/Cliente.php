@@ -46,7 +46,7 @@ class Cliente extends CActiveRecord
 			array('nitCi, telefono', 'length', 'max'=>20),
 			array('apellido, nombre', 'length', 'max'=>40),
 			array('correo', 'length', 'max'=>50),
-			array('direccion', 'length', 'max'=>100),
+			array('direccion', 'length', 'max'=>200),
 			array('fechaRegistro', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -80,7 +80,7 @@ class Cliente extends CActiveRecord
 		return array(
 			'idCliente' => 'Id Cliente',
 			'nitCi' => 'Nit Ci',
-			'apellido' => 'Apellido',
+			'apellido' => 'Apellido / R.Social',
 			'nombre' => 'Nombre',
 			'correo' => 'Correo',
 			'fechaRegistro' => 'Fecha Registro',

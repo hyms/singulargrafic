@@ -87,6 +87,7 @@ class CtpController extends Controller
                 ->find('`t`.idCTP='.$_GET['id']));
             $ctp->formaPago = 1;
             $ctp->tipoOrden = 1;
+            $ctp->fechaOrden = date("Y-m-d H:i:s");
             $ctp=$this->getCodigo($ctp);
             $detalle = array();
             $total=0;
@@ -99,19 +100,21 @@ class CtpController extends Controller
                 $condCliente = 'idTiposClientes='.$ctp->idCliente0->idTiposClientes;
                 $condCantidad="";
                 foreach ($cantidades as $c)
-                {	if($c->Inicio<=$item->nroPlacas)
-                    $condCantidad = "idCantidad=".$c->idCantidadCTP;
-                else
-                    break;
+                {
+                    if($c->Inicio<=$item->nroPlacas)
+                        $condCantidad = "and idCantidad=".$c->idCantidadCTP;
+                    else
+                        break;
                 }
                 $condHora ="";
                 foreach ($horas as $h)
-                {	if($h->inicio<=date("H:0:s"))
-                    $condHora ="idHorario=".$h->idHorario;
-                else
-                    break;
+                {
+                    if($h->inicio<=date("H:0:s"))
+                        $condHora ="and idHorario=".$h->idHorario;
+                    else
+                        break;
                 }
-                $matriz = MatrizPreciosCTP::model()->find($condAlmacen.' and '.$condCliente.' and '.$condCantidad.' and '.$condHora);
+                $matriz = MatrizPreciosCTP::model()->find($condAlmacen.' and '.$condCliente.$condCantidad.$condHora);
                 if($ctp->tipoOrden ==0)
                     $detalle[$key]->costo = $matriz->precioCF;
                 else
@@ -128,6 +131,7 @@ class CtpController extends Controller
                 $sw=0;
                 $ctp->attributes = $_POST['CTP'];
                 $ctp->idUserVenta = Yii::app()->user->id;
+
                 if($ctp->formaPago == 1){
                     if(empty($ctp->fechaPlazo))
                     {
@@ -141,12 +145,13 @@ class CtpController extends Controller
                         //print_r($ctp);
                     }
                 }
+
                 if($sw==0){
                     if(!empty($ctp->fechaPlazo))
                         $ctp->fechaPlazo= date("Y-m-d H:i:s",strtotime($ctp->fechaPlazo));
                     $ctp->estado = 2;
 
-                    $ctp=$this->getCodigo($ctp);
+                    //$ctp=$this->getCodigo($ctp);
                     $tmp = array();
 
                     $caja = $this->verifyModel(Caja::model()->findByPk($this->cajaCTP));
@@ -164,8 +169,10 @@ class CtpController extends Controller
 
                     foreach ($_POST['DetalleCTP'] as $key => $item)
                     {
-                        $tmp[$key] = $ctp->detalleCTPs[$key];
+                        $tmp[$key] = DetalleCTP::model()->findByPk($ctp->detalleCTPs[$key]->idDetalleCTP);
+
                         $tmp[$key]->attributes = $item;
+                        $tmp[$key]->save();
                     }
                     $ctp->detalleCTPs=$tmp;
 
@@ -193,12 +200,12 @@ class CtpController extends Controller
                         foreach ($ctp->detalleCTPs as $key => $item){
                             //$item->save();
                             $almacen[$key] = AlmacenProducto::model()->findByPk($item->idAlmacenProducto);
-                            $almacen[$key]->stockU = $almacen[$key]->stockU - $item->cantidadU;
+                            $almacen[$key]->stockU = $almacen[$key]->stockU - $item->nroPlacas;
                             if($almacen[$key]->stockU>=0)
                             {
                                 if(!$almacen[$key]->validate()){
-                                   $ctp->estado = 1;
-                                   break;
+                                    $ctp->estado = 1;
+                                    break;
                                 }
                             }
                             else{
@@ -208,41 +215,24 @@ class CtpController extends Controller
                         }
                         if($ctp->estado!=1)
                         {
-                            $cajaMovimiento->save();
-                            foreach($almacen as $item)
-                            {
-                                if($item->save())
-                                {
-                                    $movimiento=new MovimientoAlmacen;
-                                    $movimiento->idProducto = $almacen[$key]->idProducto0->idProducto;
-                                    //$movimiento->idAlmacenDestino = 2;
-                                    $movimiento->idAlmacenOrigen = $this->almacen;
-                                    //$idUser->idUser = Yii::app()->user->id;
-                                    $movimiento->fechaMovimiento = date("Y-m-d H:i:s");
-                                    $movimiento->cantidadU = $ctp->detalleCTPs[$key]->cantidadU;
-                                    //$movimiento->cantidadP = $item->cantidadP;
-                                    $movimiento->obs = "orden de trabajo";
-                                    $movimiento->save();
+                            if($this->saveMovimientoAlmacen($ctp->detalleCTPs)){
+                                if($cajaMovimiento->save()){
+                                    $caja->saldo=$caja->saldo+$cajaMovimiento->monto;
+                                    $caja->save();
                                 }
+
+                                $ctp->idCajaMovimientoVenta =$cajaMovimiento->idCajaMovimientoVenta;
+                                if($ctp->save())
+                                    $this->redirect(array('ctp/preview','id'=>$ctp->idCTP));
                             }
-                            $this->redirect(array("ctp/buscar"));
+                            else{
+                                $ctp->estado = 1;
+                                $ctp->save();
+                            }
                         }
                         else
                             $ctp->save();
-                        if($this->saveMovimientoAlmacen($ctp->detalleCTPs)){
-                            if($cajaMovimiento->save()){
-                                $caja->saldo=$caja->saldo+$cajaMovimiento->monto;
-                                $caja->save();
-                            }
 
-                            $ctp->idCajaMovimientoVenta =$cajaMovimiento->idCajaMovimientoVenta;
-                            if($ctp->save())
-                                $this->redirect(array('ctp/preview','id'=>$ctp->idCTP));
-                        }
-                        else{
-                            $ctp->estado = 1;
-                            $ctp->save();
-                        }
                     }
                 }
             }
@@ -297,7 +287,7 @@ class CtpController extends Controller
                         $ctp->idCajaMovimientoVenta0->monto = $ctp->montoPagado;
                         $caja->save();
                         $ctp->save();
-                        $this->redirect(array('ctp/buscar'));
+                        $this->redirect(array('ctp/preview','id'=>$_GET['id']));
                     }
                 }
                 else
@@ -305,7 +295,7 @@ class CtpController extends Controller
                     if($ctp->estado == 2)
                     {
                         $ctp->attributes = $_POST['CTP'];
-                        if($ctp->montoPagado > 0 && $ctp->montoPagado>=$ctp->idCajaMovimientoVenta0->monto)
+                        if(($ctp->montoPagado > 0) && ($ctp->montoPagado >= $ctp->idCajaMovimientoVenta0->monto))
                         {
                             $caja->monto = $caja->monto - $ctp->idCajaMovimientoVenta0->monto;
                             if(($caja->monto + $ctp->montoPagado)>0)
@@ -317,6 +307,10 @@ class CtpController extends Controller
                                 $this->redirect(array('ctp/buscar'));
                             }
                         }
+                    }
+                    else
+                    {
+                        throw new CHttpException(400,'Petición no válida.');
                     }
                 }
             }
@@ -354,14 +348,14 @@ class CtpController extends Controller
                     {
                         $caja->saldo = $caja->saldo -  $tmp->monto;
 
-                    $ctp->montoPagado = 0;
-                    if($ctp->save())
-                    {
-                        $tmp->delete();
-                        foreach($almacen as $item)
-                        {   $item->save();  }
-                        $this->redirect(array('ctp/ordenes'));
-                    }
+                        $ctp->montoPagado = 0;
+                        if($ctp->save())
+                        {
+                            $tmp->delete();
+                            foreach($almacen as $item)
+                            {   $item->save();  }
+                            $this->redirect(array('ctp/ordenes'));
+                        }
                     }
 
                 }
@@ -380,25 +374,6 @@ class CtpController extends Controller
 
     public function actionBuscar()
     {
-        /*$t="";
-        if(isset($_GET['t']))
-        {
-            $t='(`t`.estado=1 and `t`.tipoCTP='.$_GET['t'].')';
-            if($_GET['t']==1)
-            $t="(`t`.estado=2 and `t`.tipoCTP=1)";
-        }
-        else
-            $t='(`t`.estado=2 and `t`.tipoCTP=1) or (`t`.estado=1 and `t`.tipoCTP!=1)';
-
-        /*$ordenes=new CActiveDataProvider('CTP',array(
-                'criteria'=>array(
-                        'condition'=>$t,
-                        'with'=>array('idCliente0'),
-                        'order'=>'fechaOrden Desc',
-                ),
-                'pagination'=>array(
-                        'pageSize'=>'20',
-                ),));*/
         $ordenes = new CTP('searchOrder');
         $ordenes->unsetAttributes();
         $ordenes->idSucursal = $this->sucursal;
