@@ -246,7 +246,7 @@ class OrdenController extends Controller
 				if(!empty($cliente->idCliente))
                     $orden->idCliente = $cliente->idCliente;
 
-                $user = Users::model()->with('idEmpleado0')->findByPk(Yii::app()->user->id);
+                $user = User::model()->with('idEmpleado0')->findByPk(Yii::app()->user->id);
 				$orden->obs = $orden->obs."(Modificado por el usuario ".$user->username." (".$user->idEmpleado0->nombre." ".$user->idEmpleado0->apellido."))";
 				
 				if($orden->validate())

@@ -57,8 +57,20 @@
 
 
     <div class="row">
-        <div class="col-xs-8"><strong>Son:</strong> <?php $this->widget('ext.numerosALetras', array('valor'=>$venta->montoVenta,'despues'=>''))?></div>
-        <div class="col-xs-offset-1 col-xs-3 well well-sm"><strong>Total:</strong> <?php echo $venta->montoVenta." Bs.";?></div>
+        <div class="col-xs-6"><strong>Son:</strong> <?php $this->widget('ext.numerosALetras', array('valor'=>$venta->montoVenta,'despues'=>''))?></div>
+        <?php
+        if($venta->formaPago==1)
+        {
+            echo '<div class="col-xs-2"><div class="well well-sm"><strong>'.CHtml::encode("A/C: ").'</strong>'.CHtml::encode($venta->montoPagado).'</div></div>';
+            echo '<div class="col-xs-2"><div class="well well-sm"><strong>'.CHtml::encode("Saldo: ").'</strong>'.CHtml::encode($venta->montoCambio*-1).'</div></div>';
+            echo '<div class="col-xs-2 well well-sm">';
+        }
+        else
+        {
+            echo'<div class="col-xs-offset-4 col-xs-2 well well-sm">';
+        }
+        ?>
+        <strong>Total:</strong> <?php echo $venta->montoVenta." Bs.</div>";?>
     </div>
 
     <div class="row">
@@ -68,16 +80,11 @@
     </div>
 
     <div class="row">
-        <div class="col-xs-6"><strong>Observaciones: </strong ><?php echo $venta->obs; ?></div>
-        <div class="col-xs-3"><strong><?php echo ($venta->formaPago==1)?CHtml::encode("a/c:"):""?></strong> <?php echo ($venta->formaPago==1)?CHtml::encode($venta->montoPagado):""?></div>
-        <div class="col-xs-3"><strong><?php echo ($venta->formaPago==1)?CHtml::encode("Saldo:"):""?></strong> <?php echo ($venta->formaPago==1)?CHtml::encode($venta->montoCambio*-1):""?></div>
+        <div class="col-xs-12"><strong>Observaciones: </strong ><?php echo $venta->obs; ?></div>
     </div>
 
     <div class="row">
-        <div class="col-xs-6 "><strong>NOTA:</strong> Una vez redirada la mercancia, no se aceptan <strong>RECLAMOS, CAMBIOS NI DEVOLUCIONES</strong>.</div>
-        <div class="col-xs-offset-1 col-xs-4"><strong>Firma:..................................</strong></div>
-        <div class="col-xs-offset-1 col-xs-4"><strong>Apellido y Nomb ................</strong></div>
-        <div class="col-xs-offset-7 col-xs-4 text-center"><strong>Recibi Conforme</strong></div>
+        <div class="col-xs-12"><strong>NOTA:</strong> Una vez redirada la mercancia, no se aceptan <strong>RECLAMOS, CAMBIOS NI DEVOLUCIONES</strong>.</div>
     </div>
 
 </div>

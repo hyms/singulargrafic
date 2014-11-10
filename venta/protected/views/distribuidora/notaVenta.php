@@ -1,12 +1,16 @@
 <h3 id="titleStock">Stock</h3>
 
-<div class="panel-group" id="accordion">
-    <div class="panel panel-default" >
-        <div class="panel-heading">
-            <strong class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Lista de Productos</a></strong>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <strong class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                    Lista de Productos
+                </a>
+            </strong>
         </div>
-        <div id="collapseOne" class="panel-collapse collapse in">
-            <div class="panel-body" style="overflow: auto;">
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
                 <?php $this->renderPartial('tables/producto',array('productos'=>$productos))?>
             </div>
         </div>

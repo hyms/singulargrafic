@@ -111,7 +111,7 @@ class SiteController extends Controller
     {
         if(isset($_GET['id']))
         {
-            $model = Users::model()->findByPk($_GET['id']);
+            $model = User::model()->findByPk($_GET['id']);
 
             // uncomment the following code to enable ajax-based validation
             /*
@@ -124,13 +124,13 @@ class SiteController extends Controller
 
             $empleado = Empleado::model()->findByPk($model->idEmpleado);
 
-            if(isset($_POST['Users']))
+            if(isset($_POST['User']))
             {
-                $model->attributes = $_POST['Users'];
-                $model->password = $_POST['Users']['password'];
+                $model->attributes = $_POST['User'];
+                $model->password = $_POST['User']['password'];
                 if($model->idUser!=null)
                 {
-                    $userBpk = Users::model()->findByPk($model->idUser);
+                    $userBpk = User::model()->findByPk($model->idUser);
                     if($userBpk->password != $model->password)
                         $model->password = md5($model->password);
                 }

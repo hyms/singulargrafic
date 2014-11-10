@@ -94,7 +94,7 @@ class ReposController extends Controller
                     $otro = $_POST['respOtro'];
                     if(is_numeric($otro))
                     {
-                        $name = Users::model()->with('idEmpleado0')->findByPk(Yii::app()->user->id);
+                        $name = User::model()->with('idEmpleado0')->findByPk(Yii::app()->user->id);
                         $otro = $name->idEmpleado0->apellido;
                     }
                     //$repos->responsable = $otro;
@@ -170,7 +170,7 @@ class ReposController extends Controller
                 $orden = CTP::model()->findByPk($ctp->idCTP);
                 $orden->attributes = $_POST['CTP'];
 
-                $user = Users::model()->with('idEmpleado0')->findByPk(Yii::app()->user->id);
+                $user = User::model()->with('idEmpleado0')->findByPk(Yii::app()->user->id);
                 $orden->obs = "Modificado por el usuario ".$user->username." (".$user->idEmpleado0->nombre." ".$user->idEmpleado0->apellido.")";
 
                 if($orden->save())

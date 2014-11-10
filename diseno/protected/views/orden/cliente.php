@@ -1,6 +1,11 @@
 <div class="panel panel-default">
-    <div class="panel-body" style="overflow: auto;">
-        <?php $this->renderPartial('tables/producto',array('productos'=>$productos,'index'=>'cliente','clientes'=>$clientes));?>
+    <div class="panel-body" >
+        <?php
+        if(isset($clientes))
+            $this->renderPartial('tables/producto',array('productos'=>$productos,'index'=>'cliente','clientes'=>$clientes));
+        else
+            $this->renderPartial('tables/producto',array('productos'=>$productos,'index'=>'cliente'));
+        ?>
     </div>
 </div>
 

@@ -7,9 +7,9 @@
             echo " ".CHtml::link('<span class="glyphicon glyphicon-ok-circle"></span>',array('ctp/validar','id'=>$ctp->idCTP), array("class"=>"btn btn-success","id"=>"validar",'title'=>'Validar Orden','confirm'=>'Esta seguro de la Validación?'));
     }
 
-    if($ctp->estado!=1)
+    /*if($ctp->estado!=1)
     {
         echo " ".CHtml::link('<span class="glyphicon glyphicon-remove-circle"></span>',array('ctp/return','id'=>$ctp->idCTP), array("class"=>"btn btn-danger","id"=>"cancelar",'title'=>'Retornar Orden','confirm'=>'Esta seguro de Cancelar la orden?'));
-    }
+    }*/
     ?>
 </div>

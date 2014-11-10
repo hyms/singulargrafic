@@ -19,7 +19,7 @@ class UserIdentity extends CUserIdentity
     private $_tipo;
     public function authenticate(){
         $username=strtolower($this->username);
-        $user=Users::model()->with('idEmpleado0')->find('LOWER(username)=?',array($username),'estado=0');
+        $user=User::model()->with('idEmpleado0')->find('LOWER(username)=?',array($username),'estado=0');
 
         if($user===null)
         {   $this->errorCode=self::ERROR_USERNAME_INVALID;  }

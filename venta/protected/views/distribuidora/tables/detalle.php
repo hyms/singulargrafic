@@ -1,4 +1,4 @@
-<div class="form-group">
+
 
     <h4 class="col-xs-offset-10 text-right"><strong><?php echo $venta->codigo; ?></strong></h4>
     <h3 class="col-xs-offset-8 text-right"><strong><?php echo "NOTA DE VENTA";?></strong></h3>
@@ -55,20 +55,29 @@
     </div>
 
     <div class="row">
-        <span class="col-xs-8"><strong>Son:</strong> <?php $this->widget('ext.numerosALetras', array('valor'=>$venta->montoVenta,'despues'=>''))?></span>
-        <div class="col-xs-offset-1 col-xs-3 "><strong>Total:</strong> <?php echo $venta->montoVenta." Bs.";?></div>
+        <div class="col-xs-6"><strong>Son:</strong> <?php $this->widget('ext.numerosALetras', array('valor'=>$venta->montoVenta,'despues'=>''))?></div>
+        <?php
+        if($venta->formaPago==1)
+        {
+            echo '<div class="col-xs-2"><strong>'.CHtml::encode("A/C: ").'</strong>'.CHtml::encode($venta->montoPagado).'</div>';
+            echo '<div class="col-xs-2"><strong>'.CHtml::encode("Saldo: ").'</strong>'.CHtml::encode($venta->montoCambio*-1).'</div>';
+            echo '<div class="col-xs-2">';
+        }
+        else
+        {
+            echo'<div class="col-xs-offset-4 col-xs-2">';
+        }
+        ?>
+        <strong>Total:</strong> <?php echo $venta->montoVenta." Bs.</div>";?>
     </div>
 
     <div class="row">
-        <span class="col-xs-4"><strong>Forma de pago:</strong> <?php echo ($venta->formaPago==0)?CHtml::encode("Contado"):CHtml::encode("Credito")?></span>
-        <span class="col-xs-4"><strong><?php echo ($venta->formaPago==1)?CHtml::encode("Fecha/Cobro:"):""?></strong> <?php echo ($venta->formaPago==1)?CHtml::encode(date("d/m/Y",strtotime($venta->fechaPlazo))):"" ?></span>
-        <span class="col-xs-4"><strong><?php echo ($venta->formaPago==1)?CHtml::encode("Autorizado:"):""?></strong> <?php echo ($venta->formaPago==1)?CHtml::encode(($venta->autorizado==0)?'Erick Paredes':'Miriam Martinez'):""?></span>
+        <div class="col-xs-4"><strong>Forma de pago:</strong> <?php echo ($venta->formaPago==0)?CHtml::encode("Contado"):CHtml::encode("Credito")?></div>
+        <div class="col-xs-4"><strong><?php echo ($venta->formaPago==1)?CHtml::encode("Fecha/Cobro:"):""?></strong> <?php echo ($venta->formaPago==1)?CHtml::encode(date("d/m/Y",strtotime($venta->fechaPlazo))):"" ?></div>
+        <div class="col-xs-4"><strong><?php echo ($venta->formaPago==1)?CHtml::encode("Autorizado:"):""?></strong> <?php echo ($venta->formaPago==1)?CHtml::encode(($venta->autorizado==0)?'Erick Paredes':'Miriam Martinez'):""?></div>
     </div>
 
     <div class="row">
-        <span class="col-xs-6"><strong>Observaciones: </strong ><?php echo $venta->obs; ?></span>
-        <span class="col-xs-3"><strong><?php echo ($venta->formaPago==1)?CHtml::encode("a/c:"):""?></strong> <?php echo ($venta->formaPago==1)?CHtml::encode($venta->montoPagado):""?></span>
-        <span class="col-xs-3"><strong><?php echo ($venta->formaPago==1)?CHtml::encode("Saldo:"):""?></strong> <?php echo ($venta->formaPago==1)?CHtml::encode($venta->montoCambio*-1):""?></span>
+        <div class="col-xs-12"><strong>Observaciones: </strong ><?php echo $venta->obs; ?></div>
     </div>
 
-</div>

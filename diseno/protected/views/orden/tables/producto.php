@@ -1,5 +1,5 @@
 <?php
-if(isset($cliente))
+if(isset($clientes))
 {
     ?>
     <div class="row">

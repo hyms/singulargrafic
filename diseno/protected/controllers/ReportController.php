@@ -75,7 +75,7 @@ class ReportController extends CController
     {
         $deudas = new FallasCTP('search');
         $deudas->unsetAttributes();
-        $idEmpleado=Users::model()->findByPk(Yii::app()->user->id);
+        $idEmpleado=User::model()->findByPk(Yii::app()->user->id);
         $deudas->idEmpleado = $idEmpleado->idEmpleado;
         if(isset($_GET['FallasCTP']))
         {

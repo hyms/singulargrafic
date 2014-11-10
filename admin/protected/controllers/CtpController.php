@@ -284,8 +284,7 @@ class CtpController extends Controller
 
     public function actionReportOrden()
     {
-        if(isset($_GET['id']))
-        {
+        if (isset($_GET['id'])) {
             $ctp = CTP::model()
                 ->with('idCliente0')
                 ->with('idUserOT0')
@@ -293,17 +292,14 @@ class CtpController extends Controller
                 ->with('idUserVenta0')
                 ->with('detalleCTPs')
                 ->findByPk($_GET['id']);
-            if($ctp->tipoCTP==1)
-            {
-                $this->renderPartial('prints/preview',array('render'=>'preview','ctp'=>$ctp,'tipo'=>''));
+            if ($ctp->tipoCTP == 1) {
+                $this->renderPartial('prints/preview', array('render' => 'preview', 'ctp' => $ctp, 'tipo' => ''));
             }
-            if($ctp->tipoCTP==2)
-            {
-                $this->renderPartial('prints/previewTI',array('render'=>'previewTI','ctp'=>$ctp,'tipo'=>'','titulo'=>'Interna'));
+            if ($ctp->tipoCTP == 2) {
+                $this->renderPartial('prints/previewTI', array('render' => 'previewTI', 'ctp' => $ctp, 'tipo' => '', 'titulo' => 'Interna'));
             }
-            if($ctp->tipoCTP==3)
-            {
-                $ctpP= CTP::model()
+            if ($ctp->tipoCTP == 3) {
+                $ctpP = CTP::model()
                     ->with('idCliente0')
                     ->with('idUserVenta0')
                     ->with('idUserVenta0.idEmpleado0')
@@ -311,26 +307,41 @@ class CtpController extends Controller
                 $ctp->idCliente0 = $ctpP->idCliente0;
                 $ctp->idUserVenta0 = $ctpP->idUserVenta0;
 
-                if($ctp->montoVenta>0)
-                    $this->renderPartial('prints/preview',array('render'=>'preview','ctp'=>$ctp,'tipo'=>'Reposición'));
+                if ($ctp->montoVenta > 0)
+                    $this->renderPartial('prints/preview', array('render' => 'preview', 'ctp' => $ctp, 'tipo' => 'Reposición'));
                 else
-                    $this->renderPartial('prints/preview',array('render'=>'previewSC','ctp'=>$ctp,'tipo'=>'Reposición'));
+                    $this->renderPartial('prints/preview', array('render' => 'previewSC', 'ctp' => $ctp, 'tipo' => 'Reposición'));
             }
-        }
-        else
-            throw new CHttpException(400,'Petición no válida.');
+        } else
+            throw new CHttpException(400, 'Petición no válida.');
     }
 
     public function actionGenerar()
     {
-        
-        $diaReporte = CTP::model()
-            ->with('cTPs')
-            ->with('detalleCTPs')
-            ->with('fallasCTPs')
-            ->findAll('`t`.fechaOrden>="'.' 00:00:00" and`t`.fechaOrden<="'.' 23:59:59"')
-            ;
-        $this->render('index',array('render'=>'generar'));
+        if (isset($_GET['sucursal'])) {
+            if (isset($_GET['fechaStart'])) {
+                if (!isset($_GET['fechaFinish'])) {
+                    $_GET['fechaFinish'] = $_GET['fechaStart'];
+                }
+                $diaReporte = CTP::model()
+                    ->with('cTPs')
+                    ->with('detalleCTPs')
+                    ->with('fallasCTPs')
+                    ->findAll('`t`.fechaOrden>="' . $_GET['fechaStart'] . ' 00:00:00" and`t`.fechaOrden<="' . $_GET['fechaFinish'] . ' 23:59:59"' . ' and idSucursal0=' . $_GET['sucursal']);
+                $almacen = Almacen::model()->find('idSucursal0=' . $_GET['sucursal']);
+                if (!empty($diaReporte)) {
+                    $columnsTitles = array();
+                    $columnsData = array();
+
+                    $placas = AlmacenProducto::model()->with('idProducto0')->findAll('idAlmacen=' . "3");
+                    foreach ($placas as $item) {
+
+                    }
+                    $this->createExcel('', '', 'Placas_Diario_' . date('Ymd'));
+                }
+            }
+        }
+        $this->render('index', array('render' => 'generar'));
     }
 
     public function verifyModel($model)
@@ -338,5 +349,65 @@ class CtpController extends Controller
         if($model===null)
             throw new CHttpException(404,'La Respuesta de la pagina no Existe.');
         return $model;
+    }
+
+    private function createExcel($columnsTitle,$content,$title="")
+    {
+        if($title=="")
+            $title="Reports";
+
+        Yii::import('ext.phpexcel.XPHPExcel');
+        $objPHPExcel= XPHPExcel::createPHPExcel();
+        $objPHPExcel->getProperties()
+            ->setCreator("Grafica Singular")
+            ->setLastModifiedBy("Grafica Singular")
+            ->setTitle($title)
+            ->setSubject($title)
+            ->setDescription($title.".xlsx");
+
+        $column=65;
+        //assign titles
+        foreach ($columnsTitle as $item)
+        {
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).'1', $item);
+            $objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
+            $column++;
+        }
+
+        //create content
+        $index=2;
+        foreach ($content as $items)
+        {
+            $column=65;
+            foreach ($items as $item)
+            {
+
+                $objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($column).($index), $item);
+                $objPHPExcel->getActiveSheet()->getColumnDimension(chr($column))->setAutoSize(true);
+                $column++;
+            }
+            $index++;
+        }
+        // Rename worksheet
+        $objPHPExcel->getActiveSheet()->setTitle($title);
+
+
+        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+        $objPHPExcel->setActiveSheetIndex(0);
+        // Redirect output to a clientâ€™s web browser (Excel5)
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="'.$title.'.xls"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+
+        // If you're serving to IE over SSL, then the following may be needed
+        header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+        header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header ('Pragma: public'); // HTTP/1.0
+
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output');
+        Yii::app()->end();
     }
 }
