@@ -1,8 +1,15 @@
-<?php
-/* @var $this DistribuidoraController */
+<div class="col-xs-2">
+    <?php $this->renderPartial('menus/principal'); ?>
+</div>
+<div class="col-xs-10">
 
-$this->breadcrumbs=array(
-	'Recibos',
+</div>
+
+
+<?php
+
+/*
+
 );
 ?>
 <div class="col-xs-2">

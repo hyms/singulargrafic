@@ -109,7 +109,7 @@ class CtpController extends Controller
                 $condHora ="";
                 foreach ($horas as $h)
                 {
-                    if($h->inicio<=date("H:0:s"))
+                    if($h->inicio<=date("H:m:s"))
                         $condHora =" and idHorario=".$h->idHorario;
                     else
                         break;
@@ -280,8 +280,13 @@ class CtpController extends Controller
                 if($ctp->idCajaMovimientoVenta0->arqueo<1)
                 {
                     $ctp->attributes = $_POST['CTP'];
-                    if($ctp->montoPagado > 0)
+                    if($ctp->montoPagado >= 0)
                     {
+                        if($ctp->montoPagado < $ctp->montoVenta)
+                            $ctp->estado = 2;
+                        else
+                            $ctp->estado = 0;
+                        
                         $caja->saldo = $caja->saldo - $ctp->idCajaMovimientoVenta0->monto;
                         $caja->saldo = $caja->saldo + $ctp->montoPagado;
                         $ctp->idCajaMovimientoVenta0->monto = $ctp->montoPagado;

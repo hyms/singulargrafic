@@ -62,11 +62,11 @@
 </div>
 
 <div class="form-group col-xs-4">
-    <?php //echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default')); ?>
-    <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar','#',array('class'=>'btn btn-primary','id'=>'saveModal')); ?>
+    <?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default')); ?>
+    <?php //echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar','#',array('class'=>'btn btn-primary','id'=>'saveModal')); ?>
 </div>
 
-<?php $this->endWidget(); ?>
+<?php $this->endWidget(); /*?>
 <script>
     $('#saveModal').click(function(){
         $.ajax({
@@ -83,3 +83,4 @@
         return false; // prevent normal submit
     });
 </script>
+<?php */

@@ -1,7 +1,7 @@
 <?php
 Yii::app()->clientScript->registerScript('ajaxModal',"
 $('#document').ready(function(){
-    $('.openDlg').on('click', function(){
+    $(document).on('click','.openDlg', function(){
         var dialogId = $(this).attr('class').replace('openDlg ', '');
         $.ajax({
             'type': 'GET',
