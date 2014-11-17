@@ -46,7 +46,7 @@ class Recibos extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idCajaMovimientoVenta', 'required'),
+			//array('idCajaMovimientoVenta', 'required'),
 			array('idCliente, tipoRecivo, idCajaMovimientoVenta, idSucursal', 'numerical', 'integerOnly'=>true),
 			array('monto, acuenta, saldo, descuento', 'numerical'),
 			array('categoria, responsable', 'length', 'max'=>40),

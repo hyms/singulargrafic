@@ -24,7 +24,7 @@ Yii::app()->getClientScript()->registerScript("ajax_cliente",
 							$('#apellido').prop('readonly', false);
 						}
 						$('#apellido').val(data[\"cliente\"][\"apellido\"]);
-	            		$('#clienteNit').val(data[\"cliente\"][\"nitCi\"]);
+	            		$('#NitCi').val(data[\"cliente\"][\"nitCi\"]);
 							
 					},
 				error:	
@@ -32,7 +32,10 @@ Yii::app()->getClientScript()->registerScript("ajax_cliente",
 	        });
 		}
 	}
-		
+",CClientScript::POS_HEAD);
+
+Yii::app()->getClientScript()->registerScript("ajax_cliente",
+    "
     $('#NitCi').keydown(function(e){ 
         if(e.keyCode==13 || e.keyCode==9) 
 	    { 

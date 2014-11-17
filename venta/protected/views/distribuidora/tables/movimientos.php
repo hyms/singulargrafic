@@ -1,6 +1,6 @@
 <?php if(!empty($cond3)){?>
     <div class="panel panel-default">
-        <div class="panel-body" style="overflow: auto;">
+        <div class="panel-body">
             <div class="form-group hidden-print">
                 <?php if($cf!="" && $sf!=""){?>
                     <?php echo CHtml::link('Con Factura', $cf, array("class"=>"btn btn-default")); ?>

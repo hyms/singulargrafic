@@ -44,10 +44,10 @@
                 array(
                     'header'=>'Fecha',
                     'type'=>'raw',
-                    'value'=>'$data->fechaOrden',
+                    'value'=>'$data->fechaGenerada',
                     'filter'=>$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                'name'=>'fechaOrden',
-                                'attribute'=>'fechaOrden',
+                                'name'=>'fechaGenerada',
+                                'attribute'=>'fechaGenerada',
                                 'language'=>'es',
                                 'model'=>$ordenes,
                                 'options'=>array(

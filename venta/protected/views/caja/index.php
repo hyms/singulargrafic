@@ -1,8 +1,23 @@
-<div class="col-xs-2">
+<div class="col-xs-2 hidden-print">
     <?php $this->renderPartial('menus/principal'); ?>
 </div>
 <div class="col-xs-10">
-
+    <?php
+    switch($render) {
+        case "deuda":
+        case "reciboIngreso":
+            $this->renderPartial("forms/reciboIngreso", array('cliente' => $cliente, 'recibo' => $recibo,));
+            break;
+        case "preview":
+            $this->renderPartial('prints/preview', array('recibo' => $recibo));
+            break;
+        case "buscar":
+            $this->renderPartial("tables/buscar", array('recibos' => $recibos));
+            break;
+        default:
+            break;
+    }
+    ?>
 </div>
 
 

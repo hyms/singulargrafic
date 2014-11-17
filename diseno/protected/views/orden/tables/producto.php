@@ -66,6 +66,11 @@ if(isset($clientes)) {
                     'value' => '$data->nitCi',
                     'filter' => CHtml::activeTelField($clientes, 'nitCi', array('class' => 'form-control input-sm')),
                 ),
+                array(
+                    'header'=>'',
+                    'type'=>'raw',
+                    'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-ok\"></span> Añadir","#",array("onclick"=>\'cliente(\'.$data->nitCi.\');\',"class"=>"btn btn-success btn-xs"))',
+                )
             ),
 
         ));

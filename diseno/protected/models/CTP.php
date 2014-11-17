@@ -157,7 +157,7 @@ class CTP extends CActiveRecord
         $criteria=new CDbCriteria;
 
         $criteria->with = array('idCliente0','idCTPParent0');
-        $criteria->order='`t`.fechaOrden Desc';
+        $criteria->order='`t`.fechaGenerada Desc';
         if($cond!=null)
         {
             $criteria->condition = $cond;
@@ -190,7 +190,7 @@ class CTP extends CActiveRecord
         $criteria->compare('`t`.fechaEntega',$this->fechaEntega,true);
         $criteria->compare('`t`.obsCaja',$this->obsCaja,true);
         $criteria->compare('`t`.idSucursal',$this->idSucursal);
-        $criteria->compare('fechaGenerada',$this->fechaGenerada,true);
+        $criteria->compare('`t`.fechaGenerada',$this->fechaGenerada,true);
 
         $criteria->compare('idCliente0.apellido',$this->apellido,true);
         $criteria->compare('idCliente0.nitCi',$this->nitCi);
@@ -207,7 +207,7 @@ class CTP extends CActiveRecord
         $criteria=new CDbCriteria;
 
         $criteria->with = array('idCliente0','idCTPParent0','idUserOT0','idUserOT0.idEmpleado0');
-        $criteria->order='`t`.fechaOrden Desc';
+        $criteria->order='`t`.fechaGenerada Desc';
 
         //$criteria->condition = "";
 
@@ -238,7 +238,7 @@ class CTP extends CActiveRecord
         $criteria->compare('`t`.fechaEntega',$this->fechaEntega,true);
         $criteria->compare('`t`.obsCaja',$this->obsCaja,true);
         $criteria->compare('`t`.idSucursal',$this->idSucursal);
-        $criteria->compare('fechaGenerada',$this->fechaGenerada,true);
+        $criteria->compare('`t`.fechaGenerada',$this->fechaGenerada,true);
 
         $criteria->compare('idCliente0.apellido',$this->apellido,true);
         $criteria->compare('idCliente0.nitCi',$this->nitCi);

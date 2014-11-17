@@ -3,6 +3,29 @@
 class CajaController extends Controller
 {
 
+    /*/protected $cajaCTP=3;
+    protected $cajaCTP;
+    protected $sucursal;
+    protected $almacen;
+
+    public function init()
+    {
+        $this->sucursal =  Yii::app()->user->getState('idSucursal');
+        if(!empty($this->sucursal))
+        {
+            $this->almacen = Almacen::model()->find('idSucursal='.$this->sucursal.' and nombre like "CTP%"');
+            $this->cajaCTP = Caja::model()->find('idSucursal='.$this->sucursal.' and nombre like "CTP%"');
+            if(!empty($this->almacen) && !empty($this->cajaCTP))
+            {
+                $this->almacen = $this->almacen->idAlmacen;
+                $this->cajaCTP = $this->cajaCTP->idCaja;
+            }
+            else
+                throw new CHttpException(500,'Page not found.');
+        }
+        parent::init();
+    }*/
+
     public function filters()
     {
         return array( 'accessControl' ); // perform access control for CRUD operations
@@ -61,7 +84,7 @@ class CajaController extends Controller
             ->with('idcajaChica0.idUser0')
             ->findAll();
         $caja = CajaChica::model()->with('cajaChicaTipos')->with('cajaChicaTipos.idTipoMovimiento0')->find('idUser='.Yii::app()->user->id);
-        $this->render("index",array('tabla'=>$tabla,'caja'=>$caja));
+        $this->render("index",array('render'=>'','tabla'=>$tabla,'caja'=>$caja));
     }
 
     public function actionEgreso()
@@ -223,7 +246,10 @@ class CajaController extends Controller
             }
 
         }
-        $this->render("reciboIngreso",array(
+
+        //$this->render("reciboIngreso",array(
+        $this->render("index",array(
+            'render'=>'reciboIngreso',
             'cliente'=>$cliente,
             'recibo'=>$recibo,
         ));
@@ -288,63 +314,59 @@ class CajaController extends Controller
     {
         $recibos = new Recibos('search');
 
-
         $recibos->unsetAttributes();
-        if(!isset($_GET["t"]))
-        {	$recibos->tipoRecivo=1;}
-        else
-        {	$recibos->tipoRecivo=$_GET["t"];	}
+        if (!isset($_GET["t"])) {
+            $recibos->tipoRecivo = 1;
+        } else {
+            $recibos->tipoRecivo = $_GET["t"];
+        }
 
-        if (isset($_GET['Recibos']))
-        {
+        if (isset($_GET['Recibos'])) {
             $recibos->attributes = $_GET['Recibos'];
         }
 
-        $this->render("buscar",array('recibos'=>$recibos));
+        //$this->render("buscar", array('recibos' => $recibos));
+        $this->render('index', array('render'=>'buscar','recibos' => $recibos));
     }
 
     public function actionDeuda()
     {
-        if(isset($_GET['id']) && isset($_GET['serv']))
-        {
+        if (isset($_GET['id']) && isset($_GET['serv'])) {
             $cliente = new Cliente;
             $recibo = new Recibos;
-            $venta="";
-            if($_GET['serv']=="nv")
-            {
-                $venta = $this->verifyModel(Venta::model()	->with('idCliente0')
+            $venta = "";
+            if ($_GET['serv'] == "nv") {
+                $venta = $this->verifyModel(Venta::model()->with('idCliente0')
                     ->with('idCajaMovimientoVenta0')
                     ->with("detalleVentas")
                     ->with("detalleVentas.idAlmacenProducto0")
                     ->with("detalleVentas.idAlmacenProducto0.idProducto0")
                     ->findByPk($_GET['id']));
                 $recibo->categoria = "Nota de Venta";
-                $i=0;
-                $recibo->concepto="";
-                foreach ($venta->detalleVentas as $producto)
-                {
-                    if($i>0)
-                    {$recibo->concepto=$recibo->concepto.", ";}
-                    $recibo->concepto=$recibo->concepto.$producto->idAlmacenProducto0->idProducto0->material." ".$producto->idAlmacenProducto0->idProducto0->color." ".$producto->idAlmacenProducto0->idProducto0->detalle." ".$producto->idAlmacenProducto0->idProducto0->marca;
+                $i = 0;
+                $recibo->concepto = "";
+                foreach ($venta->detalleVentas as $producto) {
+                    if ($i > 0) {
+                        $recibo->concepto = $recibo->concepto . ", ";
+                    }
+                    $recibo->concepto = $recibo->concepto . $producto->idAlmacenProducto0->idProducto0->material . " " . $producto->idAlmacenProducto0->idProducto0->color . " " . $producto->idAlmacenProducto0->idProducto0->detalle . " " . $producto->idAlmacenProducto0->idProducto0->marca;
                     $i++;
                 }
-            }
-            elseif($_GET['serv']=="ot")
-            {
-                $venta = $this->verifyModel(CTP::model()	->with('idCliente0')
+            } elseif ($_GET['serv'] == "ot") {
+                $venta = $this->verifyModel(CTP::model()->with('idCliente0')
                     ->with('idCajaMovimientoVenta0')
                     ->with("detalleCTPs")
                     ->with("detalleCTPs.idAlmacenProducto0")
                     ->with("detalleCTPs.idAlmacenProducto0.idProducto0")
                     ->findByPk($_GET['id']));
                 $recibo->categoria = "Orden de Trabajo";
-                $i=0;
-                $recibo->concepto="";
-                foreach ($venta->detalleCTPs as $producto)
-                {
-                    if($i>0)
-                    {   $recibo->concepto=$recibo->concepto.", ";   }
-                    $recibo->concepto=$recibo->concepto.$producto->formato."/".$producto->nroPlacas."-".$producto->trabajo;
+                $i = 0;
+                $recibo->concepto = "";
+                foreach ($venta->detalleCTPs as $producto) {
+                    if ($i > 0) {
+                        $recibo->concepto = $recibo->concepto . ", ";
+                    }
+                    $recibo->concepto = $recibo->concepto . $producto->formato . " (" . $producto->nroPlacas . ") - " . $producto->trabajo;
                     $i++;
                 }
             }
@@ -352,24 +374,25 @@ class CajaController extends Controller
 
             $cliente = $venta->idCliente0;
             $caja = $this->verifyModel(CajaMovimientoVenta::model()->findByPk($venta->idCajaMovimientoVenta0->idCajaMovimientoVenta));
-            $row = Recibos::model()->find(array("select"=>"count(*) as `max`",'condition'=>'tipoRecivo=1'));
+            $row = Recibos::model()->find(array("select" => "count(*) as `max`", 'condition' => 'tipoRecivo=1'));
             $recibo->fechaRegistro = date("Y-m-d h:m:s");
-            $recibo->codigo = "I-".($row['max']+1);
+            $recibo->codigo = "I-" . ($row['max'] + 1);
             $recibo->tipoRecivo = 1;
-
+            $recibo->codigoNumero = $venta->codigo;
             $recibo->saldo = $venta->montoVenta - $venta->montoPagado;
+            $recibo->acuenta = $venta->montoPagado;
             $recibo->idCliente = $cliente->idCliente;
 
-            if(isset($_POST['Recibos']))
-            {
+            if (isset($_POST['Recibos'])) {
                 $recibo->attributes = $_POST['Recibos'];
                 $cliente->attributes = $_POST['Cliente'];
-                if($recibo->validate())
-                {
+
+
+                if ($recibo->validate()) {
                     $cajaMovimiento = new CajaMovimientoVenta;
                     //Yii::app()->user->id;
                     $cajaMovimiento->idUser = Yii::app()->user->id;
-                    $cajaMovimiento->motivo = "Nota de Venta";
+                    $cajaMovimiento->motivo = "Recibo de Ingreso";
                     $cajaMovimiento->idCaja = $caja->idCaja;
                     $cajaMovimiento->arqueo = 0;
                     $cajaMovimiento->tipo = 0;
@@ -377,30 +400,36 @@ class CajaController extends Controller
                     $cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
                     $cajaMovimiento->arqueo = 0;
 
+                    $venta->montoPagado = $venta->montoPagado + $recibo->monto;
+
+                    if (($venta->montoVenta - $venta->montoPagado) >= 0) {
+                        $recibo->saldo = $venta->montoVenta - $venta->montoPagado;
+                    } else {
+                        $recibo->saldo = 0;
+                    }
+                    $venta->montoCambio = $venta->montoVenta - $venta->montoPagado;
                     $cajaVenta = Caja::model()->findByPk($caja->idCaja);
                     $cajaVenta->saldo = $cajaVenta->saldo + $caja->monto;
                     $cajaVenta->save();
 
-                    if($cajaMovimiento->save())
-                    {
+                    if ($cajaMovimiento->save()) {
                         $recibo->idCajaMovimientoVenta = $caja->idCajaMovimientoVenta;
-                        if($recibo->save())
-                        {
-                            $venta->estado = 1;
+                        if ($recibo->save()) {
+                            if ($venta->montoPagado >= $venta->montoVenta)
+                                $venta->estado = 0;
                             $venta->save();
-                            $this->redirect(array('preview','id'=>$recibo->idRecibos));
+                            $this->redirect(array('preview', 'id' => $recibo->idRecibos));
                         }
                     }
                 }
-
             }
-            $this->render("reciboIngreso",array(
+            $this->render("index", array('render' => 'deuda', 'cliente' => $cliente, 'recibo' => $recibo, ));
+            /*$this->render("reciboIngreso",array(
                 'cliente'=>$cliente,
                 'recibo'=>$recibo,
-            ));
-        }
-        else
-            throw new CHttpException(400,'Petición no válida.');
+            ));*/
+        } else
+            throw new CHttpException(400, 'Petición no válida.');
     }
 
     public function actionChica()
@@ -429,7 +458,7 @@ class CajaController extends Controller
                 ->findByPk($_GET['id']);
 
             if($recibo!=null)
-                $this->render('preview',array('recibo'=>$recibo));
+                $this->render('index',array('render'=>'preview','recibo'=>$recibo));
             else
                 $this->redirect(array('index'));
         }

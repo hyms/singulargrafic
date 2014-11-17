@@ -32,11 +32,11 @@
                     'filter'=>CHtml::activeTextField($ordenes,'responsable',array('class'=>'form-control input-sm')),
                 ),
                 array(
-                    'header'=>'Fecha Orden',
-                    'value'=>'$data->fechaOrden',
+                    'header'=>'Fecha Generada',
+                    'value'=>'$data->fechaGenerada',
                     'filter'=>$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                'name'=>'fechaOrden',
-                                'attribute'=>'fechaOrden',
+                                'name'=>'fechaGenerada',
+                                'attribute'=>'fechaGenerada',
                                 'language'=>'es',
                                 'model'=>$ordenes,
                                 'options'=>array(

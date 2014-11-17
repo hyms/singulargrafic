@@ -2,7 +2,7 @@
     <div class="panel-heading">
         <strong class="panel-title">Ordenes de trabajo</strong>
     </div>
-    <div class="panel-body" style="overflow: auto;">
+    <div class="panel-body">
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
             'dataProvider'=>$ordenes->search('`t`.tipoCTP!=3'),
@@ -28,10 +28,10 @@
                 array(
                     'header'=>'Fecha',
                     'type'=>'raw',
-                    'value'=>'$data->fechaOrden',
+                    'value'=>'$data->fechaGenerada',
                     'filter'=>$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                'name'=>'fechaOrden',
-                                'attribute'=>'fechaOrden',
+                                'name'=>'fechaGenerada',
+                                'attribute'=>'fechaGenerada',
                                 'language'=>'es',
                                 'model'=>$ordenes,
                                 'options'=>array(

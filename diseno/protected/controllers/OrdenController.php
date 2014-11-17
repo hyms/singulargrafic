@@ -45,88 +45,77 @@ class OrdenController extends Controller
 	}
 	
 	public function actionCliente()
-	{
-        $clientes =new Cliente('search');
-        if(isset($_GET['Cliente']))
-        {
-            $clientes->attributes=$_GET['Cliente'];
+    {
+        $clientes = new Cliente('search');
+        if (isset($_GET['Cliente'])) {
+            $clientes->attributes = $_GET['Cliente'];
         }
 
-		$cliente = new Cliente;
-		$detalle = new DetalleCTP;
-		$ctp = new CTP;
-		$productos = new AlmacenProducto('searchCTP');
+        $cliente = new Cliente;
+        $detalle = new DetalleCTP;
+        $ctp = new CTP;
+        $productos = new AlmacenProducto('searchCTP');
         $productos->idAlmacen = $this->almacen;
         $productos->material = "PLACAS CTP";
 
         $ctp->idSucursal = $this->sucursal;
         $ctp->tipoCTP = 1;
-		$ctp->codigo = $this->getCodigo($ctp->tipoCTP);
-		$ctp->fechaGenerada = date("Y-m-d H:i:s");
-		$ctp->idUserOT = Yii::app()->user->id;
+        $ctp->codigo = $this->getCodigo($ctp->tipoCTP);
+        $ctp->fechaGenerada = date("Y-m-d H:i:s");
+        $ctp->idUserOT = Yii::app()->user->id;
 
-		$swc=0; $swv=0;
-		if(isset($_POST['Cliente']))
-		{
-			$cliente = $this->saveCliente($_POST['Cliente']);
-            if($cliente->validate())
-                $swc=1;
-		}
-		
-		if(isset($_POST['CTP']))
-		{
-			$ctp->attributes = $_POST['CTP'];
-			$ctp->estado = 1;
-			
-			if($ctp->validate() && $ctp->fechaEntega!="")
-            {
-				$swv=1;
-            }
-            else
-            {
-                if($ctp->fechaEntega=="")
-                {
-                    $ctp->addError('fechaEntega','Fecha de entrega no debe estar vacio');
+        $swc = 0;
+        $swv = 0;
+        if (isset($_POST['Cliente'])) {
+            $cliente = $this->saveCliente($_POST['Cliente']);
+            if ($cliente->validate())
+                $swc = 1;
+        }
+
+        if (isset($_POST['CTP'])) {
+            $ctp->attributes = $_POST['CTP'];
+            $ctp->estado = 1;
+
+            if ($ctp->validate() && $ctp->fechaEntega != "") {
+                $swv = 1;
+            } else {
+                if ($ctp->fechaEntega == "") {
+                    $ctp->addError('fechaEntega', 'Fecha de entrega no debe estar vacio');
                 }
             }
-		}
-		
-		if(isset($_POST['DetalleCTP']))
-		{
-			$detalle = array();
-			$det = count($_POST['DetalleCTP']);
-			foreach ($_POST['DetalleCTP'] as $key=>$item)
-			{
-				$detalle[$key] = new DetalleCTP;
-				$detalle[$key]->attributes = $item;
-				$almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($detalle[$key]->idAlmacenProducto);
-				$detalle[$key]->formato = $almacen->idProducto0->color;
+        }
+
+        if (isset($_POST['DetalleCTP'])) {
+            $detalle = array();
+            $det = count($_POST['DetalleCTP']);
+            foreach ($_POST['DetalleCTP'] as $key => $item) {
+                $detalle[$key] = new DetalleCTP;
+                $detalle[$key]->attributes = $item;
+                $almacen = AlmacenProducto::model()->with('idProducto0')->findByPk($detalle[$key]->idAlmacenProducto);
+                $detalle[$key]->formato = $almacen->idProducto0->color;
                 $almacen->stockU = $almacen->stockU - $detalle[$key]->nroPlacas;
-                if($detalle[$key]->validate() && $almacen->stockU >= 0)
-					$det--;
+                if ($detalle[$key]->validate() && $almacen->stockU >= 0)
+                    $det--;
                 else
-                    $ctp->addError('obs','placas insuficientes');
-			}
-		}
-		
-		if($swc==1 && $swv==1 && $det==0)
-		{
+                    $ctp->addError('obs', 'placas insuficientes');
+            }
+        }
+
+        if ($swc == 1 && $swv == 1 && $det == 0) {
             $cliente->save();
-			$ctp->idCliente = $cliente->idCliente;
-		
-			if($ctp->save())
-			{
-				foreach($detalle as $item)
-				{
-					$item->idCTP = $ctp->idCTP;
-					$item->save();
-				}
-				$this->redirect(array('orden/buscar'));
-			}
-		}
-		
-		$this->render('index',array('render'=>'new','cliente'=>$cliente,'detalle'=>$detalle,'ctp'=>$ctp,'productos'=>$productos,'clientes'=>$clientes));
-	}
+            $ctp->idCliente = $cliente->idCliente;
+
+            if ($ctp->save()) {
+                foreach ($detalle as $item) {
+                    $item->idCTP = $ctp->idCTP;
+                    $item->save();
+                }
+                $this->redirect(array('orden/buscar'));
+            }
+        }
+
+        $this->render('index', array('render' => 'new', 'cliente' => $cliente, 'detalle' => $detalle, 'ctp' => $ctp, 'productos' => $productos, 'clientes' => $clientes));
+    }
 	
 	public function actionInterna()
 	{
@@ -439,7 +428,7 @@ class OrdenController extends Controller
 	
 	private function getCodigo($tipo)
     {
-        $row = CTP::model()->find(array('condition'=>"tipoCTP=".$tipo." and idSucursal=".$this->sucursal." and fechaOrden like '%".date('Y-m-d')."%'",'select'=>'count(*) as max'));
+        $row = CTP::model()->find(array('condition'=>"tipoCTP=".$tipo." and idSucursal=".$this->sucursal." and fechaGenerada like '%".date('Y-m-d')."%'",'select'=>'count(*) as max'));
         $codigoTMP =($row->max+1)."-".date('md');
         return $codigoTMP;
     }
