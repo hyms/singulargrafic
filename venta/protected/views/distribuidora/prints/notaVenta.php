@@ -59,15 +59,13 @@
     <div class="row">
         <div class="col-xs-6"><strong>Son:</strong> <?php $this->widget('ext.numerosALetras', array('valor'=>$venta->montoVenta,'despues'=>''))?></div>
         <?php
-        if($venta->formaPago==1)
-        {
-            echo '<div class="col-xs-2"><div class="well well-sm"><strong>'.CHtml::encode("A/C: ").'</strong>'.CHtml::encode($venta->montoPagado).'</div></div>';
-            echo '<div class="col-xs-2"><div class="well well-sm"><strong>'.CHtml::encode("Saldo: ").'</strong>'.CHtml::encode($venta->montoCambio*-1).'</div></div>';
+        if($venta->formaPago==1) {
+            echo '<div class="col-xs-2"><div class="well well-sm"><strong>' . CHtml::encode("A/C: ") . '</strong>' . CHtml::encode($venta->montoPagado) . '</div></div>';
+            echo '<div class="col-xs-2"><div class="well well-sm"><strong>' . CHtml::encode("Saldo: ") . '</strong>' . CHtml::encode($venta->montoCambio * -1) . '</div></div>';
             echo '<div class="col-xs-2 well well-sm">';
         }
-        else
-        {
-            echo'<div class="col-xs-offset-4 col-xs-2 well well-sm">';
+        else {
+            echo '<div class="col-xs-offset-4 col-xs-2 well well-sm">';
         }
         ?>
         <strong>Total:</strong> <?php echo $venta->montoVenta." Bs.</div>";?>

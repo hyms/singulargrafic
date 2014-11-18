@@ -14,45 +14,6 @@ $form=$this->beginWidget('CActiveForm', array(
     ),
 ));
 ?>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <span class="panel-title"><strong>Datos Cliente</strong></span>
-    </div>
-    <div class="panel-body" style="overflow: auto;">
-        <div class="form-group" >
-            <div class="col-xs-4">
-                <?php echo CHtml::activeLabelEx($cliente,'nitCi',array('class'=>'control-label col-xs-4')); ?>
-                <div class="col-xs-8">
-                    <?php echo CHtml::activeTextField($cliente,'nitCi',array('class'=>'form-control ',"id"=>"nitCi")); ?>
-                </div>
-                <?php echo CHtml::error($cliente,'nitCi',array('class'=>'label label-danger')); ?>
-            </div>
-            <div class="col-xs-5">
-                <?php echo CHtml::activeLabelEx($cliente,'apellido',array('class'=>'control-label col-xs-4')); ?>
-                <div class="col-xs-8">
-                    <?php echo CHtml::activeTextField($cliente,'apellido',array('class'=>'form-control',"id"=>"apellido")); ?>
-                </div>
-                <?php echo CHtml::error($cliente,'apellido',array('class'=>'label label-danger')); ?>
-            </div>
-        </div>
-        <div class="form-group" >
-            <div class="col-xs-4">
-                <?php echo CHtml::activeLabelEx($recibo,'celular',array('class'=>'control-label col-xs-4')); ?>
-                <div class="col-xs-8">
-                    <?php echo CHtml::activeTextField($recibo,'celular',array('class'=>'form-control')); ?>
-                </div>
-                <?php echo CHtml::error($recibo,'celular',array('class'=>'label label-danger')); ?>
-            </div>
-            <div class="col-xs-5">
-                <?php echo CHtml::activeLabelEx($recibo,'responsable',array('class'=>'control-label col-xs-4')); ?>
-                <div class="col-xs-8">
-                    <?php echo CHtml::activeTextField($recibo,'responsable',array('class'=>'form-control ')); ?>
-                </div>
-                <?php echo CHtml::error($recibo,'responsable',array('class'=>'label label-danger')); ?>
-            </div>
-        </div>
-    </div>
-</div>
 
 <?php $this->renderPartial('forms/formRecibo',array('recibo'=>$recibo)); ?>
 

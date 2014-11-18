@@ -1,11 +1,3 @@
-<?php
-/* @var $this SiteController */
-/* @var $model LoginForm */
-/* @var $form CActiveForm  */
-
-$this->pageTitle=Yii::app()->name . ' - Login';
-?>
-
 <h1 class="text-center">Sistema de Ventas</h1>
 
 <div class="form">
@@ -52,4 +44,4 @@ $this->pageTitle=Yii::app()->name . ' - Login';
     </div>
 
     <?php $this->endWidget(); ?>
-</div><!-- form -->
+</div>

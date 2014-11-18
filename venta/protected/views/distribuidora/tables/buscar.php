@@ -32,19 +32,19 @@
                     'type'=>'raw',
                     'value'=>'$data->fechaVenta',
                     'filter'=>$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                'name'=>'fechaVenta',
-                                'language'=>'es',
-                                'attribute'=>'fechaVenta',
-                                'model'=>$ventas,
-                                'options'=>array(
-                                    'showAnim'=>'fold',
-                                    'dateFormat'=>'yy-mm-dd',
-                                ),
-                                'htmlOptions'=>array(
-                                    'class'=>'form-control input-sm',
-                                ),
+                            'name'=>'fechaVenta',
+                            'language'=>'es',
+                            'attribute'=>'fechaVenta',
+                            'model'=>$ventas,
+                            'options'=>array(
+                                'showAnim'=>'fold',
+                                'dateFormat'=>'yy-mm-dd',
                             ),
-                            true),
+                            'htmlOptions'=>array(
+                                'class'=>'form-control input-sm',
+                            ),
+                        ),
+                        true),
                 ),
                 array(
                     'header'=>'codigo',

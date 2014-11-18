@@ -1,8 +1,8 @@
-<?php if(!empty($cond3)){?>
+<?php if(!empty($cond3)){ ?>
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="form-group hidden-print">
-                <?php if($cf!="" && $sf!=""){?>
+                <?php if($cf!="" && $sf!=""){ ?>
                     <?php echo CHtml::link('Con Factura', $cf, array("class"=>"btn btn-default hidden-print")); ?>
                     <?php echo CHtml::link('Sin Factura', $sf, array("class"=>"btn btn-default hidden-print")); ?>
                     <?php echo CHtml::link('Imprimir', $cond3, array("class"=>"btn btn-default hidden-print")); ?>
@@ -59,25 +59,25 @@
                             'type'=>'raw',
                             'value'=>'$data->fechaOrden',
                             'filter'=>$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                        'name'=>'fechaOrden',
-                                        'attribute'=>'fechaOrden',
-                                        'language'=>'es',
-                                        'model'=>$ventas,
-                                        'options'=>array(
-                                            'showAnim'=>'fold',
-                                            'dateFormat'=>'yy-mm-dd',
-                                        ),
-                                        'htmlOptions'=>array(
-                                            'class'=>'form-control input-sm',
-                                        ),
+                                    'name'=>'fechaOrden',
+                                    'attribute'=>'fechaOrden',
+                                    'language'=>'es',
+                                    'model'=>$ventas,
+                                    'options'=>array(
+                                        'showAnim'=>'fold',
+                                        'dateFormat'=>'yy-mm-dd',
                                     ),
-                                    true),
+                                    'htmlOptions'=>array(
+                                        'class'=>'form-control input-sm',
+                                    ),
+                                ),
+                                true),
                         ),
-                        /*array(
+                        array(
                                 'header'=>'',
                                 'type'=>'raw',
-                                'value'=>'CHtml::link("Detalle", array("ctp/ventaDetalle","id"=>$data->idVenta), array("class" => "openDlg divDialog"))',
-                        ),*/
+                                'value'=>'CHtml::link("Detalle", array("ctp/ordenView","id"=>$data->idCTP), array("class" => "openDlg divDialog"))',
+                        ),
                     )
                 ));
                 ?>

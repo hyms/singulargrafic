@@ -5,7 +5,6 @@
         </div>
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
-            //'dataProvider'=>$ventas,
             'dataProvider'=>$ventas->searchVenta(),
             'filter'=>$ventas,
             'ajaxUpdate'=>false,
@@ -52,32 +51,30 @@
                     'header'=>'cantidad Unidad',
                     'type'=>'raw',
                     'value'=>'$data->cantidadU',
-
                 ),
                 array(
                     'header'=>'cantidad paquete',
                     'type'=>'raw',
                     'value'=>'$data->cantidadP',
-
                 ),
                 array(
                     'header'=>'Fecha',
                     'type'=>'raw',
                     'value'=>'$data->idVenta0->fechaVenta',
                     'filter'=>$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                'name'=>'fecha',
-                                'attribute'=>'fecha',
-                                'language'=>'es',
-                                'model'=>$ventas,
-                                'options'=>array(
-                                    'showAnim'=>'fold',
-                                    'dateFormat'=>'yy-mm-dd',
-                                ),
-                                'htmlOptions'=>array(
-                                    'class'=>'form-control',
-                                ),
+                            'name'=>'fecha',
+                            'attribute'=>'fecha',
+                            'language'=>'es',
+                            'model'=>$ventas,
+                            'options'=>array(
+                                'showAnim'=>'fold',
+                                'dateFormat'=>'yy-mm-dd',
                             ),
-                            true),
+                            'htmlOptions'=>array(
+                                'class'=>'form-control',
+                            ),
+                        ),
+                        true),
                 ),
 
             )
@@ -89,10 +86,9 @@
     $datagrid->Pagination = false;
     $data = $datagrid->data;
     $unidad = 0; $paquete = 0;
-    foreach($data as $item)
-    {
-        $unidad = $unidad+$item->cantidadU;
-        $paquete = $paquete+$item->cantidadP;
+    foreach($data as $item) {
+        $unidad = $unidad + $item->cantidadU;
+        $paquete = $paquete + $item->cantidadP;
     }
     ?>
     <div class="well well-sm col-xs-offset-8 col-xs-4">

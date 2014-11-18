@@ -87,11 +87,10 @@
             $datos->Pagination=false;
             $datos=$datos->getData();
             $total=0;
-            foreach ($datos as $item)
-            {
-                $dato=$item->montoPagado-$item->montoCambio;
-                if($dato>0)
-                    $total = $total+$dato;
+            foreach ($datos as $item) {
+                $dato = $item->montoPagado - $item->montoCambio;
+                if ($dato > 0)
+                    $total = $total + $dato;
             }
             ?>
         </div>
@@ -114,4 +113,4 @@
     ?>
     <div class="divForForm"></div>
     <?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>
-<?php }?>
+<?php } ?>

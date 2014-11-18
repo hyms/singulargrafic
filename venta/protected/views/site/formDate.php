@@ -6,7 +6,6 @@
     </div>
     <div class="panel-body">
         <div class="form">
-
             <?php $form=$this->beginWidget('CActiveForm', array(
                 'id'=>'users-formDate-form',
                 'htmlOptions'=>array(
@@ -19,7 +18,6 @@
                 // you need to use the performAjaxValidation()-method described there.
                 'enableAjaxValidation'=>false,
             )); ?>
-
             <?php echo $form->errorSummary($model); ?>
 
             <div class="form-group col-xs-5">
@@ -41,9 +39,7 @@
             <div class="form-group col-xs-2">
                 <?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-xs-offset-2')); ?>
             </div>
-
             <?php $this->endWidget(); ?>
-
-        </div><!-- form -->
+        </div>
     </div>
 </div>

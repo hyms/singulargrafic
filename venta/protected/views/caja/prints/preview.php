@@ -7,8 +7,8 @@
     <h3 class="text-center"><?php echo "<strong>RECIBO DE ".(($recibo->tipoRecivo==0)?"EGRESO":"INGRESO")." ".$recibo->codigo."</strong> "; ?></h3>
 
     <div class="row">
-        <span class="col-xs-3"><strong><?php echo "NIT:";?></strong> <?php echo $recibo->idCliente0->nitCi;?></span>
-        <span class="col-xs-6"><strong><?php echo "CLIENTE:";?></strong> <?php echo $recibo->idCliente0->apellido;?></span>
+        <span class="col-xs-6"><strong><?php echo "Nombre:";?></strong> <?php echo $recibo->responsable;?></span>
+        <span class="col-xs-3"><strong><?php echo "Nit/Ci:";?></strong> <?php echo $recibo->celular;?></span>
         <span class="col-xs-3"><strong>Fecha: </strong><?php echo date("d-m-Y",strtotime($recibo->fechaRegistro));?></span>
 
         <span class="col-xs-12"><strong><?php echo "Concepto: ";?></strong><?php echo $recibo->concepto;?></span>

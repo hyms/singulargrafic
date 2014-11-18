@@ -28,20 +28,21 @@ class CajaController extends Controller
 
     public function filters()
     {
-        return array( 'accessControl' ); // perform access control for CRUD operations
+        return array('accessControl'); // perform access control for CRUD operations
     }
 
-    public function accessRules() {
+    public function accessRules()
+    {
         return array(
             /*array('allow', // allow authenticated user to perform 'create' and 'update' actions
                     //'actions'=>array('index'),
                     'expression'=>'isset($user->role) && ($user->role==="3")',
             ),*/
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'expression'=>'isset($user->role) && ($user->role<=3)',
+                'expression' => 'isset($user->role) && ($user->role<=3)',
             ),
             array('deny',
-                'users'=>array('*'),
+                'users' => array('*'),
             ),
         );
     }
@@ -83,36 +84,31 @@ class CajaController extends Controller
             ->with('idcajaChica0')
             ->with('idcajaChica0.idUser0')
             ->findAll();
-        $caja = CajaChica::model()->with('cajaChicaTipos')->with('cajaChicaTipos.idTipoMovimiento0')->find('idUser='.Yii::app()->user->id);
-        $this->render("index",array('render'=>'','tabla'=>$tabla,'caja'=>$caja));
+        $caja = CajaChica::model()->with('cajaChicaTipos')->with('cajaChicaTipos.idTipoMovimiento0')->find('idUser=' . Yii::app()->user->id);
+        $this->render("index", array('render' => '', 'tabla' => $tabla, 'caja' => $caja));
     }
 
     public function actionEgreso()
     {
         $egreso = new CajaChicaMovimiento;
-        $egreso->fechaMovimiento=date("Y-m-d H:i:s");
-        $egreso->tipoMovimiento=0;
-        $caja = CajaChica::model()->with('idCaja0')->find('idUser='.Yii::app()->user->id);
+        $egreso->fechaMovimiento = date("Y-m-d H:i:s");
+        $egreso->tipoMovimiento = 0;
+        $caja = CajaChica::model()->with('idCaja0')->find('idUser=' . Yii::app()->user->id);
         $egreso->idcajaChica = $caja->idcajaChica;
-        if(isset($_POST['MovimientoCaja']))
-        {
-            $egreso->attributes=$_POST['MovimientoCaja'];
-            if($egreso->validate())
-            {
-                $caja->saldo = $caja->saldo-$egreso->monto;
-                if($caja->saldo>=0)
-                {
-                    if($egreso->save())
-                        if($caja->save())
+        if (isset($_POST['MovimientoCaja'])) {
+            $egreso->attributes = $_POST['MovimientoCaja'];
+            if ($egreso->validate()) {
+                $caja->saldo = $caja->saldo - $egreso->monto;
+                if ($caja->saldo >= 0) {
+                    if ($egreso->save())
+                        if ($caja->save())
                             $this->redirect('index');
-                }
-                else
-                {
-                    $egreso->addError('monto','No existen suficientes fondos');
+                } else {
+                    $egreso->addError('monto', 'No existen suficientes fondos');
                 }
             }
         }
-        $this->render("egreso",array('model'=>$egreso));
+        $this->render("egreso", array('model' => $egreso));
     }
 
     public function actionIngreso()
@@ -120,77 +116,64 @@ class CajaController extends Controller
         $ingreso = new MovimientoCaja;
         $ingreso->fechaMovimiento = date("Y-m-d H:i:s");
         $ingreso->tipo = 1;
-        $caja = $caja = CajaVenta::model()->find(array('condition'=>'`t`.idCaja=2 and fechaArqueo is NULL'));
+        $caja = $caja = CajaVenta::model()->find(array('condition' => '`t`.idCaja=2 and fechaArqueo is NULL'));
         $ingreso->idCaja = $caja->idCajaVenta;
-        if(isset($_POST['MovimientoCaja']))
-        {
-            $ingreso->attributes=$_POST['MovimientoCaja'];
-            if($ingreso->validate())
-            {
-                $caja->saldo = $caja->saldo+$ingreso->monto;
-                if($ingreso->save())
-                    if($caja->save())
+        if (isset($_POST['MovimientoCaja'])) {
+            $ingreso->attributes = $_POST['MovimientoCaja'];
+            if ($ingreso->validate()) {
+                $caja->saldo = $caja->saldo + $ingreso->monto;
+                if ($ingreso->save())
+                    if ($caja->save())
                         $this->redirect(array('index'));
             }
         }
-        $this->render("ingreso",array('model'=>$ingreso));
+        $this->render("ingreso", array('model' => $ingreso));
     }
 
     public function actionArqueo()
     {
         $movimiento = new MovimientoCaja;
-        $caja = CajaVenta::model()->find(array('condition'=>'`t`.idCaja=2 and fechaArqueo is NULL'));
-        if(isset($_POST['MovimientoCaja']))
-        {
+        $caja = CajaVenta::model()->find(array('condition' => '`t`.idCaja=2 and fechaArqueo is NULL'));
+        if (isset($_POST['MovimientoCaja'])) {
             $movimiento->attributes = $_POST['MovimientoCaja'];
             $movimiento->motivo = "Traspaso de efectivo a Administracion";
-            $comprovante = CajaVenta::model()->find(array('select'=>'max(comprobante) as max'));
-            $caja->comprobante = $comprovante->max +1;
+            $comprovante = CajaVenta::model()->find(array('select' => 'max(comprobante) as max'));
+            $caja->comprobante = $comprovante->max + 1;
             $movimiento->fechaMovimiento = date("Y-m-d H:i:s");
-            $comprovante = MovimientoCaja::model()->find(array('order'=>'fechaMovimiento Desc'));
-            if(empty($comprovante))
-                $comprovante=new MovimientoCaja;
-            if(date("d",strtotime($movimiento->fechaMovimiento)) > date("d",strtotime($comprovante->fechaMovimiento)))
-                $movimiento->fechaMovimiento = date("Y-m-d",strtotime($comprovante->fechaMovimiento))." 23:00:00";
+            $comprovante = MovimientoCaja::model()->find(array('order' => 'fechaMovimiento Desc'));
+            if (empty($comprovante))
+                $comprovante = new MovimientoCaja;
+            if (date("d", strtotime($movimiento->fechaMovimiento)) > date("d", strtotime($comprovante->fechaMovimiento)))
+                $movimiento->fechaMovimiento = date("Y-m-d", strtotime($comprovante->fechaMovimiento)) . " 23:00:00";
             $movimiento->tipo = 0;
             $movimiento->idCaja = $caja->idCajaVenta;
             $movimiento->idUser = $caja->idUser;
-            if($movimiento->validate())
-            {
-                $caja->saldo = $caja->saldo-$movimiento->monto;
-                $caja->fechaArqueo=date("Y-m-d H:i:s");
-                $caja->entregado=$movimiento->monto;
-                if($movimiento->monto==0)
-                {
-                    $caja->comprobante="";
-                    if($caja->save())
-                    {
-                        if($this->initCaja($caja->saldo))
-                            $this->redirect(array('index','ar'=>$caja->idCajaVenta));
+            if ($movimiento->validate()) {
+                $caja->saldo = $caja->saldo - $movimiento->monto;
+                $caja->fechaArqueo = date("Y-m-d H:i:s");
+                $caja->entregado = $movimiento->monto;
+                if ($movimiento->monto == 0) {
+                    $caja->comprobante = "";
+                    if ($caja->save()) {
+                        if ($this->initCaja($caja->saldo))
+                            $this->redirect(array('index', 'ar' => $caja->idCajaVenta));
                     }
-                }
-                else
-                {
-                    if($movimiento->monto > 0)
-                    {
-                        if($movimiento->save())
-                        {
-                            if($caja->save())
-                            {
-                                if($this->initCaja($caja->saldo))
-                                    $this->redirect(array('index','ar'=>$caja->idCajaVenta));
+                } else {
+                    if ($movimiento->monto > 0) {
+                        if ($movimiento->save()) {
+                            if ($caja->save()) {
+                                if ($this->initCaja($caja->saldo))
+                                    $this->redirect(array('index', 'ar' => $caja->idCajaVenta));
                             }
                         }
-                    }
-                    else
-                    {
-                        $movimiento->addError('monto',"El numero debe ser positivo");
+                    } else {
+                        $movimiento->addError('monto', "El numero debe ser positivo");
                     }
                 }
             }
         }
 
-        $this->render("arqueo",array('movimiento'=>$movimiento,'caja'=>$caja));
+        $this->render("arqueo", array('movimiento' => $movimiento, 'caja' => $caja));
     }
 
     public function actionReciboIngreso()
@@ -198,114 +181,101 @@ class CajaController extends Controller
         $cliente = new Cliente;
         $recibo = new Recibos;
         $cajaMovimiento = new CajaMovimientoVenta;
-        if(isset($_GET['id']))
-        {
+        if (isset($_GET['id'])) {
             $recibo = $this->verifyModel(Recibos::model()->findByPk($_GET['id']));
             $cajaMovimiento = CajaMovimientoVenta::model()->findByPk($recibo->idCajaMovimientoVenta);
-        }
-        else
-        {
+        } else {
             //$cajaMovimiento = $this->verifyModel(CajaMovimientoVenta::model()->find('idUser='.Yii::app()->user->id.''));
-            $row = Recibos::model()->find(array("select"=>"count(*) as `max`",'condition'=>'tipoRecivo=1'));
+            $row = Recibos::model()->find(array("select" => "count(*) as `max`", 'condition' => 'tipoRecivo=1'));
 
             $recibo->fechaRegistro = date("Y-m-d h:m:s");
-            $recibo->codigo = "I-".($row['max']+1);
+            $recibo->codigo = "I-" . ($row['max'] + 1);
             $recibo->tipoRecivo = 1;
 
         }
-        if(isset($_POST['Recibos']))
-        {
-            $saldobkp="";
-            if(!empty($recibo->acuenta))
-                $saldobkp= $recibo->acuenta;
+        if (isset($_POST['Recibos'])) {
+            $saldobkp = "";
+            if (!empty($recibo->acuenta))
+                $saldobkp = $recibo->acuenta;
 
             $recibo->attributes = $_POST['Recibos'];
             $cliente->attributes = $_POST['Cliente'];
-            $cliente = Cliente::model()->find("nitCi='".$cliente->nitCi."'");
+            $cliente = Cliente::model()->find("nitCi='" . $cliente->nitCi . "'");
             $recibo->idCliente = $cliente->idCliente;
 
-            if($recibo->validate())
-            {
+            if ($recibo->validate()) {
                 $cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
                 $cajaMovimiento->monto = $recibo->monto;
-                if($recibo->categoria=="Nota de Venta")
-                    $cajaMovimiento->idCaja=2;
-                if($recibo->categoria=="Orden de Trabajo")
-                    $cajaMovimiento->idCaja=3;
-                if($cajaMovimiento->save())
-                {
+                if ($recibo->categoria == "Nota de Venta")
+                    $cajaMovimiento->idCaja = 2;
+                if ($recibo->categoria == "Orden de Trabajo")
+                    $cajaMovimiento->idCaja = 3;
+                if ($cajaMovimiento->save()) {
                     $recibo->idCajaMovimientoVenta = $cajaMovimiento->idCajaMovimientoVenta;
-                    $caja=Caja::model()->findByPk($cajaMovimiento->idCaja);
-                    if($saldobkp!="")
+                    $caja = Caja::model()->findByPk($cajaMovimiento->idCaja);
+                    if ($saldobkp != "")
                         $caja->saldo = $caja->saldo - $saldobkp;
                     $caja->saldo = $caja->saldo - $cajaMovimiento->monto;
                     $recibo->save();
-                    if($caja->save())
-                        $this->redirect(array('preview','id'=>$recibo->idRecibos));
+                    if ($caja->save())
+                        $this->redirect(array('preview', 'id' => $recibo->idRecibos));
                 }
             }
 
         }
 
         //$this->render("reciboIngreso",array(
-        $this->render("index",array(
-            'render'=>'reciboIngreso',
-            'cliente'=>$cliente,
-            'recibo'=>$recibo,
+        $this->render("index", array(
+            'render' => 'reciboIngreso',
+            'cliente' => $cliente,
+            'recibo' => $recibo,
         ));
     }
 
     public function actionReciboEgreso()
     {
         $cliente = new Cliente;
-        $recibo="";$caja="";
+        $recibo = "";
+        $caja = "";
 
-        if(isset($_GET['id']))
-        {
+        if (isset($_GET['id'])) {
             $recibo = $this->verifyModel(Recibos::model()->findByPk($_GET['id']));
             $caja = CajaVenta::model()->findByPk($recibo->idCajaVenta);
-        }
-        else
-        {
+        } else {
             $recibo = new Recibos;
-            $caja = CajaVenta::model()->find('idUser='.Yii::app()->user->id.' and fechaArqueo is NULL');
-            $row = Recibos::model()->find(array("select"=>"count(*) as `max`",'condition'=>'tipoRecivo=0'));
+            $caja = CajaVenta::model()->find('idUser=' . Yii::app()->user->id . ' and fechaArqueo is NULL');
+            $row = Recibos::model()->find(array("select" => "count(*) as `max`", 'condition' => 'tipoRecivo=0'));
 
-            $recibo->fechaRegistro=date("Y-m-d h:m:s");
-            $recibo->codigo = "E-".($row['max']+1);
-            $recibo->tipoRecivo=0;
-            $recibo->responsable="Miriam Martinez";
+            $recibo->fechaRegistro = date("Y-m-d h:m:s");
+            $recibo->codigo = "E-" . ($row['max'] + 1);
+            $recibo->tipoRecivo = 0;
+            $recibo->responsable = "Miriam Martinez";
 
             $recibo->idCaja = $caja->idCajaVenta;
         }
 
-        if(isset($_POST['Recibos']))
-        {
-            $saldobkp="";
-            if(!empty($recibo->acuenta))
-                $saldobkp= $recibo->acuenta;
-            $recibo->attributes=$_POST['Recibos'];
-            if($recibo->validate())
-            {
-                if(!empty($recibo->idRecibos))
+        if (isset($_POST['Recibos'])) {
+            $saldobkp = "";
+            if (!empty($recibo->acuenta))
+                $saldobkp = $recibo->acuenta;
+            $recibo->attributes = $_POST['Recibos'];
+            if ($recibo->validate()) {
+                if (!empty($recibo->idRecibos))
                     $caja->saldo = $caja->saldo + $saldobkp;
 
-                $caja->saldo = $caja->saldo-$recibo->acuenta;
-                if($caja->saldo>=0)
-                {
-                    if($recibo->save())
-                        if($caja->save())
-                            $this->redirect(array('preview','id'=>$recibo->idRecibos));
-                }
-                else
-                {
-                    $recibo->addError('acuenta','No existen suficientes fondos');
+                $caja->saldo = $caja->saldo - $recibo->acuenta;
+                if ($caja->saldo >= 0) {
+                    if ($recibo->save())
+                        if ($caja->save())
+                            $this->redirect(array('preview', 'id' => $recibo->idRecibos));
+                } else {
+                    $recibo->addError('acuenta', 'No existen suficientes fondos');
                 }
             }
         }
-        $this->render("reciboEgreso",array(
-            'cliente'=>$cliente,
-            'recibo'=>$recibo,
+        $this->render("reciboEgreso", array(
+            'cliente' => $cliente,
+            'recibo' => $recibo,
 
         ));
     }
@@ -326,7 +296,7 @@ class CajaController extends Controller
         }
 
         //$this->render("buscar", array('recibos' => $recibos));
-        $this->render('index', array('render'=>'buscar','recibos' => $recibos));
+        $this->render('index', array('render' => 'buscar', 'recibos' => $recibos));
     }
 
     public function actionDeuda()
@@ -366,7 +336,7 @@ class CajaController extends Controller
                     if ($i > 0) {
                         $recibo->concepto = $recibo->concepto . ", ";
                     }
-                    $recibo->concepto = $recibo->concepto . $producto->formato . " (" . $producto->nroPlacas . ") - " . $producto->trabajo;
+                    $recibo->concepto = $recibo->concepto . $producto->nroPlacas . " placa(s) " . $producto->formato . " - " . $producto->trabajo;
                     $i++;
                 }
             }
@@ -374,18 +344,19 @@ class CajaController extends Controller
 
             $cliente = $venta->idCliente0;
             $caja = $this->verifyModel(CajaMovimientoVenta::model()->findByPk($venta->idCajaMovimientoVenta0->idCajaMovimientoVenta));
-            $row = Recibos::model()->find(array("select" => "count(*) as `max`", 'condition' => 'tipoRecivo=1'));
+            $row = Recibos::model()->find(array('select' => 'count(*) as `max`', 'condition' => 'tipoRecivo=1'));
             $recibo->fechaRegistro = date("Y-m-d h:m:s");
             $recibo->codigo = "I-" . ($row['max'] + 1);
             $recibo->tipoRecivo = 1;
             $recibo->codigoNumero = $venta->codigo;
             $recibo->saldo = $venta->montoVenta - $venta->montoPagado;
             $recibo->acuenta = $venta->montoPagado;
-            $recibo->idCliente = $cliente->idCliente;
+            $recibo->responsable = $cliente->apellido;
+            $recibo->idSucursal = $venta->idSucursal;
 
             if (isset($_POST['Recibos'])) {
                 $recibo->attributes = $_POST['Recibos'];
-                $cliente->attributes = $_POST['Cliente'];
+                //$cliente->attributes = $_POST['Cliente'];
 
 
                 if ($recibo->validate()) {
@@ -423,7 +394,7 @@ class CajaController extends Controller
                     }
                 }
             }
-            $this->render("index", array('render' => 'deuda', 'cliente' => $cliente, 'recibo' => $recibo, ));
+            $this->render("index", array('render' => 'deuda', 'cliente' => $cliente, 'recibo' => $recibo,));
             /*$this->render("reciboIngreso",array(
                 'cliente'=>$cliente,
                 'recibo'=>$recibo,
@@ -432,38 +403,86 @@ class CajaController extends Controller
             throw new CHttpException(400, 'Petición no válida.');
     }
 
+    public function actionModificarRecibo()
+    {
+        if (isset($_GET['id'])) {
+            $recibo = $this->verifyModel(Recibos::model()->findByPk($_GET['id']));
+            $cajaMovimiento = CajaMovimientoVenta::model()->findByPk($recibo->idCajaMovimientoVenta);
+            $caja = Caja::model()->findByPk($cajaMovimiento->idCaja);
+            if (isset($_POST['Recibos'])) {
+
+                if ($recibo->tipoRecivo == 1) {
+                    $venta = CTP::model()->find('codigo="' . $recibo->codigoNumero . '" and idSucursal=' . $recibo->idSucursal);
+                    if (empty($venta))
+                        $venta = Venta::model()->find('codigo="' . $recibo->codigoNumero . '" and idSucursal=' . $recibo->idSucursal);
+                    if (!empty($venta))
+                        $venta->montoPagado = $venta->montoPagado - $recibo->monto;
+                    $caja->saldo = $caja->saldo - $cajaMovimiento->monto;
+                }
+                if ($recibo->tipoRecivo == 0) {
+                    $caja->saldo = $caja->saldo + $cajaMovimiento->monto;
+                }
+
+                $recibo->attributes = $_POST['Recibos'];
+
+                if ($recibo->validate() && $cajaMovimiento->arqueo == 0) {
+                    $cajaMovimiento->fechaMovimiento = date("Y-m-d H:i:s");
+                    if ($recibo->tipoRecivo == 1) {
+                        if (!empty($venta)) {
+                            $venta->montoPagado = $venta->montoPagado + $recibo->monto;
+                            if (($venta->montoVenta - $venta->montoPagado) >= 0) {
+                                $recibo->saldo = $venta->montoVenta - $venta->montoPagado;
+                            } else {
+                                $recibo->saldo = 0;
+                            }
+                            $venta->montoCambio = $venta->montoVenta - $venta->montoPagado;
+                            $recibo->acuenta = $venta->montoPagado - $recibo->monto;
+                        }
+                        $caja->saldo = $caja->saldo + $cajaMovimiento->monto;
+                    }
+                    if ($recibo->tipoRecivo == 0) {
+                        $caja->saldo = $caja->saldo - $cajaMovimiento->monto;
+                    }
+                    $caja->save();
+
+                    if ($cajaMovimiento->save()) {
+                        $recibo->idCajaMovimientoVenta = $cajaMovimiento->idCajaMovimientoVenta;
+                        if ($recibo->save()) {
+                            if (!empty($venta)) {
+                                if ($venta->montoPagado >= $venta->montoVenta)
+                                    $venta->estado = 0;
+                                $venta->save();
+                            }
+                            $this->redirect(array('preview', 'id' => $recibo->idRecibos));
+                        }
+                    }
+                }
+            }
+            $this->render("index", array('render' => 'modificar', 'recibo' => $recibo,));
+        } else
+            throw new CHttpException(400, 'Petición no válida.');
+    }
+
     public function actionChica()
     {
-        $t=0;
-        if(isset($_GET['t']))
-        {
-            $t=$_GET['t'];
+        $t = 0;
+        if (isset($_GET['t'])) {
+            $t = $_GET['t'];
         }
-        if($t==0)
-        {
+        if ($t == 0) {
             $this->actionEgreso();
-        }
-        else
-        {
+        } else {
             $this->actionIngreso();
         }
     }
 
     public function actionPreview()
     {
-        if(isset($_GET['id']))
-        {
-            $recibo = Recibos::model()
-                ->with("idCliente0")
-                ->findByPk($_GET['id']);
-
-            if($recibo!=null)
-                $this->render('index',array('render'=>'preview','recibo'=>$recibo));
-            else
-                $this->redirect(array('index'));
-        }
-        else
-            throw new CHttpException(400,'Petición no válida.');
+        if (isset($_GET['id'])) {
+            $recibo = $this->verifyModel(Recibos::model()->findByPk($_GET['id']));
+            $this->render('index', array('render' => 'preview', 'recibo' => $recibo));
+        } else
+            throw new CHttpException(400, 'Petición no válida.');
     }
 
     public function actionEnvio()
@@ -472,15 +491,14 @@ class CajaController extends Controller
         $envio = new EnvioMaterial;
         $detalle = array();
 
-        if(isset($_GET['id']))
-        {
+        if (isset($_GET['id'])) {
             $envio = EnvioMaterial::model()->with('detalleEnvios')->findByPk($_GET['id']);
             $detalle = $envio->detalleEnvios;
         }
 
         //init filter
         $productos->unsetAttributes();
-        if (isset($_GET['AlmacenProducto'])){
+        if (isset($_GET['AlmacenProducto'])) {
             $productos->attributes = $_GET['AlmacenProducto'];
             $productos->color = $_GET['AlmacenProducto']['color'];
             $productos->material = $_GET['AlmacenProducto']['material'];
@@ -490,36 +508,30 @@ class CajaController extends Controller
             $productos->codigo = $_GET['AlmacenProducto']['codigo'];
         }
         //end filter
-        $se=false;
-        if(isset($_POST['EnvioMaterial']))
-        {
+        $se = false;
+        if (isset($_POST['EnvioMaterial'])) {
             $envio->attributes = $_POST['EnvioMaterial'];
             $envio->fechaEnvio = date('Y-m-d H:i:s');
             $envio->idUser = Yii::app()->user->id;
-            $se=$envio->validate();
+            $se = $envio->validate();
         }
-        $sd=1;
-        if(isset($_POST['DetalleEnvio']))
-        {
+        $sd = 1;
+        if (isset($_POST['DetalleEnvio'])) {
             $sd = count($_POST['DetalleEnvio']);
 
-            foreach ($_POST['DetalleEnvio'] as $key => $item)
-            {
+            foreach ($_POST['DetalleEnvio'] as $key => $item) {
                 $detalle[$key] = new DetalleEnvio;
-                $detalle[$key]->attributes=$item;
-                if($detalle[$key]->validate() && ($detalle[$key]->cantidadP>0 || $detalle[$key]->cantidadU>0))
+                $detalle[$key]->attributes = $item;
+                if ($detalle[$key]->validate() && ($detalle[$key]->cantidadP > 0 || $detalle[$key]->cantidadU > 0))
                     $sd--;
             }
         }
-        if($se && $sd==0)
-        {
+        if ($se && $sd == 0) {
             $envio->save();
-            foreach ($detalle as $key => $item)
-            {
-                $item->idEnvioMaterial=$envio->idEnvioMaterial;
-                if($item->save())
-                {
-                    $movimiento=new MovimientoAlmacen;
+            foreach ($detalle as $key => $item) {
+                $item->idEnvioMaterial = $envio->idEnvioMaterial;
+                if ($item->save()) {
+                    $movimiento = new MovimientoAlmacen;
                     /*$movimiento->idProducto = $almacenes->idProducto0->idProducto;
                     $movimiento->idAlmacenDestino = 2;
                     //$movimiento[$i]->idAlmacenOrigen = 2;
@@ -531,73 +543,63 @@ class CajaController extends Controller
                     $movimiento->save();*/
                 }
             }//*/
-            $this->redirect(array('caja/envios','envios'=>true));
-        }
-        else
+            $this->redirect(array('caja/envios', 'envios' => true));
+        } else
             echo "Error";
 
-        $this->render("envios",array("productos"=>$productos,'envio'=>$envio,'detalle'=>$detalle,'nuevo'=>true));
+        $this->render("envios", array("productos" => $productos, 'envio' => $envio, 'detalle' => $detalle, 'nuevo' => true));
     }
 
     public function actionEnvios()
     {
-        if(isset($_GET['nuevo']))
-        {
+        if (isset($_GET['nuevo'])) {
             $this->actionEnvio();
-        }
-        elseif(isset($_GET['envios']))
-        {
+        } elseif (isset($_GET['envios'])) {
             $envios = new EnvioMaterial('search');
             $envios->unsetAttributes();
-            if (isset($_GET['EnvioMaterial'])){
-                $envios->attributes=$_GET['EnvioMaterial'];
+            if (isset($_GET['EnvioMaterial'])) {
+                $envios->attributes = $_GET['EnvioMaterial'];
             }
-            $this->render("envios",array("envios"=>$envios,'realizado'=>true));
-        }
-        else
-            $this->render("envios",array("envios"=>''));
+            $this->render("envios", array("envios" => $envios, 'realizado' => true));
+        } else
+            $this->render("envios", array("envios" => ''));
     }
 
     public function actionAddDetalle()
     {
         //if(Yii::app()->request->isAjaxRequest && isset($_GET['index']))
-        if(isset($_GET['index']))
-        {
+        if (isset($_GET['index'])) {
             $detalle = new DetalleEnvio;
             $almacen = new AlmacenProducto;
-            if(isset($_GET['al']))
-            {
+            if (isset($_GET['al'])) {
                 $almacen = AlmacenProducto::model()
                     ->with("idProducto0")
                     ->findByPk($_GET['al']);
-
             }
 
             $detalle->idAlmacenProducto = $almacen->idAlmacenProducto;
             $this->renderPartial('envios/_newRowDetalleEnvio', array(
-                'model'=>$detalle,
-                'index'=>$_GET['index'],
-                'almacen'=>$almacen,
+                'model' => $detalle,
+                'index' => $_GET['index'],
+                'almacen' => $almacen,
             ));
-        }
-        else
-            throw new CHttpException(400,'Petición no válida.');
+        } else
+            throw new CHttpException(400, 'Petición no válida.');
     }
 
     private function initCaja($saldo)
     {
         $caja = new CajaVenta;
         $caja->saldo = $saldo;
-        $caja->idCaja=2;
-        $caja->idUser=Yii::app()->user->id;
+        $caja->idCaja = 2;
+        $caja->idUser = Yii::app()->user->id;
         return $caja->save();
     }
 
     private function verifyModel($model)
     {
-        if($model===null)
-            throw new CHttpException(404,'La Respuesta de la pagina no Existe.');
-
+        if ($model === null)
+            throw new CHttpException(404, 'La Respuesta de la pagina no Existe.');
         return $model;
     }
 }

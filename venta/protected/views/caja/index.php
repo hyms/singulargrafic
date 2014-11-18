@@ -14,6 +14,12 @@
         case "buscar":
             $this->renderPartial("tables/buscar", array('recibos' => $recibos));
             break;
+        case "modificar":
+            if ($recibo->tipoRecivo == 1)
+                $this->renderPartial("forms/reciboIngreso", array('recibo' => $recibo,));
+            if ($recibo->tipoRecivo == 0)
+                $this->renderPartial("forms/reciboEgreso", array('recibo' => $recibo,));
+            break;
         default:
             break;
     }

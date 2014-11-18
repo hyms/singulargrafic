@@ -5,6 +5,23 @@
     <div class="panel-body">
         <div class="form-group" >
             <div class="col-xs-8">
+                <?php echo CHtml::activeLabelEx($recibo,'responsable',array('class'=>'control-label col-xs-3')); ?>
+                <div class="col-xs-9">
+                    <?php echo CHtml::activeTextField($recibo,'responsable',array('class'=>'form-control ')); ?>
+                </div>
+                <?php echo CHtml::error($recibo,'responsable',array('class'=>'label label-danger')); ?>
+            </div>
+            <div class="col-xs-4">
+                <?php echo CHtml::activeLabelEx($recibo,'celular',array('class'=>'control-label col-xs-3')); ?>
+                <div class="col-xs-9">
+                    <?php echo CHtml::activeTextField($recibo,'celular',array('class'=>'form-control')); ?>
+                </div>
+                <?php echo CHtml::error($recibo,'celular',array('class'=>'label label-danger')); ?>
+            </div>
+        </div>
+
+        <div class="form-group" >
+            <div class="col-xs-8">
                 <?php echo CHtml::activeLabelEx($recibo,'concepto',array('class'=>'control-label col-xs-3')); ?>
                 <div class="col-xs-9">
                     <?php echo CHtml::activeTextArea($recibo,'concepto',array('class'=>'form-control ',"id"=>"concepto")); ?>

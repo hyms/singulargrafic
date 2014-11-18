@@ -78,5 +78,4 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array('id'=>'divDialog',
     'options'=>array( 'title'=>'Añadir a Stock', 'autoOpen'=>false, 'modal'=>true, 'width'=>800)));
 ?>
     <div class="divForForm"></div>
-
 <?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>

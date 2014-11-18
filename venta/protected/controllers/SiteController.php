@@ -5,24 +5,26 @@ class SiteController extends Controller
 
     public function filters()
     {
-        return array( 'accessControl' ); // perform access control for CRUD operations
+        return array('accessControl'); // perform access control for CRUD operations
     }
 
-    public function accessRules() {
+    public function accessRules()
+    {
         return array(
             array('allow',
-                'actions'=>array('login','error'),
-                'users'=>array('*')
+                'actions' => array('login', 'error'),
+                'users' => array('*')
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions'=>array('index','logout','dates'),
-                'users'=>array('@'),
+                'actions' => array('index', 'logout', 'dates'),
+                'users' => array('@'),
             ),
             array('deny',
-                'users'=>array('*'),
+                'users' => array('*'),
             ),
         );
     }
+
     /**
      * Declares class-based actions.
      */
@@ -30,14 +32,14 @@ class SiteController extends Controller
     {
         return array(
             // captcha action renders the CAPTCHA image displayed on the contact page
-            'captcha'=>array(
-                'class'=>'CCaptchaAction',
-                'backColor'=>0xFFFFFF,
+            'captcha' => array(
+                'class' => 'CCaptchaAction',
+                'backColor' => 0xFFFFFF,
             ),
             // page action renders "static" pages stored under 'protected/views/site/pages'
             // They can be accessed via: index.php?r=site/page&view=FileName
-            'page'=>array(
-                'class'=>'CViewAction',
+            'page' => array(
+                'class' => 'CViewAction',
             ),
         );
     }
@@ -58,9 +60,8 @@ class SiteController extends Controller
      */
     public function actionError()
     {
-        if($error=Yii::app()->errorHandler->error)
-        {
-            if(Yii::app()->request->isAjaxRequest)
+        if ($error = Yii::app()->errorHandler->error) {
+            if (Yii::app()->request->isAjaxRequest)
                 echo $error['message'];
             else
                 $this->render('error', $error);
@@ -73,25 +74,23 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $this->layout = 'loginLayout';
-        $model=new LoginForm;
+        $model = new LoginForm;
 
         // if it is ajax validation request
-        if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
-        {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
 
         // collect user input data
-        if(isset($_POST['LoginForm']))
-        {
-            $model->attributes=$_POST['LoginForm'];
+        if (isset($_POST['LoginForm'])) {
+            $model->attributes = $_POST['LoginForm'];
             // validate user input and redirect to the previous page if valid
-            if($model->validate() && $model->login())
+            if ($model->validate() && $model->login())
                 $this->redirect(Yii::app()->user->returnUrl);
         }
         // display the login form
-        $this->render('login',array('model'=>$model));
+        $this->render('login', array('model' => $model));
     }
 
     /**
@@ -106,8 +105,7 @@ class SiteController extends Controller
 
     public function actionDates()
     {
-        if(isset($_GET['id']))
-        {
+        if (isset($_GET['id'])) {
             $model = Users::model()->findByPk($_GET['id']);
 
             // uncomment the following code to enable ajax-based validation
@@ -121,27 +119,22 @@ class SiteController extends Controller
 
             $empleado = Empleado::model()->findByPk($model->idEmpleado);
 
-            if(isset($_POST['Users']))
-            {
+            if (isset($_POST['Users'])) {
                 $model->attributes = $_POST['Users'];
                 $model->password = $_POST['Users']['password'];
-                if($model->idUser!=null)
-                {
+                if ($model->idUser != null) {
                     $userBpk = Users::model()->findByPk($model->idUser);
-                    if($userBpk->password != $model->password)
+                    if ($userBpk->password != $model->password)
                         $model->password = md5($model->password);
-                }
-                else
-                {
+                } else {
                     $model->password = md5($model->password);
                 }
 
-                if($model->save())
+                if ($model->save())
                     $this->redirect(array('index'));
             }
-            $this->render('formDate',array('model'=>$model,'empleado'=>$empleado));
-        }
-        else
-            throw new CHttpException(400,'La Respuesta de la pagina no Existe.');
+            $this->render('formDate', array('model' => $model, 'empleado' => $empleado));
+        } else
+            throw new CHttpException(400, 'La Respuesta de la pagina no Existe.');
     }
 }

@@ -12,12 +12,8 @@
 		<h4 class="col-xs-offset-8 text-right"><strong>Fecha: </strong><?php echo date("d-m-Y",strtotime($recibo->fechaRegistro));?></h4>
 	
 		<p class="row">
-			<?php if(!empty($recibo->idCliente0)){?>
-			<span class="col-xs-2"> <strong><?php echo "NIT:";?></strong> <?php echo $recibo->idCliente0->nitCi;?></span>
-			<span class="col-xs-3" > <strong><?php echo "CLIENTE:";?></strong> <?php echo $recibo->idCliente0->apellido;?></span>
-			<?php }?>
 			<span class="col-xs-4"> <strong><?php echo "RESPONSABLE";?></strong> <?php echo $recibo->responsable;?></span>
-			<?php if($recibo->celular!=""){?><span class="col-xs-3"> <strong><?php echo "CELULAR";?></strong> <?php echo $recibo->celular;?></span><?php }?>
+			<span class="col-xs-3"> <strong><?php echo "Nit/Ci";?></strong> <?php echo $recibo->celular;?></span>
 		</p>
 		<p class="row">
 			<span class="col-xs-12"> <strong><?php echo "Concepto:";?></strong> <?php echo $recibo->concepto;?></span>

@@ -66,21 +66,4 @@
     <?php //echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar','#',array('class'=>'btn btn-primary','id'=>'saveModal')); ?>
 </div>
 
-<?php $this->endWidget(); /*?>
-<script>
-    $('#saveModal').click(function(){
-        $.ajax({
-            'type': 'POST',
-            'url' : '<?php echo CHtml::normalizeUrl(array('distribuidora/addReduce','id'=>$almacen->idAlmacenProducto)); ?>',
-            'data': $( '#form_Modal').serialize(),
-            success: function (data) {
-                data = JSON.parse(data);
-                //alert(data);
-                if(data['status']=='ok')
-                    $('#divDialog').dialog('close');
-            }
-        });
-        return false; // prevent normal submit
-    });
-</script>
-<?php */
+<?php $this->endWidget();

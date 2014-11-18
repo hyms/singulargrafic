@@ -73,5 +73,4 @@ $fecha=$dias[date('w',strtotime($fecha))]." ".date('d',strtotime($fecha))." de "
             <p class="text-center"><?php echo "Recibi conforme";?></p>
         </div>
     </div>
-
 </div>

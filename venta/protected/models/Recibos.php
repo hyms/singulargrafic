@@ -7,7 +7,6 @@
  * @property integer $idRecibos
  * @property string $categoria
  * @property string $codigo
- * @property integer $idCliente
  * @property string $responsable
  * @property string $celular
  * @property string $fechaRegistro
@@ -25,11 +24,11 @@
  *
  * The followings are the available model relations:
  * @property CajaMovimientoVenta $idCajaMovimientoVenta0
- * @property Cliente $idCliente0
  * @property Sucursal $idSucursal0
  */
 class Recibos extends CActiveRecord
 {
+    public $max;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -47,7 +46,7 @@ class Recibos extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			//array('idCajaMovimientoVenta', 'required'),
-			array('idCliente, tipoRecivo, idCajaMovimientoVenta, idSucursal', 'numerical', 'integerOnly'=>true),
+			array('tipoRecivo, idCajaMovimientoVenta, idSucursal', 'numerical', 'integerOnly'=>true),
 			array('monto, acuenta, saldo, descuento', 'numerical'),
 			array('categoria, responsable', 'length', 'max'=>40),
 			array('codigo, celular, codigoNumero, servicio', 'length', 'max'=>20),
@@ -56,7 +55,7 @@ class Recibos extends CActiveRecord
 			array('fechaRegistro', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idRecibos, categoria, codigo, idCliente, responsable, celular, fechaRegistro, concepto, codigoNumero, servicio, monto, acuenta, saldo, obs, tipoRecivo, descuento, idCajaMovimientoVenta, idSucursal', 'safe', 'on'=>'search'),
+			array('idRecibos, categoria, codigo, responsable, celular, fechaRegistro, concepto, codigoNumero, servicio, monto, acuenta, saldo, obs, tipoRecivo, descuento, idCajaMovimientoVenta, idSucursal', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,7 +68,6 @@ class Recibos extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
-			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
 			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
 		);
 	}
@@ -83,9 +81,8 @@ class Recibos extends CActiveRecord
 			'idRecibos' => 'Id Recibos',
 			'categoria' => 'Categoria',
 			'codigo' => 'Codigo',
-			'idCliente' => 'Id Cliente',
 			'responsable' => 'Responsable',
-			'celular' => 'Celular',
+			'celular' => 'Nit/Ci',
 			'fechaRegistro' => 'Fecha Registro',
 			'concepto' => 'Concepto',
 			'codigoNumero' => 'Codigo Numero',
@@ -119,12 +116,9 @@ class Recibos extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-        $criteria->order='fechaRegistro Desc';
-
 		$criteria->compare('idRecibos',$this->idRecibos);
 		$criteria->compare('categoria',$this->categoria,true);
 		$criteria->compare('codigo',$this->codigo,true);
-		$criteria->compare('idCliente',$this->idCliente);
 		$criteria->compare('responsable',$this->responsable,true);
 		$criteria->compare('celular',$this->celular,true);
 		$criteria->compare('fechaRegistro',$this->fechaRegistro,true);
@@ -145,7 +139,6 @@ class Recibos extends CActiveRecord
 		));
 	}
 
-    public $max;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

@@ -16,6 +16,7 @@
     <td class="col-xs-1">
         <?php echo CHtml::activeTextField($model,"[$index]cantidadU",array('class'=>'form-control input-sm','id'=>'stockUnidad_'.$index)); ?>
     </td>
+
     <td class="col-xs-1">
         <?php echo CHtml::activeTextField($model,"[$index]costoU",array('class'=>'form-control input-sm','id'=>'costoUnidad_'.$index)); ?>
     </td>
@@ -23,6 +24,7 @@
     <td class="col-xs-1">
         <?php echo CHtml::activeTextField($model,"[$index]cantidadP",array('class'=>'form-control input-sm','id'=>'stockPaquete_'.$index)); ?>
     </td>
+
     <td class="col-xs-1">
         <?php echo CHtml::activeTextField($model,"[$index]costoP",array('class'=>'form-control input-sm','id'=>'costoPaquete_'.$index)); ?>
     </td>
@@ -64,39 +66,38 @@ echo "
 		return true;
 	})
 
-
 	$('#stockUnidad_". $index ."').keydown(function(e){
         if(e.keyCode==13 || e.keyCode==9)
 	    {
 	    	$('#costoUnidad_". $index ."').focus();
 	      	return true;
 	    }
-
     });
+
 	$('#costoUnidad_". $index ."').keydown(function(e){
         if(e.keyCode==13 || e.keyCode==9)
 	    {
 	    	$('#stockPaquete_". $index ."').focus();
 	      	return true;
 	    }
-
     });
+
 	$('#stockPaquete_". $index ."').keydown(function(e){
         if(e.keyCode==13 || e.keyCode==9)
 	    {
 	    	$('#costoPaquete_". $index ."').focus();
 	      	return true;
 	    }
-
     });
+
 	$('#costoPaquete_". $index ."').keydown(function(e){
         if(e.keyCode==13 || e.keyCode==9)
 	    {
 	    	$('#adicional_". $index ."').focus();
 	      	return true;
 	    }
-
     });
+
 	$('#adicional_". $index ."').keydown(function(e){
         if(e.keyCode==13 || e.keyCode==9)
 	    {
@@ -110,7 +111,6 @@ echo "
 	    	}
 	      	return true;
 	    }
-
     });
 
 </script>

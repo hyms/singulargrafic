@@ -3,8 +3,7 @@
     <div class="panel-heading">
         <span class="panel-title"><strong>Arqueo</strong></span>
     </div>
-
-    <div class="panel-body" style="overflow: auto;">
+    <div class="panel-body">
         <?php
         $form=$this->beginWidget('CActiveForm', array(
             'id'=>'detalle-venta-detalleVenta-form',
@@ -21,7 +20,6 @@
                 <?php echo CHtml::activeTextField($caja,'saldo',array('class'=>'form-control ','readonly'=>true)); ?>
             </div>
             <?php echo CHtml::error($caja,'saldo',array('class'=>'label label-danger')); ?>
-
         </div>
         <div class="form-group col-xs-5" >
             <?php echo CHtml::label('Monto a Entregar','monto',array('class'=>'control-label col-xs-6')); ?>
@@ -30,7 +28,6 @@
                 <?php echo CHtml::activeHiddenField($arqueo,'fechaVentas',array('class'=>'form-control')); ?>
             </div>
             <?php echo CHtml::error($arqueo,'monto',array('class'=>'label label-danger')); ?>
-
         </div>
         <?php echo CHtml::link('<span class="glyphicon glyphicon-floppy-disk"></span> Continuar',"#",array('class'=>'btn btn-default col-xs-offset-1','id'=>'save')); ?>
         <?php $this->endWidget(); ?>

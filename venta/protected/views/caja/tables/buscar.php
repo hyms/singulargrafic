@@ -1,9 +1,6 @@
-<div>
-    <ul class="nav nav-tabs">
-        <li><?php echo CHtml::link("Recibos Ingreso",array("caja/buscar","t"=>1),array("class"=>"hidden-print")) ?></li>
-        <li><?php echo CHtml::link("Recibos Egreso",array("caja/buscar","t"=>0),array("class"=>"hidden-print")) ?></li>
-    </ul>
-</div>
+<?php
+$this->renderPartial('menus/tipoRecibo');
+?>
 <div class="panel panel-default">
     <div class="panel-body">
         <?php
@@ -68,7 +65,7 @@
                 array(
                     'header'=>'',
                     'type'=>'raw',
-                    'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-edit\"></span>Modificar",array(($data->tipoRecivo==1)?"caja/reciboIngreso":"caja/reciboEgreso","id"=>$data->idRecibos),array("class"=>"hidden-print","title"=>"Modificar Recibo"))',
+                    'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-edit\"></span>Modificar",array("caja/modificarRecibo","id"=>$data->idRecibos),array("class"=>"hidden-print","title"=>"Modificar Recibo"))',
                 ),
                 array(
                     'header'=>'',

@@ -12,7 +12,6 @@ $form=$this->beginWidget('CActiveForm', array(
         'role'=>'form'
     ),
 ));
-
 echo CHtml::activeHiddenField($ctp,'idCTP');
 ?>
 

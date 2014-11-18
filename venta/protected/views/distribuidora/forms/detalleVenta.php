@@ -13,21 +13,17 @@
     </tr></thead>
     <tbody class="tabular-input-container">
     <?php
-    if(count($detalle)>=1)
-    {
-        if(!isset($detalle->isNewRecord))
-        {
-            $i=0;
-            foreach ($detalle as $item)
-            {
-                if($item->idAlmacenProducto!=null)
-                {
+    if(count($detalle)>=1) {
+        if (!isset($detalle->isNewRecord)) {
+            $i = 0;
+            foreach ($detalle as $item) {
+                if ($item->idAlmacenProducto != null) {
                     $this->renderPartial('forms/_newRowDetalleVenta', array(
-                        'model'=>$item,
-                        'index'=>$i,
-                        'almacen'=>AlmacenProducto::model()
-                                ->with("idProducto0")
-                                ->findByPk($item->idAlmacenProducto),
+                        'model' => $item,
+                        'index' => $i,
+                        'almacen' => AlmacenProducto::model()
+                            ->with("idProducto0")
+                            ->findByPk($item->idAlmacenProducto),
                     ));
                     $i++;
                 }
