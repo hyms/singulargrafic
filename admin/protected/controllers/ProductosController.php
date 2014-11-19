@@ -238,6 +238,7 @@ class ProductosController extends Controller
         $almacen->stockU=0;
         $almacen->stockP=0;
         //print_r($almacen);
-        return $almacen->save();
+        $val = $almacen->save();
+        return $val;
     }
 }
