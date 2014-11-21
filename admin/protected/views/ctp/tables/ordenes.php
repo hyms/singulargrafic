@@ -41,7 +41,26 @@
                     'filter'=>CHtml::activeDropDownList($ordenes,'estado',array('1'=>"Sin Cobrar",'2'=>"Deuda",'0'=>"Cancelado"),array('class'=>'form-control input-sm','empty'=>"")),
                 ),
                 array(
-                    'header'=>'Fecha',
+                    'header'=>'Fecha Generada',
+                    'type'=>'raw',
+                    'value'=>'$data->fechaGenerada',
+                    'filter'=>$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                                'name'=>'fechaGenerada',
+                                'attribute'=>'fechaGenerada',
+                                'language'=>'es',
+                                'model'=>$ordenes,
+                                'options'=>array(
+                                    'showAnim'=>'fold',
+                                    'dateFormat'=>'yy-mm-dd',
+                                ),
+                                'htmlOptions'=>array(
+                                    'class'=>'form-control input-sm',
+                                ),
+                            ),
+                            true),
+                ),
+                array(
+                    'header'=>'Fecha Cobrada',
                     'type'=>'raw',
                     'value'=>'$data->fechaOrden',
                     'filter'=>$this->widget('zii.widgets.jui.CJuiDatePicker', array(

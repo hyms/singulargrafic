@@ -36,7 +36,6 @@ Yii::app()->clientscript
                     array('label'=>'Distribuidora', 'url'=>array('distribuidora/index')),
                     array('label'=>'Pre-Prensa CTP', 'url'=>array('ctp/index')),
                     array('label'=>'Caja', 'url'=>array('caja/index')),
-                    //array('label'=>'Clientes', 'url'=>array('cliente/index')),
                     array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
                     array('label'=>'Logout ('.Yii::app()->user->name.') <b class="caret"></b>', 'url'=>array('#'), 'visible'=>!Yii::app()->user->isGuest,
                         'linkOptions'=> array(

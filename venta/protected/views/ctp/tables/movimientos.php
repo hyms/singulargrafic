@@ -5,7 +5,7 @@
                 <?php if($cf!="" && $sf!=""){ ?>
                     <?php echo CHtml::link('Con Factura', $cf, array("class"=>"btn btn-default hidden-print")); ?>
                     <?php echo CHtml::link('Sin Factura', $sf, array("class"=>"btn btn-default hidden-print")); ?>
-                    <?php echo CHtml::link('Imprimir', $cond3, array("class"=>"btn btn-default hidden-print")); ?>
+                    <?php echo CHtml::link('<span class="glyphicon glyphicon-print"></span>', $cond3, array("class"=>"btn btn-default hidden-print")); ?>
                 <?php }?>
             </div>
 

@@ -233,9 +233,13 @@ class CTP extends CActiveRecord
         $criteria->compare('idCliente0.apellido',$this->apellido,true);
         $criteria->compare('idCliente0.nitCi',$this->nit);
 
-        return new CActiveDataProvider($this, array(
+        $data = new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
+            //'pagination'=>false,
         ));
+        Yii::app()->session['excel']= $this;
+
+        return $data;
     }
 
 

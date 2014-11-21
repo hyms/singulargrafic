@@ -2,198 +2,165 @@
 
 class ClienteController extends Controller
 {
-
 	public function filters()
 	{
 		return array( 'accessControl' ); // perform access control for CRUD operations
 	}
-
+	
 	public function accessRules() {
 		return array(
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'expression'=>'isset($user->role) && ($user->role<=3)',
-            ),
-			array('deny',
-				'users'=>array('*'),
-			),
+				array('allow', // allow authenticated user to perform 'create' and 'update' actions
+						'expression'=>'isset($user->role) && ($user->role==="1")',
+				),
+				array('deny',
+						'users'=>array('*'),
+				),
 		);
 	}
 
-	public function actionIndex()
-	{
-		/*$venta = Venta::model()->findAll(array('select'=>'count(*) as max, idCliente','group'=>'`t`.idCliente'));
-		$datos1 = CHtml::listData($venta,'idCliente','max');
-		
-		$venta = Venta::model()->findAll(array('select'=>'count(*) as max, idCliente','group'=>'`t`.idCliente','condition'=>'formaPago=1'));
-		$datos2 = CHtml::listData($venta,'idCliente','max');
-		
-		$venta = Venta::model()->findAll(array('select'=>'montoCambio as max, idCliente','group'=>'`t`.idCliente','condition'=>'formaPago=1'));
-		$datos3 = CHtml::listData($venta,'idCliente','max');
-		
-		//print_r($datos);
-		$datos= array('compra'=>$datos1,'credito'=>$datos2,'deuda'=>$datos3);
-		$criteria=new CDbCriteria();
-		$count=Cliente::model()->count($criteria);
-		$pages=new CPagination($count);
-		// results per page
-		$pages->pageSize=20;
-		$pages->applyLimit($criteria);
-		$cliente=Cliente::model()->findAll($criteria);
-		
-		$this->render("index",array('cliente'=>$cliente,'datos'=>$datos,'pages' => $pages));*/
-		$this->render("index");
-	}
-	
-	public function actionRegister()
+    public function actionCreate()
 	{
 		$model=new Cliente;
-		
+
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-		
+
 		if(isset($_POST['Cliente']))
 		{
 			$model->attributes=$_POST['Cliente'];
-			$tipoCliente = TiposClientes::model()->find('nombre="nuevo"');
-			$model->idTiposClientes=$tipoCliente->idTiposClientes;
 			$model->fechaRegistro=date("Y-m-d H:i:s");
-			if($model->save())
-				$this->redirect(array('index'));
+            if(!empty($model->nitCi) && !empty($model->apellido))
+            {
+                if ($model->save())
+                    $this->redirect(array('index'));
+            }
+            else
+            {
+                if(empty($model->nitCi))
+                    $model->addError('nitCi','Nit Ci no puede estar vacio');
+                if(empty($model->apellido))
+                    $model->addError('apellido','Apellido no puede estar vacio');
+            }
 		}
-		
-		$this->render("form",array('model'=>$model));
+
+		$this->render('index',array(
+            'render'=>'new',
+			'model'=>$model,
+		));
 	}
-	
+
 	public function actionUpdate()
 	{
 		if($_GET['id'])
 		{
 			$model=$this->verifyModel(Cliente::model()->findByPk($_GET['id']));
-	
+		
 			// Uncomment the following line if AJAX validation is needed
 			// $this->performAjaxValidation($model);
-	
+		
 			if(isset($_POST['Cliente']))
 			{
 				$model->attributes=$_POST['Cliente'];
 				if($model->save())
 					$this->redirect(array('index'));
 			}
-	
-			$this->render('form',array(
-					'model'=>$model,
+
+            $this->render('index',array(
+                'render'=>'update',
+				'model'=>$model,
 			));
 		}
 		else
-			throw new CHttpException(400,'Petición no válida.');
+			throw new CHttpException(400,'La Respuesta de la pagina no Existe.');
 	}
-	
-	public function actionDetail()
+
+	public function actionDelete($id)
 	{
-		if(isset($_GET['id']))
-		{
-			$datos00=array();
-			$cliente = Cliente::model()
-									->with("ventas")
-									->with("ventas.detalleVentas")
-									->with("ventas.detalleVentas.idAlmacenProducto0")
-									->with("ventas.detalleVentas.idAlmacenProducto0.idProducto0")
-									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and ventas.formaPago=0 and ventas.tipoVenta=0','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
-			$temp="";
-			if(!empty($cliente))
-			foreach ($cliente->ventas as $ventas)
-			{
-				foreach ($ventas->detalleVentas as $detalle)
-				{
-					$temp=array("nombre"=>$detalle->idAlmacenProducto0->idProducto0->material." ".$detalle->idAlmacenProducto0->idProducto0->color." ".$detalle->idAlmacenProducto0->idProducto0->detalle,"cant"=>$cliente->max);
-					array_push($datos00, $temp);
-				}
-			}
-			$datos01=array();
-			$cliente = Cliente::model()
-									->with("ventas")
-									->with("ventas.detalleVentas")
-									->with("ventas.detalleVentas.idAlmacenProducto0")
-									->with("ventas.detalleVentas.idAlmacenProducto0.idProducto0")
-									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and ventas.formaPago=1 and ventas.tipoVenta=0','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
-			$temp="";
-			if(!empty($cliente))
-			foreach ($cliente->ventas as $ventas)
-			{
-				foreach ($ventas->Detalle as $detalle)
-				{
-					$temp=array("nombre"=>$detalle->idAlmacenProducto0->idProducto0->material." ".$detalle->idAlmacenProducto0->idProducto0->color." ".$detalle->idAlmacenProducto0->idProducto0->detalle,"cant"=>$cliente->max);
-					array_push($datos01, $temp);
-				}
-			}
-			$datos10=array();
-			$cliente = Cliente::model()
-									->with("ventas")
-									->with("ventas.detalleVentas")
-									->with("ventas.detalleVentas.idAlmacenProducto0")
-									->with("ventas.detalleVentas.idAlmacenProducto0.idProducto0")
-									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and ventas.formaPago=0 and ventas.tipoVenta=1','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
-			$temp="";
-			if(!empty($cliente))
-			foreach ($cliente->ventas as $ventas)
-			{
-				foreach ($ventas->Detalle as $detalle)
-				{
-					$temp=array("nombre"=>$detalle->idAlmacenProducto0->idProducto0->material." ".$detalle->idAlmacenProducto0->idProducto0->color." ".$detalle->idAlmacenProducto0->idProducto0->detalle,"cant"=>$cliente->max);
-					array_push($datos10, $temp);
-				}
-			}
-			$datos11=array();
-			$cliente = Cliente::model()
-									->with("ventas")
-									->with("ventas.detalleVentas")
-									->with("ventas.detalleVentas.idAlmacenProducto0")
-									->with("ventas.detalleVentas.idAlmacenProducto0.idProducto0")
-									->find(array('condition'=>'`t`.idVenta='.$_GET['id'].' and ventas.formaPago=1	and ventas.tipoVenta=1','group'=>'detalleVentas.idAlmacen','select'=>'* , count(detalleVentas.idAlmacen) as max'));
-			$temp="";
-			if(!empty($cliente))
-			foreach ($cliente->ventas as $ventas)
-			{
-				foreach ($ventas->Detalle as $detalle)
-				{
-					$temp=array("nombre"=>$detalle->idAlmacenProducto0->idProducto0->material." ".$detalle->idAlmacenProducto0->idProducto0->color." ".$detalle->idAlmacenProducto0->idProducto0->detalle,"cant"=>$cliente->max);
-					array_push($datos11, $temp);
-				}
-			}
-			
-			$venta = Venta::model()
-							->with("detalleVentas")
-							->with("detalleVentas.idAlmacenProducto0")
-							->with("detalleVentas.idAlmacenProducto0.idProducto0")
-							->findAll(array('select'=>'montoCambio as max, *','group'=>'`t`.idCliente','condition'=>'estado=2 and `t`.idCliente='.$_GET['id']));
-			$datosD = array();
-			if(!empty($venta))
-			foreach ($venta as $ventas)
-			{
-				foreach ($ventas->Detalle as $detalle)
-				{
-					$temp=array(
-							"nombre"=>$detalle->idAlmacenProducto0->idProducto0->material." ".$detalle->idAlmacenProducto0->idProducto0->color." ".$detalle->idAlmacenProducto0->idProducto0->detalle,
-							"fechaVenta"=>date("d-m-Y",strtotime($ventas->fechaVenta)),
-							"fechaPlazo"=>date("d-m-Y",strtotime($ventas->fechaPlazo)),
-							"monto"=>number_format($ventas->max, 2));
-					array_push($datosD, $temp);
-				}
-			}
-			
-			$cliente = Cliente::model()->findByPk($_GET['id']);
-			$datos = array("00"=>$datos00,"01"=>$datos01,"10"=>$datos10,"11"=>$datos11,"deuda"=>$datosD);
-			$this->render("detail",array('cliente'=>$cliente,'datos'=>$datos));
-		}
-		else
-			throw new CHttpException(400,'Petición no válida.');
+		$this->loadModel($id)->delete();
+
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+	}
+
+    public function actionClientes()
+    {
+        $dataProvider=new CActiveDataProvider('Cliente',
+            array(
+                'pagination'=>array(
+                    'pageSize'=>'20',
+                ),));
+        $this->render('index',array(
+            'render'=>'clientes',
+            'dataProvider'=>$dataProvider,
+        ));
+    }
+
+	public function actionIndex()
+	{
+		$this->render('index',array(
+            'render'=>'index',
+		));
 	}
 	
-	private function verifyModel($model)
+	public function actionTipoCliente()
+	{
+		$model=new TiposClientes;
+		
+		// uncomment the following code to enable ajax-based validation
+		/*
+		 if(isset($_POST['ajax']) && $_POST['ajax']==='tipos-clientes-tipoClientes-form')
+		 {
+		echo CActiveForm::validate($model);
+		Yii::app()->end();
+		}
+		*/
+		
+		if(isset($_POST['TiposClientes']))
+		{
+			$model->attributes=$_POST['TiposClientes'];
+			if($model->save())
+			{
+				// form inputs are valid, do something here
+				//return;
+				$this->redirect(array('cliente/index'));
+			}
+		}
+			$this->renderPartial('tipoClientes',array('model'=>$model));
+	}
+	
+	public function actionPreferencia()
+	{
+		$clientes = Cliente::model()->findAll(array('condition'=>'`t`.idTiposClientes IS NOT NULL and `t`.idTiposClientes!=3','order'=>'apellido'));
+
+		if(isset($_POST['Cliente']))
+		{
+			foreach ($clientes as $key => &$cliente)
+			{
+				if(isset($_POST['Cliente'][$key+1]))
+				{
+					$cliente->attributes = $_POST['Cliente'][$key+1];
+					$cliente->save();
+				}
+			}
+		}
+
+		$this->render('index',array('render'=>'preferencia','clientes'=>$clientes));
+	}
+
+    public function verifyModel($model)
 	{
 		if($model===null)
 			throw new CHttpException(404,'La Respuesta de la pagina no Existe.');
-
 		return $model;
+	}
+
+	protected function performAjaxValidation($model)
+	{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='cliente-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
 	}
 }

@@ -550,6 +550,19 @@ class CajaController extends Controller
         $this->render("envios", array("productos" => $productos, 'envio' => $envio, 'detalle' => $detalle, 'nuevo' => true));
     }
 
+    public function actionClientes()
+    {
+        $clientes = new Cliente('search');
+        $clientes->unsetAttributes();
+        if (isset($_GET['Cliente'])) {
+            $clientes->attributes = $_GET['Cliente'];
+        }
+        $this->render('index', array(
+            'render' => 'clientes',
+            'clientes' => $clientes,
+        ));
+    }
+
     public function actionEnvios()
     {
         if (isset($_GET['nuevo'])) {

@@ -80,7 +80,7 @@
             break;
         case "previewDay":
             $this->renderPartial('menus/movimientos');
-            $this->renderPartial("movimientos/previewVentas", array('tabla' => $tabla,));
+            $this->renderPartial("prints/ordenes", array('tabla' => $tabla,));
             $this->renderPartial('scripts/print');
             break;
         case "comprobante":

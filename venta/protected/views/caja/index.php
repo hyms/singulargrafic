@@ -20,6 +20,9 @@
             if ($recibo->tipoRecivo == 0)
                 $this->renderPartial("forms/reciboEgreso", array('recibo' => $recibo,));
             break;
+        case "clientes":
+            $this->renderPartial('tables/clientes',array('clientes'=>$clientes,));
+            break;
         default:
             break;
     }

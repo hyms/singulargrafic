@@ -123,6 +123,7 @@ class CtpController extends Controller
                 $sw = 0;
                 $ctp->attributes = $_POST['CTP'];
                 $ctp->idUserVenta = Yii::app()->user->id;
+                $ctp = $this->getCodigo($ctp);
 
                 if ($ctp->formaPago == 1) {
                     if (empty($ctp->fechaPlazo)) {
@@ -253,6 +254,7 @@ class CtpController extends Controller
             if (isset($_POST['CTP'])) {
                 if ($ctp->idCajaMovimientoVenta0->arqueo < 1) {
                     $ctp->attributes = $_POST['CTP'];
+                    $ctp = $this->getCodigo($ctp);
                     if ($ctp->montoPagado >= 0) {
                         if ($ctp->montoPagado < $ctp->montoVenta)
                             $ctp->estado = 2;
@@ -407,6 +409,36 @@ class CtpController extends Controller
 
     public function actionMovimientos()
     {
+        if (isset($_GET['excel']) && isset(Yii::app()->session['excel'])) {
+            $model = Yii::app()->session['excel'];
+            $dataProvider = $model->searchCTP();
+            $dataProvider->pagination = false; // for retrive all modules
+            $data = $dataProvider->data;
+
+            $columnsTitle = array('Nro', 'Nº de Venta', 'Apellido', 'NitCI', 'Monto de la Venta', 'Monto Pagado', 'Fecha');
+            $content = array();
+            $index = 1;
+            foreach ($data as $item) {
+                array_push($content, array($index,
+                    $item->codigo,
+                    $item->idCliente0->apellido,
+                    $item->idCliente0->nitCi,
+                    $item->montoVenta,
+                    $item->montoPagado,
+                    $item->fechaOrden,
+                ));
+                $index++;
+            }
+            $total = 0;
+            foreach ($data as $item) {
+                $dato = $item->montoPagado - $item->montoCambio;
+                if ($dato > 0)
+                    $total = $total + $dato;
+            }
+            array_push($content, array('', '', '', '', '', 'total', $total));
+            $this->createExcel($columnsTitle, $content, 'Reporte de Ordenes ' . date('Ymd'));
+        }
+
         $cond3 = "";
         $saldo = "";
         $cf = array("ctp/movimientos", 'f' => 0);
@@ -414,12 +446,12 @@ class CtpController extends Controller
         $ventas = new CTP('searchCTP');
 
         $ventas->unsetAttributes();
-        $ventas->idSucursal = $this->sucursal;
-
+        $ventas->idSucursal=$this->sucursal;
         if (isset($_GET['f']))
             $ventas->tipoOrden = $_GET['f'];
 
         if (isset($_GET['d']) || isset($_GET['m'])) {
+            $d = date("d");
             $m = date("m");
             $y = date("Y");
 
@@ -435,28 +467,26 @@ class CtpController extends Controller
                 $ventas->fechaOrden = $y . "-" . $m . "-" . $d;
                 $cf = array("ctp/movimientos", 'f' => 0, 'd' => $_GET['d']);
                 $sf = array("ctp/movimientos", 'f' => 1, 'd' => $_GET['d']);
-                //$cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"d"=>date("d",strtotime($ventas->fechaVenta)));
             }
             if (isset($_GET['m'])) {
                 $m = $_GET['m'];
                 $ventas->fechaOrden = $y . "-" . $m;
                 $cf = array("ctp/movimientos", 'f' => 0, 'm' => $_GET['m']);
                 $sf = array("ctp/movimientos", 'f' => 1, 'm' => $_GET['m']);
-                //$cond3=array("distribuidora/previewDay","f"=>$ventas->tipoVenta,"m"=>date("m",strtotime($ventas->fechaVenta)));
             }
 
-            if (isset($_GET['CTP'])) {
-                $ventas->attributes = $_GET['CTP'];
+            if (isset($_GET['Venta'])) {
+                $ventas->attributes = $_GET['Venta'];
 
-                if (isset($_GET['CTP']['apellido']))
-                    $ventas->apellido = $_GET['CTP']['apellido'];
-                if (isset($_GET['CTP']['nit']))
-                    $ventas->nit = $_GET['CTP']['nit'];
+                if (isset($_GET['Venta']['apellido']))
+                    $ventas->apellido = $_GET['Venta']['apellido'];
+                if (isset($_GET['Venta']['nit']))
+                    $ventas->nit = $_GET['Venta']['nit'];
 
             }
-
-            if (isset($_GET['d']))
-                $cond3 = array("ctp/previewDay", "f" => $ventas->tipoOrden, "d" => date("d", strtotime($ventas->fechaOrden)));
+            if (isset($_GET['d'])) {
+                $cond3 = array("ctp/previewDay", "f" => $ventas->tipoOrden, "date" => date("Y-m-d", strtotime($ventas->fechaOrden)));
+            }
             if (isset($_GET['m']))
                 $cond3 = array("ctp/previewDay", "f" => $ventas->tipoOrden, "m" => date("m", strtotime($ventas->fechaOrden)));
         }
@@ -464,16 +494,56 @@ class CtpController extends Controller
 
         if (isset($_GET['d'])) {
             $saldo = CajaArqueo::model()->find(array('condition' => "idCaja=" . $this->cajaCTP . " and fechaVentas<'" . $ventas->fechaOrden . "'", 'order' => 'idCajaArqueo Desc'));
+            //print_r($saldo);
             if (!empty($saldo))
                 $saldo = $saldo->saldo;
         }
 
+        //$this->render('movimientos',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'cond3'=>$cond3));
         $this->render('base', array('render' => 'movimientos', 'ventas' => $ventas, 'saldo' => $saldo, 'cond3' => $cond3, 'cf' => $cf, 'sf' => $sf));
     }
 
     public function actionPreviewDay()
     {
-
+        if (isset($_GET['excel']) && isset(Yii::app()->session['excel'])) {
+            $columnsTitle = array('Nº', 'Codigo Orden', 'Cliente', 'Cod. Prod.', 'Detalle del Producto', 'Cant', 'Precio', 'T/A', 'Total', 'Importe', 'Creditos', 'Fact');
+            $content = array();
+            $i = 0;
+            $total = 0;
+            $importe = 0;
+            $creditos = 0;
+            $adicional = 0;
+            print_r(Yii::app()->session['excel']);
+            foreach (Yii::app()->session['excel'] as $item) {
+                $temp = count($item->detalleCTPs);
+                foreach ($item->detalleCTPs as $producto) {
+                    $i++;
+                    $temp--;
+                    array_push($content, array($i,
+                        $item->codigo,
+                        $item->idCliente0->apellido . " " . $item->idCliente0->nombre,
+                        $producto->idAlmacenProducto0->idProducto0->codigo,
+                        $producto->idAlmacenProducto0->idProducto0->material
+                        . " " . $producto->idAlmacenProducto0->idProducto0->color
+                        . " " . $producto->idAlmacenProducto0->idProducto0->detalle
+                        . " " . $producto->idAlmacenProducto0->idProducto0->marca,
+                        $producto->nroPlacas,
+                        ($producto->nroPlacas * $producto->costo),
+                        $producto->costoAdicional,
+                        $producto->costoTotal,
+                        ($item->estado == 1) ? (($temp == 0) ? ($item->montoPagado - $item->montoCambio) : 0) : (($item->estado == 2) ? (($temp == 0) ? $item->montoPagado : 0) : 0),
+                        ($item->estado == 2) ? (($temp == 0) ? ($item->montoCambio * (-1)) : 0) : 0,
+                        $item->factura
+                    ));
+                    $total = $total + $producto->costoTotal;
+                    $adicional = $adicional + $producto->costoAdicional;
+                    ($item->estado == 1) ? (($temp == 0) ? ($importe = $importe + ($item->montoPagado - $item->montoCambio)) : 0) : (($item->estado == 2) ? (($temp == 0) ? ($importe = $importe + $item->montoPagado) : 0) : 0);
+                    ($item->estado == 2) ? (($temp == 0) ? ($creditos = $creditos + ($item->montoCambio * (-1))) : 0) : 0;
+                }
+            }
+            array_push($content, array('', '', '', '', '', '', 'Totales', $adicional, $total, $importe, $creditos));
+            $this->createExcel($columnsTitle, $content, 'Reporte de Ordenes ' . date('Ymd'));
+        }
         $fact = "";
         $cond = "";
         if (isset($_GET['f'])) {
@@ -514,9 +584,10 @@ class CtpController extends Controller
             ->with('detalleCTPs.idAlmacenProducto0')
             ->with('detalleCTPs.idAlmacenProducto0.idProducto0')
             ->with('idCajaMovimientoVenta0')
-            ->findAll(array('condition' => 'idCajaMovimientoVenta0.idCaja=' . $this->cajaCTP . ' and idSucursal' . $this->sucursal . ' ' . $fact . $cond)));//$tabla = $caja->ventas;
+            ->findAll(array('condition' => 'idCajaMovimientoVenta0.idCaja=' . $this->cajaCTP . ' and idSucursal=' . $this->sucursal . ' ' . $fact . $cond)));//$tabla = $caja->ventas;
         ;
-        $this->render("base", array('render' => 'previewDay', 'tabla' => $caja,));
+        $this->render("base", array('render' => "previewDay", 'tabla' => $caja,));
+        //$this->render("base", array('render' => 'previewDay', 'tabla' => $caja,));
     }
 
     public function actionArqueo()
