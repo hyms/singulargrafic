@@ -803,13 +803,14 @@ class DistribuidoraController extends Controller
                             $movimiento->motivo = "Arqueo de Caja";
                             $arqueo->comprobante = "";
                         }
-                        if ($arqueo->save() && $caja->save()) {
+                        if ($arqueo->validate() && $caja->validate()) {
+                            $arqueo->save();
+                            $caja->save();
                             //$start=$arqueo->fechaVentas." 00:00:00";
                             $end = $arqueo->fechaVentas . " 23:59:59";
                             $movimiento->save();
                             $arqueo->idCajaMovimientoVenta = $movimiento->idCajaMovimientoVenta;
                             $arqueo->save();
-                            //$cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition'=>"`t`.idCaja=2 and arqueo=0 and '".$start."'<=fechaMovimiento AND fechaMovimiento<='".$end."'"));
                             $cajaMovimiento = CajaMovimientoVenta::model()->findAll(array('condition' => "`t`.idCaja=" . $this->cajaDistribuidora . " and tipo=0 and arqueo=0 and fechaMovimiento<='" . $end . "'"));
                             foreach ($cajaMovimiento as $item) {
                                 $item->arqueo = $arqueo->idCajaArqueo;
@@ -896,9 +897,9 @@ class DistribuidoraController extends Controller
                 ->find(array('condition' => 'idCajaArqueo=' . $_GET['id'] . ' and cajaMovimientoVenta.tipo=0 and `t`.idCaja=' . $this->cajaDistribuidora, 'order' => 'cajaMovimientoVenta.fechaMovimiento Desc'));
             $start = $arqueo->fechaVentas;
             if (!empty($arqueo)) {
-                $arqueoA = CajaArqueo::model()->findByPk($arqueo->idCajaArqueo - 1);
+                $arqueoA = CajaArqueo::model()->findByPk($arqueo->idCajaArqueo + 1);
                 if (!empty($arqueoA)) {
-                    $d = date("d", strtotime($arqueoA->fechaVentas)) + 1;
+                    $d = date("d", strtotime($arqueoA->fechaVentas)) - 1;
                     $start = date("Y-m", strtotime($arqueoA->fechaVentas)) . "-" . $d . " 00:00:00";
                 }
             }
@@ -913,7 +914,7 @@ class DistribuidoraController extends Controller
 
             $recibo = Recibos::model()
                 ->with('idCajaMovimientoVenta0')
-                ->findAll(array('condition' => "fechaRegistro	>='" . $arqueo->fechaVentas . "' and fechaRegistro<='" . date("Y-m-d", strtotime($arqueo->fechaVentas)) . " 23:59:59' and idCajaMovimientoVenta0.tipo=0 and idCajaMovimientoVenta0.idcaja=" . $this->cajaDistribuidora));
+                ->findAll(array('condition' => "fechaRegistro>='" . $arqueo->fechaVentas . "' and fechaRegistro<='" . date("Y-m-d", strtotime($arqueo->fechaVentas)) . " 23:59:59' and idCajaMovimientoVenta0.tipo=0 and idCajaMovimientoVenta0.idcaja=" . $this->cajaDistribuidora));
             $recibos = 0;
 
             foreach ($recibo as $item) {
@@ -1170,7 +1171,6 @@ class DistribuidoraController extends Controller
         }
         // Rename worksheet
         $objPHPExcel->getActiveSheet()->setTitle($title);
-
 
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $objPHPExcel->setActiveSheetIndex(0);

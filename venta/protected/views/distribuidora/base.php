@@ -76,7 +76,7 @@
                 break;
             case "registroRealizado":
                 $this->renderPartial('menus/arqueo');
-                $saldo = CajaArqueo::model()->find(array('condition' => "idCaja=2 and idCajaArqueo<" . $arqueo->idCajaArqueo, 'order' => 'idCajaArqueo Desc'));
+                $saldo = CajaArqueo::model()->find(array('condition' => "idCaja=".$arqueo->idCaja." and idCajaArqueo<" . $arqueo->idCajaArqueo, 'order' => 'idCajaArqueo Desc'));
                 if (empty($saldo))
                     $saldo = 0;
                 else

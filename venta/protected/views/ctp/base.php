@@ -52,13 +52,13 @@
             $this->renderPartial('tables/arqueos', array('arqueos' => $arqueos,));
             break;
         case "registroRealizado":
-            $saldo = 0;
-            $saldo = CajaArqueo::model()->findByPk($arqueo->idCajaArqueo - 1);
-            if (!isset($saldo))
+            $saldo = CajaArqueo::model()->find(array('condition' => "idCaja=" . $arqueo->idCaja . " and idCajaArqueo<" . $arqueo->idCajaArqueo, 'order' => 'idCajaArqueo Desc'));
+            if (empty($saldo))
                 $saldo = 0;
             else
                 $saldo = $saldo->saldo;
             $this->renderPartial('tables/registroDiario', array('fecha' => $fecha, 'saldo' => $saldo, 'ventas' => $ventas, 'recibos' => $recibos, 'arqueo' => $arqueo));
+            $this->renderPartial("scripts/print");
             break;
         case "material":
             $this->renderPartial('tables/material', array('material' => $material));

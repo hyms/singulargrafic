@@ -19,24 +19,24 @@
 	'enableAjaxValidation'=>false,
 )); ?>
     <div class="form-group">
-        <?php echo $form->labelEx($model,'idParent',array('class'=>'col-sm-3 control-label')); ?>
-        <div class="col-sm-9">
+        <?php echo $form->labelEx($model,'idParent',array('class'=>'col-xs-3 control-label')); ?>
+        <div class="col-xs-9">
             <?php echo $form->dropDownList($model,'idParent',$model->getAlmacenes(),array('class'=>'form-control','empty'=>'')); ?>
         </div>
         <?php echo $form->error($model,'idParent'); ?>
     </div>
 
     <div class="form-group">
-		<?php echo $form->labelEx($model,'idSucursal',array('class'=>'col-sm-3 control-label')); ?>
-        <div class="col-sm-9">
+		<?php echo $form->labelEx($model,'idSucursal',array('class'=>'col-xs-3 control-label')); ?>
+        <div class="col-xs-9">
             <?php echo $form->dropDownList($model,'idSucursal',CHtml::listData(Sucursal::model()->findAll(),'idSucursal','nombre'),array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'idSucursal'); ?>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'nombre',array('class'=>'col-sm-3 control-label')); ?>
-        <div class="col-sm-9">
+		<?php echo $form->labelEx($model,'nombre',array('class'=>'col-xs-3 control-label')); ?>
+        <div class="col-xs-9">
 		<?php echo $form->textField($model,'nombre',array('class'=>'form-control')); ?>
 		</div>
 		<?php echo $form->error($model,'nombre'); ?>
@@ -44,7 +44,7 @@
 
 
 	<div class="form-group">
-		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
+		<?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-xs-offset-2')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

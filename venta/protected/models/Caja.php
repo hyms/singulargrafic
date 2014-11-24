@@ -36,7 +36,7 @@ class Caja extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre, saldo', 'required'),
+			//array('nombre, saldo', 'required'),
 			array('idParent, idSucursal', 'numerical', 'integerOnly'=>true),
 			array('saldo', 'numerical'),
 			array('nombre', 'length', 'max'=>50),

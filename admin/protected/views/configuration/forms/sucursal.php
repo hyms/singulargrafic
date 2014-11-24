@@ -19,16 +19,16 @@
         'enableAjaxValidation'=>false,
     )); ?>
     <div class="form-group">
-        <?php echo $form->labelEx($model,'nombre',array('class'=>'col-sm-3 control-label')); ?>
-        <div class="col-sm-9">
+        <?php echo $form->labelEx($model,'nombre',array('class'=>'col-xs-3 control-label')); ?>
+        <div class="col-xs-9">
             <?php echo $form->textField($model,'nombre',array('class'=>'form-control')); ?>
         </div>
         <?php echo $form->error($model,'nombre'); ?>
     </div>
 
     <div class="form-group">
-        <?php echo $form->labelEx($model,'detalle',array('class'=>'col-sm-3 control-label')); ?>
-        <div class="col-sm-9">
+        <?php echo $form->labelEx($model,'detalle',array('class'=>'col-xs-3 control-label')); ?>
+        <div class="col-xs-9">
             <?php echo $form->textArea($model,'detalle',array('class'=>'form-control')); ?>
         </div>
         <?php echo $form->error($model,'detalle'); ?>
@@ -36,7 +36,7 @@
 
 
     <div class="form-group">
-        <?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-sm-offset-2')); ?>
+        <?php echo CHtml::submitButton('Guardar',array('class'=>'btn btn-default col-xs-offset-2')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

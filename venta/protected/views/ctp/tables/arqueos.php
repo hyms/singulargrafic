@@ -31,12 +31,12 @@
                     array(
                         'header'=>'',
                         'type'=>'raw',
-                        'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-print\"></span>", array("distribuidora/comprobante","id"=>$data->idCajaArqueo))',
+                        'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-print\"></span>", array("ctp/comprobante","id"=>$data->idCajaArqueo))',
                     ),
                     array(
                         'header'=>'',
                         'type'=>'raw',
-                        'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-list-alt\"></span> Registro Diario", array("distribuidora/registroDiario","id"=>$data->idCajaArqueo))',
+                        'value'=>'CHtml::link("<span class=\"glyphicon glyphicon-list-alt\"></span> Registro Diario", array("ctp/registroDiario","id"=>$data->idCajaArqueo))',
                     ),
                 )
             ));
