@@ -17,7 +17,7 @@
  * The followings are the available model relations:
  * @property CajaMovimientoVenta $idCajaMovimientoVenta0
  * @property Caja $idCaja0
- * @property Users $idUser0
+ * @property User $idUser0
  */
 class CajaArqueo extends CActiveRecord
 {
@@ -57,7 +57,7 @@ class CajaArqueo extends CActiveRecord
 		return array(
 			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
 			'idCaja0' => array(self::BELONGS_TO, 'Caja', 'idCaja'),
-			'idUser0' => array(self::BELONGS_TO, 'Users', 'idUser'),
+			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
 		);
 	}
 

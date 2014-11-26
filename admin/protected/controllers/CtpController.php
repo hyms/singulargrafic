@@ -278,6 +278,7 @@ class CtpController extends Controller
             $placas->attributes = $_GET['DetalleCTP'];
             $placas->cliente = $_GET['DetalleCTP']['cliente'];
             $placas->sucursal = $_GET['DetalleCTP']['sucursal'];
+            $placas->fecha = $_GET['DetalleCTP']['fecha'];
         }
         $this->render('index',array('render'=>'reportPlaca','model'=>$placas));
     }

@@ -150,6 +150,7 @@ class CTP extends CActiveRecord
     public $apellido;
     public $nitCi;
     public $codigoP;
+    public $diseno;
     public function search($cond=null)
     {
         // @todo Please modify the following code to remove attributes that should not be searched.
@@ -196,6 +197,7 @@ class CTP extends CActiveRecord
         $criteria->compare('idCliente0.nitCi',$this->nitCi);
 
         $criteria->compare('idCTPParent0.codigo',$this->codigoP,true);
+
 
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
@@ -244,6 +246,7 @@ class CTP extends CActiveRecord
         $criteria->compare('idCliente0.nitCi',$this->nitCi);
 
         $criteria->compare('idCTPParent0.codigo',$this->codigoP,true);
+        $criteria->compare('idEmpleado0.nombre',$this->diseno,true);
 
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,

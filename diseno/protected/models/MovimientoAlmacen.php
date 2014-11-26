@@ -58,7 +58,7 @@ class MovimientoAlmacen extends CActiveRecord
 			'idAlmacenOrigen0' => array(self::BELONGS_TO, 'Almacen', 'idAlmacenOrigen'),
 			'idAlmacenDestino0' => array(self::BELONGS_TO, 'Almacen', 'idAlmacenDestino'),
 			'idProducto0' => array(self::BELONGS_TO, 'Producto', 'idProducto'),
-			'idUser0' => array(self::BELONGS_TO, 'Users', 'idUser'),
+			'idUser0' => array(self::BELONGS_TO, 'User', 'idUser'),
 		);
 	}
 

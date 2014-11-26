@@ -53,7 +53,7 @@ echo ((!empty($ctp->idCtp))?CHtml::activeHiddenField($ctp,'idCtp'):'');
             <div class="col-xs-2"><div class="text-right">Atribuible:</div></div>
             <div class="col-xs-4"><?php echo CHtml::activeDropDownList($repos,'responsable',$listaResp,array('class'=>'form-control input-sm','id'=>'resp'))?></div>
             <div class="col-xs-2"><div class="text-right"><?php echo "Diseñador:";?></div></div>
-            <div class="col-xs-4"><?php echo CHtml::dropDownList('respOtro',$otro,CHtml::listData(Users::model()->with('idEmpleado0')->findAll('tipo=4 and idSucursal='.$this->sucursal),'idEmpleado','idEmpleado0.apellido'),array('class'=>'form-control input-sm','id'=>'respOtro','disabled'=>(($otro=="")?true:false)))?></div>
+            <div class="col-xs-4"><?php echo CHtml::dropDownList('respOtro',$otro,CHtml::listData(User::model()->with('idEmpleado0')->findAll('tipo=4 and idSucursal='.$this->sucursal),'idEmpleado','idEmpleado0.apellido'),array('class'=>'form-control input-sm','id'=>'respOtro','disabled'=>(($otro=="")?true:false)))?></div>
         </div>
         <div class="col-xs-3"></div>
     </div>

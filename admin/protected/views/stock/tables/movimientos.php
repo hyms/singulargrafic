@@ -66,6 +66,7 @@
             <?php echo CHtml::submitButton('Go',array('class'=>'btn btn-default')); ?>
             </div>
         </div>
+        <div class="col-xs-12">
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
             'dataProvider'=>$movimientos->searchReporte(),
@@ -128,6 +129,7 @@
             )
             ));
         ?>
+        </div>
     <?php $this->endWidget(); ?>
     </div>
 </div>

@@ -46,6 +46,7 @@ Yii::app()->clientscript
                                 array('label'=>'Ventas de Dsitribuidora', 'url'=>array('distribuidora/report')),
                                 array('label'=>'Ordenes CTP', 'url'=>array('ctp/report')),
                                 //array('label'=>'Imprenta', 'url'=>array('#')),
+                                array('label'=>'Clientes', 'url'=>array('cliente/report')),
                                 array('label'=>'Reporte de Productos', 'url'=>array('report/producto')),
                             )),
                         array('label'=>'Personas <b class="caret"></b>', 'url'=>array('#'),

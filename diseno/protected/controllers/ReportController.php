@@ -53,6 +53,7 @@ class ReportController extends CController
         if (isset($_GET['CTP'])) {
             $ordenes->attributes = $_GET['CTP'];
             $ordenes->apellido = $_GET['CTP']['apellido'];
+            $ordenes->diseno = $_GET['CTP']['diseno'];
         }
         $this->render('index', array('render' => 'ordenes', 'ordenes' => $ordenes));
     }

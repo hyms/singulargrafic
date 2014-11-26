@@ -23,7 +23,7 @@
                 array(
                     'header'=>'Diseñador',
                     'value'=>'$data->idUserOT0->idEmpleado0->nombre',
-                    'filter'=>'',
+                    'filter'=>CHtml::activeTextField($ordenes,'diseno',array('class'=>'form-control input-sm')),
                 ),
                 array(
                     'header'=>'Cliente',

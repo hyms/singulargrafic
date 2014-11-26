@@ -50,7 +50,6 @@ class CtpController extends Controller
                 'limit' => '5',
             ),
                 'pagination' => false,));
-        //$almacenes = AlmacenProducto::model()->with('idProducto0')->findAll('idAlmacen='.$_GET['almacen'].' and (stockP+(stockU/idProducto0.cantXPaquete))<=5');
         $agotarse = new CActiveDataProvider('AlmacenProducto',
             array('criteria' => array(
                 'with' => array('idProducto0'),
@@ -133,7 +132,6 @@ class CtpController extends Controller
                     if ($ctp->autorizado == "") {
                         $sw = 1;
                         $ctp->addError('fechaPlazo', 'Debes seleccionar a un autorizado');
-                        //print_r($ctp);
                     }
                 }
 
@@ -142,7 +140,6 @@ class CtpController extends Controller
                         $ctp->fechaPlazo = date("Y-m-d H:i:s", strtotime($ctp->fechaPlazo));
                     $ctp->estado = 2;
 
-                    //$ctp=$this->getCodigo($ctp);
                     $tmp = array();
 
                     $caja = $this->verifyModel(Caja::model()->findByPk($this->cajaCTP));
@@ -326,7 +323,6 @@ class CtpController extends Controller
                             $this->redirect(array('ctp/ordenes'));
                         }
                     }
-
                 }
                 if ($ctp->save()) {
                     foreach ($almacen as $item) {
@@ -334,7 +330,6 @@ class CtpController extends Controller
                     }
                     $this->redirect(array('ctp/ordenes'));
                 }
-
             }
         } else
             throw new CHttpException(400, 'Petición no válida.');
@@ -345,7 +340,6 @@ class CtpController extends Controller
         $ordenes = new CTP('searchOrder');
         $ordenes->unsetAttributes();
         $ordenes->idSucursal = $this->sucursal;
-        //$ordenes->estado = 1;
         if (isset($_GET['CTP'])) {
             $ordenes->attributes = $_GET['CTP'];
             $ordenes->apellido = $_GET['CTP']['apellido'];
@@ -369,12 +363,6 @@ class CtpController extends Controller
                 $this->render('base', array('render' => 'preview', 'ctp' => $ctp, 'tipo' => ''));
             }
             if ($ctp->tipoCTP == 2) {
-                /*$ctpP= CTP::model()
-                    ->with('idCliente0')
-                    ->with('idUserOT0')
-                    ->with('idUserOT0.idEmpleado0')
-                    ->findByPk($ctp->idCTPParent);*/
-                //print_r($ctp);
                 $this->render('base', array('render' => 'previewTI', 'ctp' => $ctp, 'tipo' => '1', 'titulo' => 'Interna'));
             }
             if ($ctp->tipoCTP == 3) {
@@ -407,7 +395,6 @@ class CtpController extends Controller
                     'pageSize' => 20,
                 ),));
         $this->render('base', array('render' => 'deudores', 'deudores' => $deudores));
-
     }
 
     public function actionMovimientos()
@@ -415,7 +402,7 @@ class CtpController extends Controller
         if (isset($_GET['excel']) && isset(Yii::app()->session['excel'])) {
             $model = Yii::app()->session['excel'];
             $dataProvider = $model->searchCTP();
-            $dataProvider->pagination = false; // for retrive all modules
+            $dataProvider->pagination = false;
             $data = $dataProvider->data;
 
             $columnsTitle = array('Nro', 'Nº de Venta', 'Apellido', 'NitCI', 'Monto de la Venta', 'Monto Pagado', 'Fecha');
@@ -454,7 +441,6 @@ class CtpController extends Controller
             $ventas->tipoOrden = $_GET['f'];
 
         if (isset($_GET['d']) || isset($_GET['m'])) {
-            $d = date("d");
             $m = date("m");
             $y = date("Y");
 
@@ -494,7 +480,6 @@ class CtpController extends Controller
                 $cond3 = array("ctp/previewDay", "f" => $ventas->tipoOrden, "m" => date("m", strtotime($ventas->fechaOrden)));
         }
 
-
         if (isset($_GET['d'])) {
             $saldo = CajaArqueo::model()->find(array('condition' => "idCaja=" . $this->cajaCTP . " and fechaVentas<'" . $ventas->fechaOrden . "'", 'order' => 'idCajaArqueo Desc'));
             //print_r($saldo);
@@ -502,7 +487,6 @@ class CtpController extends Controller
                 $saldo = $saldo->saldo;
         }
 
-        //$this->render('movimientos',array('ventas'=>$ventas,'cond1'=>$cond1,'cond2'=>$cond2,'cond3'=>$cond3));
         $this->render('base', array('render' => 'movimientos', 'ventas' => $ventas, 'saldo' => $saldo, 'cond3' => $cond3, 'cf' => $cf, 'sf' => $sf));
     }
 
@@ -516,7 +500,7 @@ class CtpController extends Controller
             $importe = 0;
             $creditos = 0;
             $adicional = 0;
-            print_r(Yii::app()->session['excel']);
+            //print_r(Yii::app()->session['excel']);
             foreach (Yii::app()->session['excel'] as $item) {
                 $temp = count($item->detalleCTPs);
                 foreach ($item->detalleCTPs as $producto) {
@@ -590,7 +574,6 @@ class CtpController extends Controller
             ->findAll(array('condition' => 'idCajaMovimientoVenta0.idCaja=' . $this->cajaCTP . ' and idSucursal=' . $this->sucursal . ' ' . $fact . $cond)));//$tabla = $caja->ventas;
         ;
         $this->render("base", array('render' => "previewDay", 'tabla' => $caja,));
-        //$this->render("base", array('render' => 'previewDay', 'tabla' => $caja,));
     }
 
     public function actionArqueo()
@@ -664,7 +647,6 @@ class CtpController extends Controller
                             }
                             $this->redirect(array('ctp/comprobante', 'id' => $arqueo->idCajaArqueo));
                         }
-
                     } else {
                         $movimiento->addError('monto', "El numero debe ser positivo");
                         $this->redirect(array('ctp/arqueo'));
@@ -946,7 +928,6 @@ class CtpController extends Controller
 
     public function actionAjaxFactura()
     {
-        //Yii::app()->user->id;
         $detalle = array();
         $tipo = 0;
         if (isset($_POST['tipo'])) {
@@ -966,7 +947,6 @@ class CtpController extends Controller
             }
             $horas = Horario::model()->findAll();
             $cantidades = CantidadCTP::model()->findAll();
-            //$resultado['detalle']=array();
 
             $cliente = Cliente::model()->find("nitCi=" . $_POST['cliente']);
             if (empty($cliente)) {
@@ -998,11 +978,8 @@ class CtpController extends Controller
                     $resultado[$key]['costo'] = $matriz->precioCF;
                 else
                     $resultado[$key]['costo'] = $matriz->precioSF;
-
             }
-            //*/
             $resultado['codigo'] = $ctp->codigo;
-
             echo CJSON::encode($resultado);
         }
     }

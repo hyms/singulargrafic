@@ -57,7 +57,7 @@ class Empleado extends CActiveRecord
 		return array(
 			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
 			'fallasCTPs' => array(self::HAS_MANY, 'FallasCTP', 'idEmpleado'),
-			'users' => array(self::HAS_MANY, 'Users', 'idEmpleado'),
+			'users' => array(self::HAS_MANY, 'User', 'idEmpleado'),
 		);
 	}
 
