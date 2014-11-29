@@ -66,6 +66,7 @@ class ReportController extends CController
         if (isset($_GET['DetalleCTP'])) {
             $placas->attributes = $_GET['DetalleCTP'];
             $placas->cliente = $_GET['DetalleCTP']['cliente'];
+            $placas->fecha = $_GET['DetalleCTP']['fecha'];
         }
         $this->render('index', array('render' => 'placas', 'placas' => $placas));
     }

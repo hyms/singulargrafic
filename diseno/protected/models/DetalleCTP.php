@@ -163,11 +163,11 @@ class DetalleCTP extends CActiveRecord
         $criteria->compare('Y',$this->Y);
         $criteria->compare('K',$this->K);
 
-        $criteria->compare('idCTP0.codigo',$this->codigo);
+        $criteria->compare('idCTP0.codigo',$this->codigo,true);
         $criteria->compare('idCTP0.idSucursal',$this->sucursal );
-        $criteria->compare('idCTP0.fechaOrden',$this->fecha);
+        $criteria->compare('idCTP0.fechaOrden',$this->fecha,true);
         $criteria->compare('idCTP0.estado',$this->estado);
-        $criteria->compare('idCliente0.apellido',$this->cliente);
+        $criteria->compare('idCliente0.apellido',$this->cliente,true);
 
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
