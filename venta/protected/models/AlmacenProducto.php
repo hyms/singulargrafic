@@ -118,7 +118,7 @@ class AlmacenProducto extends CActiveRecord
         $criteria=new CDbCriteria;
 
         $criteria->with= array(
-            'idProducto0','idAlmacen0'
+            'idProducto0','idAlmacen0','preciosDistribuidoras'
         );
         if(empty($this->idAlmacen))
             $this->idAlmacen=2;

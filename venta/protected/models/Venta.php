@@ -24,9 +24,11 @@
  * @property string $obs
  * @property integer $idCajaMovimientoVenta
  * @property integer $idSucursal
+ * @property integer $idUserVenta
  *
  * The followings are the available model relations:
  * @property DetalleVenta[] $detalleVentas
+ * @property User $idUserVenta0
  * @property CajaMovimientoVenta $idCajaMovimientoVenta0
  * @property Cliente $idCliente0
  * @property Sucursal $idSucursal0
@@ -50,7 +52,7 @@ class Venta extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('numero', 'required'),
-			array('tipoVenta, formaPago, idCliente, numero, serie, estado, idCajaMovimientoVenta, idSucursal', 'numerical', 'integerOnly'=>true),
+			array('tipoVenta, formaPago, idCliente, numero, serie, estado, idCajaMovimientoVenta, idSucursal, idUserVenta', 'numerical', 'integerOnly'=>true),
 			array('montoVenta, montoPagado, montoCambio, montoDescuento', 'numerical'),
 			array('codigo', 'length', 'max'=>45),
 			array('factura, autorizado, responsable', 'length', 'max'=>50),
@@ -58,7 +60,7 @@ class Venta extends CActiveRecord
 			array('fechaVenta, fechaPlazo', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('idVenta, fechaVenta, tipoVenta, formaPago, idCliente, fechaPlazo, codigo, numero, serie, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, idSucursal', 'safe', 'on'=>'search'),
+			array('idVenta, fechaVenta, tipoVenta, formaPago, idCliente, fechaPlazo, codigo, numero, serie, montoVenta, montoPagado, montoCambio, montoDescuento, estado, factura, autorizado, responsable, obs, idCajaMovimientoVenta, idSucursal, idUserVenta', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,6 +73,7 @@ class Venta extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'detalleVentas' => array(self::HAS_MANY, 'DetalleVenta', 'idVenta'),
+			'idUserVenta0' => array(self::BELONGS_TO, 'User', 'idUserVenta'),
 			'idCajaMovimientoVenta0' => array(self::BELONGS_TO, 'CajaMovimientoVenta', 'idCajaMovimientoVenta'),
 			'idCliente0' => array(self::BELONGS_TO, 'Cliente', 'idCliente'),
 			'idSucursal0' => array(self::BELONGS_TO, 'Sucursal', 'idSucursal'),
@@ -103,6 +106,7 @@ class Venta extends CActiveRecord
 			'obs' => 'Obs',
 			'idCajaMovimientoVenta' => 'Id Caja Movimiento Venta',
 			'idSucursal' => 'Id Sucursal',
+			'idUserVenta' => 'Id User Venta',
 		);
 	}
 
@@ -144,6 +148,7 @@ class Venta extends CActiveRecord
 		$criteria->compare('obs',$this->obs,true);
 		$criteria->compare('idCajaMovimientoVenta',$this->idCajaMovimientoVenta);
 		$criteria->compare('idSucursal',$this->idSucursal);
+		$criteria->compare('idUserVenta',$this->idUserVenta);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -187,6 +192,7 @@ class Venta extends CActiveRecord
         $criteria->compare('idCliente0.apellido',$this->apellido);
         $criteria->compare('codigo',$this->codigos);
         $criteria->compare('serie',$this->codigos);
+        $criteria->compare('idSucursal',$this->idSucursal);
 
         //$criteria->mergeWith($this->dateRangeSearchCriteria('fechaVenta', $this->fechaVenta));
         //$criteria->mergeWith($this->dateRangeSearchCriteria('fechaPlazo', $this->fechaPlazo));
@@ -215,6 +221,7 @@ class Venta extends CActiveRecord
         $criteria->compare('montoCambio',$this->montoCambio);
         $criteria->compare('montoDescuento',$this->montoDescuento);
         $criteria->compare('tipoVenta',$this->tipoVenta);
+        $criteria->compare('idSucursal',$this->idSucursal);
         $criteria->compare('idCliente0.apellido',$this->apellido,true);
         $criteria->compare('idCliente0.nitCi',$this->nit);
 
@@ -229,7 +236,6 @@ class Venta extends CActiveRecord
 
     public $material;
     public $detalle;
-
 
     public function searchVentaProducto()
     {
@@ -249,6 +255,7 @@ class Venta extends CActiveRecord
         $criteria->compare('fechaVenta',$this->fechaVenta,true);
         $criteria->compare('idCliente',$this->idCliente);
         $criteria->compare('codigo',$this->codigo,true);
+        $criteria->compare('idSucursal',$this->idSucursal);
 
         $criteria->compare('idCliente0.apellido',$this->apellido,true);
         $criteria->compare('idCliente0.nitCi',$this->nit);
@@ -259,9 +266,6 @@ class Venta extends CActiveRecord
         ));
     }
 
-    protected function getUltimoDiaMes($elAnio,$elMes) {
-        return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
-    }
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
@@ -272,4 +276,9 @@ class Venta extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    protected function getUltimoDiaMes($elAnio, $elMes)
+    {
+        return date("d", (mktime(0, 0, 0, $elMes + 1, 1, $elAnio) - 1));
+    }
 }

@@ -42,11 +42,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'header'=>'Precio CF',
-            'value'=>'$data->idProducto0->precioCFU."/".$data->idProducto0->precioCFP',
+            'value'=>'((isset($data["preciosDistribuidoras"][0]["precioCFU"]))?$data["preciosDistribuidoras"][0]["precioCFU"]:"")."/".((isset($data["preciosDistribuidoras"][0]["precioCFP"]))?$data["preciosDistribuidoras"][0]["precioCFP"]:"")',
         ),
         array(
             'header'=>'Precio SF',
-            'value'=>'$data->idProducto0->precioSFU."/".$data->idProducto0->precioSFP',
+            'value'=>'((isset($data["preciosDistribuidoras"][0]["precioSFU"]))?$data["preciosDistribuidoras"][0]["precioSFU"]:"")."/".((isset($data["preciosDistribuidoras"][0]["precioSFP"]))?$data["preciosDistribuidoras"][0]["precioSFP"]:"")',
         ),
         array(
             'header'=>'Stock Unidad',

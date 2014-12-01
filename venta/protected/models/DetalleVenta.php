@@ -118,6 +118,7 @@ class DetalleVenta extends CActiveRecord
     public $detalle;
     public $codigoProducto;
     public $color;
+    public $sucursal;
     public function searchVenta()
     {
         $criteria=new CDbCriteria;
@@ -133,6 +134,7 @@ class DetalleVenta extends CActiveRecord
 
         $criteria->compare('idVenta0.codigo',$this->codigo);
         $criteria->compare('idVenta0.fechaVenta',$this->fecha,true);
+        $criteria->compare('idVenta0.idSucursal',$this->sucursal,true);
         $criteria->compare('idCliente0.apellido',$this->apellido,true);
         $criteria->compare('idProducto0.codigo',$this->codigoProducto,true);
         $criteria->compare('idProducto0.color',$this->color);

@@ -2,8 +2,27 @@
 
 class DistribuidoraController extends Controller
 {
-    var $cajaDistribuidora = 2;
-    var $alamcenDistribuidora = 2;
+    //var $cajaDistribuidora = 2;
+    //var $alamcenDistribuidora = 2;
+
+    protected $cajaDistribuidora;
+    protected $sucursal;
+    protected $alamcenDistribuidora;
+
+    public function init()
+    {
+        $this->sucursal = Yii::app()->user->getState('idSucursal');
+        if (!empty($this->sucursal)) {
+            $this->alamcenDistribuidora = Almacen::model()->find('idSucursal=' . $this->sucursal . ' and nombre like "Distribuidora%"');
+            $this->cajaDistribuidora = Caja::model()->find('idSucursal=' . $this->sucursal . ' and nombre like "Distribuidora%"');
+            if (!empty($this->alamcenDistribuidora) && !empty($this->cajaDistribuidora)) {
+                $this->alamcenDistribuidora = $this->alamcenDistribuidora->idAlmacen;
+                $this->cajaDistribuidora = $this->cajaDistribuidora->idCaja;
+            } else
+                throw new CHttpException(500, 'Page not found.');
+        }
+        parent::init();
+    }
 
     public function filters()
     {
@@ -26,6 +45,7 @@ class DistribuidoraController extends Controller
     {
         $ventas = new CActiveDataProvider('Venta',
             array('criteria' => array(
+                'condition'=>'idSucursal='.$this->sucursal,
                 'group' => '`t`.idCliente',
                 'select' => 'count(*) as cantidad, `t`.`idCliente`',
                 'order' => 'cantidad Desc',
@@ -36,7 +56,8 @@ class DistribuidoraController extends Controller
         $productos = new CActiveDataProvider(DetalleVenta::model(),
             array('criteria' => array(
                 'limit' => 5,
-                'with' => array('idAlmacenProducto0' => array('select' => '*'), 'idAlmacenProducto0.idProducto0' => array('select' => '*')),
+                'with' => array('idAlmacenProducto0' => array('select' => '*'), 'idAlmacenProducto0.idProducto0' => array('select' => '*'),),
+                'condition'=>'idAlmacen='.$this->alamcenDistribuidora,
                 'group' => '`t`.idAlmacenProducto',
                 'select' => 'sum(`t`.cantidadU + (`t`.cantidadP*idProducto0.cantXPaquete)) as cantidad, `t`.idAlmacenProducto',
                 'order' => 'cantidad Desc',
@@ -67,11 +88,14 @@ class DistribuidoraController extends Controller
         $venta->fechaVenta = date("Y-m-d H:i:s");
         $venta->formaPago = 0;
         $venta->tipoVenta = 1;
+        $venta->idSucursal = $this->sucursal;
+        $venta->idUserVenta = Yii::app()->user->id;
         $venta = $this->getCodigo($venta);
         //end default values
 
         //init filter
         $productos->unsetAttributes();
+        $productos->idAlmacen = $this->alamcenDistribuidora;
         if (isset($_GET['AlmacenProducto'])) {
             $productos->attributes = $_GET['AlmacenProducto'];
             $productos->color = $_GET['AlmacenProducto']['color'];
@@ -99,6 +123,8 @@ class DistribuidoraController extends Controller
 
         if (isset($_POST['Venta'])) {
             $venta->attributes = $_POST['Venta'];
+
+            //print_r($venta); return true;
             $venta = $this->getCodigo($venta);
             $venta->estado = 1;
             if ($venta->formaPago == 1) {
@@ -225,6 +251,7 @@ class DistribuidoraController extends Controller
     {
         $ventas = new Venta('searchVenta');
         $ventas->unsetAttributes();
+        $ventas->idSucursal = $this->sucursal;
         if (isset($_GET['Venta'])) {
             $ventas->attributes = $_GET['Venta'];
             $ventas->nit = $_GET['Venta']['nit'];
@@ -452,7 +479,7 @@ class DistribuidoraController extends Controller
         $deudores = new CActiveDataProvider('Venta',
             array('criteria' => array(
                 //'condition'=>'montoVenta>montoPagado',
-                'condition' => 'estado=2',
+                'condition' => 'estado=2 and idSucursal='.$this->sucursal,
                 'with' => array('idCliente0'),
                 'order' => 'fechaPlazo ASC',
             ),
@@ -501,6 +528,7 @@ class DistribuidoraController extends Controller
         $ventas = new Venta('searchDistribuidora');
 
         $ventas->unsetAttributes();
+        $ventas->idSucursal=$this->sucursal;
         if (isset($_GET['f']))
             $ventas->tipoVenta = $_GET['f'];
 
@@ -590,6 +618,7 @@ class DistribuidoraController extends Controller
         $movimentoProducto = new DetalleVenta('searchVenta');
         //init filter
         $movimentoProducto->unsetAttributes();
+        $movimentoProducto->sucursal=$this->sucursal;
         if (isset($_GET['DetalleVenta'])) {
             //$movimentoProducto->attributes = $_GET['DetalleVenta'];
             $movimentoProducto->codigo = $_GET['DetalleVenta']['codigo'];
@@ -762,12 +791,12 @@ class DistribuidoraController extends Controller
             $arqueo->idUser = Yii::app()->user->id;
             $arqueo->idCaja = $this->cajaDistribuidora;
             $end = $arqueo->fechaVentas . " 23:59:59";
-
+            
             $movimiento = new CajaMovimientoVenta;
             $movimiento->motivo = "Traspaso de efectivo a Administracion";
             $comprovante = CajaArqueo::model()->find(array('select' => 'MAX(comprobante) as max', 'condition' => 'idCaja=' . $this->cajaDistribuidora));
             $arqueo->comprobante = $comprovante->max + 1;
-            $movimiento->fechaMovimiento = $arqueo->fechaVentas . " 23:59:59";
+            $movimiento->fechaMovimiento = date("Y-m-d", strtotime($arqueo->fechaVentas)) . " 23:59:59";
 
             $movimiento->tipo = 0;
             $movimiento->idCaja = $arqueo->idCaja;
@@ -905,16 +934,17 @@ class DistribuidoraController extends Controller
             }
             $venta = Venta::model()
                 ->with('idCajaMovimientoVenta0')
-                ->findAll(array('condition' => "fechaVenta>='" . $start . "' and fechaVenta<='" . date("Y-m-d", strtotime($arqueo->fechaVentas)) . " 23:59:59' and idCajaMovimientoVenta0.tipo=0"));
+                ->findAll(array('condition' => "fechaVenta>='" . $start . "' and fechaVenta<='" . date("Y-m-d", strtotime($arqueo->fechaVentas)) . " 23:59:59' and idCajaMovimientoVenta0.tipo=0 and idCajaMovimientoVenta0.arqueo=".$arqueo->idCajaArqueo));
             $ventas = 0;
 
             foreach ($venta as $item) {
+                //print_r($item); print('<br>');
                 $ventas = $ventas + $item->idCajaMovimientoVenta0->monto;
             }
 
             $recibo = Recibos::model()
                 ->with('idCajaMovimientoVenta0')
-                ->findAll(array('condition' => "fechaRegistro>='" . $arqueo->fechaVentas . "' and fechaRegistro<='" . date("Y-m-d", strtotime($arqueo->fechaVentas)) . " 23:59:59' and idCajaMovimientoVenta0.tipo=0 and idCajaMovimientoVenta0.idcaja=" . $this->cajaDistribuidora));
+                ->findAll(array('condition' => "fechaRegistro>='" . $arqueo->fechaVentas . "' and fechaRegistro<='" . date("Y-m-d", strtotime($arqueo->fechaVentas)) . " 23:59:59' and idCajaMovimientoVenta0.tipo=0 and idCajaMovimientoVenta0.idcaja=" . $this->cajaDistribuidora.' and idCajaMovimientoVenta0.arqueo='.$arqueo->idCajaArqueo));
             $recibos = 0;
 
             foreach ($recibo as $item) {
@@ -980,17 +1010,18 @@ class DistribuidoraController extends Controller
             if (isset($_GET['al'])) {
                 $almacen = AlmacenProducto::model()
                     ->with("idProducto0")
+                    ->with("preciosDistribuidoras")
                     ->findByPk($_GET['al']);
             }
 
             $detalle->idAlmacenProducto = $almacen->idAlmacenProducto;
             if (isset($_GET['factura'])) {
                 if ($_GET['factura'] == 0) {
-                    $detalle->costoP = $almacen->idProducto0->precioCFP;
-                    $detalle->costoU = $almacen->idProducto0->precioCFU;
+                    $detalle->costoP = $almacen["preciosDistribuidoras"][0]["precioCFP"];
+                    $detalle->costoU = $almacen["preciosDistribuidoras"][0]["precioCFU"];
                 } else {
-                    $detalle->costoP = $almacen->idProducto0->precioSFP;
-                    $detalle->costoU = $almacen->idProducto0->precioSFU;
+                    $detalle->costoP = $almacen["preciosDistribuidoras"][0]["precioSFP"];
+                    $detalle->costoU = $almacen["preciosDistribuidoras"][0]["precioSFU"];
                 }
             }
 
@@ -1026,11 +1057,11 @@ class DistribuidoraController extends Controller
                 //$resutado[$item['index']]=CJSON::encode($producto);
                 $resultado[$key]['index'] = $item['index'];
                 if ($tipo == 0) {
-                    $resultado[$key]['precioU'] = $almacen->idProducto0->precioCFU;
-                    $resultado[$key]['precioP'] = $almacen->idProducto0->precioCFP;
+                    $resultado[$key]['precioU'] = $almacen["preciosDistribuidoras"][0]["precioCFU"];
+                    $resultado[$key]['precioP'] = $almacen["preciosDistribuidoras"][0]["precioCFP"];
                 } else {
-                    $resultado[$key]['precioU'] = $almacen->idProducto0->precioSFU;
-                    $resultado[$key]['precioP'] = $almacen->idProducto0->precioSFP;
+                    $resultado[$key]['precioU'] = $almacen["preciosDistribuidoras"][0]["precioSFU"];
+                    $resultado[$key]['precioP'] = $almacen["preciosDistribuidoras"][0]["precioSFP"];
                 }
             }
             $venta = new Venta;
@@ -1113,7 +1144,7 @@ class DistribuidoraController extends Controller
 
     protected function getCodigo($venta)
     {
-        $row = Venta::model()->find(array("condition" => "tipoVenta=" . $venta->tipoVenta, 'order' => 'fechaVenta Desc'));
+        $row = Venta::model()->find(array("condition" => "tipoVenta=" . $venta->tipoVenta.' and idSucursal='.$this->sucursal, 'order' => 'fechaVenta Desc'));
         if (empty($row))
             $row = new Venta;
 

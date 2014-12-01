@@ -232,13 +232,16 @@ class ProductosController extends Controller
     }
     private function initStock($id,$alm=1)
     {
-        $almacen = new AlmacenProducto;
-        $almacen->idAlmacen=$alm;
-        $almacen->idProducto=$id;
-        $almacen->stockU=0;
-        $almacen->stockP=0;
-        //print_r($almacen);
-        $val = $almacen->save();
-        return $val;
+        $date = AlmacenProducto::model()->find("idAlmacen=".$alm." and idProducto=".$id);
+        if(empty($date)) {
+            $almacen = new AlmacenProducto;
+            $almacen->idAlmacen = $alm;
+            $almacen->idProducto = $id;
+            $almacen->stockU = 0;
+            $almacen->stockP = 0;
+            //print_r($almacen);
+            $val = $almacen->save();
+            return $val;
+        }
     }
 }

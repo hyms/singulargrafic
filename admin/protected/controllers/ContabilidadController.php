@@ -105,7 +105,42 @@ class ContabilidadController extends Controller
 
     public function actionPrecios()
     {
-        $this->render('index',array('render'=>''));
+        if(isset($_GET["id"])) {
+            $lista = AlmacenProducto::model()->with("idProducto0")->findAll(array('condition'=>"idAlmacen=".$_GET["id"],'order'=>'idProducto0.material, idProducto0.color, idProducto0.detalle'));
+            $this->render('index', array('render' => 'distribuidora','lista'=>$lista));
+        }
+        else
+            $this->render('index', array('render' => 'menuDist'));
+    }
+
+    public function actionPrecioDist()
+    {
+        if (isset($_GET['id']) && isset($_GET['al'])) {
+            $producto = Producto::model()->findByPk($_GET['id']);
+            $model = PreciosDistribuidora::model()->find('idAlmacenProducto=' . $_GET['al']);
+            if (empty($model))
+                $model = new PreciosDistribuidora;
+
+            // uncomment the following code to enable ajax-based validation
+            /*
+                        if(isset($_POST['ajax']) && $_POST['ajax']==='precios-distribuidora-preciosDistribuidora-form')
+                        {
+                            echo CActiveForm::validate($model);
+                            Yii::app()->end();
+                        }
+            */
+
+            if (isset($_POST['PreciosDistribuidora'])) {
+                $model->attributes = $_POST['PreciosDistribuidora'];
+                $model->idAlmacenProducto = $_GET['al'];
+                if ($model->validate()) {
+                    $model->save();
+                    $this->redirect(array('contabilidad/precios', 'id' => $_GET['al']));
+                }
+            }
+
+            $this->renderPartial('forms/preciosDistribuidora', array('model' => $model, 'nombre' => $producto->material . " " . $producto->color . " " . $producto->detalle . " " . $producto->marca));
+        }
     }
 
     public function actionHorario()

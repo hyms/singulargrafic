@@ -25,6 +25,16 @@ class CajaController extends Controller
         }
         parent::init();
     }*/
+    protected $sucursal;
+
+    public function init()
+    {
+        $this->sucursal = Yii::app()->user->getState('idSucursal');
+        if (empty($this->sucursal)) {
+            throw new CHttpException(500, 'Page not found.');
+        }
+        parent::init();
+    }
 
     public function filters()
     {
