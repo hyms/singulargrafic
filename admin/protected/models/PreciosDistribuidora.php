@@ -32,7 +32,7 @@ class PreciosDistribuidora extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idAlmacenProducto, precioCFU, precioCFP, precioSFU, precioSFP', 'required'),
+			//array('idAlmacenProducto, precioCFU, precioCFP, precioSFU, precioSFP', 'required'),
 			array('idAlmacenProducto', 'numerical', 'integerOnly'=>true),
 			array('precioCFU, precioCFP, precioSFU, precioSFP', 'numerical'),
 			// The following rule is used by search().

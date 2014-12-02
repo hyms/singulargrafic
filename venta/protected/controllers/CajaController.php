@@ -305,7 +305,6 @@ class CajaController extends Controller
             $recibos->attributes = $_GET['Recibos'];
         }
 
-        //$this->render("buscar", array('recibos' => $recibos));
         $this->render('index', array('render' => 'buscar', 'recibos' => $recibos));
     }
 

@@ -45,7 +45,7 @@ class DistribuidoraController extends Controller
     {
         $ventas = new CActiveDataProvider('Venta',
             array('criteria' => array(
-                'condition'=>'idSucursal='.$this->sucursal,
+                'condition' => 'idSucursal=' . $this->sucursal,
                 'group' => '`t`.idCliente',
                 'select' => 'count(*) as cantidad, `t`.`idCliente`',
                 'order' => 'cantidad Desc',
@@ -57,7 +57,7 @@ class DistribuidoraController extends Controller
             array('criteria' => array(
                 'limit' => 5,
                 'with' => array('idAlmacenProducto0' => array('select' => '*'), 'idAlmacenProducto0.idProducto0' => array('select' => '*'),),
-                'condition'=>'idAlmacen='.$this->alamcenDistribuidora,
+                'condition' => 'idAlmacen=' . $this->alamcenDistribuidora,
                 'group' => '`t`.idAlmacenProducto',
                 'select' => 'sum(`t`.cantidadU + (`t`.cantidadP*idProducto0.cantXPaquete)) as cantidad, `t`.idAlmacenProducto',
                 'order' => 'cantidad Desc',
@@ -479,7 +479,7 @@ class DistribuidoraController extends Controller
         $deudores = new CActiveDataProvider('Venta',
             array('criteria' => array(
                 //'condition'=>'montoVenta>montoPagado',
-                'condition' => 'estado=2 and idSucursal='.$this->sucursal,
+                'condition' => 'estado=2 and idSucursal=' . $this->sucursal,
                 'with' => array('idCliente0'),
                 'order' => 'fechaPlazo ASC',
             ),
@@ -528,7 +528,7 @@ class DistribuidoraController extends Controller
         $ventas = new Venta('searchDistribuidora');
 
         $ventas->unsetAttributes();
-        $ventas->idSucursal=$this->sucursal;
+        $ventas->idSucursal = $this->sucursal;
         if (isset($_GET['f']))
             $ventas->tipoVenta = $_GET['f'];
 
@@ -618,7 +618,7 @@ class DistribuidoraController extends Controller
         $movimentoProducto = new DetalleVenta('searchVenta');
         //init filter
         $movimentoProducto->unsetAttributes();
-        $movimentoProducto->sucursal=$this->sucursal;
+        $movimentoProducto->sucursal = $this->sucursal;
         if (isset($_GET['DetalleVenta'])) {
             //$movimentoProducto->attributes = $_GET['DetalleVenta'];
             $movimentoProducto->codigo = $_GET['DetalleVenta']['codigo'];
@@ -791,7 +791,7 @@ class DistribuidoraController extends Controller
             $arqueo->idUser = Yii::app()->user->id;
             $arqueo->idCaja = $this->cajaDistribuidora;
             $end = $arqueo->fechaVentas . " 23:59:59";
-            
+
             $movimiento = new CajaMovimientoVenta;
             $movimiento->motivo = "Traspaso de efectivo a Administracion";
             $comprovante = CajaArqueo::model()->find(array('select' => 'MAX(comprobante) as max', 'condition' => 'idCaja=' . $this->cajaDistribuidora));
@@ -934,7 +934,7 @@ class DistribuidoraController extends Controller
             }
             $venta = Venta::model()
                 ->with('idCajaMovimientoVenta0')
-                ->findAll(array('condition' => "fechaVenta>='" . $start . "' and fechaVenta<='" . date("Y-m-d", strtotime($arqueo->fechaVentas)) . " 23:59:59' and idCajaMovimientoVenta0.tipo=0 and idCajaMovimientoVenta0.arqueo=".$arqueo->idCajaArqueo));
+                ->findAll(array('condition' => "fechaVenta>='" . $start . "' and fechaVenta<='" . date("Y-m-d", strtotime($arqueo->fechaVentas)) . " 23:59:59' and idCajaMovimientoVenta0.tipo=0 and idCajaMovimientoVenta0.arqueo=" . $arqueo->idCajaArqueo));
             $ventas = 0;
 
             foreach ($venta as $item) {
@@ -944,7 +944,7 @@ class DistribuidoraController extends Controller
 
             $recibo = Recibos::model()
                 ->with('idCajaMovimientoVenta0')
-                ->findAll(array('condition' => "fechaRegistro>='" . $arqueo->fechaVentas . "' and fechaRegistro<='" . date("Y-m-d", strtotime($arqueo->fechaVentas)) . " 23:59:59' and idCajaMovimientoVenta0.tipo=0 and idCajaMovimientoVenta0.idcaja=" . $this->cajaDistribuidora.' and idCajaMovimientoVenta0.arqueo='.$arqueo->idCajaArqueo));
+                ->findAll(array('condition' => "fechaRegistro>='" . $arqueo->fechaVentas . "' and fechaRegistro<='" . date("Y-m-d", strtotime($arqueo->fechaVentas)) . " 23:59:59' and idCajaMovimientoVenta0.tipo=0 and idCajaMovimientoVenta0.idcaja=" . $this->cajaDistribuidora . ' and idCajaMovimientoVenta0.arqueo=' . $arqueo->idCajaArqueo));
             $recibos = 0;
 
             foreach ($recibo as $item) {
@@ -1144,7 +1144,7 @@ class DistribuidoraController extends Controller
 
     protected function getCodigo($venta)
     {
-        $row = Venta::model()->find(array("condition" => "tipoVenta=" . $venta->tipoVenta.' and idSucursal='.$this->sucursal, 'order' => 'fechaVenta Desc'));
+        $row = Venta::model()->find(array("condition" => "tipoVenta=" . $venta->tipoVenta . ' and idSucursal=' . $this->sucursal, 'order' => 'fechaVenta Desc'));
         if (empty($row))
             $row = new Venta;
 

@@ -8,7 +8,7 @@
         'items'=>array(
             //array('label'=>'Reportes', 'url'=>array('caja/reporte')),
             //array('label'=>'Caja Chica', 'url'=>array('caja/egreso')),
-            array('label'=>'Recibo Ingreso', 'url'=>array('caja/reciboIngreso')),
+            //array('label'=>'Recibo Ingreso', 'url'=>array('caja/reciboIngreso')),
             //array('label'=>'Recibo Egreso', 'url'=>array('caja/reciboEgreso')),
             array('label'=>'Buscar Recibos', 'url'=>array('caja/buscar')),
             array('label'=>'Clientes', 'url'=>array('caja/clientes')),

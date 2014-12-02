@@ -729,7 +729,7 @@ class CtpController extends Controller
             }
             $venta = CTP::model()
                 ->with('idCajaMovimientoVenta0')
-                ->findAll(array('condition' => "fechaOrden>='" . $start . "' and fechaOrden<='" . date("Y-m-d", strtotime($arqueo->fechaVentas)) . " 23:59:59' and idCajaMovimientoVenta0.tipo=0"));
+                ->findAll(array('condition' => "fechaOrden>='" . $start . "' and fechaOrden<='" . date("Y-m-d", strtotime($arqueo->fechaVentas)) . " 23:59:59' and idCajaMovimientoVenta0.tipo=0 and idCajaMovimientoVenta0.arqueo=" . $arqueo->idCajaArqueo));
             $ventas = 0;
 
             foreach ($venta as $item) {
@@ -738,7 +738,7 @@ class CtpController extends Controller
 
             $recibo = Recibos::model()
                 ->with('idCajaMovimientoVenta0')
-                ->findAll(array('condition' => "fechaRegistro>='" . $arqueo->fechaVentas . "' and fechaRegistro<='" . date("Y-m-d", strtotime($arqueo->fechaVentas)) . " 23:59:59' and idCajaMovimientoVenta0.tipo=0 and idCajaMovimientoVenta0.idcaja=" . $this->cajaCTP));
+                ->findAll(array('condition' => "fechaRegistro>='" . $arqueo->fechaVentas . "' and fechaRegistro<='" . date("Y-m-d", strtotime($arqueo->fechaVentas)) . " 23:59:59' and idCajaMovimientoVenta0.tipo=0 and idCajaMovimientoVenta0.idcaja=" . $this->cajaCTP . " and idCajaMovimientoVenta0.arqueo=" . $arqueo->idCajaArqueo));
             $recibos = 0;
 
             foreach ($recibo as $item) {

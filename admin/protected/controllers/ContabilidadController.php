@@ -115,8 +115,9 @@ class ContabilidadController extends Controller
 
     public function actionPrecioDist()
     {
-        if (isset($_GET['id']) && isset($_GET['al'])) {
-            $producto = Producto::model()->findByPk($_GET['id']);
+        if (isset($_GET['al'])) {
+            $almacenProducto = AlmacenProducto::model()->findByPk($_GET['al']);
+            $producto = Producto::model()->findByPk($almacenProducto->idProducto);
             $model = PreciosDistribuidora::model()->find('idAlmacenProducto=' . $_GET['al']);
             if (empty($model))
                 $model = new PreciosDistribuidora;
@@ -135,7 +136,7 @@ class ContabilidadController extends Controller
                 $model->idAlmacenProducto = $_GET['al'];
                 if ($model->validate()) {
                     $model->save();
-                    $this->redirect(array('contabilidad/precios', 'id' => $_GET['al']));
+                    $this->redirect(array('contabilidad/precios', 'id' => $almacenProducto->idAlmacen));
                 }
             }
 

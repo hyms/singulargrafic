@@ -3,7 +3,7 @@
     foreach($lista as $key => $item)
     {
         echo '<li class="list-group-item col-xs-6">';
-        echo CHtml::link($item->idProducto0->material." ".$item->idProducto0->color." ".$item->idProducto0->detalle." ".$item->idProducto0->marca, array("contabilidad/PrecioDist","id"=>$item->idProducto,'al'=>$item->idAlmacenProducto), array("class" => "openDlg divDialog","title"=>"Nota de Venta"));
+        echo CHtml::link($item->idProducto0->material." ".$item->idProducto0->color." ".$item->idProducto0->detalle." ".$item->idProducto0->marca, array("contabilidad/PrecioDist",'al'=>$item->idAlmacenProducto), array("class" => "openDlg divDialog","title"=>"Nota de Venta"));
         echo '</li>';
     }
     ?>
